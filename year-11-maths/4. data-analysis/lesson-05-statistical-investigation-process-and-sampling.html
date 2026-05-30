@@ -264,6 +264,14 @@
       letter-spacing: -0.03em;
     }
 
+    .content-card h4 {
+      margin: 1rem 0 0.5rem;
+      font-family: var(--display);
+      font-size: 1.4rem;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
     .content-card p,
     .content-card li,
     .content-card td,
@@ -272,86 +280,104 @@
       color: var(--ink-soft);
     }
 
-    .stage-grid,
-    .mini-grid {
+    .slide-group {
       display: grid;
-      gap: 0.8rem;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .stage-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .mini-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .card,
-    .note,
-    .example,
-    .definition,
-    .table-wrap {
+    .slide {
       border: 1px solid var(--border);
       border-radius: 18px;
       background: rgba(255,255,255,0.66);
-      padding: 0.95rem 1rem;
+      padding: 1.2rem 1.25rem;
+      position: relative;
     }
 
-    .card strong,
-    .note strong,
-    .example strong,
-    .definition strong {
-      color: var(--ink);
+    .slide h4 {
+      margin: 0 0 0.75rem;
+      font-family: var(--display);
+      font-size: 1.2rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
-    .card .num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-family: var(--mono);
-      font-size: 0.76rem;
-      margin-bottom: 0.7rem;
+    .slide p {
+      margin: 0.5rem 0;
+      line-height: 1.75;
+      color: var(--ink-soft);
     }
 
-    .definition ul,
-    .note ul,
-    .content-card ul {
-      margin: 0.5rem 0 0;
+    .slide ul, .slide ol {
+      margin: 0.5rem 0;
       padding-left: 1.2rem;
     }
 
-    .content-card li + li { margin-top: 0.35rem; }
-
-    .example,
-    .note {
-      border-left: 4px solid var(--accent);
-      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.62));
+    .slide li {
+      margin: 0.35rem 0;
+      line-height: 1.75;
+      color: var(--ink-soft);
     }
 
-    .example h4,
-    .note h4,
-    .definition h4 {
-      margin: 0 0 0.45rem;
+    .slide strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .example-block {
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.62));
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 0.75rem 0;
+    }
+
+    .example-block h5 {
+      margin: 0 0 0.5rem;
       font-size: 0.95rem;
       font-family: var(--mono);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--accent);
+      font-weight: 600;
+    }
+
+    .example-block p {
+      margin: 0.35rem 0;
+      font-size: 0.95rem;
+    }
+
+    .definition-block {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.7);
+      padding: 1rem;
+      margin: 0.75rem 0;
+    }
+
+    .definition-block h5 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .definition-block p {
+      margin: 0.35rem 0;
+      font-size: 0.95rem;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.96rem;
+      margin: 0.75rem 0;
     }
 
-    th,
-    td {
+    th, td {
       text-align: left;
       vertical-align: top;
       padding: 0.7rem 0.65rem;
@@ -364,38 +390,7 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--ink);
-    }
-
-    .formula {
-      display: block;
-      margin-top: 0.55rem;
-      padding: 0.9rem 1rem;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.7);
-      font-family: var(--mono);
-      font-size: 0.95rem;
-      color: var(--ink);
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.75rem;
-    }
-
-    .tag {
-      display: inline-flex;
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(142, 68, 173, 0.08);
-      border: 1px solid rgba(142, 68, 173, 0.2);
-      color: var(--ink-soft);
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-weight: 600;
     }
 
     .back-link {
@@ -424,11 +419,20 @@
       margin-top: 0;
     }
 
+    .formula {
+      display: inline-block;
+      padding: 0.4rem 0.7rem;
+      background: rgba(142, 68, 173, 0.08);
+      border-radius: 6px;
+      border: 1px solid rgba(142, 68, 173, 0.2);
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+
     @media (max-width: 980px) {
       .hero,
-      .layout,
-      .stage-grid,
-      .mini-grid {
+      .layout {
         grid-template-columns: 1fr;
       }
 
@@ -463,21 +467,21 @@
 <body>
   <div class="page">
     <div class="topbar">
-      <a href="index.html">← Back to Data Analysis archive</a>
-        <span>Lesson 05</span>
+      <a href="index.html">← Back to Data Analysis</a>
+      <span>Lesson 05</span>
     </div>
 
     <section class="hero" aria-label="Lesson introduction">
       <div class="hero-main">
         <h1>Statistical Investigation Process and Sampling</h1>
-        <p class="subtitle">Use the contents below to move through the lesson and study the examples at your own pace.</p>
+        <p class="subtitle">Learn how to design rigorous statistical investigations and select representative samples.</p>
       </div>
 
       <aside class="hero-side">
-        <p class="section-label">What to remember</p>
-        <p>Good questions are specific and neutral.</p>
-        <p>Representative samples matter more than convenience.</p>
-        <p>Bias can appear in wording, selection, or interpretation.</p>
+        <p class="section-label">Key takeaways</p>
+        <p>Statistical investigations follow a four-stage cycle.</p>
+        <p>Good surveys are clear, unambiguous, and neutral.</p>
+        <p>Representative samples are essential for valid conclusions.</p>
       </aside>
     </section>
 
@@ -485,67 +489,107 @@
       <aside class="toc" aria-label="Table of contents">
         <h2>Contents</h2>
         <a href="#process">The process</a>
-        <a href="#questions">Question design</a>
-        <a href="#sampling">Population and sample</a>
+        <a href="#survey-design">Survey design</a>
+        <a href="#population">Population and sample</a>
         <a href="#methods">Sampling methods</a>
-        <a href="#faults">Faults and bias</a>
+        <a href="#faults">Faults in data</a>
         <a href="#homework">Homework</a>
       </aside>
 
       <article class="content">
+        <!-- Section 1: The Statistical Investigation Process -->
         <section class="content-card" id="process">
           <p class="section-label">Section 1</p>
           <h3>The Statistical Investigation Process</h3>
+
           <p>A statistical investigation follows a cycle of four key stages.</p>
-          <div class="stage-grid">
-            <div class="card"><span class="num">1</span><strong>Pose a question</strong><p>Identify an issue and define what you want to find out.</p></div>
-            <div class="card"><span class="num">2</span><strong>Collect data</strong><p>Design a survey or study that will produce useful information.</p></div>
-            <div class="card"><span class="num">3</span><strong>Analyse data</strong><p>Organise, display, and summarise what was collected.</p></div>
-            <div class="card"><span class="num">4</span><strong>Interpret and communicate</strong><p>Draw conclusions and answer the original question.</p></div>
+
+          <div class="slide-group">
+            <div class="slide">
+              <h4>Stage 1: Pose a Question</h4>
+              <p>Identify an issue and define what you want to find out.</p>
+              <ul>
+                <li>Targets a specific <strong>population</strong> (the group you want information about)</li>
+                <li>Can be answered by collecting <strong>data</strong></li>
+                <li>Anticipates variability in responses</li>
+              </ul>
+            </div>
+
+            <div class="slide">
+              <h4>Stage 2: Collect Data</h4>
+              <p>Design a survey or study that will produce useful information.</p>
+              <ul>
+                <li>Consider your sampling method</li>
+                <li>Ensure questions are well-designed</li>
+                <li>Collect data systematically</li>
+              </ul>
+            </div>
+
+            <div class="slide">
+              <h4>Stage 3: Analyse Data</h4>
+              <p>Organise, display and summarise what was collected.</p>
+              <ul>
+                <li>Create tables and graphs</li>
+                <li>Calculate summary statistics</li>
+                <li>Look for patterns</li>
+              </ul>
+            </div>
+
+            <div class="slide">
+              <h4>Stage 4: Interpret and Communicate</h4>
+              <p>Draw conclusions and answer the original question.</p>
+              <ul>
+                <li>Relate findings back to the question</li>
+                <li>Consider limitations of the data</li>
+                <li>Communicate results clearly</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="example-block">
+            <h5>Example</h5>
+            <p><strong>Issue:</strong> Screen time among teenagers.</p>
+            <p><strong>Poor question:</strong> "Do you use your phone a lot?"</p>
+            <p><strong>Better question:</strong> "How many hours per day do Year 11 students at this school spend on social media?"</p>
           </div>
         </section>
 
-        <section class="content-card" id="questions">
+        <!-- Section 2: Survey Design -->
+        <section class="content-card" id="survey-design">
           <p class="section-label">Section 2</p>
-          <h3>Posing and Designing Questions</h3>
-          <div class="mini-grid">
-            <div class="definition">
-              <h4>What makes a good statistical question?</h4>
-              <ul>
-                <li>It targets a specific population.</li>
-                <li>It can be answered with data.</li>
-                <li>It expects variation in the responses.</li>
-              </ul>
-            </div>
-            <div class="note">
-              <h4>Example</h4>
-              <p><strong>Issue:</strong> Screen time among teenagers.</p>
-              <p><strong>Poor question:</strong> “Do you use your phone a lot?”</p>
-              <p><strong>Better question:</strong> “How many hours per day do Year 11 students at this school spend on social media?”</p>
-            </div>
+          <h3>Survey Design</h3>
+
+          <div class="slide">
+            <h4>Questionnaire Design Principles</h4>
+            <p>A well-designed survey question must be:</p>
+            <ul>
+              <li><strong>Clear</strong> — written in plain language that all respondents understand</li>
+              <li><strong>Unambiguous</strong> — only one possible interpretation</li>
+              <li><strong>Neutral</strong> — does not lead the respondent toward a particular answer</li>
+              <li><strong>Appropriately scaled</strong> — the number of response choices is suitable</li>
+              <li><strong>Sensitive</strong> — respectful of diverse groups, cultures and backgrounds</li>
+            </ul>
           </div>
 
-          <div class="mini-grid" style="margin-top: 0.9rem;">
-            <div class="definition">
-              <h4>Questionnaire design principles</h4>
-              <ul>
-                <li><strong>Clear</strong> — plain language that everyone understands.</li>
-                <li><strong>Unambiguous</strong> — only one possible interpretation.</li>
-                <li><strong>Neutral</strong> — does not push the respondent toward an answer.</li>
-                <li><strong>Appropriately scaled</strong> — the number of response choices fits the task.</li>
-                <li><strong>Sensitive</strong> — respectful of diverse groups and backgrounds.</li>
-              </ul>
-            </div>
-            <div class="example">
-              <h4>Clear vs leading</h4>
-              <p><strong>Ambiguous:</strong> “How often do you exercise?”</p>
-              <p><strong>Better:</strong> “How many times per week do you participate in physical activity for at least 30 minutes?”</p>
-              <p><strong>Leading:</strong> “Don’t you agree that homework should be banned?”</p>
-              <p><strong>Better:</strong> “What is your opinion on homework in secondary schools?”</p>
-            </div>
+          <div class="example-block">
+            <h5>Clear vs Ambiguous</h5>
+            <p><strong>Ambiguous:</strong> "How often do you exercise?"</p>
+            <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><em>"Often" means different things to different people.</em></p>
+            <p><strong>Better:</strong> "How many times per week do you participate in physical activity for at least 30 minutes?"</p>
+            <ul style="margin-top: 0.25rem; font-size: 0.9rem;">
+              <li>Never • 1–2 times • 3–4 times • 5 or more times</li>
+            </ul>
           </div>
 
-          <div class="table-wrap" style="margin-top: 0.9rem;">
+          <div class="example-block">
+            <h5>Neutral vs Leading</h5>
+            <p><strong>Leading:</strong> "Don't you agree that homework should be banned?"</p>
+            <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><em>The phrasing pushes the respondent toward "yes".</em></p>
+            <p><strong>Better:</strong> "What is your opinion on homework in secondary schools?"</p>
+          </div>
+
+          <div class="slide" style="margin-top: 0.75rem;">
+            <h4>Number of Response Choices</h4>
             <table>
               <thead>
                 <tr>
@@ -568,7 +612,7 @@
                 <tr>
                   <td>Well-balanced</td>
                   <td>Scale of 1–5</td>
-                  <td>Captures a range of opinion</td>
+                  <td>Captures range of opinion</td>
                 </tr>
                 <tr>
                   <td>No neutral option</td>
@@ -577,107 +621,109 @@
                 </tr>
               </tbody>
             </table>
+            <p><strong>Tip:</strong> A 4 or 5 point scale is typical for opinion questions.</p>
           </div>
 
-          <div class="definition" style="margin-top: 0.9rem;">
-            <h4>Privacy, bias, ethics and cultural responsiveness</h4>
-            <p><strong>Privacy:</strong> respondents have the right to remain anonymous, especially for sensitive questions such as income, health, or religion.</p>
-            <p><strong>Bias:</strong> a systematic error that skews results. It can come from wording, sample selection, or the way data is collected.</p>
-            <p><strong>Ethics:</strong> participation should be voluntary, informed, and free from harm. Data must be reported honestly.</p>
-            <p><strong>Cultural responsiveness:</strong> questions must be respectful and relevant to people from all backgrounds.</p>
+          <div class="definition-block">
+            <h5>Privacy, Bias, Ethics and Cultural Responsiveness</h5>
+            <p><strong>Privacy:</strong> Respondents have the right to remain anonymous. Sensitive questions (income, health, religion) must be handled carefully.</p>
+            <p><strong>Bias:</strong> A systematic error that skews results. Can arise from question wording, sample selection or the way data is collected.</p>
+            <p><strong>Ethics:</strong> Participation should be voluntary, informed and free from harm. Data must be reported honestly.</p>
+            <p><strong>Cultural responsiveness:</strong> Questions must be respectful and relevant to people from all backgrounds. Avoid assumptions based on culture, gender or identity.</p>
           </div>
 
-          <div class="mini-grid" style="margin-top: 0.9rem;">
-            <div class="example">
-              <h4>Examples of bias in surveys</h4>
-              <p><strong>Wording bias:</strong> “Most experts agree smoking is harmful. Do you support a smoking ban?”</p>
-              <p><strong>Privacy concern:</strong> asking employees to rate their manager by name in a non-anonymous survey may produce dishonest answers.</p>
-            </div>
-            <div class="note">
-              <h4>Check yourself</h4>
-              <p>If a question sounds emotional, vague, or loaded, rewrite it before the survey goes out.</p>
-            </div>
+          <div class="example-block">
+            <h5>Examples of Bias in Surveys</h5>
+            <p><strong>Wording bias:</strong> "Most experts agree smoking is harmful. Do you support a smoking ban?" — The phrasing pressures respondents to agree.</p>
+            <p><strong>Privacy concern:</strong> Asking employees to rate their manager by name in a non-anonymous survey may cause them to give dishonest positive responses out of fear.</p>
           </div>
         </section>
 
-        <section class="content-card" id="sampling">
+        <!-- Section 3: Population and Sample -->
+        <section class="content-card" id="population">
           <p class="section-label">Section 3</p>
-          <h3>Population, Sample, and Census</h3>
-          <div class="definition">
-            <h4>Key terms</h4>
-            <p><strong>Population:</strong> the entire group that the investigation is about.</p>
-            <p><strong>Sample:</strong> a subset of the population selected to represent the whole group.</p>
-            <p><strong>Census:</strong> data collected from every member of the population.</p>
+          <h3>Population and Sample</h3>
+
+          <div class="definition-block">
+            <h5>Key Terms</h5>
+            <p><strong>Population:</strong> The entire group that the investigation is about.</p>
+            <p><strong>Sample:</strong> A subset of the population selected to represent the whole group.</p>
+            <p><strong>Census:</strong> Data collected from every member of the population.</p>
           </div>
-          <p style="margin-top: 0.85rem;">A <strong>representative sample</strong> reflects the characteristics of the population. If the sample is not representative, the conclusions may be invalid.</p>
+
+          <p style="margin-top: 0.85rem;">A <strong>representative sample</strong> reflects the characteristics of the population. If a sample is not representative, conclusions drawn from it may be invalid.</p>
         </section>
 
+        <!-- Section 4: Sampling Methods -->
         <section class="content-card" id="methods">
           <p class="section-label">Section 4</p>
           <h3>Sampling Methods</h3>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Method</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Random sampling</td>
-                  <td>Every member of the population has an equal chance of selection.</td>
-                </tr>
-                <tr>
-                  <td>Systematic sampling</td>
-                  <td>Select every <em>n</em>th member from an ordered list.</td>
-                </tr>
-                <tr>
-                  <td>Stratified sampling</td>
-                  <td>Divide the population into strata and sample from each in proportion.</td>
-                </tr>
-                <tr>
-                  <td>Self-selected sampling</td>
-                  <td>Participants volunteer themselves, as in an online poll.</td>
-                </tr>
-              </tbody>
-            </table>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Random sampling</strong></td>
+                <td>Every member of the population has an equal chance of selection</td>
+              </tr>
+              <tr>
+                <td><strong>Systematic sampling</strong></td>
+                <td>Select every <em>n</em>th member from an ordered list</td>
+              </tr>
+              <tr>
+                <td><strong>Stratified sampling</strong></td>
+                <td>Divide the population into strata (subgroups) and sample from each in proportion</td>
+              </tr>
+              <tr>
+                <td><strong>Self-selected sampling</strong></td>
+                <td>Participants volunteer themselves, as in an online poll</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example-block">
+            <h5>Random Sampling</h5>
+            <p>Every member of the population has an <strong>equal chance</strong> of being selected. Assign each student a number and use a random number generator to select the sample. Minimises selection bias but requires a complete list (sampling frame).</p>
           </div>
 
-          <div class="mini-grid" style="margin-top: 0.9rem;">
-            <div class="example">
-              <h4>Random sampling</h4>
-              <p>Assign each student a number and use a random number generator to select the sample.</p>
-            </div>
-            <div class="example">
-              <h4>Systematic sampling</h4>
-              <p>Choose every <em>n</em>th item from a list after a random starting point.</p>
-              <span class="formula">n = population size / sample size</span>
-            </div>
-            <div class="example">
-              <h4>Stratified sampling</h4>
-              <p>Split the population into subgroups and sample each subgroup in proportion.</p>
-            </div>
-            <div class="example">
-              <h4>Self-selected sampling</h4>
-              <p>Useful for quick polls, but strongly affected by voluntary response bias.</p>
-            </div>
+          <div class="example-block">
+            <h5>Systematic Sampling</h5>
+            <p>Select every <em>n</em>th member from an ordered list, starting from a randomly chosen point.</p>
+            <p style="text-align: center; margin: 0.5rem 0;"><span class="formula">n = population size ÷ sample size</span></p>
+            <p>Example: A factory produces 1,000 items per day. To check quality, inspect every 20th item off the production line (items 20, 40, 60, …).</p>
           </div>
 
-          <div class="table-wrap" style="margin-top: 0.9rem;">
+          <div class="example-block">
+            <h5>Stratified Sampling</h5>
+            <p>The population is divided into <strong>subgroups (strata)</strong> based on a characteristic (e.g. year group, gender). Members are sampled from each stratum <strong>in proportion</strong>.</p>
+            <p><strong>Example:</strong> A school of 600 students (200 in Year 10, 200 in Year 11, 200 in Year 12). To take a stratified sample of 60: From each year group = (60 ÷ 600) × 200 = 20 students</p>
+          </div>
+
+          <div class="example-block">
+            <h5>Self-Selected Sampling</h5>
+            <p>Participants <strong>choose to take part</strong> themselves. Easy and inexpensive, but highly prone to <strong>voluntary response bias</strong> — those with strong opinions are more likely to respond. Example: An online poll asking "Should the school canteen serve healthier food?" — only students who feel strongly will bother to respond.</p>
+          </div>
+
+          <div class="slide" style="margin-top: 0.75rem;">
+            <h4>Comparing Sampling Methods</h4>
             <table>
               <thead>
                 <tr>
                   <th>Method</th>
                   <th>Representative?</th>
-                  <th>Main risk</th>
+                  <th>Main Risk</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Random</td>
-                  <td>Yes, if done correctly</td>
-                  <td>Requires a full sampling frame</td>
+                  <td>Yes (if done correctly)</td>
+                  <td>Requires full sampling frame</td>
                 </tr>
                 <tr>
                   <td>Systematic</td>
@@ -686,7 +732,7 @@
                 </tr>
                 <tr>
                   <td>Stratified</td>
-                  <td>Yes</td>
+                  <td>Yes (best method)</td>
                   <td>More complex to organise</td>
                 </tr>
                 <tr>
@@ -699,61 +745,60 @@
           </div>
         </section>
 
+        <!-- Section 5: Faults in Data Collection -->
         <section class="content-card" id="faults">
           <p class="section-label">Section 5</p>
           <h3>Faults in Data Collection and Interpretation</h3>
-          <div class="mini-grid">
-            <div class="definition">
-              <h4>Data collection methods</h4>
-              <p><strong>Survey:</strong> participants answer questions about themselves.</p>
-              <p><strong>Experiment:</strong> the researcher controls a variable and measures the effect.</p>
-              <p><strong>Observational study:</strong> the researcher observes and records without interference.</p>
-            </div>
-            <div class="note">
-              <h4>Common survey problems</h4>
-              <ul>
-                <li>Leading questions</li>
-                <li>Double-barrelled questions</li>
-                <li>Ambiguous language</li>
-                <li>Sensitive questions without anonymity</li>
-                <li>Response bias</li>
-              </ul>
-            </div>
+
+          <div class="slide">
+            <h4>Types of Data Collection</h4>
+            <p><strong>Survey:</strong> Participants answer questions about themselves.</p>
+            <p><strong>Experiment:</strong> The researcher controls a variable and measures the effect.</p>
+            <p><strong>Observational study:</strong> The researcher observes and records without interference.</p>
           </div>
 
-          <div class="mini-grid" style="margin-top: 0.9rem;">
-            <div class="example">
-              <h4>Survey design fault</h4>
-              <p>“Do you eat healthily and exercise regularly?” asks two separate questions and should be split into two items.</p>
-            </div>
-            <div class="example">
-              <h4>Experiment / observational faults</h4>
-              <p>Confounding variables, observer effects, small sample sizes, and non-response bias can all distort results.</p>
-            </div>
-          </div>
-
-          <div class="note" style="margin-top: 0.9rem;">
-            <h4>Misunderstandings and misrepresentations</h4>
+          <div class="slide">
+            <h4>Faults in Survey Design</h4>
+            <p>Common problems with surveys include:</p>
             <ul>
-              <li>Cherry-picking only the data that supports a desired conclusion.</li>
-              <li>Misleading graphs with truncated axes, inconsistent scales, or 3D effects.</li>
-              <li>Confusing correlation with causation.</li>
-              <li>Overgeneralising from a small or biased sample.</li>
+              <li><strong>Leading questions</strong> — wording that pushes respondents toward a particular answer</li>
+              <li><strong>Double-barrelled questions</strong> — asking two things in one question</li>
+              <li><strong>Ambiguous language</strong> — words that different people interpret differently</li>
+              <li><strong>Sensitive questions without anonymity</strong> — causes dishonest responses</li>
+              <li><strong>Response bias</strong> — participants answer in a socially desirable way rather than honestly</li>
             </ul>
-            <p style="margin-bottom: 0;"><strong>Example:</strong> a graph that starts at 900 instead of 0 can make a small change look dramatic.</p>
+            <p><strong>Example:</strong> "Do you eat healthily and exercise regularly?" asks two separate questions — it should be split into two distinct items.</p>
+          </div>
+
+          <div class="slide">
+            <h4>Faults in Experiments and Observational Studies</h4>
+            <ul>
+              <li><strong>Confounding variables</strong> — a third variable affects the result, making it unclear what caused the outcome</li>
+              <li><strong>Observer effect</strong> — participants behave differently when they know they are being watched</li>
+              <li><strong>Small sample size</strong> — results may not generalise to the population</li>
+              <li><strong>Non-response bias</strong> — certain types of people consistently decline to participate, skewing the sample</li>
+            </ul>
+            <p><strong>Example:</strong> A study finds students who eat breakfast score higher on tests. But students from higher-income families may both eat breakfast <em>and</em> have better resources for study — income is a confounding variable.</p>
+          </div>
+
+          <div class="slide">
+            <h4>Misunderstandings and Misrepresentations</h4>
+            <p>Even after data is collected, results can be misrepresented:</p>
+            <ul>
+              <li><strong>Cherry-picking</strong> — reporting only the data that supports a desired conclusion</li>
+              <li><strong>Misleading graphs</strong> — truncated axes, inconsistent scales, or 3D effects that distort proportions</li>
+              <li><strong>Correlation vs causation</strong> — two variables may be related without one causing the other</li>
+              <li><strong>Overgeneralisation</strong> — applying conclusions from a small or biased sample to the entire population</li>
+            </ul>
+            <p><strong>Example:</strong> A graph showing sales "up 50%" with a y-axis starting at 900 instead of 0 makes a small change look dramatic.</p>
           </div>
         </section>
 
+        <!-- Homework -->
         <section class="content-card homework" id="homework">
           <p class="section-label">Section 6</p>
           <h3>Homework</h3>
           <p>Complete all questions from <em>Data Analysis</em> — <em>Statistical Investigation Process and Sampling</em>.</p>
-          <div class="tag-row">
-            <span class="tag">Question design</span>
-            <span class="tag">Sampling methods</span>
-            <span class="tag">Bias</span>
-            <span class="tag">Ethics</span>
-          </div>
         </section>
       </article>
     </div>
