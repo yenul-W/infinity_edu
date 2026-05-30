@@ -6,7 +6,263 @@
   <title>Data Analysis — Year 11 Maths Standard</title>
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=Outfit:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-  <style> :root { --accent: #8e44ad; } </style>
+  <style>
+    :root { --accent: #8e44ad; }
+    
+    .pdf-viewer-container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .lessons-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    
+    .lesson-btn {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: left;
+      transition: all 0.2s;
+      color: var(--ink);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .lesson-btn::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.3s;
+    }
+    
+    .lesson-btn:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: translateX(4px);
+    }
+    
+    .lesson-btn.active {
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      border-color: var(--accent);
+    }
+    
+    .lesson-btn.active::before {
+      transform: scaleY(1);
+    }
+    
+    .lesson-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+    }
+    
+    .lesson-title {
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    
+    .pdf-viewer-main {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    
+    .pdf-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1.5px solid var(--border);
+      background: linear-gradient(to right, #fafaf8, transparent);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .pdf-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    .pdf-btn:hover {
+      background: color-mix(in srgb, var(--accent) 120%, transparent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(192,57,43,0.25);
+    }
+    
+    .pdf-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .page-info {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      min-width: 100px;
+      text-align: center;
+    }
+    
+    .zoom-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.25rem;
+    }
+    
+    .zoom-btn {
+      background: transparent;
+      border: none;
+      color: var(--ink-soft);
+      cursor: pointer;
+      padding: 0.4rem 0.6rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    
+    .zoom-btn:hover {
+      color: var(--accent);
+    }
+    
+    .zoom-display {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      padding: 0 0.6rem;
+      color: var(--ink-soft);
+      font-weight: 500;
+      min-width: 45px;
+      text-align: center;
+    }
+    
+    #pdf-canvas {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+    }
+    
+    .pdf-viewer {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: #f0ebe3;
+      min-height: 500px;
+      overflow: auto;
+    }
+    
+    .pdf-embed {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #f0ebe3;
+    }
+    
+    .pdf-loading {
+      text-align: center;
+      color: var(--ink-faint);
+    }
+    
+    .pdf-loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .download-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    
+    .download-link:hover {
+      color: color-mix(in srgb, var(--accent) 120%, transparent);
+    }
+    
+    @media (max-width: 1024px) {
+      .pdf-viewer-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .pdf-controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .control-group {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .pdf-controls {
+        padding: 1rem;
+      }
+      
+      .pdf-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      
+      .lessons-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="bg-pattern"></div>
@@ -21,32 +277,130 @@
 
   <main class="main-content">
     <div class="lesson-list">
-
-      <div class="lesson-empty">
-        <div class="empty-icon">📄</div>
-        <p>Lessons coming soon — check back shortly.</p>
-      </div>
-
-      <!-- EXAMPLE (uncomment and edit when you have PDFs):
-
-      <div class="lesson-item">
-        <div class="lesson-number">01</div>
-        <div class="lesson-details">
-          <h3>Types of Data</h3>
-          <div class="lesson-links">
-            <a href="lesson-01-slides.pdf" class="pdf-link slides" target="_blank">📑 Annotated Slides</a>
-            <a href="lesson-01-homework.pdf" class="pdf-link homework" target="_blank">✏️ Homework</a>
+      <div class="pdf-viewer-container">
+        <div class="lessons-sidebar" id="lessonsList"></div>
+        
+        <div class="pdf-viewer-main">
+          <div class="pdf-controls">
+            <div class="control-group">
+              <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()" title="Download PDF">⬇ Download</button>
+              <a id="openExternalBtn" class="pdf-btn" style="text-decoration: none; cursor: pointer;" title="Open in default viewer">↗ Open</a>
+            </div>
+            
+            <div class="control-group">
+              <div class="zoom-control">
+                <button class="zoom-btn" onclick="zoomOut()">−</button>
+                <span class="zoom-display" id="zoomLevel">100%</span>
+                <button class="zoom-btn" onclick="zoomIn()">+</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pdf-viewer" id="pdfViewerContainer">
+            <iframe id="pdf-iframe" class="pdf-embed" src=""></iframe>
           </div>
         </div>
       </div>
-
-      -->
-
     </div>
   </main>
 
   <footer class="site-footer">
     Year 11 Mathematics Standard &mdash; Learning Materials
   </footer>
+
+  <script>
+    // Get the current directory for absolute paths
+    const currentDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    
+    const lessons = [
+      { title: 'Descriptive Statistics', file: currentDir + '/assets/1__Data_Analysis__Descriptive_Statistics.pdf' },
+      { title: 'Histograms & Polygons', file: currentDir + '/assets/2__Data_Analysis__Histograms___Polygons.pdf' },
+      { title: 'Measures of Centre and Spread', file: currentDir + '/assets/3__Data_Analysis__Measures_of_Centre_and_Spread.pdf' },
+      { title: 'Quartiles, Box Plots and Outliers', file: currentDir + '/assets/4__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf' }
+    ];
+    
+    let currentLessonIndex = 0;
+    let currentLessonFile = '';
+    
+    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+    const pdfIframe = document.getElementById('pdf-iframe');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const openExternalBtn = document.getElementById('openExternalBtn');
+    const zoomLevelEl = document.getElementById('zoomLevel');
+    
+    // Initialize lessons sidebar
+    function initializeLessons() {
+      const lessonsList = document.getElementById('lessonsList');
+      lessons.forEach((lesson, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'lesson-btn' + (index === 0 ? ' active' : '');
+        btn.innerHTML = `<div class="lesson-num">Lesson ${index + 1}</div><div class="lesson-title">${lesson.title}</div>`;
+        btn.onclick = () => loadLesson(index);
+        lessonsList.appendChild(btn);
+      });
+    }
+    
+    // Load a lesson PDF
+    function loadLesson(index) {
+      currentLessonIndex = index;
+      currentLessonFile = lessons[index].file;
+      
+      // Update active button
+      document.querySelectorAll('.lesson-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+      
+      // Load PDF in iframe
+      // For file:// protocol, we'll use a data URL wrapper or direct link
+      pdfIframe.src = currentLessonFile;
+      
+      // Update download button
+      downloadBtn.onclick = () => downloadPDF();
+      
+      // Update open external button
+      openExternalBtn.onclick = () => {
+        window.open(currentLessonFile, '_blank');
+      };
+    }
+    
+    function downloadPDF() {
+      const link = document.createElement('a');
+      link.href = currentLessonFile;
+      link.download = currentLessonFile.split('/').pop();
+      link.click();
+    }
+    
+    function zoomIn() {
+      try {
+        if (pdfIframe.contentDocument) {
+          const currentZoom = parseFloat(zoomLevelEl.textContent) || 100;
+          const newZoom = Math.min(currentZoom + 20, 300);
+          zoomLevelEl.textContent = newZoom + '%';
+          pdfIframe.style.transform = `scale(${newZoom / 100})`;
+          pdfIframe.style.transformOrigin = 'top left';
+        }
+      } catch (e) {
+        console.log('Zoom controlled by PDF viewer');
+      }
+    }
+    
+    function zoomOut() {
+      try {
+        if (pdfIframe.contentDocument) {
+          const currentZoom = parseFloat(zoomLevelEl.textContent) || 100;
+          const newZoom = Math.max(currentZoom - 20, 50);
+          zoomLevelEl.textContent = newZoom + '%';
+          pdfIframe.style.transform = `scale(${newZoom / 100})`;
+          pdfIframe.style.transformOrigin = 'top left';
+        }
+      } catch (e) {
+        console.log('Zoom controlled by PDF viewer');
+      }
+    }
+    
+    // Initialize on load
+    initializeLessons();
+    loadLesson(0);
+  </script>
 </body>
 </html>
