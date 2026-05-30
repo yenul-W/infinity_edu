@@ -15,24 +15,9 @@
 
   <header class="site-header">
     <div class="header-content">
-      <div class="breadcrumb">year 11 • mathematics standard</div>
-      <div class="hero-section">
-        <div class="hero-text">
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-number">4</span>
-              <span class="stat-label">Topics</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">∞</span>
-              <span class="stat-label">Practice</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">100%</span>
-              <span class="stat-label">Free</span>
-            </div>
-          </div>
-        </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div class="breadcrumb">year 11 • mathematics standard</div>
+        <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode"><span class="toggle-icon">dark</span></button>
       </div>
     </div>
   </header>
@@ -105,6 +90,32 @@
   </footer>
 
   <script>
+    // Dark mode toggle
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = document.querySelector('.toggle-icon');
+    const html = document.documentElement;
+
+    // Check for saved preference or default to system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+
+    // Apply initial theme
+    if (isDark) {
+      html.classList.add('dark-mode');
+      toggleIcon.textContent = 'light';
+    } else {
+      html.classList.remove('dark-mode');
+      toggleIcon.textContent = 'dark';
+    }
+
+    // Toggle on click
+    toggle.addEventListener('click', () => {
+      const isDarkNow = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+      toggleIcon.textContent = isDarkNow ? 'light' : 'dark';
+    });
+
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
