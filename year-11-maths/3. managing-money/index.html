@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Managing Money — Year 11 Maths Standard</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent-color: #14b8a6;
+      --accent-glow: rgba(20, 184, 166, 0.3);
+    }
+
+    .topic-header {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(20, 184, 166, 0.1) 100%);
+      border-bottom: 1px solid var(--surface-lighter);
+    }
+
+    .topic-page-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      font-family: var(--font-display);
+    }
+
+    .topic-page-title em {
+      background: linear-gradient(135deg, var(--primary-teal), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lesson-item {
+      background: var(--surface-light);
+      border: 1px solid var(--surface-lighter);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease-out;
+      animation: slideInUp 0.6s ease-out both;
+    }
+
+    .lesson-item:nth-child(1) { animation-delay: 0.1s; }
+    .lesson-item:nth-child(2) { animation-delay: 0.2s; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .lesson-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(20, 184, 166, 0.4);
+      box-shadow: 0 15px 40px var(--accent-glow);
+    }
+
+    .lesson-number {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 1;
+    }
+
+    .lesson-details h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      margin-bottom: 1rem;
+    }
+
+    .pdf-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid;
+      transition: all 0.3s ease-out;
+      font-family: var(--font-body);
+      margin-right: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .pdf-link.slides {
+      color: var(--primary-teal);
+      border-color: var(--primary-teal);
+      background: rgba(20, 184, 166, 0.1);
+    }
+
+    .pdf-link.slides:hover {
+      background: rgba(20, 184, 166, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(20, 184, 166, 0.2);
+    }
+
+    .pdf-link.homework {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      background: rgba(15, 183, 245, 0.1);
+    }
+
+    .pdf-link.homework:hover {
+      background: rgba(15, 183, 245, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(15, 183, 245, 0.2);
+    }
+
+    .lesson-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .lesson-empty p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-family: var(--font-display);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease-out;
+      font-family: var(--font-body);
+    }
+
+    .back-link:hover {
+      color: var(--primary-teal);
+      transform: translateX(-4px);
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg"></div>
+  <div class="gradient-orb orb-1"></div>
+  <div class="gradient-orb orb-2"></div>
+  <div class="gradient-orb orb-3"></div>
+
+  <header class="topic-header">
+    <div class="header-content" style="max-width: 1000px; margin: 0 auto;">
+      <a href="../../index.html" class="back-link">← Back to Topics</a>
+      <h1 class="topic-page-title">Managing <em>Money</em></h1>
+      <p style="color: var(--text-secondary); margin-top: 1rem;">Budget like a boss, understand interest, loans & smart financial decisions.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="lesson-list" style="max-width: 1000px; margin: 0 auto; padding: 3rem 2rem;">
+
+      <div class="lesson-item">
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+          <div class="lesson-number">01</div>
+          <div class="lesson-details" style="flex: 1;">
+            <h3>Purchasing Goods</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.6;">Master consumer decisions, comparing prices, discounts, and making smart purchasing choices.</p>
+            <div class="lesson-links">
+              <a href="assets/1__Managing_Money___Purchasing_Goods.pdf" class="pdf-link slides" target="_blank">📑 Study Material</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-item">
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+          <div class="lesson-number">02</div>
+          <div class="lesson-details" style="flex: 1;">
+            <h3>Budgeting</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.6;">Learn to create and manage budgets, track expenses, and plan your finances for success.</p>
+            <div class="lesson-links">
+              <a href="assets/2__Managing_Money___Budgeting.pdf" class="pdf-link slides" target="_blank">📑 Study Material</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>Year 11 Mathematics Standard • Topic 03: Managing Money</p>
+      <div class="footer-accent">✨ Learn • Master • Excel ✨</div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const orbs = document.querySelectorAll('.gradient-orb');
+      orbs.forEach((orb, index) => {
+        const x = (e.clientX / window.innerWidth) * (50 - index * 10);
+        const y = (e.clientY / window.innerHeight) * (50 - index * 10);
+        orb.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  </script>
+</body>
+</html>

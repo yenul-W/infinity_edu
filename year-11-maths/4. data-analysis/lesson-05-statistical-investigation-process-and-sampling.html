@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 05 — Statistical Investigation Process and Sampling</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #faf6ef;
+      --paper: rgba(255, 252, 246, 0.9);
+      --ink: #191511;
+      --ink-soft: #53493f;
+      --ink-faint: #897f74;
+      --border: #e4d9cc;
+      --accent: #8e44ad;
+      --accent-soft: rgba(142, 68, 173, 0.12);
+      --shadow: 0 24px 60px rgba(36, 24, 18, 0.12);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(142, 68, 173, 0.08), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(214, 111, 61, 0.09), transparent 24%),
+        linear-gradient(180deg, #fcf8f1 0%, #f4ede3 100%);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(135deg, rgba(25, 21, 17, 0.025) 0 1px, transparent 1px 15px);
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      position: relative;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .topbar a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .topbar a:hover {
+      border-color: currentColor;
+      color: var(--accent);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 1rem;
+      align-items: stretch;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-main,
+    .hero-side,
+    .toc,
+    .content-card {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-main {
+      padding: 1.6rem 1.7rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: '';
+      position: absolute;
+      inset: auto -15% -35% auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142, 68, 173, 0.16), transparent 68%);
+    }
+
+    .eyebrow,
+    .section-label {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0.5rem 0 0.65rem;
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 0.92;
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      max-width: 10ch;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 56ch;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.2rem;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+      background: rgba(255, 255, 255, 0.55);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.06em;
+    }
+
+    .hero-side {
+      padding: 1.4rem;
+      display: grid;
+      gap: 0.85rem;
+      align-content: start;
+      background: linear-gradient(165deg, rgba(35, 24, 22, 0.96), rgba(69, 45, 69, 0.94));
+      color: #fbf5ec;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-side::before {
+      content: '';
+      position: absolute;
+      inset: auto -22% -30% auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 195, 133, 0.2), transparent 65%);
+    }
+
+    .hero-side .section-label,
+    .hero-side p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-side p {
+      margin: 0;
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: rgba(251, 245, 236, 0.88);
+      line-height: 1.6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 1rem;
+      padding: 1rem;
+    }
+
+    .toc h2 {
+      margin: 0 0 0.75rem;
+      font-family: var(--display);
+      font-size: 1.6rem;
+      line-height: 1;
+      font-weight: 600;
+    }
+
+    .toc a {
+      display: block;
+      text-decoration: none;
+      padding: 0.52rem 0.6rem;
+      border-radius: 12px;
+      color: var(--ink-soft);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .toc a:hover {
+      background: var(--accent-soft);
+      color: var(--ink);
+      transform: translateX(2px);
+    }
+
+    .content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .content-card {
+      padding: 1.2rem 1.25rem 1.3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 42%);
+    }
+
+    .content-card h3 {
+      margin: 0.35rem 0 0.75rem;
+      font-family: var(--display);
+      font-size: 2rem;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+
+    .content-card p,
+    .content-card li,
+    .content-card td,
+    .content-card th {
+      line-height: 1.75;
+      color: var(--ink-soft);
+    }
+
+    .stage-grid,
+    .mini-grid {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .stage-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .mini-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card,
+    .note,
+    .example,
+    .definition,
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.66);
+      padding: 0.95rem 1rem;
+    }
+
+    .card strong,
+    .note strong,
+    .example strong,
+    .definition strong {
+      color: var(--ink);
+    }
+
+    .card .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .definition ul,
+    .note ul,
+    .content-card ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    .content-card li + li { margin-top: 0.35rem; }
+
+    .example,
+    .note {
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.62));
+    }
+
+    .example h4,
+    .note h4,
+    .definition h4 {
+      margin: 0 0 0.45rem;
+      font-size: 0.95rem;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.96rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.7rem 0.65rem;
+      border-bottom: 1px solid rgba(137, 127, 116, 0.2);
+    }
+
+    th {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .formula {
+      display: block;
+      margin-top: 0.55rem;
+      padding: 0.9rem 1rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.7);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(142, 68, 173, 0.08);
+      border: 1px solid rgba(142, 68, 173, 0.2);
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      padding-bottom: 0.15rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+      border-color: currentColor;
+    }
+
+    .homework {
+      padding: 1rem 1.05rem;
+      border-radius: 18px;
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+      background: linear-gradient(135deg, rgba(142, 68, 173, 0.08), rgba(255,255,255,0.7));
+    }
+
+    .homework h3 {
+      margin-top: 0;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .layout,
+      .stage-grid,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 1rem 0.75rem 2rem;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-main,
+      .hero-side,
+      .toc,
+      .content-card {
+        border-radius: 20px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <a href="index.html">← Back to Data Analysis archive</a>
+        <span>Lesson 05</span>
+    </div>
+
+    <section class="hero" aria-label="Lesson introduction">
+      <div class="hero-main">
+        <h1>Statistical Investigation Process and Sampling</h1>
+        <p class="subtitle">Use the contents below to move through the lesson and study the examples at your own pace.</p>
+      </div>
+
+      <aside class="hero-side">
+        <p class="section-label">What to remember</p>
+        <p>Good questions are specific and neutral.</p>
+        <p>Representative samples matter more than convenience.</p>
+        <p>Bias can appear in wording, selection, or interpretation.</p>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <a href="#process">The process</a>
+        <a href="#questions">Question design</a>
+        <a href="#sampling">Population and sample</a>
+        <a href="#methods">Sampling methods</a>
+        <a href="#faults">Faults and bias</a>
+        <a href="#homework">Homework</a>
+      </aside>
+
+      <article class="content">
+        <section class="content-card" id="process">
+          <p class="section-label">Section 1</p>
+          <h3>The Statistical Investigation Process</h3>
+          <p>A statistical investigation follows a cycle of four key stages.</p>
+          <div class="stage-grid">
+            <div class="card"><span class="num">1</span><strong>Pose a question</strong><p>Identify an issue and define what you want to find out.</p></div>
+            <div class="card"><span class="num">2</span><strong>Collect data</strong><p>Design a survey or study that will produce useful information.</p></div>
+            <div class="card"><span class="num">3</span><strong>Analyse data</strong><p>Organise, display, and summarise what was collected.</p></div>
+            <div class="card"><span class="num">4</span><strong>Interpret and communicate</strong><p>Draw conclusions and answer the original question.</p></div>
+          </div>
+        </section>
+
+        <section class="content-card" id="questions">
+          <p class="section-label">Section 2</p>
+          <h3>Posing and Designing Questions</h3>
+          <div class="mini-grid">
+            <div class="definition">
+              <h4>What makes a good statistical question?</h4>
+              <ul>
+                <li>It targets a specific population.</li>
+                <li>It can be answered with data.</li>
+                <li>It expects variation in the responses.</li>
+              </ul>
+            </div>
+            <div class="note">
+              <h4>Example</h4>
+              <p><strong>Issue:</strong> Screen time among teenagers.</p>
+              <p><strong>Poor question:</strong> “Do you use your phone a lot?”</p>
+              <p><strong>Better question:</strong> “How many hours per day do Year 11 students at this school spend on social media?”</p>
+            </div>
+          </div>
+
+          <div class="mini-grid" style="margin-top: 0.9rem;">
+            <div class="definition">
+              <h4>Questionnaire design principles</h4>
+              <ul>
+                <li><strong>Clear</strong> — plain language that everyone understands.</li>
+                <li><strong>Unambiguous</strong> — only one possible interpretation.</li>
+                <li><strong>Neutral</strong> — does not push the respondent toward an answer.</li>
+                <li><strong>Appropriately scaled</strong> — the number of response choices fits the task.</li>
+                <li><strong>Sensitive</strong> — respectful of diverse groups and backgrounds.</li>
+              </ul>
+            </div>
+            <div class="example">
+              <h4>Clear vs leading</h4>
+              <p><strong>Ambiguous:</strong> “How often do you exercise?”</p>
+              <p><strong>Better:</strong> “How many times per week do you participate in physical activity for at least 30 minutes?”</p>
+              <p><strong>Leading:</strong> “Don’t you agree that homework should be banned?”</p>
+              <p><strong>Better:</strong> “What is your opinion on homework in secondary schools?”</p>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top: 0.9rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Example</th>
+                  <th>Issue</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Too few choices</td>
+                  <td>Yes / No</td>
+                  <td>Forces oversimplification</td>
+                </tr>
+                <tr>
+                  <td>Too many choices</td>
+                  <td>Scale of 1–100</td>
+                  <td>Hard to answer consistently</td>
+                </tr>
+                <tr>
+                  <td>Well-balanced</td>
+                  <td>Scale of 1–5</td>
+                  <td>Captures a range of opinion</td>
+                </tr>
+                <tr>
+                  <td>No neutral option</td>
+                  <td>Agree / Disagree only</td>
+                  <td>Forces a stance</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="definition" style="margin-top: 0.9rem;">
+            <h4>Privacy, bias, ethics and cultural responsiveness</h4>
+            <p><strong>Privacy:</strong> respondents have the right to remain anonymous, especially for sensitive questions such as income, health, or religion.</p>
+            <p><strong>Bias:</strong> a systematic error that skews results. It can come from wording, sample selection, or the way data is collected.</p>
+            <p><strong>Ethics:</strong> participation should be voluntary, informed, and free from harm. Data must be reported honestly.</p>
+            <p><strong>Cultural responsiveness:</strong> questions must be respectful and relevant to people from all backgrounds.</p>
+          </div>
+
+          <div class="mini-grid" style="margin-top: 0.9rem;">
+            <div class="example">
+              <h4>Examples of bias in surveys</h4>
+              <p><strong>Wording bias:</strong> “Most experts agree smoking is harmful. Do you support a smoking ban?”</p>
+              <p><strong>Privacy concern:</strong> asking employees to rate their manager by name in a non-anonymous survey may produce dishonest answers.</p>
+            </div>
+            <div class="note">
+              <h4>Check yourself</h4>
+              <p>If a question sounds emotional, vague, or loaded, rewrite it before the survey goes out.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-card" id="sampling">
+          <p class="section-label">Section 3</p>
+          <h3>Population, Sample, and Census</h3>
+          <div class="definition">
+            <h4>Key terms</h4>
+            <p><strong>Population:</strong> the entire group that the investigation is about.</p>
+            <p><strong>Sample:</strong> a subset of the population selected to represent the whole group.</p>
+            <p><strong>Census:</strong> data collected from every member of the population.</p>
+          </div>
+          <p style="margin-top: 0.85rem;">A <strong>representative sample</strong> reflects the characteristics of the population. If the sample is not representative, the conclusions may be invalid.</p>
+        </section>
+
+        <section class="content-card" id="methods">
+          <p class="section-label">Section 4</p>
+          <h3>Sampling Methods</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Random sampling</td>
+                  <td>Every member of the population has an equal chance of selection.</td>
+                </tr>
+                <tr>
+                  <td>Systematic sampling</td>
+                  <td>Select every <em>n</em>th member from an ordered list.</td>
+                </tr>
+                <tr>
+                  <td>Stratified sampling</td>
+                  <td>Divide the population into strata and sample from each in proportion.</td>
+                </tr>
+                <tr>
+                  <td>Self-selected sampling</td>
+                  <td>Participants volunteer themselves, as in an online poll.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mini-grid" style="margin-top: 0.9rem;">
+            <div class="example">
+              <h4>Random sampling</h4>
+              <p>Assign each student a number and use a random number generator to select the sample.</p>
+            </div>
+            <div class="example">
+              <h4>Systematic sampling</h4>
+              <p>Choose every <em>n</em>th item from a list after a random starting point.</p>
+              <span class="formula">n = population size / sample size</span>
+            </div>
+            <div class="example">
+              <h4>Stratified sampling</h4>
+              <p>Split the population into subgroups and sample each subgroup in proportion.</p>
+            </div>
+            <div class="example">
+              <h4>Self-selected sampling</h4>
+              <p>Useful for quick polls, but strongly affected by voluntary response bias.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top: 0.9rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Representative?</th>
+                  <th>Main risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Random</td>
+                  <td>Yes, if done correctly</td>
+                  <td>Requires a full sampling frame</td>
+                </tr>
+                <tr>
+                  <td>Systematic</td>
+                  <td>Usually</td>
+                  <td>Pattern bias in the list</td>
+                </tr>
+                <tr>
+                  <td>Stratified</td>
+                  <td>Yes</td>
+                  <td>More complex to organise</td>
+                </tr>
+                <tr>
+                  <td>Self-selected</td>
+                  <td>Rarely</td>
+                  <td>Voluntary response bias</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="content-card" id="faults">
+          <p class="section-label">Section 5</p>
+          <h3>Faults in Data Collection and Interpretation</h3>
+          <div class="mini-grid">
+            <div class="definition">
+              <h4>Data collection methods</h4>
+              <p><strong>Survey:</strong> participants answer questions about themselves.</p>
+              <p><strong>Experiment:</strong> the researcher controls a variable and measures the effect.</p>
+              <p><strong>Observational study:</strong> the researcher observes and records without interference.</p>
+            </div>
+            <div class="note">
+              <h4>Common survey problems</h4>
+              <ul>
+                <li>Leading questions</li>
+                <li>Double-barrelled questions</li>
+                <li>Ambiguous language</li>
+                <li>Sensitive questions without anonymity</li>
+                <li>Response bias</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mini-grid" style="margin-top: 0.9rem;">
+            <div class="example">
+              <h4>Survey design fault</h4>
+              <p>“Do you eat healthily and exercise regularly?” asks two separate questions and should be split into two items.</p>
+            </div>
+            <div class="example">
+              <h4>Experiment / observational faults</h4>
+              <p>Confounding variables, observer effects, small sample sizes, and non-response bias can all distort results.</p>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top: 0.9rem;">
+            <h4>Misunderstandings and misrepresentations</h4>
+            <ul>
+              <li>Cherry-picking only the data that supports a desired conclusion.</li>
+              <li>Misleading graphs with truncated axes, inconsistent scales, or 3D effects.</li>
+              <li>Confusing correlation with causation.</li>
+              <li>Overgeneralising from a small or biased sample.</li>
+            </ul>
+            <p style="margin-bottom: 0;"><strong>Example:</strong> a graph that starts at 900 instead of 0 can make a small change look dramatic.</p>
+          </div>
+        </section>
+
+        <section class="content-card homework" id="homework">
+          <p class="section-label">Section 6</p>
+          <h3>Homework</h3>
+          <p>Complete all questions from <em>Data Analysis</em> — <em>Statistical Investigation Process and Sampling</em>.</p>
+          <div class="tag-row">
+            <span class="tag">Question design</span>
+            <span class="tag">Sampling methods</span>
+            <span class="tag">Bias</span>
+            <span class="tag">Ethics</span>
+          </div>
+        </section>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

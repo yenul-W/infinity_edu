@@ -108,6 +108,15 @@
       overflow: hidden;
       position: relative;
     }
+
+    .lesson-kind {
+      margin-top: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
     
     .lesson-btn::before {
       content: '';
@@ -349,31 +358,17 @@
 
   <main class="main-content">
     <div class="lesson-shell">
-      <section class="lesson-hero" aria-label="Data analysis archive overview">
-        <div class="lesson-hero-copy">
-          <div class="hero-panel-label">Module archive</div>
-          <h2>Open lessons, switch tracks, and keep the reading flow in one place.</h2>
-          <p>Use the lesson rail to move between PDFs. Download or open externally whenever you need the browser viewer.</p>
-        </div>
-        <aside class="lesson-hero-note">
-          <p>4 PDF lessons</p>
-          <p>Switch instantly from the sidebar</p>
-          <p>Built for reading, review, and annotation</p>
-        </aside>
-      </section>
-
-      <div class="lesson-list">
       <div class="pdf-viewer-container">
         <div class="lessons-sidebar" id="lessonsList"></div>
-        
+
         <div class="pdf-viewer-main">
           <div class="pdf-controls">
-            <div class="control-group">
-              <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()" title="Download PDF">⬇ Download</button>
-              <a id="openExternalBtn" class="pdf-btn" style="text-decoration: none; cursor: pointer;" title="Open in default viewer">↗ Open</a>
+            <div class="control-group" id="fileControls">
+              <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()" title="Download PDF">⬇ Download PDF</button>
+              <a id="openExternalBtn" class="pdf-btn" style="text-decoration: none; cursor: pointer;" title="Open lesson in a new tab">↗ Open lesson</a>
             </div>
-            
-            <div class="control-group">
+
+            <div class="control-group" id="zoomControls">
               <div class="zoom-control">
                 <button class="zoom-btn" onclick="zoomOut()">−</button>
                 <span class="zoom-display" id="zoomLevel">100%</span>
@@ -381,12 +376,11 @@
               </div>
             </div>
           </div>
-          
+
           <div class="pdf-viewer" id="pdfViewerContainer">
-            <iframe id="pdf-iframe" class="pdf-embed" src=""></iframe>
+            <iframe id="pdf-iframe" class="pdf-embed" src="" title="Lesson viewer"></iframe>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </main>
@@ -400,20 +394,28 @@
     const currentDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     
     const lessons = [
-      { title: 'Descriptive Statistics', file: currentDir + '/assets/1__Data_Analysis__Descriptive_Statistics.pdf' },
-      { title: 'Histograms & Polygons', file: currentDir + '/assets/2__Data_Analysis__Histograms___Polygons.pdf' },
-      { title: 'Measures of Centre and Spread', file: currentDir + '/assets/3__Data_Analysis__Measures_of_Centre_and_Spread.pdf' },
-      { title: 'Quartiles, Box Plots and Outliers', file: currentDir + '/assets/4__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf' }
+      { title: 'Descriptive Statistics', file: currentDir + '/assets/1__Data_Analysis__Descriptive_Statistics.pdf', kind: 'pdf' },
+      { title: 'Histograms & Polygons', file: currentDir + '/assets/2__Data_Analysis__Histograms___Polygons.pdf', kind: 'pdf' },
+      { title: 'Measures of Centre and Spread', file: currentDir + '/assets/3__Data_Analysis__Measures_of_Centre_and_Spread.pdf', kind: 'pdf' },
+      { title: 'Quartiles, Box Plots and Outliers', file: currentDir + '/assets/4__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf', kind: 'pdf' },
+      { title: 'Statistical Investigation Process and Sampling', file: currentDir + '/lesson-05-statistical-investigation-process-and-sampling.html', kind: 'html' }
     ];
     
     let currentLessonIndex = 0;
     let currentLessonFile = '';
+    let currentLessonKind = 'pdf';
     
     const pdfViewerContainer = document.getElementById('pdfViewerContainer');
     const pdfIframe = document.getElementById('pdf-iframe');
     const downloadBtn = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
     const zoomLevelEl = document.getElementById('zoomLevel');
+    const zoomControls = document.getElementById('zoomControls');
+    const fileControls = document.getElementById('fileControls');
+
+    function toFileUrl(path) {
+      return path.startsWith('file://') ? path : `file://${path}`;
+    }
     
     // Initialize lessons sidebar
     function initializeLessons() {
@@ -431,6 +433,7 @@
     function loadLesson(index) {
       currentLessonIndex = index;
       currentLessonFile = lessons[index].file;
+      currentLessonKind = lessons[index].kind;
       
       // Update active button
       document.querySelectorAll('.lesson-btn').forEach((btn, i) => {
@@ -438,21 +441,22 @@
       });
       
       // Load PDF in iframe
-      // For file:// protocol, we'll use a data URL wrapper or direct link
-      pdfIframe.src = currentLessonFile;
+      pdfIframe.src = toFileUrl(currentLessonFile);
       
-      // Update download button
+      // Toggle controls for HTML lessons.
+      downloadBtn.style.display = currentLessonKind === 'pdf' ? 'inline-flex' : 'none';
+      zoomControls.style.display = currentLessonKind === 'pdf' ? 'flex' : 'none';
+      
       downloadBtn.onclick = () => downloadPDF();
-      
-      // Update open external button
-      openExternalBtn.onclick = () => {
-        window.open(currentLessonFile, '_blank');
-      };
+      openExternalBtn.textContent = currentLessonKind === 'pdf' ? '↗ Open PDF' : '↗ Open lesson';
+      openExternalBtn.href = toFileUrl(currentLessonFile);
+      openExternalBtn.target = '_blank';
+      openExternalBtn.rel = 'noreferrer';
     }
     
     function downloadPDF() {
       const link = document.createElement('a');
-      link.href = currentLessonFile;
+      link.href = toFileUrl(currentLessonFile);
       link.download = currentLessonFile.split('/').pop();
       link.click();
     }
