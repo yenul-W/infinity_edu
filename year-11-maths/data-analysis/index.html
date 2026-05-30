@@ -5,9 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Analysis — Year 11 Maths Standard</title>
   <link rel="stylesheet" href="../../style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=Outfit:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root { --accent: #8e44ad; }
+
+    .lesson-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    .lesson-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .lesson-hero-copy,
+    .lesson-hero-note {
+      border-radius: 1.25rem;
+      border: 1px solid var(--border);
+      background: rgba(255, 252, 246, 0.82);
+      box-shadow: 0 18px 42px rgba(32, 24, 18, 0.06);
+      padding: 1.35rem 1.4rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .lesson-hero-copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3.1rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      max-width: 12ch;
+      margin-top: 0.45rem;
+    }
+
+    .lesson-hero-copy p {
+      margin-top: 0.95rem;
+      max-width: 48ch;
+      color: var(--ink-soft);
+    }
+
+    .lesson-hero-note {
+      background: linear-gradient(145deg, rgba(28, 23, 17, 0.96), rgba(59, 43, 38, 0.94));
+      color: #f8f1e7;
+      display: grid;
+      align-content: start;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lesson-hero-note::after {
+      content: '';
+      position: absolute;
+      inset: auto -12% -18% auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142, 68, 173, 0.22), transparent 64%);
+    }
+
+    .lesson-hero-note p {
+      position: relative;
+      margin: 0;
+      padding: 0.75rem 0.85rem;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      font-size: 0.92rem;
+      color: rgba(248,241,231,0.84);
+    }
     
     .pdf-viewer-container {
       display: grid;
@@ -187,8 +257,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
-      background: #f0ebe3;
+      padding: 1rem;
+      background:
+        linear-gradient(180deg, rgba(246, 239, 229, 0.96), rgba(236, 226, 212, 0.96)),
+        repeating-linear-gradient(135deg, rgba(31, 24, 18, 0.03) 0 1px, transparent 1px 16px);
       min-height: 500px;
       overflow: auto;
     }
@@ -197,7 +269,7 @@
       width: 100%;
       height: 100%;
       border: none;
-      background: #f0ebe3;
+      background: transparent;
     }
     
     .pdf-loading {
@@ -276,7 +348,21 @@
   </header>
 
   <main class="main-content">
-    <div class="lesson-list">
+    <div class="lesson-shell">
+      <section class="lesson-hero" aria-label="Data analysis archive overview">
+        <div class="lesson-hero-copy">
+          <div class="hero-panel-label">Module archive</div>
+          <h2>Open lessons, switch tracks, and keep the reading flow in one place.</h2>
+          <p>Use the lesson rail to move between PDFs. Download or open externally whenever you need the browser viewer.</p>
+        </div>
+        <aside class="lesson-hero-note">
+          <p>4 PDF lessons</p>
+          <p>Switch instantly from the sidebar</p>
+          <p>Built for reading, review, and annotation</p>
+        </aside>
+      </section>
+
+      <div class="lesson-list">
       <div class="pdf-viewer-container">
         <div class="lessons-sidebar" id="lessonsList"></div>
         
@@ -300,6 +386,7 @@
             <iframe id="pdf-iframe" class="pdf-embed" src=""></iframe>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </main>
