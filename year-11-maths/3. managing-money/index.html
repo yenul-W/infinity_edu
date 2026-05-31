@@ -7,21 +7,7 @@
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --accent-color: #14b8a6;
-      --accent-glow: rgba(20, 184, 166, 0.3);
-    }
-
-    .topic-header {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(20, 184, 166, 0.1) 100%);
-      border-bottom: 1px solid var(--surface-lighter);
-    }
-
-    .topic-page-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      font-family: var(--font-display);
-    }
+    :root { --accent: #14b8a6; }
 
     .topic-page-title em {
       background: linear-gradient(135deg, var(--primary-teal), var(--accent-blue));
@@ -30,129 +16,8 @@
       background-clip: text;
     }
 
-    .lesson-item {
-      background: var(--surface-light);
-      border: 1px solid var(--surface-lighter);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease-out;
-      animation: slideInUp 0.6s ease-out both;
-    }
-
-    .lesson-item:nth-child(1) { animation-delay: 0.1s; }
-    .lesson-item:nth-child(2) { animation-delay: 0.2s; }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .lesson-item:hover {
-      transform: translateY(-6px);
-      border-color: rgba(20, 184, 166, 0.4);
-      box-shadow: 0 15px 40px var(--accent-glow);
-    }
-
-    .lesson-number {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent-color), var(--accent-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      opacity: 1;
-    }
-
-    .lesson-details h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      font-family: var(--font-display);
-      margin-bottom: 1rem;
-    }
-
-    .pdf-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 0.7rem 1.4rem;
-      border-radius: 12px;
-      text-decoration: none;
-      border: 2px solid;
-      transition: all 0.3s ease-out;
-      font-family: var(--font-body);
-      margin-right: 0.8rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .pdf-link.slides {
-      color: var(--primary-teal);
-      border-color: var(--primary-teal);
-      background: rgba(20, 184, 166, 0.1);
-    }
-
-    .pdf-link.slides:hover {
-      background: rgba(20, 184, 166, 0.2);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(20, 184, 166, 0.2);
-    }
-
-    .pdf-link.homework {
-      color: var(--accent-blue);
-      border-color: var(--accent-blue);
-      background: rgba(15, 183, 245, 0.1);
-    }
-
-    .pdf-link.homework:hover {
-      background: rgba(15, 183, 245, 0.2);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(15, 183, 245, 0.2);
-    }
-
-    .lesson-empty {
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    .empty-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .lesson-empty p {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      font-family: var(--font-display);
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-decoration: none;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease-out;
-      font-family: var(--font-body);
-    }
-
-    .back-link:hover {
-      color: var(--primary-teal);
-      transform: translateX(-4px);
-    }
+    .lesson-btn:hover { background: rgba(20, 184, 166, 0.08); }
+    .lesson-btn.active { background: rgba(20, 184, 166, 0.1); }
   </style>
 </head>
 <body>
@@ -162,66 +27,211 @@
   <div class="gradient-orb orb-3"></div>
 
   <header class="topic-header">
-    <div class="header-content" style="max-width: 1000px; margin: 0 auto;">
-      <a href="../../index.html" class="back-link">← Back to Topics</a>
+    <div class="header-inner">
+      <div class="header-nav">
+        <a href="../../index.html" class="back-link">&larr; All Topics</a>
+        <div class="header-actions">
+          <a class="syllabus-chip-inline" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa8d2fb431" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
+          <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode"><span class="toggle-icon">dark</span></button>
+        </div>
+      </div>
       <h1 class="topic-page-title">Managing <em>Money</em></h1>
-      <p style="color: var(--text-secondary); margin-top: 1rem;">Budget like a boss, understand interest, loans & smart financial decisions.</p>
     </div>
   </header>
 
   <main class="main-content">
-    <div class="lesson-list" style="max-width: 1000px; margin: 0 auto; padding: 3rem 2rem;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div class="pdf-viewer-container">
+        <div class="lessons-sidebar" id="lessonsList"></div>
 
-      <div class="lesson-item">
-        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
-          <div class="lesson-number">01</div>
-          <div class="lesson-details" style="flex: 1;">
-            <h3>Purchasing Goods</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.6;">Master consumer decisions, comparing prices, discounts, and making smart purchasing choices.</p>
-            <div class="lesson-links">
-              <a href="assets/1__Managing_Money___Purchasing_Goods.pdf" class="pdf-link slides" target="_blank">📑 Study Material</a>
+        <div class="pdf-viewer-main">
+          <div class="pdf-controls">
+            <div class="control-group" id="fileControls">
+              <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()">&#8595; Download</button>
+              <a id="openExternalBtn" class="pdf-btn" style="cursor:pointer;" rel="noreferrer">&#8599; Open</a>
+            </div>
+
+            <div class="control-group" id="pageControls">
+              <button class="pdf-btn" id="prevBtn" onclick="changePage(-1)" disabled>&#8592; Prev</button>
+              <span class="page-info" id="pageInfo">—</span>
+              <button class="pdf-btn" id="nextBtn" onclick="changePage(1)" disabled>Next &#8594;</button>
+            </div>
+
+            <div class="control-group" id="zoomControls">
+              <div class="zoom-control">
+                <button class="zoom-btn" onclick="zoomOut()">&minus;</button>
+                <span class="zoom-display" id="zoomLevel">100%</span>
+                <button class="zoom-btn" onclick="zoomIn()">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdf-viewer" id="pdfViewerContainer">
+            <div class="pdf-loading">
+              <div class="pdf-loading-spinner"></div>
+              <p>Loading...</p>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="lesson-item">
-        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
-          <div class="lesson-number">02</div>
-          <div class="lesson-details" style="flex: 1;">
-            <h3>Budgeting</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.6;">Learn to create and manage budgets, track expenses, and plan your finances for success.</p>
-            <div class="lesson-links">
-              <a href="assets/2__Managing_Money___Budgeting.pdf" class="pdf-link slides" target="_blank">📑 Study Material</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="lesson-item" style="margin-top: 3rem; border-color: var(--accent-blue); background: rgba(15, 183, 245, 0.05);">
-        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
-          <div style="font-size: 2.5rem;">📝</div>
-          <div class="lesson-details" style="flex: 1;">
-            <h3 style="color: var(--accent-blue);">Topic Homework</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.6;">Test your understanding with comprehensive practice questions covering all topics.</p>
-            <div class="lesson-links">
-              <a href="Managing_Money_Questions.pdf" class="pdf-link homework" target="_blank">📋 Homework Questions</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-content">
-      <p>Year 11 Mathematics Standard • Topic 03: Managing Money</p>
-      <div class="footer-accent">✨ Learn • Master • Excel ✨</div>
+      <p>Year 11 Mathematics Standard</p>
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    // Dark mode
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = toggle.querySelector('.toggle-icon');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefersDark;
+    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
+    toggle.addEventListener('click', () => {
+      const nowDark = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      toggleIcon.textContent = nowDark ? 'light' : 'dark';
+    });
+
+    const lessons = [
+      { title: 'Purchasing Goods', file: 'assets/1__Managing_Money___Purchasing_Goods.pdf', kind: 'pdf' },
+      { title: 'Budgeting', file: 'assets/2__Managing_Money___Budgeting.pdf', kind: 'pdf' },
+      { title: 'Topic Homework', file: 'Managing_Money_Questions.pdf', kind: 'pdf' }
+    ];
+
+    let currentLessonFile = '';
+    let currentLessonKind = 'pdf';
+    let currentPdfDoc = null;
+    let currentPage = 1;
+    let zoomLevel = 100;
+    let renderTask = null;
+
+    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const openExternalBtn = document.getElementById('openExternalBtn');
+    const zoomLevelEl = document.getElementById('zoomLevel');
+    const zoomControls = document.getElementById('zoomControls');
+    const pageControls = document.getElementById('pageControls');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function initializeLessons() {
+      const lessonsList = document.getElementById('lessonsList');
+      lessons.forEach((lesson, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'lesson-btn' + (index === 0 ? ' active' : '');
+        btn.innerHTML = `
+          <div class="lesson-num">Lesson ${index + 1}</div>
+          <div class="lesson-title">${lesson.title}</div>
+          <div class="lesson-kind">PDF</div>
+        `;
+        btn.onclick = () => loadLesson(index);
+        lessonsList.appendChild(btn);
+      });
+    }
+
+    async function renderPage(pageNum) {
+      if (!currentPdfDoc) return;
+      if (renderTask) { renderTask.cancel(); renderTask = null; }
+
+      const page = await currentPdfDoc.getPage(pageNum);
+      const containerWidth = pdfViewerContainer.clientWidth - 48;
+      const baseViewport = page.getViewport({ scale: 1 });
+      const autoScale = Math.min(containerWidth / baseViewport.width, 1.5);
+      const scale = (zoomLevel / 100) * autoScale;
+      const viewport = page.getViewport({ scale });
+
+      let canvas = document.getElementById('pdf-canvas');
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'pdf-canvas';
+        canvas.className = 'pdf-canvas-wrapper';
+        pdfViewerContainer.innerHTML = '';
+        pdfViewerContainer.appendChild(canvas);
+      }
+
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      canvas.style.maxWidth = '100%';
+
+      const context = canvas.getContext('2d');
+      renderTask = page.render({ canvasContext: context, viewport });
+      await renderTask.promise;
+      renderTask = null;
+    }
+
+    async function loadLesson(index) {
+      currentLessonFile = lessons[index].file;
+      currentPage = 1;
+      zoomLevel = 100;
+      zoomLevelEl.textContent = '100%';
+
+      document.querySelectorAll('.lesson-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+
+      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading PDF...</p></div>';
+      try {
+        currentPdfDoc = await pdfjsLib.getDocument(currentLessonFile).promise;
+        openExternalBtn.href = currentLessonFile;
+        openExternalBtn.target = '_blank';
+        openExternalBtn.textContent = '↗ Open PDF';
+        await renderPage(currentPage);
+        updatePageButtons();
+      } catch (e) {
+        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + currentLessonFile + '" target="_blank" style="color:var(--accent);">Download instead</a></p></div>';
+      }
+    }
+
+    function updatePageButtons() {
+      if (!currentPdfDoc) return;
+      const total = currentPdfDoc.numPages;
+      document.getElementById('pageInfo').textContent = currentPage + ' / ' + total;
+      prevBtn.disabled = currentPage <= 1;
+      nextBtn.disabled = currentPage >= total;
+    }
+
+    async function changePage(delta) {
+      if (!currentPdfDoc) return;
+      const newPage = currentPage + delta;
+      if (newPage < 1 || newPage > currentPdfDoc.numPages) return;
+      currentPage = newPage;
+      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading...</p></div>';
+      await renderPage(currentPage);
+      updatePageButtons();
+    }
+
+    function downloadPDF() {
+      const link = document.createElement('a');
+      link.href = currentLessonFile;
+      link.download = currentLessonFile.split('/').pop();
+      link.click();
+    }
+
+    function zoomIn() {
+      zoomLevel = Math.min(zoomLevel + 20, 300);
+      zoomLevelEl.textContent = zoomLevel + '%';
+      renderPage(currentPage);
+    }
+
+    function zoomOut() {
+      zoomLevel = Math.max(zoomLevel - 20, 50);
+      zoomLevelEl.textContent = zoomLevel + '%';
+      renderPage(currentPage);
+    }
+
+    initializeLessons();
+    loadLesson(0);
+
     document.addEventListener('mousemove', (e) => {
       const orbs = document.querySelectorAll('.gradient-orb');
       orbs.forEach((orb, index) => {

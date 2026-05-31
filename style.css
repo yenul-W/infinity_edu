@@ -858,3 +858,335 @@ html:not(.dark-mode) .topic-header {
   background-clip: text;
 }
 
+/* Header nav row: back link + right-side actions (syllabus chip + dark toggle) */
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Syllabus chip inside topic pages (non-absolute version) */
+.syllabus-chip-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--surface-lighter);
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.syllabus-chip-inline:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--surface-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED PDF VIEWER STYLES (used by all topic pages)
+   ═══════════════════════════════════════════════════════════════ */
+
+.pdf-viewer-container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.lessons-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lesson-btn {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: left;
+  transition: all 0.2s ease;
+  color: var(--ink);
+  position: relative;
+}
+
+.lesson-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--ink-faint);
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.lesson-title {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.lesson-kind {
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.lesson-btn:hover {
+  border-color: var(--accent);
+  background: rgba(14, 165, 233, 0.08);
+  transform: translateX(3px);
+}
+
+.lesson-btn.active {
+  background: rgba(14, 165, 233, 0.1);
+  border-color: var(--accent);
+  border-left-width: 4px;
+}
+
+.lesson-btn.active .lesson-title {
+  color: var(--ink);
+}
+
+.pdf-viewer-main {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.pdf-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-light);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.pdf-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+}
+
+.pdf-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.pdf-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.page-info {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  min-width: 80px;
+  text-align: center;
+}
+
+.zoom-control {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.2rem;
+  background: var(--card-bg);
+}
+
+.zoom-btn {
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.3rem 0.55rem;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.zoom-btn:hover {
+  color: var(--accent);
+}
+
+.zoom-display {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  padding: 0 0.5rem;
+  color: var(--ink-faint);
+  font-weight: 600;
+  min-width: 42px;
+  text-align: center;
+}
+
+.pdf-canvas-wrapper {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+.pdf-viewer {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--surface-light);
+  min-height: 520px;
+  overflow: auto;
+}
+
+.pdf-loading {
+  text-align: center;
+  color: var(--ink-faint);
+  padding: 3rem;
+  align-self: center;
+}
+
+.pdf-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.pdf-loading p {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — TOPIC PAGES & PDF VIEWER
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .pdf-viewer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .lessons-sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .topic-header {
+    padding: 1.25rem 1rem;
+  }
+
+  .main-content {
+    padding: 2rem 1rem;
+  }
+
+  .header-nav {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .lessons-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pdf-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .pdf-viewer {
+    min-height: 400px;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .topic-page-title {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  .syllabus-chip-inline {
+    font-size: 0.55rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
