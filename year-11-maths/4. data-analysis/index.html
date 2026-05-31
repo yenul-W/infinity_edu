@@ -7,10 +7,6 @@
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --accent: #0ea5e9; }
-
-    /* ── Scroll-based PDF viewer ──────────────────────────── */
-
     .pdf-viewer {
       flex: 1;
       display: flex;
@@ -24,39 +20,19 @@
       overflow-x: auto;
       scroll-behavior: smooth;
     }
-
-    html:not(.dark-mode) .pdf-viewer {
-      background: rgba(0, 0, 0, 0.07);
-    }
-
+    html:not(.dark-mode) .pdf-viewer { background: rgba(0, 0, 0, 0.07); }
     .pdf-page-canvas {
       display: block;
       max-width: 100%;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
-      border-radius: 2px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.2);
+      border-radius: 0;
     }
-
     html:not(.dark-mode) .pdf-page-canvas {
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* ── Page info / progress ─────────────────────────────── */
-
-    .pdf-load-progress {
-      font-family: var(--font-mono);
-      font-size: 0.63rem;
-      color: var(--ink-faint);
-      text-align: center;
-      letter-spacing: 0.08em;
-      margin-top: 0.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
     }
   </style>
 </head>
-<body>
-  <div class="animated-bg"></div>
-  <div class="gradient-orb orb-1"></div>
-  <div class="gradient-orb orb-2"></div>
-  <div class="gradient-orb orb-3"></div>
+<body class="sociotype">
 
   <header class="topic-header">
     <div class="header-inner">
@@ -82,11 +58,9 @@
               <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()">&#8595; Download</button>
               <a id="openExternalBtn" class="pdf-btn" style="cursor:pointer;" rel="noreferrer">&#8599; Open</a>
             </div>
-
             <div class="control-group" id="pageControls">
               <span class="page-info" id="pageInfo">—</span>
             </div>
-
             <div class="control-group" id="zoomControls">
               <div class="zoom-control">
                 <button class="zoom-btn" onclick="zoomOut()">&minus;</button>
@@ -95,7 +69,6 @@
               </div>
             </div>
           </div>
-
           <div class="pdf-viewer" id="pdfViewerContainer">
             <div class="pdf-loading">
               <div class="pdf-loading-spinner"></div>
@@ -117,7 +90,6 @@
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    // Dark mode
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
     const html = document.documentElement;
@@ -140,42 +112,86 @@
         title: 'Descriptive Statistics',
         slides: currentDir + '/assets/1__Data_Analysis__Descriptive_Statistics.pdf',
         annotated: currentDir + '/assets/annotated/ANNOTATED%201__Data_Analysis__Descriptive_Statistics.pdf',
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: [
+          'Classify data as numerical or categorical',
+          'Describe data as discrete or continuous',
+          'Recognise why some data need grouping for appropriate representation',
+          'Represent numerical data as frequency tables and histograms',
+          'Represent categorical data in tables and column graphs',
+          'Identify distribution shapes as symmetric, positively or negatively skewed',
+          'Interpret dot plots, line graphs, sector graphs and divided bar charts'
+        ]
       },
       {
         num: 2,
         title: 'Histograms & Polygons',
         slides: currentDir + '/assets/2__Data_Analysis__Histograms___Polygons.pdf',
         annotated: currentDir + '/assets/annotated/ANNOTATED%202__Data_Analysis__Histograms___Polygons.pdf',
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: [
+          'Use spreadsheets to organise and represent data using appropriate displays',
+          'Represent data using frequency distribution tables with histograms and polygons',
+          'Select appropriate graph types and justify choices',
+          'Explain how graphical representations can lead to misinterpretation',
+          'Interpret box plots and histograms to draw conclusions'
+        ]
       },
       {
         num: 3,
         title: 'Measures of Centre and Spread',
         slides: currentDir + '/assets/3__Data_Analysis__Measures_of_Centre_and_Spread.pdf',
         annotated: currentDir + '/assets/annotated/ANNOTATED%203__Data_Analysis__Measures_of_Centre_and_Spread.pdf',
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: [
+          'Describe and calculate mean, median and mode using digital tools',
+          'Identify datasets as uniform, unimodal, bimodal or multimodal',
+          'Identify range and standard deviation as measures of variation',
+          'Calculate range and population standard deviation using digital tools',
+          'Compare datasets using measures of centre and spread',
+          'Justify appropriate uses of each measure',
+          'Identify real-world examples of appropriate and inappropriate use'
+        ]
       },
       {
         num: 4,
         title: 'Quartiles, Box Plots and Outliers',
         slides: currentDir + '/assets/4__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf',
         annotated: currentDir + '/assets/annotated/ANNOTATED%204__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf',
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: [
+          'Determine quartiles from datasets or graphical representations',
+          'Determine the interquartile range (IQR)',
+          'Represent data using box plots displaying five-number summaries',
+          'Compare measures of centre, spread and shape using box plots',
+          'Determine quartiles from histograms and dot plots',
+          'Identify clusters, gaps and outliers and explain their occurrence',
+          'Apply Q1 − 1.5×IQR and Q3 + 1.5×IQR to formally identify outliers',
+          'Explain the impact of outliers on measures of centre and spread'
+        ]
       },
       {
         num: 5,
         title: 'Statistical Investigation Process and Sampling',
         slides: currentDir + '/lesson-05-statistical-investigation-process-and-sampling.html',
         annotated: null,
-        kind: 'html'
+        kind: 'html',
+        syllabus: [
+          'Identify an issue and pose a question to a targeted population',
+          'Develop a survey applying questionnaire design principles',
+          'Examine issues of privacy, ethics and responsiveness to diverse groups',
+          'Compare systematic, self-selected, random and stratified sampling',
+          'Justify whether a sample is representative of a population',
+          'Describe potential faults in survey design and misrepresentations'
+        ]
       },
       {
         num: 6,
         title: 'Topic Homework',
         slides: currentDir + '/assets/Data_Analysis_Questions.pdf',
         annotated: null,
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: []
       }
     ];
 
@@ -201,7 +217,10 @@
         group.className = 'lesson-group' + (index === 0 ? ' active' : '');
         group.dataset.index = index;
 
-        const kindLabel = lesson.kind === 'pdf' ? 'PDF' : 'Interactive';
+        const kindLabel = lesson.kind === 'html' ? 'Interactive' : 'PDF';
+        const syllabusHtml = lesson.syllabus && lesson.syllabus.length > 0
+          ? `<div class="lesson-syllabus-dots"><ul>${lesson.syllabus.map(d => `<li>${d}</li>`).join('')}</ul></div>`
+          : '';
 
         let inner = `
           <div class="lesson-group-header">
@@ -209,6 +228,7 @@
             <span class="lesson-kind-badge">${kindLabel}</span>
           </div>
           <div class="lesson-group-title">${lesson.title}</div>
+          ${syllabusHtml}
         `;
 
         if (lesson.annotated) {
@@ -222,6 +242,10 @@
 
         group.innerHTML = inner;
 
+        group.addEventListener('click', () => {
+          loadFile(index, currentLessonIndex === index ? currentVariant : 'slides');
+        });
+
         if (lesson.annotated) {
           group.querySelectorAll('.variant-btn').forEach(btn => {
             btn.addEventListener('click', e => {
@@ -229,8 +253,6 @@
               loadFile(parseInt(btn.dataset.lesson), btn.dataset.variant);
             });
           });
-        } else {
-          group.addEventListener('click', () => loadFile(index, 'slides'));
         }
 
         lessonsList.appendChild(group);
@@ -241,7 +263,6 @@
       document.querySelectorAll('.lesson-group').forEach((g, i) => {
         g.classList.toggle('active', i === lessonIndex);
       });
-
       const activeGroup = document.querySelectorAll('.lesson-group')[lessonIndex];
       if (activeGroup) {
         activeGroup.querySelectorAll('.variant-btn').forEach(btn => {
@@ -252,31 +273,23 @@
 
     async function renderAllPages(pdfDoc, generation) {
       const containerWidth = pdfViewerContainer.clientWidth - 48;
-
       for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
         if (generation !== renderGeneration) return;
-
         const page = await pdfDoc.getPage(pageNum);
         const baseViewport = page.getViewport({ scale: 1 });
         const autoScale = Math.min(containerWidth / baseViewport.width, 1.5);
         const scale = (zoomLevel / 100) * autoScale;
         const viewport = page.getViewport({ scale });
-
         const canvas = document.createElement('canvas');
         canvas.className = 'pdf-page-canvas';
         canvas.dataset.page = pageNum;
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-
         if (generation !== renderGeneration) return;
         pdfViewerContainer.appendChild(canvas);
-
         await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-
-        // Update page count display progressively
         document.getElementById('pageInfo').textContent = pageNum + ' / ' + pdfDoc.numPages;
       }
-
       setupScrollPageTracker(pdfDoc.numPages);
     }
 
@@ -285,17 +298,13 @@
         let topmost = null;
         entries.forEach(e => {
           if (e.isIntersecting) {
-            if (!topmost || e.boundingClientRect.top < topmost.boundingClientRect.top) {
-              topmost = e;
-            }
+            if (!topmost || e.boundingClientRect.top < topmost.boundingClientRect.top) topmost = e;
           }
         });
         if (topmost) {
-          const page = parseInt(topmost.target.dataset.page);
-          document.getElementById('pageInfo').textContent = page + ' / ' + totalPages;
+          document.getElementById('pageInfo').textContent = topmost.target.dataset.page + ' / ' + totalPages;
         }
       }, { root: pdfViewerContainer, threshold: 0.1 });
-
       pdfViewerContainer.querySelectorAll('.pdf-page-canvas').forEach(c => observer.observe(c));
     }
 
@@ -331,7 +340,7 @@
           await renderAllPages(currentPdfDoc, thisGeneration);
         } catch (e) {
           if (thisGeneration !== renderGeneration) return;
-          pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + file + '" target="_blank" style="color:var(--accent);">Download instead</a></p></div>';
+          pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + file + '" target="_blank" style="color:var(--accent,#000);">Download instead</a></p></div>';
         }
       } else {
         currentPdfDoc = null;
@@ -369,15 +378,6 @@
 
     initializeLessons();
     loadFile(0, 'slides');
-
-    document.addEventListener('mousemove', (e) => {
-      const orbs = document.querySelectorAll('.gradient-orb');
-      orbs.forEach((orb, index) => {
-        const x = (e.clientX / window.innerWidth) * (50 - index * 10);
-        const y = (e.clientY / window.innerHeight) * (50 - index * 10);
-        orb.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    });
   </script>
 </body>
 </html>

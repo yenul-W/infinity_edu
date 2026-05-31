@@ -6,25 +6,8 @@
   <title>Managing Money — Year 11 Maths Standard</title>
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root { --accent: #14b8a6; }
-
-    .topic-page-title em {
-      background: linear-gradient(135deg, var(--primary-teal), var(--accent-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .lesson-btn:hover { background: rgba(20, 184, 166, 0.08); }
-    .lesson-btn.active { background: rgba(20, 184, 166, 0.1); }
-  </style>
 </head>
-<body>
-  <div class="animated-bg"></div>
-  <div class="gradient-orb orb-1"></div>
-  <div class="gradient-orb orb-2"></div>
-  <div class="gradient-orb orb-3"></div>
+<body class="sociotype">
 
   <header class="topic-header">
     <div class="header-inner">
@@ -50,13 +33,11 @@
               <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()">&#8595; Download</button>
               <a id="openExternalBtn" class="pdf-btn" style="cursor:pointer;" rel="noreferrer">&#8599; Open</a>
             </div>
-
             <div class="control-group" id="pageControls">
               <button class="pdf-nav-arrow" id="prevBtn" onclick="changePage(-1)" disabled>&#8592;</button>
               <span class="page-info" id="pageInfo">—</span>
               <button class="pdf-nav-arrow" id="nextBtn" onclick="changePage(1)" disabled>&#8594;</button>
             </div>
-
             <div class="control-group" id="zoomControls">
               <div class="zoom-control">
                 <button class="zoom-btn" onclick="zoomOut()">&minus;</button>
@@ -65,7 +46,6 @@
               </div>
             </div>
           </div>
-
           <div class="pdf-viewer" id="pdfViewerContainer">
             <div class="pdf-loading">
               <div class="pdf-loading-spinner"></div>
@@ -87,7 +67,6 @@
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    // Dark mode
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
     const html = document.documentElement;
@@ -103,24 +82,53 @@
     });
 
     const lessons = [
-      { title: 'Purchasing Goods', file: 'assets/1__Managing_Money___Purchasing_Goods.pdf', kind: 'pdf' },
-      { title: 'Budgeting', file: 'assets/2__Managing_Money___Budgeting.pdf', kind: 'pdf' },
-      { title: 'Topic Homework', file: 'Managing_Money_Questions.pdf', kind: 'pdf' }
+      {
+        num: 1,
+        title: 'Purchasing Goods',
+        file: 'assets/1__Managing_Money___Purchasing_Goods.pdf',
+        kind: 'pdf',
+        syllabus: [
+          'Apply discounts and markups to determine selling prices',
+          'Calculate total cost or deposit for goods in Australia and internationally',
+          'Solve problems involving GST or VAT',
+          'Examine payment options involving interest',
+          'Calculate the cost of buying on terms (deposit + regular payments)',
+          'Compare and justify different methods of purchasing goods',
+          'Calculate the cost of purchasing a vehicle (price, insurance, registration, fuel)'
+        ]
+      },
+      {
+        num: 2,
+        title: 'Budgeting',
+        file: 'assets/2__Managing_Money___Budgeting.pdf',
+        kind: 'pdf',
+        syllabus: [
+          'Examine the ongoing costs of a vehicle',
+          'Use a spreadsheet to model the costs of purchasing, running and maintaining a vehicle',
+          'Calculate household costs from electricity, water and gas bills',
+          'Prepare a personal budget for a given income, considering expenses and savings',
+          'Use a spreadsheet to model personal and household budgets',
+          'Examine budgeting and emergency fund strategies to minimise financial problems'
+        ]
+      },
+      {
+        num: 3,
+        title: 'Topic Homework',
+        file: 'Managing_Money_Questions.pdf',
+        kind: 'pdf',
+        syllabus: []
+      }
     ];
 
     let currentLessonFile = '';
-    let currentLessonKind = 'pdf';
     let currentPdfDoc = null;
     let currentPage = 1;
     let zoomLevel = 100;
     let renderTask = null;
 
     const pdfViewerContainer = document.getElementById('pdfViewerContainer');
-    const downloadBtn = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
     const zoomLevelEl = document.getElementById('zoomLevel');
-    const zoomControls = document.getElementById('zoomControls');
-    const pageControls = document.getElementById('pageControls');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
@@ -129,10 +137,14 @@
       lessons.forEach((lesson, index) => {
         const btn = document.createElement('button');
         btn.className = 'lesson-btn' + (index === 0 ? ' active' : '');
+        const syllabusHtml = lesson.syllabus && lesson.syllabus.length > 0
+          ? `<div class="lesson-syllabus-dots"><ul>${lesson.syllabus.map(d => `<li>${d}</li>`).join('')}</ul></div>`
+          : '';
         btn.innerHTML = `
-          <div class="lesson-num">Lesson ${index + 1}</div>
+          <div class="lesson-num">Lesson ${lesson.num}</div>
           <div class="lesson-title">${lesson.title}</div>
           <div class="lesson-kind">PDF</div>
+          ${syllabusHtml}
         `;
         btn.onclick = () => loadLesson(index);
         lessonsList.appendChild(btn);
@@ -188,7 +200,7 @@
         await renderPage(currentPage);
         updatePageButtons();
       } catch (e) {
-        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + currentLessonFile + '" target="_blank" style="color:var(--accent);">Download instead</a></p></div>';
+        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + currentLessonFile + '" target="_blank" style="color:var(--accent,#000);">Download instead</a></p></div>';
       }
     }
 
@@ -231,15 +243,6 @@
 
     initializeLessons();
     loadLesson(0);
-
-    document.addEventListener('mousemove', (e) => {
-      const orbs = document.querySelectorAll('.gradient-orb');
-      orbs.forEach((orb, index) => {
-        const x = (e.clientX / window.innerWidth) * (50 - index * 10);
-        const y = (e.clientY / window.innerHeight) * (50 - index * 10);
-        orb.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    });
   </script>
 </body>
 </html>

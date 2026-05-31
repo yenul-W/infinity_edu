@@ -7,18 +7,6 @@
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --accent: #ec4899; }
-
-    .topic-page-title em {
-      background: linear-gradient(135deg, var(--primary-pink), var(--accent-orange));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .lesson-group:hover { background: rgba(236, 72, 153, 0.06); }
-    .lesson-group.active { background: rgba(236, 72, 153, 0.08); }
-
     .pdf-viewer {
       flex: 1;
       display: flex;
@@ -32,28 +20,19 @@
       overflow-x: auto;
       scroll-behavior: smooth;
     }
-
-    html:not(.dark-mode) .pdf-viewer {
-      background: rgba(0, 0, 0, 0.07);
-    }
-
+    html:not(.dark-mode) .pdf-viewer { background: rgba(0, 0, 0, 0.07); }
     .pdf-page-canvas {
       display: block;
       max-width: 100%;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.2);
       border-radius: 0;
     }
-
     html:not(.dark-mode) .pdf-page-canvas {
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
     }
   </style>
 </head>
-<body>
-  <div class="animated-bg"></div>
-  <div class="gradient-orb orb-1"></div>
-  <div class="gradient-orb orb-2"></div>
-  <div class="gradient-orb orb-3"></div>
+<body class="sociotype">
 
   <header class="topic-header">
     <div class="header-inner">
@@ -79,11 +58,9 @@
               <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()">&#8595; Download</button>
               <a id="openExternalBtn" class="pdf-btn" style="cursor:pointer;" rel="noreferrer">&#8599; Open</a>
             </div>
-
             <div class="control-group" id="pageControls">
               <span class="page-info" id="pageInfo">—</span>
             </div>
-
             <div class="control-group" id="zoomControls">
               <div class="zoom-control">
                 <button class="zoom-btn" onclick="zoomOut()">&minus;</button>
@@ -92,7 +69,6 @@
               </div>
             </div>
           </div>
-
           <div class="pdf-viewer" id="pdfViewerContainer">
             <div class="pdf-loading">
               <div class="pdf-loading-spinner"></div>
@@ -114,7 +90,6 @@
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    // Dark mode
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
     const html = document.documentElement;
@@ -135,21 +110,39 @@
         title: 'Ways of Earning',
         slides: 'assets/1__Earning_Money___Ways_of_Earning.pdf',
         annotated: 'assets/annotated/ANNOTATED%201__Earning_Money___Ways_of_Earning.pdf',
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: [
+          'Solve problems involving salaries',
+          'Solve problems involving overtime and penalty rates (nights, weekends, public holidays)',
+          'Calculate earnings from commissions, sliding scale commission, bonuses, allowances and royalties',
+          'Calculate weekly, fortnightly, monthly and yearly earnings (1 year = 52 weeks)',
+          'Calculate leave loading as a percentage of eligible normal pay',
+          'Use spreadsheets to model employee income including overtime, allowances and commissions'
+        ]
       },
       {
         num: 2,
         title: 'Taxation',
         slides: 'assets/2__Earning_Money___Taxation.pdf',
         annotated: 'assets/annotated/ANNOTATED%202__Earning_Money___Taxation.pdf',
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: [
+          'Determine taxable income by examining allowable deductions',
+          'Determine tax payable by interpreting and applying tax tables',
+          'Calculate weekly, fortnightly or monthly tax deductions using tax tables',
+          'Calculate Medicare levy from taxable income',
+          'Calculate net pay after deductions, taxation and Medicare levy',
+          'Determine whether additional tax is payable or a refund is owed',
+          'Use spreadsheets to model taxation scenarios'
+        ]
       },
       {
         num: 3,
         title: 'Topic Homework',
         slides: 'Earning_Money_Questions.pdf',
         annotated: null,
-        kind: 'pdf'
+        kind: 'pdf',
+        syllabus: []
       }
     ];
 
@@ -164,8 +157,6 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
     const zoomLevelEl = document.getElementById('zoomLevel');
-    const zoomControls = document.getElementById('zoomControls');
-    const pageControls = document.getElementById('pageControls');
 
     function initializeLessons() {
       const lessonsList = document.getElementById('lessonsList');
@@ -174,12 +165,17 @@
         group.className = 'lesson-group' + (index === 0 ? ' active' : '');
         group.dataset.index = index;
 
+        const syllabusHtml = lesson.syllabus && lesson.syllabus.length > 0
+          ? `<div class="lesson-syllabus-dots"><ul>${lesson.syllabus.map(d => `<li>${d}</li>`).join('')}</ul></div>`
+          : '';
+
         let inner = `
           <div class="lesson-group-header">
             <span class="lesson-group-num">Lesson ${lesson.num}</span>
             <span class="lesson-kind-badge">PDF</span>
           </div>
           <div class="lesson-group-title">${lesson.title}</div>
+          ${syllabusHtml}
         `;
 
         if (lesson.annotated) {
@@ -193,6 +189,10 @@
 
         group.innerHTML = inner;
 
+        group.addEventListener('click', () => {
+          loadFile(index, currentLessonIndex === index ? currentVariant : 'slides');
+        });
+
         if (lesson.annotated) {
           group.querySelectorAll('.variant-btn').forEach(btn => {
             btn.addEventListener('click', e => {
@@ -200,8 +200,6 @@
               loadFile(parseInt(btn.dataset.lesson), btn.dataset.variant);
             });
           });
-        } else {
-          group.addEventListener('click', () => loadFile(index, 'slides'));
         }
 
         lessonsList.appendChild(group);
@@ -283,7 +281,7 @@
         await renderAllPages(currentPdfDoc, thisGeneration);
       } catch (e) {
         if (thisGeneration !== renderGeneration) return;
-        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + file + '" target="_blank" style="color:var(--accent);">Download instead</a></p></div>';
+        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + file + '" target="_blank" style="color:var(--accent,#000);">Download instead</a></p></div>';
       }
     }
 
@@ -316,15 +314,6 @@
 
     initializeLessons();
     loadFile(0, 'slides');
-
-    document.addEventListener('mousemove', (e) => {
-      const orbs = document.querySelectorAll('.gradient-orb');
-      orbs.forEach((orb, index) => {
-        const x = (e.clientX / window.innerWidth) * (50 - index * 10);
-        const y = (e.clientY / window.innerHeight) * (50 - index * 10);
-        orb.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    });
   </script>
 </body>
 </html>
