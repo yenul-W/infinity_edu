@@ -9,124 +9,6 @@
   <style>
     :root { --accent: #0ea5e9; }
 
-    /* ── Lesson group sidebar items ───────────────────────── */
-
-    .lesson-group {
-      position: relative;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      padding: 0.75rem 1rem 0.75rem 1.25rem;
-      cursor: pointer;
-      transition: background 0.18s ease, border-color 0.18s ease;
-      overflow: hidden;
-    }
-
-    .lesson-group::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 18%;
-      height: 64%;
-      width: 3px;
-      background: var(--accent);
-      border-radius: 0 3px 3px 0;
-      opacity: 0;
-      transform: scaleY(0.2);
-      transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .lesson-group:hover {
-      background: var(--surface-light);
-      border-color: var(--border);
-    }
-
-    .lesson-group.active {
-      background: var(--surface-light);
-      border-color: var(--border);
-    }
-
-    .lesson-group.active::before {
-      opacity: 1;
-      transform: scaleY(1);
-    }
-
-    .lesson-group-header {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .lesson-group-num {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      color: var(--ink-faint);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .lesson-kind-badge {
-      margin-left: auto;
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      background: var(--surface-lighter);
-      padding: 0.1rem 0.35rem;
-      border-radius: 4px;
-    }
-
-    .lesson-group-title {
-      font-size: 0.83rem;
-      color: var(--ink-soft);
-      font-weight: 600;
-      line-height: 1.35;
-    }
-
-    .lesson-group.active .lesson-group-title {
-      color: var(--ink);
-    }
-
-    /* ── Variant (Slides / Annotated) tabs ────────────────── */
-
-    .lesson-variants {
-      display: flex;
-      gap: 0.3rem;
-      margin-top: 0.55rem;
-    }
-
-    .variant-btn {
-      flex: 1;
-      padding: 0.28rem 0.4rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: transparent;
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .variant-btn:hover {
-      color: var(--ink);
-      border-color: var(--accent);
-      background: rgba(14, 165, 233, 0.06);
-    }
-
-    .variant-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
-
     /* ── Scroll-based PDF viewer ──────────────────────────── */
 
     .pdf-viewer {
@@ -257,7 +139,7 @@
         num: 1,
         title: 'Descriptive Statistics',
         slides: currentDir + '/assets/1__Data_Analysis__Descriptive_Statistics.pdf',
-        annotated: null,
+        annotated: currentDir + '/assets/annotated/ANNOTATED%201__Data_Analysis__Descriptive_Statistics.pdf',
         kind: 'pdf'
       },
       {

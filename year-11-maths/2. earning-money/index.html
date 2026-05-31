@@ -16,8 +16,37 @@
       background-clip: text;
     }
 
-    .lesson-btn:hover { background: rgba(236, 72, 153, 0.08); }
-    .lesson-btn.active { background: rgba(236, 72, 153, 0.1); }
+    .lesson-group:hover { background: rgba(236, 72, 153, 0.06); }
+    .lesson-group.active { background: rgba(236, 72, 153, 0.08); }
+
+    .pdf-viewer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.25);
+      min-height: 540px;
+      overflow-y: auto;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+
+    html:not(.dark-mode) .pdf-viewer {
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    .pdf-page-canvas {
+      display: block;
+      max-width: 100%;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 0;
+    }
+
+    html:not(.dark-mode) .pdf-page-canvas {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -52,9 +81,7 @@
             </div>
 
             <div class="control-group" id="pageControls">
-              <button class="pdf-nav-arrow" id="prevBtn" onclick="changePage(-1)" disabled>&#8592;</button>
               <span class="page-info" id="pageInfo">—</span>
-              <button class="pdf-nav-arrow" id="nextBtn" onclick="changePage(1)" disabled>&#8594;</button>
             </div>
 
             <div class="control-group" id="zoomControls">
@@ -103,17 +130,35 @@
     });
 
     const lessons = [
-      { title: 'Ways of Earning', file: 'assets/1__Earning_Money___Ways_of_Earning.pdf', kind: 'pdf' },
-      { title: 'Taxation', file: 'assets/2__Earning_Money___Taxation.pdf', kind: 'pdf' },
-      { title: 'Topic Homework', file: 'Earning_Money_Questions.pdf', kind: 'pdf' }
+      {
+        num: 1,
+        title: 'Ways of Earning',
+        slides: 'assets/1__Earning_Money___Ways_of_Earning.pdf',
+        annotated: 'assets/annotated/ANNOTATED%201__Earning_Money___Ways_of_Earning.pdf',
+        kind: 'pdf'
+      },
+      {
+        num: 2,
+        title: 'Taxation',
+        slides: 'assets/2__Earning_Money___Taxation.pdf',
+        annotated: 'assets/annotated/ANNOTATED%202__Earning_Money___Taxation.pdf',
+        kind: 'pdf'
+      },
+      {
+        num: 3,
+        title: 'Topic Homework',
+        slides: 'Earning_Money_Questions.pdf',
+        annotated: null,
+        kind: 'pdf'
+      }
     ];
 
+    let currentLessonIndex = 0;
+    let currentVariant = 'slides';
     let currentLessonFile = '';
-    let currentLessonKind = 'pdf';
     let currentPdfDoc = null;
-    let currentPage = 1;
     let zoomLevel = 100;
-    let renderTask = null;
+    let renderGeneration = 0;
 
     const pdfViewerContainer = document.getElementById('pdfViewerContainer');
     const downloadBtn = document.getElementById('downloadBtn');
@@ -121,116 +166,156 @@
     const zoomLevelEl = document.getElementById('zoomLevel');
     const zoomControls = document.getElementById('zoomControls');
     const pageControls = document.getElementById('pageControls');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
 
     function initializeLessons() {
       const lessonsList = document.getElementById('lessonsList');
       lessons.forEach((lesson, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'lesson-btn' + (index === 0 ? ' active' : '');
-        btn.innerHTML = `
-          <div class="lesson-num">Lesson ${index + 1}</div>
-          <div class="lesson-title">${lesson.title}</div>
-          <div class="lesson-kind">PDF</div>
+        const group = document.createElement('div');
+        group.className = 'lesson-group' + (index === 0 ? ' active' : '');
+        group.dataset.index = index;
+
+        let inner = `
+          <div class="lesson-group-header">
+            <span class="lesson-group-num">Lesson ${lesson.num}</span>
+            <span class="lesson-kind-badge">PDF</span>
+          </div>
+          <div class="lesson-group-title">${lesson.title}</div>
         `;
-        btn.onclick = () => loadLesson(index);
-        lessonsList.appendChild(btn);
+
+        if (lesson.annotated) {
+          inner += `
+            <div class="lesson-variants">
+              <button class="variant-btn active" data-lesson="${index}" data-variant="slides">Slides</button>
+              <button class="variant-btn" data-lesson="${index}" data-variant="annotated">Annotated</button>
+            </div>
+          `;
+        }
+
+        group.innerHTML = inner;
+
+        if (lesson.annotated) {
+          group.querySelectorAll('.variant-btn').forEach(btn => {
+            btn.addEventListener('click', e => {
+              e.stopPropagation();
+              loadFile(parseInt(btn.dataset.lesson), btn.dataset.variant);
+            });
+          });
+        } else {
+          group.addEventListener('click', () => loadFile(index, 'slides'));
+        }
+
+        lessonsList.appendChild(group);
       });
     }
 
-    async function renderPage(pageNum) {
-      if (!currentPdfDoc) return;
-      if (renderTask) { renderTask.cancel(); renderTask = null; }
-
-      const page = await currentPdfDoc.getPage(pageNum);
-      const containerWidth = pdfViewerContainer.clientWidth - 48;
-      const baseViewport = page.getViewport({ scale: 1 });
-      const autoScale = Math.min(containerWidth / baseViewport.width, 1.5);
-      const scale = (zoomLevel / 100) * autoScale;
-      const viewport = page.getViewport({ scale });
-
-      let canvas = document.getElementById('pdf-canvas');
-      if (!canvas) {
-        canvas = document.createElement('canvas');
-        canvas.id = 'pdf-canvas';
-        canvas.className = 'pdf-canvas-wrapper';
-        pdfViewerContainer.innerHTML = '';
-        pdfViewerContainer.appendChild(canvas);
+    function updateSidebarActive(lessonIndex, variant) {
+      document.querySelectorAll('.lesson-group').forEach((g, i) => {
+        g.classList.toggle('active', i === lessonIndex);
+      });
+      const activeGroup = document.querySelectorAll('.lesson-group')[lessonIndex];
+      if (activeGroup) {
+        activeGroup.querySelectorAll('.variant-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.variant === variant);
+        });
       }
-
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      canvas.style.maxWidth = '100%';
-
-      const context = canvas.getContext('2d');
-      renderTask = page.render({ canvasContext: context, viewport });
-      await renderTask.promise;
-      renderTask = null;
     }
 
-    async function loadLesson(index) {
-      currentLessonFile = lessons[index].file;
-      currentPage = 1;
-      zoomLevel = 100;
-      zoomLevelEl.textContent = '100%';
+    async function renderAllPages(pdfDoc, generation) {
+      const containerWidth = pdfViewerContainer.clientWidth - 48;
+      for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+        if (generation !== renderGeneration) return;
+        const page = await pdfDoc.getPage(pageNum);
+        const baseViewport = page.getViewport({ scale: 1 });
+        const autoScale = Math.min(containerWidth / baseViewport.width, 1.5);
+        const scale = (zoomLevel / 100) * autoScale;
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement('canvas');
+        canvas.className = 'pdf-page-canvas';
+        canvas.dataset.page = pageNum;
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        if (generation !== renderGeneration) return;
+        pdfViewerContainer.appendChild(canvas);
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        document.getElementById('pageInfo').textContent = pageNum + ' / ' + pdfDoc.numPages;
+      }
+      setupScrollPageTracker(pdfDoc.numPages);
+    }
 
-      document.querySelectorAll('.lesson-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
-      });
+    function setupScrollPageTracker(totalPages) {
+      const observer = new IntersectionObserver(entries => {
+        let topmost = null;
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            if (!topmost || e.boundingClientRect.top < topmost.boundingClientRect.top) topmost = e;
+          }
+        });
+        if (topmost) {
+          document.getElementById('pageInfo').textContent = topmost.target.dataset.page + ' / ' + totalPages;
+        }
+      }, { root: pdfViewerContainer, threshold: 0.1 });
+      pdfViewerContainer.querySelectorAll('.pdf-page-canvas').forEach(c => observer.observe(c));
+    }
+
+    async function loadFile(lessonIndex, variant) {
+      const lesson = lessons[lessonIndex];
+      const file = variant === 'annotated' ? lesson.annotated : lesson.slides;
+
+      currentLessonIndex = lessonIndex;
+      currentVariant = variant;
+      currentLessonFile = file;
+      renderGeneration++;
+      const thisGeneration = renderGeneration;
+
+      updateSidebarActive(lessonIndex, variant);
+
+      openExternalBtn.textContent = '↗ Open PDF';
+      openExternalBtn.href = file;
+      openExternalBtn.target = '_blank';
 
       pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading PDF...</p></div>';
+      document.getElementById('pageInfo').textContent = '—';
+
       try {
-        currentPdfDoc = await pdfjsLib.getDocument(currentLessonFile).promise;
-        openExternalBtn.href = currentLessonFile;
-        openExternalBtn.target = '_blank';
-        openExternalBtn.textContent = '↗ Open PDF';
-        await renderPage(currentPage);
-        updatePageButtons();
+        currentPdfDoc = await pdfjsLib.getDocument(file).promise;
+        if (thisGeneration !== renderGeneration) return;
+        pdfViewerContainer.innerHTML = '';
+        await renderAllPages(currentPdfDoc, thisGeneration);
       } catch (e) {
-        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + currentLessonFile + '" target="_blank" style="color:var(--accent);">Download instead</a></p></div>';
+        if (thisGeneration !== renderGeneration) return;
+        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + file + '" target="_blank" style="color:var(--accent);">Download instead</a></p></div>';
       }
-    }
-
-    function updatePageButtons() {
-      if (!currentPdfDoc) return;
-      const total = currentPdfDoc.numPages;
-      document.getElementById('pageInfo').textContent = currentPage + ' / ' + total;
-      prevBtn.disabled = currentPage <= 1;
-      nextBtn.disabled = currentPage >= total;
-    }
-
-    async function changePage(delta) {
-      if (!currentPdfDoc) return;
-      const newPage = currentPage + delta;
-      if (newPage < 1 || newPage > currentPdfDoc.numPages) return;
-      currentPage = newPage;
-      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading...</p></div>';
-      await renderPage(currentPage);
-      updatePageButtons();
     }
 
     function downloadPDF() {
       const link = document.createElement('a');
       link.href = currentLessonFile;
-      link.download = currentLessonFile.split('/').pop();
+      link.download = decodeURIComponent(currentLessonFile.split('/').pop());
       link.click();
+    }
+
+    async function rerenderAll() {
+      if (!currentPdfDoc) return;
+      renderGeneration++;
+      const thisGeneration = renderGeneration;
+      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Re-rendering...</p></div>';
+      await renderAllPages(currentPdfDoc, thisGeneration);
     }
 
     function zoomIn() {
       zoomLevel = Math.min(zoomLevel + 20, 300);
       zoomLevelEl.textContent = zoomLevel + '%';
-      renderPage(currentPage);
+      rerenderAll();
     }
 
     function zoomOut() {
       zoomLevel = Math.max(zoomLevel - 20, 50);
       zoomLevelEl.textContent = zoomLevel + '%';
-      renderPage(currentPage);
+      rerenderAll();
     }
 
     initializeLessons();
-    loadLesson(0);
+    loadFile(0, 'slides');
 
     document.addEventListener('mousemove', (e) => {
       const orbs = document.querySelectorAll('.gradient-orb');
