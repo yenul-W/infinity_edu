@@ -29,6 +29,13 @@
   --text-secondary: rgba(255, 255, 255, 0.8);
   --text-tertiary: rgba(255, 255, 255, 0.6);
 
+  /* Shared topic-page variables (dark defaults) */
+  --border: rgba(255, 255, 255, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --ink: #ffffff;
+  --ink-soft: rgba(255, 255, 255, 0.7);
+  --ink-faint: rgba(255, 255, 255, 0.4);
+
   /* Fonts */
   --font-display: 'Poppins', sans-serif;
   --font-body: 'Outfit', sans-serif;
@@ -387,31 +394,25 @@ body {
   flex: 1;
 }
 
-.topic-emoji {
-  font-size: 3rem;
-  animation: emojiPulse 2s ease-in-out infinite;
+.topic-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  animation: iconPulse 3s ease-in-out infinite;
+  transition: transform 0.3s ease-out;
 }
 
-@keyframes emojiPulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
-.topic-card:hover .topic-emoji {
-  animation: emojiSpin 0.6s ease-out forwards;
-}
-
-@keyframes emojiSpin {
-  from {
-    transform: rotate(0deg) scale(1);
-  }
-  to {
-    transform: rotate(12deg) scale(1.2);
-  }
+.topic-card:hover .topic-icon {
+  animation: none;
+  transform: scale(1.18) rotate(6deg);
 }
 
 .topic-info {
@@ -693,6 +694,11 @@ html.dark-mode {
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.8);
   --text-tertiary: rgba(255, 255, 255, 0.6);
+  --border: rgba(255, 255, 255, 0.12);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --ink: #ffffff;
+  --ink-soft: rgba(255, 255, 255, 0.7);
+  --ink-faint: rgba(255, 255, 255, 0.4);
 }
 
 html.dark-mode body {
@@ -736,4 +742,119 @@ html:not(.dark-mode) .gradient-orb {
   mix-blend-mode: multiply;
 }
 
+html:not(.dark-mode) {
+  --border: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(0, 0, 0, 0.04);
+  --ink: #0a0a0a;
+  --ink-soft: rgba(0, 0, 0, 0.65);
+  --ink-faint: rgba(0, 0, 0, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SITE HERO (landing page header content)
+   ═══════════════════════════════════════════════════════════════ */
+
+.site-hero {
+  padding: 1.5rem 0 0.5rem;
+  animation: fadeUp 0.8s ease-out 0.2s both;
+}
+
+.site-hero .site-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SYLLABUS CHIP (on topic cards)
+   ═══════════════════════════════════════════════════════════════ */
+
+.syllabus-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--surface-lighter);
+  border-radius: 6px;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  transition: all 0.25s ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.syllabus-chip:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--surface-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED TOPIC PAGE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.topic-header {
+  position: relative;
+  z-index: 10;
+  padding: 2rem;
+  border-bottom: 1px solid var(--surface-lighter);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  animation: slideDownFade 0.8s ease-out;
+}
+
+html:not(.dark-mode) .topic-header {
+  background: rgba(248, 248, 248, 0.8);
+}
+
+.header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease-out;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.back-link:hover {
+  color: var(--primary-purple);
+  transform: translateX(-4px);
+}
+
+.topic-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.topic-page-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--primary-purple), var(--accent-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
