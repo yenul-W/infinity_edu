@@ -1460,6 +1460,20 @@ body.sociotype .pdf-loading p { color: #9d9d9d; }
 body.sociotype .pdf-loading-spinner { border-color: #d6d6d6; border-top-color: #000000; }
 html.dark-mode body.sociotype .pdf-loading-spinner { border-color: #333; border-top-color: #ffffff; }
 
+/* PDF iframe viewer */
+.pdf-frame {
+  width: 100%;
+  border: none;
+  display: block;
+  background: #f8f8f8;
+}
+html.dark-mode .pdf-frame { background: #111111; }
+
+body.sociotype .pdf-frame {
+  height: calc(100vh - 200px);
+  min-height: 420px;
+}
+
 /* Footer */
 body.sociotype .site-footer {
   border-top: 1px solid #000000;

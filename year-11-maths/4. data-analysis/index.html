@@ -6,31 +6,6 @@
   <title>Data Analysis — Year 11 Maths Standard</title>
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    .pdf-viewer {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      padding: 1.5rem;
-      background: rgba(0, 0, 0, 0.25);
-      min-height: 540px;
-      overflow-y: auto;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-    }
-    html:not(.dark-mode) .pdf-viewer { background: rgba(0, 0, 0, 0.07); }
-    .pdf-page-canvas {
-      display: block;
-      max-width: 100%;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.2);
-      border-radius: 0;
-    }
-    html:not(.dark-mode) .pdf-page-canvas {
-      box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
-    }
-  </style>
 </head>
 <body class="sociotype">
 
@@ -54,27 +29,12 @@
 
         <div class="pdf-viewer-main">
           <div class="pdf-controls">
-            <div class="control-group" id="fileControls">
-              <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()">&#8595; Download</button>
-              <a id="openExternalBtn" class="pdf-btn" style="cursor:pointer;" rel="noreferrer">&#8599; Open</a>
-            </div>
-            <div class="control-group" id="pageControls">
-              <span class="page-info" id="pageInfo">—</span>
-            </div>
-            <div class="control-group" id="zoomControls">
-              <div class="zoom-control">
-                <button class="zoom-btn" onclick="zoomOut()">&minus;</button>
-                <span class="zoom-display" id="zoomLevel">100%</span>
-                <button class="zoom-btn" onclick="zoomIn()">+</button>
-              </div>
+            <div class="control-group">
+              <button class="pdf-btn" id="downloadBtn" onclick="downloadCurrent()">&#8595; Download</button>
+              <a id="openExternalBtn" class="pdf-btn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
             </div>
           </div>
-          <div class="pdf-viewer" id="pdfViewerContainer">
-            <div class="pdf-loading">
-              <div class="pdf-loading-spinner"></div>
-              <p>Loading...</p>
-            </div>
-          </div>
+          <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
         </div>
       </div>
     </div>
@@ -86,10 +46,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
     const html = document.documentElement;
@@ -104,14 +61,12 @@
       toggleIcon.textContent = nowDark ? 'light' : 'dark';
     });
 
-    const currentDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-
     const lessons = [
       {
         num: 1,
         title: 'Descriptive Statistics',
-        slides: currentDir + '/assets/1__Data_Analysis__Descriptive_Statistics.pdf',
-        annotated: currentDir + '/assets/annotated/ANNOTATED%201__Data_Analysis__Descriptive_Statistics.pdf',
+        slides: 'assets/1__Data_Analysis__Descriptive_Statistics.pdf',
+        annotated: 'assets/annotated/ANNOTATED%201__Data_Analysis__Descriptive_Statistics.pdf',
         kind: 'pdf',
         syllabus: [
           'Classify data as numerical or categorical',
@@ -126,8 +81,8 @@
       {
         num: 2,
         title: 'Histograms & Polygons',
-        slides: currentDir + '/assets/2__Data_Analysis__Histograms___Polygons.pdf',
-        annotated: currentDir + '/assets/annotated/ANNOTATED%202__Data_Analysis__Histograms___Polygons.pdf',
+        slides: 'assets/2__Data_Analysis__Histograms___Polygons.pdf',
+        annotated: 'assets/annotated/ANNOTATED%202__Data_Analysis__Histograms___Polygons.pdf',
         kind: 'pdf',
         syllabus: [
           'Use spreadsheets to organise and represent data using appropriate displays',
@@ -140,8 +95,8 @@
       {
         num: 3,
         title: 'Measures of Centre and Spread',
-        slides: currentDir + '/assets/3__Data_Analysis__Measures_of_Centre_and_Spread.pdf',
-        annotated: currentDir + '/assets/annotated/ANNOTATED%203__Data_Analysis__Measures_of_Centre_and_Spread.pdf',
+        slides: 'assets/3__Data_Analysis__Measures_of_Centre_and_Spread.pdf',
+        annotated: 'assets/annotated/ANNOTATED%203__Data_Analysis__Measures_of_Centre_and_Spread.pdf',
         kind: 'pdf',
         syllabus: [
           'Describe and calculate mean, median and mode using digital tools',
@@ -156,15 +111,14 @@
       {
         num: 4,
         title: 'Quartiles, Box Plots and Outliers',
-        slides: currentDir + '/assets/4__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf',
-        annotated: currentDir + '/assets/annotated/ANNOTATED%204__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf',
+        slides: 'assets/4__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf',
+        annotated: 'assets/annotated/ANNOTATED%204__Data_Analysis__Quartiles__Box_Plots_and_Outliers.pdf',
         kind: 'pdf',
         syllabus: [
           'Determine quartiles from datasets or graphical representations',
           'Determine the interquartile range (IQR)',
           'Represent data using box plots displaying five-number summaries',
           'Compare measures of centre, spread and shape using box plots',
-          'Determine quartiles from histograms and dot plots',
           'Identify clusters, gaps and outliers and explain their occurrence',
           'Apply Q1 − 1.5×IQR and Q3 + 1.5×IQR to formally identify outliers',
           'Explain the impact of outliers on measures of centre and spread'
@@ -173,7 +127,7 @@
       {
         num: 5,
         title: 'Statistical Investigation Process and Sampling',
-        slides: currentDir + '/lesson-05-statistical-investigation-process-and-sampling.html',
+        slides: 'lesson-05-statistical-investigation-process-and-sampling.html',
         annotated: null,
         kind: 'html',
         syllabus: [
@@ -187,8 +141,8 @@
       },
       {
         num: 6,
-        title: 'Topic Homework',
-        slides: currentDir + '/assets/Data_Analysis_Questions.pdf',
+        homework: true,
+        slides: 'assets/Data_Analysis_Questions.pdf',
         annotated: null,
         kind: 'pdf',
         syllabus: []
@@ -199,16 +153,10 @@
     let currentVariant = 'slides';
     let currentLessonFile = '';
     let currentLessonKind = 'pdf';
-    let currentPdfDoc = null;
-    let zoomLevel = 100;
-    let renderGeneration = 0;
 
-    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+    const pdfFrame = document.getElementById('pdfFrame');
     const downloadBtn = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
-    const zoomLevelEl = document.getElementById('zoomLevel');
-    const zoomControls = document.getElementById('zoomControls');
-    const pageControls = document.getElementById('pageControls');
 
     function initializeLessons() {
       const lessonsList = document.getElementById('lessonsList');
@@ -224,12 +172,14 @@
 
         let inner = `
           <div class="lesson-group-header">
-            <span class="lesson-group-num">Lesson ${lesson.num}</span>
+            <span class="lesson-group-num">${lesson.homework ? 'Homework' : 'Lesson ' + lesson.num}</span>
             <span class="lesson-kind-badge">${kindLabel}</span>
           </div>
-          <div class="lesson-group-title">${lesson.title}</div>
-          ${syllabusHtml}
         `;
+        if (!lesson.homework) {
+          inner += `<div class="lesson-group-title">${lesson.title}</div>`;
+        }
+        inner += syllabusHtml;
 
         if (lesson.annotated) {
           inner += `
@@ -245,7 +195,6 @@
         group.addEventListener('click', () => {
           loadFile(index, currentLessonIndex === index ? currentVariant : 'slides');
         });
-
         if (lesson.annotated) {
           group.querySelectorAll('.variant-btn').forEach(btn => {
             btn.addEventListener('click', e => {
@@ -271,109 +220,30 @@
       }
     }
 
-    async function renderAllPages(pdfDoc, generation) {
-      const containerWidth = pdfViewerContainer.clientWidth - 48;
-      for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-        if (generation !== renderGeneration) return;
-        const page = await pdfDoc.getPage(pageNum);
-        const baseViewport = page.getViewport({ scale: 1 });
-        const autoScale = Math.min(containerWidth / baseViewport.width, 1.5);
-        const scale = (zoomLevel / 100) * autoScale;
-        const viewport = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        canvas.className = 'pdf-page-canvas';
-        canvas.dataset.page = pageNum;
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        if (generation !== renderGeneration) return;
-        pdfViewerContainer.appendChild(canvas);
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-        document.getElementById('pageInfo').textContent = pageNum + ' / ' + pdfDoc.numPages;
-      }
-      setupScrollPageTracker(pdfDoc.numPages);
-    }
-
-    function setupScrollPageTracker(totalPages) {
-      const observer = new IntersectionObserver(entries => {
-        let topmost = null;
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            if (!topmost || e.boundingClientRect.top < topmost.boundingClientRect.top) topmost = e;
-          }
-        });
-        if (topmost) {
-          document.getElementById('pageInfo').textContent = topmost.target.dataset.page + ' / ' + totalPages;
-        }
-      }, { root: pdfViewerContainer, threshold: 0.1 });
-      pdfViewerContainer.querySelectorAll('.pdf-page-canvas').forEach(c => observer.observe(c));
-    }
-
-    async function loadFile(lessonIndex, variant) {
+    function loadFile(lessonIndex, variant) {
       const lesson = lessons[lessonIndex];
-      const file = variant === 'annotated' ? lesson.annotated : lesson.slides;
+      const file = variant === 'annotated' && lesson.annotated ? lesson.annotated : lesson.slides;
       const kind = lesson.kind;
 
       currentLessonIndex = lessonIndex;
       currentVariant = variant;
       currentLessonFile = file;
       currentLessonKind = kind;
-      renderGeneration++;
-      const thisGeneration = renderGeneration;
 
       updateSidebarActive(lessonIndex, variant);
 
       downloadBtn.style.display = kind === 'pdf' ? 'inline-flex' : 'none';
-      zoomControls.style.display = kind === 'pdf' ? 'flex' : 'none';
-      pageControls.style.display = kind === 'pdf' ? 'flex' : 'none';
-
-      openExternalBtn.textContent = kind === 'pdf' ? '↗ Open PDF' : '↗ Open lesson';
+      openExternalBtn.textContent = kind === 'html' ? '↗ Open lesson' : '↗ Open PDF';
       openExternalBtn.href = file;
-      openExternalBtn.target = '_blank';
 
-      if (kind === 'pdf') {
-        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading PDF...</p></div>';
-        document.getElementById('pageInfo').textContent = '—';
-        try {
-          currentPdfDoc = await pdfjsLib.getDocument(file).promise;
-          if (thisGeneration !== renderGeneration) return;
-          pdfViewerContainer.innerHTML = '';
-          await renderAllPages(currentPdfDoc, thisGeneration);
-        } catch (e) {
-          if (thisGeneration !== renderGeneration) return;
-          pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + file + '" target="_blank" style="color:var(--accent,#000);">Download instead</a></p></div>';
-        }
-      } else {
-        currentPdfDoc = null;
-        document.getElementById('pageInfo').textContent = '';
-        pdfViewerContainer.innerHTML = '<iframe src="' + file + '" style="width:100%;height:100%;border:none;min-height:600px;"></iframe>';
-      }
+      pdfFrame.src = file;
     }
 
-    function downloadPDF() {
+    function downloadCurrent() {
       const link = document.createElement('a');
       link.href = currentLessonFile;
       link.download = decodeURIComponent(currentLessonFile.split('/').pop());
       link.click();
-    }
-
-    async function rerenderAll() {
-      if (!currentPdfDoc) return;
-      renderGeneration++;
-      const thisGeneration = renderGeneration;
-      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Re-rendering...</p></div>';
-      await renderAllPages(currentPdfDoc, thisGeneration);
-    }
-
-    function zoomIn() {
-      zoomLevel = Math.min(zoomLevel + 20, 300);
-      zoomLevelEl.textContent = zoomLevel + '%';
-      rerenderAll();
-    }
-
-    function zoomOut() {
-      zoomLevel = Math.max(zoomLevel - 20, 50);
-      zoomLevelEl.textContent = zoomLevel + '%';
-      rerenderAll();
     }
 
     initializeLessons();

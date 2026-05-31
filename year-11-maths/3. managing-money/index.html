@@ -29,29 +29,12 @@
 
         <div class="pdf-viewer-main">
           <div class="pdf-controls">
-            <div class="control-group" id="fileControls">
-              <button class="pdf-btn" id="downloadBtn" onclick="downloadPDF()">&#8595; Download</button>
-              <a id="openExternalBtn" class="pdf-btn" style="cursor:pointer;" rel="noreferrer">&#8599; Open</a>
-            </div>
-            <div class="control-group" id="pageControls">
-              <button class="pdf-nav-arrow" id="prevBtn" onclick="changePage(-1)" disabled>&#8592;</button>
-              <span class="page-info" id="pageInfo">—</span>
-              <button class="pdf-nav-arrow" id="nextBtn" onclick="changePage(1)" disabled>&#8594;</button>
-            </div>
-            <div class="control-group" id="zoomControls">
-              <div class="zoom-control">
-                <button class="zoom-btn" onclick="zoomOut()">&minus;</button>
-                <span class="zoom-display" id="zoomLevel">100%</span>
-                <button class="zoom-btn" onclick="zoomIn()">+</button>
-              </div>
+            <div class="control-group">
+              <button class="pdf-btn" id="downloadBtn" onclick="downloadCurrent()">&#8595; Download</button>
+              <a id="openExternalBtn" class="pdf-btn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
             </div>
           </div>
-          <div class="pdf-viewer" id="pdfViewerContainer">
-            <div class="pdf-loading">
-              <div class="pdf-loading-spinner"></div>
-              <p>Loading...</p>
-            </div>
-          </div>
+          <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
         </div>
       </div>
     </div>
@@ -63,10 +46,7 @@
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
     const html = document.documentElement;
@@ -113,132 +93,68 @@
       },
       {
         num: 3,
-        title: 'Topic Homework',
+        homework: true,
         file: 'Managing_Money_Questions.pdf',
         kind: 'pdf',
         syllabus: []
       }
     ];
 
+    let currentLessonIndex = 0;
     let currentLessonFile = '';
-    let currentPdfDoc = null;
-    let currentPage = 1;
-    let zoomLevel = 100;
-    let renderTask = null;
 
-    const pdfViewerContainer = document.getElementById('pdfViewerContainer');
+    const pdfFrame = document.getElementById('pdfFrame');
     const openExternalBtn = document.getElementById('openExternalBtn');
-    const zoomLevelEl = document.getElementById('zoomLevel');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
 
     function initializeLessons() {
       const lessonsList = document.getElementById('lessonsList');
       lessons.forEach((lesson, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'lesson-btn' + (index === 0 ? ' active' : '');
+        const group = document.createElement('div');
+        group.className = 'lesson-group' + (index === 0 ? ' active' : '');
+        group.dataset.index = index;
+
         const syllabusHtml = lesson.syllabus && lesson.syllabus.length > 0
           ? `<div class="lesson-syllabus-dots"><ul>${lesson.syllabus.map(d => `<li>${d}</li>`).join('')}</ul></div>`
           : '';
-        btn.innerHTML = `
-          <div class="lesson-num">Lesson ${lesson.num}</div>
-          <div class="lesson-title">${lesson.title}</div>
-          <div class="lesson-kind">PDF</div>
-          ${syllabusHtml}
+
+        let inner = `
+          <div class="lesson-group-header">
+            <span class="lesson-group-num">${lesson.homework ? 'Homework' : 'Lesson ' + lesson.num}</span>
+            <span class="lesson-kind-badge">PDF</span>
+          </div>
         `;
-        btn.onclick = () => loadLesson(index);
-        lessonsList.appendChild(btn);
+        if (!lesson.homework) {
+          inner += `<div class="lesson-group-title">${lesson.title}</div>`;
+        }
+        inner += syllabusHtml;
+
+        group.innerHTML = inner;
+        group.addEventListener('click', () => loadLesson(index));
+        lessonsList.appendChild(group);
       });
     }
 
-    async function renderPage(pageNum) {
-      if (!currentPdfDoc) return;
-      if (renderTask) { renderTask.cancel(); renderTask = null; }
+    function loadLesson(index) {
+      const lesson = lessons[index];
+      const file = lesson.file || lesson.slides;
 
-      const page = await currentPdfDoc.getPage(pageNum);
-      const containerWidth = pdfViewerContainer.clientWidth - 48;
-      const baseViewport = page.getViewport({ scale: 1 });
-      const autoScale = Math.min(containerWidth / baseViewport.width, 1.5);
-      const scale = (zoomLevel / 100) * autoScale;
-      const viewport = page.getViewport({ scale });
+      currentLessonIndex = index;
+      currentLessonFile = file;
 
-      let canvas = document.getElementById('pdf-canvas');
-      if (!canvas) {
-        canvas = document.createElement('canvas');
-        canvas.id = 'pdf-canvas';
-        canvas.className = 'pdf-canvas-wrapper';
-        pdfViewerContainer.innerHTML = '';
-        pdfViewerContainer.appendChild(canvas);
-      }
-
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      canvas.style.maxWidth = '100%';
-
-      const context = canvas.getContext('2d');
-      renderTask = page.render({ canvasContext: context, viewport });
-      await renderTask.promise;
-      renderTask = null;
-    }
-
-    async function loadLesson(index) {
-      currentLessonFile = lessons[index].file;
-      currentPage = 1;
-      zoomLevel = 100;
-      zoomLevelEl.textContent = '100%';
-
-      document.querySelectorAll('.lesson-btn').forEach((btn, i) => {
-        btn.classList.toggle('active', i === index);
+      document.querySelectorAll('.lesson-group').forEach((g, i) => {
+        g.classList.toggle('active', i === index);
       });
 
-      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading PDF...</p></div>';
-      try {
-        currentPdfDoc = await pdfjsLib.getDocument(currentLessonFile).promise;
-        openExternalBtn.href = currentLessonFile;
-        openExternalBtn.target = '_blank';
-        openExternalBtn.textContent = '↗ Open PDF';
-        await renderPage(currentPage);
-        updatePageButtons();
-      } catch (e) {
-        pdfViewerContainer.innerHTML = '<div class="pdf-loading"><p>Could not load PDF. <a href="' + currentLessonFile + '" target="_blank" style="color:var(--accent,#000);">Download instead</a></p></div>';
-      }
+      pdfFrame.src = file;
+      openExternalBtn.href = file;
+      openExternalBtn.textContent = '↗ Open PDF';
     }
 
-    function updatePageButtons() {
-      if (!currentPdfDoc) return;
-      const total = currentPdfDoc.numPages;
-      document.getElementById('pageInfo').textContent = currentPage + ' / ' + total;
-      prevBtn.disabled = currentPage <= 1;
-      nextBtn.disabled = currentPage >= total;
-    }
-
-    async function changePage(delta) {
-      if (!currentPdfDoc) return;
-      const newPage = currentPage + delta;
-      if (newPage < 1 || newPage > currentPdfDoc.numPages) return;
-      currentPage = newPage;
-      pdfViewerContainer.innerHTML = '<div class="pdf-loading"><div class="pdf-loading-spinner"></div><p>Loading...</p></div>';
-      await renderPage(currentPage);
-      updatePageButtons();
-    }
-
-    function downloadPDF() {
+    function downloadCurrent() {
       const link = document.createElement('a');
       link.href = currentLessonFile;
-      link.download = currentLessonFile.split('/').pop();
+      link.download = decodeURIComponent(currentLessonFile.split('/').pop());
       link.click();
-    }
-
-    function zoomIn() {
-      zoomLevel = Math.min(zoomLevel + 20, 300);
-      zoomLevelEl.textContent = zoomLevel + '%';
-      renderPage(currentPage);
-    }
-
-    function zoomOut() {
-      zoomLevel = Math.max(zoomLevel - 20, 50);
-      zoomLevelEl.textContent = zoomLevel + '%';
-      renderPage(currentPage);
     }
 
     initializeLessons();
