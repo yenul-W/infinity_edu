@@ -1489,3 +1489,67 @@ body.sociotype .footer-content p {
   text-transform: uppercase;
   color: #9d9d9d;
 }
+
+/* ─── LIVE SESSION BAR ────────────────────────────────────────── */
+
+.live-session-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 auto 2.5rem;
+  padding: 0.65rem 1.25rem;
+  max-width: 520px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  flex-wrap: wrap;
+}
+
+html:not(.dark-mode) .live-session-bar {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.09);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(52,211,153,0); }
+}
+
+.live-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.live-join-btn {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #34d399;
+  background: rgba(52,211,153,0.10);
+  border: 1px solid rgba(52,211,153,0.25);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.18s, border-color 0.18s;
+  white-space: nowrap;
+}
+
+.live-join-btn:hover {
+  background: rgba(52,211,153,0.18);
+  border-color: rgba(52,211,153,0.45);
+}
