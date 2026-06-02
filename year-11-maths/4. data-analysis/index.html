@@ -23,20 +23,18 @@
   </header>
 
   <main class="main-content">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <div class="pdf-viewer-container">
-        <div class="lessons-sidebar" id="lessonsList"></div>
+    <div class="pdf-viewer-container">
+      <div class="lessons-sidebar" id="lessonsList"></div>
 
-        <div class="pdf-viewer-main">
-          <div class="pdf-controls">
-            <div class="control-group">
-              <button class="pdf-btn" id="downloadBtn" onclick="downloadCurrent()">&#8595; Download</button>
-              <a id="openExternalBtn" class="pdf-btn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
-              <button class="pdf-btn" onclick="printSyllabus()">&#8741; Print Syllabus</button>
-            </div>
+      <div class="pdf-viewer-main">
+        <div class="pdf-controls">
+          <div class="control-group">
+            <button class="pdf-btn" id="downloadBtn" onclick="downloadCurrent()">&#8595; Download</button>
+            <a id="openExternalBtn" class="pdf-btn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+            <button class="pdf-btn" onclick="printSyllabus()">&#8741; Print Syllabus</button>
           </div>
-          <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
         </div>
+        <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
       </div>
     </div>
   </main>

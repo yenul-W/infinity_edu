@@ -1172,7 +1172,7 @@ html.dark-mode body.sociotype .dark-mode-btn { color: #818181; border-bottom-col
 html.dark-mode body.sociotype .dark-mode-btn:hover { color: #ffffff; border-bottom-color: #ffffff; }
 
 /* Layout */
-body.sociotype .main-content { padding: 0 2.5rem 2.5rem; }
+body.sociotype .main-content { padding: 0; }
 
 body.sociotype .pdf-viewer-container {
   gap: 0;
