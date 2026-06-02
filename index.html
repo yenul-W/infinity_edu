@@ -25,10 +25,16 @@
   </div>
 
   <!-- ── Live session bar ────────────────────────────────────── -->
-  <div class="live-session-bar">
+  <div class="live-session-bar" id="liveSessionBar">
     <span class="live-dot"></span>
-    <span class="live-label">Live Lesson &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST</span>
-    <a class="live-join-btn" href="https://meet.google.com/xdv-qwag-kti" target="_blank" rel="noreferrer noopener">Join Google Meet &rarr;</a>
+    <span class="live-label" id="liveLabel">Live Lesson &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST</span>
+    <a class="live-join-btn" id="liveJoinBtn" href="https://meet.google.com/xdv-qwag-kti" target="_blank" rel="noreferrer noopener">Join Google Meet &rarr;</a>
+  </div>
+
+  <!-- ── Syllabus search ─────────────────────────────────────── -->
+  <div class="search-bar-wrap">
+    <input class="syllabus-search" id="syllabusSearch" type="search" placeholder="Search syllabus dot points…" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="searchResults" hidden></div>
   </div>
 
   <!-- ── 4-column card grid ───────────────────────────────────── -->
@@ -36,7 +42,8 @@
     <div class="topic-grid">
 
       <!-- 01 Formulas & Equations — night sky / Milky Way -->
-      <div class="topic-card topic-card-1" onclick="window.location.href='year-11-maths/1. formulas-and-equations/index.html'" style="cursor:pointer;">
+      <div class="topic-card topic-card-1" id="card-1" onclick="window.location.href='year-11-maths/1. formulas-and-equations/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <div class="scene-bg scene-bg-1"></div>
           <svg class="scene-art" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -78,7 +85,8 @@
       </div>
 
       <!-- 02 Earning Money — golden rolling hills / warm dusk -->
-      <div class="topic-card topic-card-2" onclick="window.location.href='year-11-maths/2. earning-money/index.html'" style="cursor:pointer;">
+      <div class="topic-card topic-card-2" id="card-2" onclick="window.location.href='year-11-maths/2. earning-money/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <div class="scene-bg scene-bg-2"></div>
           <svg class="scene-art" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -119,7 +127,8 @@
       </div>
 
       <!-- 03 Managing Money — lush forest / deep green -->
-      <div class="topic-card topic-card-3" onclick="window.location.href='year-11-maths/3. managing-money/index.html'" style="cursor:pointer;">
+      <div class="topic-card topic-card-3" id="card-3" onclick="window.location.href='year-11-maths/3. managing-money/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <div class="scene-bg scene-bg-3"></div>
           <svg class="scene-art" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -158,7 +167,8 @@
       </div>
 
       <!-- 04 Data Analysis — Earth from space / deep blue -->
-      <div class="topic-card topic-card-4" onclick="window.location.href='year-11-maths/4. data-analysis/index.html'" style="cursor:pointer;">
+      <div class="topic-card topic-card-4" id="card-4" onclick="window.location.href='year-11-maths/4. data-analysis/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <div class="scene-bg scene-bg-4"></div>
           <svg class="scene-art" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -220,27 +230,114 @@
     </div>
   </main>
 
+  <script src="search-data.js"></script>
   <script>
+    // ── Dark mode ───────────────────────────────────────────────
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = document.querySelector('.toggle-icon');
     const html = document.documentElement;
-
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
-
-    if (isDark) {
-      html.classList.add('dark-mode');
-      toggleIcon.textContent = 'light';
-    } else {
-      html.classList.remove('dark-mode');
-      toggleIcon.textContent = 'dark';
-    }
-
+    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
     toggle.addEventListener('click', () => {
       const isDarkNow = html.classList.toggle('dark-mode');
       localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
       toggleIcon.textContent = isDarkNow ? 'light' : 'dark';
+    });
+
+    // ── Live session bar ────────────────────────────────────────
+    function updateLiveStatus() {
+      const now = new Date();
+      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+      const day = sydney.getDay();
+      const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
+      const bar = document.getElementById('liveSessionBar');
+      const label = document.getElementById('liveLabel');
+      bar.classList.remove('live-session-bar--live', 'live-session-bar--soon', 'live-session-bar--idle');
+      if (day === 6 && totalMins >= 420 && totalMins < 480) {
+        bar.classList.add('live-session-bar--live');
+        label.innerHTML = 'Live Now &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST';
+      } else if (day === 6 && totalMins >= 405 && totalMins < 420) {
+        const minsLeft = 420 - totalMins;
+        bar.classList.add('live-session-bar--soon');
+        label.innerHTML = `Starting Soon  ·  in ~${minsLeft}m`;
+      } else {
+        bar.classList.add('live-session-bar--idle');
+        label.innerHTML = 'Next Lesson &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST';
+      }
+    }
+    updateLiveStatus();
+    setInterval(updateLiveStatus, 60000);
+
+    // ── Completion badges ───────────────────────────────────────
+    const COMPLETABLE = { 1: [0,1], 2: [0,1], 3: [0,1], 4: [0,1,2,3,4] };
+    function checkCompletionBadges() {
+      for (const [topicId, indices] of Object.entries(COMPLETABLE)) {
+        const allDone = indices.every(i => localStorage.getItem(`ie_done_${topicId}_${i}`) === '1');
+        const card = document.getElementById(`card-${topicId}`);
+        if (card) card.classList.toggle('topic-card--complete', allDone);
+      }
+    }
+    checkCompletionBadges();
+
+    // ── Syllabus search ─────────────────────────────────────────
+    const searchInput = document.getElementById('syllabusSearch');
+    const searchResults = document.getElementById('searchResults');
+    let searchDebounce = null;
+
+    function escapeRegex(s) {
+      return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function highlightMatch(text, query) {
+      const re = new RegExp(`(${escapeRegex(query)})`, 'gi');
+      return text.replace(re, '<mark>$1</mark>');
+    }
+
+    function runSearch(query) {
+      if (!query || !window.SEARCH_DATA) { searchResults.hidden = true; return; }
+      const q = query.trim().toLowerCase();
+      if (q.length < 2) { searchResults.hidden = true; return; }
+
+      const matches = [];
+      for (const entry of SEARCH_DATA) {
+        for (const dot of entry.dots) {
+          if (dot.toLowerCase().includes(q)) {
+            matches.push({ entry, dot });
+            if (matches.length >= 8) break;
+          }
+        }
+        if (matches.length >= 8) break;
+      }
+
+      if (matches.length === 0) {
+        searchResults.innerHTML = `<div class="search-no-results">No results for "${query}"</div>`;
+      } else {
+        searchResults.innerHTML = matches.map(({ entry, dot }) => `
+          <a class="search-result-item" href="${entry.url}">
+            <div class="search-result-meta">${entry.topicTitle} &middot; Lesson ${entry.lessonNum}: ${entry.lessonTitle}</div>
+            <div class="search-result-dot">${highlightMatch(dot, query.trim())}</div>
+          </a>
+        `).join('');
+      }
+      searchResults.hidden = false;
+    }
+
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => runSearch(searchInput.value), 200);
+    });
+
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { searchResults.hidden = true; searchInput.blur(); }
+    });
+
+    document.addEventListener('click', e => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.hidden = true;
+      }
     });
   </script>
 </body>

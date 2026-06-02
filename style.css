@@ -1553,3 +1553,288 @@ html:not(.dark-mode) .live-session-bar {
   background: rgba(52,211,153,0.18);
   border-color: rgba(52,211,153,0.45);
 }
+
+/* ─── LIVE BAR: STATE OVERRIDES ──────────────────────────────── */
+
+.live-session-bar--soon .live-dot {
+  background: #fbbf24;
+  animation: pulse-dot-amber 2s ease-in-out infinite;
+}
+
+.live-session-bar--soon .live-join-btn {
+  color: #fbbf24;
+  background: rgba(251,191,36,0.10);
+  border-color: rgba(251,191,36,0.25);
+}
+
+.live-session-bar--soon .live-join-btn:hover {
+  background: rgba(251,191,36,0.18);
+  border-color: rgba(251,191,36,0.45);
+}
+
+@keyframes pulse-dot-amber {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(251,191,36,0); }
+}
+
+.live-session-bar--idle .live-dot {
+  background: rgba(255,255,255,0.25);
+  animation: none;
+}
+
+html:not(.dark-mode) .live-session-bar--idle .live-dot {
+  background: rgba(0,0,0,0.18);
+}
+
+.live-session-bar--idle .live-join-btn {
+  display: none;
+}
+
+/* ─── TOPIC CARD: COMPLETED BADGE ────────────────────────────── */
+
+.topic-card--complete {
+  border-color: rgba(52,211,153,0.25) !important;
+}
+
+.complete-badge {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #34d399;
+  background: rgba(7,7,11,0.65);
+  border: 1px solid rgba(52,211,153,0.35);
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.topic-card--complete .complete-badge {
+  display: flex;
+}
+
+/* ─── STUDY BAR (TIMER + PRINT) ──────────────────────────────── */
+
+.study-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 1.25rem;
+  border-bottom: 1px solid #000;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+html.dark-mode body.sociotype .study-bar { border-bottom-color: #ffffff; }
+
+.study-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.timer-display {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #818181;
+  min-width: 2.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+html.dark-mode .timer-display { color: #666; }
+
+.timer-total {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: #b0b0b0;
+}
+
+html.dark-mode .timer-total { color: #444; }
+
+/* ─── LESSON COMPLETION ──────────────────────────────────────── */
+
+.complete-btn {
+  margin-top: 0.55rem;
+  align-self: flex-start;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.lesson-group--done .lesson-group-num::after {
+  content: ' ✓';
+  color: #34d399;
+  font-weight: 700;
+}
+
+.complete-btn--done {
+  color: #34d399 !important;
+  border-bottom-color: #34d399 !important;
+}
+
+html.dark-mode .complete-btn--done {
+  color: #34d399 !important;
+  border-bottom-color: #34d399 !important;
+}
+
+/* ─── PRINT SYLLABUS SHEET ───────────────────────────────────── */
+
+.print-syllabus-sheet {
+  display: none;
+}
+
+@media print {
+  body.sociotype .topic-header,
+  body.sociotype .main-content,
+  body.sociotype .site-footer { display: none !important; }
+
+  .print-syllabus-sheet {
+    display: block !important;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #000;
+    padding: 2cm;
+    max-width: 18cm;
+    margin: 0 auto;
+  }
+
+  .print-syllabus-sheet h1 {
+    font-size: 17pt;
+    font-weight: bold;
+    margin-bottom: 0.2em;
+    border-bottom: 1.5pt solid #000;
+    padding-bottom: 0.3em;
+  }
+
+  .print-subtitle {
+    font-size: 9pt;
+    color: #555;
+    margin-bottom: 1.4em;
+    font-style: italic;
+  }
+
+  .print-syllabus-sheet h2 {
+    font-size: 11pt;
+    font-weight: bold;
+    margin: 1.1em 0 0.3em;
+    page-break-after: avoid;
+  }
+
+  .print-syllabus-sheet ul {
+    margin: 0;
+    padding-left: 1.2em;
+    page-break-inside: avoid;
+  }
+
+  .print-syllabus-sheet li {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    margin-bottom: 0.12em;
+  }
+}
+
+/* ─── SYLLABUS SEARCH ────────────────────────────────────────── */
+
+.search-bar-wrap {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+}
+
+.syllabus-search {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+html:not(.dark-mode) .syllabus-search {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.09);
+  color: var(--text);
+}
+
+.syllabus-search::placeholder { color: var(--text-muted); }
+
+.syllabus-search:focus { border-color: rgba(255,255,255,0.22); }
+html:not(.dark-mode) .syllabus-search:focus { border-color: rgba(0,0,0,0.25); }
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  z-index: 100;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+html:not(.dark-mode) .search-results {
+  background: #fff;
+  border-color: rgba(0,0,0,0.10);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+}
+
+.search-result-item {
+  display: block;
+  padding: 0.6rem 1.1rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+html:not(.dark-mode) .search-result-item { border-bottom-color: rgba(0,0,0,0.05); }
+.search-result-item:last-child { border-bottom: none; }
+.search-result-item:hover { background: rgba(255,255,255,0.05); }
+html:not(.dark-mode) .search-result-item:hover { background: rgba(0,0,0,0.04); }
+
+.search-result-meta {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.search-result-dot {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.search-result-dot mark {
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.search-no-results {
+  padding: 1rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}

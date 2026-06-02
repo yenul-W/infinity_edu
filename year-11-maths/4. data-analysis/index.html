@@ -32,6 +32,15 @@
             <div class="control-group">
               <button class="pdf-btn" id="downloadBtn" onclick="downloadCurrent()">&#8595; Download</button>
               <a id="openExternalBtn" class="pdf-btn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+              <button class="pdf-btn" onclick="printSyllabus()">&#8741; Print Syllabus</button>
+            </div>
+          </div>
+          <div class="study-bar">
+            <div class="study-bar-left">
+              <span class="timer-display" id="timerDisplay">25:00</span>
+              <button class="pdf-btn" id="timerStartBtn" onclick="toggleTimer()">Start</button>
+              <button class="pdf-btn" onclick="resetTimer()">Reset</button>
+              <span class="timer-total" id="timerTotal"></span>
             </div>
           </div>
           <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
@@ -60,6 +69,8 @@
       localStorage.setItem('theme', nowDark ? 'dark' : 'light');
       toggleIcon.textContent = nowDark ? 'light' : 'dark';
     });
+
+    const TOPIC_ID = 4;
 
     const lessons = [
       {
@@ -158,6 +169,105 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
 
+    // ── Completion ──────────────────────────────────────────────
+    function isLessonDone(idx) {
+      return localStorage.getItem(`ie_done_${TOPIC_ID}_${idx}`) === '1';
+    }
+    function setLessonDone(idx, done) {
+      if (done) localStorage.setItem(`ie_done_${TOPIC_ID}_${idx}`, '1');
+      else localStorage.removeItem(`ie_done_${TOPIC_ID}_${idx}`);
+    }
+    function updateCompletionUI(idx) {
+      const group = document.querySelectorAll('.lesson-group')[idx];
+      if (!group) return;
+      const done = isLessonDone(idx);
+      group.classList.toggle('lesson-group--done', done);
+      const btn = group.querySelector('.complete-btn');
+      if (btn) {
+        btn.textContent = done ? '✓ Done' : 'Mark Complete';
+        btn.classList.toggle('complete-btn--done', done);
+      }
+    }
+
+    // ── Timer ───────────────────────────────────────────────────
+    let timerInterval = null;
+    let timerSeconds = 25 * 60;
+    let timerRunning = false;
+
+    function formatTime(s) {
+      return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+    }
+    function updateTimerDisplay() {
+      document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+      document.getElementById('timerStartBtn').textContent = timerRunning ? 'Pause' : 'Start';
+    }
+    function updateTotalDisplay() {
+      const total = parseInt(localStorage.getItem(`ie_time_${TOPIC_ID}_${currentLessonIndex}`) || '0');
+      const el = document.getElementById('timerTotal');
+      if (!el) return;
+      if (total === 0) { el.textContent = ''; return; }
+      const h = Math.floor(total / 3600);
+      const m = Math.floor((total % 3600) / 60);
+      const s = total % 60;
+      el.textContent = h > 0 ? `${h}h ${m}m studied` : m > 0 ? `${m}m studied` : `${s}s studied`;
+    }
+    function toggleTimer() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+      } else {
+        timerRunning = true;
+        timerInterval = setInterval(() => {
+          const key = `ie_time_${TOPIC_ID}_${currentLessonIndex}`;
+          localStorage.setItem(key, String(parseInt(localStorage.getItem(key) || '0') + 1));
+          timerSeconds--;
+          if (timerSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerSeconds = 25 * 60;
+            try {
+              const ctx = new AudioContext();
+              const o = ctx.createOscillator();
+              const g = ctx.createGain();
+              o.connect(g); g.connect(ctx.destination);
+              o.frequency.value = 880;
+              g.gain.setValueAtTime(0.3, ctx.currentTime);
+              g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+              o.start(ctx.currentTime); o.stop(ctx.currentTime + 0.8);
+            } catch(e) {}
+          }
+          updateTimerDisplay();
+          updateTotalDisplay();
+        }, 1000);
+      }
+      updateTimerDisplay();
+    }
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerSeconds = 25 * 60;
+      updateTimerDisplay();
+    }
+
+    // ── Print ───────────────────────────────────────────────────
+    function printSyllabus() {
+      const existing = document.querySelector('.print-syllabus-sheet');
+      if (existing) existing.remove();
+      const topicTitle = document.querySelector('.topic-page-title').textContent.replace(/\s+/g, ' ').trim();
+      const sheet = document.createElement('div');
+      sheet.className = 'print-syllabus-sheet';
+      let markup = `<h1>${topicTitle}</h1><p class="print-subtitle">Year 11 Mathematics Standard — NSW Curriculum</p>`;
+      lessons.forEach(l => {
+        if (!l.homework && l.syllabus && l.syllabus.length > 0) {
+          markup += `<h2>Lesson ${l.num}: ${l.title}</h2><ul>${l.syllabus.map(d => `<li>${d}</li>`).join('')}</ul>`;
+        }
+      });
+      sheet.innerHTML = markup;
+      document.body.appendChild(sheet);
+      window.print();
+    }
+
+    // ── Sidebar ─────────────────────────────────────────────────
     function initializeLessons() {
       const lessonsList = document.getElementById('lessonsList');
       lessons.forEach((lesson, index) => {
@@ -180,7 +290,9 @@
           inner += `<div class="lesson-group-title">${lesson.title}</div>`;
         }
         inner += syllabusHtml;
-
+        if (!lesson.homework) {
+          inner += `<button class="complete-btn pdf-btn" data-index="${index}">Mark Complete</button>`;
+        }
         if (lesson.annotated) {
           inner += `
             <div class="lesson-variants">
@@ -191,6 +303,16 @@
         }
 
         group.innerHTML = inner;
+
+        const cBtn = group.querySelector('.complete-btn');
+        if (cBtn) {
+          cBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            setLessonDone(index, !isLessonDone(index));
+            updateCompletionUI(index);
+          });
+          updateCompletionUI(index);
+        }
 
         group.addEventListener('click', () => {
           loadFile(index, currentLessonIndex === index ? currentVariant : 'slides');
@@ -224,18 +346,15 @@
       const lesson = lessons[lessonIndex];
       const file = variant === 'annotated' && lesson.annotated ? lesson.annotated : lesson.slides;
       const kind = lesson.kind;
-
       currentLessonIndex = lessonIndex;
       currentVariant = variant;
       currentLessonFile = file;
       currentLessonKind = kind;
-
       updateSidebarActive(lessonIndex, variant);
-
+      updateTotalDisplay();
       downloadBtn.style.display = kind === 'pdf' ? 'inline-flex' : 'none';
       openExternalBtn.textContent = kind === 'html' ? '↗ Open lesson' : '↗ Open PDF';
       openExternalBtn.href = file;
-
       pdfFrame.src = file;
     }
 
