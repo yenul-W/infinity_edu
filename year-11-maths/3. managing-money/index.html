@@ -35,14 +35,6 @@
               <button class="pdf-btn" onclick="printSyllabus()">&#8741; Print Syllabus</button>
             </div>
           </div>
-          <div class="study-bar">
-            <div class="study-bar-left">
-              <span class="timer-display" id="timerDisplay">25:00</span>
-              <button class="pdf-btn" id="timerStartBtn" onclick="toggleTimer()">Start</button>
-              <button class="pdf-btn" onclick="resetTimer()">Reset</button>
-              <span class="timer-total" id="timerTotal"></span>
-            </div>
-          </div>
           <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
         </div>
       </div>
@@ -137,66 +129,6 @@
       }
     }
 
-    // ── Timer ───────────────────────────────────────────────────
-    let timerInterval = null;
-    let timerSeconds = 25 * 60;
-    let timerRunning = false;
-
-    function formatTime(s) {
-      return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
-    }
-    function updateTimerDisplay() {
-      document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
-      document.getElementById('timerStartBtn').textContent = timerRunning ? 'Pause' : 'Start';
-    }
-    function updateTotalDisplay() {
-      const total = parseInt(localStorage.getItem(`ie_time_${TOPIC_ID}_${currentLessonIndex}`) || '0');
-      const el = document.getElementById('timerTotal');
-      if (!el) return;
-      if (total === 0) { el.textContent = ''; return; }
-      const h = Math.floor(total / 3600);
-      const m = Math.floor((total % 3600) / 60);
-      const s = total % 60;
-      el.textContent = h > 0 ? `${h}h ${m}m studied` : m > 0 ? `${m}m studied` : `${s}s studied`;
-    }
-    function toggleTimer() {
-      if (timerRunning) {
-        clearInterval(timerInterval);
-        timerRunning = false;
-      } else {
-        timerRunning = true;
-        timerInterval = setInterval(() => {
-          const key = `ie_time_${TOPIC_ID}_${currentLessonIndex}`;
-          localStorage.setItem(key, String(parseInt(localStorage.getItem(key) || '0') + 1));
-          timerSeconds--;
-          if (timerSeconds <= 0) {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            timerSeconds = 25 * 60;
-            try {
-              const ctx = new AudioContext();
-              const o = ctx.createOscillator();
-              const g = ctx.createGain();
-              o.connect(g); g.connect(ctx.destination);
-              o.frequency.value = 880;
-              g.gain.setValueAtTime(0.3, ctx.currentTime);
-              g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
-              o.start(ctx.currentTime); o.stop(ctx.currentTime + 0.8);
-            } catch(e) {}
-          }
-          updateTimerDisplay();
-          updateTotalDisplay();
-        }, 1000);
-      }
-      updateTimerDisplay();
-    }
-    function resetTimer() {
-      clearInterval(timerInterval);
-      timerRunning = false;
-      timerSeconds = 25 * 60;
-      updateTimerDisplay();
-    }
-
     // ── Print ───────────────────────────────────────────────────
     function printSyllabus() {
       const existing = document.querySelector('.print-syllabus-sheet');
@@ -266,7 +198,6 @@
       document.querySelectorAll('.lesson-group').forEach((g, i) => {
         g.classList.toggle('active', i === index);
       });
-      updateTotalDisplay();
       pdfFrame.src = file;
       openExternalBtn.href = file;
       openExternalBtn.textContent = '↗ Open PDF';

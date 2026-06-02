@@ -31,12 +31,6 @@
     <a class="live-join-btn" id="liveJoinBtn" href="https://meet.google.com/xdv-qwag-kti" target="_blank" rel="noreferrer noopener">Join Google Meet &rarr;</a>
   </div>
 
-  <!-- ── Syllabus search ─────────────────────────────────────── -->
-  <div class="search-bar-wrap">
-    <input class="syllabus-search" id="syllabusSearch" type="search" placeholder="Search syllabus dot points…" autocomplete="off" spellcheck="false">
-    <div class="search-results" id="searchResults" hidden></div>
-  </div>
-
   <!-- ── 4-column card grid ───────────────────────────────────── -->
   <main class="site-main">
     <div class="topic-grid">
@@ -230,7 +224,6 @@
     </div>
   </main>
 
-  <script src="search-data.js"></script>
   <script>
     // ── Dark mode ───────────────────────────────────────────────
     const toggle = document.getElementById('darkModeToggle');
@@ -282,63 +275,6 @@
     }
     checkCompletionBadges();
 
-    // ── Syllabus search ─────────────────────────────────────────
-    const searchInput = document.getElementById('syllabusSearch');
-    const searchResults = document.getElementById('searchResults');
-    let searchDebounce = null;
-
-    function escapeRegex(s) {
-      return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    function highlightMatch(text, query) {
-      const re = new RegExp(`(${escapeRegex(query)})`, 'gi');
-      return text.replace(re, '<mark>$1</mark>');
-    }
-
-    function runSearch(query) {
-      if (!query || !window.SEARCH_DATA) { searchResults.hidden = true; return; }
-      const q = query.trim().toLowerCase();
-      if (q.length < 2) { searchResults.hidden = true; return; }
-
-      const matches = [];
-      for (const entry of SEARCH_DATA) {
-        for (const dot of entry.dots) {
-          if (dot.toLowerCase().includes(q)) {
-            matches.push({ entry, dot });
-            if (matches.length >= 8) break;
-          }
-        }
-        if (matches.length >= 8) break;
-      }
-
-      if (matches.length === 0) {
-        searchResults.innerHTML = `<div class="search-no-results">No results for "${query}"</div>`;
-      } else {
-        searchResults.innerHTML = matches.map(({ entry, dot }) => `
-          <a class="search-result-item" href="${entry.url}">
-            <div class="search-result-meta">${entry.topicTitle} &middot; Lesson ${entry.lessonNum}: ${entry.lessonTitle}</div>
-            <div class="search-result-dot">${highlightMatch(dot, query.trim())}</div>
-          </a>
-        `).join('');
-      }
-      searchResults.hidden = false;
-    }
-
-    searchInput.addEventListener('input', () => {
-      clearTimeout(searchDebounce);
-      searchDebounce = setTimeout(() => runSearch(searchInput.value), 200);
-    });
-
-    searchInput.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { searchResults.hidden = true; searchInput.blur(); }
-    });
-
-    document.addEventListener('click', e => {
-      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-        searchResults.hidden = true;
-      }
-    });
   </script>
 </body>
 </html>
