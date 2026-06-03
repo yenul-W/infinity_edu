@@ -1178,6 +1178,7 @@ body.sociotype .pdf-viewer-container {
   gap: 0;
   margin-top: 0;
   border-top: 1px solid #000000;
+  min-height: calc(100vh - 130px);
 }
 html.dark-mode body.sociotype .pdf-viewer-container { border-top-color: #ffffff; }
 
@@ -1186,6 +1187,7 @@ body.sociotype .lessons-sidebar {
   padding-top: 0;
   gap: 0;
   border-right: 1px solid #000000;
+  overflow-y: auto;
 }
 html.dark-mode body.sociotype .lessons-sidebar { border-right-color: #ffffff; }
 
@@ -1316,77 +1318,29 @@ html.dark-mode body.sociotype .lesson-btn.active .lesson-syllabus-dots { border-
 html.dark-mode .lesson-syllabus-dots li { color: #666; }
 html.dark-mode .lesson-syllabus-dots li::before { color: #333; }
 
-/* lesson-btn (Managing Money) */
-body.sociotype .lesson-btn {
-  border: none;
-  border-bottom: 1px solid #d6d6d6;
-  border-radius: 0;
-  padding: 1rem 1.25rem;
-  background: transparent;
-  color: #000000;
-  position: relative;
-}
-html.dark-mode body.sociotype .lesson-btn { border-bottom-color: #222; color: #ffffff; }
-
-body.sociotype .lesson-btn::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 2px;
-  background: #000000;
-  border-radius: 0;
-  opacity: 0;
-  transform: scaleY(0);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-html.dark-mode body.sociotype .lesson-btn::before { background: #ffffff; }
-
-body.sociotype .lesson-btn:hover { background: rgba(0,0,0,0.025); border-color: #d6d6d6; }
-body.sociotype .lesson-btn.active { background: transparent; border-color: #d6d6d6; }
-body.sociotype .lesson-btn.active::before { opacity: 1; transform: scaleY(1); }
-html.dark-mode body.sociotype .lesson-btn:hover { background: rgba(255,255,255,0.03); }
-html.dark-mode body.sociotype .lesson-btn.active { border-color: #222; }
-
-body.sociotype .lesson-num {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  color: #9d9d9d;
-}
-body.sociotype .lesson-title {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #000000;
-}
-body.sociotype .lesson-btn.active .lesson-title { color: #000000; }
-html.dark-mode body.sociotype .lesson-title,
-html.dark-mode body.sociotype .lesson-btn.active .lesson-title { color: #ffffff; }
-
-body.sociotype .lesson-kind {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  color: #9d9d9d;
-  background: transparent;
-  border: 1px solid #d6d6d6;
-  padding: 0.1rem 0.3rem;
-}
-html.dark-mode body.sociotype .lesson-kind { color: #666; border-color: #333; }
-
 /* PDF viewer */
-body.sociotype .pdf-viewer-main { background: transparent; border: none; }
+body.sociotype .pdf-viewer-main {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
 
 body.sociotype .pdf-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: transparent;
   border-bottom: 1px solid #000000;
-  padding: 0.65rem 1.25rem;
+  padding: 0.75rem 1.5rem;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 html.dark-mode body.sociotype .pdf-controls { border-bottom-color: #ffffff; }
+
+body.sociotype #fileControls { flex: 1; justify-content: flex-start; }
+body.sociotype #pageControls { flex: 0; justify-content: center; gap: 0.6rem; }
+body.sociotype #zoomControls { flex: 1; justify-content: flex-end; }
 
 body.sociotype .pdf-btn {
   font-family: system-ui, -apple-system, sans-serif;
@@ -1400,8 +1354,11 @@ body.sociotype .pdf-btn {
   border-radius: 0;
   padding: 0.2rem 0;
   background: transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  gap: 0.35rem;
 }
 body.sociotype .pdf-btn:hover { color: #000000; border-bottom-color: #000000; background: transparent; }
+body.sociotype .pdf-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 html.dark-mode body.sociotype .pdf-btn { color: #555; border-bottom-color: #333; }
 html.dark-mode body.sociotype .pdf-btn:hover { color: #ffffff; border-bottom-color: #ffffff; }
 
@@ -1409,42 +1366,73 @@ body.sociotype .page-info {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   color: #818181;
   background: transparent;
   border: none;
   border-bottom: 1px solid #d6d6d6;
   border-radius: 0;
-  padding: 0.2rem 0.5rem;
+  padding: 0.15rem 0.6rem;
+  min-width: 52px;
+  text-align: center;
 }
 html.dark-mode body.sociotype .page-info { color: #555; border-bottom-color: #333; }
 
-body.sociotype .zoom-control { border: 1px solid #d6d6d6; background: transparent; border-radius: 0; }
+body.sociotype .zoom-control {
+  border: 1px solid #d6d6d6;
+  background: transparent;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+}
 html.dark-mode body.sociotype .zoom-control { border-color: #333; }
-body.sociotype .zoom-btn { color: #818181; background: transparent; }
+
+body.sociotype .zoom-btn {
+  color: #818181;
+  background: transparent;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.25rem 0.55rem;
+  font-weight: 400;
+  transition: color 0.15s ease;
+}
 body.sociotype .zoom-btn:hover { color: #000000; background: transparent; }
 html.dark-mode body.sociotype .zoom-btn { color: #555; }
 html.dark-mode body.sociotype .zoom-btn:hover { color: #ffffff; background: transparent; }
+
 body.sociotype .zoom-display {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 11px;
+  letter-spacing: 0.04em;
   color: #818181;
-  border-color: #d6d6d6;
+  border-left: 1px solid #d6d6d6;
+  border-right: 1px solid #d6d6d6;
+  padding: 0.25rem 0.5rem;
+  min-width: 44px;
+  text-align: center;
 }
 html.dark-mode body.sociotype .zoom-display { color: #555; border-color: #333; }
 
 body.sociotype .pdf-nav-arrow {
+  width: 28px;
+  height: 28px;
   background: transparent;
   border: 1px solid #d6d6d6;
   color: #818181;
   border-radius: 0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 body.sociotype .pdf-nav-arrow:hover:not(:disabled) {
   background: #000000;
   border-color: #000000;
   color: #ffffff;
-  transform: none;
 }
+body.sociotype .pdf-nav-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
 html.dark-mode body.sociotype .pdf-nav-arrow { border-color: #333; color: #555; }
 html.dark-mode body.sociotype .pdf-nav-arrow:hover:not(:disabled) {
   background: #ffffff;
@@ -1452,27 +1440,77 @@ html.dark-mode body.sociotype .pdf-nav-arrow:hover:not(:disabled) {
   color: #000000;
 }
 
-body.sociotype .pdf-viewer { background: #f8f8f8; }
-html.dark-mode body.sociotype .pdf-viewer { background: #111111; }
+/* PDF stage — scrollable canvas area */
+body.sociotype .pdf-stage {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem;
+  background: #efefef;
+  overflow-y: auto;
+  min-height: 480px;
+}
+html.dark-mode body.sociotype .pdf-stage { background: #111111; }
 
-body.sociotype .pdf-loading { color: #9d9d9d; }
-body.sociotype .pdf-loading p { color: #9d9d9d; }
-body.sociotype .pdf-loading-spinner { border-color: #d6d6d6; border-top-color: #000000; }
+body.sociotype .pdf-canvas-wrapper {
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  box-shadow: none;
+  display: inline-block;
+}
+html.dark-mode body.sociotype .pdf-canvas-wrapper {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+/* HTML-kind lesson iframe */
+body.sociotype .pdf-html-frame {
+  width: 100%;
+  flex: 1;
+  border: none;
+  display: none;
+  min-height: 480px;
+}
+
+/* Loading state */
+body.sociotype .pdf-loading {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: #9d9d9d;
+}
+body.sociotype .pdf-loading p {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9d9d9d;
+}
+body.sociotype .pdf-loading-spinner {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #d6d6d6;
+  border-top-color: #000000;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
 html.dark-mode body.sociotype .pdf-loading-spinner { border-color: #333; border-top-color: #ffffff; }
 
-/* PDF iframe viewer */
-.pdf-frame {
-  width: 100%;
-  border: none;
-  display: block;
-  background: #f8f8f8;
+/* Completion — achromatic done state (replaces green) */
+body.sociotype .complete-btn--done {
+  color: #000000 !important;
+  border-bottom-color: #000000 !important;
 }
-html.dark-mode .pdf-frame { background: #111111; }
-
-body.sociotype .pdf-frame {
-  height: calc(100vh - 200px);
-  min-height: 420px;
+html.dark-mode body.sociotype .complete-btn--done {
+  color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
 }
+body.sociotype .lesson-group--done .lesson-group-num::after { color: #818181; }
 
 /* Footer */
 body.sociotype .site-footer {
