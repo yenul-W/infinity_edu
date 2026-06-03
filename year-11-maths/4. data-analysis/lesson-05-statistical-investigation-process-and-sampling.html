@@ -3,416 +3,366 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>Lesson 05 — Statistical Investigation Process and Sampling</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #faf6ef;
-      --paper: rgba(255, 252, 246, 0.9);
-      --ink: #191511;
-      --ink-soft: #53493f;
-      --ink-faint: #897f74;
-      --border: #e4d9cc;
-      --accent: #8e44ad;
-      --accent-soft: rgba(142, 68, 173, 0.12);
-      --shadow: 0 24px 60px rgba(36, 24, 18, 0.12);
-      --display: 'Cormorant Garamond', Georgia, serif;
-      --body: 'Atkinson Hyperlegible', system-ui, sans-serif;
-      --mono: 'IBM Plex Mono', monospace;
+      --color-canvas-white: #ffffff;
+      --color-ink-black: #000000;
+      --color-medium-gray: #818181;
+      --color-light-gray: #d6d6d6;
+      --color-faded-gray: #9d9d9d;
+      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --text-caption: 11px;
+      --leading-caption: 1.38;
+      --tracking-caption: 0.88px;
+      --text-body: 14px;
+      --leading-body: 1.29;
+      --tracking-body: 0.35px;
+      --text-heading: 26px;
+      --leading-heading: 1.13;
+      --tracking-heading: 0.26px;
+      --text-display-sm: 40px;
+      --leading-display-sm: 1;
+      --tracking-display-sm: 0.6px;
+      --spacing-8: 8px;
+      --spacing-12: 12px;
+      --spacing-24: 24px;
+      --spacing-120: 120px;
+      --spacing-140: 140px;
+      --section-gap: 120px;
+      --element-gap: 12px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-ink-black);
+      background: var(--color-canvas-white);
       min-height: 100vh;
-      font-family: var(--body);
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 10% 15%, rgba(142, 68, 173, 0.08), transparent 28%),
-        radial-gradient(circle at 90% 20%, rgba(214, 111, 61, 0.09), transparent 24%),
-        linear-gradient(180deg, #fcf8f1 0%, #f4ede3 100%);
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: repeating-linear-gradient(135deg, rgba(25, 21, 17, 0.025) 0 1px, transparent 1px 15px);
-      pointer-events: none;
-      mix-blend-mode: multiply;
     }
 
     a { color: inherit; }
 
     .page {
-      position: relative;
       max-width: 1240px;
       margin: 0 auto;
-      padding: 1.5rem 1.25rem 3rem;
+      padding: 24px 24px 120px;
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      color: var(--ink-soft);
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      gap: var(--spacing-24);
+      padding-bottom: var(--spacing-24);
+      margin-bottom: var(--spacing-24);
+      border-bottom: 1px solid var(--color-ink-black);
+      font-size: var(--text-caption);
+      line-height: var(--leading-caption);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--color-medium-gray);
     }
 
     .topbar a {
       text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      color: var(--color-ink-black);
+      border-bottom: 1px solid var(--color-ink-black);
+      transition: color 0.15s ease;
     }
 
     .topbar a:hover {
-      border-color: currentColor;
-      color: var(--accent);
+      color: var(--color-medium-gray);
     }
 
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: 1rem;
+      gap: var(--spacing-12);
       align-items: stretch;
-      margin-bottom: 1.25rem;
+      margin-bottom: var(--spacing-120);
     }
 
     .hero-main,
     .hero-side,
     .toc,
     .content-card {
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      border: 1px solid var(--color-ink-black);
+      background: var(--color-canvas-white);
     }
 
     .hero-main {
-      padding: 1.6rem 1.7rem 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-main::after {
-      content: '';
-      position: absolute;
-      inset: auto -15% -35% auto;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(142, 68, 173, 0.16), transparent 68%);
+      padding: 32px 36px 28px;
     }
 
     .eyebrow,
     .section-label {
-      margin: 0;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-size: var(--text-caption);
+      line-height: var(--leading-caption);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--color-medium-gray);
+      font-weight: 400;
     }
 
     h1 {
-      margin: 0.5rem 0 0.65rem;
-      font-family: var(--display);
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 0.92;
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      max-width: 10ch;
+      margin: var(--spacing-12) 0;
+      font-family: var(--font-onsite);
+      font-size: var(--text-display-sm);
+      line-height: var(--leading-display-sm);
+      font-weight: 400;
+      letter-spacing: var(--tracking-display-sm);
     }
 
     .subtitle {
-      margin: 0;
       max-width: 56ch;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--ink-soft);
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.65rem;
-      margin-top: 1.2rem;
+      gap: var(--spacing-8);
+      margin-top: var(--spacing-24);
     }
 
     .meta-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
-      background: rgba(255, 255, 255, 0.55);
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--ink-soft);
-      letter-spacing: 0.06em;
+      gap: var(--spacing-8);
+      padding: 6px 12px;
+      border: 1px solid var(--color-ink-black);
+      font-size: var(--text-caption);
+      letter-spacing: 0.05em;
+      color: var(--color-medium-gray);
     }
 
     .hero-side {
-      padding: 1.4rem;
+      padding: 32px 28px;
       display: grid;
-      gap: 0.85rem;
+      gap: var(--spacing-12);
       align-content: start;
-      background: linear-gradient(165deg, rgba(35, 24, 22, 0.96), rgba(69, 45, 69, 0.94));
-      color: #fbf5ec;
-      position: relative;
-      overflow: hidden;
+      border-left: none;
     }
 
-    .hero-side::before {
-      content: '';
-      position: absolute;
-      inset: auto -22% -30% auto;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 195, 133, 0.2), transparent 65%);
-    }
-
-    .hero-side .section-label,
-    .hero-side p {
-      position: relative;
-      z-index: 1;
+    .hero-side .section-label {
+      color: var(--color-ink-black);
     }
 
     .hero-side p {
-      margin: 0;
-      padding: 0.8rem 0.9rem;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.05);
-      color: rgba(251, 245, 236, 0.88);
-      line-height: 1.6;
+      padding: var(--spacing-12);
+      border: 1px solid var(--color-light-gray);
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
     }
 
     .layout {
       display: grid;
-      grid-template-columns: 240px minmax(0, 1fr);
-      gap: 1rem;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: var(--spacing-12);
       align-items: start;
     }
 
     .toc {
       position: sticky;
-      top: 1rem;
-      padding: 1rem;
+      top: 24px;
+      padding: var(--spacing-24);
     }
 
     .toc h2 {
-      margin: 0 0 0.75rem;
-      font-family: var(--display);
-      font-size: 1.6rem;
-      line-height: 1;
-      font-weight: 600;
+      font-size: var(--text-heading);
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+      font-weight: 400;
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12);
+      border-bottom: 1px solid var(--color-light-gray);
     }
 
     .toc a {
       display: block;
       text-decoration: none;
-      padding: 0.52rem 0.6rem;
-      border-radius: 12px;
-      color: var(--ink-soft);
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      padding: 8px 0;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
     }
 
     .toc a:hover {
-      background: var(--accent-soft);
-      color: var(--ink);
-      transform: translateX(2px);
+      color: var(--color-ink-black);
+      border-bottom-color: var(--color-ink-black);
     }
 
     .content {
       display: grid;
-      gap: 1rem;
+      gap: var(--spacing-12);
     }
 
     .content-card {
-      padding: 1.2rem 1.25rem 1.3rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .content-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      border-radius: inherit;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 42%);
+      padding: 32px 36px;
     }
 
     .content-card h3 {
-      margin: 0.35rem 0 0.75rem;
-      font-family: var(--display);
-      font-size: 2rem;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
+      margin: var(--spacing-12) 0 var(--spacing-24);
+      font-size: var(--text-heading);
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+      font-weight: 400;
     }
 
     .content-card h4 {
-      margin: 1rem 0 0.5rem;
-      font-family: var(--display);
-      font-size: 1.4rem;
-      line-height: 1;
-      letter-spacing: -0.02em;
+      margin: var(--spacing-24) 0 var(--spacing-12);
+      font-size: 18px;
+      line-height: 1.22;
+      letter-spacing: 0.015em;
+      font-weight: 400;
     }
 
     .content-card p,
     .content-card li,
-    .content-card td,
-    .content-card th {
+    .content-card td {
+      font-size: var(--text-body);
       line-height: 1.75;
-      color: var(--ink-soft);
+      color: var(--color-medium-gray);
     }
+
+    .content-card p { margin: var(--spacing-8) 0; }
 
     .slide-group {
       display: grid;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: var(--spacing-12);
+      margin-bottom: var(--spacing-24);
     }
 
     .slide {
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.66);
-      padding: 1.2rem 1.25rem;
-      position: relative;
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
     }
 
     .slide h4 {
-      margin: 0 0 0.75rem;
-      font-family: var(--display);
-      font-size: 1.2rem;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      margin: 0 0 var(--spacing-12);
+      font-size: 16px;
+      line-height: 1.31;
+      letter-spacing: 0.015em;
+      font-weight: 400;
+      color: var(--color-ink-black);
     }
 
     .slide p {
-      margin: 0.5rem 0;
+      margin: var(--spacing-8) 0;
+      font-size: var(--text-body);
       line-height: 1.75;
-      color: var(--ink-soft);
+      color: var(--color-medium-gray);
     }
 
     .slide ul, .slide ol {
-      margin: 0.5rem 0;
-      padding-left: 1.2rem;
+      margin: var(--spacing-8) 0;
+      padding-left: var(--spacing-24);
     }
 
     .slide li {
-      margin: 0.35rem 0;
+      margin: 6px 0;
+      font-size: var(--text-body);
       line-height: 1.75;
-      color: var(--ink-soft);
+      color: var(--color-medium-gray);
     }
 
     .slide strong {
-      color: var(--ink);
-      font-weight: 600;
+      color: var(--color-ink-black);
+      font-weight: 400;
     }
 
     .example-block {
-      border-left: 4px solid var(--accent);
-      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.62));
-      padding: 1rem;
-      border-radius: 12px;
-      margin: 0.75rem 0;
+      border-left: 2px solid var(--color-ink-black);
+      padding: var(--spacing-12) var(--spacing-24);
+      margin: var(--spacing-24) 0;
     }
 
     .example-block h5 {
-      margin: 0 0 0.5rem;
-      font-size: 0.95rem;
-      font-family: var(--mono);
+      margin: 0 0 var(--spacing-8);
+      font-size: var(--text-caption);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--color-ink-black);
+      font-weight: 400;
     }
 
     .example-block p {
-      margin: 0.35rem 0;
-      font-size: 0.95rem;
+      margin: 6px 0;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
     }
 
     .definition-block {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.7);
-      padding: 1rem;
-      margin: 0.75rem 0;
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      margin: var(--spacing-24) 0;
     }
 
     .definition-block h5 {
-      margin: 0 0 0.5rem;
-      font-size: 0.95rem;
-      font-family: var(--mono);
+      margin: 0 0 var(--spacing-12);
+      font-size: var(--text-caption);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--color-ink-black);
+      font-weight: 400;
     }
 
     .definition-block p {
-      margin: 0.35rem 0;
-      font-size: 0.95rem;
+      margin: 6px 0;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.96rem;
-      margin: 0.75rem 0;
+      font-size: var(--text-body);
+      margin: var(--spacing-24) 0;
     }
 
     th, td {
       text-align: left;
       vertical-align: top;
-      padding: 0.7rem 0.65rem;
-      border-bottom: 1px solid rgba(137, 127, 116, 0.2);
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--color-light-gray);
     }
 
     th {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--ink);
-      font-weight: 600;
+      color: var(--color-ink-black);
+      font-weight: 400;
+      border-bottom-color: var(--color-ink-black);
     }
 
     .back-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 6px;
       text-decoration: none;
-      padding-bottom: 0.15rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      border-bottom: 1px solid var(--color-ink-black);
+      transition: color 0.15s ease;
     }
 
     .back-link:hover {
-      color: var(--accent);
-      border-color: currentColor;
+      color: var(--color-medium-gray);
     }
 
     .homework {
-      padding: 1rem 1.05rem;
-      border-radius: 18px;
-      border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
-      background: linear-gradient(135deg, rgba(142, 68, 173, 0.08), rgba(255,255,255,0.7));
+      border: 1px solid var(--color-ink-black);
     }
 
     .homework h3 {
@@ -421,19 +371,22 @@
 
     .formula {
       display: inline-block;
-      padding: 0.4rem 0.7rem;
-      background: rgba(142, 68, 173, 0.08);
-      border-radius: 6px;
-      border: 1px solid rgba(142, 68, 173, 0.2);
-      font-family: var(--mono);
-      font-size: 0.9rem;
-      color: var(--ink);
+      padding: 4px 10px;
+      border: 1px solid var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      color: var(--color-ink-black);
     }
 
     @media (max-width: 980px) {
       .hero,
       .layout {
         grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        border-left: 1px solid var(--color-ink-black);
+        border-top: none;
       }
 
       .toc {
@@ -443,24 +396,398 @@
 
     @media (max-width: 640px) {
       .page {
-        padding: 1rem 0.75rem 2rem;
+        padding: 16px 16px 80px;
       }
 
       .topbar {
         flex-direction: column;
         align-items: flex-start;
+        gap: var(--spacing-8);
       }
 
       .hero-main,
-      .hero-side,
-      .toc,
-      .content-card {
-        border-radius: 20px;
+      .hero-side {
+        padding: 24px 20px;
       }
 
-      h1 {
-        max-width: none;
+      .content-card {
+        padding: 24px 20px;
       }
+    }
+
+    /* TOC active state */
+    .toc a.toc-active {
+      color: var(--color-ink-black);
+      border-left: 2px solid var(--color-ink-black);
+      padding-left: 10px;
+      margin-left: -12px;
+    }
+
+    /* Stepper component */
+    .stepper {
+      margin-bottom: var(--spacing-24);
+    }
+
+    .stepper-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-24);
+      gap: var(--spacing-12);
+    }
+
+    .stepper-track {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .stepper-node {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--color-light-gray);
+      background: var(--color-canvas-white);
+      color: var(--color-medium-gray);
+      font-size: var(--text-caption);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+      font-family: var(--font-onsite);
+    }
+
+    .stepper-node.active {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+      border-color: var(--color-ink-black);
+    }
+
+    .stepper-node.visited {
+      border-color: var(--color-ink-black);
+      color: var(--color-ink-black);
+    }
+
+    .stepper-line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-light-gray);
+      min-width: 12px;
+    }
+
+    .stepper-counter {
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      color: var(--color-medium-gray);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .stepper-nav {
+      display: flex;
+      gap: var(--spacing-12);
+      margin-top: var(--spacing-12);
+    }
+
+    .stepper-btn {
+      padding: 8px 20px;
+      border: 1px solid var(--color-ink-black);
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: var(--tracking-body);
+    }
+
+    .stepper-btn:hover:not(:disabled) {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+    }
+
+    .stepper-btn:disabled {
+      border-color: var(--color-light-gray);
+      color: var(--color-medium-gray);
+      cursor: default;
+    }
+
+    /* Simulator */
+    .simulator {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      margin: var(--spacing-24) 0;
+    }
+
+    .simulator h4 {
+      margin: 0 0 var(--spacing-8);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .simulator-intro {
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-12);
+      line-height: 1.75;
+    }
+
+    .sim-legend {
+      display: flex;
+      gap: var(--spacing-24);
+      margin-bottom: var(--spacing-12);
+      flex-wrap: wrap;
+    }
+
+    .sim-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--text-caption);
+      letter-spacing: 0.05em;
+      color: var(--color-medium-gray);
+    }
+
+    .sim-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .sim-dot[data-year="10"] { background: #4a90d9; }
+    .sim-dot[data-year="11"] { background: #5a9e6f; }
+    .sim-dot[data-year="12"] { background: #c0504d; }
+
+    .sim-controls {
+      display: flex;
+      gap: var(--spacing-8);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-12);
+    }
+
+    .sim-btn {
+      padding: 7px 16px;
+      border: 1px solid var(--color-ink-black);
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-caption);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sim-btn:hover {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+    }
+
+    .sim-btn.active {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+    }
+
+    .sim-reset {
+      border-color: var(--color-medium-gray);
+      color: var(--color-medium-gray);
+    }
+
+    .sim-reset:hover {
+      background: var(--color-medium-gray);
+      color: var(--color-canvas-white);
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      margin-bottom: var(--spacing-12);
+    }
+
+    .sim-person {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transition: opacity 0.3s, box-shadow 0.3s, transform 0.2s;
+      opacity: 0.35;
+    }
+
+    .sim-person[data-year="10"] { background: #4a90d9; }
+    .sim-person[data-year="11"] { background: #5a9e6f; }
+    .sim-person[data-year="12"] { background: #c0504d; }
+
+    .sim-person.selected {
+      opacity: 1;
+      box-shadow: 0 0 0 2px var(--color-canvas-white), 0 0 0 4px var(--color-ink-black);
+      transform: scale(1.12);
+    }
+
+    .sim-person.unselected {
+      opacity: 0.15;
+    }
+
+    .sim-status {
+      min-height: 56px;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      line-height: 1.75;
+      border-top: 1px solid var(--color-light-gray);
+      padding-top: var(--spacing-12);
+    }
+
+    .sim-status strong {
+      color: var(--color-ink-black);
+    }
+
+    /* Quiz components */
+    .quiz-block {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      margin: var(--spacing-24) 0;
+    }
+
+    .quiz-header {
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .quiz-header h4 {
+      margin: var(--spacing-8) 0;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .quiz-header p {
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .quiz-q {
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-24);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .quiz-q:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .quiz-q-text {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      margin-bottom: var(--spacing-12);
+      color: var(--color-ink-black);
+    }
+
+    .quiz-q-prompt {
+      font-size: var(--text-caption);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-8);
+    }
+
+    .quiz-opt {
+      padding: 7px 16px;
+      border: 1px solid var(--color-light-gray);
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      letter-spacing: var(--tracking-body);
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      border-color: var(--color-ink-black);
+    }
+
+    .quiz-opt.correct {
+      background: #e8f4e8;
+      border-color: #5a9e6f;
+      color: #2d6e45;
+    }
+
+    .quiz-opt.incorrect {
+      background: #fde8e8;
+      border-color: #c0504d;
+      color: #8b2020;
+    }
+
+    html.dark-mode .quiz-opt.correct {
+      background: #1a3325;
+      border-color: #5a9e6f;
+      color: #8ecfa8;
+    }
+
+    html.dark-mode .quiz-opt.incorrect {
+      background: #3a1515;
+      border-color: #c0504d;
+      color: #e08080;
+    }
+
+    .quiz-opt:disabled {
+      cursor: default;
+    }
+
+    .quiz-opt.kc-selected {
+      border-color: var(--color-ink-black);
+    }
+
+    .quiz-feedback {
+      margin-top: var(--spacing-8);
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .quiz-feedback.visible {
+      padding: var(--spacing-8) var(--spacing-12);
+      border-left: 2px solid var(--color-ink-black);
+    }
+
+    .kc-footer {
+      margin-top: var(--spacing-24);
+      padding-top: var(--spacing-24);
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .kc-score {
+      font-size: var(--text-heading);
+      font-weight: 400;
+      letter-spacing: var(--tracking-heading);
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .kc-score span {
+      display: block;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      margin-top: var(--spacing-8);
+      line-height: 1.75;
+    }
+
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black: #f0f0f0;
+      --color-medium-gray: #818181;
+      --color-light-gray: #2a2a2a;
+      --color-faded-gray: #5a5a5a;
     }
   </style>
 </head>
@@ -493,6 +820,7 @@
         <a href="#population">Population and sample</a>
         <a href="#methods">Sampling methods</a>
         <a href="#faults">Faults in data</a>
+        <a href="#knowledge-check">Knowledge check</a>
         <a href="#homework">Homework</a>
       </aside>
 
@@ -504,49 +832,27 @@
 
           <p>A statistical investigation follows a cycle of four key stages.</p>
 
-          <div class="slide-group">
-            <div class="slide">
-              <h4>Stage 1: Pose a Question</h4>
-              <p>Identify an issue and define what you want to find out.</p>
-              <ul>
-                <li>Targets a specific <strong>population</strong> (the group you want information about)</li>
-                <li>Can be answered by collecting <strong>data</strong></li>
-                <li>Anticipates variability in responses</li>
-              </ul>
+          <div class="stepper" id="process-stepper" aria-label="Investigation stages">
+            <div class="stepper-header">
+              <div class="stepper-track">
+                <button class="stepper-node active" data-step="0" aria-label="Stage 1">1</button>
+                <div class="stepper-line"></div>
+                <button class="stepper-node" data-step="1" aria-label="Stage 2">2</button>
+                <div class="stepper-line"></div>
+                <button class="stepper-node" data-step="2" aria-label="Stage 3">3</button>
+                <div class="stepper-line"></div>
+                <button class="stepper-node" data-step="3" aria-label="Stage 4">4</button>
+              </div>
+              <span class="stepper-counter" id="stepper-counter">1 / 4</span>
             </div>
-
-            <div class="slide">
-              <h4>Stage 2: Collect Data</h4>
-              <p>Design a survey or study that will produce useful information.</p>
-              <ul>
-                <li>Consider your sampling method</li>
-                <li>Ensure questions are well-designed</li>
-                <li>Collect data systematically</li>
-              </ul>
-            </div>
-
-            <div class="slide">
-              <h4>Stage 3: Analyse Data</h4>
-              <p>Organise, display and summarise what was collected.</p>
-              <ul>
-                <li>Create tables and graphs</li>
-                <li>Calculate summary statistics</li>
-                <li>Look for patterns</li>
-              </ul>
-            </div>
-
-            <div class="slide">
-              <h4>Stage 4: Interpret and Communicate</h4>
-              <p>Draw conclusions and answer the original question.</p>
-              <ul>
-                <li>Relate findings back to the question</li>
-                <li>Consider limitations of the data</li>
-                <li>Communicate results clearly</li>
-              </ul>
+            <div class="stepper-panel slide" id="stepper-panel" role="region" aria-live="polite"></div>
+            <div class="stepper-nav">
+              <button class="stepper-btn" id="stepper-prev" disabled>&#8592; Previous</button>
+              <button class="stepper-btn" id="stepper-next">Next &#8594;</button>
             </div>
           </div>
 
-          <div class="example-block">
+          <div class="example-block" id="process-example">
             <h5>Example</h5>
             <p><strong>Issue:</strong> Screen time among teenagers.</p>
             <p><strong>Poor question:</strong> "Do you use your phone a lot?"</p>
@@ -574,9 +880,9 @@
           <div class="example-block">
             <h5>Clear vs Ambiguous</h5>
             <p><strong>Ambiguous:</strong> "How often do you exercise?"</p>
-            <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><em>"Often" means different things to different people.</em></p>
+            <p style="color: var(--color-faded-gray);"><em>"Often" means different things to different people.</em></p>
             <p><strong>Better:</strong> "How many times per week do you participate in physical activity for at least 30 minutes?"</p>
-            <ul style="margin-top: 0.25rem; font-size: 0.9rem;">
+            <ul>
               <li>Never • 1–2 times • 3–4 times • 5 or more times</li>
             </ul>
           </div>
@@ -584,11 +890,11 @@
           <div class="example-block">
             <h5>Neutral vs Leading</h5>
             <p><strong>Leading:</strong> "Don't you agree that homework should be banned?"</p>
-            <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><em>The phrasing pushes the respondent toward "yes".</em></p>
+            <p style="color: var(--color-faded-gray);"><em>The phrasing pushes the respondent toward "yes".</em></p>
             <p><strong>Better:</strong> "What is your opinion on homework in secondary schools?"</p>
           </div>
 
-          <div class="slide" style="margin-top: 0.75rem;">
+          <div class="slide">
             <h4>Number of Response Choices</h4>
             <table>
               <thead>
@@ -632,6 +938,15 @@
             <p><strong>Cultural responsiveness:</strong> Questions must be respectful and relevant to people from all backgrounds. Avoid assumptions based on culture, gender or identity.</p>
           </div>
 
+          <div class="quiz-block" id="flaw-quiz">
+            <div class="quiz-header">
+              <p class="section-label">Activity</p>
+              <h4>Spot the Flaw</h4>
+              <p>Each question below contains a common survey design problem. Identify the flaw.</p>
+            </div>
+            <div id="flaw-questions"></div>
+          </div>
+
           <div class="example-block">
             <h5>Examples of Bias in Surveys</h5>
             <p><strong>Wording bias:</strong> "Most experts agree smoking is harmful. Do you support a smoking ban?" — The phrasing pressures respondents to agree.</p>
@@ -651,7 +966,7 @@
             <p><strong>Census:</strong> Data collected from every member of the population.</p>
           </div>
 
-          <p style="margin-top: 0.85rem;">A <strong>representative sample</strong> reflects the characteristics of the population. If a sample is not representative, conclusions drawn from it may be invalid.</p>
+          <p>A <strong>representative sample</strong> reflects the characteristics of the population. If a sample is not representative, conclusions drawn from it may be invalid.</p>
         </section>
 
         <!-- Section 4: Sampling Methods -->
@@ -694,7 +1009,7 @@
           <div class="example-block">
             <h5>Systematic Sampling</h5>
             <p>Select every <em>n</em>th member from an ordered list, starting from a randomly chosen point.</p>
-            <p style="text-align: center; margin: 0.5rem 0;"><span class="formula">n = population size ÷ sample size</span></p>
+            <p style="text-align: center;"><span class="formula">n = population size ÷ sample size</span></p>
             <p>Example: A factory produces 1,000 items per day. To check quality, inspect every 20th item off the production line (items 20, 40, 60, …).</p>
           </div>
 
@@ -709,7 +1024,7 @@
             <p>Participants <strong>choose to take part</strong> themselves. Easy and inexpensive, but highly prone to <strong>voluntary response bias</strong> — those with strong opinions are more likely to respond. Example: An online poll asking "Should the school canteen serve healthier food?" — only students who feel strongly will bother to respond.</p>
           </div>
 
-          <div class="slide" style="margin-top: 0.75rem;">
+          <div class="slide">
             <h4>Comparing Sampling Methods</h4>
             <table>
               <thead>
@@ -742,6 +1057,25 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div class="simulator" id="sampling-simulator">
+            <h4>Try it: Sampling Method Simulator</h4>
+            <p class="simulator-intro">A school of 100 students across three year groups. Select a method to see who gets sampled.</p>
+            <div class="sim-legend">
+              <span class="sim-legend-item"><span class="sim-dot" data-year="10"></span> Year 10 (33)</span>
+              <span class="sim-legend-item"><span class="sim-dot" data-year="11"></span> Year 11 (34)</span>
+              <span class="sim-legend-item"><span class="sim-dot" data-year="12"></span> Year 12 (33)</span>
+            </div>
+            <div class="sim-controls">
+              <button class="sim-btn" data-method="random">Random</button>
+              <button class="sim-btn" data-method="systematic">Systematic</button>
+              <button class="sim-btn" data-method="stratified">Stratified</button>
+              <button class="sim-btn" data-method="selfselected">Self-selected</button>
+              <button class="sim-btn sim-reset" data-method="reset">Reset</button>
+            </div>
+            <div class="sim-grid" id="sim-grid" role="img" aria-label="Population grid of 100 students"></div>
+            <div class="sim-status" id="sim-status" aria-live="polite"></div>
           </div>
         </section>
 
@@ -794,14 +1128,426 @@
           </div>
         </section>
 
+        <!-- Knowledge Check -->
+        <section class="content-card" id="knowledge-check">
+          <p class="section-label">Section 6</p>
+          <h3>Knowledge Check</h3>
+          <p>Answer all 6 questions — the quiz submits automatically once you've answered each one.</p>
+          <div id="kc-questions"></div>
+          <div class="kc-footer" id="kc-footer" style="display:none">
+            <div class="kc-score" id="kc-score"></div>
+            <button class="stepper-btn" id="kc-reset" style="margin-top: var(--spacing-12)">Try again</button>
+          </div>
+        </section>
+
         <!-- Homework -->
         <section class="content-card homework" id="homework">
-          <p class="section-label">Section 6</p>
+          <p class="section-label">Section 7</p>
           <h3>Homework</h3>
           <p>Complete all questions from <em>Data Analysis</em> — <em>Statistical Investigation Process and Sampling</em>.</p>
         </section>
       </article>
     </div>
   </div>
+  <script>
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved ? saved === 'dark' : prefersDark) html.classList.add('dark-mode');
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        html.classList.toggle('dark-mode', e.matches);
+      }
+    });
+
+    // TOC: highlight active section on scroll
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+      var sections = Array.from(tocLinks)
+        .map(function(a) { return document.querySelector(a.getAttribute('href')); })
+        .filter(Boolean);
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            tocLinks.forEach(function(l) { l.classList.remove('toc-active'); });
+            var link = document.querySelector('.toc a[href="#' + e.target.id + '"]');
+            if (link) link.classList.add('toc-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function(s) { obs.observe(s); });
+    })();
+
+    // Investigation Process Stepper
+    (function() {
+      var STAGES = [
+        {
+          title: 'Stage 1: Pose a Question',
+          body: '<p>Identify an issue and define what you want to find out.</p><ul><li>Targets a specific <strong>population</strong> (the group you want information about)</li><li>Can be answered by collecting <strong>data</strong></li><li>Anticipates variability in responses</li></ul>',
+          example: '<h5>Example &#8212; Stage 1</h5><p><strong>Issue:</strong> Screen time among teenagers.</p><p><strong>Poor question:</strong> "Do you use your phone a lot?"</p><p><strong>Better question:</strong> "How many hours per day do Year 11 students at this school spend on social media?"</p>'
+        },
+        {
+          title: 'Stage 2: Collect Data',
+          body: '<p>Design a survey or study that will produce useful information.</p><ul><li>Consider your sampling method</li><li>Ensure questions are well-designed</li><li>Collect data systematically</li></ul>',
+          example: '<h5>Example &#8212; Stage 2</h5><p><strong>Method:</strong> Distribute an anonymous survey to a stratified sample of 60 Year 11 students.</p><p><strong>Question used:</strong> "On a typical school night, how many hours do you spend on social media?" (Scale: 0 / 1 / 2 / 3 / 4+)</p>'
+        },
+        {
+          title: 'Stage 3: Analyse Data',
+          body: '<p>Organise, display and summarise what was collected.</p><ul><li>Create tables and graphs</li><li>Calculate summary statistics</li><li>Look for patterns</li></ul>',
+          example: '<h5>Example &#8212; Stage 3</h5><p><strong>Finding:</strong> Mean daily social media use = 2.4 hrs. 68% of students reported 2+ hours per night. A histogram shows a right-skewed distribution.</p>'
+        },
+        {
+          title: 'Stage 4: Interpret and Communicate',
+          body: '<p>Draw conclusions and answer the original question.</p><ul><li>Relate findings back to the question</li><li>Consider limitations of the data</li><li>Communicate results clearly</li></ul>',
+          example: '<h5>Example &#8212; Stage 4</h5><p><strong>Conclusion:</strong> On average, Year 11 students spend about 2.4 hours per school night on social media. Results are limited to one school and may not generalise more broadly.</p>'
+        }
+      ];
+
+      var current = 0;
+      var panel = document.getElementById('stepper-panel');
+      var counter = document.getElementById('stepper-counter');
+      var prevBtn = document.getElementById('stepper-prev');
+      var nextBtn = document.getElementById('stepper-next');
+      var exampleBlock = document.getElementById('process-example');
+      var nodes = document.querySelectorAll('#process-stepper .stepper-node');
+
+      function render() {
+        var stage = STAGES[current];
+        panel.innerHTML = '<h4>' + stage.title + '</h4>' + stage.body;
+        if (exampleBlock) exampleBlock.innerHTML = stage.example;
+        counter.textContent = (current + 1) + ' / ' + STAGES.length;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === STAGES.length - 1;
+        nodes.forEach(function(n, i) {
+          n.classList.toggle('active', i === current);
+          n.classList.toggle('visited', i < current);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { if (current > 0) { current--; render(); } });
+      nextBtn.addEventListener('click', function() { if (current < STAGES.length - 1) { current++; render(); } });
+      nodes.forEach(function(n, i) { n.addEventListener('click', function() { current = i; render(); }); });
+
+      render();
+    })();
+
+    // Sampling Method Simulator
+    (function() {
+      var YEAR = [];
+      for (var i = 0; i < 100; i++) {
+        if (i < 33) YEAR.push(10);
+        else if (i < 67) YEAR.push(11);
+        else YEAR.push(12);
+      }
+
+      var EXPLANATIONS = {
+        random: function(n) {
+          return '<strong>' + n + ' of 100 selected.</strong> Random sampling — every person had an equal 30% chance of being chosen. The selection is scattered with no pattern, and each year group gets roughly proportional representation by chance.';
+        },
+        systematic: function(n) {
+          return '<strong>' + n + ' of 100 selected.</strong> Systematic sampling — every 3rd person from the ordered list (persons 3, 6, 9…). The list is ordered by year group, so each group is naturally included. Watch for pattern bias if the original list has a periodic structure.';
+        },
+        stratified: function(n) {
+          return '<strong>' + n + ' of 100 selected.</strong> Stratified sampling — exactly 10 from Year 10, 10 from Year 11, and 10 from Year 12. This guarantees proportional representation — the most reliable method when subgroups matter.';
+        },
+        selfselected: function(n) {
+          return '<strong>' + n + ' selected (varies each time).</strong> Self-selected sampling — students who “felt strongly” responded. Notice Year 12 students (red) tend to dominate — voluntary response bias means those with strong opinions are more likely to participate.';
+        }
+      };
+
+      var grid = document.getElementById('sim-grid');
+      var status = document.getElementById('sim-status');
+      if (!grid) return;
+
+      var cells = [];
+      YEAR.forEach(function(yr) {
+        var div = document.createElement('div');
+        div.className = 'sim-person';
+        div.dataset.year = yr;
+        grid.appendChild(div);
+        cells.push(div);
+      });
+
+      function clearSelection() {
+        cells.forEach(function(c) { c.classList.remove('selected', 'unselected'); });
+        if (status) status.innerHTML = '';
+        document.querySelectorAll('.sim-btn').forEach(function(b) { b.classList.remove('active'); });
+      }
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      var methods = {
+        random: function() {
+          var all = [];
+          for (var i = 0; i < 100; i++) all.push(i);
+          return shuffle(all).slice(0, 30);
+        },
+        systematic: function() {
+          var result = [];
+          for (var i = 2; i < 100; i += 3) result.push(i);
+          return result;
+        },
+        stratified: function() {
+          var yr10 = [], yr11 = [], yr12 = [];
+          for (var i = 0; i < 33; i++) yr10.push(i);
+          for (var i = 33; i < 67; i++) yr11.push(i);
+          for (var i = 67; i < 100; i++) yr12.push(i);
+          return shuffle(yr10).slice(0, 10).concat(shuffle(yr11).slice(0, 10)).concat(shuffle(yr12).slice(0, 10));
+        },
+        selfselected: function() {
+          var result = [];
+          for (var i = 0; i < 100; i++) {
+            var threshold = YEAR[i] === 12 ? 0.7 : 0.2;
+            if (Math.random() < threshold) result.push(i);
+          }
+          return result;
+        }
+      };
+
+      document.querySelectorAll('.sim-btn[data-method]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var method = btn.dataset.method;
+          clearSelection();
+          if (method === 'reset') return;
+          btn.classList.add('active');
+          var indices = methods[method]();
+          var selected = new Set(indices);
+          cells.forEach(function(c, i) {
+            if (!selected.has(i)) c.classList.add('unselected');
+          });
+          indices.forEach(function(idx, i) {
+            setTimeout(function() {
+              cells[idx].classList.add('selected');
+              cells[idx].classList.remove('unselected');
+            }, i * 8);
+          });
+          if (status) status.innerHTML = EXPLANATIONS[method](indices.length);
+        });
+      });
+    })();
+
+    // Spot the Flaw Quiz
+    (function() {
+      var FLAW_QS = [
+        {
+          question: '“Don’t you agree that junk food should be banned from school canteens?”',
+          options: ['Leading', 'Ambiguous', 'Double-barrelled', 'Well-designed'],
+          answer: 0,
+          feedback: 'This is a <strong>leading question</strong>. “Don’t you agree that…” pressures respondents to say yes. A neutral version: “What is your view on junk food in school canteens?”'
+        },
+        {
+          question: '“Do you eat well and exercise regularly?”',
+          options: ['Leading', 'Ambiguous', 'Double-barrelled', 'Well-designed'],
+          answer: 2,
+          feedback: 'This is <strong>double-barrelled</strong> — it asks about diet and exercise in one question. A respondent who eats well but doesn’t exercise has no honest answer. Split it into two separate questions.'
+        },
+        {
+          question: '“How often do you feel stressed?”',
+          options: ['Leading', 'Ambiguous', 'Double-barrelled', 'Well-designed'],
+          answer: 1,
+          feedback: 'This is <strong>ambiguous</strong>. “Often” means different things to different people. A better version uses a defined scale: “In the past week, how many days did you feel stressed? (0 / 1–2 / 3–4 / 5–7)”'
+        },
+        {
+          question: '“On a scale of 1–5, how satisfied are you with the school library? (1 = Very dissatisfied, 5 = Very satisfied)”',
+          options: ['Leading', 'Ambiguous', 'Double-barrelled', 'Well-designed'],
+          answer: 3,
+          feedback: '<strong>Well-designed.</strong> It is specific, neutral, uses a clearly labelled 5-point scale, and asks about one thing. This is the standard to aim for.'
+        }
+      ];
+
+      var container = document.getElementById('flaw-questions');
+      if (!container) return;
+
+      FLAW_QS.forEach(function(q, qi) {
+        var div = document.createElement('div');
+        div.className = 'quiz-q';
+
+        var promptEl = document.createElement('p');
+        promptEl.className = 'quiz-q-prompt';
+        promptEl.textContent = 'Question ' + (qi + 1);
+
+        var textEl = document.createElement('p');
+        textEl.className = 'quiz-q-text';
+        textEl.innerHTML = 'Survey question: <em>' + q.question + '</em>';
+
+        var subPrompt = document.createElement('p');
+        subPrompt.className = 'quiz-q-prompt';
+        subPrompt.textContent = 'What is the flaw?';
+
+        var optsEl = document.createElement('div');
+        optsEl.className = 'quiz-options';
+
+        var fbEl = document.createElement('div');
+        fbEl.className = 'quiz-feedback';
+
+        div.appendChild(promptEl);
+        div.appendChild(textEl);
+        div.appendChild(subPrompt);
+        div.appendChild(optsEl);
+        div.appendChild(fbEl);
+        container.appendChild(div);
+
+        q.options.forEach(function(opt, oi) {
+          var btn = document.createElement('button');
+          btn.className = 'quiz-opt';
+          btn.textContent = opt;
+          btn.addEventListener('click', function() {
+            optsEl.querySelectorAll('.quiz-opt').forEach(function(b) { b.disabled = true; });
+            var isCorrect = oi === q.answer;
+            btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+            if (!isCorrect) optsEl.querySelectorAll('.quiz-opt')[q.answer].classList.add('correct');
+            fbEl.className = 'quiz-feedback visible';
+            fbEl.innerHTML = q.feedback;
+          });
+          optsEl.appendChild(btn);
+        });
+      });
+    })();
+
+    // End-of-Lesson Knowledge Check
+    (function() {
+      var KC_QS = [
+        {
+          q: 'A researcher surveys only students who volunteer to answer an online poll about homework. What type of sampling is this?',
+          opts: ['Stratified sampling', 'Systematic sampling', 'Self-selected sampling', 'Random sampling'],
+          ans: 2,
+          exp: 'Self-selected sampling — participants choose to respond. This causes voluntary response bias: those with strong opinions are over-represented.'
+        },
+        {
+          q: 'A school of 500 students needs a sample of 50. They select every 10th student from the enrolment list. What is this method called?',
+          opts: ['Random sampling', 'Systematic sampling', 'Stratified sampling', 'Self-selected sampling'],
+          ans: 1,
+          exp: 'Systematic sampling — every nth member from an ordered list. Here n = 500 ÷ 50 = 10.'
+        },
+        {
+          q: 'Which flaw does this question contain? “Do you agree that the government should invest more in schools?”',
+          opts: ['Double-barrelled', 'Ambiguous language', 'Leading question', 'No flaw — well designed'],
+          ans: 2,
+          exp: '“Do you agree that…” is a leading question — the phrasing pressures the respondent to agree.'
+        },
+        {
+          q: 'A study finds students who eat breakfast get better grades. A researcher concludes breakfast causes better grades. What is the most likely problem?',
+          opts: ['Observer effect', 'Confounding variable', 'Cherry-picking', 'Response bias'],
+          ans: 1,
+          exp: 'Confounding variable — a third factor (e.g. family income) may cause both breakfast eating and better grades, making the causal claim invalid.'
+        },
+        {
+          q: 'In stratified sampling, what determines how many people are selected from each stratum?',
+          opts: [
+            'The order of names on the enrolment list',
+            'Which stratum is easiest to survey',
+            'The proportion of the population each stratum represents',
+            'A random draw regardless of stratum size'
+          ],
+          ans: 2,
+          exp: 'Proportional representation is the defining feature — each stratum contributes to the sample in proportion to its share of the total population.'
+        },
+        {
+          q: 'A graph shows company revenue “doubled” but the y-axis starts at $900,000 instead of $0. What misrepresentation is this?',
+          opts: ['Cherry-picking data', 'Misleading graph with truncated axis', 'Overgeneralisation', 'Correlation vs causation error'],
+          ans: 1,
+          exp: 'A truncated y-axis makes small changes look dramatic. Always check whether the y-axis starts at zero before interpreting a graph.'
+        }
+      ];
+
+      var container = document.getElementById('kc-questions');
+      var footer = document.getElementById('kc-footer');
+      var scoreEl = document.getElementById('kc-score');
+      var resetBtn = document.getElementById('kc-reset');
+      if (!container) return;
+
+      var answers, submitted;
+
+      function buildQuestions() {
+        container.innerHTML = '';
+        answers = new Array(KC_QS.length).fill(null);
+        submitted = false;
+        footer.style.display = 'none';
+
+        KC_QS.forEach(function(q, qi) {
+          var div = document.createElement('div');
+          div.className = 'quiz-q';
+
+          var promptEl = document.createElement('p');
+          promptEl.className = 'quiz-q-prompt';
+          promptEl.textContent = 'Question ' + (qi + 1) + ' of ' + KC_QS.length;
+
+          var textEl = document.createElement('p');
+          textEl.className = 'quiz-q-text';
+          textEl.textContent = q.q;
+
+          var optsEl = document.createElement('div');
+          optsEl.className = 'quiz-options';
+          optsEl.id = 'kc-opts-' + qi;
+
+          var fbEl = document.createElement('div');
+          fbEl.className = 'quiz-feedback';
+          fbEl.id = 'kc-fb-' + qi;
+
+          div.appendChild(promptEl);
+          div.appendChild(textEl);
+          div.appendChild(optsEl);
+          div.appendChild(fbEl);
+          container.appendChild(div);
+
+          q.opts.forEach(function(opt, oi) {
+            var btn = document.createElement('button');
+            btn.className = 'quiz-opt';
+            btn.textContent = opt;
+            btn.addEventListener('click', function() {
+              if (submitted) return;
+              answers[qi] = oi;
+              optsEl.querySelectorAll('.quiz-opt').forEach(function(b, bi) {
+                b.classList.toggle('kc-selected', bi === oi);
+              });
+              if (answers.every(function(a) { return a !== null; })) submitQuiz();
+            });
+            optsEl.appendChild(btn);
+          });
+        });
+      }
+
+      function submitQuiz() {
+        submitted = true;
+        var score = 0;
+        KC_QS.forEach(function(q, qi) {
+          var optsEl = document.getElementById('kc-opts-' + qi);
+          var fbEl = document.getElementById('kc-fb-' + qi);
+          var userAns = answers[qi];
+          if (userAns === q.ans) score++;
+          optsEl.querySelectorAll('.quiz-opt').forEach(function(b, bi) {
+            b.disabled = true;
+            b.classList.remove('kc-selected');
+            if (bi === q.ans) b.classList.add('correct');
+            else if (bi === userAns) b.classList.add('incorrect');
+          });
+          fbEl.className = 'quiz-feedback visible';
+          fbEl.textContent = q.exp;
+        });
+        var remarks = [
+          [6, 'Outstanding — full marks! You have a strong grasp of statistical investigation.'],
+          [5, 'Excellent — just one to review.'],
+          [4, 'Good work. Revisit the sections covering your missed questions.'],
+          [3, 'Making progress — re-read Sections 2, 4, and 5 and try again.'],
+          [0, 'Keep going — work through the lesson again and retry.']
+        ];
+        var remark = remarks.find(function(r) { return score >= r[0]; })[1];
+        scoreEl.innerHTML = score + ' / ' + KC_QS.length + '<span>' + remark + '</span>';
+        footer.style.display = 'block';
+        footer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      resetBtn.addEventListener('click', buildQuestions);
+      buildQuestions();
+    })();
+  </script>
 </body>
 </html>
