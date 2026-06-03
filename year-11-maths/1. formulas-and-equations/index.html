@@ -25,16 +25,36 @@
   <main class="main-content">
     <div class="pdf-viewer-container">
       <div class="lessons-sidebar" id="lessonsList"></div>
-
       <div class="pdf-viewer-main">
         <div class="pdf-controls">
-          <div class="control-group">
-            <button class="pdf-btn" id="downloadBtn" onclick="downloadCurrent()">&#8595; Download</button>
-            <a id="openExternalBtn" class="pdf-btn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
-            <button class="pdf-btn" onclick="printSyllabus()">&#8741; Print Syllabus</button>
+          <div class="control-group" id="fileControls">
+            <button class="pdf-btn" id="downloadBtn">&#8595; Download</button>
+            <a class="pdf-btn" id="openExternalBtn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+            <button class="pdf-btn" id="printSyllabusBtn">&#8942; Print Syllabus</button>
+          </div>
+          <div class="control-group" id="pageControls">
+            <button class="pdf-nav-arrow" id="prevPage" disabled>&#8592;</button>
+            <span class="page-info" id="pageInfo">&#8212; / &#8212;</span>
+            <button class="pdf-nav-arrow" id="nextPage" disabled>&#8594;</button>
+          </div>
+          <div class="control-group" id="zoomControls">
+            <div class="zoom-control">
+              <button class="zoom-btn" id="zoomOut">&#8722;</button>
+              <span class="zoom-display" id="zoomDisplay">&#8212;</span>
+              <button class="zoom-btn" id="zoomIn">+</button>
+            </div>
           </div>
         </div>
-        <iframe id="pdfFrame" class="pdf-frame" src="" title="PDF Viewer"></iframe>
+        <div class="pdf-stage" id="pdfStage">
+          <div class="pdf-loading" id="pdfLoading">
+            <div class="pdf-loading-spinner"></div>
+            <p>Loading</p>
+          </div>
+          <div class="pdf-canvas-wrapper" id="pdfCanvasWrapper" style="display:none">
+            <canvas id="pdfCanvas"></canvas>
+          </div>
+          <iframe class="pdf-html-frame" id="pdfHtmlFrame" src="about:blank" title="Lesson"></iframe>
+        </div>
       </div>
     </div>
   </main>
@@ -45,6 +65,8 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="../../pdf-viewer.js"></script>
   <script>
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
@@ -104,146 +126,7 @@
       }
     ];
 
-    let currentLessonIndex = 0;
-    let currentVariant = 'slides';
-    let currentLessonFile = '';
-
-    const pdfFrame = document.getElementById('pdfFrame');
-    const openExternalBtn = document.getElementById('openExternalBtn');
-
-    // ── Completion ──────────────────────────────────────────────
-    function isLessonDone(idx) {
-      return localStorage.getItem(`ie_done_${TOPIC_ID}_${idx}`) === '1';
-    }
-    function setLessonDone(idx, done) {
-      if (done) localStorage.setItem(`ie_done_${TOPIC_ID}_${idx}`, '1');
-      else localStorage.removeItem(`ie_done_${TOPIC_ID}_${idx}`);
-    }
-    function updateCompletionUI(idx) {
-      const group = document.querySelectorAll('.lesson-group')[idx];
-      if (!group) return;
-      const done = isLessonDone(idx);
-      group.classList.toggle('lesson-group--done', done);
-      const btn = group.querySelector('.complete-btn');
-      if (btn) {
-        btn.textContent = done ? '✓ Done' : 'Mark Complete';
-        btn.classList.toggle('complete-btn--done', done);
-      }
-    }
-
-    // ── Print ───────────────────────────────────────────────────
-    function printSyllabus() {
-      const existing = document.querySelector('.print-syllabus-sheet');
-      if (existing) existing.remove();
-      const topicTitle = document.querySelector('.topic-page-title').textContent.replace(/\s+/g, ' ').trim();
-      const sheet = document.createElement('div');
-      sheet.className = 'print-syllabus-sheet';
-      let markup = `<h1>${topicTitle}</h1><p class="print-subtitle">Year 11 Mathematics Standard — NSW Curriculum</p>`;
-      lessons.forEach(l => {
-        if (!l.homework && l.syllabus && l.syllabus.length > 0) {
-          markup += `<h2>Lesson ${l.num}: ${l.title}</h2><ul>${l.syllabus.map(d => `<li>${d}</li>`).join('')}</ul>`;
-        }
-      });
-      sheet.innerHTML = markup;
-      document.body.appendChild(sheet);
-      window.print();
-    }
-
-    // ── Sidebar ─────────────────────────────────────────────────
-    function initializeLessons() {
-      const lessonsList = document.getElementById('lessonsList');
-      lessons.forEach((lesson, index) => {
-        const group = document.createElement('div');
-        group.className = 'lesson-group' + (index === 0 ? ' active' : '');
-        group.dataset.index = index;
-
-        const syllabusHtml = lesson.syllabus && lesson.syllabus.length > 0
-          ? `<div class="lesson-syllabus-dots"><ul>${lesson.syllabus.map(d => `<li>${d}</li>`).join('')}</ul></div>`
-          : '';
-
-        let inner = `
-          <div class="lesson-group-header">
-            <span class="lesson-group-num">${lesson.homework ? 'Homework' : 'Lesson ' + lesson.num}</span>
-            <span class="lesson-kind-badge">PDF</span>
-          </div>
-        `;
-        if (!lesson.homework) {
-          inner += `<div class="lesson-group-title">${lesson.title}</div>`;
-        }
-        inner += syllabusHtml;
-        if (!lesson.homework) {
-          inner += `<button class="complete-btn pdf-btn" data-index="${index}">Mark Complete</button>`;
-        }
-        if (lesson.annotated) {
-          inner += `
-            <div class="lesson-variants">
-              <button class="variant-btn active" data-lesson="${index}" data-variant="slides">Slides</button>
-              <button class="variant-btn" data-lesson="${index}" data-variant="annotated">Annotated</button>
-            </div>
-          `;
-        }
-
-        group.innerHTML = inner;
-
-        const cBtn = group.querySelector('.complete-btn');
-        if (cBtn) {
-          cBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            setLessonDone(index, !isLessonDone(index));
-            updateCompletionUI(index);
-          });
-          updateCompletionUI(index);
-        }
-
-        group.addEventListener('click', () => {
-          loadFile(index, currentLessonIndex === index ? currentVariant : 'slides');
-        });
-        if (lesson.annotated) {
-          group.querySelectorAll('.variant-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-              e.stopPropagation();
-              loadFile(parseInt(btn.dataset.lesson), btn.dataset.variant);
-            });
-          });
-        }
-
-        lessonsList.appendChild(group);
-      });
-    }
-
-    function updateSidebarActive(lessonIndex, variant) {
-      document.querySelectorAll('.lesson-group').forEach((g, i) => {
-        g.classList.toggle('active', i === lessonIndex);
-      });
-      const activeGroup = document.querySelectorAll('.lesson-group')[lessonIndex];
-      if (activeGroup) {
-        activeGroup.querySelectorAll('.variant-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.variant === variant);
-        });
-      }
-    }
-
-    function loadFile(lessonIndex, variant) {
-      const lesson = lessons[lessonIndex];
-      const file = variant === 'annotated' && lesson.annotated ? lesson.annotated : lesson.slides;
-      currentLessonIndex = lessonIndex;
-      currentVariant = variant;
-      currentLessonFile = file;
-      updateSidebarActive(lessonIndex, variant);
-      pdfFrame.src = file;
-      openExternalBtn.href = file;
-      openExternalBtn.textContent = '↗ Open PDF';
-    }
-
-    function downloadCurrent() {
-      const link = document.createElement('a');
-      link.href = currentLessonFile;
-      link.download = decodeURIComponent(currentLessonFile.split('/').pop());
-      link.click();
-    }
-
-    initializeLessons();
-    loadFile(0, 'slides');
+    initPdfViewer({ topicId: TOPIC_ID, lessons });
   </script>
 </body>
 </html>
