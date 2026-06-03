@@ -22,6 +22,7 @@
     const prevBtn         = document.getElementById('prevPage');
     const nextBtn         = document.getElementById('nextPage');
     const pageInfo        = document.getElementById('pageInfo');
+    const pageTotal       = document.getElementById('pageTotal');
     const zoomInBtn       = document.getElementById('zoomIn');
     const zoomOutBtn      = document.getElementById('zoomOut');
     const zoomDisplay     = document.getElementById('zoomDisplay');
@@ -178,7 +179,8 @@
     }
 
     function updatePageInfo() {
-      pageInfo.textContent = `${currentPage} / ${totalPages}`;
+      pageInfo.value = String(currentPage);
+      pageTotal.textContent = '/ ' + totalPages;
       prevBtn.disabled = currentPage <= 1;
       nextBtn.disabled = currentPage >= totalPages;
     }
@@ -251,6 +253,9 @@
       const gen = ++loadGen;
 
       pdfLoading.style.display = 'flex';
+      pageInfo.disabled = true;
+      pageInfo.value = '';
+      pageTotal.textContent = '/ —';
       canvasWrapper.style.display = 'none';
       canvasWrapper.innerHTML = '';
       pageCanvases = [];
@@ -274,6 +279,7 @@
       if (gen !== loadGen) return;
 
       pdfLoading.style.display = 'none';
+      pageInfo.disabled = false;
       canvasWrapper.style.display = '';
       setupPageObserver();
       updatePageInfo();
@@ -349,6 +355,25 @@
     });
     nextBtn.addEventListener('click', () => {
       if (currentPage < totalPages) scrollToPage(currentPage + 1);
+    });
+
+    pageInfo.addEventListener('focus', () => { pageInfo.select(); });
+    pageInfo.addEventListener('blur', () => { pageInfo.value = String(currentPage); });
+    pageInfo.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const n = parseInt(pageInfo.value, 10);
+        if (!isNaN(n) && n >= 1 && n <= totalPages) {
+          currentPage = n;
+          updatePageInfo();
+          scrollToPage(n, false);
+        } else {
+          pageInfo.value = String(currentPage);
+        }
+        pageInfo.blur();
+      } else if (e.key === 'Escape') {
+        pageInfo.value = String(currentPage);
+        pageInfo.blur();
+      }
     });
 
     zoomInBtn.addEventListener('click', async () => {
