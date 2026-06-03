@@ -1443,23 +1443,36 @@ html.dark-mode body.sociotype .pdf-nav-arrow:hover:not(:disabled) {
 /* PDF stage — scrollable canvas area */
 body.sociotype .pdf-stage {
   flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 2rem;
-  background: #efefef;
   overflow-y: auto;
+  overflow-x: auto;
+  background: #efefef;
+  padding: 2rem;
   min-height: 480px;
 }
 html.dark-mode body.sociotype .pdf-stage { background: #111111; }
 
+/* Canvas wrapper — flex column of page divs, centred in stage */
 body.sociotype .pdf-canvas-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-width: min-content;
+  margin: 0 auto;
+}
+
+/* Individual page */
+body.sociotype .pdf-page {
   background: #ffffff;
   border: 1px solid #d6d6d6;
-  box-shadow: none;
-  display: inline-block;
+  display: block;
+  flex-shrink: 0;
 }
-html.dark-mode body.sociotype .pdf-canvas-wrapper {
+body.sociotype .pdf-page canvas { display: block; }
+html.dark-mode body.sociotype .pdf-page {
   background: #1a1a1a;
   border-color: #333;
 }
