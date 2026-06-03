@@ -1,4 +1,4 @@
-/* pdf-viewer.js — Sociotype custom PDF viewer
+/* pdf-viewer.js — Sociotype custom PDF viewer (scrolling mode)
  * Requires PDF.js loaded before this script (sets global pdfjsLib).
  * Call initPdfViewer({ topicId, lessons }) from each lesson page.
  */
@@ -15,35 +15,36 @@
 
   function initPdfViewer({ topicId, lessons }) {
     // ── DOM refs ─────────────────────────────────────────────────
-    const lessonsList    = document.getElementById('lessonsList');
-    const downloadBtn    = document.getElementById('downloadBtn');
+    const lessonsList     = document.getElementById('lessonsList');
+    const downloadBtn     = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
-    const printBtn       = document.getElementById('printSyllabusBtn');
-    const prevBtn        = document.getElementById('prevPage');
-    const nextBtn        = document.getElementById('nextPage');
-    const pageInfo       = document.getElementById('pageInfo');
-    const zoomInBtn      = document.getElementById('zoomIn');
-    const zoomOutBtn     = document.getElementById('zoomOut');
-    const zoomDisplay    = document.getElementById('zoomDisplay');
-    const pageControls   = document.getElementById('pageControls');
-    const zoomControls   = document.getElementById('zoomControls');
-    const pdfStage       = document.getElementById('pdfStage');
-    const pdfLoading     = document.getElementById('pdfLoading');
-    const canvasWrapper  = document.getElementById('pdfCanvasWrapper');
-    const canvas         = document.getElementById('pdfCanvas');
-    const htmlFrame      = document.getElementById('pdfHtmlFrame');
+    const printBtn        = document.getElementById('printSyllabusBtn');
+    const prevBtn         = document.getElementById('prevPage');
+    const nextBtn         = document.getElementById('nextPage');
+    const pageInfo        = document.getElementById('pageInfo');
+    const zoomInBtn       = document.getElementById('zoomIn');
+    const zoomOutBtn      = document.getElementById('zoomOut');
+    const zoomDisplay     = document.getElementById('zoomDisplay');
+    const pageControls    = document.getElementById('pageControls');
+    const zoomControls    = document.getElementById('zoomControls');
+    const pdfStage        = document.getElementById('pdfStage');
+    const pdfLoading      = document.getElementById('pdfLoading');
+    const canvasWrapper   = document.getElementById('pdfCanvasWrapper');
+    const htmlFrame       = document.getElementById('pdfHtmlFrame');
 
     // ── State ────────────────────────────────────────────────────
-    let pdfDoc           = null;
-    let currentPage      = 1;
-    let totalPages       = 0;
-    let scale            = 1;
-    let fitScale         = 1;
-    let rendering        = false;
-    let currentFile      = '';
-    let currentVariant   = 'slides';
-    let currentIndex     = 0;
-    let currentKind      = 'pdf';
+    let pdfDoc        = null;
+    let currentPage   = 1;
+    let totalPages    = 0;
+    let scale         = 1;
+    let fitScale      = 1;
+    let currentFile   = '';
+    let currentVariant = 'slides';
+    let currentIndex  = 0;
+    let currentKind   = 'pdf';
+    let loadGen       = 0;       // stale-load guard
+    let pageObserver  = null;
+    let pageCanvases  = [];      // one canvas per page
 
     // ── Completion ───────────────────────────────────────────────
     function isDone(idx) {
@@ -158,7 +159,7 @@
       }
     }
 
-    // ── PDF rendering ────────────────────────────────────────────
+    // ── Scale helpers ────────────────────────────────────────────
     function calcFitScale() {
       if (!pdfDoc) return Promise.resolve(1);
       const st = window.getComputedStyle(pdfStage);
@@ -172,50 +173,121 @@
       });
     }
 
-    async function renderPage(num) {
-      if (rendering || !pdfDoc) return;
-      rendering = true;
-      pdfLoading.style.display = 'flex';
-      canvasWrapper.style.display = 'none';
-
-      const page = await pdfDoc.getPage(num);
-      const viewport = page.getViewport({ scale });
-      canvas.width  = viewport.width;
-      canvas.height = viewport.height;
-
-      await page.render({
-        canvasContext: canvas.getContext('2d'),
-        viewport
-      }).promise;
-
-      pdfLoading.style.display = 'none';
-      canvasWrapper.style.display = 'block';
-      rendering = false;
-      updateControls();
-    }
-
-    function updateControls() {
-      pageInfo.textContent = `${currentPage} / ${totalPages}`;
-      prevBtn.disabled = currentPage <= 1;
-      nextBtn.disabled = currentPage >= totalPages;
+    function updateZoomDisplay() {
       zoomDisplay.textContent = Math.round(scale / fitScale * 100) + '%';
     }
 
+    function updatePageInfo() {
+      pageInfo.textContent = `${currentPage} / ${totalPages}`;
+      prevBtn.disabled = currentPage <= 1;
+      nextBtn.disabled = currentPage >= totalPages;
+    }
+
+    // ── Per-page rendering ───────────────────────────────────────
+    async function renderPageToCanvas(num) {
+      const cv = pageCanvases[num - 1];
+      if (!cv || !pdfDoc) return;
+      const page = await pdfDoc.getPage(num);
+      const viewport = page.getViewport({ scale });
+      cv.width  = viewport.width;
+      cv.height = viewport.height;
+      await page.render({ canvasContext: cv.getContext('2d'), viewport }).promise;
+    }
+
+    // Build one .pdf-page div + canvas per page
+    function buildPageDivs() {
+      canvasWrapper.innerHTML = '';
+      pageCanvases = [];
+      for (let i = 1; i <= totalPages; i++) {
+        const wrap = document.createElement('div');
+        wrap.className = 'pdf-page';
+        wrap.dataset.page = i;
+        const cv = document.createElement('canvas');
+        wrap.appendChild(cv);
+        canvasWrapper.appendChild(wrap);
+        pageCanvases.push(cv);
+      }
+    }
+
+    // Re-render all pages (used after zoom change)
+    async function rerenderAll(gen) {
+      updateZoomDisplay();
+      for (let i = 1; i <= totalPages; i++) {
+        if (gen !== loadGen) return;
+        await renderPageToCanvas(i);
+      }
+    }
+
+    // ── IntersectionObserver — track visible page ────────────────
+    function setupPageObserver() {
+      if (pageObserver) pageObserver.disconnect();
+      const thresholds = Array.from({ length: 11 }, (_, i) => i * 0.1);
+      pageObserver = new IntersectionObserver(entries => {
+        let best = 0, bestPage = currentPage;
+        entries.forEach(entry => {
+          if (entry.intersectionRatio > best) {
+            best = entry.intersectionRatio;
+            bestPage = parseInt(entry.target.dataset.page);
+          }
+        });
+        if (best > 0) {
+          currentPage = bestPage;
+          updatePageInfo();
+        }
+      }, { root: pdfStage, threshold: thresholds });
+
+      canvasWrapper.querySelectorAll('.pdf-page').forEach(el => pageObserver.observe(el));
+    }
+
+    // ── Scroll to page ───────────────────────────────────────────
+    function scrollToPage(num, smooth = true) {
+      const el = canvasWrapper.querySelector(`.pdf-page[data-page="${num}"]`);
+      if (!el) return;
+      el.scrollIntoView({ behavior: smooth ? 'smooth' : 'instant', block: 'start' });
+    }
+
+    // ── Load PDF ─────────────────────────────────────────────────
     async function loadPdf(url) {
+      const gen = ++loadGen;
+
       pdfLoading.style.display = 'flex';
       canvasWrapper.style.display = 'none';
+      canvasWrapper.innerHTML = '';
+      pageCanvases = [];
+      if (pageObserver) { pageObserver.disconnect(); pageObserver = null; }
 
-      pdfDoc = await pdfjsLib.getDocument(url).promise;
+      const doc = await pdfjsLib.getDocument(url).promise;
+      if (gen !== loadGen) return;
+
+      pdfDoc = doc;
       totalPages = pdfDoc.numPages;
       currentPage = 1;
 
       fitScale = await calcFitScale();
+      if (gen !== loadGen) return;
       scale = fitScale;
 
-      await renderPage(currentPage);
+      buildPageDivs();
+
+      // Render first page before revealing
+      await renderPageToCanvas(1);
+      if (gen !== loadGen) return;
+
+      pdfLoading.style.display = 'none';
+      canvasWrapper.style.display = '';
+      setupPageObserver();
+      updatePageInfo();
+      updateZoomDisplay();
+      pdfStage.scrollTop = 0;
+
+      // Render remaining pages in the background
+      for (let i = 2; i <= totalPages; i++) {
+        if (gen !== loadGen) return;
+        await renderPageToCanvas(i);
+      }
     }
 
-    // ── Mode switching (pdf vs html) ─────────────────────────────
+    // ── Mode switching ───────────────────────────────────────────
     function showPdfMode() {
       pageControls.style.display = '';
       zoomControls.style.display = '';
@@ -239,9 +311,9 @@
     // ── Load lesson ───────────────────────────────────────────────
     async function loadLesson(idx, variant) {
       const lesson = lessons[idx];
-      currentIndex  = idx;
+      currentIndex   = idx;
       currentVariant = variant;
-      currentKind   = lesson.kind || 'pdf';
+      currentKind    = lesson.kind || 'pdf';
 
       const file = (variant === 'annotated' && lesson.annotated)
         ? lesson.annotated
@@ -273,19 +345,23 @@
 
     // ── Event listeners ──────────────────────────────────────────
     prevBtn.addEventListener('click', () => {
-      if (currentPage > 1) { currentPage--; renderPage(currentPage); }
+      if (currentPage > 1) scrollToPage(currentPage - 1);
     });
     nextBtn.addEventListener('click', () => {
-      if (currentPage < totalPages) { currentPage++; renderPage(currentPage); }
+      if (currentPage < totalPages) scrollToPage(currentPage + 1);
     });
 
-    zoomInBtn.addEventListener('click', () => {
+    zoomInBtn.addEventListener('click', async () => {
+      if (currentKind !== 'pdf') return;
       scale = Math.min(scale + fitScale * ZOOM_STEP, fitScale * ZOOM_MAX);
-      renderPage(currentPage);
+      const gen = loadGen;
+      await rerenderAll(gen);
     });
-    zoomOutBtn.addEventListener('click', () => {
+    zoomOutBtn.addEventListener('click', async () => {
+      if (currentKind !== 'pdf') return;
       scale = Math.max(scale - fitScale * ZOOM_STEP, fitScale * ZOOM_MIN);
-      renderPage(currentPage);
+      const gen = loadGen;
+      await rerenderAll(gen);
     });
 
     downloadBtn.addEventListener('click', downloadCurrent);
@@ -301,17 +377,22 @@
         const ratio = scale / fitScale;
         fitScale = newFit;
         scale = fitScale * ratio;
-        renderPage(currentPage);
+        const gen = loadGen;
+        await rerenderAll(gen);
       }, 200);
     });
 
     // Keyboard navigation
     document.addEventListener('keydown', e => {
       if (currentKind !== 'pdf') return;
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        if (currentPage < totalPages) { currentPage++; renderPage(currentPage); }
+        e.preventDefault();
+        if (currentPage < totalPages) scrollToPage(currentPage + 1);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        if (currentPage > 1) { currentPage--; renderPage(currentPage); }
+        e.preventDefault();
+        if (currentPage > 1) scrollToPage(currentPage - 1);
       }
     });
 
