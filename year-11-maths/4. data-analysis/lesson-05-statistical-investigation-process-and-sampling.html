@@ -1161,6 +1161,18 @@
       }
     });
 
+    window.addEventListener('storage', e => {
+      if (e.key === 'theme') {
+        html.classList.toggle('dark-mode', e.newValue === 'dark');
+      }
+    });
+
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        html.classList.toggle('dark-mode', e.data.dark);
+      }
+    });
+
     // TOC: highlight active section on scroll
     (function() {
       var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
