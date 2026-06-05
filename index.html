@@ -224,6 +224,71 @@
     </div>
   </main>
 
+  <!-- ── Survey section ─────────────────────────────────────── -->
+  <!--
+    SETUP: Replace the iframe src below with your Google Forms embed URL.
+    Steps:
+      1. Go to forms.google.com and create a new form.
+      2. Add these 4 questions:
+           Q1 (Multiple choice, required): "How do you find the site layout?"
+               Options: Confusing / A bit hard to navigate / It's OK / Pretty clear / Really clear
+           Q2 (Multiple choice, required): "What do you think of the colour scheme?"
+               Options: Love it / It's alright / Not my thing
+           Q3 (Multiple choice, required): "For lessons, do you prefer PDF slides or interactive lessons?"
+               Options: PDF slides / Interactive lessons / Both work fine / No preference
+           Q4 (Short answer, optional): "Anything else you'd like to say?"
+      3. Click Send → Embed icon (<>) → copy the src= URL from the <iframe> code shown.
+      4. Paste that URL below, replacing REPLACE_WITH_GOOGLE_FORMS_EMBED_URL.
+  -->
+  <section class="survey-section" id="survey">
+    <div class="survey-inner">
+      <p class="survey-eyebrow">30 seconds</p>
+      <h2 class="survey-heading">Quick feedback</h2>
+      <p class="survey-sub">Four questions — helps make this site better for you.</p>
+      <form id="surveyForm" class="survey-form" novalidate>
+
+        <fieldset class="survey-fieldset">
+          <legend class="survey-legend">How do you find the site layout?</legend>
+          <div class="survey-options">
+            <label class="survey-option"><input type="radio" name="layout" value="Confusing"><span>Confusing</span></label>
+            <label class="survey-option"><input type="radio" name="layout" value="A bit hard to navigate"><span>A bit hard to navigate</span></label>
+            <label class="survey-option"><input type="radio" name="layout" value="It's OK"><span>It&rsquo;s OK</span></label>
+            <label class="survey-option"><input type="radio" name="layout" value="Pretty clear"><span>Pretty clear</span></label>
+            <label class="survey-option"><input type="radio" name="layout" value="Really clear"><span>Really clear</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="survey-fieldset">
+          <legend class="survey-legend">What do you think of the colour scheme?</legend>
+          <div class="survey-options">
+            <label class="survey-option"><input type="radio" name="colour" value="Love it"><span>Love it</span></label>
+            <label class="survey-option"><input type="radio" name="colour" value="It's alright"><span>It&rsquo;s alright</span></label>
+            <label class="survey-option"><input type="radio" name="colour" value="Not my thing"><span>Not my thing</span></label>
+            <label class="survey-option"><input type="radio" name="colour" value="I need more colour"><span>I need more colour</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="survey-fieldset">
+          <legend class="survey-legend">For lessons, do you prefer PDF slides or interactive lessons?</legend>
+          <div class="survey-options">
+            <label class="survey-option"><input type="radio" name="format" value="PDF slides"><span>PDF slides</span></label>
+            <label class="survey-option"><input type="radio" name="format" value="Interactive lessons"><span>Interactive lessons</span></label>
+            <label class="survey-option"><input type="radio" name="format" value="Both work fine"><span>Both work fine</span></label>
+            <label class="survey-option"><input type="radio" name="format" value="No preference"><span>No preference</span></label>
+          </div>
+        </fieldset>
+
+        <div class="survey-fieldset">
+          <label class="survey-legend" for="surveyOther">Anything else you&rsquo;d like to say? <span class="survey-optional">(optional)</span></label>
+          <textarea id="surveyOther" name="other" class="survey-textarea" rows="3" placeholder="Your thoughts…"></textarea>
+        </div>
+
+        <button type="submit" class="survey-submit">Submit feedback &rarr;</button>
+      </form>
+      <p class="survey-done" id="surveyDone" style="display:none">Response recorded &mdash; thank you.</p>
+    </div>
+  </section>
+
   <script>
     // ── Dark mode ───────────────────────────────────────────────
     const toggle = document.getElementById('darkModeToggle');
@@ -241,6 +306,24 @@
     });
 
     // ── Live session bar ────────────────────────────────────────
+    function getNextSaturdayLabel() {
+      const now = new Date();
+      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+      const day = sydney.getDay();
+      const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
+      let daysUntilSat;
+      if (day === 6) {
+        daysUntilSat = (totalMins >= 480) ? 7 : 0;
+      } else {
+        daysUntilSat = (6 - day + 7) % 7 || 7;
+      }
+      const target = new Date(now.getTime() + daysUntilSat * 86400 * 1000);
+      const dateStr = target.toLocaleDateString('en-AU', {
+        weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Australia/Sydney'
+      }).replace(',', '').replace(/\./g, '');
+      return `Next Lesson &nbsp;&middot;&nbsp; ${dateStr} &nbsp;&middot;&nbsp; 7:00 – 8:00 AM AEST`;
+    }
+
     function updateLiveStatus() {
       const now = new Date();
       const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
@@ -258,7 +341,7 @@
         label.innerHTML = `Starting Soon  ·  in ~${minsLeft}m`;
       } else {
         bar.classList.add('live-session-bar--idle');
-        label.innerHTML = 'Next Lesson &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST';
+        label.innerHTML = getNextSaturdayLabel();
       }
     }
     updateLiveStatus();
@@ -276,5 +359,42 @@
     checkCompletionBadges();
 
   </script>
+
+  <script>
+    // ── Survey submission ──────────────────────────────────────────
+    // SETUP: Replace each 'entry.XXXXXXXXXX' below with the real entry
+    // IDs from your Google Form. To find them:
+    //   1. Open the form URL in a browser
+    //   2. Right-click → View Page Source (Cmd+U)
+    //   3. Search for "entry." — IDs look like entry.1234567890
+    (function () {
+      var SURVEY_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf6gRVgWa9CZM3NZ92s8IVM1GrowqmgWd2PNkL7QZn-WjvT4w/formResponse';
+      var ENTRY = {
+        layout: 'entry.1466005241',  // Q1 — How do you find the site layout?
+        colour: 'entry.1703439837',  // Q2 — What do you think of the colour scheme?
+        format: 'entry.633836083',   // Q3 — PDF slides or interactive lessons?
+        other:  'entry.2089748571',  // Q4 — Anything else?
+      };
+      var form = document.getElementById('surveyForm');
+      var done = document.getElementById('surveyDone');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var checked = function (n) {
+          var el = form.querySelector('[name="' + n + '"]:checked');
+          return el ? el.value : '';
+        };
+        var fd = new FormData();
+        fd.append(ENTRY.layout, checked('layout'));
+        fd.append(ENTRY.colour, checked('colour'));
+        fd.append(ENTRY.format, checked('format'));
+        fd.append(ENTRY.other,  form.querySelector('[name="other"]').value);
+        fetch(SURVEY_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(function () {});
+        form.style.display = 'none';
+        done.style.display = '';
+      });
+    })();
+  </script>
+  <script src="question-popup.js"></script>
 </body>
 </html>
