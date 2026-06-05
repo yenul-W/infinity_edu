@@ -789,6 +789,23 @@
       --color-light-gray: #2a2a2a;
       --color-faded-gray: #5a5a5a;
     }
+
+    .hw-pdf-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: var(--text-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-ink-black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-ink-black);
+      padding-bottom: 1px;
+      background: transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .hw-pdf-link:hover {
+      color: var(--color-medium-gray);
+      border-bottom-color: var(--color-medium-gray);
+    }
   </style>
 </head>
 <body>
@@ -1145,6 +1162,7 @@
           <p class="section-label">Section 7</p>
           <h3>Homework</h3>
           <p>Complete all questions from <em>Data Analysis</em> — <em>Statistical Investigation Process and Sampling</em>.</p>
+          <a href="assets/Data_Analysis_Questions.pdf" target="_blank" rel="noreferrer" class="hw-pdf-link">Open homework PDF &rarr;</a>
         </section>
       </article>
     </div>
@@ -1561,5 +1579,6 @@
       buildQuestions();
     })();
   </script>
+  <script src="../../question-popup.js"></script>
 </body>
 </html>
