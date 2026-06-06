@@ -1804,7 +1804,6 @@ html.dark-mode .complete-btn--done {
 
 .survey-inner {
   max-width: 640px;
-  margin: 0 auto;
 }
 
 .survey-eyebrow {
@@ -1934,8 +1933,14 @@ html.dark-mode .complete-btn--done {
   border-bottom-color: var(--text);
 }
 
+.survey-submit-row {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
 .survey-submit {
-  align-self: flex-start;
+  display: block;
+  width: fit-content;
   background: transparent;
   color: var(--text);
   border: none;

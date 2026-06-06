@@ -283,7 +283,9 @@
           <textarea id="surveyOther" name="other" class="survey-textarea" rows="3" placeholder="Your thoughts…"></textarea>
         </div>
 
-        <button type="submit" class="survey-submit">Submit feedback &rarr;</button>
+        <div class="survey-submit-row">
+          <button type="submit" class="survey-submit">Submit feedback &rarr;</button>
+        </div>
       </form>
       <p class="survey-done" id="surveyDone" style="display:none">Response recorded &mdash; thank you.</p>
     </div>
@@ -348,7 +350,7 @@
     setInterval(updateLiveStatus, 60000);
 
     // ── Completion badges ───────────────────────────────────────
-    const COMPLETABLE = { 1: [0,1], 2: [0,1], 3: [0,1], 4: [0,1,2,3,4] };
+    const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6] };
     function checkCompletionBadges() {
       for (const [topicId, indices] of Object.entries(COMPLETABLE)) {
         const allDone = indices.every(i => localStorage.getItem(`ie_done_${topicId}_${i}`) === '1');

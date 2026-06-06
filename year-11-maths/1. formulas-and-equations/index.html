@@ -57,12 +57,6 @@
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-content">
-      <p>Year 11 Mathematics Standard</p>
-    </div>
-  </footer>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="../../pdf-viewer.js"></script>
   <script>
@@ -78,6 +72,9 @@
       const nowDark = html.classList.toggle('dark-mode');
       localStorage.setItem('theme', nowDark ? 'dark' : 'light');
       toggleIcon.textContent = nowDark ? 'light' : 'dark';
+      const frame = document.getElementById('pdfHtmlFrame');
+      try { if (frame && frame.contentDocument && frame.contentDocument.documentElement) { frame.contentDocument.documentElement.classList.toggle('dark-mode', nowDark); } } catch (e) {}
+      try { if (frame && frame.contentWindow) { frame.contentWindow.postMessage({ type: 'ie-theme', dark: nowDark }, '*'); } } catch (e) {}
     });
 
     const TOPIC_ID = 1;
@@ -121,6 +118,17 @@
         annotated: null,
         kind: 'pdf',
         syllabus: []
+      },
+      {
+        num: 4,
+        title: 'Revision',
+        slides: 'lesson-revision.html',
+        annotated: null,
+        kind: 'html',
+        syllabus: [
+          'HSC exam questions covering all topic areas',
+          'Worked solutions for every question'
+        ]
       }
     ];
 
