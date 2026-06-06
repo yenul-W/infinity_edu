@@ -1,9 +1,108 @@
 /**
  * question-popup.js — self-contained Ask a Question popup
  *
- * SETUP: Set GAS_URL to your deployed Google Apps Script web app URL.
- * Apps Script deployment: Execute as Me, Who has access: Anyone.
- * See README / setup comments in index.html for the full Apps Script code.
+ * SETUP: Set GAS_URL below to your deployed Google Apps Script web app URL.
+ * Deploy the script as: Execute as Me, Who has access: Anyone.
+ *
+ * ─── GOOGLE APPS SCRIPT (paste into script.google.com and redeploy) ───────
+ *
+ * var SPREADSHEET_ID = '';   // ← paste your Sheet ID here (from the Sheet URL)
+ * var SHEET_NAME     = 'Questions';
+ * var FOLDER_NAME    = 'ie-question-images';
+ *
+ * function doPost(e) {
+ *   var lock = LockService.getScriptLock();
+ *   lock.tryLock(10000);
+ *   try {
+ *     var d  = JSON.parse(e.postData.contents);
+ *     var sh = getSheet_();
+ *     var imageUrl = '';
+ *     if (d.imageBase64 && d.imageBase64.length > 22) {
+ *       try {
+ *         imageUrl = saveImageToDrive_(d.imageBase64, d.studentId);
+ *       } catch (imgErr) {
+ *         imageUrl = 'ERROR: ' + imgErr.toString();
+ *       }
+ *     }
+ *     sh.appendRow([
+ *       d.studentId || '', d.timestamp || new Date().toISOString(),
+ *       d.category || '', d.type || '', d.hscYear || '',
+ *       d.hscStandard || '', d.hscQNumber || '', d.questionText || '',
+ *       imageUrl, 'FALSE', ''
+ *     ]);
+ *     return json_({ status: 'ok' });
+ *   } catch (err) {
+ *     return json_({ status: 'error', message: err.toString() });
+ *   } finally { lock.releaseLock(); }
+ * }
+ *
+ * function doGet(e) {
+ *   try {
+ *     var sid  = (e.parameter || {}).studentId || '';
+ *     var sh   = getSheet_();
+ *     var rows = sh.getDataRange().getValues();
+ *     if (rows.length < 1) return json_({ questions: [] });
+ *     // Detect whether the first row is a header row or data
+ *     var hasHeaders = String(rows[0][0]).trim() === 'studentId';
+ *     var dataRows   = hasHeaders ? rows.slice(1) : rows;
+ *     var idx = hasHeaders
+ *       ? (function () { var m = {}; rows[0].forEach(function (h, i) { m[String(h).trim()] = i; }); return m; }())
+ *       : { studentId:0, timestamp:1, category:2, type:3, hscYear:4, hscStandard:5,
+ *           hscQNumber:6, questionText:7, imageUrl:8, answered:9, teacherResponse:10 };
+ *     var questions = dataRows
+ *       .filter(function (r) { return !sid || String(r[idx.studentId]) === sid; })
+ *       .map(function (r) {
+ *         return {
+ *           studentId: r[idx.studentId], timestamp: r[idx.timestamp],
+ *           category: r[idx.category], type: r[idx.type],
+ *           hscYear: r[idx.hscYear], hscStandard: r[idx.hscStandard],
+ *           hscQNumber: r[idx.hscQNumber], questionText: r[idx.questionText],
+ *           imageUrl: r[idx.imageUrl] || '',
+ *           answered: r[idx.answered], teacherResponse: r[idx.teacherResponse] || '',
+ *         };
+ *       });
+ *     return json_({ questions: questions });
+ *   } catch (err) {
+ *     return json_({ status: 'error', message: err.toString() });
+ *   }
+ * }
+ *
+ * function getSheet_() {
+ *   var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+ *   var sh = ss.getSheetByName(SHEET_NAME);
+ *   if (!sh) {
+ *     sh = ss.insertSheet(SHEET_NAME);
+ *     sh.appendRow(['studentId','timestamp','category','type','hscYear','hscStandard',
+ *                   'hscQNumber','questionText','imageUrl','answered','teacherResponse']);
+ *   }
+ *   return sh;
+ * }
+ *
+ * // Run this once manually in the editor to authorize Drive access
+ * function authorizeAll_() {
+ *   DriveApp.getRootFolder();
+ *   getSheet_();
+ * }
+ *
+ * function saveImageToDrive_(dataUrl, studentId, timestamp) {
+ *   var m = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+ *   if (!m) return '';
+ *   var mime = m[1], b64 = m[2], ext = mime.split('/')[1] || 'jpg';
+ *   var name = 'q_' + (studentId || 'x') + '_' + Date.now() + '.' + ext;
+ *   var folders = DriveApp.getFoldersByName(FOLDER_NAME);
+ *   var folder  = folders.hasNext() ? folders.next() : DriveApp.createFolder(FOLDER_NAME);
+ *   var blob    = Utilities.newBlob(Utilities.base64Decode(b64), mime, name);
+ *   var file    = folder.createFile(blob);
+ *   file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+ *   return 'https://drive.google.com/uc?export=view&id=' + file.getId();
+ * }
+ *
+ * function json_(obj) {
+ *   return ContentService.createTextOutput(JSON.stringify(obj))
+ *     .setMimeType(ContentService.MimeType.JSON);
+ * }
+ *
+ * ─────────────────────────────────────────────────────────────────────────
  */
 
 (function () {
@@ -24,7 +123,7 @@
       'background:#000;color:#fff;',
       'border:none;border-radius:0;',
       'cursor:pointer;',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.78rem;font-weight:600;letter-spacing:0.04em;',
       'transition:background 0.15s;white-space:nowrap;',
     '}',
@@ -59,7 +158,7 @@
     '.qpop-tab{',
       'background:transparent;border:none;border-bottom:1px solid transparent;border-radius:0;',
       'padding:0.1rem 0;cursor:pointer;',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.78rem;font-weight:600;letter-spacing:0.04em;',
       'color:rgba(0,0,0,0.38);',
       'transition:color 0.15s,border-color 0.15s;',
@@ -86,7 +185,7 @@
 
     /* Label */
     '.qpop-label{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.65rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;',
       'color:rgba(0,0,0,0.42);margin:0;',
     '}',
@@ -98,7 +197,7 @@
       'background:transparent;color:rgba(0,0,0,0.42);',
       'border:none;border-bottom:1px solid rgba(0,0,0,0.16);border-radius:0;',
       'padding:0.18rem 0;cursor:pointer;',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.78rem;font-weight:400;',
       'transition:color 0.15s,border-color 0.15s;',
     '}',
@@ -117,7 +216,7 @@
       'background:transparent;color:#000;',
       'border:none;border-bottom:1px solid rgba(0,0,0,0.22);border-radius:0;',
       'padding:0.3rem 0;',
-      'font-family:system-ui,-apple-system,sans-serif;font-size:0.83rem;',
+      'font-family:\'Space Mono\',monospace;font-size:0.83rem;',
       'outline:none;transition:border-color 0.15s;width:100%;',
       '-moz-appearance:textfield;',
     '}',
@@ -130,7 +229,7 @@
       'background:transparent;color:#000;',
       'border:1px solid rgba(0,0,0,0.18);border-radius:0;',
       'padding:0.5rem;',
-      'font-family:system-ui,-apple-system,sans-serif;font-size:0.83rem;',
+      'font-family:\'Space Mono\',monospace;font-size:0.83rem;',
       'resize:vertical;outline:none;min-height:80px;',
       'transition:border-color 0.15s;width:100%;',
     '}',
@@ -139,14 +238,14 @@
     'html.dark-mode .qpop-textarea:focus{border-color:rgba(240,240,245,0.65);}',
 
     '.qpop-file{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.75rem;color:rgba(0,0,0,0.48);cursor:pointer;',
     '}',
     'html.dark-mode .qpop-file{color:rgba(240,240,245,0.48);}',
 
     /* Hints & errors */
     '.qpop-hint{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.68rem;color:#b91c1c;line-height:1.5;margin:0;',
     '}',
     'html.dark-mode .qpop-hint{color:#f87171;}',
@@ -157,7 +256,7 @@
       'background:transparent;color:#000;',
       'border:none;border-bottom:1px solid #000;border-radius:0;',
       'padding:0.4rem 0;cursor:pointer;',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.83rem;font-weight:600;letter-spacing:0.04em;',
       'text-align:left;align-self:flex-start;',
       'transition:color 0.15s,border-color 0.15s;',
@@ -168,7 +267,7 @@
     '.qpop-submit:disabled{opacity:0.35;cursor:not-allowed;}',
 
     '.qpop-status{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.75rem;color:rgba(0,0,0,0.48);line-height:1.5;margin:0;',
     '}',
     'html.dark-mode .qpop-status{color:rgba(240,240,245,0.48);}',
@@ -182,14 +281,14 @@
     'html.dark-mode .qpop-history-item{border-color:rgba(240,240,245,0.10);}',
     '.qpop-history-meta{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}',
     '.qpop-history-date{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.56rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;',
       'color:rgba(0,0,0,0.32);margin-left:auto;',
     '}',
     'html.dark-mode .qpop-history-date{color:rgba(240,240,245,0.32);}',
 
     '.qpop-category-tag{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;',
       'color:rgba(0,0,0,0.42);border:1px solid rgba(0,0,0,0.16);border-radius:0;',
       'padding:0.1rem 0.35rem;',
@@ -197,7 +296,7 @@
     'html.dark-mode .qpop-category-tag{color:rgba(240,240,245,0.42);border-color:rgba(240,240,245,0.16);}',
 
     '.qpop-badge{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;',
       'padding:0.1rem 0.35rem;border-radius:0;',
     '}',
@@ -207,20 +306,20 @@
     'html.dark-mode .qpop-badge--answered{color:#34d399;border-color:rgba(52,211,153,0.3);}',
 
     '.qpop-history-question{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.8rem;color:rgba(0,0,0,0.52);line-height:1.55;margin:0;',
     '}',
     'html.dark-mode .qpop-history-question{color:rgba(240,240,245,0.52);}',
 
     '.qpop-history-response{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.78rem;color:#000;line-height:1.55;',
       'padding:0.5rem;border-left:2px solid rgba(0,0,0,0.18);margin-top:0.25rem;',
     '}',
     'html.dark-mode .qpop-history-response{color:#f0f0f5;border-left-color:rgba(240,240,245,0.18);}',
 
     '.qpop-no-questions{',
-      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-family:\'Space Mono\',monospace;',
       'font-size:0.8rem;color:rgba(0,0,0,0.42);line-height:1.6;padding:0.5rem 0;margin:0;',
     '}',
     'html.dark-mode .qpop-no-questions{color:rgba(240,240,245,0.42);}',
@@ -561,9 +660,10 @@
           item.appendChild(meta);
           item.appendChild(qEl);
 
-          if (q.imageBase64) {
+          var imgSrc = q.imageUrl || q.imageBase64;
+          if (imgSrc) {
             var img = document.createElement('img');
-            img.src = q.imageBase64;
+            img.src = imgSrc;
             img.style.cssText = 'max-width:100%;margin-top:0.4rem;border:1px solid rgba(0,0,0,0.10);display:block;';
             item.appendChild(img);
           }

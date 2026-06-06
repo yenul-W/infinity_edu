@@ -17,61 +17,19 @@ Sociotype presents as a serious, editorial platform for typography, characterize
 
 ## Tokens — Typography
 
-### Main Onsite — Main Onsite — detected in extracted data but not described by AI · `--font-main-onsite`
-- **Weights:** 400
-- **Sizes:** 11px, 12px, 13px, 14px, 16px, 18px, 26px, 40px
-- **Line height:** 1, 1.13, 1.19, 1.22, 1.29, 1.31, 1.33, 1.38
-- **Letter spacing:** 0.015, 0.025, 0.04, 0.05, 0.08
-- **Role:** Main Onsite — detected in extracted data but not described by AI
+### Poppins · `--font-display`
+- **Weights:** 500, 600, 700
+- **Sizes:** 26px, 40px, clamp(1.4rem, 6vw, 2rem)
+- **Line height:** 1.13–1.25
+- **Letter spacing:** 0.26px–0.6px
+- **Role:** Display typeface for page titles and section headings (e.g. "Preliminary Mathematics Standard").
 
-### Onsite — Primary typeface for all body text, navigation, buttons, and smaller headings. Its regular weight ensures readability while maintaining a modern, understated presence. · `--font-onsite`
-- **Substitute:** system-ui, sans-serif
-- **Weights:** 400
-- **Sizes:** 251px
-- **Line height:** 1.25
-- **Letter spacing:** 0.0800em at 11px, 0.0500em at 12px, 0.0400em at 13px, 0.0250em at 14px, 0.0150em at 16px, 0.0150em at 18px
-- **Role:** Primary typeface for all body text, navigation, buttons, and smaller headings. Its regular weight ensures readability while maintaining a modern, understated presence.
-
-### Avec Sharp — Display typeface for featured headlines and typographic showcases. Its unique character defines the brand's aesthetic in a large, impactful way. · `--font-avec-sharp`
-- **Substitute:** serif
-- **Weights:** 400
-- **Sizes:** 251px
-- **Line height:** 1.25
-- **Letter spacing:** 0.0010em
-- **Role:** Display typeface for featured headlines and typographic showcases. Its unique character defines the brand's aesthetic in a large, impactful way.
-
-### Ceno — Alternative display typeface, used for specific typographic showcases. Shares the overall expressive, impactful role of Avec Sharp. · `--font-ceno`
-- **Substitute:** serif
-- **Weights:** 400
-- **Sizes:** 251px
-- **Line height:** 1.25
-- **Letter spacing:** 0.0010em
-- **Role:** Alternative display typeface, used for specific typographic showcases. Shares the overall expressive, impactful role of Avec Sharp.
-
-### Meso — Alternative display typeface, used for specific typographic showcases. Expands the brand's visual range for showcasing different font styles. · `--font-meso`
-- **Substitute:** serif
-- **Weights:** 400
-- **Sizes:** 251px
-- **Line height:** 1.25
-- **Letter spacing:** 0.0010em
-- **Role:** Alternative display typeface, used for specific typographic showcases. Expands the brand's visual range for showcasing different font styles.
-
-### Gestura — Alternative display typeface with ligatures, used for specific typographic showcases. Highlights the intricate details of font design. · `--font-gestura`
-- **Substitute:** serif
-- **Weights:** 400
-- **Sizes:** 251px
-- **Line height:** 1.25
-- **Letter spacing:** 0.0010em
-- **OpenType features:** `'liga' on`
-- **Role:** Alternative display typeface with ligatures, used for specific typographic showcases. Highlights the intricate details of font design.
-
-### Rework — Alternative display typeface, used for specific typographic showcases. Contributes to the diverse presentation of font families. · `--font-rework`
-- **Substitute:** serif
-- **Weights:** 400
-- **Sizes:** 251px
-- **Line height:** 1.25
-- **Letter spacing:** 0.0010em
-- **Role:** Alternative display typeface, used for specific typographic showcases. Contributes to the diverse presentation of font families.
+### Space Mono · `--font-mono`
+- **Weights:** 400, 700
+- **Sizes:** 11px, 12px, 13px, 14px
+- **Line height:** 1.19–1.38
+- **Letter spacing:** 0.04em–0.08em
+- **Role:** Monospace typeface for eyebrow labels, navigation, and code-adjacent UI (e.g. "YEAR 11").
 
 ### Type Scale
 
@@ -141,8 +99,8 @@ Transparent background, placeholder/text in Medium Gray (#818181), with a thin 1
 - Maintain a strict 0px border-radius for all components, including buttons, cards, and input fields, for a sharp, precise feel.
 - Implement interactive elements primarily as ghost buttons or underlined text, with minimal visual styling beyond color and text decoration transitions.
 - Structure content with ample vertical spacing, leveraging the implied section gap of 120px to create distinct content blocks.
-- Employ the Onsite font for all functional text under 'display' sizes, ensuring consistency in body, navigation, and button labels.
-- Utilize Avec Sharp, Ceno, Meso, Gestura, or Rework fonts exclusively for large, impactful display typography to showcase different font characteristics.
+- Use Space Mono for all eyebrow labels, navigation tags, and code-adjacent UI text.
+- Use Poppins for all display headings and page titles.
 
 ### Don't
 - Avoid using saturated background colors or heavy fills for interactive elements; stick to the achromatic palette.
@@ -150,7 +108,7 @@ Transparent background, placeholder/text in Medium Gray (#818181), with a thin 1
 - Refrain from applying rounded corners to any UI elements; all corners should be sharp 0px radius.
 - Do not use highly contrasting accent colors for calls to action; rely on text weight, size, and subtle border changes for emphasis.
 - Avoid dense, clustered layouts; allow generous empty space around content sections and individual elements.
-- Do not deviate from the specified typefaces Onsite, Avec Sharp, Ceno, Meso, Gestura, or Rework; no other typefaces are part of this system.
+- Do not deviate from the specified typefaces Poppins and Space Mono; no other typefaces are part of this system.
 - Do not use generic system fonts or default browser styles for links; ensure all interactive text uses the defined ghost button or underlined styles.
 
 ## Imagery
@@ -171,9 +129,8 @@ accent: no distinct accent color
 primary action: no distinct CTA color
 
 Example Component Prompts:
-1. Create a top navigation bar: Canvas White background, Ink Black ghost text links in Onsite font at 14px (letter-spacing 0.35px). Each link should have a 1px Ink Black bottom border on hover. Spacing between links is 50px right margin. Global top-left brand text 'SOCIOTYPE' in Ink Black. Top-right utilitarian links 'Shop', 'Trials', 'About', 'Cart (0)'.
-2. Design a featured typeface section: Canvas White background. Headline 'Featured: [Typeface Name]' in Onsite 40px (letter-spacing 0.6px), Ink Black. Followed by descriptive body text in Onsite 14px (letter-spacing 0.35px), Ink Black. A 'More Info →' ghost button (Ink Black text and 1px bottom border, Onsite 14px, letter-spacing 0.35px).
-3. Create a prominent typeface showcase block: Avec Sharp 251px (letter-spacing 2.51px) in Ink Black on a Canvas White background. Ensure no padding or border-radius, maintaining a sharp edge.
+1. Create a top navigation bar: Canvas White background, Ink Black eyebrow label in Space Mono at 12px (letter-spacing 0.08em). Each link should have a 1px Ink Black bottom border on hover.
+2. Design a page title: Canvas White background. Headline in Poppins 40px (letter-spacing 0.6px), Ink Black, weight 600. No padding or border-radius.
 
 ## Similar Brands
 
@@ -196,13 +153,8 @@ Example Component Prompts:
   --color-faded-gray: #9d9d9d;
 
   /* Typography — Font Families */
-  --font-main-onsite: 'Main Onsite', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-onsite: 'Onsite', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-avec-sharp: 'Avec Sharp', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-ceno: 'Ceno', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-meso: 'Meso', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-gestura: 'Gestura', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-rework: 'Rework', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
   /* Typography — Scale */
   --text-caption: 11px;
@@ -254,13 +206,8 @@ Example Component Prompts:
   --color-faded-gray: #9d9d9d;
 
   /* Typography */
-  --font-main-onsite: 'Main Onsite', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-onsite: 'Onsite', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-avec-sharp: 'Avec Sharp', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-ceno: 'Ceno', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-meso: 'Meso', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-gestura: 'Gestura', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-rework: 'Rework', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
   /* Typography — Scale */
   --text-caption: 11px;

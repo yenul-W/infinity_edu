@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Formulas &amp; Equations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --color-canvas-white: #ffffff;
@@ -11,7 +12,7 @@
       --color-medium-gray: #818181;
       --color-light-gray: #d6d6d6;
       --color-faded-gray: #9d9d9d;
-      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-onsite: 'Outfit', system-ui, -apple-system, sans-serif;
       --font-mono: 'Space Mono', monospace;
       --text-caption: 11px;
       --leading-caption: 1.38;
@@ -274,6 +275,17 @@
       .sidebar { display: none; }
       .main { padding: var(--spacing-24) var(--spacing-16); }
     }
+    .q-options li { cursor: pointer; padding: 6px 8px; }
+    .q-options li:hover:not(.opt-locked) { background: var(--color-light-gray); }
+    .q-options li.opt-correct { background: #d4edda; color: #155724; }
+    .q-options li.opt-correct .opt-label { color: #155724; }
+    .q-options li.opt-wrong { background: #f8d7da; color: #721c24; }
+    .q-options li.opt-wrong .opt-label { color: #721c24; }
+    .q-options li.opt-locked { cursor: default; pointer-events: none; }
+    html.dark-mode .q-options li.opt-correct { background: #1a3a25; color: #8fd4a0; }
+    html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
+    html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
+    html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
   </style>
 </head>
 <body>
@@ -378,7 +390,7 @@ where N = standard drinks consumed
       H = hours drinking
       M = person's mass (kg)</code>
         <p class="q-text">Calculate the BAC of a male who consumed 4 standard drinks in 3.5 hours and weighs 68 kg, correct to 2 decimal places.</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 1.03</li>
           <li><span class="opt-label">B.</span> 0.03</li>
           <li><span class="opt-label">C.</span> 0.04</li>
@@ -431,7 +443,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
         <p class="q-text">When Jake stops drinking alcohol at 10:30 pm, he has a blood alcohol content (BAC) of 0.08375. The number of hours required for a person to reach zero BAC after they stop consuming alcohol is given by:</p>
         <code class="q-formula">Time = BAC ÷ 0.015</code>
         <p class="q-text">At what time on the next day should Jake expect his BAC to be 0.05?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> 12:45 am</li>
           <li><span class="opt-label">B.</span> 1:50 am</li>
           <li><span class="opt-label">C.</span> 2:15 am</li>
@@ -491,7 +503,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
         <code class="q-formula">D = A ÷ (A + 12) × adult dose</code>
         <p class="q-text">where D = child dosage, A = age of child in years.</p>
         <p class="q-text">A child's dosage is calculated to be 20 mg, based on an adult dosage of 40 mg. How old is the child in years?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> 3</li>
           <li><span class="opt-label">B.</span> 6</li>
           <li><span class="opt-label">C.</span> 9</li>
@@ -583,7 +595,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The distance between Bricktown and Koala Creek is 75 km. A person travels from Bricktown to Koala Creek at an average speed of 50 km/h. How long does it take the person to complete the journey?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 40 minutes</li>
           <li><span class="opt-label">B.</span> 1 hour 25 minutes</li>
           <li><span class="opt-label">C.</span> 1 hour 30 minutes</li>
@@ -605,7 +617,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A car takes 6 hours to complete a journey when travelling at 60 km/h. How long would the same journey take if the car were travelling at 100 km/h?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> 36 minutes</li>
           <li><span class="opt-label">B.</span> 1 hour and 40 minutes</li>
           <li><span class="opt-label">C.</span> 3 hours and 6 minutes</li>
@@ -628,7 +640,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Fleur lives 15 kilometres from her work. On Wednesday, she drove to work and averaged 60 kilometres per hour. On Thursday, she took the bus which averaged 15 kilometres per hour. What was the extra time of the bus journey, in minutes, compared to when she drove on Wednesday?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 15</li>
           <li><span class="opt-label">B.</span> 45</li>
           <li><span class="opt-label">C.</span> 60</li>
@@ -705,7 +717,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Kate is comparing two different models of car. Car A uses fuel at the rate of 9 L/100 km. Car B uses 3.5 L/100 km. Suppose Kate plans on driving 8000 km in the next year. How much less fuel will she use driving Car B instead of Car A?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 44 L</li>
           <li><span class="opt-label">B.</span> 280 L</li>
           <li><span class="opt-label">C.</span> 440 L</li>
@@ -795,6 +807,30 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
     });
     window.addEventListener('message', e => {
       if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.q-options[data-correct]').forEach(ul => {
+      const correct = ul.dataset.correct.toUpperCase();
+      const block = ul.closest('.question-block');
+      const solution = block.querySelector('details.solution');
+      ul.querySelectorAll('li').forEach(li => {
+        const letter = li.querySelector('.opt-label').textContent.trim().replace('.', '');
+        li.addEventListener('click', () => {
+          if (ul.classList.contains('answered')) return;
+          ul.classList.add('answered');
+          ul.querySelectorAll('li').forEach(l => l.classList.add('opt-locked'));
+          const isCorrect = letter === correct;
+          li.classList.add(isCorrect ? 'opt-correct' : 'opt-wrong');
+          if (!isCorrect) {
+            ul.querySelectorAll('li').forEach(l => {
+              if (l.querySelector('.opt-label').textContent.trim().replace('.', '') === correct)
+                l.classList.add('opt-correct');
+            });
+          }
+          if (solution) solution.open = true;
+        });
+      });
     });
   </script>
 

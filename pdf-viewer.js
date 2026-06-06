@@ -77,7 +77,7 @@
       sheet.className = 'print-syllabus-sheet';
       let markup = `<h1>${topicTitle}</h1><p class="print-subtitle">Year 11 Mathematics Standard — NSW Curriculum</p>`;
       lessons.forEach(l => {
-        if (!l.homework && l.syllabus && l.syllabus.length > 0) {
+        if (!l.homework && !l.revision && l.syllabus && l.syllabus.length > 0) {
           markup += `<h2>Lesson ${l.num}: ${l.title}</h2><ul>${l.syllabus.map(d => `<li>${d}</li>`).join('')}</ul>`;
         }
       });
@@ -99,15 +99,15 @@
 
         let inner = `
           <div class="lesson-group-header">
-            <span class="lesson-group-num">${lesson.homework ? 'Homework' : 'Lesson ' + lesson.num}</span>
-            <span class="lesson-kind-badge">${(lesson.kind || 'pdf').toUpperCase()}</span>
+            <span class="lesson-group-num">${lesson.homework ? 'Homework' : lesson.revision ? 'Revision' : 'Lesson ' + lesson.num}</span>
+            <span class="lesson-kind-badge">${lesson.kind === 'html' ? 'INTERACTIVE' : (lesson.kind || 'pdf').toUpperCase()}</span>
           </div>`;
 
-        if (!lesson.homework) {
+        if (!lesson.homework && !lesson.revision) {
           inner += `<div class="lesson-group-title">${lesson.title}</div>`;
         }
         inner += syllabusHtml;
-        if (!lesson.homework) {
+        if (!lesson.homework && !lesson.revision) {
           inner += `<button class="complete-btn pdf-btn" data-index="${index}">Mark Complete</button>`;
         }
         if (lesson.annotated) {

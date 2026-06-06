@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Lesson 06 — Data Analysis with Spreadsheets</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-ink-black: #000000;
+      --color-medium-gray: #818181;
+      --color-light-gray: #d6d6d6;
+      --color-faded-gray: #9d9d9d;
+      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --text-caption: 11px;
+      --leading-caption: 1.38;
+      --tracking-caption: 0.88px;
+      --text-body: 14px;
+      --leading-body: 1.29;
+      --tracking-body: 0.35px;
+      --text-heading: 26px;
+      --leading-heading: 1.13;
+      --tracking-heading: 0.26px;
+      --text-display-sm: 40px;
+      --leading-display-sm: 1;
+      --tracking-display-sm: 0.6px;
+      --spacing-8: 8px;
+      --spacing-12: 12px;
+      --spacing-24: 24px;
+      --spacing-120: 120px;
+      --spacing-140: 140px;
+      --section-gap: 120px;
+      --element-gap: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-ink-black);
+      background: var(--color-canvas-white);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 24px 120px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--spacing-24);
+      padding-bottom: var(--spacing-24);
+      margin-bottom: var(--spacing-24);
+      border-bottom: 1px solid var(--color-ink-black);
+      font-size: var(--text-caption);
+      line-height: var(--leading-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+    }
+
+    .topbar a {
+      text-decoration: none;
+      color: var(--color-ink-black);
+      border-bottom: 1px solid var(--color-ink-black);
+      transition: color 0.15s ease;
+    }
+
+    .topbar a:hover {
+      color: var(--color-medium-gray);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: var(--spacing-12);
+      align-items: stretch;
+      margin-bottom: var(--spacing-120);
+    }
+
+    .hero-main,
+    .hero-side,
+    .toc,
+    .content-card {
+      border: 1px solid var(--color-ink-black);
+      background: var(--color-canvas-white);
+    }
+
+    .hero-main {
+      padding: 32px 36px 28px;
+    }
+
+    .eyebrow,
+    .section-label {
+      font-size: var(--text-caption);
+      line-height: var(--leading-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+      font-weight: 400;
+    }
+
+    h1 {
+      margin: var(--spacing-12) 0;
+      font-family: var(--font-onsite);
+      font-size: var(--text-display-sm);
+      line-height: var(--leading-display-sm);
+      font-weight: 400;
+      letter-spacing: var(--tracking-display-sm);
+    }
+
+    .subtitle {
+      max-width: 56ch;
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-8);
+      margin-top: var(--spacing-24);
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      padding: 6px 12px;
+      border: 1px solid var(--color-ink-black);
+      font-size: var(--text-caption);
+      letter-spacing: 0.05em;
+      color: var(--color-medium-gray);
+    }
+
+    .hero-side {
+      padding: 32px 28px;
+      display: grid;
+      gap: var(--spacing-12);
+      align-content: start;
+      border-left: none;
+    }
+
+    .hero-side .section-label {
+      color: var(--color-ink-black);
+    }
+
+    .hero-side p {
+      padding: var(--spacing-12);
+      border: 1px solid var(--color-light-gray);
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: var(--spacing-12);
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 24px;
+      padding: var(--spacing-24);
+    }
+
+    .toc h2 {
+      font-size: var(--text-heading);
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+      font-weight: 400;
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .toc a {
+      display: block;
+      text-decoration: none;
+      padding: 8px 0;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .toc a:hover {
+      color: var(--color-ink-black);
+      border-bottom-color: var(--color-ink-black);
+    }
+
+    .toc a.toc-active {
+      color: var(--color-ink-black);
+      border-left: 2px solid var(--color-ink-black);
+      padding-left: 10px;
+      margin-left: -12px;
+    }
+
+    .content {
+      display: grid;
+      gap: var(--spacing-12);
+    }
+
+    .content-card {
+      padding: 32px 36px;
+    }
+
+    .content-card h3 {
+      margin: var(--spacing-12) 0 var(--spacing-24);
+      font-size: var(--text-heading);
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+      font-weight: 400;
+    }
+
+    .content-card h4 {
+      margin: var(--spacing-24) 0 var(--spacing-12);
+      font-size: 18px;
+      line-height: 1.22;
+      letter-spacing: 0.015em;
+      font-weight: 400;
+    }
+
+    .content-card p,
+    .content-card li,
+    .content-card td {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .content-card p { margin: var(--spacing-8) 0; }
+
+    .slide {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      margin: var(--spacing-12) 0;
+    }
+
+    .slide h4 {
+      margin: 0 0 var(--spacing-12);
+      font-size: 16px;
+      line-height: 1.31;
+      letter-spacing: 0.015em;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .slide p {
+      margin: var(--spacing-8) 0;
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .slide ul, .slide ol {
+      margin: var(--spacing-8) 0;
+      padding-left: var(--spacing-24);
+    }
+
+    .slide li {
+      margin: 6px 0;
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .slide strong {
+      color: var(--color-ink-black);
+      font-weight: 400;
+    }
+
+    .example-block {
+      border-left: 2px solid var(--color-ink-black);
+      padding: var(--spacing-12) var(--spacing-24);
+      margin: var(--spacing-24) 0;
+    }
+
+    .example-block h5 {
+      margin: 0 0 var(--spacing-8);
+      font-size: var(--text-caption);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-ink-black);
+      font-weight: 400;
+    }
+
+    .example-block p {
+      margin: 6px 0;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+    }
+
+    .definition-block {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      margin: var(--spacing-24) 0;
+    }
+
+    .definition-block h5 {
+      margin: 0 0 var(--spacing-12);
+      font-size: var(--text-caption);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-ink-black);
+      font-weight: 400;
+    }
+
+    .definition-block p {
+      margin: 6px 0;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--text-body);
+      margin: var(--spacing-24) 0;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    th {
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-ink-black);
+      font-weight: 400;
+      border-bottom-color: var(--color-ink-black);
+    }
+
+    .formula {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      color: var(--color-ink-black);
+    }
+
+    /* Stepper component */
+    .stepper {
+      margin-bottom: var(--spacing-24);
+    }
+
+    .stepper-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-24);
+      gap: var(--spacing-12);
+    }
+
+    .stepper-track {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .stepper-node {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--color-light-gray);
+      background: var(--color-canvas-white);
+      color: var(--color-medium-gray);
+      font-size: var(--text-caption);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+      font-family: var(--font-onsite);
+    }
+
+    .stepper-node.active {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+      border-color: var(--color-ink-black);
+    }
+
+    .stepper-node.visited {
+      border-color: var(--color-ink-black);
+      color: var(--color-ink-black);
+    }
+
+    .stepper-line {
+      flex: 1;
+      height: 1px;
+      background: var(--color-light-gray);
+      min-width: 8px;
+    }
+
+    .stepper-counter {
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      color: var(--color-medium-gray);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .stepper-panel {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      min-height: 140px;
+    }
+
+    .stepper-panel h4 {
+      margin: 0 0 var(--spacing-12);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .stepper-panel p {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: var(--spacing-8) 0;
+    }
+
+    .stepper-panel ul {
+      padding-left: var(--spacing-24);
+      margin: var(--spacing-8) 0;
+    }
+
+    .stepper-panel li {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: 6px 0;
+    }
+
+    .stepper-panel strong {
+      color: var(--color-ink-black);
+      font-weight: 400;
+    }
+
+    .sheet-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid var(--color-light-gray);
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-12);
+    }
+
+    .stepper-nav {
+      display: flex;
+      gap: var(--spacing-12);
+      margin-top: var(--spacing-12);
+    }
+
+    .stepper-btn {
+      padding: 8px 20px;
+      border: 1px solid var(--color-ink-black);
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: var(--tracking-body);
+    }
+
+    .stepper-btn:hover:not(:disabled) {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+    }
+
+    .stepper-btn:disabled {
+      border-color: var(--color-light-gray);
+      color: var(--color-medium-gray);
+      cursor: default;
+    }
+
+    /* Accordion */
+    .accordion {
+      margin: var(--spacing-24) 0;
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      color: var(--color-ink-black);
+      letter-spacing: var(--tracking-body);
+      text-align: left;
+      gap: var(--spacing-12);
+      transition: color 0.15s;
+    }
+
+    .accordion-trigger:hover {
+      color: var(--color-medium-gray);
+    }
+
+    .accordion-trigger-label {
+      font-size: var(--text-body);
+      line-height: 1.5;
+    }
+
+    .accordion-icon {
+      flex-shrink: 0;
+      font-size: 18px;
+      color: var(--color-medium-gray);
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    .accordion-item.open .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 0 20px;
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    .accordion-body p {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: var(--spacing-8) 0;
+    }
+
+    .accordion-body ul {
+      padding-left: var(--spacing-24);
+      margin: var(--spacing-8) 0;
+    }
+
+    .accordion-body li {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: 6px 0;
+    }
+
+    .accordion-body strong {
+      color: var(--color-ink-black);
+      font-weight: 400;
+    }
+
+    .formula-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--spacing-12);
+      margin: var(--spacing-8) 0;
+      flex-wrap: wrap;
+    }
+
+    .formula-row .formula {
+      white-space: nowrap;
+    }
+
+    .formula-note {
+      font-size: var(--text-caption);
+      color: var(--color-faded-gray);
+      letter-spacing: 0.04em;
+    }
+
+    /* Worked example step reveal */
+    .worked-example {
+      border: 1px solid var(--color-light-gray);
+      margin: var(--spacing-24) 0;
+    }
+
+    .worked-example-header {
+      padding: 20px var(--spacing-24);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .worked-example-header h4 {
+      margin: var(--spacing-8) 0 0;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .worked-example-header p {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: var(--spacing-8) 0 0;
+    }
+
+    .step-list {
+      padding: var(--spacing-12) var(--spacing-24);
+    }
+
+    .step-item {
+      border-bottom: 1px solid var(--color-light-gray);
+      padding: var(--spacing-12) 0;
+    }
+
+    .step-item:last-child {
+      border-bottom: none;
+    }
+
+    .step-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      color: var(--color-ink-black);
+      letter-spacing: var(--tracking-body);
+      text-align: left;
+      padding: 6px 0;
+      transition: color 0.15s;
+    }
+
+    .step-trigger:hover {
+      color: var(--color-medium-gray);
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--color-light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-caption);
+      letter-spacing: 0;
+      flex-shrink: 0;
+      color: var(--color-medium-gray);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .step-item.revealed .step-num {
+      background: var(--color-ink-black);
+      border-color: var(--color-ink-black);
+      color: var(--color-canvas-white);
+    }
+
+    .step-label {
+      flex: 1;
+      font-size: var(--text-body);
+      color: var(--color-ink-black);
+    }
+
+    .step-reveal-icon {
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+      white-space: nowrap;
+    }
+
+    .step-item.revealed .step-reveal-icon {
+      color: var(--color-faded-gray);
+    }
+
+    .step-body {
+      display: none;
+      padding: var(--spacing-8) 0 var(--spacing-12) 36px;
+    }
+
+    .step-item.revealed .step-body {
+      display: block;
+    }
+
+    .step-body p {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: 4px 0;
+    }
+
+    .step-body strong {
+      color: var(--color-ink-black);
+      font-weight: 400;
+    }
+
+    .step-body .formula {
+      margin: var(--spacing-8) 0;
+      display: block;
+      width: fit-content;
+    }
+
+    .step-body table {
+      margin: var(--spacing-12) 0;
+      font-size: var(--text-caption);
+    }
+
+    .step-body th, .step-body td {
+      padding: 6px 10px;
+    }
+
+    /* Common mistakes checklist */
+    .checklist {
+      margin: var(--spacing-12) 0;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-12);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--color-light-gray);
+      cursor: pointer;
+    }
+
+    .checklist-item:first-child {
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--color-light-gray);
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .check-box::after {
+      content: '';
+      display: none;
+      width: 10px;
+      height: 6px;
+      border-left: 1.5px solid var(--color-canvas-white);
+      border-bottom: 1.5px solid var(--color-canvas-white);
+      transform: rotate(-45deg) translateY(-2px);
+    }
+
+    .checklist-item.checked .check-box {
+      background: var(--color-ink-black);
+      border-color: var(--color-ink-black);
+    }
+
+    .checklist-item.checked .check-box::after {
+      display: block;
+    }
+
+    .checklist-text {
+      flex: 1;
+    }
+
+    .checklist-text strong {
+      display: block;
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-ink-black);
+      margin-bottom: 4px;
+      transition: color 0.15s;
+    }
+
+    .checklist-item.checked .checklist-text strong {
+      color: var(--color-medium-gray);
+      text-decoration: line-through;
+    }
+
+    .checklist-text p {
+      font-size: var(--text-caption);
+      line-height: 1.6;
+      color: var(--color-faded-gray);
+      margin: 0;
+    }
+
+    .checklist-progress {
+      margin-top: var(--spacing-12);
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+    }
+
+    .checklist-progress-bar {
+      height: 2px;
+      background: var(--color-light-gray);
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .checklist-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--color-ink-black);
+      transition: width 0.3s ease;
+    }
+
+    /* Quiz components */
+    .quiz-block {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+      margin: var(--spacing-24) 0;
+    }
+
+    .quiz-header {
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .quiz-header h4 {
+      margin: var(--spacing-8) 0;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .quiz-header p {
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .quiz-q {
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-24);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .quiz-q:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .quiz-q-text {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      margin-bottom: var(--spacing-12);
+      color: var(--color-ink-black);
+    }
+
+    .quiz-q-prompt {
+      font-size: var(--text-caption);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-8);
+    }
+
+    .quiz-opt {
+      padding: 7px 16px;
+      border: 1px solid var(--color-light-gray);
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      font-size: var(--text-body);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      letter-spacing: var(--tracking-body);
+    }
+
+    .quiz-opt:hover:not(:disabled) {
+      border-color: var(--color-ink-black);
+    }
+
+    .quiz-opt.correct {
+      background: #e8f4e8;
+      border-color: #5a9e6f;
+      color: #2d6e45;
+    }
+
+    .quiz-opt.incorrect {
+      background: #fde8e8;
+      border-color: #c0504d;
+      color: #8b2020;
+    }
+
+    html.dark-mode .quiz-opt.correct {
+      background: #1a3325;
+      border-color: #5a9e6f;
+      color: #8ecfa8;
+    }
+
+    html.dark-mode .quiz-opt.incorrect {
+      background: #3a1515;
+      border-color: #c0504d;
+      color: #e08080;
+    }
+
+    .quiz-opt:disabled {
+      cursor: default;
+    }
+
+    .quiz-opt.kc-selected {
+      border-color: var(--color-ink-black);
+    }
+
+    .quiz-feedback {
+      margin-top: var(--spacing-8);
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+    }
+
+    .quiz-feedback.visible {
+      padding: var(--spacing-8) var(--spacing-12);
+      border-left: 2px solid var(--color-ink-black);
+    }
+
+    .kc-footer {
+      margin-top: var(--spacing-24);
+      padding-top: var(--spacing-24);
+      border-top: 1px solid var(--color-light-gray);
+    }
+
+    .kc-score {
+      font-size: var(--text-heading);
+      font-weight: 400;
+      letter-spacing: var(--tracking-heading);
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .kc-score span {
+      display: block;
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      margin-top: var(--spacing-8);
+      line-height: 1.75;
+    }
+
+    /* Downloads */
+    .downloads-section {
+      border: 1px solid var(--color-ink-black);
+    }
+
+    .downloads-section h3 {
+      margin-top: 0;
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-12);
+      margin-top: var(--spacing-24);
+    }
+
+    .download-card {
+      border: 1px solid var(--color-light-gray);
+      padding: var(--spacing-24);
+    }
+
+    .download-card-label {
+      font-size: var(--text-caption);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-12);
+    }
+
+    .download-card h4 {
+      margin: 0 0 var(--spacing-8);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-ink-black);
+    }
+
+    .download-card p {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-medium-gray);
+      margin: 0 0 var(--spacing-24);
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      padding: 9px 20px;
+      border: 1px solid var(--color-ink-black);
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      text-decoration: none;
+      font-size: var(--text-body);
+      letter-spacing: var(--tracking-body);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .download-btn:hover {
+      background: var(--color-ink-black);
+      color: var(--color-canvas-white);
+    }
+
+    .download-btn-arrow {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    /* Dark mode */
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black: #f0f0f0;
+      --color-medium-gray: #818181;
+      --color-light-gray: #2a2a2a;
+      --color-faded-gray: #5a5a5a;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-side {
+        border-left: 1px solid var(--color-ink-black);
+        border-top: none;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .download-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 16px 80px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-8);
+      }
+
+      .hero-main,
+      .hero-side {
+        padding: 24px 20px;
+      }
+
+      .content-card {
+        padding: 24px 20px;
+      }
+
+      .download-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <a href="index.html">&#8592; Back to Data Analysis</a>
+      <span>Lesson 06</span>
+    </div>
+
+    <section class="hero" aria-label="Lesson introduction">
+      <div class="hero-main">
+        <p class="eyebrow">Lesson 06</p>
+        <h1>Data Analysis with Spreadsheets</h1>
+        <p class="subtitle">A guided companion to the tutorial spreadsheet. Work through each sheet with tips, formula references, and worked examples before attempting the questions.</p>
+        <div class="hero-meta">
+          <span class="meta-pill">7 Sheets</span>
+          <span class="meta-pill">Spreadsheet included</span>
+          <span class="meta-pill">All topic areas</span>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <p class="section-label">Before you begin</p>
+        <p>Download the tutorial spreadsheet and have it open alongside this page.</p>
+        <p>Work through each sheet in order — later sheets build on earlier ones.</p>
+        <p>A scientific calculator is required for standard deviation and some mean calculations.</p>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <a href="#about">Sheet guide</a>
+        <a href="#formulas">Formula reference</a>
+        <a href="#worked">Worked examples</a>
+        <a href="#mistakes">Common mistakes</a>
+        <a href="#knowledge-check">Knowledge check</a>
+        <a href="#downloads">Downloads</a>
+      </aside>
+
+      <article class="content">
+
+        <!-- Section 1: Sheet Guide -->
+        <section class="content-card" id="about">
+          <p class="section-label">Section 1</p>
+          <h3>Sheet Guide</h3>
+          <p>The tutorial spreadsheet has seven sheets. Step through each one below to see what it covers and what to watch for.</p>
+
+          <div class="stepper" id="sheet-stepper" aria-label="Tutorial sheet guide">
+            <div class="stepper-header">
+              <div class="stepper-track" id="sheet-track"></div>
+              <span class="stepper-counter" id="sheet-counter">1 / 7</span>
+            </div>
+            <div class="stepper-panel" id="sheet-panel" role="region" aria-live="polite"></div>
+            <div class="stepper-nav">
+              <button class="stepper-btn" id="sheet-prev" disabled>&#8592; Previous</button>
+              <button class="stepper-btn" id="sheet-next">Next &#8594;</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Formula Reference -->
+        <section class="content-card" id="formulas">
+          <p class="section-label">Section 2</p>
+          <h3>Formula Reference</h3>
+          <p>Click any topic to expand the formulas you'll need for that sheet.</p>
+
+          <div class="accordion" id="formula-accordion">
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                <span class="accordion-trigger-label">Measures of Centre &mdash; Mean, Median, Mode</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <div class="formula-row">
+                  <span class="formula">Mean = &Sigma;x &divide; n</span>
+                  <span class="formula-note">Sum of all values divided by the count</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Mean (freq table) = &Sigma;(f &times; x) &divide; &Sigma;f</span>
+                  <span class="formula-note">Multiply each value by its frequency, sum, then divide by total frequency</span>
+                </div>
+                <p><strong>Median</strong> — the middle value when data is ordered. For <em>n</em> values, the median is at position (n + 1) &divide; 2. If <em>n</em> is even, average the two middle values.</p>
+                <p><strong>Mode</strong> — the most frequently occurring value. A dataset can have no mode, one mode (unimodal), or more than one mode (bimodal / multimodal).</p>
+                <div class="example-block" style="margin-top: 16px;">
+                  <h5>When to use each</h5>
+                  <p><strong>Mean</strong> — best for symmetric distributions with no outliers</p>
+                  <p><strong>Median</strong> — best when outliers are present or data is skewed</p>
+                  <p><strong>Mode</strong> — best for categorical data or finding the most common value</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                <span class="accordion-trigger-label">Spread &mdash; Range, Variance, Standard Deviation</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <div class="formula-row">
+                  <span class="formula">Range = Max &minus; Min</span>
+                  <span class="formula-note">Affected by outliers</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Population variance &sigma;&sup2; = &Sigma;(x &minus; &mu;)&sup2; &divide; n</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Population std dev &sigma; = &radic;(&Sigma;(x &minus; &mu;)&sup2; &divide; n)</span>
+                  <span class="formula-note">Same units as the data</span>
+                </div>
+                <p>A <strong>larger standard deviation</strong> means the data is more spread out. A <strong>smaller standard deviation</strong> means values are clustered close to the mean.</p>
+                <p>On your calculator, use the &sigma;n (population) function, not &sigma;n&minus;1 (sample), unless told otherwise.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                <span class="accordion-trigger-label">Quartiles, IQR &amp; Outlier Detection</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <p>Order the data, then split into four equal quarters.</p>
+                <div class="formula-row">
+                  <span class="formula">Q1 = median of the lower half</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Q2 = median of the whole dataset</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Q3 = median of the upper half</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">IQR = Q3 &minus; Q1</span>
+                  <span class="formula-note">Interquartile range — middle 50% of data</span>
+                </div>
+                <p><strong>Outlier fences (1.5 &times; IQR rule):</strong></p>
+                <div class="formula-row">
+                  <span class="formula">Lower fence = Q1 &minus; 1.5 &times; IQR</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Upper fence = Q3 + 1.5 &times; IQR</span>
+                </div>
+                <p>Any value <strong>below the lower fence</strong> or <strong>above the upper fence</strong> is classified as an outlier.</p>
+                <p>The <strong>five-number summary</strong> is: Min, Q1, Q2 (Median), Q3, Max.</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                <span class="accordion-trigger-label">Frequency Tables &amp; Histograms</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <div class="formula-row">
+                  <span class="formula">Class width = Upper boundary &minus; Lower boundary</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Class midpoint = (Lower + Upper) &divide; 2</span>
+                  <span class="formula-note">Used as the x value when calculating mean from grouped data</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Relative frequency = f &divide; &Sigma;f</span>
+                </div>
+                <div class="formula-row">
+                  <span class="formula">Cumulative frequency = running total of frequencies</span>
+                </div>
+                <p>In a histogram, bars are adjacent (no gaps) and bar width represents the class interval. Bar height (or area) represents frequency.</p>
+                <p><strong>Distribution shapes:</strong> symmetric (bell-shaped), positively skewed (tail to the right), negatively skewed (tail to the left).</p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger">
+                <span class="accordion-trigger-label">Data Classification</span>
+                <span class="accordion-icon">+</span>
+              </button>
+              <div class="accordion-body">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>Subtype</th>
+                      <th>Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Numerical</td>
+                      <td>Discrete</td>
+                      <td>Number of siblings, goals scored</td>
+                    </tr>
+                    <tr>
+                      <td>Numerical</td>
+                      <td>Continuous</td>
+                      <td>Height, temperature, time</td>
+                    </tr>
+                    <tr>
+                      <td>Categorical</td>
+                      <td>Nominal</td>
+                      <td>Eye colour, sport played (no natural order)</td>
+                    </tr>
+                    <tr>
+                      <td>Categorical</td>
+                      <td>Ordinal</td>
+                      <td>Survey rating (strongly agree &rarr; strongly disagree)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p><strong>Discrete</strong> — can only take specific values (usually countable whole numbers). <strong>Continuous</strong> — can take any value within a range (measured, not counted).</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 3: Worked Examples -->
+        <section class="content-card" id="worked">
+          <p class="section-label">Section 3</p>
+          <h3>Worked Examples</h3>
+          <p>Click each step to reveal the working. Try to do it yourself first before checking.</p>
+
+          <!-- Worked Example 1 -->
+          <div class="worked-example">
+            <div class="worked-example-header">
+              <p class="section-label">Example 1</p>
+              <h4>Mean, Median and Mode from a Frequency Table</h4>
+              <p>The table below shows the number of hours per week students spend exercising. Find the mean, median and mode.</p>
+              <table style="margin-top: 12px;">
+                <thead>
+                  <tr><th>Hours (x)</th><th>Frequency (f)</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>4</td></tr>
+                  <tr><td>2</td><td>7</td></tr>
+                  <tr><td>3</td><td>9</td></tr>
+                  <tr><td>4</td><td>5</td></tr>
+                  <tr><td>5</td><td>3</td></tr>
+                  <tr><td><strong>Total</strong></td><td><strong>28</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="step-list" id="ex1-steps"></div>
+          </div>
+
+          <!-- Worked Example 2 -->
+          <div class="worked-example">
+            <div class="worked-example-header">
+              <p class="section-label">Example 2</p>
+              <h4>Calculating IQR and Identifying Outliers</h4>
+              <p>The weekly sales (in $000s) at a small shop over 9 weeks are: <strong>12, 15, 14, 18, 13, 16, 45, 14, 17</strong>. Find Q1, Q3, IQR, and determine whether 45 is an outlier.</p>
+            </div>
+            <div class="step-list" id="ex2-steps"></div>
+          </div>
+
+          <!-- Worked Example 3 -->
+          <div class="worked-example">
+            <div class="worked-example-header">
+              <p class="section-label">Example 3</p>
+              <h4>Describing a Dataset's Distribution</h4>
+              <p>A temperature dataset has: Mean = 22.4&deg;C, Median = 20.1&deg;C, Mode = 19&deg;C. The histogram shows a long tail to the right. Describe the distribution and explain which measure of centre is most appropriate.</p>
+            </div>
+            <div class="step-list" id="ex3-steps"></div>
+          </div>
+        </section>
+
+        <!-- Section 4: Common Mistakes -->
+        <section class="content-card" id="mistakes">
+          <p class="section-label">Section 4</p>
+          <h3>Common Mistakes</h3>
+          <p>Tick off each item as you work through the tutorial. These are the most common errors in Data Analysis questions.</p>
+
+          <div class="checklist" id="mistakes-list"></div>
+          <div class="checklist-progress">
+            <span id="checklist-count">0 of 8 reviewed</span>
+            <div class="checklist-progress-bar">
+              <div class="checklist-progress-fill" id="checklist-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: Knowledge Check -->
+        <section class="content-card" id="knowledge-check">
+          <p class="section-label">Section 5</p>
+          <h3>Knowledge Check</h3>
+          <p>Answer all 5 questions — the quiz submits automatically once you've answered each one.</p>
+          <div id="kc-questions"></div>
+          <div class="kc-footer" id="kc-footer" style="display:none">
+            <div class="kc-score" id="kc-score"></div>
+            <button class="stepper-btn" id="kc-reset" style="margin-top: var(--spacing-12)">Try again</button>
+          </div>
+        </section>
+
+        <!-- Section 6: Downloads -->
+        <section class="content-card downloads-section" id="downloads">
+          <p class="section-label">Section 6</p>
+          <h3>Downloads</h3>
+          <p>Download the tutorial spreadsheet to complete alongside this lesson, and the homework spreadsheet to complete independently.</p>
+
+          <div class="download-grid">
+            <div class="download-card">
+              <p class="download-card-label">Tutorial</p>
+              <h4>Data Analysis Tutorial Spreadsheet</h4>
+              <p>Seven sheets covering all Data Analysis topic areas. Complete in order, working alongside this lesson's tips and examples.</p>
+              <a href="assets/Yr11_DataAnalysis_TUTORIAL.xlsx" download class="download-btn">
+                <span class="download-btn-arrow">&#8595;</span>
+                Download Tutorial (.xlsx)
+              </a>
+            </div>
+            <div class="download-card">
+              <p class="download-card-label">Homework</p>
+              <h4>Data Analysis Homework Spreadsheet</h4>
+              <p>Complete this independently after working through the tutorial. Apply all skills from lessons 1&ndash;6.</p>
+              <a href="assets/Yr11_DataAnalysis_HOMEWORK.xlsx" download class="download-btn">
+                <span class="download-btn-arrow">&#8595;</span>
+                Download Homework (.xlsx)
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+
+  <script>
+    // Dark mode wiring
+    var html = document.documentElement;
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved ? saved === 'dark' : prefersDark) html.classList.add('dark-mode');
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      if (!localStorage.getItem('theme')) {
+        html.classList.toggle('dark-mode', e.matches);
+      }
+    });
+
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'theme') html.classList.toggle('dark-mode', e.newValue === 'dark');
+    });
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'ie-theme') {
+        html.classList.toggle('dark-mode', e.data.dark);
+      }
+    });
+
+    // TOC scroll highlighting
+    (function() {
+      var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
+      var sections = Array.from(tocLinks)
+        .map(function(a) { return document.querySelector(a.getAttribute('href')); })
+        .filter(Boolean);
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            tocLinks.forEach(function(l) { l.classList.remove('toc-active'); });
+            var link = document.querySelector('.toc a[href="#' + e.target.id + '"]');
+            if (link) link.classList.add('toc-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      sections.forEach(function(s) { obs.observe(s); });
+    })();
+
+    // Sheet Stepper
+    (function() {
+      var SHEETS = [
+        {
+          label: 'Sheet 1',
+          title: 'Data Classification',
+          difficulty: 'Foundation',
+          body: '<p>This sheet asks you to classify data as <strong>numerical</strong> or <strong>categorical</strong>, then as <strong>discrete / continuous</strong> or <strong>nominal / ordinal</strong>.</p><ul><li>Ask: "Can you measure it on a number line?" &rarr; numerical. "Can you only put it in named groups?" &rarr; categorical.</li><li>Discrete = countable whole numbers (e.g. goals scored). Continuous = measurable, can take any value (e.g. height).</li><li>Nominal = no natural order (e.g. eye colour). Ordinal = has a natural order (e.g. ranking).</li></ul>'
+        },
+        {
+          label: 'Sheet 2',
+          title: 'Frequency Tables',
+          difficulty: 'Foundation',
+          body: '<p>You\'ll construct and interpret grouped and ungrouped frequency tables, add cumulative frequency columns, and draw histograms.</p><ul><li>Check all class intervals have <strong>equal width</strong> before proceeding.</li><li>Cumulative frequency runs as a <strong>running total</strong> — each row adds to the previous.</li><li>For the histogram, bars must be <strong>adjacent</strong> (touching) — gaps mean the graph is wrong.</li><li>Class midpoint = (lower bound + upper bound) &divide; 2 — you\'ll need this if calculating the mean.</li></ul>'
+        },
+        {
+          label: 'Sheet 3',
+          title: 'Measures of Centre',
+          difficulty: 'Foundation',
+          body: '<p>Find the mean, median and mode for datasets, and decide which measure best represents the data.</p><ul><li><strong>Mean from a frequency table:</strong> &Sigma;(f &times; x) &divide; &Sigma;f — multiply each value by its frequency first.</li><li><strong>Median position:</strong> (n + 1) &divide; 2 — if n = 20, median is at position 10.5 (average of 10th and 11th values).</li><li>If the data has outliers, the <strong>median</strong> is usually the better measure.</li><li>Mean, median and mode will all be equal in a <strong>perfectly symmetric</strong> distribution.</li></ul>'
+        },
+        {
+          label: 'Sheet 4',
+          title: 'Spread & Standard Deviation',
+          difficulty: 'Intermediate',
+          body: '<p>Calculate range, variance and population standard deviation, and interpret what they mean about the dataset.</p><ul><li><strong>Range</strong> = Max &minus; Min. Simple but heavily affected by a single outlier.</li><li>For <strong>standard deviation</strong> by hand: find the mean, subtract from each value, square each result, average them, then take the square root.</li><li>On your calculator use <strong>&sigma;n</strong> (population std dev) unless the question says "sample".</li><li>Standard deviation has the <strong>same units</strong> as the original data — always include units in your answer.</li><li>A higher std dev means more spread; a lower std dev means values cluster tightly around the mean.</li></ul>'
+        },
+        {
+          label: 'Sheet 5',
+          title: 'Quartiles & IQR',
+          difficulty: 'Intermediate',
+          body: '<p>Find the five-number summary, calculate IQR, and use the 1.5 &times; IQR rule to identify outliers.</p><ul><li>Always <strong>sort the data</strong> before finding quartiles.</li><li>Q1 = median of the lower half, Q3 = median of the upper half — do <em>not</em> include the overall median in either half when n is odd.</li><li><strong>Outlier check:</strong> Lower fence = Q1 &minus; 1.5 &times; IQR; Upper fence = Q3 + 1.5 &times; IQR. Values outside these fences are outliers.</li><li>On a <strong>box plot</strong>, whiskers extend to the last data point within the fences (not to the fence itself).</li></ul>'
+        },
+        {
+          label: 'Sheet 6',
+          title: 'Weather Dataset',
+          difficulty: 'Intermediate',
+          body: '<p>A real-style temperature dataset. You\'ll calculate statistics, graph the data, and analyse its shape and distribution.</p><ul><li>Start by identifying the <strong>shape of the distribution</strong> — is it symmetric, positively skewed, or negatively skewed?</li><li>In a <strong>positively skewed</strong> distribution the tail goes right and mean &gt; median &gt; mode.</li><li>In a <strong>negatively skewed</strong> distribution the tail goes left and mean &lt; median &lt; mode.</li><li>Look for <strong>clusters</strong> (dense regions), <strong>gaps</strong> (empty regions), and any potential outliers before drawing conclusions.</li><li>Link your statistics back to the context: "The mean temperature of 24.3&deg;C suggests…"</li></ul>'
+        },
+        {
+          label: 'Sheet 7',
+          title: 'Sales Dataset',
+          difficulty: 'Advanced',
+          body: '<p>Business sales data requiring full analysis: centre, spread, box plots, outlier identification, and comparison of two datasets.</p><ul><li>When <strong>comparing two datasets</strong>, always comment on both <em>centre</em> (mean or median) and <em>spread</em> (std dev or IQR) — one alone is not enough.</li><li>When drawing box plots for comparison, use the <strong>same scale</strong> on both.</li><li>If an outlier is present, discuss its <strong>impact</strong>: does it pull the mean up? Does it affect the std dev significantly?</li><li>Conclude in context: "Store A has a higher median sales figure, but greater spread, suggesting more variability in performance."</li></ul>'
+        }
+      ];
+
+      var track = document.getElementById('sheet-track');
+      var panel = document.getElementById('sheet-panel');
+      var counter = document.getElementById('sheet-counter');
+      var prevBtn = document.getElementById('sheet-prev');
+      var nextBtn = document.getElementById('sheet-next');
+      var current = 0;
+      var nodes = [];
+
+      // Build stepper track
+      SHEETS.forEach(function(_, i) {
+        if (i > 0) {
+          var line = document.createElement('div');
+          line.className = 'stepper-line';
+          track.appendChild(line);
+        }
+        var node = document.createElement('button');
+        node.className = 'stepper-node' + (i === 0 ? ' active' : '');
+        node.textContent = i + 1;
+        node.setAttribute('aria-label', 'Sheet ' + (i + 1));
+        node.addEventListener('click', function() { current = i; render(); });
+        track.appendChild(node);
+        nodes.push(node);
+      });
+
+      function render() {
+        var sheet = SHEETS[current];
+        panel.innerHTML =
+          '<span class="sheet-badge">' + sheet.label + ' &mdash; ' + sheet.difficulty + '</span>' +
+          '<h4>' + sheet.title + '</h4>' +
+          sheet.body;
+        counter.textContent = (current + 1) + ' / ' + SHEETS.length;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === SHEETS.length - 1;
+        nodes.forEach(function(n, i) {
+          n.classList.toggle('active', i === current);
+          n.classList.toggle('visited', i < current);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() { if (current > 0) { current--; render(); } });
+      nextBtn.addEventListener('click', function() { if (current < SHEETS.length - 1) { current++; render(); } });
+
+      render();
+    })();
+
+    // Accordion
+    (function() {
+      document.querySelectorAll('.accordion-trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
+          var item = trigger.closest('.accordion-item');
+          var isOpen = item.classList.contains('open');
+          item.classList.toggle('open', !isOpen);
+        });
+      });
+    })();
+
+    // Worked Example Step Reveals
+    (function() {
+      var EXAMPLES = [
+        {
+          containerId: 'ex1-steps',
+          steps: [
+            {
+              label: 'Set up the f × x column',
+              body: '<p>Multiply each value by its frequency:</p><table><thead><tr><th>x</th><th>f</th><th>f × x</th></tr></thead><tbody><tr><td>1</td><td>4</td><td>4</td></tr><tr><td>2</td><td>7</td><td>14</td></tr><tr><td>3</td><td>9</td><td>27</td></tr><tr><td>4</td><td>5</td><td>20</td></tr><tr><td>5</td><td>3</td><td>15</td></tr><tr><td><strong>Total</strong></td><td><strong>28</strong></td><td><strong>80</strong></td></tr></tbody></table>'
+            },
+            {
+              label: 'Calculate the mean',
+              body: '<p>Mean = Σ(f × x) ÷ Σf</p><span class="formula">Mean = 80 ÷ 28 ≈ 2.86 hours</span><p>Round to 2 decimal places unless instructed otherwise.</p>'
+            },
+            {
+              label: 'Find the median',
+              body: '<p>Total frequency n = 28. Median position = (28 + 1) ÷ 2 = <strong>14.5th value</strong> (average of 14th and 15th).</p><p>Cumulative frequencies: x=1: 4 &nbsp;│&nbsp; x=2: 11 &nbsp;│&nbsp; x=3: 20</p><p>Both the 14th and 15th values fall in the x = 3 group (cumulative freq reaches 20 at x = 3).</p><span class="formula">Median = 3 hours</span>'
+            },
+            {
+              label: 'Identify the mode',
+              body: '<p>The mode is the value with the <strong>highest frequency</strong>.</p><p>x = 3 has frequency 9 (the highest).</p><span class="formula">Mode = 3 hours</span><p>Note: mean ≈ 2.86, median = 3, mode = 3. The distribution is slightly negatively skewed (mean is pulled left).</p>'
+            }
+          ]
+        },
+        {
+          containerId: 'ex2-steps',
+          steps: [
+            {
+              label: 'Order the data',
+              body: '<p>Sort from smallest to largest:</p><span class="formula">12, 13, 14, 14, 15, 16, 17, 18, 45</span><p>n = 9 values.</p>'
+            },
+            {
+              label: 'Find Q1 and Q3',
+              body: '<p>Median (Q2) is at position (9+1)÷2 = 5th value = <strong>15</strong>.</p><p>Lower half (excluding median): 12, 13, 14, 14 → Q1 = (13+14)÷2 = <strong>13.5</strong></p><p>Upper half (excluding median): 16, 17, 18, 45 → Q3 = (17+18)÷2 = <strong>17.5</strong></p>'
+            },
+            {
+              label: 'Calculate IQR',
+              body: '<span class="formula">IQR = Q3 − Q1 = 17.5 − 13.5 = 4</span>'
+            },
+            {
+              label: 'Apply the 1.5 × IQR rule',
+              body: '<p>Lower fence = Q1 − 1.5 × IQR = 13.5 − 6 = <strong>7.5</strong></p><p>Upper fence = Q3 + 1.5 × IQR = 17.5 + 6 = <strong>23.5</strong></p><p>The value 45 is above the upper fence of 23.5.</p><span class="formula">Conclusion: 45 IS an outlier</span><p>Interpret in context: "The sale of $45,000 in week 7 is unusually high and is classified as an outlier. It may reflect a one-off bulk purchase."</p>'
+            }
+          ]
+        },
+        {
+          containerId: 'ex3-steps',
+          steps: [
+            {
+              label: 'Identify the distribution shape',
+              body: '<p>The histogram has a long tail extending to the <strong>right</strong>.</p><p>This means the distribution is <strong>positively skewed</strong> (right-skewed).</p><p>Confirm with the statistics: Mean (22.4) &gt; Median (20.1) &gt; Mode (19) — the mean is pulled right by high values.</p>'
+            },
+            {
+              label: 'Choose the appropriate measure of centre',
+              body: '<p>In a positively skewed distribution, there are some unusually high values (e.g. very hot days) pulling the <strong>mean upward</strong>.</p><p>The <strong>median</strong> is not affected by these extremes and better represents the "typical" temperature.</p><span class="formula">Most appropriate measure: Median = 20.1°C</span>'
+            },
+            {
+              label: 'Write a full description',
+              body: '<p>A complete description addresses: <strong>shape</strong>, <strong>centre</strong>, <strong>spread</strong>, and <strong>unusual features</strong>.</p><p><em>Example response:</em> "The distribution of temperatures is positively skewed, with a long tail to the right indicating some unusually hot days. The median temperature of 20.1°C is the most appropriate measure of centre as it is resistant to the influence of outliers. The mean of 22.4°C overestimates the typical temperature due to a small number of extreme high values."</p>'
+            }
+          ]
+        }
+      ];
+
+      EXAMPLES.forEach(function(ex) {
+        var container = document.getElementById(ex.containerId);
+        if (!container) return;
+
+        ex.steps.forEach(function(step, si) {
+          var item = document.createElement('div');
+          item.className = 'step-item';
+
+          var trigger = document.createElement('button');
+          trigger.className = 'step-trigger';
+
+          var num = document.createElement('span');
+          num.className = 'step-num';
+          num.textContent = si + 1;
+
+          var label = document.createElement('span');
+          label.className = 'step-label';
+          label.textContent = step.label;
+
+          var icon = document.createElement('span');
+          icon.className = 'step-reveal-icon';
+          icon.textContent = 'Show';
+
+          trigger.appendChild(num);
+          trigger.appendChild(label);
+          trigger.appendChild(icon);
+
+          var body = document.createElement('div');
+          body.className = 'step-body';
+          body.innerHTML = step.body;
+
+          trigger.addEventListener('click', function() {
+            var isRevealed = item.classList.contains('revealed');
+            item.classList.toggle('revealed', !isRevealed);
+            icon.textContent = isRevealed ? 'Show' : 'Hide';
+          });
+
+          item.appendChild(trigger);
+          item.appendChild(body);
+          container.appendChild(item);
+        });
+      });
+    })();
+
+    // Common Mistakes Checklist
+    (function() {
+      var MISTAKES = [
+        {
+          title: 'Using the wrong standard deviation button on the calculator',
+          detail: 'Use σn for population standard deviation. σn−1 is for samples — unless the question specifies "sample", always use σn.'
+        },
+        {
+          title: 'Forgetting to order data before finding quartiles',
+          detail: 'Quartiles require sorted data. If you skip this step, Q1, Q2, Q3 and the outlier check will all be wrong.'
+        },
+        {
+          title: 'Including the median in both halves when finding Q1 and Q3',
+          detail: 'When n is odd, exclude the median value from both the lower and upper halves before finding Q1 and Q3.'
+        },
+        {
+          title: 'Drawing gaps between histogram bars',
+          detail: 'Histograms show continuous data — bars must touch. Gaps suggest separate categories (a bar chart), not a continuous distribution.'
+        },
+        {
+          title: 'Using mean instead of median with skewed data',
+          detail: 'When data is skewed or has outliers, the median is the better measure of centre. The mean is pulled toward the outlier.'
+        },
+        {
+          title: 'Not using class midpoints when calculating mean from grouped data',
+          detail: 'For grouped frequency tables, use the midpoint of each class (not the lower bound) as the x value in Σ(f × x) ÷ Σf.'
+        },
+        {
+          title: 'Extending box plot whiskers to the fence, not the last data point',
+          detail: 'Whiskers extend to the last data value that falls within the fence, not to the fence value itself. Outliers are plotted separately as individual points.'
+        },
+        {
+          title: 'Describing a dataset without context',
+          detail: 'Always relate your statistical conclusions back to the real-world situation. "The median is 20.1°C" alone is incomplete — explain what it means for the data.'
+        }
+      ];
+
+      var list = document.getElementById('mistakes-list');
+      var countEl = document.getElementById('checklist-count');
+      var fill = document.getElementById('checklist-fill');
+      var checkedCount = 0;
+
+      MISTAKES.forEach(function(m, i) {
+        var item = document.createElement('div');
+        item.className = 'checklist-item';
+        item.setAttribute('role', 'checkbox');
+        item.setAttribute('aria-checked', 'false');
+        item.setAttribute('tabindex', '0');
+
+        var box = document.createElement('div');
+        box.className = 'check-box';
+
+        var text = document.createElement('div');
+        text.className = 'checklist-text';
+
+        var strong = document.createElement('strong');
+        strong.textContent = m.title;
+
+        var detail = document.createElement('p');
+        detail.textContent = m.detail;
+
+        text.appendChild(strong);
+        text.appendChild(detail);
+        item.appendChild(box);
+        item.appendChild(text);
+        list.appendChild(item);
+
+        function toggle() {
+          var isChecked = item.classList.toggle('checked');
+          item.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+          checkedCount = list.querySelectorAll('.checklist-item.checked').length;
+          countEl.textContent = checkedCount + ' of ' + MISTAKES.length + ' reviewed';
+          fill.style.width = (checkedCount / MISTAKES.length * 100) + '%';
+        }
+
+        item.addEventListener('click', toggle);
+        item.addEventListener('keydown', function(e) {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+        });
+      });
+    })();
+
+    // Knowledge Check
+    (function() {
+      var KC_QS = [
+        {
+          q: 'A dataset of shoe sizes includes: 6, 7, 7, 8, 8, 8, 9, 9, 10. What is the mode?',
+          opts: ['7', '8', '9', '8.5'],
+          ans: 1,
+          exp: 'Mode = 8. It appears 3 times, more than any other value.'
+        },
+        {
+          q: 'A frequency table has classes 10–19, 20–29, 30–39. What is the class width?',
+          opts: ['9', '10', '19', '5'],
+          ans: 1,
+          exp: 'Class width = upper boundary − lower boundary. Using true boundaries: 19.5 − 9.5 = 10. Alternatively, 20 − 10 = 10.'
+        },
+        {
+          q: 'A dataset has Q1 = 12, Q3 = 20. What is the IQR, and what is the upper outlier fence?',
+          opts: ['IQR = 8, fence = 32', 'IQR = 8, fence = 28', 'IQR = 16, fence = 44', 'IQR = 8, fence = 20'],
+          ans: 0,
+          exp: 'IQR = Q3 − Q1 = 20 − 12 = 8. Upper fence = Q3 + 1.5 × IQR = 20 + 12 = 32.'
+        },
+        {
+          q: 'A distribution has mean = 85, median = 72, mode = 65. Which best describes its shape?',
+          opts: ['Symmetric', 'Negatively skewed', 'Positively skewed', 'Uniform'],
+          ans: 2,
+          exp: 'Mean > Median > Mode indicates positive (right) skew — a long tail pulls the mean upward.'
+        },
+        {
+          q: 'Which data type is "the number of students in a classroom"?',
+          opts: ['Continuous numerical', 'Discrete numerical', 'Nominal categorical', 'Ordinal categorical'],
+          ans: 1,
+          exp: 'Number of students is countable and can only be a whole number — this makes it discrete numerical data.'
+        }
+      ];
+
+      var container = document.getElementById('kc-questions');
+      var footer = document.getElementById('kc-footer');
+      var scoreEl = document.getElementById('kc-score');
+      var resetBtn = document.getElementById('kc-reset');
+      if (!container) return;
+
+      var answers, submitted;
+
+      function buildQuestions() {
+        container.innerHTML = '';
+        answers = new Array(KC_QS.length).fill(null);
+        submitted = false;
+        footer.style.display = 'none';
+
+        KC_QS.forEach(function(q, qi) {
+          var div = document.createElement('div');
+          div.className = 'quiz-q';
+
+          var promptEl = document.createElement('p');
+          promptEl.className = 'quiz-q-prompt';
+          promptEl.textContent = 'Question ' + (qi + 1) + ' of ' + KC_QS.length;
+
+          var textEl = document.createElement('p');
+          textEl.className = 'quiz-q-text';
+          textEl.textContent = q.q;
+
+          var optsEl = document.createElement('div');
+          optsEl.className = 'quiz-options';
+          optsEl.id = 'kc-opts-' + qi;
+
+          var fbEl = document.createElement('div');
+          fbEl.className = 'quiz-feedback';
+          fbEl.id = 'kc-fb-' + qi;
+
+          div.appendChild(promptEl);
+          div.appendChild(textEl);
+          div.appendChild(optsEl);
+          div.appendChild(fbEl);
+          container.appendChild(div);
+
+          q.opts.forEach(function(opt, oi) {
+            var btn = document.createElement('button');
+            btn.className = 'quiz-opt';
+            btn.textContent = opt;
+            btn.addEventListener('click', function() {
+              if (submitted) return;
+              answers[qi] = oi;
+              optsEl.querySelectorAll('.quiz-opt').forEach(function(b, bi) {
+                b.classList.toggle('kc-selected', bi === oi);
+              });
+              if (answers.every(function(a) { return a !== null; })) submitQuiz();
+            });
+            optsEl.appendChild(btn);
+          });
+        });
+      }
+
+      function submitQuiz() {
+        submitted = true;
+        var score = 0;
+        KC_QS.forEach(function(q, qi) {
+          var optsEl = document.getElementById('kc-opts-' + qi);
+          var fbEl = document.getElementById('kc-fb-' + qi);
+          var userAns = answers[qi];
+          if (userAns === q.ans) score++;
+          optsEl.querySelectorAll('.quiz-opt').forEach(function(b, bi) {
+            b.disabled = true;
+            b.classList.remove('kc-selected');
+            if (bi === q.ans) b.classList.add('correct');
+            else if (bi === userAns) b.classList.add('incorrect');
+          });
+          fbEl.className = 'quiz-feedback visible';
+          fbEl.textContent = q.exp;
+        });
+        var remarks = [
+          [5, 'Full marks — outstanding work across all topic areas.'],
+          [4, 'Excellent — just one to review. Check the explanation for the question you missed.'],
+          [3, 'Good progress. Revisit the formula reference and worked examples for any areas you missed.'],
+          [0, 'Keep going — work through the sheet guide and formula reference, then try again.']
+        ];
+        var remark = remarks.find(function(r) { return score >= r[0]; })[1];
+        scoreEl.innerHTML = score + ' / ' + KC_QS.length + '<span>' + remark + '</span>';
+        footer.style.display = 'block';
+        footer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      resetBtn.addEventListener('click', buildQuestions);
+      buildQuestions();
+    })();
+  </script>
+  <script src="../../question-popup.js"></script>
+</body>
+</html>
