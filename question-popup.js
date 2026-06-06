@@ -123,8 +123,8 @@
       'background:#000;color:#fff;',
       'border:none;border-radius:0;',
       'cursor:pointer;',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.78rem;font-weight:600;letter-spacing:0.04em;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:13px;font-weight:700;letter-spacing:0.04em;',
       'transition:background 0.15s;white-space:nowrap;',
     '}',
     '.qpop-trigger:hover{background:#1a1a1a;}',
@@ -158,8 +158,8 @@
     '.qpop-tab{',
       'background:transparent;border:none;border-bottom:1px solid transparent;border-radius:0;',
       'padding:0.1rem 0;cursor:pointer;',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.78rem;font-weight:600;letter-spacing:0.04em;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:13px;font-weight:700;letter-spacing:0.04em;',
       'color:rgba(0,0,0,0.38);',
       'transition:color 0.15s,border-color 0.15s;',
     '}',
@@ -185,8 +185,8 @@
 
     /* Label */
     '.qpop-label{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.65rem;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;',
       'color:rgba(0,0,0,0.42);margin:0;',
     '}',
     'html.dark-mode .qpop-label{color:rgba(240,240,245,0.42);}',
@@ -197,8 +197,8 @@
       'background:transparent;color:rgba(0,0,0,0.42);',
       'border:none;border-bottom:1px solid rgba(0,0,0,0.16);border-radius:0;',
       'padding:0.18rem 0;cursor:pointer;',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.78rem;font-weight:400;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:13px;font-weight:500;',
       'transition:color 0.15s,border-color 0.15s;',
     '}',
     'html.dark-mode .qpop-toggle{color:rgba(240,240,245,0.42);border-bottom-color:rgba(240,240,245,0.16);}',
@@ -216,7 +216,7 @@
       'background:transparent;color:#000;',
       'border:none;border-bottom:1px solid rgba(0,0,0,0.22);border-radius:0;',
       'padding:0.3rem 0;',
-      'font-family:\'Space Mono\',monospace;font-size:0.83rem;',
+      'font-family:\'Poppins\',sans-serif;font-size:14px;',
       'outline:none;transition:border-color 0.15s;width:100%;',
       '-moz-appearance:textfield;',
     '}',
@@ -229,7 +229,7 @@
       'background:transparent;color:#000;',
       'border:1px solid rgba(0,0,0,0.18);border-radius:0;',
       'padding:0.5rem;',
-      'font-family:\'Space Mono\',monospace;font-size:0.83rem;',
+      'font-family:\'Poppins\',sans-serif;font-size:14px;',
       'resize:vertical;outline:none;min-height:80px;',
       'transition:border-color 0.15s;width:100%;',
     '}',
@@ -237,16 +237,10 @@
     '.qpop-textarea:focus{border-color:#000;}',
     'html.dark-mode .qpop-textarea:focus{border-color:rgba(240,240,245,0.65);}',
 
-    '.qpop-file{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.75rem;color:rgba(0,0,0,0.48);cursor:pointer;',
-    '}',
-    'html.dark-mode .qpop-file{color:rgba(240,240,245,0.48);}',
-
     /* Hints & errors */
     '.qpop-hint{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.68rem;color:#b91c1c;line-height:1.5;margin:0;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:13px;color:#b91c1c;line-height:1.5;margin:0;',
     '}',
     'html.dark-mode .qpop-hint{color:#f87171;}',
 
@@ -256,8 +250,8 @@
       'background:transparent;color:#000;',
       'border:none;border-bottom:1px solid #000;border-radius:0;',
       'padding:0.4rem 0;cursor:pointer;',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.83rem;font-weight:600;letter-spacing:0.04em;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:13px;font-weight:700;letter-spacing:0.04em;',
       'text-align:left;align-self:flex-start;',
       'transition:color 0.15s,border-color 0.15s;',
     '}',
@@ -267,8 +261,8 @@
     '.qpop-submit:disabled{opacity:0.35;cursor:not-allowed;}',
 
     '.qpop-status{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.75rem;color:rgba(0,0,0,0.48);line-height:1.5;margin:0;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:13px;color:rgba(0,0,0,0.48);line-height:1.5;margin:0;',
     '}',
     'html.dark-mode .qpop-status{color:rgba(240,240,245,0.48);}',
 
@@ -281,23 +275,23 @@
     'html.dark-mode .qpop-history-item{border-color:rgba(240,240,245,0.10);}',
     '.qpop-history-meta{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}',
     '.qpop-history-date{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.56rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;',
       'color:rgba(0,0,0,0.32);margin-left:auto;',
     '}',
     'html.dark-mode .qpop-history-date{color:rgba(240,240,245,0.32);}',
 
     '.qpop-category-tag{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;',
       'color:rgba(0,0,0,0.42);border:1px solid rgba(0,0,0,0.16);border-radius:0;',
       'padding:0.1rem 0.35rem;',
     '}',
     'html.dark-mode .qpop-category-tag{color:rgba(240,240,245,0.42);border-color:rgba(240,240,245,0.16);}',
 
     '.qpop-badge{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.56rem;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;',
       'padding:0.1rem 0.35rem;border-radius:0;',
     '}',
     '.qpop-badge--pending{color:rgba(0,0,0,0.38);border:1px solid rgba(0,0,0,0.14);}',
@@ -306,21 +300,21 @@
     'html.dark-mode .qpop-badge--answered{color:#34d399;border-color:rgba(52,211,153,0.3);}',
 
     '.qpop-history-question{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.8rem;color:rgba(0,0,0,0.52);line-height:1.55;margin:0;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:14px;color:rgba(0,0,0,0.52);line-height:1.55;margin:0;',
     '}',
     'html.dark-mode .qpop-history-question{color:rgba(240,240,245,0.52);}',
 
     '.qpop-history-response{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.78rem;color:#000;line-height:1.55;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:14px;color:#000;line-height:1.55;',
       'padding:0.5rem;border-left:2px solid rgba(0,0,0,0.18);margin-top:0.25rem;',
     '}',
     'html.dark-mode .qpop-history-response{color:#f0f0f5;border-left-color:rgba(240,240,245,0.18);}',
 
     '.qpop-no-questions{',
-      'font-family:\'Space Mono\',monospace;',
-      'font-size:0.8rem;color:rgba(0,0,0,0.42);line-height:1.6;padding:0.5rem 0;margin:0;',
+      'font-family:\'Poppins\',sans-serif;',
+      'font-size:14px;color:rgba(0,0,0,0.42);line-height:1.6;padding:0.5rem 0;margin:0;',
     '}',
     'html.dark-mode .qpop-no-questions{color:rgba(240,240,245,0.42);}',
 
@@ -399,11 +393,6 @@
         '<div class="qpop-field" id="otherFields">',
           '<label class="qpop-label" for="qText">Your question</label>',
           '<textarea class="qpop-textarea" id="qText" placeholder="Type your question here…" rows="4"></textarea>',
-          '<label class="qpop-label" for="qImage" style="margin-top:10px">',
-            'Attach image <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional, max 200 KB)</span>',
-          '</label>',
-          '<input class="qpop-file" type="file" id="qImage" accept="image/*">',
-          '<p class="qpop-hint" id="imgHint" style="display:none">Image too large (max 200 KB). Please use a smaller screenshot.</p>',
         '</div>',
 
         '<div class="qpop-actions">',
@@ -448,14 +437,11 @@
   var hscYear      = document.getElementById('hscYear');
   var hscQNum      = document.getElementById('hscQNum');
   var qText        = document.getElementById('qText');
-  var qImage       = document.getElementById('qImage');
-  var imgHint      = document.getElementById('imgHint');
   var submitBtn    = document.getElementById('qpopSubmit');
   var statusEl     = document.getElementById('qpopStatus');
   var historyList  = document.getElementById('historyList');
 
   var isOpen = false;
-  var imageBase64 = '';
 
   function openPanel()  {
     isOpen = true;
@@ -514,21 +500,6 @@
     otherFields.style.display = isHsc ? 'none' : '';
   });
 
-  /* Image upload */
-  qImage.addEventListener('change', function () {
-    imgHint.style.display = 'none';
-    imageBase64 = '';
-    var file = qImage.files[0];
-    if (!file) return;
-    if (file.size > 200 * 1024) {
-      imgHint.style.display = '';
-      qImage.value = '';
-      return;
-    }
-    var reader = new FileReader();
-    reader.onload = function (e) { imageBase64 = e.target.result; };
-    reader.readAsDataURL(file);
-  });
 
   function getToggleValue(groupEl) {
     var active = groupEl.querySelector('.qpop-toggle--active');
@@ -548,8 +519,6 @@
 
   function resetForm() {
     qText.value = '';
-    qImage.value = '';
-    imageBase64 = '';
     hscYear.value = '';
     hscQNum.value = '';
   }
@@ -578,7 +547,6 @@
       hscStandard:  isHsc ? getToggleValue(stdGroup) : '',
       hscQNumber:   isHsc ? hscQNum.value.trim() : '',
       questionText: isHsc ? '' : qText.value.trim(),
-      imageBase64:  isHsc ? '' : imageBase64,
     };
 
     submitBtn.disabled = true;
@@ -662,6 +630,10 @@
 
           var imgSrc = q.imageUrl || q.imageBase64;
           if (imgSrc) {
+            imgSrc = imgSrc.replace(
+              /https:\/\/drive\.google\.com\/uc\?export=view&id=([^&\s]+)/,
+              'https://drive.google.com/thumbnail?id=$1&sz=w800'
+            );
             var img = document.createElement('img');
             img.src = imgSrc;
             img.style.cssText = 'max-width:100%;margin-top:0.4rem;border:1px solid rgba(0,0,0,0.10);display:block;';
