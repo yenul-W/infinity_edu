@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Earning Money</title>
+  <style>
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-ink-black: #000000;
+      --color-medium-gray: #818181;
+      --color-light-gray: #d6d6d6;
+      --color-faded-gray: #9d9d9d;
+      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --text-caption: 11px;
+      --leading-caption: 1.38;
+      --tracking-caption: 0.88px;
+      --text-body: 14px;
+      --leading-body: 1.29;
+      --tracking-body: 0.35px;
+      --text-heading: 26px;
+      --leading-heading: 1.13;
+      --tracking-heading: 0.26px;
+      --spacing-8: 8px;
+      --spacing-12: 12px;
+      --spacing-16: 16px;
+      --spacing-24: 24px;
+      --spacing-40: 40px;
+      --section-gap: 64px;
+    }
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black: #f0f0f0;
+      --color-medium-gray: #818181;
+      --color-light-gray: #2a2a2a;
+      --color-faded-gray: #5a5a5a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid var(--color-light-gray);
+      padding: var(--spacing-40) var(--spacing-16);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+    }
+    .sidebar-back {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      color: var(--color-faded-gray);
+      text-decoration: none;
+      letter-spacing: var(--tracking-caption);
+      display: block;
+      margin-bottom: var(--spacing-24);
+    }
+    .sidebar-back:hover { color: var(--color-ink-black); }
+    .sidebar-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-8);
+      margin-top: var(--spacing-16);
+    }
+    .sidebar-link {
+      font-size: var(--text-caption);
+      color: var(--color-medium-gray);
+      text-decoration: none;
+      line-height: 1.6;
+      display: block;
+      padding: 2px 0;
+    }
+    .sidebar-link:hover { color: var(--color-ink-black); }
+    .main {
+      flex: 1;
+      padding: var(--spacing-40) 56px;
+      max-width: 780px;
+    }
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-8);
+    }
+    .page-title {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      line-height: 1;
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-12);
+    }
+    .page-intro {
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      margin-bottom: var(--spacing-40);
+      max-width: 560px;
+    }
+    .section { margin-bottom: var(--section-gap); }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-8);
+    }
+    .section-title {
+      font-size: var(--text-heading);
+      font-weight: 600;
+      letter-spacing: var(--tracking-heading);
+      line-height: var(--leading-heading);
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+    .question-block {
+      margin-bottom: var(--spacing-24);
+      padding: var(--spacing-16);
+      border: 1px solid var(--color-light-gray);
+    }
+    .question-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      margin-bottom: var(--spacing-12);
+    }
+    .q-num {
+      font-family: var(--font-onsite);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+    }
+    .q-source { font-family: var(--font-onsite); font-size: var(--text-caption); color: var(--color-faded-gray); letter-spacing: var(--tracking-caption); }
+    a.q-source-link { text-decoration: none; border-bottom: 1px solid var(--color-light-gray); color: var(--color-faded-gray); }
+    a.q-source-link:hover { color: var(--color-ink-black); border-bottom-color: var(--color-ink-black); }
+    .q-marks { margin-left: auto; font-family: var(--font-onsite); font-size: var(--text-caption); color: var(--color-faded-gray); }
+    .q-text { font-size: var(--text-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
+    .q-text + .q-text { margin-top: calc(-1 * var(--spacing-8)); }
+    .q-options { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--spacing-12); }
+    .q-options li { font-size: var(--text-body); color: var(--color-ink-black); display: flex; gap: var(--spacing-8); }
+    .opt-label { font-weight: 600; color: var(--color-faded-gray); min-width: 18px; }
+    .q-table { border-collapse: collapse; font-size: var(--text-body); margin: var(--spacing-12) 0; width: 100%; }
+    .q-table th, .q-table td { border: 1px solid var(--color-light-gray); padding: 6px 10px; text-align: left; }
+    .q-table th { background: var(--color-light-gray); font-weight: 600; }
+    details.solution { border-top: 1px solid var(--color-light-gray); margin-top: var(--spacing-12); padding-top: var(--spacing-8); }
+    details.solution summary {
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      list-style: none;
+      user-select: none;
+    }
+    details.solution summary::-webkit-details-marker { display: none; }
+    details.solution summary::after { content: '  ↓'; }
+    details.solution[open] summary::after { content: '  ↑'; }
+    details.solution[open] summary { margin-bottom: var(--spacing-12); }
+    .solution-body { font-size: var(--text-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); color: var(--color-ink-black); }
+    .solution-body p + p { margin-top: var(--spacing-8); }
+    .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
+    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
+    @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <a class="sidebar-back" href="index.html">← Back</a>
+    <span class="sidebar-label">Sections</span>
+    <a class="sidebar-link" href="#wages">Wages &amp; Overtime</a>
+    <a class="sidebar-link" href="#commission">Commission &amp; Leave</a>
+    <a class="sidebar-link" href="#netpay">Net Pay &amp; Deductions</a>
+    <a class="sidebar-link" href="#tax">Taxation</a>
+    <a class="sidebar-link" href="#medicare">Medicare Levy</a>
+  </nav>
+
+  <main class="main">
+    <p class="page-label">Earning Money — Revision</p>
+    <h1 class="page-title">HSC Practice Questions</h1>
+    <p class="page-intro">Questions drawn from past NSW HSC examinations. Attempt each question before opening the solution.</p>
+
+    <!-- ── Section 1: Wages & Overtime ── -->
+    <section class="section" id="wages">
+      <p class="section-label">Section 1</p>
+      <h2 class="section-title">Wages, Overtime &amp; Allowances</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q1</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2009" target="_blank" rel="noreferrer noopener">2009 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Billy worked for 35 hours at the normal hourly rate of pay and for five hours at double time. He earned $561.60 in total for this work. What was the normal hourly rate of pay?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $7.02</li>
+          <li><span class="opt-label">B.</span> $12.48</li>
+          <li><span class="opt-label">C.</span> $14.04</li>
+          <li><span class="opt-label">D.</span> $16.05</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Let normal rate = r</span>
+            <span class="solution-step">35r + 5 × (2r) = 561.60</span>
+            <span class="solution-step">35r + 10r = 561.60  →  45r = 561.60</span>
+            <span class="solution-answer">r = $12.48 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q2</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2008" target="_blank" rel="noreferrer noopener">2008 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Luke's normal rate of pay is $15 per hour. Last week he was paid for 12 hours, at time-and-a-half. How many hours would Luke need to work this week, at double time, to earn the same amount?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 4</li>
+          <li><span class="opt-label">B.</span> 6</li>
+          <li><span class="opt-label">C.</span> 8</li>
+          <li><span class="opt-label">D.</span> 9</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Last week earnings = 12 × $15 × 1.5 = $270</span>
+            <span class="solution-step">Double time rate = $15 × 2 = $30/hr</span>
+            <span class="solution-step">Hours needed = $270 ÷ $30</span>
+            <span class="solution-answer">= 9 hours → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q3</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2017" target="_blank" rel="noreferrer noopener">2017 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Tom earns a weekly wage of $1025. He also receives an additional allowance of $87.50 per day when handling toxic substances. What is Tom's income in a fortnight in which he handles toxic substances on 5 separate days?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $1112.50</li>
+          <li><span class="opt-label">B.</span> $1462.50</li>
+          <li><span class="opt-label">C.</span> $2225.00</li>
+          <li><span class="opt-label">D.</span> $2487.50</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Fortnightly wage = 2 × $1025 = $2050</span>
+            <span class="solution-step">Toxic allowance = 5 × $87.50 = $437.50</span>
+            <span class="solution-step">Total = $2050 + $437.50</span>
+            <span class="solution-answer">= $2487.50 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q4</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2022" target="_blank" rel="noreferrer noopener">2022 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Tian is paid $20.45 per hour, as well as a meal allowance of $16.20 per day. What are Tian's total earnings if she works 9 hours per day for 5 days?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Hourly pay = $20.45 × 9 × 5 = $920.25</span>
+            <span class="solution-step">Meal allowance = $16.20 × 5 = $81.00</span>
+            <span class="solution-answer">Total = $920.25 + $81.00 = $1001.25</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q5</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2013" target="_blank" rel="noreferrer noopener">2013 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Luke's normal rate of pay is $24.80 per hour. In one week he worked 14 hours at the normal rate, 4 hours at time-and-a-half, and 3.5 hours at double time. He was also paid a wet weather allowance of $50 for the week. What was his pay for the week?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $583.20</li>
+          <li><span class="opt-label">B.</span> $620.40</li>
+          <li><span class="opt-label">C.</span> $669.60</li>
+          <li><span class="opt-label">D.</span> $719.60</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Normal: 14 × $24.80 = $347.20</span>
+            <span class="solution-step">Time-and-a-half: 4 × $24.80 × 1.5 = $148.80</span>
+            <span class="solution-step">Double time: 3.5 × $24.80 × 2 = $173.60</span>
+            <span class="solution-step">Allowance: $50.00</span>
+            <span class="solution-step">Total = 347.20 + 148.80 + 173.60 + 50</span>
+            <span class="solution-answer">= $719.60 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q6</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2016" target="_blank" rel="noreferrer noopener">2016 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Isabella works a 35-hour week and is paid at an hourly rate of $18. Any overtime hours worked are paid at time-and-a-half. In a particular week, she earned $1008. How many hours in total did Isabella work in this week?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 37.3</li>
+          <li><span class="opt-label">B.</span> 42</li>
+          <li><span class="opt-label">C.</span> 49</li>
+          <li><span class="opt-label">D.</span> 56</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Normal pay = 35 × $18 = $630</span>
+            <span class="solution-step">Overtime pay = $1008 − $630 = $378</span>
+            <span class="solution-step">OT rate = $18 × 1.5 = $27/hr</span>
+            <span class="solution-step">OT hours = $378 ÷ $27 = 14 hours</span>
+            <span class="solution-step">Total = 35 + 14</span>
+            <span class="solution-answer">= 49 hours → Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 2: Commission & Leave ── -->
+    <section class="section" id="commission">
+      <p class="section-label">Section 2</p>
+      <h2 class="section-title">Commission, Allowances &amp; Leave Loading</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q7</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2014" target="_blank" rel="noreferrer noopener">2014 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Jane sells jewellery. Her commission is based on a sliding scale of 6% on the first $2000 of her sales, 3.5% on the next $1000, and 2% thereafter. What is Jane's commission when her total sales are $5670?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $188.40</li>
+          <li><span class="opt-label">B.</span> $208.40</li>
+          <li><span class="opt-label">C.</span> $321.85</li>
+          <li><span class="opt-label">D.</span> $652.05</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">First $2000: 6% × $2000 = $120.00</span>
+            <span class="solution-step">Next $1000: 3.5% × $1000 = $35.00</span>
+            <span class="solution-step">Remaining ($5670 − $3000 = $2670): 2% × $2670 = $53.40</span>
+            <span class="solution-step">Total = $120.00 + $35.00 + $53.40</span>
+            <span class="solution-answer">= $208.40 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q8</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2006" target="_blank" rel="noreferrer noopener">2006 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A salesman earns $200 per week plus $40 commission for each item he sells. How many items does he need to sell to earn a total of $2640 in two weeks?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 33</li>
+          <li><span class="opt-label">B.</span> 56</li>
+          <li><span class="opt-label">C.</span> 61</li>
+          <li><span class="opt-label">D.</span> 66</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Base pay (2 weeks) = 2 × $200 = $400</span>
+            <span class="solution-step">Commission needed = $2640 − $400 = $2240</span>
+            <span class="solution-step">Items = $2240 ÷ $40</span>
+            <span class="solution-answer">= 56 items → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q9</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2007" target="_blank" rel="noreferrer noopener">2007 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Joe is about to go on holidays for four weeks. His weekly salary is $280 and his holiday loading is 17.5% of four weeks pay. What is Joe's total pay for the four weeks holiday?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $196</li>
+          <li><span class="opt-label">B.</span> $329</li>
+          <li><span class="opt-label">C.</span> $1169</li>
+          <li><span class="opt-label">D.</span> $1316</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Four weeks pay = 4 × $280 = $1120</span>
+            <span class="solution-step">Leave loading = 17.5% × $1120 = $196</span>
+            <span class="solution-step">Total = $1120 + $196</span>
+            <span class="solution-answer">= $1316 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q10</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2016" target="_blank" rel="noreferrer noopener">2016 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Jenny earns a yearly salary of $63,752. Her annual leave loading is 17.5% of four weeks pay. Calculate her total pay for her four weeks of annual leave.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Weekly pay = $63,752 ÷ 52 = $1226 (approx)</span>
+            <span class="solution-step">Four weeks pay = 4 × $1226 = $4904</span>
+            <span class="solution-step">Leave loading = 17.5% × $4904 = $858.20</span>
+            <span class="solution-step">Total = $4904 + $858.20</span>
+            <span class="solution-answer">= $5762.20</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q11</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2022" target="_blank" rel="noreferrer noopener">2022 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">A real estate agent's commission for selling houses is 2% for the first $800,000 of the sale price and 1.5% for any amount over $800,000. Calculate the commission earned in selling a house for $1,500,000.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">First $800,000: 2% × $800,000 = $16,000</span>
+            <span class="solution-step">Over $800,000: $1,500,000 − $800,000 = $700,000</span>
+            <span class="solution-step">1.5% × $700,000 = $10,500</span>
+            <span class="solution-step">Total commission = $16,000 + $10,500</span>
+            <span class="solution-answer">= $26,500</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 3: Net Pay ── -->
+    <section class="section" id="netpay">
+      <p class="section-label">Section 3</p>
+      <h2 class="section-title">Net Pay &amp; Deductions</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q12</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2015" target="_blank" rel="noreferrer noopener">2015 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Gayle's gross pay each week is $952.25. The following deductions are taken from her gross pay each week: tax $180.93, superannuation $85.70, union membership $21.40, health fund $38.15. What is Gayle's net pay each week?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $326.18</li>
+          <li><span class="opt-label">B.</span> $626.07</li>
+          <li><span class="opt-label">C.</span> $771.32</li>
+          <li><span class="opt-label">D.</span> $952.25</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Total deductions = 180.93 + 85.70 + 21.40 + 38.15 = $326.18</span>
+            <span class="solution-step">Net pay = $952.25 − $326.18</span>
+            <span class="solution-answer">= $626.07 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q13</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2018" target="_blank" rel="noreferrer noopener">2018 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">David earns a gross income of $890 per week. Each week, 25% of this income is deducted in taxation. David budgets to save 20% of his net income. How much does he budget to save each week?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $44.50</li>
+          <li><span class="opt-label">B.</span> $133.50</li>
+          <li><span class="opt-label">C.</span> $489.50</li>
+          <li><span class="opt-label">D.</span> $534.00</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Tax = 25% × $890 = $222.50</span>
+            <span class="solution-step">Net income = $890 − $222.50 = $667.50</span>
+            <span class="solution-step">Savings = 20% × $667.50</span>
+            <span class="solution-answer">= $133.50 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q14</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2012" target="_blank" rel="noreferrer noopener">2012 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Tai earns a gross weekly wage of $1024. Each week her deductions are: tax instalment of $296.40, health fund contribution of $24.50, union fees of $15.80. She also pays $3640 over the year as her share of household expenses. What percentage of her net wage does Tai pay for household expenses?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Net weekly wage = $1024 − $296.40 − $24.50 − $15.80 = $687.30</span>
+            <span class="solution-step">Annual net wage = $687.30 × 52 = $35,739.60</span>
+            <span class="solution-step">Percentage = ($3640 ÷ $35,739.60) × 100</span>
+            <span class="solution-answer">≈ 10.2%</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 4: Taxation ── -->
+    <section class="section" id="tax">
+      <p class="section-label">Section 4</p>
+      <h2 class="section-title">Taxation</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q15</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2011" target="_blank" rel="noreferrer noopener">2011 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Sri has a gross salary of $56,350. She has tax deductions of $350 for union fees, $2000 in work-related expenses and $250 in donations to charities. The Medicare levy is 1.5% of her taxable income. Calculate Sri's Medicare levy.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Taxable income = $56,350 − $350 − $2000 − $250 = $53,750</span>
+            <span class="solution-step">Medicare levy = 1.5% × $53,750</span>
+            <span class="solution-answer">= $806.25</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q16</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2016" target="_blank" rel="noreferrer noopener">2016 HSC ↗</a>
+          <span class="q-marks">5 marks</span>
+        </div>
+        <p class="q-text">Theo is completing his tax return. He has a gross salary of $82,521 and income from a rental property totalling $10,920. He is claiming $13,420 in allowable deductions.</p>
+        <table class="q-table">
+          <tr><th>Taxable income</th><th>Tax payable</th></tr>
+          <tr><td>$0 – $18,200</td><td>Nil</td></tr>
+          <tr><td>$18,201 – $37,000</td><td>19c for each $1 over $18,200</td></tr>
+          <tr><td>$37,001 – $87,000</td><td>$3,572 + 32.5c for each $1 over $37,000</td></tr>
+          <tr><td>$87,001 – $180,000</td><td>$19,822 + 37c for each $1 over $87,000</td></tr>
+          <tr><td>$180,001 and over</td><td>$54,232 + 45c for each $1 over $180,000</td></tr>
+        </table>
+        <p class="q-text"><strong>(i)</strong> Determine Theo's taxable income. [1 mark]</p>
+        <p class="q-text"><strong>(ii)</strong> Using the tax table, calculate Theo's tax payable. [2 marks]</p>
+        <p class="q-text"><strong>(iii)</strong> Theo must also pay a Medicare levy of $1600.42. He has already paid $20,525 as Pay As You Go (PAYG) tax. Should Theo receive a tax refund or will he owe more tax? Justify with calculations. [2 marks]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) Taxable income = $82,521 + $10,920 − $13,420 = $80,021</span>
+            <span class="solution-step">(ii) Tax = $3,572 + 32.5% × ($80,021 − $37,000)</span>
+            <span class="solution-step">    = $3,572 + 0.325 × $43,021</span>
+            <span class="solution-step">    = $3,572 + $13,981.83 ≈ $17,553.83</span>
+            <span class="solution-step">(iii) Total owed = $17,553.83 + $1,600.42 = $19,154.25</span>
+            <span class="solution-step">     PAYG paid = $20,525.00</span>
+            <span class="solution-answer">Refund = $20,525 − $19,154.25 = $1,370.75 (Theo receives a refund)</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q17</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2021" target="_blank" rel="noreferrer noopener">2021 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">William has a gross annual salary of $84,000. He has allowable tax deductions of $900 for home-office equipment and $474 for union fees. William must also pay a Medicare Levy of 2% of his taxable income.</p>
+        <table class="q-table">
+          <tr><th>Taxable income</th><th>Tax payable</th></tr>
+          <tr><td>$0 – $18,200</td><td>Nil</td></tr>
+          <tr><td>$18,201 – $45,000</td><td>19c for each $1 over $18,200</td></tr>
+          <tr><td>$45,001 – $120,000</td><td>$5,092 + 32.5c for each $1 over $45,000</td></tr>
+          <tr><td>$120,001 – $180,000</td><td>$29,467 + 37c for each $1 over $120,000</td></tr>
+          <tr><td>$180,001 and over</td><td>$51,667 + 45c for each $1 over $180,000</td></tr>
+        </table>
+        <p class="q-text">Calculate the total tax payable by William including the Medicare Levy.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Taxable income = $84,000 − $900 − $474 = $82,626</span>
+            <span class="solution-step">Tax = $5,092 + 32.5% × ($82,626 − $45,000)</span>
+            <span class="solution-step">    = $5,092 + 0.325 × $37,626</span>
+            <span class="solution-step">    = $5,092 + $12,228.45 = $17,320.45</span>
+            <span class="solution-step">Medicare levy = 2% × $82,626 = $1,652.52</span>
+            <span class="solution-answer">Total tax = $17,320.45 + $1,652.52 = $18,972.97</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 5: Medicare ── -->
+    <section class="section" id="medicare">
+      <p class="section-label">Section 5</p>
+      <h2 class="section-title">Medicare Levy &amp; Net Income</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q18</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2005" target="_blank" rel="noreferrer noopener">2005 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Janet's gross income last year was $60,000. She had allowable tax deductions of $5000. Janet paid 1.5% of her taxable income for the Medicare levy. How much was Janet's Medicare levy?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $750</li>
+          <li><span class="opt-label">B.</span> $825</li>
+          <li><span class="opt-label">C.</span> $900</li>
+          <li><span class="opt-label">D.</span> $975</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Taxable income = $60,000 − $5000 = $55,000</span>
+            <span class="solution-step">Medicare levy = 1.5% × $55,000</span>
+            <span class="solution-answer">= $825 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q19</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2017" target="_blank" rel="noreferrer noopener">2017 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Sabrina's taxable income is $86,725 in a particular year. In addition to income tax, she pays the Medicare levy, which is 2% of her taxable income.</p>
+        <table class="q-table">
+          <tr><th>Taxable income</th><th>Tax payable</th></tr>
+          <tr><td>$0 – $18,200</td><td>Nil</td></tr>
+          <tr><td>$18,201 – $37,000</td><td>19c for each $1 over $18,200</td></tr>
+          <tr><td>$37,001 – $87,000</td><td>$3,572 + 32.5c for each $1 over $37,000</td></tr>
+          <tr><td>$87,001 – $180,000</td><td>$19,822 + 37c for each $1 over $87,000</td></tr>
+          <tr><td>$180,001 and over</td><td>$54,232 + 45c for each $1 over $180,000</td></tr>
+        </table>
+        <p class="q-text">Calculate Sabrina's net income in that year.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Tax = $3,572 + 32.5% × ($86,725 − $37,000)</span>
+            <span class="solution-step">    = $3,572 + 0.325 × $49,725</span>
+            <span class="solution-step">    = $3,572 + $16,160.63 = $19,732.63</span>
+            <span class="solution-step">Medicare levy = 2% × $86,725 = $1,734.50</span>
+            <span class="solution-step">Total deductions = $19,732.63 + $1,734.50 = $21,467.13</span>
+            <span class="solution-answer">Net income = $86,725 − $21,467.13 = $65,257.87</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved ? saved === 'dark' : prefersDark) html.classList.add('dark-mode');
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) html.classList.toggle('dark-mode', e.matches);
+    });
+    window.addEventListener('storage', e => {
+      if (e.key === 'theme') html.classList.toggle('dark-mode', e.newValue === 'dark');
+    });
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+
+</body>
+</html>

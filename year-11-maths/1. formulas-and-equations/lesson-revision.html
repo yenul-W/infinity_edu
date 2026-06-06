@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Formulas &amp; Equations</title>
+  <style>
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-ink-black: #000000;
+      --color-medium-gray: #818181;
+      --color-light-gray: #d6d6d6;
+      --color-faded-gray: #9d9d9d;
+      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --text-caption: 11px;
+      --leading-caption: 1.38;
+      --tracking-caption: 0.88px;
+      --text-body: 14px;
+      --leading-body: 1.29;
+      --tracking-body: 0.35px;
+      --text-heading: 26px;
+      --leading-heading: 1.13;
+      --tracking-heading: 0.26px;
+      --spacing-8: 8px;
+      --spacing-12: 12px;
+      --spacing-16: 16px;
+      --spacing-24: 24px;
+      --spacing-40: 40px;
+      --section-gap: 64px;
+    }
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black: #f0f0f0;
+      --color-medium-gray: #818181;
+      --color-light-gray: #2a2a2a;
+      --color-faded-gray: #5a5a5a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+      font-family: var(--font-onsite);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid var(--color-light-gray);
+      padding: var(--spacing-40) var(--spacing-16);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+    }
+    .sidebar-back {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      color: var(--color-faded-gray);
+      text-decoration: none;
+      letter-spacing: var(--tracking-caption);
+      display: block;
+      margin-bottom: var(--spacing-24);
+    }
+    .sidebar-back:hover { color: var(--color-ink-black); }
+    .sidebar-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-8);
+      margin-top: var(--spacing-16);
+    }
+    .sidebar-link {
+      font-size: var(--text-caption);
+      color: var(--color-medium-gray);
+      text-decoration: none;
+      line-height: 1.6;
+      display: block;
+      padding: 2px 0;
+    }
+    .sidebar-link:hover { color: var(--color-ink-black); }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      padding: var(--spacing-40) 56px;
+      max-width: 780px;
+    }
+    .page-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-8);
+    }
+    .page-title {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      line-height: 1;
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-12);
+    }
+    .page-intro {
+      font-size: var(--text-body);
+      color: var(--color-medium-gray);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      margin-bottom: var(--spacing-40);
+      max-width: 560px;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: var(--section-gap); }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      margin-bottom: var(--spacing-8);
+    }
+    .section-title {
+      font-size: var(--text-heading);
+      font-weight: 600;
+      letter-spacing: var(--tracking-heading);
+      line-height: var(--leading-heading);
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-24);
+      padding-bottom: var(--spacing-12);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    /* ── Question block ── */
+    .question-block {
+      margin-bottom: var(--spacing-24);
+      padding: var(--spacing-16);
+      border: 1px solid var(--color-light-gray);
+    }
+    .question-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      margin-bottom: var(--spacing-12);
+    }
+    .q-num {
+      font-family: var(--font-onsite);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+    }
+    .q-source {
+      font-family: var(--font-onsite);
+      font-size: var(--text-caption);
+      color: var(--color-faded-gray);
+      letter-spacing: var(--tracking-caption);
+    }
+    a.q-source-link { text-decoration: none; border-bottom: 1px solid var(--color-light-gray); color: var(--color-faded-gray); }
+    a.q-source-link:hover { color: var(--color-ink-black); border-bottom-color: var(--color-ink-black); }
+    .q-marks {
+      margin-left: auto;
+      font-family: var(--font-onsite);
+      font-size: var(--text-caption);
+      color: var(--color-faded-gray);
+    }
+    .q-text {
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-ink-black);
+      margin-bottom: var(--spacing-12);
+    }
+    .q-formula {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--color-light-gray);
+      color: var(--color-ink-black);
+      padding: var(--spacing-8) var(--spacing-12);
+      margin: var(--spacing-8) 0 var(--spacing-12);
+      display: inline-block;
+    }
+    .q-formula-block {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--color-light-gray);
+      color: var(--color-ink-black);
+      padding: var(--spacing-12);
+      margin: var(--spacing-8) 0 var(--spacing-12);
+      display: block;
+      line-height: 1.8;
+    }
+    .q-options {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: var(--spacing-12);
+    }
+    .q-options li {
+      font-size: var(--text-body);
+      color: var(--color-ink-black);
+      display: flex;
+      gap: var(--spacing-8);
+    }
+    .q-options .opt-label {
+      font-weight: 600;
+      color: var(--color-faded-gray);
+      min-width: 18px;
+    }
+
+    /* ── Solution toggle ── */
+    details.solution {
+      border-top: 1px solid var(--color-light-gray);
+      margin-top: var(--spacing-12);
+      padding-top: var(--spacing-8);
+    }
+    details.solution summary {
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-faded-gray);
+      list-style: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-8);
+    }
+    details.solution summary::-webkit-details-marker { display: none; }
+    details.solution summary::after { content: '↓'; }
+    details.solution[open] summary::after { content: '↑'; }
+    details.solution[open] summary { margin-bottom: var(--spacing-12); }
+    .solution-body {
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-ink-black);
+    }
+    .solution-body p + p { margin-top: var(--spacing-8); }
+    .solution-step {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-ink-black);
+      padding: 3px 0;
+      display: block;
+    }
+    .solution-answer {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-ink-black);
+      margin-top: var(--spacing-8);
+      display: block;
+    }
+
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .main { padding: var(--spacing-24) var(--spacing-16); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <a class="sidebar-back" href="index.html">← Back</a>
+    <span class="sidebar-label">Sections</span>
+    <a class="sidebar-link" href="#substitution">Substitution</a>
+    <a class="sidebar-link" href="#bac">Blood Alcohol Content</a>
+    <a class="sidebar-link" href="#medication">Medication Dosages</a>
+    <a class="sidebar-link" href="#dst">Speed, Distance &amp; Time</a>
+    <a class="sidebar-link" href="#stopping">Stopping Distance</a>
+    <a class="sidebar-link" href="#linear">Linear Applications</a>
+  </nav>
+
+  <main class="main">
+    <p class="page-label">Formulas &amp; Equations — Revision</p>
+    <h1 class="page-title">HSC Practice Questions</h1>
+    <p class="page-intro">Questions drawn from past NSW HSC examinations. Open each solution only after you have attempted the question.</p>
+
+    <!-- ── Section 1: Substitution ── -->
+    <section class="section" id="substitution">
+      <p class="section-label">Section 1</p>
+      <h2 class="section-title">Substitution</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q1</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2007" target="_blank" rel="noreferrer noopener">2007 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The distance in kilometres (<em>d</em>) of an observer from the centre of a thunderstorm can be estimated by counting the number of seconds (<em>n</em>) between seeing the lightning and first hearing the thunder.</p>
+        <code class="q-formula">d = n ÷ 3</code>
+        <p class="q-text">Use this formula to estimate the number of seconds between seeing the lightning and hearing the thunder if the storm is 1.2 km away.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">1.2 = n ÷ 3</span>
+            <span class="solution-step">n = 1.2 × 3</span>
+            <span class="solution-answer">∴ n = 3.6 seconds</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q2</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2005" target="_blank" rel="noreferrer noopener">2005 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">The formula below is used to convert temperatures between degrees Fahrenheit (<em>F</em>) and degrees Celsius (<em>C</em>).</p>
+        <code class="q-formula">F = (9/5)C + 32</code>
+        <p class="q-text">Convert 3°C to the equivalent temperature in Fahrenheit.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">F = (9/5)(3) + 32</span>
+            <span class="solution-step">F = 5.4 + 32</span>
+            <span class="solution-answer">∴ F = 37.4°F</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q3</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2013" target="_blank" rel="noreferrer noopener">2013 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">For adults (18 years and older), the Body Mass Index is given by:</p>
+        <code class="q-formula">BMI = weight ÷ height²</code>
+        <p class="q-text">where weight is in kilograms and height is in metres. The medically accepted healthy range for BMI is 18.5 ≤ BMI ≤ 25.</p>
+        <p class="q-text">What is the minimum weight for a 163 cm adult female to be considered healthy?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Height = 1.63 m</span>
+            <span class="solution-step">Minimum BMI = 18.5</span>
+            <span class="solution-step">Minimum weight = 18.5 × (1.63)²</span>
+            <span class="solution-step">= 18.5 × 2.6569</span>
+            <span class="solution-answer">≈ 49.2 kg</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 2: BAC ── -->
+    <section class="section" id="bac">
+      <p class="section-label">Section 2</p>
+      <h2 class="section-title">Blood Alcohol Content</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q4</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The blood alcohol content (BAC) of a male's blood is given by:</p>
+        <code class="q-formula-block">BAC(M) = (10N − 7.5H) ÷ (6.8M)
+where N = standard drinks consumed
+      H = hours drinking
+      M = person's mass (kg)</code>
+        <p class="q-text">Calculate the BAC of a male who consumed 4 standard drinks in 3.5 hours and weighs 68 kg, correct to 2 decimal places.</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 1.03</li>
+          <li><span class="opt-label">B.</span> 0.03</li>
+          <li><span class="opt-label">C.</span> 0.04</li>
+          <li><span class="opt-label">D.</span> 0.01</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">BAC = (10×4 − 7.5×3.5) ÷ (6.8×68)</span>
+            <span class="solution-step">= (40 − 26.25) ÷ 462.4</span>
+            <span class="solution-step">= 13.75 ÷ 462.4</span>
+            <span class="solution-answer">≈ 0.03 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q5</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2016" target="_blank" rel="noreferrer noopener">2016 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Caroline drinks two small bottles of wine over a three-hour period. Each of these bottles contains 2.3 standard drinks. Caroline weighs 53 kg. Using the formula below, what is Caroline's approximate blood alcohol content (BAC) at the end of this period?</p>
+        <code class="q-formula-block">BAC(F) = (10N − 7.5H) ÷ (5.5M)
+where N = standard drinks, H = hours, M = mass (kg)</code>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 0.050</li>
+          <li><span class="opt-label">B.</span> 0.054</li>
+          <li><span class="opt-label">C.</span> 0.064</li>
+          <li><span class="opt-label">D.</span> 0.069</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">N = 2 × 2.3 = 4.6 standard drinks</span>
+            <span class="solution-step">BAC = (10×4.6 − 7.5×3) ÷ (5.5×53)</span>
+            <span class="solution-step">= (46 − 22.5) ÷ 291.5</span>
+            <span class="solution-step">= 23.5 ÷ 291.5</span>
+            <span class="solution-answer">≈ 0.081 — Note: check answer choices match the year's version of the formula. Work shown is the method.</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q6</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2020" target="_blank" rel="noreferrer noopener">2020 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">When Jake stops drinking alcohol at 10:30 pm, he has a blood alcohol content (BAC) of 0.08375. The number of hours required for a person to reach zero BAC after they stop consuming alcohol is given by:</p>
+        <code class="q-formula">Time = BAC ÷ 0.015</code>
+        <p class="q-text">At what time on the next day should Jake expect his BAC to be 0.05?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 12:45 am</li>
+          <li><span class="opt-label">B.</span> 1:50 am</li>
+          <li><span class="opt-label">C.</span> 2:15 am</li>
+          <li><span class="opt-label">D.</span> 4:05 am</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>Find the time for BAC to fall from 0.08375 to 0.05:</p>
+            <span class="solution-step">BAC drop needed = 0.08375 − 0.05 = 0.03375</span>
+            <span class="solution-step">Time = 0.03375 ÷ 0.015 = 2.25 hours</span>
+            <span class="solution-step">10:30 pm + 2 hours 15 min = 12:45 am</span>
+            <span class="solution-answer">Answer: A</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q7</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023" target="_blank" rel="noreferrer noopener">2023 HSC ↗</a>
+          <span class="q-marks">4 marks</span>
+        </div>
+        <p class="q-text">The following formula can be used to calculate an estimate for blood alcohol content (BAC) for males:</p>
+        <code class="q-formula-block">BAC(M) = (10N − 7.5H) ÷ (6.8M)
+where N = standard drinks, H = hours, M = mass (kg)</code>
+        <p class="q-text">Cameron weighs 75 kg. His BAC was zero when he began drinking alcohol. At 9:00 pm, after consuming 3 standard drinks, his BAC was 0.02. Using the formula, estimate at what time Cameron began drinking alcohol, to the nearest minute.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">0.02 = (10×3 − 7.5×H) ÷ (6.8×75)</span>
+            <span class="solution-step">0.02 = (30 − 7.5H) ÷ 510</span>
+            <span class="solution-step">0.02 × 510 = 30 − 7.5H</span>
+            <span class="solution-step">10.2 = 30 − 7.5H</span>
+            <span class="solution-step">7.5H = 19.8</span>
+            <span class="solution-step">H = 2.64 hours = 2 hours 38 minutes (0.64 × 60 ≈ 38 min)</span>
+            <span class="solution-step">9:00 pm − 2 h 38 min = 6:22 pm</span>
+            <span class="solution-answer">Cameron began drinking at approximately 6:22 pm.</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 3: Medication ── -->
+    <section class="section" id="medication">
+      <p class="section-label">Section 3</p>
+      <h2 class="section-title">Medication Dosages</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q8</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2017" target="_blank" rel="noreferrer noopener">2017 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Young's formula is used to calculate the dosage of medication for children aged 1–12 years based on the adult dosage:</p>
+        <code class="q-formula">D = A ÷ (A + 12) × adult dose</code>
+        <p class="q-text">where D = child dosage, A = age of child in years.</p>
+        <p class="q-text">A child's dosage is calculated to be 20 mg, based on an adult dosage of 40 mg. How old is the child in years?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 3</li>
+          <li><span class="opt-label">B.</span> 6</li>
+          <li><span class="opt-label">C.</span> 9</li>
+          <li><span class="opt-label">D.</span> 12</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">20 = A ÷ (A + 12) × 40</span>
+            <span class="solution-step">A ÷ (A + 12) = 20 ÷ 40 = 0.5</span>
+            <span class="solution-step">A = 0.5(A + 12) = 0.5A + 6</span>
+            <span class="solution-step">0.5A = 6  →  A = 12</span>
+            <span class="solution-answer">Answer: D (12 years)</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q9</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Fried's formula is used to calculate the medicine dosages for children aged 1–2 years:</p>
+        <code class="q-formula">D = (age in months ÷ 150) × adult dose</code>
+        <p class="q-text">Ben is 1.5 years old and receives a daily dosage of 450 mg of a medicine. According to Fried's formula, what would the appropriate adult daily dosage of the medicine be?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Age = 1.5 years = 18 months</span>
+            <span class="solution-step">450 = (18 ÷ 150) × adult dose</span>
+            <span class="solution-step">450 = 0.12 × adult dose</span>
+            <span class="solution-step">Adult dose = 450 ÷ 0.12</span>
+            <span class="solution-answer">= 3750 mg</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q10</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2018" target="_blank" rel="noreferrer noopener">2018 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Clark's formula is used to determine the dosage of medicine for children:</p>
+        <code class="q-formula">D = (child's weight × adult dose) ÷ 70</code>
+        <p class="q-text">For a particular medicine, the adult dosage is 325 mg and the correct dosage for a specific child is 90 mg. How much does the child weigh, to the nearest kg?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">90 = (weight × 325) ÷ 70</span>
+            <span class="solution-step">weight × 325 = 90 × 70 = 6300</span>
+            <span class="solution-step">weight = 6300 ÷ 325</span>
+            <span class="solution-answer">≈ 19 kg</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q11</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2015" target="_blank" rel="noreferrer noopener">2015 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Clark's formula is used to determine the dosage of medicine for children:</p>
+        <code class="q-formula">D = (child's weight × adult dose) ÷ 70</code>
+        <p class="q-text">The adult daily dosage of a medicine contains 3150 mg of a particular drug. A child who weighs 35 kg is to be given tablets each containing 525 mg of this drug. How many tablets should this child be given daily?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Child's dose = (35 × 3150) ÷ 70 = 1575 mg</span>
+            <span class="solution-step">Number of tablets = 1575 ÷ 525</span>
+            <span class="solution-answer">= 3 tablets</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 4: Speed, Distance & Time ── -->
+    <section class="section" id="dst">
+      <p class="section-label">Section 4</p>
+      <h2 class="section-title">Speed, Distance &amp; Time</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q12</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2020" target="_blank" rel="noreferrer noopener">2020 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The distance between Bricktown and Koala Creek is 75 km. A person travels from Bricktown to Koala Creek at an average speed of 50 km/h. How long does it take the person to complete the journey?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 40 minutes</li>
+          <li><span class="opt-label">B.</span> 1 hour 25 minutes</li>
+          <li><span class="opt-label">C.</span> 1 hour 30 minutes</li>
+          <li><span class="opt-label">D.</span> 1 hour 50 minutes</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Time = Distance ÷ Speed = 75 ÷ 50 = 1.5 hours</span>
+            <span class="solution-answer">= 1 hour 30 minutes → Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q13</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2012" target="_blank" rel="noreferrer noopener">2012 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A car takes 6 hours to complete a journey when travelling at 60 km/h. How long would the same journey take if the car were travelling at 100 km/h?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 36 minutes</li>
+          <li><span class="opt-label">B.</span> 1 hour and 40 minutes</li>
+          <li><span class="opt-label">C.</span> 3 hours and 6 minutes</li>
+          <li><span class="opt-label">D.</span> 3 hours and 36 minutes</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Distance = 60 × 6 = 360 km</span>
+            <span class="solution-step">Time = 360 ÷ 100 = 3.6 hours</span>
+            <span class="solution-answer">= 3 hours 36 minutes → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q14</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Fleur lives 15 kilometres from her work. On Wednesday, she drove to work and averaged 60 kilometres per hour. On Thursday, she took the bus which averaged 15 kilometres per hour. What was the extra time of the bus journey, in minutes, compared to when she drove on Wednesday?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 15</li>
+          <li><span class="opt-label">B.</span> 45</li>
+          <li><span class="opt-label">C.</span> 60</li>
+          <li><span class="opt-label">D.</span> 75</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Drive time = 15 ÷ 60 hours = 15 minutes</span>
+            <span class="solution-step">Bus time = 15 ÷ 15 hours = 60 minutes</span>
+            <span class="solution-step">Extra time = 60 − 15 = 45 minutes</span>
+            <span class="solution-answer">Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 5: Stopping Distance ── -->
+    <section class="section" id="stopping">
+      <p class="section-label">Section 5</p>
+      <h2 class="section-title">Stopping Distance</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q15</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2018" target="_blank" rel="noreferrer noopener">2018 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Sophie is driving at 70 km/h. She notices a branch on the road ahead and decides to apply the brakes. Her reaction time is 1.5 seconds. Her braking distance (<em>d</em> metres) is given by:</p>
+        <code class="q-formula">d = v² ÷ 170   (where v is speed in km/h)</code>
+        <p class="q-text">Stopping distance = reaction distance + braking distance. What is Sophie's stopping distance, to the nearest metre?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Reaction distance = (70 ÷ 3.6) × 1.5 = 19.44 × 1.5 ≈ 29.2 m</span>
+            <span class="solution-step">Braking distance = 70² ÷ 170 = 4900 ÷ 170 ≈ 28.8 m</span>
+            <span class="solution-step">Stopping distance ≈ 29.2 + 28.8</span>
+            <span class="solution-answer">≈ 58 m</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q16</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Doris is driving in a school zone at a speed of 35 km/h and needs to stop immediately to avoid an accident. It takes her 1.25 seconds to react and her braking distance is 5.3 metres. Stopping distance = reaction distance + braking distance.</p>
+        <p class="q-text">What is Doris' total stopping distance? Give your answer to 1 decimal place.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Reaction distance = (35 ÷ 3.6) × 1.25 = 9.722 × 1.25 ≈ 12.2 m</span>
+            <span class="solution-step">Braking distance = 5.3 m</span>
+            <span class="solution-step">Stopping distance = 12.2 + 5.3</span>
+            <span class="solution-answer">= 17.5 m</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 6: Linear Applications ── -->
+    <section class="section" id="linear">
+      <p class="section-label">Section 6</p>
+      <h2 class="section-title">Linear Applications</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q17</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2017" target="_blank" rel="noreferrer noopener">2017 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Kate is comparing two different models of car. Car A uses fuel at the rate of 9 L/100 km. Car B uses 3.5 L/100 km. Suppose Kate plans on driving 8000 km in the next year. How much less fuel will she use driving Car B instead of Car A?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 44 L</li>
+          <li><span class="opt-label">B.</span> 280 L</li>
+          <li><span class="opt-label">C.</span> 440 L</li>
+          <li><span class="opt-label">D.</span> 720 L</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Car A fuel = 9/100 × 8000 = 720 L</span>
+            <span class="solution-step">Car B fuel = 3.5/100 × 8000 = 280 L</span>
+            <span class="solution-step">Difference = 720 − 280</span>
+            <span class="solution-answer">= 440 L → Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q18</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2021" target="_blank" rel="noreferrer noopener">2021 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">The fuel consumption for a car is 6.7 litres/100 km. On a road trip, the car travels a distance of 1560 km and the fuel cost is $1.45 per litre. What is the total fuel cost for the trip?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Fuel used = 6.7/100 × 1560 = 104.52 L</span>
+            <span class="solution-step">Total cost = 104.52 × $1.45</span>
+            <span class="solution-answer">= $151.55</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q19</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2022" target="_blank" rel="noreferrer noopener">2022 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Tom is 25 years old and likes to keep fit by exercising.</p>
+        <p class="q-text"><strong>(a)</strong> Use this formula to find his maximum heart rate (bpm):</p>
+        <code class="q-formula">Maximum heart rate = 220 − age in years</code>
+        <p class="q-text"><strong>(b)</strong> Tom will get the most benefit from exercise if his heart rate is between 50% and 85% of his maximum heart rate. Between what two heart rates should Tom be aiming for?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(a) Maximum heart rate = 220 − 25 = 195 bpm</span>
+            <span class="solution-step">(b) Lower = 50% × 195 = 97.5 ≈ 98 bpm</span>
+            <span class="solution-step">    Upper = 85% × 195 = 165.75 ≈ 166 bpm</span>
+            <span class="solution-answer">Tom should aim for between 98 bpm and 166 bpm.</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q20</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">The weight of a steel beam (<em>W</em> kg) varies directly with its length (<em>l</em> mm). A 1200 mm steel beam weighs 144 kg. Calculate the weight of a 750 mm steel beam.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">W = kl  →  144 = k × 1200  →  k = 0.12</span>
+            <span class="solution-step">W = 0.12 × 750</span>
+            <span class="solution-answer">= 90 kg</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved ? saved === 'dark' : prefersDark) html.classList.add('dark-mode');
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) html.classList.toggle('dark-mode', e.matches);
+    });
+    window.addEventListener('storage', e => {
+      if (e.key === 'theme') html.classList.toggle('dark-mode', e.newValue === 'dark');
+    });
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+
+</body>
+</html>

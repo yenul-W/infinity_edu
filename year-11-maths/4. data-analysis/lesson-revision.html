@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Data Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-ink-black: #000000;
+      --color-medium-gray: #818181;
+      --color-light-gray: #d6d6d6;
+      --color-faded-gray: #9d9d9d;
+      --font-onsite: 'Outfit', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --text-caption: 11px;
+      --text-body: 14px;
+      --leading-body: 1.6;
+      --text-heading: 24px;
+      --leading-heading: 1.15;
+      --spacing-8: 8px;
+      --spacing-12: 12px;
+      --spacing-16: 16px;
+      --spacing-24: 24px;
+      --spacing-40: 40px;
+      --section-gap: 64px;
+    }
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black: #f0f0f0;
+      --color-medium-gray: #818181;
+      --color-light-gray: #2a2a2a;
+      --color-faded-gray: #5a5a5a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--color-canvas-white); color: var(--color-ink-black); font-family: var(--font-onsite); display: flex; min-height: 100vh; }
+    .sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--color-light-gray); padding: var(--spacing-40) var(--spacing-16); display: flex; flex-direction: column; gap: var(--spacing-8); }
+    .sidebar-back { font-family: var(--font-mono); font-size: var(--text-caption); color: var(--color-faded-gray); text-decoration: none; display: block; margin-bottom: var(--spacing-24); }
+    .sidebar-back:hover { color: var(--color-ink-black); }
+    .sidebar-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); margin-top: var(--spacing-16); }
+    .sidebar-link { font-size: var(--text-caption); color: var(--color-medium-gray); text-decoration: none; line-height: 1.6; display: block; padding: 2px 0; }
+    .sidebar-link:hover { color: var(--color-ink-black); }
+    .main { flex: 1; padding: var(--spacing-40) 56px; max-width: 780px; }
+    .page-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .page-title { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
+    .page-intro { font-size: var(--text-body); color: var(--color-medium-gray); line-height: var(--leading-body); margin-bottom: var(--spacing-40); max-width: 560px; }
+    .section { margin-bottom: var(--section-gap); }
+    .section-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .section-title { font-size: var(--text-heading); font-weight: 600; letter-spacing: -0.01em; line-height: var(--leading-heading); color: var(--color-ink-black); margin-bottom: var(--spacing-24); padding-bottom: var(--spacing-12); border-bottom: 1px solid var(--color-light-gray); }
+    .question-block { margin-bottom: var(--spacing-24); padding: var(--spacing-16); border: 1px solid var(--color-light-gray); }
+    .question-meta { display: flex; align-items: center; gap: var(--spacing-8); margin-bottom: var(--spacing-12); }
+    .q-num { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); }
+    .q-source { font-size: var(--text-caption); color: var(--color-faded-gray); }
+    .q-marks { margin-left: auto; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--color-faded-gray); }
+    .q-text { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
+    .q-options { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--spacing-12); }
+    .q-options li { font-size: var(--text-body); color: var(--color-ink-black); display: flex; gap: var(--spacing-8); }
+    .opt-label { font-weight: 600; color: var(--color-faded-gray); min-width: 18px; }
+    .q-table { border-collapse: collapse; font-size: var(--text-body); margin: var(--spacing-12) 0; }
+    .q-table th, .q-table td { border: 1px solid var(--color-light-gray); padding: 6px 10px; text-align: left; }
+    .q-table th { background: var(--color-light-gray); font-weight: 600; }
+    details.solution { border-top: 1px solid var(--color-light-gray); margin-top: var(--spacing-12); padding-top: var(--spacing-8); }
+    details.solution summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); list-style: none; user-select: none; }
+    details.solution summary::-webkit-details-marker { display: none; }
+    details.solution summary::after { content: '  ↓'; }
+    details.solution[open] summary::after { content: '  ↑'; }
+    details.solution[open] summary { margin-bottom: var(--spacing-12); }
+    .solution-body { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-ink-black); }
+    .solution-body p + p { margin-top: var(--spacing-8); }
+    .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
+    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
+    @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <a class="sidebar-back" href="index.html">← Back</a>
+    <span class="sidebar-label">Sections</span>
+    <a class="sidebar-link" href="#classification">Data Classification</a>
+    <a class="sidebar-link" href="#sampling">Sampling &amp; Inquiry</a>
+    <a class="sidebar-link" href="#statistics">Summary Statistics</a>
+    <a class="sidebar-link" href="#outliers">Outliers &amp; Quartiles</a>
+  </nav>
+
+  <main class="main">
+    <p class="page-label">Data Analysis — Revision</p>
+    <h1 class="page-title">HSC Practice Questions</h1>
+    <p class="page-intro">Questions drawn from past NSW HSC examinations. Attempt each question before opening the solution.</p>
+
+    <!-- ── Section 1: Data Classification ── -->
+    <section class="section" id="classification">
+      <p class="section-label">Section 1</p>
+      <h2 class="section-title">Data Classification</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q1</span>
+          <span class="q-source">2018 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A survey asked the following question: "How many brothers do you have?" How would the responses be classified?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Categorical, ordinal</li>
+          <li><span class="opt-label">B.</span> Categorical, nominal</li>
+          <li><span class="opt-label">C.</span> Numerical, discrete</li>
+          <li><span class="opt-label">D.</span> Numerical, continuous</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>"Number of brothers" is a count — it can only take whole number values. It is numerical and discrete.</p>
+            <span class="solution-answer">Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q2</span>
+          <span class="q-source">2015 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A survey asked the following question for students born in Australia: "Which State or Territory were you born in?" How would the responses be classified?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Categorical, ordinal</li>
+          <li><span class="opt-label">B.</span> Categorical, nominal</li>
+          <li><span class="opt-label">C.</span> Numerical, discrete</li>
+          <li><span class="opt-label">D.</span> Numerical, continuous</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>State/Territory names are categories with no natural ordering (you can't say one state is "greater than" another).</p>
+            <span class="solution-answer">Answer: B — Categorical, nominal</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q3</span>
+          <span class="q-source">2009 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The eye colours of a sample of children were recorded. When analysing this data, which of the following could be found?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Mean</li>
+          <li><span class="opt-label">B.</span> Median</li>
+          <li><span class="opt-label">C.</span> Mode</li>
+          <li><span class="opt-label">D.</span> Range</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>Eye colour is categorical/nominal data. You cannot calculate a mean, median, or range for categories, but you can find the most common (mode).</p>
+            <span class="solution-answer">Answer: C — Mode</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q4</span>
+          <span class="q-source">2015 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">On a school report, a student's record of completing homework is graded using the following codes: C = consistently, U = usually, S = sometimes, R = rarely, N = never. What type of data is this?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Categorical, ordinal</li>
+          <li><span class="opt-label">B.</span> Categorical, nominal</li>
+          <li><span class="opt-label">C.</span> Numerical, continuous</li>
+          <li><span class="opt-label">D.</span> Numerical, discrete</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>The categories (C, U, S, R, N) have a clear natural order from most to least frequent. This is categorical ordinal data.</p>
+            <span class="solution-answer">Answer: A — Categorical, ordinal</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q5</span>
+          <span class="q-source">2016 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Which set of data is classified as categorical and nominal?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> blue, green, yellow</li>
+          <li><span class="opt-label">B.</span> small, medium, large</li>
+          <li><span class="opt-label">C.</span> 5.2 cm, 6 cm, 7.21 cm</li>
+          <li><span class="opt-label">D.</span> 4 people, 5 people, 9 people</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>Colours (blue, green, yellow) are categories with no natural ordering — they are categorical nominal. "Small, medium, large" has an order, so it would be ordinal.</p>
+            <span class="solution-answer">Answer: A</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 2: Sampling & Inquiry ── -->
+    <section class="section" id="sampling">
+      <p class="section-label">Section 2</p>
+      <h2 class="section-title">Sampling Methods &amp; Statistical Inquiry</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q6</span>
+          <span class="q-source">2013 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A high school has 100 students in each year group, Year 7 to Year 12. A survey is to be conducted to determine the average number of text messages sent per month by students at the school. Which of the following would provide the most representative sample for this survey?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> All Year 7 students</li>
+          <li><span class="opt-label">B.</span> All physics students in Year 11 and 12</li>
+          <li><span class="opt-label">C.</span> 20 students chosen at random from each year group</li>
+          <li><span class="opt-label">D.</span> 120 students chosen at random from the school roll</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>Option C is a stratified sample — it gives each year group equal representation, providing the most representative sample across the school.</p>
+            <span class="solution-answer">Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q7</span>
+          <span class="q-source">2012 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Handmade chocolates are checked for size and shape. Every 30th chocolate is sampled. Which term best describes this type of sampling?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Census</li>
+          <li><span class="opt-label">B.</span> Random</li>
+          <li><span class="opt-label">C.</span> Stratified</li>
+          <li><span class="opt-label">D.</span> Systematic</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>Selecting every nth item is systematic sampling.</p>
+            <span class="solution-answer">Answer: D — Systematic</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q8</span>
+          <span class="q-source">2017 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A factory's quality control department has tested every 50th item produced for possible defects. What type of sampling has been used?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Random</li>
+          <li><span class="opt-label">B.</span> Stratified</li>
+          <li><span class="opt-label">C.</span> Systematic</li>
+          <li><span class="opt-label">D.</span> Numerical</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-answer">Answer: C — Systematic (every 50th item)</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q9</span>
+          <span class="q-source">2009 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Jamie wants to know how many songs were downloaded legally from the internet in the last 12 months by people aged 18–25 years. He has decided to conduct a statistical inquiry. After he collects the data, which of the following shows the best order for the steps he should take?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Display, organise, conclude, analyse</li>
+          <li><span class="opt-label">B.</span> Organise, display, conclude, analyse</li>
+          <li><span class="opt-label">C.</span> Display, organise, analyse, conclude</li>
+          <li><span class="opt-label">D.</span> Organise, display, analyse, conclude</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>After collecting data, the logical order is: Organise → Display → Analyse → Conclude.</p>
+            <span class="solution-answer">Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q10</span>
+          <span class="q-source">2012 HSC</span>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">Greg needs to conduct a statistical inquiry into how much time people aged 18–25 years have spent accessing social media websites in the last two weeks. The steps of statistical inquiry (NOT in order) are:</p>
+        <table class="q-table">
+          <tr><th>Letter</th><th>Step</th></tr>
+          <tr><td>A</td><td>Collect data</td></tr>
+          <tr><td>B</td><td>Organise and display data</td></tr>
+          <tr><td>C</td><td>Formulate question</td></tr>
+          <tr><td>D</td><td>Draw conclusions</td></tr>
+          <tr><td>E</td><td>Analyse data</td></tr>
+          <tr><td>F</td><td>Identify population</td></tr>
+        </table>
+        <p class="q-text"><strong>(i)</strong> Using the letters A–F, list the steps in the most appropriate order for Greg to conduct his statistical inquiry. [2 marks]</p>
+        <p class="q-text"><strong>(ii)</strong> A survey question reads: "Do you agree that social media is addictive?" Give TWO reasons why this survey question may be considered to be poorly designed. [2 marks]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) C → F → A → B → E → D</span>
+            <span class="solution-step">    (Formulate question → Identify population → Collect data</span>
+            <span class="solution-step">     → Organise and display → Analyse → Conclude)</span>
+            <span class="solution-step">(ii) Any TWO of:</span>
+            <span class="solution-step">  • The question is leading — it assumes social media is addictive</span>
+            <span class="solution-step">  • The question uses the word "agree" which pressures respondents to agree</span>
+            <span class="solution-answer">  • The term "addictive" is subjective / ambiguous</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q11</span>
+          <span class="q-source">2011 HSC</span>
+          <span class="q-marks">4 marks</span>
+        </div>
+        <p class="q-text">A study on the mobile phone usage of NSW high school students is to be conducted. Data is to be gathered using a questionnaire.</p>
+        <p class="q-text"><strong>(i)</strong> Write a suitable question for this questionnaire that would provide discrete ordinal data. [1 mark]</p>
+        <p class="q-text"><strong>(ii)</strong> An initial study is to be conducted using a stratified sample. Describe a method that could be used to obtain a representative stratified sample. [1 mark]</p>
+        <p class="q-text"><strong>(iii)</strong> Who should be surveyed if it is decided to use a census for the study? [1 mark]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) Example: "How many calls do you make per day?"</span>
+            <span class="solution-step">    Response options: 0, 1–2, 3–5, 6–10, more than 10</span>
+            <span class="solution-step">    (Discrete because it's a count; ordinal because the categories are ordered)</span>
+            <span class="solution-step">(ii) Identify the total number of students in each year group.</span>
+            <span class="solution-step">    Select students proportionally from each year group at random.</span>
+            <span class="solution-answer">(iii) All NSW high school students.</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 3: Summary Statistics ── -->
+    <section class="section" id="statistics">
+      <p class="section-label">Section 3</p>
+      <h2 class="section-title">Summary Statistics</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q12</span>
+          <span class="q-source">2018 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A set of scores has the following five-number summary: lower extreme = 2, lower quartile = 5, median = 6, upper quartile = 8, upper extreme = 9. What is the range?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 2</li>
+          <li><span class="opt-label">B.</span> 3</li>
+          <li><span class="opt-label">C.</span> 6</li>
+          <li><span class="opt-label">D.</span> 7</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Range = upper extreme − lower extreme = 9 − 2</span>
+            <span class="solution-answer">= 7 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q13</span>
+          <span class="q-source">2004 HSC</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Use the set of scores 1, 3, 3, 3, 4, 5, 7, 7, 12 to answer both parts.</p>
+        <p class="q-text"><strong>(a)</strong> What is the range?&nbsp;&nbsp; <strong>(b)</strong> What are the median and the mode?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(a) Range = 12 − 1 = 11</span>
+            <span class="solution-step">(b) 9 values: the median is the 5th value = 4</span>
+            <span class="solution-step">    Mode = 3 (appears 3 times)</span>
+            <span class="solution-answer">Range = 11,  Median = 4,  Mode = 3</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q14</span>
+          <span class="q-source">2008 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The July sales prices for properties in a suburb were: $552,000, $595,000, $607,000, $607,000, $682,000 and $685,000. On 1 August, another property in the same suburb was sold for over one million dollars. If the property had been sold in July, what effect would it have had on the mean and median sale prices?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Both the mean and median would have changed.</li>
+          <li><span class="opt-label">B.</span> Neither the mean nor the median would have changed.</li>
+          <li><span class="opt-label">C.</span> The mean would have changed and the median would have stayed the same.</li>
+          <li><span class="opt-label">D.</span> The mean would have stayed the same and the median would have changed.</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Current median (6 values) = average of 3rd and 4th = ($607,000 + $607,000) ÷ 2 = $607,000</span>
+            <span class="solution-step">Adding $1M+ (7th value): new median = 4th value = $607,000 (unchanged)</span>
+            <span class="solution-step">Mean would increase because the large value raises the total.</span>
+            <span class="solution-answer">Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q15</span>
+          <span class="q-source">2008 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The height of each student in a class was measured and it was found that the mean height was 160 cm. Two students were absent. When their heights were included in the data for the class, the mean height did not change. Which of the following heights are possible for the two absent students?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 155 cm and 162 cm</li>
+          <li><span class="opt-label">B.</span> 152 cm and 167 cm</li>
+          <li><span class="opt-label">C.</span> 149 cm and 171 cm</li>
+          <li><span class="opt-label">D.</span> 143 cm and 178 cm</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>The mean doesn't change only if the two heights average exactly 160 cm.</p>
+            <span class="solution-step">A: (155 + 162) ÷ 2 = 158.5 ✗</span>
+            <span class="solution-step">B: (152 + 167) ÷ 2 = 159.5 ✗</span>
+            <span class="solution-step">C: (149 + 171) ÷ 2 = 160 ✓</span>
+            <span class="solution-answer">Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q16</span>
+          <span class="q-source">2008 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The heights of the players in a basketball team were recorded as 1.80 m, 1.83 m, 1.84 m, 1.86 m and 1.92 m. When a sixth player joined the team, the average height of the players increased by 1 centimetre. What was the height of the sixth player?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 1.85 m</li>
+          <li><span class="opt-label">B.</span> 1.86 m</li>
+          <li><span class="opt-label">C.</span> 1.91 m</li>
+          <li><span class="opt-label">D.</span> 1.93 m</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Current mean = (1.80+1.83+1.84+1.86+1.92) ÷ 5 = 9.25 ÷ 5 = 1.85 m</span>
+            <span class="solution-step">New mean = 1.85 + 0.01 = 1.86 m</span>
+            <span class="solution-step">Sum of 6 players = 1.86 × 6 = 11.16 m</span>
+            <span class="solution-step">6th player = 11.16 − 9.25</span>
+            <span class="solution-answer">= 1.91 m → Answer: C</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q17</span>
+          <span class="q-source">2013 HSC</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Write down a set of six data values that has a range of 12, a mode of 12 and a minimum value of 12.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Min = 12 and range = 12, so max = 24.</span>
+            <span class="solution-step">Mode = 12, so 12 must appear more than any other value.</span>
+            <span class="solution-answer">Example: 12, 12, 14, 16, 20, 24  (range=12, mode=12, min=12)</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q18</span>
+          <span class="q-source">2009 HSC</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The mean of a set of ten scores is 14. Another two scores are included and the new mean is 16. What is the mean of the two additional scores?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 4</li>
+          <li><span class="opt-label">B.</span> 16</li>
+          <li><span class="opt-label">C.</span> 18</li>
+          <li><span class="opt-label">D.</span> 26</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Original sum = 10 × 14 = 140</span>
+            <span class="solution-step">New sum = 12 × 16 = 192</span>
+            <span class="solution-step">Sum of two new scores = 192 − 140 = 52</span>
+            <span class="solution-step">Mean of two new scores = 52 ÷ 2</span>
+            <span class="solution-answer">= 26 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 4: Outliers & Quartiles ── -->
+    <section class="section" id="outliers">
+      <p class="section-label">Section 4</p>
+      <h2 class="section-title">Outliers &amp; Five-Number Summary</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q19</span>
+          <span class="q-source">2019 HSC</span>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">The heights, in centimetres, of 10 players on a basketball team are shown below:</p>
+        <p class="q-text" style="font-family:var(--font-mono);font-size:13px;">170, 180, 185, 188, 192, 193, 193, 194, 196, 202</p>
+        <p class="q-text">Is the height of the shortest player on the team considered an outlier? Justify your answer with calculations.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Lower half: 170, 180, 185, 188, 192  → Q1 = 185</span>
+            <span class="solution-step">Upper half: 193, 193, 194, 196, 202  → Q3 = 194</span>
+            <span class="solution-step">IQR = Q3 − Q1 = 194 − 185 = 9</span>
+            <span class="solution-step">Lower fence = Q1 − 1.5 × IQR = 185 − 13.5 = 171.5</span>
+            <span class="solution-step">Shortest player = 170 cm</span>
+            <span class="solution-step">170 &lt; 171.5</span>
+            <span class="solution-answer">Yes, 170 cm IS an outlier (it is below the lower fence of 171.5).</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q20</span>
+          <span class="q-source">2021 HSC</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">The five-number summary of a dataset is given: Lowest score = 1, Q1 = 4, Median = 7, Q3 = 10, Highest score = 20. Is 20 an outlier? Justify your answer with calculations.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">IQR = Q3 − Q1 = 10 − 4 = 6</span>
+            <span class="solution-step">Upper fence = Q3 + 1.5 × IQR = 10 + 9 = 19</span>
+            <span class="solution-step">Highest score = 20 > 19</span>
+            <span class="solution-answer">Yes, 20 IS an outlier (it exceeds the upper fence of 19).</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q21</span>
+          <span class="q-source">2018 HSC</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">A set of data has a lower quartile (Q1) of 10 and an upper quartile (Q3) of 16. What is the maximum possible range for this set of data if there are no outliers?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">IQR = Q3 − Q1 = 16 − 10 = 6</span>
+            <span class="solution-step">Upper fence = Q3 + 1.5 × IQR = 16 + 9 = 25</span>
+            <span class="solution-step">Lower fence = Q1 − 1.5 × IQR = 10 − 9 = 1</span>
+            <span class="solution-step">Max range (no outliers) = 25 − 1</span>
+            <span class="solution-answer">= 24</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q22</span>
+          <span class="q-source">2017 HSC</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Jamal surveyed eight households in his street and asked how many kilolitres (kL) of water they used in the last year. The results were:</p>
+        <p class="q-text" style="font-family:var(--font-mono);font-size:13px;">175, 210, 184, 195, 201, 188, 170, 197</p>
+        <p class="q-text"><strong>(i)</strong> Calculate the mean of this set of data. [1 mark]</p>
+        <p class="q-text"><strong>(ii)</strong> What is the standard deviation of this set of data, correct to one decimal place? [1 mark]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) Sum = 175+210+184+195+201+188+170+197 = 1520</span>
+            <span class="solution-step">    Mean = 1520 ÷ 8 = 190 kL</span>
+            <span class="solution-step">(ii) Use calculator: σ ≈ 13.1 kL</span>
+            <span class="solution-answer">Mean = 190 kL,  Standard deviation ≈ 13.1 kL</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q23</span>
+          <span class="q-source">2022 HSC</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">A cumulative frequency table for a data set is shown below:</p>
+        <table class="q-table">
+          <tr><th>Score</th><th>Frequency</th><th>Cumulative frequency</th></tr>
+          <tr><td>3</td><td>4</td><td>4</td></tr>
+          <tr><td>5</td><td>6</td><td>10</td></tr>
+          <tr><td>7</td><td>8</td><td>18</td></tr>
+          <tr><td>9</td><td>6</td><td>24</td></tr>
+          <tr><td>11</td><td>4</td><td>28</td></tr>
+        </table>
+        <p class="q-text">What is the interquartile range of this data set?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">n = 28 scores. Q1 = average of 7th and 8th scores. Q3 = average of 21st and 22nd scores.</span>
+            <span class="solution-step">Scores 1–4 have value 3; scores 5–10 have value 5.</span>
+            <span class="solution-step">7th and 8th scores are both 5, so Q1 = 5.</span>
+            <span class="solution-step">Scores 11–18 have value 7; scores 19–24 have value 9.</span>
+            <span class="solution-step">21st and 22nd scores are both 9, so Q3 = 9.</span>
+            <span class="solution-step">IQR = Q3 − Q1 = 9 − 5</span>
+            <span class="solution-answer">= 4</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved ? saved === 'dark' : prefersDark) html.classList.add('dark-mode');
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) html.classList.toggle('dark-mode', e.matches);
+    });
+    window.addEventListener('storage', e => {
+      if (e.key === 'theme') html.classList.toggle('dark-mode', e.newValue === 'dark');
+    });
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+
+</body>
+</html>

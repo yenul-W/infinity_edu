@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Managing Money</title>
+  <style>
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-ink-black: #000000;
+      --color-medium-gray: #818181;
+      --color-light-gray: #d6d6d6;
+      --color-faded-gray: #9d9d9d;
+      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --text-caption: 11px;
+      --leading-caption: 1.38;
+      --tracking-caption: 0.88px;
+      --text-body: 14px;
+      --leading-body: 1.29;
+      --tracking-body: 0.35px;
+      --text-heading: 26px;
+      --leading-heading: 1.13;
+      --tracking-heading: 0.26px;
+      --spacing-8: 8px;
+      --spacing-12: 12px;
+      --spacing-16: 16px;
+      --spacing-24: 24px;
+      --spacing-40: 40px;
+      --section-gap: 64px;
+    }
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black: #f0f0f0;
+      --color-medium-gray: #818181;
+      --color-light-gray: #2a2a2a;
+      --color-faded-gray: #5a5a5a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--color-canvas-white); color: var(--color-ink-black); font-family: var(--font-onsite); display: flex; min-height: 100vh; }
+    .sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--color-light-gray); padding: var(--spacing-40) var(--spacing-16); display: flex; flex-direction: column; gap: var(--spacing-8); }
+    .sidebar-back { font-family: var(--font-mono); font-size: var(--text-caption); color: var(--color-faded-gray); text-decoration: none; display: block; margin-bottom: var(--spacing-24); }
+    .sidebar-back:hover { color: var(--color-ink-black); }
+    .sidebar-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); margin-top: var(--spacing-16); }
+    .sidebar-link { font-size: var(--text-caption); color: var(--color-medium-gray); text-decoration: none; line-height: 1.6; display: block; padding: 2px 0; }
+    .sidebar-link:hover { color: var(--color-ink-black); }
+    .main { flex: 1; padding: var(--spacing-40) 56px; max-width: 780px; }
+    .page-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .page-title { font-size: 40px; font-weight: 600; letter-spacing: 0.6px; line-height: 1; color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
+    .page-intro { font-size: var(--text-body); color: var(--color-medium-gray); line-height: var(--leading-body); letter-spacing: var(--tracking-body); margin-bottom: var(--spacing-40); max-width: 560px; }
+    .section { margin-bottom: var(--section-gap); }
+    .section-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .section-title { font-size: var(--text-heading); font-weight: 600; letter-spacing: var(--tracking-heading); line-height: var(--leading-heading); color: var(--color-ink-black); margin-bottom: var(--spacing-24); padding-bottom: var(--spacing-12); border-bottom: 1px solid var(--color-light-gray); }
+    .question-block { margin-bottom: var(--spacing-24); padding: var(--spacing-16); border: 1px solid var(--color-light-gray); }
+    .question-meta { display: flex; align-items: center; gap: var(--spacing-8); margin-bottom: var(--spacing-12); }
+    .q-num { font-family: var(--font-onsite); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); }
+    .q-source { font-family: var(--font-onsite); font-size: var(--text-caption); color: var(--color-faded-gray); letter-spacing: var(--tracking-caption); }
+    a.q-source-link { text-decoration: none; border-bottom: 1px solid var(--color-light-gray); color: var(--color-faded-gray); }
+    a.q-source-link:hover { color: var(--color-ink-black); border-bottom-color: var(--color-ink-black); }
+    .q-marks { margin-left: auto; font-family: var(--font-onsite); font-size: var(--text-caption); color: var(--color-faded-gray); }
+    .q-text { font-size: var(--text-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
+    .q-formula { font-family: var(--font-mono); font-size: 13px; background: var(--color-light-gray); color: var(--color-ink-black); padding: var(--spacing-8) var(--spacing-12); margin: var(--spacing-8) 0 var(--spacing-12); display: block; line-height: 1.8; }
+    .q-options { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--spacing-12); }
+    .q-options li { font-size: var(--text-body); color: var(--color-ink-black); display: flex; gap: var(--spacing-8); }
+    .opt-label { font-weight: 600; color: var(--color-faded-gray); min-width: 18px; }
+    .q-table { border-collapse: collapse; font-size: var(--text-body); margin: var(--spacing-12) 0; width: 100%; }
+    .q-table th, .q-table td { border: 1px solid var(--color-light-gray); padding: 6px 10px; text-align: left; }
+    .q-table th { background: var(--color-light-gray); font-weight: 600; }
+    details.solution { border-top: 1px solid var(--color-light-gray); margin-top: var(--spacing-12); padding-top: var(--spacing-8); }
+    details.solution summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); list-style: none; user-select: none; }
+    details.solution summary::-webkit-details-marker { display: none; }
+    details.solution summary::after { content: '  ↓'; }
+    details.solution[open] summary::after { content: '  ↑'; }
+    details.solution[open] summary { margin-bottom: var(--spacing-12); }
+    .solution-body { font-size: var(--text-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); color: var(--color-ink-black); }
+    .solution-body p + p { margin-top: var(--spacing-8); }
+    .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
+    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
+    @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <a class="sidebar-back" href="index.html">← Back</a>
+    <span class="sidebar-label">Sections</span>
+    <a class="sidebar-link" href="#gst">GST &amp; Discounts</a>
+    <a class="sidebar-link" href="#budget">Budgeting</a>
+    <a class="sidebar-link" href="#insurance">Insurance &amp; Vehicles</a>
+    <a class="sidebar-link" href="#interest">Simple Interest</a>
+    <a class="sidebar-link" href="#depreciation">Depreciation</a>
+  </nav>
+
+  <main class="main">
+    <p class="page-label">Managing Money — Revision</p>
+    <h1 class="page-title">HSC Practice Questions</h1>
+    <p class="page-intro">Questions drawn from past NSW HSC examinations. Attempt each question before opening the solution.</p>
+
+    <!-- ── Section 1: GST & Discounts ── -->
+    <section class="section" id="gst">
+      <p class="section-label">Section 1</p>
+      <h2 class="section-title">GST &amp; Percentage Change</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q1</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2004" target="_blank" rel="noreferrer noopener">2004 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Rita purchased a camera for $880 while on holidays in Australia. This price included 10% GST. When she left Australia she received a refund of the GST. What was Rita's refund?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $80</li>
+          <li><span class="opt-label">B.</span> $88</li>
+          <li><span class="opt-label">C.</span> $792</li>
+          <li><span class="opt-label">D.</span> $800</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>The $880 already includes 10% GST, so it equals 110% of the pre-GST price.</p>
+            <span class="solution-step">GST = $880 × 10 ÷ 110 = $880 ÷ 11</span>
+            <span class="solution-answer">= $80 → Answer: A</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q2</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2010" target="_blank" rel="noreferrer noopener">2010 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A new phone was purchased for $725 which included 10% GST. What was the price of the phone without GST, correct to the nearest cent?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $65.91</li>
+          <li><span class="opt-label">B.</span> $72.50</li>
+          <li><span class="opt-label">C.</span> $652.50</li>
+          <li><span class="opt-label">D.</span> $659.09</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Price without GST = $725 ÷ 1.10</span>
+            <span class="solution-answer">= $659.09 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q3</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2007" target="_blank" rel="noreferrer noopener">2007 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">The price of a CD is $22.00, which includes 10% GST. What is the amount of GST included in this price?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $2.00</li>
+          <li><span class="opt-label">B.</span> $2.20</li>
+          <li><span class="opt-label">C.</span> $19.80</li>
+          <li><span class="opt-label">D.</span> $20.00</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">GST = $22 × 10 ÷ 110 = $22 ÷ 11</span>
+            <span class="solution-answer">= $2.00 → Answer: A</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q4</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">A dress was on sale with 25% discount. As a regular customer, Kate received a further 10% on the already discounted price. What was the overall percentage discount Kate received?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">After 25% off → 75% of original price remains</span>
+            <span class="solution-step">After further 10% off → 90% × 75% = 67.5%</span>
+            <span class="solution-step">Overall discount = 100% − 67.5%</span>
+            <span class="solution-answer">= 32.5%</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q5</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">A golf shop is having a Boxing Day sale:</p>
+        <p class="q-text"><strong>(i)</strong> What is the percentage discount on a putter which is reduced from $120.00 to $102.00? [1 mark]</p>
+        <p class="q-text"><strong>(ii)</strong> The same discount applies storewide. What discount amount is applicable to a box of golf balls whose original price was $25.00? [1 mark]</p>
+        <p class="q-text"><strong>(iii)</strong> What is the sale price of a golf bag which originally cost $160.00? [1 mark]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) Discount = ($120 − $102) ÷ $120 × 100 = $18 ÷ $120 × 100 = 15%</span>
+            <span class="solution-step">(ii) Discount = 15% × $25 = $3.75</span>
+            <span class="solution-step">(iii) Sale price = $160 × (1 − 0.15) = $160 × 0.85</span>
+            <span class="solution-answer">= $136.00</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q6</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023" target="_blank" rel="noreferrer noopener">2023 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">A receipt from a supermarket shows a total of $124.87. The GST shown on the receipt is $3.86. GST, at a rate of 10%, is only charged on some items. What was the value of the items which did NOT have GST charged?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Value of GST items (including GST) = $3.86 × 11 = $42.46</span>
+            <span class="solution-step">Value without GST = $124.87 − $42.46</span>
+            <span class="solution-answer">= $82.41</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 2: Budgeting ── -->
+    <section class="section" id="budget">
+      <p class="section-label">Section 2</p>
+      <h2 class="section-title">Budgeting</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q7</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2005" target="_blank" rel="noreferrer noopener">2005 HSC ↗</a>
+          <span class="q-marks">5 marks</span>
+        </div>
+        <p class="q-text">Reece is preparing his annual budget. His expected income is: $90 every week as a swimming coach, plus interest earned from an investment of $5000 at a rate of 4% per annum. His planned expenses are: $30 every week on transport, $12 every week on lunches, $48 every month on entertainment. Reece will save his remaining income. (Assume 52 weeks in a year.)</p>
+        <p class="q-text"><strong>(i)</strong> Determine Reece's annual income, annual expenses, and annual savings. [3 marks]</p>
+        <p class="q-text"><strong>(ii)</strong> At the beginning of the year, Reece starts saving. Will Reece have saved enough money during the year for a deposit of $2100 on a car if he keeps to his budget? Justify your answer. [2 marks]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) Annual income = (90 × 52) + (5000 × 4%) = $4680 + $200 = $4880</span>
+            <span class="solution-step">    Annual expenses = (30 × 52) + (12 × 52) + (48 × 12)</span>
+            <span class="solution-step">                    = $1560 + $624 + $576 = $2760</span>
+            <span class="solution-step">    Annual savings = $4880 − $2760 = $2120</span>
+            <span class="solution-step">(ii) $2120 ≥ $2100, so YES, Reece will have just enough for the deposit.</span>
+            <span class="solution-answer">He will save $2120 during the year, which exceeds the $2100 deposit.</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q8</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2021" target="_blank" rel="noreferrer noopener">2021 HSC ↗</a>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">A dance school runs a holiday program and charges $150 per student. The costs of running the program are: Dance teacher: $110 per hour; Room hire: $52 per hour plus 10% GST. The program goes for two hours a day for five days. What profit does the dance school make if 20 students pay for the program?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Revenue = 20 × $150 = $3000</span>
+            <span class="solution-step">Total hours = 2 × 5 = 10 hours</span>
+            <span class="solution-step">Teacher cost = 10 × $110 = $1100</span>
+            <span class="solution-step">Room hire = 10 × $52 × 1.10 = $572 (including GST)</span>
+            <span class="solution-step">Total costs = $1100 + $572 = $1672</span>
+            <span class="solution-answer">Profit = $3000 − $1672 = $1328</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 3: Insurance & Vehicles ── -->
+    <section class="section" id="insurance">
+      <p class="section-label">Section 3</p>
+      <h2 class="section-title">Insurance &amp; Vehicle Costs</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q9</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2019" target="_blank" rel="noreferrer noopener">2019 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Julia earns $28 per hour. Her hourly pay rate increases by 2%. How much will she earn for a 4-hour shift with this increase?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $2.24</li>
+          <li><span class="opt-label">B.</span> $28.56</li>
+          <li><span class="opt-label">C.</span> $112</li>
+          <li><span class="opt-label">D.</span> $114.24</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">New rate = $28 × 1.02 = $28.56/hr</span>
+            <span class="solution-step">Earnings = $28.56 × 4</span>
+            <span class="solution-answer">= $114.24 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q10</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2018" target="_blank" rel="noreferrer noopener">2018 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Sam is the driver at fault in a car accident. Which of the following is covered by Sam's compulsory third-party (CTP) insurance?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> Repairs to Sam's car</li>
+          <li><span class="opt-label">B.</span> Injury to the other driver</li>
+          <li><span class="opt-label">C.</span> Damage to the other driver's car</li>
+          <li><span class="opt-label">D.</span> Cost of repairing a building damaged in the accident</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <p>CTP (Green Slip) insurance covers personal injury only — it pays for medical costs and compensation for people injured in the accident. It does not cover property damage.</p>
+            <span class="solution-answer">Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q11</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2019" target="_blank" rel="noreferrer noopener">2019 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Ralph buys a utility vehicle with a market value of $63,500. Stamp duty is calculated as: 3% of market value up to $45,000, and 5% of market value over $45,000. Calculate the amount of stamp duty payable by Ralph.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Stamp duty on first $45,000 = 3% × $45,000 = $1350</span>
+            <span class="solution-step">Amount over $45,000 = $63,500 − $45,000 = $18,500</span>
+            <span class="solution-step">Stamp duty on remainder = 5% × $18,500 = $925</span>
+            <span class="solution-answer">Total stamp duty = $1350 + $925 = $2275</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q12</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Alex is buying a used car with a sale price of $13,380. Stamp duty is calculated at $3 for every $100, or part thereof, of the sale price. Calculate the stamp duty payable.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">$13,380 ÷ $100 = 133.8 → round UP to 134 (because of "or part thereof")</span>
+            <span class="solution-step">Stamp duty = 134 × $3</span>
+            <span class="solution-answer">= $402</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 4: Simple Interest ── -->
+    <section class="section" id="interest">
+      <p class="section-label">Section 4</p>
+      <h2 class="section-title">Simple Interest</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q13</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">$6000 is invested in an account that earns simple interest at the rate of 3.5% per annum. What is the total interest earned in the first four years?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $70</li>
+          <li><span class="opt-label">B.</span> $84</li>
+          <li><span class="opt-label">C.</span> $210</li>
+          <li><span class="opt-label">D.</span> $840</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">I = P × R × N = $6000 × 0.035 × 4</span>
+            <span class="solution-answer">= $840 → Answer: D</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q14</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023" target="_blank" rel="noreferrer noopener">2023 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">An amount of $2500 is invested at a simple interest rate of 3% per annum. How much interest is earned in the first two years?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $75</li>
+          <li><span class="opt-label">B.</span> $150</li>
+          <li><span class="opt-label">C.</span> $2575</li>
+          <li><span class="opt-label">D.</span> $2652</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">I = $2500 × 0.03 × 2</span>
+            <span class="solution-answer">= $150 → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q15</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2010" target="_blank" rel="noreferrer noopener">2010 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Minjy invests $2000 for 1 year and 5 months. The simple interest is calculated at a rate of 6% per annum. What is the total value of the investment at the end of this period?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $2170</li>
+          <li><span class="opt-label">B.</span> $2180</li>
+          <li><span class="opt-label">C.</span> $3003</li>
+          <li><span class="opt-label">D.</span> $3700</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">N = 1 + 5/12 = 17/12 years</span>
+            <span class="solution-step">I = $2000 × 0.06 × 17/12 = $2000 × 0.085 = $170</span>
+            <span class="solution-step">Total = $2000 + $170</span>
+            <span class="solution-answer">= $2170 → Answer: A</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q16</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2013" target="_blank" rel="noreferrer noopener">2013 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Polly borrowed $11,000. She repaid the loan in full at the end of two years with a lump sum of $12,000. What annual simple interest rate was she charged?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 4.17%</li>
+          <li><span class="opt-label">B.</span> 4.55%</li>
+          <li><span class="opt-label">C.</span> 8.33%</li>
+          <li><span class="opt-label">D.</span> 9.09%</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Interest = $12,000 − $11,000 = $1000</span>
+            <span class="solution-step">R = I ÷ (P × N) = $1000 ÷ ($11,000 × 2) = 1000 ÷ 22000</span>
+            <span class="solution-answer">≈ 4.55% p.a. → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q17</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2009" target="_blank" rel="noreferrer noopener">2009 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Lou bought a plasma TV which was priced at $3499. He paid $1000 deposit and got a loan for the balance that was paid off by 24 monthly instalments of $135.36. What simple interest rate per annum, to the nearest percent, was charged on his loan?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Principal (loan) = $3499 − $1000 = $2499</span>
+            <span class="solution-step">Total repaid = 24 × $135.36 = $3248.64</span>
+            <span class="solution-step">Total interest = $3248.64 − $2499 = $749.64</span>
+            <span class="solution-step">N = 24 months = 2 years</span>
+            <span class="solution-step">R = $749.64 ÷ ($2499 × 2) ≈ 0.15</span>
+            <span class="solution-answer">≈ 15% p.a.</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q18</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">George makes a single deposit of $9000 into an account that pays simple interest. After 4 years, George's account has a balance of $10,350. What simple interest rate did George receive on his investment?</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Interest earned = $10,350 − $9000 = $1350</span>
+            <span class="solution-step">R = I ÷ (P × N) = $1350 ÷ ($9000 × 4)</span>
+            <span class="solution-answer">= 3.75% p.a.</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+    <!-- ── Section 5: Depreciation ── -->
+    <section class="section" id="depreciation">
+      <p class="section-label">Section 5</p>
+      <h2 class="section-title">Straight-Line Depreciation</h2>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q19</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023" target="_blank" rel="noreferrer noopener">2023 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">A delivery truck was valued at $65,000 when new. The value of the truck depreciates at a rate of 22 cents per kilometre travelled. What is the value of the truck after it has travelled a total distance of 132,600 km?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> $35,828</li>
+          <li><span class="opt-label">B.</span> $29,172</li>
+          <li><span class="opt-label">C.</span> $14,872</li>
+          <li><span class="opt-label">D.</span> $14,300</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Total depreciation = $0.22 × 132,600 = $29,172</span>
+            <span class="solution-step">Value = $65,000 − $29,172</span>
+            <span class="solution-answer">= $35,828 → Answer: A</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q20</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-general-archive/2013" target="_blank" rel="noreferrer noopener">2013 HSC ↗</a>
+          <span class="q-marks">1 mark</span>
+        </div>
+        <p class="q-text">Rae paid $40,000 for new office equipment at the start of the 2013 financial year. She used flat rate depreciation each year. At the start of the 2016 financial year she revalued her equipment at $22,000. What was the annual flat rate of depreciation, as a percentage of the purchase price?</p>
+        <ul class="q-options">
+          <li><span class="opt-label">A.</span> 11.25%</li>
+          <li><span class="opt-label">B.</span> 15%</li>
+          <li><span class="opt-label">C.</span> 17.5%</li>
+          <li><span class="opt-label">D.</span> 35%</li>
+        </ul>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Depreciation over 3 years = $40,000 − $22,000 = $18,000</span>
+            <span class="solution-step">Annual depreciation = $18,000 ÷ 3 = $6,000</span>
+            <span class="solution-step">Rate = $6,000 ÷ $40,000 × 100</span>
+            <span class="solution-answer">= 15% → Answer: B</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q21</span>
+          <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2021" target="_blank" rel="noreferrer noopener">2021 HSC ↗</a>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text">Adam purchased some office furniture five years ago. It depreciated by $2300 each year based on the straight-line method of depreciation. The salvage value of the furniture is now $7500. Find the initial value of the office furniture.</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">Total depreciation = 5 × $2300 = $11,500</span>
+            <span class="solution-step">Initial value = Salvage value + Total depreciation</span>
+            <span class="solution-step">= $7500 + $11,500</span>
+            <span class="solution-answer">= $19,000</span>
+          </div>
+        </details>
+      </div>
+
+      <div class="question-block">
+        <div class="question-meta">
+          <span class="q-num">Q22</span>
+          <span class="q-source">SM-Bank</span>
+          <span class="q-marks">3 marks</span>
+        </div>
+        <p class="q-text">A company purchased a machine for $60,000. For taxation purposes the machine is depreciated using the straight-line method at a flat rate of 10% of the purchase price each year.</p>
+        <p class="q-text"><strong>(i)</strong> By how many dollars will the machine depreciate annually? [1 mark]</p>
+        <p class="q-text"><strong>(ii)</strong> Calculate the value of the machine after three years. [1 mark]</p>
+        <p class="q-text"><strong>(iii)</strong> After how many years will the machine be $12,000 in value? [1 mark]</p>
+        <details class="solution">
+          <summary>Show solution</summary>
+          <div class="solution-body">
+            <span class="solution-step">(i) Annual depreciation = 10% × $60,000 = $6,000</span>
+            <span class="solution-step">(ii) Value after 3 years = $60,000 − 3 × $6,000 = $60,000 − $18,000 = $42,000</span>
+            <span class="solution-step">(iii) $12,000 = $60,000 − $6,000 × n</span>
+            <span class="solution-step">     $6,000n = $48,000  →  n = 8</span>
+            <span class="solution-answer">= 8 years</span>
+          </div>
+        </details>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved ? saved === 'dark' : prefersDark) html.classList.add('dark-mode');
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) html.classList.toggle('dark-mode', e.matches);
+    });
+    window.addEventListener('storage', e => {
+      if (e.key === 'theme') html.classList.toggle('dark-mode', e.newValue === 'dark');
+    });
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+
+</body>
+</html>

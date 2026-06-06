@@ -181,6 +181,12 @@
     '}',
     'html.dark-mode .qpop-history-item{border-color:rgba(240,240,245,0.10);}',
     '.qpop-history-meta{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}',
+    '.qpop-history-date{',
+      'font-family:system-ui,-apple-system,sans-serif;',
+      'font-size:0.56rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;',
+      'color:rgba(0,0,0,0.32);margin-left:auto;',
+    '}',
+    'html.dark-mode .qpop-history-date{color:rgba(240,240,245,0.32);}',
 
     '.qpop-category-tag{',
       'font-family:system-ui,-apple-system,sans-serif;',
@@ -482,7 +488,7 @@
     fetch(GAS_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload),
     })
       .then(function () {
@@ -496,6 +502,14 @@
         submitBtn.disabled = false;
       });
   });
+
+  var TOPIC_LABELS = {
+    general:  'General',
+    formulas: 'Formulas & Equations',
+    earning:  'Earning Money',
+    managing: 'Managing Money',
+    data:     'Data Analysis',
+  };
 
   /* History */
   function loadHistory() {
@@ -519,10 +533,20 @@
 
           var meta = document.createElement('div');
           meta.className = 'qpop-history-meta';
+          var categoryLabel = TOPIC_LABELS[q.category] || esc(q.category || 'general');
+          var dateStr = '';
+          if (q.timestamp) {
+            try {
+              dateStr = new Date(q.timestamp).toLocaleDateString('en-AU', {
+                day: 'numeric', month: 'short', year: 'numeric'
+              });
+            } catch (e) {}
+          }
           meta.innerHTML =
-            '<span class="qpop-category-tag">' + esc(q.category || 'general') + '</span>' +
+            '<span class="qpop-category-tag">' + esc(categoryLabel) + '</span>' +
             '<span class="qpop-badge ' + (answered ? 'qpop-badge--answered' : 'qpop-badge--pending') + '">' +
-            (answered ? 'Answered' : 'Pending') + '</span>';
+            (answered ? 'Answered' : 'Pending') + '</span>' +
+            (dateStr ? '<span class="qpop-history-date">' + esc(dateStr) + '</span>' : '');
 
           var summary = q.questionText
             ? q.questionText
@@ -536,6 +560,13 @@
 
           item.appendChild(meta);
           item.appendChild(qEl);
+
+          if (q.imageBase64) {
+            var img = document.createElement('img');
+            img.src = q.imageBase64;
+            img.style.cssText = 'max-width:100%;margin-top:0.4rem;border:1px solid rgba(0,0,0,0.10);display:block;';
+            item.appendChild(img);
+          }
 
           if (answered && q.teacherResponse) {
             var resp = document.createElement('div');
