@@ -240,106 +240,30 @@ body {
   inset: 0;
 }
 
-/* Background: real landscape photo + per-topic color grade + bottom dark vignette */
-.scene-bg {
+/* Background: city video (day/night) with bottom dark vignette */
+.scene-video {
   position: absolute;
   inset: 0;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
 }
 
-.topic-card:hover .scene-bg {
+.topic-card:hover .scene-video {
   transform: scale(1.06);
 }
 
-/* Card 1 — New York City (day/night) */
-.scene-bg-1 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/nyc-day.gif');
-}
-html.dark-mode .scene-bg-1 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/nyc-night.gif');
-}
-
-/* Card 2 — Los Angeles (day/night) */
-.scene-bg-2 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/la-day.gif');
-}
-html.dark-mode .scene-bg-2 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/la-night.gif');
-}
-
-/* Card 3 — Melbourne (day/night) */
-.scene-bg-3 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/melbourne-day.gif');
-}
-html.dark-mode .scene-bg-3 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/melbourne-night.gif');
-}
-
-/* Card 4 — Chicago (day/night) */
-.scene-bg-4 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/chicago-day.gif');
-}
-html.dark-mode .scene-bg-4 {
-  background:
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.0)  0%,
-      rgba(0,0,0,0.0)  28%,
-      rgba(0,0,0,0.50) 55%,
-      rgba(0,0,0,0.88) 76%,
-      rgba(0,0,0,0.97) 100%),
-    url('assets/city-gifs/chicago-night.gif');
+.scene-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.0)  0%,
+    rgba(0,0,0,0.0)  28%,
+    rgba(0,0,0,0.50) 55%,
+    rgba(0,0,0,0.88) 76%,
+    rgba(0,0,0,0.97) 100%);
+  pointer-events: none;
 }
 
 /* SVG decorative art — positioned in upper half of card */
