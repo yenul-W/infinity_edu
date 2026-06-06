@@ -71,6 +71,17 @@
     .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
     .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
     @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
+    .q-options li { cursor: pointer; padding: 6px 8px; }
+    .q-options li:hover:not(.opt-locked) { background: var(--color-light-gray); }
+    .q-options li.opt-correct { background: #d4edda; color: #155724; }
+    .q-options li.opt-correct .opt-label { color: #155724; }
+    .q-options li.opt-wrong { background: #f8d7da; color: #721c24; }
+    .q-options li.opt-wrong .opt-label { color: #721c24; }
+    .q-options li.opt-locked { cursor: default; pointer-events: none; }
+    html.dark-mode .q-options li.opt-correct { background: #1a3a25; color: #8fd4a0; }
+    html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
+    html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
+    html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
   </style>
 </head>
 <body>
@@ -101,7 +112,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A survey asked the following question: "How many brothers do you have?" How would the responses be classified?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> Categorical, ordinal</li>
           <li><span class="opt-label">B.</span> Categorical, nominal</li>
           <li><span class="opt-label">C.</span> Numerical, discrete</li>
@@ -123,7 +134,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A survey asked the following question for students born in Australia: "Which State or Territory were you born in?" How would the responses be classified?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> Categorical, ordinal</li>
           <li><span class="opt-label">B.</span> Categorical, nominal</li>
           <li><span class="opt-label">C.</span> Numerical, discrete</li>
@@ -145,7 +156,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The eye colours of a sample of children were recorded. When analysing this data, which of the following could be found?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> Mean</li>
           <li><span class="opt-label">B.</span> Median</li>
           <li><span class="opt-label">C.</span> Mode</li>
@@ -167,7 +178,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">On a school report, a student's record of completing homework is graded using the following codes: C = consistently, U = usually, S = sometimes, R = rarely, N = never. What type of data is this?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> Categorical, ordinal</li>
           <li><span class="opt-label">B.</span> Categorical, nominal</li>
           <li><span class="opt-label">C.</span> Numerical, continuous</li>
@@ -189,7 +200,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Which set of data is classified as categorical and nominal?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> blue, green, yellow</li>
           <li><span class="opt-label">B.</span> small, medium, large</li>
           <li><span class="opt-label">C.</span> 5.2 cm, 6 cm, 7.21 cm</li>
@@ -218,7 +229,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A high school has 100 students in each year group, Year 7 to Year 12. A survey is to be conducted to determine the average number of text messages sent per month by students at the school. Which of the following would provide the most representative sample for this survey?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> All Year 7 students</li>
           <li><span class="opt-label">B.</span> All physics students in Year 11 and 12</li>
           <li><span class="opt-label">C.</span> 20 students chosen at random from each year group</li>
@@ -240,7 +251,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Handmade chocolates are checked for size and shape. Every 30th chocolate is sampled. Which term best describes this type of sampling?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> Census</li>
           <li><span class="opt-label">B.</span> Random</li>
           <li><span class="opt-label">C.</span> Stratified</li>
@@ -262,7 +273,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A factory's quality control department has tested every 50th item produced for possible defects. What type of sampling has been used?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> Random</li>
           <li><span class="opt-label">B.</span> Stratified</li>
           <li><span class="opt-label">C.</span> Systematic</li>
@@ -283,7 +294,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Jamie wants to know how many songs were downloaded legally from the internet in the last 12 months by people aged 18–25 years. He has decided to conduct a statistical inquiry. After he collects the data, which of the following shows the best order for the steps he should take?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> Display, organise, conclude, analyse</li>
           <li><span class="opt-label">B.</span> Organise, display, conclude, analyse</li>
           <li><span class="opt-label">C.</span> Display, organise, analyse, conclude</li>
@@ -367,7 +378,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A set of scores has the following five-number summary: lower extreme = 2, lower quartile = 5, median = 6, upper quartile = 8, upper extreme = 9. What is the range?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> 2</li>
           <li><span class="opt-label">B.</span> 3</li>
           <li><span class="opt-label">C.</span> 6</li>
@@ -408,7 +419,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The July sales prices for properties in a suburb were: $552,000, $595,000, $607,000, $607,000, $682,000 and $685,000. On 1 August, another property in the same suburb was sold for over one million dollars. If the property had been sold in July, what effect would it have had on the mean and median sale prices?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> Both the mean and median would have changed.</li>
           <li><span class="opt-label">B.</span> Neither the mean nor the median would have changed.</li>
           <li><span class="opt-label">C.</span> The mean would have changed and the median would have stayed the same.</li>
@@ -432,7 +443,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The height of each student in a class was measured and it was found that the mean height was 160 cm. Two students were absent. When their heights were included in the data for the class, the mean height did not change. Which of the following heights are possible for the two absent students?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 155 cm and 162 cm</li>
           <li><span class="opt-label">B.</span> 152 cm and 167 cm</li>
           <li><span class="opt-label">C.</span> 149 cm and 171 cm</li>
@@ -457,7 +468,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The heights of the players in a basketball team were recorded as 1.80 m, 1.83 m, 1.84 m, 1.86 m and 1.92 m. When a sixth player joined the team, the average height of the players increased by 1 centimetre. What was the height of the sixth player?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 1.85 m</li>
           <li><span class="opt-label">B.</span> 1.86 m</li>
           <li><span class="opt-label">C.</span> 1.91 m</li>
@@ -499,7 +510,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The mean of a set of ten scores is 14. Another two scores are included and the new mean is 16. What is the mean of the two additional scores?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> 4</li>
           <li><span class="opt-label">B.</span> 16</li>
           <li><span class="opt-label">C.</span> 18</li>
@@ -652,6 +663,30 @@
     });
     window.addEventListener('message', e => {
       if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.q-options[data-correct]').forEach(ul => {
+      const correct = ul.dataset.correct.toUpperCase();
+      const block = ul.closest('.question-block');
+      const solution = block.querySelector('details.solution');
+      ul.querySelectorAll('li').forEach(li => {
+        const letter = li.querySelector('.opt-label').textContent.trim().replace('.', '');
+        li.addEventListener('click', () => {
+          if (ul.classList.contains('answered')) return;
+          ul.classList.add('answered');
+          ul.querySelectorAll('li').forEach(l => l.classList.add('opt-locked'));
+          const isCorrect = letter === correct;
+          li.classList.add(isCorrect ? 'opt-correct' : 'opt-wrong');
+          if (!isCorrect) {
+            ul.querySelectorAll('li').forEach(l => {
+              if (l.querySelector('.opt-label').textContent.trim().replace('.', '') === correct)
+                l.classList.add('opt-correct');
+            });
+          }
+          if (solution) solution.open = true;
+        });
+      });
     });
   </script>
 

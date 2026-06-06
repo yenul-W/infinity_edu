@@ -50,7 +50,7 @@
   /* Fonts */
   --font-display: 'Poppins', sans-serif;
   --font-body:    'Outfit', sans-serif;
-  --font-mono:    system-ui, -apple-system, sans-serif;
+  --font-mono:    'Space Mono', monospace;
 }
 
 /* ─── LIGHT MODE ──────────────────────────────────────────────── */
@@ -254,56 +254,92 @@ body {
   transform: scale(1.06);
 }
 
-/* Card 1 — Milky Way galaxy (indigo grade) */
+/* Card 1 — New York City (day/night) */
 .scene-bg-1 {
   background:
     linear-gradient(to bottom,
-      rgba(5,4,14,0.0)  0%,
-      rgba(5,4,14,0.0)  28%,
-      rgba(5,4,14,0.50) 55%,
-      rgba(5,4,14,0.88) 76%,
-      rgba(5,4,14,0.97) 100%),
-    radial-gradient(ellipse at 50% 28%, rgba(99,102,241,0.38) 0%, transparent 62%),
-    url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=900&h=900&fit=crop&q=80&auto=format');
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/nyc-day.gif');
+}
+html.dark-mode .scene-bg-1 {
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/nyc-night.gif');
 }
 
-/* Card 2 — Golden mountain peaks at sunrise (amber grade) */
+/* Card 2 — Los Angeles (day/night) */
 .scene-bg-2 {
   background:
     linear-gradient(to bottom,
-      rgba(12,7,0,0.0)  0%,
-      rgba(12,7,0,0.0)  28%,
-      rgba(12,7,0,0.50) 55%,
-      rgba(12,7,0,0.88) 76%,
-      rgba(12,7,0,0.97) 100%),
-    radial-gradient(ellipse at 50% 28%, rgba(251,191,36,0.30) 0%, transparent 60%),
-    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=900&fit=crop&q=80&auto=format');
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/la-day.gif');
+}
+html.dark-mode .scene-bg-2 {
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/la-night.gif');
 }
 
-/* Card 3 — Lush sunlit forest (emerald grade) */
+/* Card 3 — Melbourne (day/night) */
 .scene-bg-3 {
   background:
     linear-gradient(to bottom,
-      rgba(1,9,5,0.0)  0%,
-      rgba(1,9,5,0.0)  28%,
-      rgba(1,9,5,0.50) 55%,
-      rgba(1,9,5,0.88) 76%,
-      rgba(1,9,5,0.97) 100%),
-    radial-gradient(ellipse at 50% 28%, rgba(16,185,129,0.30) 0%, transparent 60%),
-    url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&h=900&fit=crop&q=80&auto=format');
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/melbourne-day.gif');
+}
+html.dark-mode .scene-bg-3 {
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/melbourne-night.gif');
 }
 
-/* Card 4 — Earth from space at night (sky grade) */
+/* Card 4 — Chicago (day/night) */
 .scene-bg-4 {
   background:
     linear-gradient(to bottom,
-      rgba(1,7,16,0.0)  0%,
-      rgba(1,7,16,0.0)  28%,
-      rgba(1,7,16,0.50) 55%,
-      rgba(1,7,16,0.88) 76%,
-      rgba(1,7,16,0.97) 100%),
-    radial-gradient(ellipse at 50% 28%, rgba(14,165,233,0.30) 0%, transparent 60%),
-    url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&h=900&fit=crop&q=80&auto=format');
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/chicago-day.gif');
+}
+html.dark-mode .scene-bg-4 {
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.0)  0%,
+      rgba(0,0,0,0.0)  28%,
+      rgba(0,0,0,0.50) 55%,
+      rgba(0,0,0,0.88) 76%,
+      rgba(0,0,0,0.97) 100%),
+    url('assets/city-gifs/chicago-night.gif');
 }
 
 /* SVG decorative art — positioned in upper half of card */
@@ -1947,7 +1983,7 @@ html.dark-mode .complete-btn--done {
   border-bottom: 1px solid var(--text);
   border-radius: 0;
   padding: 0.3rem 0;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -1990,7 +2026,7 @@ html.dark-mode .complete-btn--done {
   border: none;
   border-radius: 0;
   cursor: pointer;
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;

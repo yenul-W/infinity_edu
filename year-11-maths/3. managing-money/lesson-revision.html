@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Managing Money</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --color-canvas-white: #ffffff;
@@ -11,7 +12,7 @@
       --color-medium-gray: #818181;
       --color-light-gray: #d6d6d6;
       --color-faded-gray: #9d9d9d;
-      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-onsite: 'Outfit', system-ui, -apple-system, sans-serif;
       --font-mono: 'Space Mono', monospace;
       --text-caption: 11px;
       --leading-caption: 1.38;
@@ -77,6 +78,17 @@
     .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
     .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
     @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
+    .q-options li { cursor: pointer; padding: 6px 8px; }
+    .q-options li:hover:not(.opt-locked) { background: var(--color-light-gray); }
+    .q-options li.opt-correct { background: #d4edda; color: #155724; }
+    .q-options li.opt-correct .opt-label { color: #155724; }
+    .q-options li.opt-wrong { background: #f8d7da; color: #721c24; }
+    .q-options li.opt-wrong .opt-label { color: #721c24; }
+    .q-options li.opt-locked { cursor: default; pointer-events: none; }
+    html.dark-mode .q-options li.opt-correct { background: #1a3a25; color: #8fd4a0; }
+    html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
+    html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
+    html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
   </style>
 </head>
 <body>
@@ -108,7 +120,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Rita purchased a camera for $880 while on holidays in Australia. This price included 10% GST. When she left Australia she received a refund of the GST. What was Rita's refund?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> $80</li>
           <li><span class="opt-label">B.</span> $88</li>
           <li><span class="opt-label">C.</span> $792</li>
@@ -131,7 +143,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A new phone was purchased for $725 which included 10% GST. What was the price of the phone without GST, correct to the nearest cent?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> $65.91</li>
           <li><span class="opt-label">B.</span> $72.50</li>
           <li><span class="opt-label">C.</span> $652.50</li>
@@ -153,7 +165,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The price of a CD is $22.00, which includes 10% GST. What is the amount of GST included in this price?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> $2.00</li>
           <li><span class="opt-label">B.</span> $2.20</li>
           <li><span class="opt-label">C.</span> $19.80</li>
@@ -287,7 +299,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Julia earns $28 per hour. Her hourly pay rate increases by 2%. How much will she earn for a 4-hour shift with this increase?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> $2.24</li>
           <li><span class="opt-label">B.</span> $28.56</li>
           <li><span class="opt-label">C.</span> $112</li>
@@ -310,7 +322,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Sam is the driver at fault in a car accident. Which of the following is covered by Sam's compulsory third-party (CTP) insurance?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> Repairs to Sam's car</li>
           <li><span class="opt-label">B.</span> Injury to the other driver</li>
           <li><span class="opt-label">C.</span> Damage to the other driver's car</li>
@@ -374,7 +386,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">$6000 is invested in an account that earns simple interest at the rate of 3.5% per annum. What is the total interest earned in the first four years?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> $70</li>
           <li><span class="opt-label">B.</span> $84</li>
           <li><span class="opt-label">C.</span> $210</li>
@@ -396,7 +408,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">An amount of $2500 is invested at a simple interest rate of 3% per annum. How much interest is earned in the first two years?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> $75</li>
           <li><span class="opt-label">B.</span> $150</li>
           <li><span class="opt-label">C.</span> $2575</li>
@@ -418,7 +430,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Minjy invests $2000 for 1 year and 5 months. The simple interest is calculated at a rate of 6% per annum. What is the total value of the investment at the end of this period?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> $2170</li>
           <li><span class="opt-label">B.</span> $2180</li>
           <li><span class="opt-label">C.</span> $3003</li>
@@ -442,7 +454,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Polly borrowed $11,000. She repaid the loan in full at the end of two years with a lump sum of $12,000. What annual simple interest rate was she charged?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 4.17%</li>
           <li><span class="opt-label">B.</span> 4.55%</li>
           <li><span class="opt-label">C.</span> 8.33%</li>
@@ -509,7 +521,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">A delivery truck was valued at $65,000 when new. The value of the truck depreciates at a rate of 22 cents per kilometre travelled. What is the value of the truck after it has travelled a total distance of 132,600 km?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> $35,828</li>
           <li><span class="opt-label">B.</span> $29,172</li>
           <li><span class="opt-label">C.</span> $14,872</li>
@@ -532,7 +544,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Rae paid $40,000 for new office equipment at the start of the 2013 financial year. She used flat rate depreciation each year. At the start of the 2016 financial year she revalued her equipment at $22,000. What was the annual flat rate of depreciation, as a percentage of the purchase price?</p>
-        <ul class="q-options">
+        <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 11.25%</li>
           <li><span class="opt-label">B.</span> 15%</li>
           <li><span class="opt-label">C.</span> 17.5%</li>
@@ -606,6 +618,30 @@
     });
     window.addEventListener('message', e => {
       if (e.data && e.data.type === 'ie-theme') html.classList.toggle('dark-mode', e.data.dark);
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.q-options[data-correct]').forEach(ul => {
+      const correct = ul.dataset.correct.toUpperCase();
+      const block = ul.closest('.question-block');
+      const solution = block.querySelector('details.solution');
+      ul.querySelectorAll('li').forEach(li => {
+        const letter = li.querySelector('.opt-label').textContent.trim().replace('.', '');
+        li.addEventListener('click', () => {
+          if (ul.classList.contains('answered')) return;
+          ul.classList.add('answered');
+          ul.querySelectorAll('li').forEach(l => l.classList.add('opt-locked'));
+          const isCorrect = letter === correct;
+          li.classList.add(isCorrect ? 'opt-correct' : 'opt-wrong');
+          if (!isCorrect) {
+            ul.querySelectorAll('li').forEach(l => {
+              if (l.querySelector('.opt-label').textContent.trim().replace('.', '') === correct)
+                l.classList.add('opt-correct');
+            });
+          }
+          if (solution) solution.open = true;
+        });
+      });
     });
   </script>
 
