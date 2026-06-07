@@ -149,6 +149,36 @@
         </div>
       </div>
 
+      <!-- 05 Revision — Thailand -->
+      <div class="topic-card topic-card-5" id="card-5" onclick="window.location.href='year-11-maths/5. revision/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
+        <div class="card-scene">
+          <video class="scene-video" id="vid-5" autoplay loop muted playsinline>
+            <source src="assets/city-gifs/th-day.mp4" type="video/mp4">
+          </video>
+          <div class="scene-gradient"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-top-row">
+            <div class="topic-icon card-icon-5">
+              <svg width="18" height="18" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="4" width="20" height="26" rx="1"/>
+                <line x1="10" y1="11" x2="22" y2="11"/>
+                <line x1="10" y1="16" x2="22" y2="16"/>
+                <line x1="10" y1="21" x2="17" y2="21"/>
+                <path d="M4 8v22a2 2 0 0 0 2 2h22"/>
+              </svg>
+            </div>
+            <span class="card-num">05</span>
+          </div>
+          <h2 class="card-title">Revision</h2>
+          <p class="card-desc">Past papers from leading providers — print, sit, and check your answers.</p>
+          <div class="card-footer">
+            <span class="card-cta">Browse <span class="cta-arrow">&rarr;</span></span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -226,6 +256,7 @@
       'vid-2': { day: 'assets/city-gifs/la-day.mp4',        night: 'assets/city-gifs/la-night.mp4' },
       'vid-3': { day: 'assets/city-gifs/melbourne-day.mp4', night: 'assets/city-gifs/melbourne-night.mp4' },
       'vid-4': { day: 'assets/city-gifs/chicago-day.mp4',   night: 'assets/city-gifs/chicago-night.mp4' },
+      'vid-5': { day: 'assets/city-gifs/th-day.mp4',        night: 'assets/city-gifs/th-night.mp4' },
     };
     function applyVideoSrcs(dark) {
       for (const [id, srcs] of Object.entries(VIDEO_SRCS)) {
