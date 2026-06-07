@@ -313,6 +313,7 @@ body {
 .card-icon-2 { background: rgba(251,191,36,0.20);  color: #fcd34d; }
 .card-icon-3 { background: rgba(52,211,153,0.20);  color: #6ee7b7; }
 .card-icon-4 { background: rgba(56,189,248,0.20);  color: #7dd3fc; }
+.card-icon-5 { background: rgba(251,146,60,0.20);  color: #fdba74; }
 
 .card-num {
   font-family: var(--font-mono);
