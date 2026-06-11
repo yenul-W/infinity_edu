@@ -1502,6 +1502,42 @@ body.sociotype .pdf-loading-spinner {
 }
 html.dark-mode body.sociotype .pdf-loading-spinner { border-color: #333; border-top-color: #ffffff; }
 
+/* Load-error state */
+body.sociotype .pdf-error {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 3rem;
+}
+body.sociotype .pdf-error-msg {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9d9d9d;
+  text-align: center;
+}
+body.sociotype .pdf-error-retry {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #000000;
+  border-radius: 0;
+  padding: 0.35rem 0.1rem;
+  color: #000000;
+  cursor: pointer;
+}
+body.sociotype .pdf-error-retry:hover { color: #555555; border-bottom-color: #555555; }
+html.dark-mode body.sociotype .pdf-error-retry { color: #ffffff; border-bottom-color: #ffffff; }
+html.dark-mode body.sociotype .pdf-error-retry:hover { color: #aaaaaa; border-bottom-color: #aaaaaa; }
+
 /* Completion — achromatic done state (replaces green) */
 body.sociotype .complete-btn--done {
   color: #000000 !important;
@@ -2384,6 +2420,43 @@ html.dark-mode .qpop-no-questions { color: rgba(240,240,245,0.45); }
   stroke-width: 1.5;
   stroke-linecap: butt;
   transition: stroke-dashoffset 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.card-progress-count {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ── Overall progress summary on landing page ──────────────── */
+.progress-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+}
+.progress-summary-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.progress-summary-track {
+  flex: 1;
+  height: 4px;
+  border: 1px solid var(--border);
+}
+.progress-summary-fill {
+  height: 100%;
+  background: var(--text);
+  width: 0%;
+  transition: width 0.7s cubic-bezier(0.16,1,0.3,1);
 }
 
 /* ── 2. Scroll progress bar in PDF viewer ─────────────────── */

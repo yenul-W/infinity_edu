@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Formulas &amp; Equations</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <style>
     :root {
       --color-canvas-white: #ffffff;
@@ -286,6 +287,18 @@
     html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
     html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
     html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
+    .q-formula-latex {
+      margin: var(--spacing-12) 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+    .q-formula-legend {
+      font-size: var(--text-caption);
+      color: var(--color-faded-gray);
+      margin-top: calc(-1 * var(--spacing-8));
+      margin-bottom: var(--spacing-12);
+    }
+    html.dark-mode .katex { color: var(--color-ink-black); }
   </style>
 </head>
 <body>
@@ -318,7 +331,7 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The distance in kilometres (<em>d</em>) of an observer from the centre of a thunderstorm can be estimated by counting the number of seconds (<em>n</em>) between seeing the lightning and first hearing the thunder.</p>
-        <code class="q-formula">d = n ÷ 3</code>
+        <div class="q-formula-latex">\[d = \dfrac{n}{3}\]</div>
         <p class="q-text">Use this formula to estimate the number of seconds between seeing the lightning and hearing the thunder if the storm is 1.2 km away.</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -337,7 +350,7 @@
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">The formula below is used to convert temperatures between degrees Fahrenheit (<em>F</em>) and degrees Celsius (<em>C</em>).</p>
-        <code class="q-formula">F = (9/5)C + 32</code>
+        <div class="q-formula-latex">\[F = \dfrac{9}{5}C + 32\]</div>
         <p class="q-text">Convert 3°C to the equivalent temperature in Fahrenheit.</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -356,7 +369,7 @@
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">For adults (18 years and older), the Body Mass Index is given by:</p>
-        <code class="q-formula">BMI = weight ÷ height²</code>
+        <div class="q-formula-latex">\[\text{BMI} = \dfrac{\text{weight}}{\text{height}^2}\]</div>
         <p class="q-text">where weight is in kilograms and height is in metres. The medically accepted healthy range for BMI is 18.5 ≤ BMI ≤ 25.</p>
         <p class="q-text">What is the minimum weight for a 163 cm adult female to be considered healthy?</p>
         <details class="solution">
@@ -377,7 +390,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">If C = (5/9)(F − 32), the value of C when F = 212 is:</p>
+        <p class="q-text">If \(C = \dfrac{5}{9}(F - 32)\), the value of \(C\) when \(F = 212\) is:</p>
         <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 86</li>
           <li><span class="opt-label">B.</span> 1056</li>
@@ -399,7 +412,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">The value of a/(2b) − c when a = 24, b = 2 and c = −10 is:</p>
+        <p class="q-text">The value of \(\dfrac{a}{2b} - c\) when \(a = 24\), \(b = 2\) and \(c = -10\) is:</p>
         <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> −4</li>
           <li><span class="opt-label">B.</span> 0</li>
@@ -421,7 +434,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">Given the relationship d = 2e² + k, and that d = 16 when e = 2.5, what is the value of k?</p>
+        <p class="q-text">Given the relationship \(d = 2e^2 + k\), and that \(d = 16\) when \(e = 2.5\), what is the value of \(k\)?</p>
         <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> −9</li>
           <li><span class="opt-label">B.</span> 2.5</li>
@@ -444,7 +457,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">Use the formula D = yA/(y + 12) to find the value of D when y = 6 and A = 3.</p>
+        <p class="q-text">Use the formula \(D = \dfrac{yA}{y + 12}\) to find the value of \(D\) when \(y = 6\) and \(A = 3\).</p>
         <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 1/2</li>
           <li><span class="opt-label">B.</span> 1</li>
@@ -466,7 +479,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">Given the formula B = 2π(R + T/2)(A/360), find the value of A when R = 20, T = 30 and B = 55.</p>
+        <p class="q-text">Given the formula \(B = 2\pi\left(R + \dfrac{T}{2}\right)\dfrac{A}{360}\), find the value of \(A\) when \(R = 20\), \(T = 30\) and \(B = 55\).</p>
         <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> 0.5</li>
           <li><span class="opt-label">B.</span> 5.0</li>
@@ -489,7 +502,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">The formula C = (5/9)(F − 32) converts Fahrenheit to Celsius. When the temperature is 95°F, what is the temperature in Celsius?</p>
+        <p class="q-text">The formula \(C = \dfrac{5}{9}(F - 32)\) converts Fahrenheit to Celsius. When the temperature is 95°F, what is the temperature in Celsius?</p>
         <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> 35°C</li>
           <li><span class="opt-label">B.</span> 71°C</li>
@@ -512,7 +525,7 @@
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Given that x = 6, y = −3 and z = −12, find the value of each expression.</p>
-        <p class="q-text"><strong>(a)</strong> x(y + z) &nbsp;&nbsp;&nbsp; <strong>(b)</strong> (z − x)/y</p>
+        <p class="q-text"><strong>(a)</strong> \(x(y + z)\) &nbsp;&nbsp;&nbsp; <strong>(b)</strong> \(\dfrac{z - x}{y}\)</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -529,7 +542,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">2 marks</span>
         </div>
-        <p class="q-text">Use the formula s = (n/2)(a + l) to find the value of a when l = 36, n = 6 and s = 99.</p>
+        <p class="q-text">Use the formula \(s = \dfrac{n}{2}(a + l)\) to find the value of \(a\) when \(l = 36\), \(n = 6\) and \(s = 99\).</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -547,7 +560,7 @@
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Evaluate the following expressions if m = −6, n = 3, x = 2 and y = 4.</p>
-        <p class="q-text"><strong>(a)</strong> 12x²y³ &nbsp;&nbsp;&nbsp; <strong>(b)</strong> 12m³/(3n²)</p>
+        <p class="q-text"><strong>(a)</strong> \(12x^2y^3\) &nbsp;&nbsp;&nbsp; <strong>(b)</strong> \(\dfrac{12m^3}{3n^2}\)</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -572,10 +585,8 @@
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">The blood alcohol content (BAC) of a male's blood is given by:</p>
-        <code class="q-formula-block">BAC(M) = (10N − 7.5H) ÷ (6.8M)
-where N = standard drinks consumed
-      H = hours drinking
-      M = person's mass (kg)</code>
+        <div class="q-formula-latex">\[\text{BAC}(M) = \dfrac{10N - 7.5H}{6.8M}\]</div>
+        <p class="q-formula-legend">where \(N\) = standard drinks consumed, \(H\) = hours drinking, \(M\) = person's mass (kg)</p>
         <p class="q-text">Calculate the BAC of a male who consumed 4 standard drinks in 3.5 hours and weighs 68 kg, correct to 2 decimal places.</p>
         <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 1.03</li>
@@ -601,8 +612,8 @@ where N = standard drinks consumed
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Caroline drinks two small bottles of wine over a three-hour period. Each of these bottles contains 2.3 standard drinks. Caroline weighs 53 kg. Using the formula below, what is Caroline's approximate blood alcohol content (BAC) at the end of this period?</p>
-        <code class="q-formula-block">BAC(F) = (10N − 7.5H) ÷ (5.5M)
-where N = standard drinks, H = hours, M = mass (kg)</code>
+        <div class="q-formula-latex">\[\text{BAC}(F) = \dfrac{10N - 7.5H}{5.5M}\]</div>
+        <p class="q-formula-legend">where \(N\) = standard drinks, \(H\) = hours, \(M\) = mass (kg)</p>
         <ul class="q-options">
           <li><span class="opt-label">A.</span> 0.050</li>
           <li><span class="opt-label">B.</span> 0.054</li>
@@ -628,7 +639,7 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">When Jake stops drinking alcohol at 10:30 pm, he has a blood alcohol content (BAC) of 0.08375. The number of hours required for a person to reach zero BAC after they stop consuming alcohol is given by:</p>
-        <code class="q-formula">Time = BAC ÷ 0.015</code>
+        <div class="q-formula-latex">\[\text{Time} = \dfrac{\text{BAC}}{0.015}\]</div>
         <p class="q-text">At what time on the next day should Jake expect his BAC to be 0.05?</p>
         <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> 12:45 am</li>
@@ -655,8 +666,8 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">4 marks</span>
         </div>
         <p class="q-text">The following formula can be used to calculate an estimate for blood alcohol content (BAC) for males:</p>
-        <code class="q-formula-block">BAC(M) = (10N − 7.5H) ÷ (6.8M)
-where N = standard drinks, H = hours, M = mass (kg)</code>
+        <div class="q-formula-latex">\[\text{BAC}(M) = \dfrac{10N - 7.5H}{6.8M}\]</div>
+        <p class="q-formula-legend">where \(N\) = standard drinks, \(H\) = hours, \(M\) = mass (kg)</p>
         <p class="q-text">Cameron weighs 75 kg. His BAC was zero when he began drinking alcohol. At 9:00 pm, after consuming 3 standard drinks, his BAC was 0.02. Using the formula, estimate at what time Cameron began drinking alcohol, to the nearest minute.</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -680,8 +691,8 @@ where N = standard drinks, H = hours, M = mass (kg)</code>
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Calculate a Blood Alcohol Content estimate for a woman weighing 65 kg who has had four standard drinks over two and a half hours. Give your answer correct to 2 decimal places.</p>
-        <code class="q-formula-block">BAC(F) = (10N − 7.5H) ÷ (5.5M)
-where N = standard drinks, H = hours drinking, M = mass (kg)</code>
+        <div class="q-formula-latex">\[\text{BAC}(F) = \dfrac{10N - 7.5H}{5.5M}\]</div>
+        <p class="q-formula-legend">where \(N\) = standard drinks, \(H\) = hours drinking, \(M\) = mass (kg)</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -700,7 +711,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">4 marks</span>
         </div>
         <p class="q-text">Rick is a 24-year-old male with a mass of 95 kg who consumes 5 standard drinks over a period of 3 hours.</p>
-        <code class="q-formula-block">BAC(M) = (10N − 7.5H) ÷ (6.8M)</code>
+        <div class="q-formula-latex">\[\text{BAC}(M) = \dfrac{10N - 7.5H}{6.8M}\]</div>
         <p class="q-text"><strong>(a)</strong> Use the formula to estimate his BAC after his last drink, correct to 2 significant figures. [2 marks]</p>
         <p class="q-text"><strong>(b)</strong> Using the formula Time = BAC ÷ 0.015, how many hours and minutes would Rick have to wait for his BAC to reach zero? Give your answer to the nearest minute. [2 marks]</p>
         <details class="solution">
@@ -728,7 +739,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Young's formula is used to calculate the dosage of medication for children aged 1–12 years based on the adult dosage:</p>
-        <code class="q-formula">D = A ÷ (A + 12) × adult dose</code>
+        <div class="q-formula-latex">\[D = \dfrac{A}{A + 12} \times \text{adult dose}\]</div>
         <p class="q-text">where D = child dosage, A = age of child in years.</p>
         <p class="q-text">A child's dosage is calculated to be 20 mg, based on an adult dosage of 40 mg. How old is the child in years?</p>
         <ul class="q-options" data-correct="D">
@@ -756,7 +767,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Fried's formula is used to calculate the medicine dosages for children aged 1–2 years:</p>
-        <code class="q-formula">D = (age in months ÷ 150) × adult dose</code>
+        <div class="q-formula-latex">\[D = \dfrac{\text{age (months)}}{150} \times \text{adult dose}\]</div>
         <p class="q-text">Ben is 1.5 years old and receives a daily dosage of 450 mg of a medicine. According to Fried's formula, what would the appropriate adult daily dosage of the medicine be?</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -777,7 +788,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Clark's formula is used to determine the dosage of medicine for children:</p>
-        <code class="q-formula">D = (child's weight × adult dose) ÷ 70</code>
+        <div class="q-formula-latex">\[D = \dfrac{\text{child's weight} \times \text{adult dose}}{70}\]</div>
         <p class="q-text">For a particular medicine, the adult dosage is 325 mg and the correct dosage for a specific child is 90 mg. How much does the child weigh, to the nearest kg?</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -797,7 +808,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Clark's formula is used to determine the dosage of medicine for children:</p>
-        <code class="q-formula">D = (child's weight × adult dose) ÷ 70</code>
+        <div class="q-formula-latex">\[D = \dfrac{\text{child's weight} \times \text{adult dose}}{70}\]</div>
         <p class="q-text">The adult daily dosage of a medicine contains 3150 mg of a particular drug. A child who weighs 35 kg is to be given tablets each containing 525 mg of this drug. How many tablets should this child be given daily?</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -816,7 +827,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Harry uses Young's formula to calculate an 8-year-old child's dose of Adamine. The adult dosage is 15 mL. What is the child's dose?</p>
-        <code class="q-formula">Child dose = age (years) × adult dose / (age + 12)</code>
+        <div class="q-formula-latex">\[\text{Child dose} = \dfrac{\text{age (years)} \times \text{adult dose}}{\text{age} + 12}\]</div>
         <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 1.5 mL</li>
           <li><span class="opt-label">B.</span> 3 mL</li>
@@ -839,7 +850,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">1 mark</span>
         </div>
         <p class="q-text">Mischa, who weighs 52 kg, is prescribed a drug with an adult dose of 39 mg. Clark's formula is used to find the child's dosage:</p>
-        <code class="q-formula">Dosage = (weight in kg × adult dose) ÷ 70</code>
+        <div class="q-formula-latex">\[\text{Dosage} = \dfrac{\text{weight (kg)} \times \text{adult dose}}{70}\]</div>
         <p class="q-text">What is the correct dose for Mischa?</p>
         <ul class="q-options" data-correct="B">
           <li><span class="opt-label">A.</span> 4 mg</li>
@@ -863,7 +874,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">A one-and-a-half-year-old child needs medicine for a fever. The adult dosage is 40 mL. Use Fried's formula to calculate the dosage for the child to the nearest mL.</p>
-        <code class="q-formula">Dosage = age (months) × adult dose ÷ 150</code>
+        <div class="q-formula-latex">\[\text{Dosage} = \dfrac{\text{age (months)} \times \text{adult dose}}{150}\]</div>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -986,7 +997,8 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">3 marks</span>
         </div>
         <p class="q-text">Sophie is driving at 70 km/h. She notices a branch on the road ahead and decides to apply the brakes. Her reaction time is 1.5 seconds. Her braking distance (<em>d</em> metres) is given by:</p>
-        <code class="q-formula">d = v² ÷ 170   (where v is speed in km/h)</code>
+        <div class="q-formula-latex">\[d = \dfrac{v^2}{170}\]</div>
+        <p class="q-formula-legend">where \(v\) is speed in km/h</p>
         <p class="q-text">Stopping distance = reaction distance + braking distance. What is Sophie's stopping distance, to the nearest metre?</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -1025,8 +1037,7 @@ where N = standard drinks, H = hours drinking, M = mass (kg)</code>
           <span class="q-marks">6 marks</span>
         </div>
         <p class="q-text">The braking distance (d m) for two different cars travelling at speed u m/s is given by:</p>
-        <code class="q-formula-block">Car M:  d = u²/21.6
-Car H:  d = u²/18.6</code>
+        <div class="q-formula-latex">\[\text{Car M:} \quad d = \dfrac{u^2}{21.6} \qquad \text{Car H:} \quad d = \dfrac{u^2}{18.6}\]</div>
         <p class="q-text"><strong>(a)</strong> Convert 60 km/h to m/s, correct to 3 significant figures. [1 mark]</p>
         <p class="q-text"><strong>(b)</strong> If both cars were travelling at 60 km/h, what is the difference in their braking distances? [2 marks]</p>
         <p class="q-text"><strong>(c)</strong> Brad has a reaction time of 1.25 seconds. At 60 km/h, how far does the car travel during his reaction time? [2 marks]</p>
@@ -1099,7 +1110,7 @@ Car H:  d = u²/18.6</code>
         </div>
         <p class="q-text">Tom is 25 years old and likes to keep fit by exercising.</p>
         <p class="q-text"><strong>(a)</strong> Use this formula to find his maximum heart rate (bpm):</p>
-        <code class="q-formula">Maximum heart rate = 220 − age in years</code>
+        <div class="q-formula-latex">\[\text{Maximum heart rate} = 220 - \text{age (years)}\]</div>
         <p class="q-text"><strong>(b)</strong> Tom will get the most benefit from exercise if his heart rate is between 50% and 85% of his maximum heart rate. Between what two heart rates should Tom be aiming for?</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -1135,12 +1146,12 @@ Car H:  d = u²/18.6</code>
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">You are given the formula v² = u² + 2as. If u is always positive, which is the correct formula for u?</p>
+        <p class="q-text">You are given the formula \(v^2 = u^2 + 2as\). If \(u\) is always positive, which is the correct formula for \(u\)?</p>
         <ul class="q-options" data-correct="B">
-          <li><span class="opt-label">A.</span> u = √(v² + 2as)</li>
-          <li><span class="opt-label">B.</span> u = √(v² − 2as)</li>
-          <li><span class="opt-label">C.</span> u = v − 2as</li>
-          <li><span class="opt-label">D.</span> u = √(2as − v²)</li>
+          <li><span class="opt-label">A.</span> \(u = \sqrt{v^2 + 2as}\)</li>
+          <li><span class="opt-label">B.</span> \(u = \sqrt{v^2 - 2as}\)</li>
+          <li><span class="opt-label">C.</span> \(u = v - 2as\)</li>
+          <li><span class="opt-label">D.</span> \(u = \sqrt{2as - v^2}\)</li>
         </ul>
         <details class="solution">
           <summary>Show solution</summary>
@@ -1157,7 +1168,7 @@ Car H:  d = u²/18.6</code>
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">The cost per student (C) for a Maths excursion is given by C = (140 + 5n)/n, where n is the number of students. If the number of students increases from 35 to 40, what change does this make to the cost per student?</p>
+        <p class="q-text">The cost per student (\(C\)) for a Maths excursion is given by \(C = \dfrac{140 + 5n}{n}\), where \(n\) is the number of students. If the number of students increases from 35 to 40, what change does this make to the cost per student?</p>
         <ul class="q-options" data-correct="A">
           <li><span class="opt-label">A.</span> Each student pays fifty cents less.</li>
           <li><span class="opt-label">B.</span> Each student pays fifty cents more.</li>
@@ -1180,12 +1191,12 @@ Car H:  d = u²/18.6</code>
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">The formula s = ut + at²/2 is rearranged to make a the subject. The result is:</p>
+        <p class="q-text">The formula \(s = ut + \dfrac{at^2}{2}\) is rearranged to make \(a\) the subject. The result is:</p>
         <ul class="q-options" data-correct="B">
-          <li><span class="opt-label">A.</span> a = (ut² − 2s)/t²</li>
-          <li><span class="opt-label">B.</span> a = 2(s − ut)/t²</li>
-          <li><span class="opt-label">C.</span> a = (2s + ut²)/t²</li>
-          <li><span class="opt-label">D.</span> a = t²(2s − ut)/2</li>
+          <li><span class="opt-label">A.</span> \(a = \dfrac{ut^2 - 2s}{t^2}\)</li>
+          <li><span class="opt-label">B.</span> \(a = \dfrac{2(s - ut)}{t^2}\)</li>
+          <li><span class="opt-label">C.</span> \(a = \dfrac{2s + ut^2}{t^2}\)</li>
+          <li><span class="opt-label">D.</span> \(a = \dfrac{t^2(2s - ut)}{2}\)</li>
         </ul>
         <details class="solution">
           <summary>Show solution</summary>
@@ -1202,7 +1213,7 @@ Car H:  d = u²/18.6</code>
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">Which is a solution to the equation 6x − 3x/2 = 9?</p>
+        <p class="q-text">Which is a solution to the equation \(6x - \dfrac{3x}{2} = 9\)?</p>
         <ul class="q-options" data-correct="D">
           <li><span class="opt-label">A.</span> x = −2</li>
           <li><span class="opt-label">B.</span> x = −1</li>
@@ -1247,7 +1258,7 @@ Car H:  d = u²/18.6</code>
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">When (a − 4)/3 = 4, find the value of a.</p>
+        <p class="q-text">When \(\dfrac{a - 4}{3} = 4\), find the value of \(a\).</p>
         <ul class="q-options" data-correct="C">
           <li><span class="opt-label">A.</span> 8</li>
           <li><span class="opt-label">B.</span> 12</li>
@@ -1271,10 +1282,10 @@ Car H:  d = u²/18.6</code>
         </div>
         <p class="q-text">What is the solution to 4m − 5 = m + 16?</p>
         <ul class="q-options" data-correct="C">
-          <li><span class="opt-label">A.</span> m = 32/3</li>
+          <li><span class="opt-label">A.</span> \(m = \dfrac{32}{3}\)</li>
           <li><span class="opt-label">B.</span> m = 4</li>
           <li><span class="opt-label">C.</span> m = 7</li>
-          <li><span class="opt-label">D.</span> m = 101/3</li>
+          <li><span class="opt-label">D.</span> \(m = \dfrac{31}{3}\)</li>
         </ul>
         <details class="solution">
           <summary>Show solution</summary>
@@ -1308,8 +1319,8 @@ Car H:  d = u²/18.6</code>
           <span class="q-marks">4 marks</span>
         </div>
         <p class="q-text">Solve each equation.</p>
-        <p class="q-text"><strong>(a)</strong> (2x − 1)/3 + (7 − x)/2 = 4 &nbsp;&nbsp; [2 marks]</p>
-        <p class="q-text"><strong>(b)</strong> 5x + 3(2 − x) = 2x/3 + 12 &nbsp;&nbsp; [2 marks]</p>
+        <p class="q-text"><strong>(a)</strong> \(\dfrac{2x - 1}{3} + \dfrac{7 - x}{2} = 4\) &nbsp;&nbsp; [2 marks]</p>
+        <p class="q-text"><strong>(b)</strong> \(5x + 3(2 - x) = \dfrac{2x}{3} + 12\) &nbsp;&nbsp; [2 marks]</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -1328,7 +1339,7 @@ Car H:  d = u²/18.6</code>
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">2 marks</span>
         </div>
-        <p class="q-text">Make r the subject of the formula: P = 29r/7 + 2w</p>
+        <p class="q-text">Make \(r\) the subject of the formula: \(P = \dfrac{29r}{7} + 2w\)</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -1383,5 +1394,16 @@ Car H:  d = u²/18.6</code>
     });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script>
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '\\[', right: '\\]', display: true },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      throwOnError: false
+    });
+  </script>
 </body>
 </html>

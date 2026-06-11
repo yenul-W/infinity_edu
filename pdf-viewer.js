@@ -6,8 +6,11 @@
 (function () {
   'use strict';
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  // pdfjsLib comes from a CDN script — it may be missing if the network is down.
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
 
   // ── 3. Confetti burst (achromatic — white on dark, black on light) ──
   function fireConfetti() {
@@ -75,6 +78,18 @@
     const pdfLoading      = document.getElementById('pdfLoading');
     const canvasWrapper   = document.getElementById('pdfCanvasWrapper');
     const htmlFrame       = document.getElementById('pdfHtmlFrame');
+
+    // ── Load-error state ─────────────────────────────────────────
+    const pdfError = document.createElement('div');
+    pdfError.className = 'pdf-error';
+    pdfError.style.display = 'none';
+    pdfError.innerHTML =
+      '<p class="pdf-error-msg">Couldn’t load this lesson. Check your connection and try again.</p>' +
+      '<button class="pdf-error-retry">Retry</button>';
+    pdfStage.insertBefore(pdfError, canvasWrapper);
+    pdfError.querySelector('.pdf-error-retry').addEventListener('click', () => {
+      if (currentKind === 'pdf' && currentFile) loadPdf(currentFile);
+    });
 
     // ── 2. Scroll progress bar ──────────────────────────────────
     const scrollBar = document.createElement('div');
@@ -155,6 +170,11 @@
     let loadGen       = 0;       // stale-load guard
     let pageObserver  = null;
     let pageCanvases  = [];      // one canvas per page
+    let renderObserver = null;   // lazily renders pages as they near the viewport
+    let pageRenderedScale = [];  // scale each page was last rendered at (0 = not rendered)
+    let visibleForRender = new Set(); // page numbers currently in the render observer's range
+    let renderQueue = Promise.resolve(); // serialises canvas renders
+    let basePageW = 0, basePageH = 0;    // page-1 size at scale 1, for placeholder sizing
 
     // ── Completion ───────────────────────────────────────────────
     function isDone(idx) {
@@ -287,6 +307,8 @@
       const stageW = contentW > 0 ? contentW : 600;
       return pdfDoc.getPage(1).then(page => {
         const vp = page.getViewport({ scale: 1 });
+        basePageW = vp.width;
+        basePageH = vp.height;
         return Math.min(stageW / vp.width, 2.0);
       });
     }
@@ -306,14 +328,24 @@
     async function renderPageToCanvas(num) {
       const cv = pageCanvases[num - 1];
       if (!cv || !pdfDoc) return;
+      const gen = loadGen;
+      const renderScale = scale;
       const page = await pdfDoc.getPage(num);
-      const viewport = page.getViewport({ scale });
+      if (gen !== loadGen) return;
+      const viewport = page.getViewport({ scale: renderScale });
       cv.width  = viewport.width;
       cv.height = viewport.height;
       await page.render({ canvasContext: cv.getContext('2d'), viewport }).promise;
+      if (gen !== loadGen) return;
+      pageRenderedScale[num - 1] = renderScale;
+
+      const wrap = canvasWrapper.querySelector(`.pdf-page[data-page="${num}"]`);
+      if (wrap) {
+        wrap.style.minWidth = '';
+        wrap.style.minHeight = '';
+      }
 
       // Render selectable text layer for annotation
-      const wrap = canvasWrapper.querySelector(`.pdf-page[data-page="${num}"]`);
       const textDiv = wrap ? wrap.querySelector('.textLayer') : null;
       if (textDiv) {
         textDiv.innerHTML = '';
@@ -352,13 +384,56 @@
       }
     }
 
-    // Re-render all pages (used after zoom change)
-    async function rerenderAll(gen) {
+    // Size unrendered page placeholders so the scrollbar is correct
+    function sizePlaceholders() {
+      canvasWrapper.querySelectorAll('.pdf-page').forEach((wrap, i) => {
+        if (pageRenderedScale[i] === scale) return;
+        wrap.style.minWidth  = Math.floor(basePageW * scale) + 'px';
+        wrap.style.minHeight = Math.floor(basePageH * scale) + 'px';
+      });
+    }
+
+    // All canvas renders go through one queue: avoids concurrent renders
+    // on the same canvas, and collapses requests already satisfied at the
+    // current scale by the time they reach the front.
+    function queueRender(num) {
+      const gen = loadGen;
+      renderQueue = renderQueue
+        .then(() => {
+          if (gen !== loadGen) return;
+          if (pageRenderedScale[num - 1] === scale) return;
+          return renderPageToCanvas(num);
+        })
+        .catch(() => { /* a failed page render shouldn't stall the queue */ });
+      return renderQueue;
+    }
+
+    // Renders pages lazily as they approach the viewport
+    function setupRenderObserver() {
+      if (renderObserver) renderObserver.disconnect();
+      visibleForRender = new Set();
+      renderObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const num = parseInt(entry.target.dataset.page);
+          if (entry.isIntersecting) {
+            visibleForRender.add(num);
+            queueRender(num);
+          } else {
+            visibleForRender.delete(num);
+          }
+        });
+      }, { root: pdfStage, rootMargin: '150% 0px' });
+      canvasWrapper.querySelectorAll('.pdf-page').forEach(el => renderObserver.observe(el));
+    }
+
+    // Re-render at the current scale (used after zoom/resize). Only pages
+    // near the viewport render now; the rest re-render when scrolled to.
+    function rerenderAll(gen) {
       updateZoomDisplay();
-      for (let i = 1; i <= totalPages; i++) {
-        if (gen !== loadGen) return;
-        await renderPageToCanvas(i);
-      }
+      if (gen !== loadGen) return;
+      pageRenderedScale.fill(0);
+      sizePlaceholders();
+      visibleForRender.forEach(num => queueRender(num));
     }
 
     // ── IntersectionObserver — track visible page ────────────────
@@ -393,6 +468,7 @@
     async function loadPdf(url) {
       const gen = ++loadGen;
 
+      pdfError.style.display = 'none';
       pdfLoading.style.display = 'flex';
       pageInfo.disabled = true;
       pageInfo.value = '';
@@ -400,37 +476,45 @@
       canvasWrapper.style.display = 'none';
       canvasWrapper.innerHTML = '';
       pageCanvases = [];
+      pageRenderedScale = [];
       if (pageObserver) { pageObserver.disconnect(); pageObserver = null; }
+      if (renderObserver) { renderObserver.disconnect(); renderObserver = null; }
+      visibleForRender = new Set();
 
-      const doc = await pdfjsLib.getDocument(url).promise;
-      if (gen !== loadGen) return;
+      try {
+        if (typeof pdfjsLib === 'undefined') throw new Error('PDF.js failed to load');
 
-      pdfDoc = doc;
-      totalPages = pdfDoc.numPages;
-      currentPage = 1;
-
-      fitScale = await calcFitScale();
-      if (gen !== loadGen) return;
-      scale = fitScale;
-
-      buildPageDivs();
-
-      // Render first page before revealing
-      await renderPageToCanvas(1);
-      if (gen !== loadGen) return;
-
-      pdfLoading.style.display = 'none';
-      pageInfo.disabled = false;
-      canvasWrapper.style.display = '';
-      setupPageObserver();
-      updatePageInfo();
-      updateZoomDisplay();
-      pdfStage.scrollTop = 0;
-
-      // Render remaining pages in the background
-      for (let i = 2; i <= totalPages; i++) {
+        const doc = await pdfjsLib.getDocument(url).promise;
         if (gen !== loadGen) return;
-        await renderPageToCanvas(i);
+
+        pdfDoc = doc;
+        totalPages = pdfDoc.numPages;
+        currentPage = 1;
+        pageRenderedScale = new Array(totalPages).fill(0);
+
+        fitScale = await calcFitScale();
+        if (gen !== loadGen) return;
+        scale = fitScale;
+
+        buildPageDivs();
+        sizePlaceholders();
+
+        // Render first page before revealing
+        await renderPageToCanvas(1);
+        if (gen !== loadGen) return;
+
+        pdfLoading.style.display = 'none';
+        pageInfo.disabled = false;
+        canvasWrapper.style.display = '';
+        setupPageObserver();
+        setupRenderObserver(); // remaining pages render lazily on scroll
+        updatePageInfo();
+        updateZoomDisplay();
+        pdfStage.scrollTop = 0;
+      } catch (err) {
+        if (gen !== loadGen) return;
+        pdfLoading.style.display = 'none';
+        pdfError.style.display = 'flex';
       }
     }
 
@@ -447,6 +531,7 @@
       pageControls.style.display = 'none';
       zoomControls.style.display = 'none';
       pdfLoading.style.display = 'none';
+      pdfError.style.display = 'none';
       canvasWrapper.style.display = 'none';
       pdfStage.style.padding = '0';
       htmlFrame.style.display = 'block';
