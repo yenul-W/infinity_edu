@@ -9,6 +9,48 @@
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+  // ── 3. Confetti burst (achromatic — white on dark, black on light) ──
+  function fireConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+    document.body.appendChild(canvas);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    const dark = document.documentElement.classList.contains('dark-mode');
+    const palette = dark ? ['#fff','#ccc','#aaa','#777'] : ['#111','#333','#555','#888'];
+    const particles = Array.from({ length: 100 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * 80,
+      vx: (Math.random() - 0.5) * 5,
+      vy: Math.random() * 4 + 2,
+      w: Math.random() * 5 + 2,
+      h: Math.random() * 9 + 3,
+      color: palette[Math.floor(Math.random() * palette.length)],
+      rot: Math.random() * Math.PI * 2,
+      rotV: (Math.random() - 0.5) * 0.18,
+    }));
+    function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let live = false;
+      for (const p of particles) {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.rot += p.rotV;
+        if (p.y < canvas.height + 20) live = true;
+        const alpha = Math.max(0, 1 - p.y / canvas.height * 1.1);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = p.color;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      if (live) requestAnimationFrame(tick);
+      else canvas.remove();
+    }
+    tick();
+  }
+
   const ZOOM_STEP = 0.25;
   const ZOOM_MIN  = 0.5;
   const ZOOM_MAX  = 3.0;
@@ -16,6 +58,7 @@
   function initPdfViewer({ topicId, lessons }) {
     // ── DOM refs ─────────────────────────────────────────────────
     const lessonsList     = document.getElementById('lessonsList');
+
     const downloadBtn     = document.getElementById('downloadBtn');
     const openExternalBtn = document.getElementById('openExternalBtn');
     const printBtn        = document.getElementById('printSyllabusBtn');
@@ -32,6 +75,72 @@
     const pdfLoading      = document.getElementById('pdfLoading');
     const canvasWrapper   = document.getElementById('pdfCanvasWrapper');
     const htmlFrame       = document.getElementById('pdfHtmlFrame');
+
+    // ── 2. Scroll progress bar ──────────────────────────────────
+    const scrollBar = document.createElement('div');
+    scrollBar.className = 'pdf-scroll-progress';
+    pdfStage.parentElement.insertBefore(scrollBar, pdfStage);
+    pdfStage.addEventListener('scroll', () => {
+      const max = pdfStage.scrollHeight - pdfStage.clientHeight;
+      scrollBar.style.width = (max > 0 ? Math.min(1, pdfStage.scrollTop / max) : 0) * 100 + '%';
+    });
+
+    // ── Annotation toolbar (created once, appended to body) ─────
+    const annotationToolbar = document.createElement('div');
+    annotationToolbar.className = 'annotation-toolbar';
+    annotationToolbar.innerHTML =
+      '<button class="annotation-btn" id="annotationHighlightBtn">&#9998; Highlight</button>' +
+      '<button class="annotation-btn" id="annotationClearBtn">Clear all</button>';
+    document.body.appendChild(annotationToolbar);
+    const highlightBtn = document.getElementById('annotationHighlightBtn');
+    const clearBtn     = document.getElementById('annotationClearBtn');
+    let pendingLayer   = null; // textLayer div where the active selection lives
+
+    // ── Highlight persistence ────────────────────────────────────
+    function hlKey() { return `ie_hl_${topicId}_${currentIndex}`; }
+    function getHighlights() {
+      try { return JSON.parse(localStorage.getItem(hlKey()) || '[]'); } catch { return []; }
+    }
+    function saveHighlightEntry(pageNum, indices) {
+      const hl = getHighlights();
+      hl.push({ page: pageNum, indices });
+      localStorage.setItem(hlKey(), JSON.stringify(hl));
+    }
+    function clearHighlights() {
+      localStorage.removeItem(hlKey());
+      canvasWrapper.querySelectorAll('.span-highlight').forEach(s => s.classList.remove('span-highlight'));
+    }
+    function applyHighlights(pageNum, textDiv) {
+      const entries = getHighlights().filter(h => h.page === pageNum);
+      if (!entries.length) return;
+      const spans = textDiv.querySelectorAll('span');
+      entries.forEach(h => h.indices.forEach(i => { if (spans[i]) spans[i].classList.add('span-highlight'); }));
+    }
+
+    // ── Annotation toolbar interaction ───────────────────────────
+    highlightBtn.addEventListener('click', () => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !pendingLayer) return;
+      const pageNum = parseInt(pendingLayer.dataset.page);
+      const spans = [...pendingLayer.querySelectorAll('span')];
+      const selected = spans.reduce((acc, sp, i) => {
+        if (sel.containsNode(sp, true)) { sp.classList.add('span-highlight'); acc.push(i); }
+        return acc;
+      }, []);
+      if (selected.length) saveHighlightEntry(pageNum, selected);
+      sel.removeAllRanges();
+      annotationToolbar.style.display = 'none';
+      pendingLayer = null;
+    });
+    clearBtn.addEventListener('click', () => {
+      clearHighlights();
+      annotationToolbar.style.display = 'none';
+      pendingLayer = null;
+    });
+    // Hide toolbar when clicking elsewhere
+    document.addEventListener('mousedown', e => {
+      if (!annotationToolbar.contains(e.target)) annotationToolbar.style.display = 'none';
+    });
 
     // ── State ────────────────────────────────────────────────────
     let pdfDoc        = null;
@@ -124,8 +233,16 @@
         if (cBtn) {
           cBtn.addEventListener('click', e => {
             e.stopPropagation();
-            setDone(index, !isDone(index));
+            const wasDone = isDone(index);
+            setDone(index, !wasDone);
             updateCompletionUI(index);
+            // 3. Fire confetti when the last lesson is marked complete
+            if (!wasDone) {
+              const completable = [...lessonsList.querySelectorAll('.lesson-group')].filter(g => g.querySelector('.complete-btn'));
+              if (completable.every(g => g.classList.contains('lesson-group--done'))) {
+                fireConfetti();
+              }
+            }
           });
           updateCompletionUI(index);
         }
@@ -194,9 +311,29 @@
       cv.width  = viewport.width;
       cv.height = viewport.height;
       await page.render({ canvasContext: cv.getContext('2d'), viewport }).promise;
+
+      // Render selectable text layer for annotation
+      const wrap = canvasWrapper.querySelector(`.pdf-page[data-page="${num}"]`);
+      const textDiv = wrap ? wrap.querySelector('.textLayer') : null;
+      if (textDiv) {
+        textDiv.innerHTML = '';
+        textDiv.style.width  = viewport.width  + 'px';
+        textDiv.style.height = viewport.height + 'px';
+        try {
+          const textContent = await page.getTextContent();
+          const task = pdfjsLib.renderTextLayer({
+            textContentSource: textContent,
+            container: textDiv,
+            viewport,
+            textDivs: [],
+          });
+          if (task && task.promise) await task.promise;
+          applyHighlights(num, textDiv);
+        } catch (e) { /* text layer not critical */ }
+      }
     }
 
-    // Build one .pdf-page div + canvas per page
+    // Build one .pdf-page div + canvas + textLayer per page
     function buildPageDivs() {
       canvasWrapper.innerHTML = '';
       pageCanvases = [];
@@ -206,6 +343,10 @@
         wrap.dataset.page = i;
         const cv = document.createElement('canvas');
         wrap.appendChild(cv);
+        const tl = document.createElement('div');
+        tl.className = 'textLayer';
+        tl.dataset.page = i;
+        wrap.appendChild(tl);
         canvasWrapper.appendChild(wrap);
         pageCanvases.push(cv);
       }
@@ -321,6 +462,14 @@
       currentVariant = variant;
       currentKind    = lesson.kind || 'pdf';
 
+      // 5. Track recently viewed
+      const displayTitle = lesson.title || (lesson.homework ? 'Homework' : lesson.revision ? 'Revision' : `Lesson ${lesson.num}`);
+      localStorage.setItem(`ie_last_${topicId}`, JSON.stringify({ idx, title: displayTitle }));
+
+      scrollBar.style.width = '0%';
+      annotationToolbar.style.display = 'none';
+      pendingLayer = null;
+
       const file = (variant === 'annotated' && lesson.annotated)
         ? lesson.annotated
         : (lesson.slides || lesson.file);
@@ -348,6 +497,32 @@
       a.download = decodeURIComponent(currentFile.split('/').pop());
       a.click();
     }
+
+    // ── Selection → annotation toolbar ──────────────────────────
+    pdfStage.addEventListener('mouseup', () => {
+      if (currentKind !== 'pdf') return;
+      setTimeout(() => {
+        const sel = window.getSelection();
+        if (!sel || sel.isCollapsed || !sel.rangeCount) {
+          annotationToolbar.style.display = 'none';
+          return;
+        }
+        const range = sel.getRangeAt(0);
+        const node  = range.startContainer;
+        const layer = (node.nodeType === 1 ? node : node.parentElement)?.closest('.textLayer');
+        if (!layer) { annotationToolbar.style.display = 'none'; return; }
+        pendingLayer = layer;
+        const rect = range.getBoundingClientRect();
+        annotationToolbar.style.display = 'flex';
+        // Position after layout so offsetWidth is accurate
+        requestAnimationFrame(() => {
+          const tw = annotationToolbar.offsetWidth;
+          const mid = rect.left + rect.width / 2;
+          annotationToolbar.style.left = Math.max(4, mid - tw / 2) + 'px';
+          annotationToolbar.style.top  = (rect.bottom + 8) + 'px';
+        });
+      }, 10);
+    });
 
     // ── Event listeners ──────────────────────────────────────────
     prevBtn.addEventListener('click', () => {
@@ -407,11 +582,44 @@
       }, 200);
     });
 
-    // Keyboard navigation
+    // Keyboard navigation + shortcuts (2. j/k lessons, +/- zoom, d dark mode)
     document.addEventListener('keydown', e => {
-      if (currentKind !== 'pdf') return;
       const tag = document.activeElement && document.activeElement.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (e.metaKey || e.ctrlKey) return;
+
+      if (e.key === 'd') {
+        const nowDark = document.documentElement.classList.toggle('dark-mode');
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+        const ti = document.querySelector('.toggle-icon');
+        if (ti) ti.textContent = nowDark ? 'light' : 'dark';
+        return;
+      }
+      if (e.key === 'j') {
+        e.preventDefault();
+        if (currentIndex < lessons.length - 1) loadLesson(currentIndex + 1, 'slides');
+        return;
+      }
+      if (e.key === 'k') {
+        e.preventDefault();
+        if (currentIndex > 0) loadLesson(currentIndex - 1, 'slides');
+        return;
+      }
+
+      if (currentKind !== 'pdf') return;
+
+      if (e.key === '=' || e.key === '+') {
+        e.preventDefault();
+        scale = Math.min(scale + fitScale * ZOOM_STEP, fitScale * ZOOM_MAX);
+        rerenderAll(loadGen);
+        return;
+      }
+      if (e.key === '-') {
+        e.preventDefault();
+        scale = Math.max(scale - fitScale * ZOOM_STEP, fitScale * ZOOM_MIN);
+        rerenderAll(loadGen);
+        return;
+      }
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
         if (currentPage < totalPages) scrollToPage(currentPage + 1);

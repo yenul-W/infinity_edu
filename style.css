@@ -201,7 +201,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
-  min-height: 380px;
+  min-height: 520px;
   animation: gridIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both;
 }
 
@@ -279,41 +279,25 @@ body {
 
 .card-body {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   padding: 1.8rem 2rem 2rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 0.75rem;
 }
 
 .card-top-row {
+  position: absolute;
+  top: 1.8rem;
+  left: 2rem;
+  right: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.topic-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
-}
-
-.topic-card:hover .topic-icon { transform: scale(1.12); }
-
-/* Icon backgrounds — slightly more opaque since always on dark */
-.card-icon-1 { background: rgba(129,140,248,0.22); color: #a5b4fc; }
-.card-icon-2 { background: rgba(251,191,36,0.20);  color: #fcd34d; }
-.card-icon-3 { background: rgba(52,211,153,0.20);  color: #6ee7b7; }
-.card-icon-4 { background: rgba(56,189,248,0.20);  color: #7dd3fc; }
-.card-icon-5 { background: rgba(251,146,60,0.20);  color: #fdba74; }
 
 .card-num {
   font-family: var(--font-mono);
@@ -360,6 +344,10 @@ body {
   gap: 0.4rem;
   pointer-events: none;
   transition: color 0.22s ease;
+  overflow: hidden;
+  max-width: 9rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .topic-card:hover .card-cta { color: rgba(255,255,255,0.65); }
@@ -413,7 +401,7 @@ body {
   .site-main     { padding: 0 1rem 1rem; }
   .page-title    { font-size: clamp(1.4rem, 6vw, 2rem); }
   .topic-grid    { min-height: 0; }
-  .topic-card    { min-height: 340px; }
+  .topic-card    { min-height: 420px; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1465,6 +1453,7 @@ body.sociotype .pdf-canvas-wrapper {
 
 /* Individual page */
 body.sociotype .pdf-page {
+  position: relative;
   background: #ffffff;
   border: 1px solid #d6d6d6;
   display: block;
@@ -2367,4 +2356,116 @@ html.dark-mode .qpop-no-questions { color: rgba(240,240,245,0.45); }
     padding: 0.65rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   QUICK WINS — progress rings, scroll bar, recently viewed
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Progress rings on landing-page topic cards ─────────── */
+.card-num-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.progress-ring {
+  width: 26px;
+  height: 26px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+}
+.progress-ring-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.13);
+  stroke-width: 1.5;
+}
+.progress-ring-fill {
+  fill: none;
+  stroke: rgba(255,255,255,0.70);
+  stroke-width: 1.5;
+  stroke-linecap: butt;
+  transition: stroke-dashoffset 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ── 2. Scroll progress bar in PDF viewer ─────────────────── */
+.pdf-scroll-progress {
+  height: 2px;
+  background: #000;
+  width: 0%;
+  transition: width 0.08s linear;
+  flex-shrink: 0;
+}
+html.dark-mode .pdf-scroll-progress { background: #fff; }
+
+/* ── 5. Recently-viewed — CTA text update only, no extra element ── */
+
+/* ── PDF text layer (for annotation/highlighting) ─────────── */
+body.sociotype .pdf-page {
+  position: relative; /* needed for textLayer absolute positioning */
+}
+.textLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: text;
+  -webkit-user-select: text;
+  pointer-events: auto;
+  line-height: 1;
+}
+.textLayer span {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+.textLayer span::selection {
+  background: rgba(0, 0, 0, 0.18);
+}
+html.dark-mode .textLayer span::selection {
+  background: rgba(255, 255, 255, 0.22);
+}
+.span-highlight {
+  background: rgba(255, 214, 0, 0.38) !important;
+  mix-blend-mode: multiply;
+  border-radius: 0;
+}
+html.dark-mode .span-highlight {
+  background: rgba(255, 200, 0, 0.28) !important;
+  mix-blend-mode: screen;
+}
+
+/* ── Annotation toolbar (pops up on text selection) ──────── */
+.annotation-toolbar {
+  position: fixed;
+  display: none;
+  align-items: stretch;
+  z-index: 2000;
+  background: #000;
+  border: 1px solid #000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+}
+html.dark-mode .annotation-toolbar {
+  background: #fff;
+  border-color: #fff;
+}
+.annotation-btn {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255,255,255,0.18);
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  border-radius: 0;
+  white-space: nowrap;
+  transition: background 0.12s ease;
+}
+.annotation-btn:last-child { border-right: none; }
+.annotation-btn:hover { background: rgba(255,255,255,0.12); }
+html.dark-mode .annotation-btn { color: #000; border-right-color: rgba(0,0,0,0.18); }
+html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
 
