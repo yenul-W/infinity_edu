@@ -318,13 +318,6 @@ body {
   color: #ffffff;
 }
 
-.card-desc {
-  font-size: clamp(0.72rem, 0.9vw, 0.84rem);
-  line-height: 1.6;
-  color: rgba(255,255,255,0.60);
-  font-weight: 400;
-}
-
 .card-footer {
   display: flex;
   align-items: center;
@@ -2420,13 +2413,6 @@ html.dark-mode .qpop-no-questions { color: rgba(240,240,245,0.45); }
   stroke-width: 1.5;
   stroke-linecap: butt;
   transition: stroke-dashoffset 0.7s cubic-bezier(0.16,1,0.3,1);
-}
-.card-progress-count {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: rgba(255,255,255,0.45);
 }
 
 /* ── Overall progress summary on landing page ──────────────── */

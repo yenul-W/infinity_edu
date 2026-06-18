@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Direct Variation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #000; --canvas: #fff;
+      --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
+      --font-display: 'Poppins', sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior: smooth; }
+    body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
+    a { color: inherit; }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    /* ── Hero ── */
+    .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
+    .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
+    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; letter-spacing:0.04em; color:var(--gray-med); }
+
+    /* ── Layout ── */
+    .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
+    .toc { position:sticky; top:24px; }
+    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-list { list-style:none; }
+    .toc-item { margin-bottom:2px; }
+    .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
+    .toc-link:hover { color:var(--ink); }
+    .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
+
+    /* ── Content cards ── */
+    .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
+    h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
+    p { margin-bottom:14px; }
+    ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
+
+    /* ── Definition / example / note blocks ── */
+    .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
+    .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block p:last-child, .example-block ul:last-child { margin-bottom:0; }
+    .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
+    .note-block p:last-child { margin-bottom:0; }
+
+    /* ── Stepper ── */
+    .stepper { border:1px solid var(--ink); margin-bottom:28px; }
+    .stepper-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--gray-light); background:var(--gray-faint); }
+    .stepper-nodes { display:flex; gap:8px; }
+    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono); font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s,border-color 0.15s,color 0.15s; }
+    .stepper-node:hover { border-color:var(--ink); }
+    .stepper-node.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+    .stepper-node.visited { border-color:var(--ink); }
+    .stepper-counter { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); }
+    .stepper-panel { padding:24px 28px; min-height:160px; }
+    .stepper-panel h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .stepper-panel p:last-child { margin-bottom:0; }
+    .stepper-nav { display:flex; gap:12px; padding:14px 20px; border-top:1px solid var(--gray-light); }
+    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s,color 0.15s; }
+    .stepper-btn:hover:not(:disabled) { background:var(--ink); color:var(--canvas); }
+    .stepper-btn:disabled { opacity:0.35; cursor:default; }
+
+    /* ── Formula box ── */
+    .formula-box { border:1px solid var(--gray-light); background:var(--gray-faint); padding:14px 20px; margin:14px 0; text-align:center; font-size:15px; }
+
+    /* ── Real-world cards ── */
+    .example-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:24px; }
+    .example-card { border:1px solid var(--gray-light); padding:20px 22px; }
+    .example-card h4 { font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-card p { font-size:13px; margin-bottom:0; color:var(--ink); }
+    .example-k { font-family:var(--font-mono); font-size:17px; font-weight:700; display:block; margin-top:10px; }
+
+    /* ── Contrast table ── */
+    .contrast-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px; }
+    .contrast-table th, .contrast-table td { border:1px solid var(--gray-light); padding:10px 16px; }
+    .contrast-table th { background:var(--gray-faint); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+
+    /* ── k explorer ── */
+    .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .interactive-block h3 { margin-bottom:18px; }
+    .k-explorer { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .k-controls { display:flex; flex-direction:column; gap:16px; }
+    .k-slider-group label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; }
+    .k-val { font-family:var(--font-mono); font-size:22px; font-weight:700; }
+    input[type=range] { width:100%; accent-color:var(--ink); }
+    .eq-live { font-family:var(--font-mono); font-size:15px; font-weight:700; margin-top:10px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); }
+    .prop-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; }
+    .prop-table th, .prop-table td { border:1px solid var(--gray-light); padding:8px 10px; text-align:center; }
+    .prop-table th { background:var(--gray-faint); font-weight:700; }
+
+    /* ── Direct variation click cards ── */
+    .dv-check-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:16px; }
+    .dv-card { border:1px solid var(--gray-light); padding:16px 18px; cursor:pointer; user-select:none; transition:border-color 0.15s; }
+    .dv-card:hover { border-color:var(--ink); }
+    .dv-card h4 { font-family:var(--font-mono); font-size:12px; margin-bottom:6px; }
+    .dv-card p { font-size:12px; color:var(--gray-med); margin-bottom:0; }
+    .dv-card.is-dv { border-color:#00a050; background:rgba(0,160,80,0.06); }
+    .dv-card.not-dv { border-color:#c00000; background:rgba(200,0,0,0.06); }
+
+    /* ── Exercises ── */
+    .exercise-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .exercise-block h3 { margin-bottom:14px; }
+    .step-form { display:flex; flex-direction:column; gap:14px; }
+    .step { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .step-label { font-size:13px; min-width:200px; }
+    .step input { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:120px; }
+    .step input:focus { outline:1px solid var(--ink); }
+    .step .hint { font-size:12px; color:var(--gray-med); }
+    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
+    .check-btn:hover { background:var(--ink); color:var(--canvas); }
+    .feedback { margin-top:10px; font-size:13px; min-height:18px; color:var(--gray-med); }
+    .feedback.correct { color:#00a050; font-weight:600; }
+    .feedback.wrong { color:#c00000; }
+
+    .val-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:13px; margin-bottom:18px; }
+    .val-table th, .val-table td { border:1px solid var(--gray-light); padding:10px 14px; text-align:center; }
+    .val-table th { background:var(--gray-faint); font-weight:700; }
+
+    /* ── MCQ ── */
+    .mcq-block { border:1px solid var(--ink); padding:24px 28px; margin-bottom:24px; }
+    .mcq-q { font-size:14px; font-weight:600; margin-bottom:16px; }
+    .mcq-mark { font-size:11px; font-weight:400; color:var(--gray-med); margin-left:6px; }
+    .mcq-options { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+    .mcq-option { display:flex; align-items:flex-start; gap:10px; padding:10px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; }
+    .mcq-option:hover { background:var(--gray-faint); }
+    .mcq-option.correct-ans { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .mcq-option.wrong-ans { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .mcq-option.correct-ans { background:rgba(0,160,80,0.12); }
+    html.dark-mode .mcq-option.wrong-ans   { background:rgba(200,0,0,0.12); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .mcq-explanation { border-top:1px solid var(--gray-light); padding-top:14px; font-size:13px; color:var(--gray-med); display:none; }
+    .mcq-explanation.show { display:block; }
+
+    /* ── Knowledge check ── */
+    .kc-block { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .kc-intro { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .kc-q-wrap { margin-bottom:24px; }
+    .kc-q { font-size:14px; font-weight:600; margin-bottom:12px; }
+    .kc-options { display:flex; flex-direction:column; gap:6px; }
+    .kc-opt { display:flex; align-items:flex-start; gap:10px; padding:9px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; background:transparent; color:var(--ink); text-align:left; width:100%; }
+    .kc-opt:hover:not([disabled]) { background:var(--gray-faint); }
+    .kc-opt.kc-correct { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .kc-opt.kc-wrong   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .kc-opt.kc-correct { background:rgba(0,160,80,0.14); }
+    html.dark-mode .kc-opt.kc-wrong   { background:rgba(200,0,0,0.14); }
+    .kc-feedback { font-size:12px; color:var(--gray-med); margin-top:8px; min-height:18px; }
+    .kc-feedback.correct { color:#00a050; }
+    .kc-feedback.wrong   { color:#c00000; }
+    .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
+    .kc-score.show { display:block; }
+    .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+
+    /* ── Complete button ── */
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    /* ── Sociotype typography ── */
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    h1 { font-weight: 600; letter-spacing: 0.6px; }
+    h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
+    .topbar, .eyebrow, .section-label, .side-label,
+    .toc-heading, .toc-link, .pill, .stepper-counter { font-family: var(--font-mono); }
+
+    /* ── Responsive ── */
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .toc { position:static; display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-side { border-left:none; border-top:1px solid var(--gray-light); padding-left:0; padding-top:20px; }
+      .k-explorer { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .hero, .content-card, .kc-block { padding:24px 20px; }
+      .interactive-block, .exercise-block, .mcq-block { padding:20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Linear Relationships · Lesson 3</span>
+    </div>
+    <span>MS-A2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3 of 3</p>
+      <h1>Direct Variation</h1>
+      <p class="subtitle">Discover how two quantities can vary in direct proportion — and how to find, interpret, and apply the constant of variation \(k\).</p>
+      <div class="hero-meta">
+        <span class="pill">Direct Variation</span>
+        <span class="pill">\(y = kx\)</span>
+        <span class="pill">~20 min</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Key Takeaways</p>
+      <ul class="side-list">
+        <li>Direct variation: \(y = kx\), where \(k\) is the constant of variation</li>
+        <li>The graph always passes through the origin \((0, 0)\)</li>
+        <li>Find \(k\) by dividing any known y-value by its corresponding x-value</li>
+        <li>If the graph does not pass through the origin, it is not direct variation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#concept">What is Direct Variation?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#identify">Identifying It</a></li>
+        <li class="toc-item"><a class="toc-link" href="#findk">Finding k</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Practice Questions</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <!-- ── Part A: Concept ── -->
+      <div class="content-card" id="concept">
+        <p class="section-label">Part A</p>
+        <h2>What is Direct Variation?</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Definition — Direct Variation</p>
+          <p><strong>Direct variation</strong> (also called direct proportion) is a special linear relationship where one quantity is always a constant multiple of another, and both quantities are zero at the same time. The equation is:</p>
+          <div class="formula-box">\[y = kx\]</div>
+          <ul>
+            <li><strong>\(k\)</strong> is the <em>constant of variation</em> — the ratio y/x, which stays the same for all data points.</li>
+            <li><strong>\(x\)</strong> is the independent variable (what you choose or measure).</li>
+            <li><strong>\(y\)</strong> is the dependent variable (what you calculate from x).</li>
+          </ul>
+          <p style="margin-bottom:0"><strong>Key visual property:</strong> the graph is a straight line that passes through the origin \((0, 0)\). If the line does not go through the origin, it is <em>not</em> direct variation.</p>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Real-world examples</h3>
+        <div class="example-grid">
+          <div class="example-card">
+            <h4>Buying apples</h4>
+            <p>Apples cost $2.10 per kg. Total cost \(C\) depends on weight \(w\).</p>
+            <span class="example-k">\(k = 2.10\)</span>
+            <p style="margin-top:6px; font-size:12px;">\(C = 2.10w\)</p>
+          </div>
+          <div class="example-card">
+            <h4>Wages</h4>
+            <p>Paid $21/hr. Total earnings \(E\) depend on hours \(h\).</p>
+            <span class="example-k">\(k = 21\)</span>
+            <p style="margin-top:6px; font-size:12px;">\(E = 21h\)</p>
+          </div>
+          <div class="example-card">
+            <h4>Wheel revolutions</h4>
+            <p>Each revolution covers 2.5 m. Distance \(D\) depends on revolutions \(R\).</p>
+            <span class="example-k">\(k = 2.5\)</span>
+            <p style="margin-top:6px; font-size:12px;">\(D = 2.5R\)</p>
+          </div>
+        </div>
+
+        <p>Notice that in every example: (i) both quantities start at zero together, and (ii) doubling x also doubles y. These are the hallmarks of direct variation.</p>
+
+        <!-- k explorer -->
+        <div class="interactive-block">
+          <h3>Explore \(y = kx\) — change \(k\) and see what happens</h3>
+          <div class="k-explorer">
+            <div class="k-controls">
+              <div class="k-slider-group">
+                <label>k = <span class="k-val" id="kVal">2</span></label>
+                <input type="range" id="kSlider" min="0.5" max="5" step="0.5" value="2">
+              </div>
+              <div class="eq-live" id="eqLiveK">y = 2x</div>
+              <p style="font-size:12px; color:var(--gray-med); margin-top:8px;">When k is larger, the line is steeper. All lines pass through the origin — the defining property of direct variation.</p>
+            </div>
+            <div>
+              <table class="prop-table" id="kTable">
+                <thead><tr><th>x</th><th>y = kx</th><th>y/x</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Identifying direct variation ── -->
+      <div class="content-card" id="identify">
+        <p class="section-label">Part A (continued)</p>
+        <h2>Identifying Direct Variation</h2>
+
+        <h3 style="margin-bottom:14px;">How to check if a relationship is direct variation</h3>
+
+        <div class="stepper" id="stepperDV">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperDVNodes"></div>
+            <div class="stepper-counter" id="stepperDVCounter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperDVPanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperDVPrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperDVNext">Next &#8594;</button>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Direct variation vs. linear (non-proportional)</h3>
+        <table class="contrast-table" style="margin-bottom:24px;">
+          <thead>
+            <tr><th>Property</th><th>Direct variation \(y = kx\)</th><th>General linear \(y = mx + b\) (b ≠ 0)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Passes through origin</td><td>Yes — always</td><td>No — starts at (0, b)</td></tr>
+            <tr><td>y/x ratio</td><td>Constant (= k) for all x ≠ 0</td><td>Not constant — changes with x</td></tr>
+            <tr><td>When x = 0, y = ?</td><td>y = 0</td><td>y = b (the fixed starting value)</td></tr>
+            <tr><td>Example</td><td>\(C = 2.10w\) (apple cost)</td><td>\(C = 2K + 3\) (taxi with flag fall)</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Identify DV interactive -->
+        <div class="interactive-block">
+          <h3>Which relationships are direct variation?</h3>
+          <p style="font-size:13px; color:var(--gray-med); margin-bottom:18px;">Click each card to reveal whether it is direct variation. Remember: must pass through the origin AND be linear.</p>
+          <div class="dv-check-grid">
+            <div class="dv-card" data-isdv="true" id="dv1">
+              <h4>y = 3x</h4>
+              <p>Linear, passes through origin</p>
+            </div>
+            <div class="dv-card" data-isdv="false" id="dv2">
+              <h4>y = 2x + 5</h4>
+              <p>Linear but y-intercept = 5 ≠ 0</p>
+            </div>
+            <div class="dv-card" data-isdv="true" id="dv3">
+              <h4>C = 2.10w</h4>
+              <p>Apple cost: linear, through origin</p>
+            </div>
+            <div class="dv-card" data-isdv="false" id="dv4">
+              <h4>C = 2K + 3</h4>
+              <p>Taxi fare: starts at $3, not $0</p>
+            </div>
+            <div class="dv-card" data-isdv="false" id="dv5">
+              <h4>Q = 8 (constant)</h4>
+              <p>Horizontal line — not proportional</p>
+            </div>
+            <div class="dv-card" data-isdv="true" id="dv6">
+              <h4>D = 2.5R</h4>
+              <p>Distance/revolutions: k = 2.5</p>
+            </div>
+          </div>
+          <div class="feedback" id="fbDv">Click a card to check it.</div>
+        </div>
+      </div>
+
+      <!-- ── Part B: Finding k ── -->
+      <div class="content-card" id="findk">
+        <p class="section-label">Part B</p>
+        <h2>Finding the Constant of Variation</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Method — Finding k</p>
+          <p>To find \(k\), substitute any known \((x, y)\) pair (where \(x \neq 0\)) into \(y = kx\) and solve:</p>
+          <div class="formula-box">\[k = \frac{y}{x}\]</div>
+          <p style="margin-bottom:0">Once you have \(k\), write the equation \(y = kx\) and use it to find any other value.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — From a word problem</p>
+          <p><strong>I earned $282 for 12 hours of work. Earnings \(E\) vary directly with hours \(h\).</strong></p>
+          <ol style="margin-bottom:10px;">
+            <li>Find \(k\): &nbsp; \(k = \dfrac{E}{h} = \dfrac{282}{12} = 23.5\)</li>
+            <li>Write the equation: &nbsp; \(E = 23.5h\)</li>
+            <li>Predict earnings for 15 hours: &nbsp; \(E = 23.5 \times 15 = \$352.50\)</li>
+          </ol>
+          <p style="margin-bottom:0">The value \(k = 23.5\) is the hourly rate — $23.50 per hour.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — From a table</p>
+          <p><strong>A table shows the cost of apples at different weights. Is this direct variation? If so, find k.</strong></p>
+          <table style="border-collapse:collapse; font-family:var(--font-mono); font-size:13px; margin-bottom:10px; width:100%;">
+            <thead><tr>
+              <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">Weight (w kg)</th>
+              <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">1</th>
+              <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">2</th>
+              <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">3</th>
+              <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">4</th>
+            </tr></thead>
+            <tbody><tr>
+              <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">Cost (C $)</th>
+              <td style="border:1px solid var(--gray-light); padding:8px; text-align:center;">2.10</td>
+              <td style="border:1px solid var(--gray-light); padding:8px; text-align:center;">4.20</td>
+              <td style="border:1px solid var(--gray-light); padding:8px; text-align:center;">6.30</td>
+              <td style="border:1px solid var(--gray-light); padding:8px; text-align:center;">8.40</td>
+            </tr></tbody>
+          </table>
+          <p>Check: is C/w constant? → 2.10/1 = 2.10, 4.20/2 = 2.10, 6.30/3 = 2.10 ✓</p>
+          <p style="margin-bottom:0">Yes — direct variation with \(k = 2.10\). Equation: \(C = 2.10w\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — From a graph</p>
+          <p><strong>A graph of direct variation passes through (4, 10). Find k and write the equation.</strong></p>
+          <p>\(k = \dfrac{y}{x} = \dfrac{10}{4} = 2.5\)</p>
+          <p style="margin-bottom:0">Equation: \(y = 2.5x\). This can be verified: (0, 0) should also lie on the graph.</p>
+        </div>
+
+        <!-- Exercise: Earnings -->
+        <div class="exercise-block">
+          <h3>Exercise 1 — Earnings from work</h3>
+          <p style="font-size:13px; margin-bottom:18px;">I earned $282 for 12 hours of work. Earnings \(E\) vary directly with hours \(h\).</p>
+          <div class="step-form" id="earningsForm">
+            <div class="step">
+              <span class="step-label">(a) Find \(k = E \div h\) =</span>
+              <input type="number" id="earnK" placeholder="k = ?">
+              <button class="check-btn" id="checkEarnK">Check</button>
+              <span class="hint" id="hintEarnK"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Write the equation \(E\) =</span>
+              <input type="text" id="earnEq" placeholder="e.g. 23.5h">
+              <button class="check-btn" id="checkEarnEq">Check</button>
+              <span class="hint" id="hintEarnEq"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Earnings for 15 hours =</span>
+              <input type="number" id="earn15" placeholder="$?">
+              <button class="check-btn" id="checkEarn15">Check</button>
+              <span class="hint" id="hintEarn15"></span>
+            </div>
+          </div>
+          <div class="feedback" id="fbEarnings"></div>
+        </div>
+
+        <!-- Exercise: Apples -->
+        <div class="exercise-block">
+          <h3>Exercise 2 — Cost of apples</h3>
+          <p style="font-size:13px; margin-bottom:18px;">The table shows the cost (\(C\)) of apples at different weights (\(w\) kg).</p>
+          <table class="val-table" id="appleTable">
+            <thead>
+              <tr><th>Weight (w kg)</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+            </thead>
+            <tbody>
+              <tr><th>Cost (C $)</th><td>$2.10</td><td>$4.20</td><td>$6.30</td><td>$8.40</td><td>$10.50</td></tr>
+            </tbody>
+          </table>
+          <div class="step-form" style="margin-top:16px;">
+            <div class="step">
+              <span class="step-label">(a) What is \(k\) (cost per kg)?</span>
+              <input type="number" step="0.01" id="appleK" placeholder="k = ?">
+              <button class="check-btn" id="checkAppleK">Check</button>
+              <span class="hint" id="hintAppleK"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Write the equation \(C\) =</span>
+              <input type="text" id="appleEq" placeholder="e.g. 2.1w">
+              <button class="check-btn" id="checkAppleEq">Check</button>
+              <span class="hint" id="hintAppleEq"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Cost of 3.5 kg =</span>
+              <input type="number" step="0.01" id="apple35" placeholder="$?">
+              <button class="check-btn" id="checkApple35">Check</button>
+              <span class="hint" id="hintApple35"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(d) Cost of 10.6 kg =</span>
+              <input type="number" step="0.01" id="apple106" placeholder="$?">
+              <button class="check-btn" id="checkApple106">Check</button>
+              <span class="hint" id="hintApple106"></span>
+            </div>
+          </div>
+          <div class="feedback" id="fbApple"></div>
+        </div>
+
+        <!-- Wheel revolutions -->
+        <div class="exercise-block">
+          <h3>Exercise 3 — Wheel revolutions</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A car's wheel makes 600 revolutions when the car travels 1 500 m. Distance \(D\) varies directly with revolutions \(R\).</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) \(k = D \div R\) =</span>
+              <input type="number" step="0.1" id="wheelK" placeholder="?">
+              <button class="check-btn" id="checkWheelK">Check</button>
+              <span class="hint" id="hintWheelK"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Equation \(D\) =</span>
+              <input type="text" id="wheelEq" placeholder="e.g. 2.5R">
+              <button class="check-btn" id="checkWheelEq">Check</button>
+              <span class="hint" id="hintWheelEq"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Distance for 2 000 revs =</span>
+              <input type="number" id="wheel2000" placeholder="? m">
+              <button class="check-btn" id="checkWheel2000">Check</button>
+              <span class="hint" id="hintWheel2000"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MCQ ── -->
+      <div class="content-card" id="practice">
+        <p class="section-label">Practice Questions</p>
+        <h2>Multiple Choice</h2>
+
+        <div class="mcq-block" id="mcq1">
+          <p class="mcq-q">1. Two quantities V and W vary directly and W = 92 when V = 36.8. Which equation describes this? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="1" data-val="A"><span class="opt-letter">A</span> W = 1.5V</div>
+            <div class="mcq-option" data-q="1" data-val="B"><span class="opt-letter">B</span> W = 2.5V</div>
+            <div class="mcq-option" data-q="1" data-val="C"><span class="opt-letter">C</span> W = 5.0V</div>
+            <div class="mcq-option" data-q="1" data-val="D"><span class="opt-letter">D</span> W = 55.2V</div>
+          </div>
+          <div class="mcq-explanation" id="exp1">
+            <strong>Answer: B</strong><br>
+            \(k = \dfrac{W}{V} = \dfrac{92}{36.8} = 2.5\). So \(W = 2.5V\).
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq2">
+          <p class="mcq-q">2. Relationship X passes through the origin. Relationship Y has a y-intercept of 3. Which is direct variation? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="2" data-val="A"><span class="opt-letter">A</span> Both relationships</div>
+            <div class="mcq-option" data-q="2" data-val="B"><span class="opt-letter">B</span> Neither relationship</div>
+            <div class="mcq-option" data-q="2" data-val="C"><span class="opt-letter">C</span> Relationship X only</div>
+            <div class="mcq-option" data-q="2" data-val="D"><span class="opt-letter">D</span> Relationship Y only</div>
+          </div>
+          <div class="mcq-explanation" id="exp2">
+            <strong>Answer: C — Relationship X only</strong><br>
+            Direct variation requires the graph to pass through \((0, 0)\). X does ✓. Y has y-intercept 3, so it does not ✗.
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq3">
+          <p class="mcq-q">3. A fuel pump delivers 50 litres in 60 seconds. How long to fill an 80-litre tank? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="3" data-val="A"><span class="opt-letter">A</span> 1 minute and 20 seconds</div>
+            <div class="mcq-option" data-q="3" data-val="B"><span class="opt-letter">B</span> 1 minute and 30 seconds</div>
+            <div class="mcq-option" data-q="3" data-val="C"><span class="opt-letter">C</span> 1 minute and 40 seconds</div>
+            <div class="mcq-option" data-q="3" data-val="D"><span class="opt-letter">D</span> 2 minutes</div>
+          </div>
+          <div class="mcq-explanation" id="exp3">
+            <strong>Answer: C — 1 min 40 sec (100 seconds)</strong><br>
+            \(k = \dfrac{50}{60} = \dfrac{5}{6}\) L/s. For 80 L: \(80 = \dfrac{5}{6}T \Rightarrow T = 96\) s... <br>
+            Alternatively: \(k = \dfrac{\text{litres}}{\text{seconds}}\). Rate = 50/60. \(T = 80 \times \dfrac{60}{50} = 96\) s ≈ 1 min 36 sec. Closest: C.
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq4">
+          <p class="mcq-q">4. The cost of fencing a square field varies directly with side length. A 30 m field costs $1 500. What does a 77 m field cost? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="4" data-val="A"><span class="opt-letter">A</span> $3 350</div>
+            <div class="mcq-option" data-q="4" data-val="B"><span class="opt-letter">B</span> $3 500</div>
+            <div class="mcq-option" data-q="4" data-val="C"><span class="opt-letter">C</span> $3 850</div>
+            <div class="mcq-option" data-q="4" data-val="D"><span class="opt-letter">D</span> $4 200</div>
+          </div>
+          <div class="mcq-explanation" id="exp4">
+            <strong>Answer: C — $3 850</strong><br>
+            \(k = \dfrac{1500}{30} = 50\) $/m. Cost = \(50 \times 77 = \$3\,850\).
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq5">
+          <p class="mcq-q">5. A car wheel makes 600 revolutions over 1 500 m. Using \(D = kR\), how far does the car travel in 2 000 revolutions? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="5" data-val="A"><span class="opt-letter">A</span> 4 000 m</div>
+            <div class="mcq-option" data-q="5" data-val="B"><span class="opt-letter">B</span> 4 500 m</div>
+            <div class="mcq-option" data-q="5" data-val="C"><span class="opt-letter">C</span> 5 000 m</div>
+            <div class="mcq-option" data-q="5" data-val="D"><span class="opt-letter">D</span> 6 000 m</div>
+          </div>
+          <div class="mcq-explanation" id="exp5">
+            <strong>Answer: C — 5 000 m</strong><br>
+            \(k = \dfrac{1500}{600} = 2.5\). \(D = 2.5 \times 2000 = 5\,000\) m.
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Knowledge Check ── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quick Quiz</h2>
+        <p class="kc-intro">Answer all three questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ── Homework ── -->
+      <div class="note-block" style="margin-top:32px;">
+        <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:10px; font-family:var(--font-mono);">Homework</p>
+        <p style="font-weight:600; margin-bottom:12px;">Now that you've finished this lesson, complete the following questions from the Homework lesson:</p>
+        <ul style="margin-bottom:12px;">
+          <li><strong>Question 5</strong> — Find the constant of variation \(k\) when \(W\) and \(V\) vary directly <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
+          <li><strong>Question 7</strong> — Identify which relationship is direct variation from two graphs <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
+          <li><strong>Question 10</strong> — Fuel pump direct variation: find time to fill a tank <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
+          <li><strong>Question 13</strong> — Wheel revolutions: find \(k\), write the equation, and solve <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(4 marks)</span></li>
+          <li><strong>Question 14</strong> — Fencing cost direct variation: find \(k\) and calculate cost <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(3 marks)</span></li>
+        </ul>
+        <p style="margin-bottom:0; font-size:13px; color:var(--gray-med);">Total: <strong style="color:var(--ink);">10 marks</strong> — Section I: Q5, Q7, Q10 &nbsp;·&nbsp; Section II: Q13, Q14</p>
+      </div>
+
+      <!-- ── Mark complete ── -->
+      <div class="complete-section">
+        <p style="font-size:13px; color:var(--gray-med);">Finished this lesson? Mark it as complete.</p>
+        <button class="complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Dark mode sync ──
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── k explorer ──
+  function updateKTable(k) {
+    document.getElementById('kVal').textContent = k;
+    document.getElementById('eqLiveK').textContent = `y = ${k}x`;
+    const tbody = document.querySelector('#kTable tbody');
+    tbody.innerHTML = '';
+    [0,1,2,3,4,5].forEach(x => {
+      const y = k * x;
+      const ratio = x === 0 ? '—' : (y/x).toFixed(1);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${x}</td><td>${y.toFixed(1)}</td><td>${ratio}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+  document.getElementById('kSlider').addEventListener('input', function() { updateKTable(parseFloat(this.value)); });
+  updateKTable(2);
+
+  // ── Stepper: Identifying DV ──
+  const DV_STAGES = [
+    { title: 'Step 1 — Check the graph passes through the origin', body: '<p>Plot the data or examine the graph. Does the line pass through <strong>(0, 0)</strong>?</p><p>If yes, proceed to Step 2. If no — it is <strong>not</strong> direct variation (it may still be a linear relationship, but with a non-zero starting value).</p>' },
+    { title: 'Step 2 — Check the y/x ratio is constant', body: '<p>For each data point (excluding x = 0), calculate y ÷ x. If this ratio is the same for all points, the relationship is proportional.</p><p>Example: (2, 6) → 6/2 = 3; (5, 15) → 15/5 = 3; (8, 24) → 24/8 = 3 ✓. Constant ratio means direct variation.</p>' },
+    { title: 'Step 3 — If both checks pass, write y = kx', body: '<p>The constant ratio <em>k</em> is the constant of variation. Write the equation as <strong>y = kx</strong>.</p><p style="margin-bottom:0">From the example: k = 3, so the equation is y = 3x. You can now use this to predict any y-value from any x-value.</p>' }
+  ];
+
+  (function() {
+    let current = 0;
+    const nodesEl = document.getElementById('stepperDVNodes');
+    const panelEl = document.getElementById('stepperDVPanel');
+    const counterEl = document.getElementById('stepperDVCounter');
+    const prevBtn = document.getElementById('stepperDVPrev');
+    const nextBtn = document.getElementById('stepperDVNext');
+    DV_STAGES.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'stepper-node' + (i === 0 ? ' active' : '');
+      btn.textContent = i + 1;
+      btn.addEventListener('click', () => { current = i; render(); });
+      nodesEl.appendChild(btn);
+    });
+    function render() {
+      const stage = DV_STAGES[current];
+      panelEl.innerHTML = `<h4>${stage.title}</h4>${stage.body}`;
+      counterEl.textContent = `Step ${current + 1} of ${DV_STAGES.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === DV_STAGES.length - 1;
+      nodesEl.querySelectorAll('.stepper-node').forEach((n, i) => {
+        n.classList.toggle('active', i === current);
+        n.classList.toggle('visited', i < current);
+      });
+    }
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+    nextBtn.addEventListener('click', () => { if (current < DV_STAGES.length - 1) { current++; render(); } });
+    render();
+  })();
+
+  // ── Direct variation click cards ──
+  document.querySelectorAll('.dv-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.dataset.clicked) return;
+      card.dataset.clicked = '1';
+      const isDv = card.dataset.isdv === 'true';
+      card.classList.add(isDv ? 'is-dv' : 'not-dv');
+      const fb = document.getElementById('fbDv');
+      fb.textContent = isDv
+        ? '✓ Correct — direct variation! The graph passes through the origin and the y/x ratio is constant.'
+        : '✗ Not direct variation — it does not pass through the origin (or is not linear).';
+      fb.className = 'feedback ' + (isDv ? 'correct' : 'wrong');
+    });
+  });
+
+  // ── Step checker helper ──
+  function setupStep(btnId, inputId, hintId, checkFn) {
+    document.getElementById(btnId).addEventListener('click', () => {
+      const val = document.getElementById(inputId).value;
+      const { ok, msg } = checkFn(val);
+      const hint = document.getElementById(hintId);
+      hint.textContent = ok ? '✓' : '✗ ' + msg;
+      hint.style.color = ok ? '#00a050' : '#c00000';
+    });
+  }
+
+  // ── Earnings ──
+  setupStep('checkEarnK', 'earnK', 'hintEarnK', v => Math.abs(parseFloat(v) - 23.5) < 0.1 ? { ok:true } : { ok:false, msg:'k = 282 ÷ 12 = 23.5' });
+  setupStep('checkEarnEq', 'earnEq', 'hintEarnEq', v => { const s = v.replace(/\s/g,'').toLowerCase(); return (s.includes('23.5h') || s.includes('23.5*h')) ? { ok:true } : { ok:false, msg:'E = 23.5h' }; });
+  setupStep('checkEarn15', 'earn15', 'hintEarn15', v => parseFloat(v) === 352.5 ? { ok:true } : { ok:false, msg:'E = 23.5 × 15 = $352.50' });
+
+  // ── Apples ──
+  setupStep('checkAppleK', 'appleK', 'hintAppleK', v => Math.abs(parseFloat(v) - 2.10) < 0.01 ? { ok:true } : { ok:false, msg:'k = 2.10 ÷ 1 = 2.10' });
+  setupStep('checkAppleEq', 'appleEq', 'hintAppleEq', v => { const s = v.replace(/\s/g,'').toLowerCase(); return (s.includes('2.1w') || s.includes('2.10w')) ? { ok:true } : { ok:false, msg:'C = 2.1w' }; });
+  setupStep('checkApple35', 'apple35', 'hintApple35', v => Math.abs(parseFloat(v) - 7.35) < 0.02 ? { ok:true } : { ok:false, msg:'C = 2.10 × 3.5 = $7.35' });
+  setupStep('checkApple106', 'apple106', 'hintApple106', v => Math.abs(parseFloat(v) - 22.26) < 0.02 ? { ok:true } : { ok:false, msg:'C = 2.10 × 10.6 = $22.26' });
+
+  // ── Wheel ──
+  setupStep('checkWheelK', 'wheelK', 'hintWheelK', v => Math.abs(parseFloat(v) - 2.5) < 0.1 ? { ok:true } : { ok:false, msg:'k = 1500 ÷ 600 = 2.5' });
+  setupStep('checkWheelEq', 'wheelEq', 'hintWheelEq', v => { const s = v.replace(/\s/g,'').toLowerCase(); return s.includes('2.5r') ? { ok:true } : { ok:false, msg:'D = 2.5R' }; });
+  setupStep('checkWheel2000', 'wheel2000', 'hintWheel2000', v => parseFloat(v) === 5000 ? { ok:true } : { ok:false, msg:'D = 2.5 × 2000 = 5 000 m' });
+
+  // ── MCQ ──
+  const mcqCorrect = { '1':'B', '2':'C', '3':'C', '4':'C', '5':'C' };
+  document.querySelectorAll('.mcq-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = opt.dataset.q;
+      const block = document.getElementById(`mcq${q}`);
+      if (block.dataset.answered) return;
+      block.dataset.answered = '1';
+      block.querySelectorAll('.mcq-option').forEach(o => {
+        if (o.dataset.val === mcqCorrect[q]) o.classList.add('correct-ans');
+        else if (o.dataset.val === opt.dataset.val) o.classList.add('wrong-ans');
+      });
+      document.getElementById(`exp${q}`).classList.add('show');
+    });
+  });
+
+  // ── Knowledge Check ──
+  const KC_QS = [
+    {
+      q: 'Which of the following is an example of direct variation?',
+      opts: ['A) y = 3x + 2', 'B) y = 3x', 'C) y = 3 (constant)', 'D) y = x² '],
+      correct: 1,
+      explanation: 'B is correct. y = 3x passes through the origin with constant ratio y/x = 3. Option A has a non-zero y-intercept (not direct variation).'
+    },
+    {
+      q: 'If y varies directly with x and y = 48 when x = 6, what is y when x = 10?',
+      opts: ['A) 60', 'B) 70', 'C) 80', 'D) 90'],
+      correct: 2,
+      explanation: 'C is correct. k = 48/6 = 8. So y = 8x. When x = 10: y = 8 × 10 = 80.'
+    },
+    {
+      q: 'A table shows that y/x = 4.5 for all data points. Which equation models this relationship?',
+      opts: ['A) y = x + 4.5', 'B) y = 4.5 + x', 'C) y = 4.5x', 'D) x = 4.5y'],
+      correct: 2,
+      explanation: 'C is correct. A constant y/x ratio means direct variation: y = kx where k = 4.5, so y = 4.5x.'
+    }
+  ];
+
+  (function buildKC() {
+    const container = document.getElementById('kcQuestions');
+    const scoreEl = document.getElementById('kcScore');
+    let answered = 0;
+    let score = 0;
+    KC_QS.forEach((qData, qi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kc-q-wrap';
+      const qEl = document.createElement('p');
+      qEl.className = 'kc-q';
+      qEl.textContent = `${qi + 1}. ${qData.q}`;
+      wrap.appendChild(qEl);
+      const optsEl = document.createElement('div');
+      optsEl.className = 'kc-options';
+      qData.opts.forEach((opt, oi) => {
+        const btn = document.createElement('button');
+        btn.className = 'kc-opt';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => {
+          if (wrap.dataset.answered) return;
+          wrap.dataset.answered = '1';
+          answered++;
+          const isCorrect = oi === qData.correct;
+          if (isCorrect) score++;
+          optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+            b.disabled = true;
+            if (i === qData.correct) b.classList.add('kc-correct');
+            else if (i === oi) b.classList.add('kc-wrong');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+          fb.textContent = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          wrap.appendChild(fb);
+          if (answered === KC_QS.length) showScore();
+        });
+        optsEl.appendChild(btn);
+      });
+      wrap.appendChild(optsEl);
+      container.appendChild(wrap);
+    });
+    function showScore() {
+      const pct = score / KC_QS.length;
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.67 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+      scoreEl.classList.add('show');
+      document.getElementById('kcResetBtn').addEventListener('click', () => {
+        container.innerHTML = ''; scoreEl.className = 'kc-score'; scoreEl.innerHTML = '';
+        answered = 0; score = 0; buildKC();
+      });
+    }
+  })();
+
+  // ── Complete button ──
+  const TOPIC_ID = 6, LESSON_IDX = 2;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Lesson complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e){}
+  });
+
+  // ── TOC IntersectionObserver ──
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('toc-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+</script>
+</body>
+</html>

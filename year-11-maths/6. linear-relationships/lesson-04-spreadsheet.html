@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4 — Spreadsheet Modelling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #000; --canvas: #fff;
+      --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
+      --font-display: 'Poppins', sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior: smooth; }
+    body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
+    a { color: inherit; }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
+    .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
+    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; letter-spacing:0.04em; color:var(--gray-med); }
+
+    .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
+    .toc { position:sticky; top:24px; }
+    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-list { list-style:none; }
+    .toc-item { margin-bottom:2px; }
+    .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
+    .toc-link:hover { color:var(--ink); }
+    .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
+
+    .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
+    h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
+    p { margin-bottom:14px; }
+    ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
+
+    .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
+    .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block p:last-child { margin-bottom:0; }
+    .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
+    .note-block p:last-child { margin-bottom:0; }
+
+    .formula-box { border:1px solid var(--gray-light); background:var(--gray-faint); padding:14px 20px; margin:14px 0; text-align:center; font-size:15px; }
+
+    .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .interactive-block h3 { margin-bottom:18px; }
+    input[type=range] { width:100%; accent-color:var(--ink); }
+
+    /* ── MCQ ── */
+    .mcq-block { border:1px solid var(--ink); padding:24px 28px; margin-bottom:24px; }
+    .mcq-q { font-size:14px; font-weight:600; margin-bottom:16px; }
+    .mcq-mark { font-size:11px; font-weight:400; color:var(--gray-med); margin-left:6px; }
+    .mcq-options { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+    .mcq-option { display:flex; align-items:flex-start; gap:10px; padding:10px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; }
+    .mcq-option:hover { background:var(--gray-faint); }
+    .mcq-option.correct-ans { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .mcq-option.wrong-ans { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .mcq-option.correct-ans { background:rgba(0,160,80,0.12); }
+    html.dark-mode .mcq-option.wrong-ans   { background:rgba(200,0,0,0.12); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .mcq-explanation { border-top:1px solid var(--gray-light); padding-top:14px; font-size:13px; color:var(--gray-med); display:none; }
+    .mcq-explanation.show { display:block; }
+
+    /* ── Knowledge check ── */
+    .kc-block { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .kc-intro { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .kc-q-wrap { margin-bottom:24px; }
+    .kc-q { font-size:14px; font-weight:600; margin-bottom:12px; }
+    .kc-options { display:flex; flex-direction:column; gap:6px; }
+    .kc-opt { display:flex; align-items:flex-start; gap:10px; padding:9px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; background:transparent; color:var(--ink); text-align:left; width:100%; }
+    .kc-opt:hover:not([disabled]) { background:var(--gray-faint); }
+    .kc-opt.kc-correct { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .kc-opt.kc-wrong   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .kc-opt.kc-correct { background:rgba(0,160,80,0.14); }
+    html.dark-mode .kc-opt.kc-wrong   { background:rgba(200,0,0,0.14); }
+    .kc-feedback { font-size:12px; color:var(--gray-med); margin-top:8px; min-height:18px; }
+    .kc-feedback.correct { color:#00a050; }
+    .kc-feedback.wrong   { color:#c00000; }
+    .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
+    .kc-score.show { display:block; }
+    .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+
+    /* ── Complete button ── */
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    /* ── Scenario tabs ── */
+    .scenario-tabs { display:flex; flex-wrap:wrap; gap:0; margin-bottom:0; border-bottom:1px solid var(--ink); }
+    .scenario-tab { border:1px solid var(--gray-light); border-bottom:none; padding:9px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--canvas); color:var(--gray-med); transition:background 0.15s,color 0.15s; }
+    .scenario-tab:hover { color:var(--ink); border-color:var(--ink); }
+    .scenario-tab.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+
+    /* ── Scenario panels ── */
+    .scenario-panel { display:none; padding:28px; border:1px solid var(--ink); border-top:none; }
+    .scenario-panel.active { display:block; }
+
+    /* ── Spreadsheet explorer ── */
+    .ss-explorer { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
+    .ss-slider-wrap { margin-bottom:18px; }
+    .ss-slider-label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; color:var(--gray-med); }
+    .ss-slider-val { font-family:var(--font-mono); font-size:20px; font-weight:700; color:var(--ink); }
+    .ss-eq-live { font-family:var(--font-mono); font-size:13px; font-weight:700; margin-top:12px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); color:var(--ink); }
+
+    .ss-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; margin-top:4px; }
+    .ss-table th, .ss-table td { border:1px solid var(--gray-light); padding:7px 10px; text-align:center; }
+    .ss-table th { background:var(--gray-faint); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    .ss-table td.computed { color:var(--ink); }
+
+    .ss-graph-wrap { border:1px solid var(--gray-light); display:inline-block; }
+    .ss-graph-wrap svg { display:block; }
+
+    .analysis-block { margin-top:24px; border-top:1px solid var(--gray-light); padding-top:20px; }
+    .analysis-block h4 { font-size:14px; font-weight:600; margin-bottom:16px; }
+
+    /* ── Sociotype typography ── */
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    h1 { font-weight: 600; letter-spacing: 0.6px; }
+    h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
+    .topbar, .eyebrow, .section-label, .side-label, .toc-heading, .toc-link, .pill { font-family: var(--font-mono); }
+
+    /* ── Responsive ── */
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .toc { position:static; display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-side { border-left:none; border-top:1px solid var(--gray-light); padding-left:0; padding-top:20px; }
+      .ss-explorer { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .hero, .content-card, .kc-block { padding:24px 20px; }
+      .interactive-block, .mcq-block { padding:20px 16px; }
+      .scenario-panel { padding:20px 16px; }
+      .scenario-tab { font-size:10px; padding:8px 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Linear Relationships · Lesson 4</span>
+    </div>
+    <span>MS-A2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 4 of 4</p>
+      <h1>Spreadsheet Modelling</h1>
+      <p class="subtitle">Use interactive models to explore linear relationships in real-world contexts — adjust a key parameter and watch the table and graph respond live.</p>
+      <div class="hero-meta">
+        <span class="pill">Linear Models</span>
+        <span class="pill">\(y = \text{base} + \text{rate} \times x\)</span>
+        <span class="pill">~25 min</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Key Takeaways</p>
+      <ul class="side-list">
+        <li>A linear model connects two real-world quantities with a constant rate of change</li>
+        <li>Changing the gradient (rate) makes the line steeper or shallower</li>
+        <li>The y-intercept is the starting value — what y equals when x = 0</li>
+        <li>A negative gradient models a decreasing relationship</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#intro">What is Spreadsheet Modelling?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#scenarios">The Five Scenarios</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Practice Questions</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <!-- ── Intro ── -->
+      <div class="content-card" id="intro">
+        <p class="section-label">Overview</p>
+        <h2>What is Spreadsheet Modelling?</h2>
+
+        <p>A <strong>spreadsheet model</strong> organises data into rows and columns where one column holds the input values (\(x\)) and another holds computed output values (\(y\)). Every output row is calculated using the same formula — exactly like substituting values into a linear equation.</p>
+
+        <div class="definition-block">
+          <p class="def-label">The General Linear Model</p>
+          <p>Every scenario in this lesson uses a linear equation of the form:</p>
+          <div class="formula-box">\[y = \text{base} + \text{rate} \times x\]</div>
+          <ul>
+            <li><strong>base</strong> is the y-intercept — the value of \(y\) when \(x = 0\)</li>
+            <li><strong>rate</strong> is the gradient — how much \(y\) changes for each unit increase in \(x\)</li>
+            <li>When the base = 0, the model reduces to <strong>direct variation</strong>: \(y = kx\)</li>
+          </ul>
+        </div>
+
+        <p>As you work through the five scenarios below, notice how the <strong>equation</strong>, the <strong>table of values</strong>, and the <strong>graph</strong> are three representations of the same relationship. Changing the rate (gradient) in the slider changes all three simultaneously.</p>
+
+        <div class="note-block">
+          <p><strong>How to use the interactive models:</strong> Select a scenario tab (A–E), then drag the slider to change the key parameter. The spreadsheet table and graph update instantly. Use the analysis questions below each model to check your understanding.</p>
+        </div>
+      </div>
+
+      <!-- ── Scenarios ── -->
+      <div class="content-card" id="scenarios">
+        <p class="section-label">Interactive Explorer</p>
+        <h2>The Five Scenarios</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Select a scenario. Drag the slider to change the key parameter and watch the spreadsheet and graph update in real time.</p>
+
+        <div class="scenario-tabs" role="tablist">
+          <button class="scenario-tab active" data-tab="distTime"   role="tab">A — Distance &amp; Time</button>
+          <button class="scenario-tab"        data-tab="sports"     role="tab">B — Sports</button>
+          <button class="scenario-tab"        data-tab="art"        role="tab">C — Art Mastery</button>
+          <button class="scenario-tab"        data-tab="energy"     role="tab">D — Renewable Energy</button>
+          <button class="scenario-tab"        data-tab="gdp"        role="tab">E — GDP Growth</button>
+        </div>
+
+        <!-- ── Scenario A: Distance & Time ── -->
+        <div class="scenario-panel active" id="panel-distTime" role="tabpanel">
+          <div class="example-block" style="margin-bottom:20px;">
+            <p class="ex-label">Real-World Context — Distance &amp; Time</p>
+            <p>Planning a road trip from Sydney to Melbourne? The distance you cover depends on how fast you drive. This is a <strong>direct variation</strong> — doubling your speed doubles the distance for any given time, and if speed = 0 you go nowhere.</p>
+            <p style="margin-bottom:0"><strong>Equation:</strong> \(d = \text{speed} \times t\) — where \(t\) is time in hours and \(d\) is distance in km.</p>
+          </div>
+
+          <div class="interactive-block" style="margin-bottom:20px;">
+            <h3>Explore: change the driving speed</h3>
+            <div class="ss-explorer">
+              <div>
+                <div class="ss-slider-wrap">
+                  <label class="ss-slider-label">Speed = <span class="ss-slider-val" id="val-distTime">60</span> km/h</label>
+                  <input type="range" id="slider-distTime" min="20" max="120" step="10" value="60">
+                  <div class="ss-eq-live" id="eq-distTime">d = 60 × t</div>
+                </div>
+                <table class="ss-table" id="table-distTime">
+                  <thead><tr><th>Time (h)</th><th>Distance (km)</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div>
+                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <div class="ss-graph-wrap"><svg id="svg-distTime"></svg></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h4>Analysis Questions</h4>
+            <div class="mcq-block" id="dT-q1" style="margin-bottom:16px;">
+              <p class="mcq-q">1. At a speed of 80 km/h, how far would you travel in 3 hours? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="dT1" data-val="A"><span class="opt-letter">A</span> 210 km</div>
+                <div class="mcq-option" data-q="dT1" data-val="B"><span class="opt-letter">B</span> 240 km</div>
+                <div class="mcq-option" data-q="dT1" data-val="C"><span class="opt-letter">C</span> 260 km</div>
+                <div class="mcq-option" data-q="dT1" data-val="D"><span class="opt-letter">D</span> 280 km</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: B — 240 km</strong><br>
+                \(d = 80 \times 3 = 240\) km. Set the slider to 80 to confirm the table shows 240 in the row for \(t = 3\).
+              </div>
+            </div>
+            <div class="mcq-block" id="dT-q2" style="margin-bottom:16px;">
+              <p class="mcq-q">2. If the graph becomes steeper, what does that tell you about the speed? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="dT2" data-val="A"><span class="opt-letter">A</span> The speed has decreased</div>
+                <div class="mcq-option" data-q="dT2" data-val="B"><span class="opt-letter">B</span> The speed is constant</div>
+                <div class="mcq-option" data-q="dT2" data-val="C"><span class="opt-letter">C</span> The speed has increased</div>
+                <div class="mcq-option" data-q="dT2" data-val="D"><span class="opt-letter">D</span> The distance is zero</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C — The speed has increased</strong><br>
+                The gradient of the graph equals the speed. A steeper line means a larger gradient, which means a higher speed.
+              </div>
+            </div>
+            <div class="mcq-block" id="dT-q3">
+              <p class="mcq-q">3. This distance-time relationship is an example of direct variation because: <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="dT3" data-val="A"><span class="opt-letter">A</span> The graph is a curve</div>
+                <div class="mcq-option" data-q="dT3" data-val="B"><span class="opt-letter">B</span> The line passes through the origin — when \(t = 0\), \(d = 0\)</div>
+                <div class="mcq-option" data-q="dT3" data-val="C"><span class="opt-letter">C</span> The y-intercept is positive</div>
+                <div class="mcq-option" data-q="dT3" data-val="D"><span class="opt-letter">D</span> The speed is always 60 km/h</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: B</strong><br>
+                Direct variation requires the graph to pass through \((0, 0)\). At \(t = 0\) hours, distance = 0 km — you haven't moved yet.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Scenario B: Sports Performance ── -->
+        <div class="scenario-panel" id="panel-sports" role="tabpanel">
+          <div class="example-block" style="margin-bottom:20px;">
+            <p class="ex-label">Real-World Context — Sports Performance</p>
+            <p>A junior basketball player starts with a baseline skill score of 20 (representing basic coordination before structured training). Each hour of deliberate practice improves their score by a constant rate. This gives a linear model with a <strong>non-zero y-intercept</strong> — unlike direct variation.</p>
+            <p style="margin-bottom:0"><strong>Equation:</strong> \(\text{skill} = 20 + \text{rate} \times \text{hours}\)</p>
+          </div>
+
+          <div class="interactive-block" style="margin-bottom:20px;">
+            <h3>Explore: change the improvement rate</h3>
+            <div class="ss-explorer">
+              <div>
+                <div class="ss-slider-wrap">
+                  <label class="ss-slider-label">Rate = <span class="ss-slider-val" id="val-sports">3</span> points/hour</label>
+                  <input type="range" id="slider-sports" min="1" max="10" step="1" value="3">
+                  <div class="ss-eq-live" id="eq-sports">skill = 20 + 3 × hours</div>
+                </div>
+                <table class="ss-table" id="table-sports">
+                  <thead><tr><th>Practice (h)</th><th>Skill Score</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div>
+                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <div class="ss-graph-wrap"><svg id="svg-sports"></svg></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h4>Analysis Questions</h4>
+            <div class="mcq-block" id="sp-q1" style="margin-bottom:16px;">
+              <p class="mcq-q">1. What does the y-intercept of 20 represent in this context? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="sp1" data-val="A"><span class="opt-letter">A</span> The number of practice hours needed</div>
+                <div class="mcq-option" data-q="sp1" data-val="B"><span class="opt-letter">B</span> The starting skill score before any practice begins</div>
+                <div class="mcq-option" data-q="sp1" data-val="C"><span class="opt-letter">C</span> The maximum achievable skill score</div>
+                <div class="mcq-option" data-q="sp1" data-val="D"><span class="opt-letter">D</span> The rate of improvement per hour</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: B</strong><br>
+                The y-intercept is the value of the output when the input is zero. When hours = 0, skill = 20. This is the player's baseline before training starts.
+              </div>
+            </div>
+            <div class="mcq-block" id="sp-q2" style="margin-bottom:16px;">
+              <p class="mcq-q">2. With a rate of 5 points/hour, what is the skill score after 12 hours of practice? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="sp2" data-val="A"><span class="opt-letter">A</span> 60</div>
+                <div class="mcq-option" data-q="sp2" data-val="B"><span class="opt-letter">B</span> 70</div>
+                <div class="mcq-option" data-q="sp2" data-val="C"><span class="opt-letter">C</span> 80</div>
+                <div class="mcq-option" data-q="sp2" data-val="D"><span class="opt-letter">D</span> 85</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C — 80</strong><br>
+                \(\text{skill} = 20 + 5 \times 12 = 20 + 60 = 80\). Set the slider to 5 and check the row for 25 hours — then calculate for 12 hours manually.
+              </div>
+            </div>
+            <div class="mcq-block" id="sp-q3">
+              <p class="mcq-q">3. Why does this relationship NOT show direct variation? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="sp3" data-val="A"><span class="opt-letter">A</span> Because the rate changes at each step</div>
+                <div class="mcq-option" data-q="sp3" data-val="B"><span class="opt-letter">B</span> Because the graph is not a straight line</div>
+                <div class="mcq-option" data-q="sp3" data-val="C"><span class="opt-letter">C</span> Because the y-intercept is 20, not 0</div>
+                <div class="mcq-option" data-q="sp3" data-val="D"><span class="opt-letter">D</span> Because skill score can exceed 100</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C</strong><br>
+                Direct variation requires the graph to pass through the origin. Here the line starts at (0, 20), so when hours = 0, skill = 20 ≠ 0. It is linear, but not proportional.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Scenario C: Cultural Art Mastery ── -->
+        <div class="scenario-panel" id="panel-art" role="tabpanel">
+          <div class="example-block" style="margin-bottom:20px;">
+            <p class="ex-label">Real-World Context — Cultural Art Practices</p>
+            <p>Traditional and Indigenous art practices — from weaving to carving to dot painting — require dedicated time to develop mastery. Students begin with a small amount of foundational knowledge (5%) and build at a constant rate through guided practice. We cap mastery at 100% since you cannot exceed full proficiency.</p>
+            <p style="margin-bottom:0"><strong>Equation:</strong> \(\text{mastery} = 5 + \text{rate} \times \text{hours}\) (capped at 100%)</p>
+          </div>
+
+          <div class="interactive-block" style="margin-bottom:20px;">
+            <h3>Explore: change the learning rate</h3>
+            <div class="ss-explorer">
+              <div>
+                <div class="ss-slider-wrap">
+                  <label class="ss-slider-label">Rate = <span class="ss-slider-val" id="val-art">2</span> %/hour</label>
+                  <input type="range" id="slider-art" min="0.5" max="8" step="0.5" value="2">
+                  <div class="ss-eq-live" id="eq-art">mastery = 5 + 2 × hours</div>
+                </div>
+                <table class="ss-table" id="table-art">
+                  <thead><tr><th>Time (h)</th><th>Mastery (%)</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div>
+                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <div class="ss-graph-wrap"><svg id="svg-art"></svg></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h4>Analysis Questions</h4>
+            <div class="mcq-block" id="ar-q1" style="margin-bottom:16px;">
+              <p class="mcq-q">1. At a rate of 4%/hour, how many hours of practice are needed to reach 85% mastery? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="ar1" data-val="A"><span class="opt-letter">A</span> 15 hours</div>
+                <div class="mcq-option" data-q="ar1" data-val="B"><span class="opt-letter">B</span> 18 hours</div>
+                <div class="mcq-option" data-q="ar1" data-val="C"><span class="opt-letter">C</span> 20 hours</div>
+                <div class="mcq-option" data-q="ar1" data-val="D"><span class="opt-letter">D</span> 25 hours</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C — 20 hours</strong><br>
+                Solve \(85 = 5 + 4 \times h\) → \(80 = 4h\) → \(h = 20\) hours. Set the slider to 4 and observe when the table first reaches 85%.
+              </div>
+            </div>
+            <div class="mcq-block" id="ar-q2" style="margin-bottom:16px;">
+              <p class="mcq-q">2. What is the starting mastery level (before any practice)? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="ar2" data-val="A"><span class="opt-letter">A</span> 5%</div>
+                <div class="mcq-option" data-q="ar2" data-val="B"><span class="opt-letter">B</span> 0%</div>
+                <div class="mcq-option" data-q="ar2" data-val="C"><span class="opt-letter">C</span> 10%</div>
+                <div class="mcq-option" data-q="ar2" data-val="D"><span class="opt-letter">D</span> 20%</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: A — 5%</strong><br>
+                The y-intercept is 5. When hours = 0, mastery = 5 + rate × 0 = 5%. This represents foundational knowledge students already have.
+              </div>
+            </div>
+            <div class="mcq-block" id="ar-q3">
+              <p class="mcq-q">3. Which slider value would you use to reach full mastery (100%) in exactly 19 hours? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="ar3" data-val="A"><span class="opt-letter">A</span> 3.5%/h</div>
+                <div class="mcq-option" data-q="ar3" data-val="B"><span class="opt-letter">B</span> 4.5%/h</div>
+                <div class="mcq-option" data-q="ar3" data-val="C"><span class="opt-letter">C</span> 5%/h</div>
+                <div class="mcq-option" data-q="ar3" data-val="D"><span class="opt-letter">D</span> 5.5%/h</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C — 5%/h</strong><br>
+                Solve \(100 = 5 + r \times 19\) → \(95 = 19r\) → \(r = 5\). A rate of 5%/hour reaches 100% mastery in exactly 19 hours.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Scenario D: Renewable Energy ── -->
+        <div class="scenario-panel" id="panel-energy" role="tabpanel">
+          <div class="example-block" style="margin-bottom:20px;">
+            <p class="ex-label">Real-World Context — Renewable Energy &amp; Fossil Fuels</p>
+            <p>As renewable energy is adopted at a constant rate each year, fossil fuel usage decreases. This is a <strong>negative gradient</strong> relationship — as one quantity increases, the other decreases. The faster the adoption rate, the steeper the decline in fossil fuel usage.</p>
+            <p style="margin-bottom:0"><strong>Equation:</strong> \(\text{fossil fuel \%} = 100 - \text{rate} \times \text{year}\) (minimum 0%)</p>
+          </div>
+
+          <div class="interactive-block" style="margin-bottom:20px;">
+            <h3>Explore: change the annual adoption rate</h3>
+            <div class="ss-explorer">
+              <div>
+                <div class="ss-slider-wrap">
+                  <label class="ss-slider-label">Rate = <span class="ss-slider-val" id="val-energy">2</span> %/year</label>
+                  <input type="range" id="slider-energy" min="1" max="5" step="0.5" value="2">
+                  <div class="ss-eq-live" id="eq-energy">fossil = 100 − 2 × year</div>
+                </div>
+                <table class="ss-table" id="table-energy">
+                  <thead><tr><th>Year</th><th>Fossil Fuel (%)</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div>
+                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <div class="ss-graph-wrap"><svg id="svg-energy"></svg></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h4>Analysis Questions</h4>
+            <div class="mcq-block" id="en-q1" style="margin-bottom:16px;">
+              <p class="mcq-q">1. At a rate of 3%/year, in how many years will fossil fuel usage fall below 40%? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="en1" data-val="A"><span class="opt-letter">A</span> 15 years</div>
+                <div class="mcq-option" data-q="en1" data-val="B"><span class="opt-letter">B</span> 18 years</div>
+                <div class="mcq-option" data-q="en1" data-val="C"><span class="opt-letter">C</span> 20 years</div>
+                <div class="mcq-option" data-q="en1" data-val="D"><span class="opt-letter">D</span> 25 years</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C — 20 years</strong><br>
+                Solve \(40 = 100 - 3 \times t\) → \(3t = 60\) → \(t = 20\) years. Set the slider to 3 and read down the table.
+              </div>
+            </div>
+            <div class="mcq-block" id="en-q2" style="margin-bottom:16px;">
+              <p class="mcq-q">2. The gradient of the fossil fuel graph is negative. What does this mean in context? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="en2" data-val="A"><span class="opt-letter">A</span> Fossil fuel usage is increasing each year</div>
+                <div class="mcq-option" data-q="en2" data-val="B"><span class="opt-letter">B</span> Fossil fuel usage is decreasing as renewable energy is adopted</div>
+                <div class="mcq-option" data-q="en2" data-val="C"><span class="opt-letter">C</span> The relationship is not linear</div>
+                <div class="mcq-option" data-q="en2" data-val="D"><span class="opt-letter">D</span> Fossil fuel usage starts at zero</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: B</strong><br>
+                A negative gradient means the output (fossil fuel %) decreases as the input (year) increases. Each year, adoption of renewables displaces more fossil fuel usage.
+              </div>
+            </div>
+            <div class="mcq-block" id="en-q3">
+              <p class="mcq-q">3. At what rate does renewable energy need to be adopted for fossil fuel usage to reach zero in exactly 20 years? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="en3" data-val="A"><span class="opt-letter">A</span> 3%/year</div>
+                <div class="mcq-option" data-q="en3" data-val="B"><span class="opt-letter">B</span> 4%/year</div>
+                <div class="mcq-option" data-q="en3" data-val="C"><span class="opt-letter">C</span> 5%/year</div>
+                <div class="mcq-option" data-q="en3" data-val="D"><span class="opt-letter">D</span> 6%/year</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C — 5%/year</strong><br>
+                Solve \(0 = 100 - r \times 20\) → \(r = 100 \div 20 = 5\). Set the slider to 5 and observe that the table reaches 0% at year 20.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Scenario E: GDP Growth ── -->
+        <div class="scenario-panel" id="panel-gdp" role="tabpanel">
+          <div class="example-block" style="margin-bottom:20px;">
+            <p class="ex-label">Real-World Context — GDP &amp; Economic Growth</p>
+            <p>A country's Gross Domestic Product (GDP) represents the total value of goods and services produced. In a simplified linear model, GDP grows by a constant amount each year. Economists use such models to analyse historical trends and project future growth — though real GDP growth is more complex.</p>
+            <p style="margin-bottom:0"><strong>Equation:</strong> \(\text{GDP} = 2.0 + \text{rate} \times \text{year}\) ($ trillion, starting from Year 0)</p>
+          </div>
+
+          <div class="interactive-block" style="margin-bottom:20px;">
+            <h3>Explore: change the annual GDP growth rate</h3>
+            <div class="ss-explorer">
+              <div>
+                <div class="ss-slider-wrap">
+                  <label class="ss-slider-label">Rate = <span class="ss-slider-val" id="val-gdp">0.20</span> $ trillion/year</label>
+                  <input type="range" id="slider-gdp" min="0.10" max="0.50" step="0.05" value="0.20">
+                  <div class="ss-eq-live" id="eq-gdp">GDP = 2.0 + 0.20 × year</div>
+                </div>
+                <table class="ss-table" id="table-gdp">
+                  <thead><tr><th>Year</th><th>GDP ($ trillion)</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div>
+                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <div class="ss-graph-wrap"><svg id="svg-gdp"></svg></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h4>Analysis Questions</h4>
+            <div class="mcq-block" id="gd-q1" style="margin-bottom:16px;">
+              <p class="mcq-q">1. At a growth rate of $0.30 trillion/year, what is the projected GDP after 8 years? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="gd1" data-val="A"><span class="opt-letter">A</span> $3.8 trillion</div>
+                <div class="mcq-option" data-q="gd1" data-val="B"><span class="opt-letter">B</span> $4.4 trillion</div>
+                <div class="mcq-option" data-q="gd1" data-val="C"><span class="opt-letter">C</span> $4.8 trillion</div>
+                <div class="mcq-option" data-q="gd1" data-val="D"><span class="opt-letter">D</span> $5.0 trillion</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: B — $4.4 trillion</strong><br>
+                \(\text{GDP} = 2.0 + 0.30 \times 8 = 2.0 + 2.4 = 4.4\). Set the slider to 0.30 and read the Year 8 row.
+              </div>
+            </div>
+            <div class="mcq-block" id="gd-q2" style="margin-bottom:16px;">
+              <p class="mcq-q">2. What does the y-intercept of $2.0 trillion represent in this model? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="gd2" data-val="A"><span class="opt-letter">A</span> The GDP at Year 0 — the starting economic output</div>
+                <div class="mcq-option" data-q="gd2" data-val="B"><span class="opt-letter">B</span> The annual growth rate</div>
+                <div class="mcq-option" data-q="gd2" data-val="C"><span class="opt-letter">C</span> The maximum possible GDP</div>
+                <div class="mcq-option" data-q="gd2" data-val="D"><span class="opt-letter">D</span> The number of years in the model</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: A</strong><br>
+                The y-intercept is the value of the output when the input (year) = 0. It represents the country's GDP at the start of the observation period.
+              </div>
+            </div>
+            <div class="mcq-block" id="gd-q3">
+              <p class="mcq-q">3. If the annual growth rate slows from $0.30 to $0.10 trillion/year, what happens to the graph? <span class="mcq-mark">(1 mark)</span></p>
+              <div class="mcq-options">
+                <div class="mcq-option" data-q="gd3" data-val="A"><span class="opt-letter">A</span> The line shifts down but keeps the same slope</div>
+                <div class="mcq-option" data-q="gd3" data-val="B"><span class="opt-letter">B</span> The line becomes steeper</div>
+                <div class="mcq-option" data-q="gd3" data-val="C"><span class="opt-letter">C</span> The line becomes shallower (less steep) but starts from the same point</div>
+                <div class="mcq-option" data-q="gd3" data-val="D"><span class="opt-letter">D</span> The line becomes horizontal</div>
+              </div>
+              <div class="mcq-explanation">
+                <strong>Answer: C</strong><br>
+                The growth rate is the gradient. Reducing it from 0.30 to 0.10 makes the slope shallower. The y-intercept ($2.0 trillion) stays the same — the starting GDP doesn't change, only the rate of growth does.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end scenarios card -->
+
+      <!-- ── Practice MCQs ── -->
+      <div class="content-card" id="practice">
+        <p class="section-label">Practice Questions</p>
+        <h2>Multiple Choice</h2>
+
+        <div class="mcq-block" id="mcq1">
+          <p class="mcq-q">1. A car travels at 90 km/h. Using the model \(d = 90t\), how far does it travel in 2.5 hours? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="m1" data-val="A"><span class="opt-letter">A</span> 200 km</div>
+            <div class="mcq-option" data-q="m1" data-val="B"><span class="opt-letter">B</span> 225 km</div>
+            <div class="mcq-option" data-q="m1" data-val="C"><span class="opt-letter">C</span> 250 km</div>
+            <div class="mcq-option" data-q="m1" data-val="D"><span class="opt-letter">D</span> 270 km</div>
+          </div>
+          <div class="mcq-explanation">
+            <strong>Answer: B — 225 km</strong><br>
+            \(d = 90 \times 2.5 = 225\) km.
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq2">
+          <p class="mcq-q">2. A linear model has equation \(y = 15 + 4x\). What is the gradient? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="m2" data-val="A"><span class="opt-letter">A</span> 15</div>
+            <div class="mcq-option" data-q="m2" data-val="B"><span class="opt-letter">B</span> 4</div>
+            <div class="mcq-option" data-q="m2" data-val="C"><span class="opt-letter">C</span> 19</div>
+            <div class="mcq-option" data-q="m2" data-val="D"><span class="opt-letter">D</span> 60</div>
+          </div>
+          <div class="mcq-explanation">
+            <strong>Answer: B — 4</strong><br>
+            In \(y = mx + b\), the gradient is \(m\). Here \(m = 4\). The 15 is the y-intercept (starting value).
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq3">
+          <p class="mcq-q">3. A spreadsheet model shows that when \(x\) increases by 1, \(y\) always increases by 3, and \(y = 0\) when \(x = 0\). Which equation models this? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="m3" data-val="A"><span class="opt-letter">A</span> \(y = x + 3\)</div>
+            <div class="mcq-option" data-q="m3" data-val="B"><span class="opt-letter">B</span> \(y = 3\)</div>
+            <div class="mcq-option" data-q="m3" data-val="C"><span class="opt-letter">C</span> \(y = 3x\)</div>
+            <div class="mcq-option" data-q="m3" data-val="D"><span class="opt-letter">D</span> \(y = x - 3\)</div>
+          </div>
+          <div class="mcq-explanation">
+            <strong>Answer: C — \(y = 3x\)</strong><br>
+            A constant increase of 3 per unit of \(x\), starting from zero, gives \(y = 3x\). This is direct variation with \(k = 3\).
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq4">
+          <p class="mcq-q">4. The equation \(\text{fossil\_fuel} = 100 - 2 \times \text{year}\) has what type of gradient? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="m4" data-val="A"><span class="opt-letter">A</span> Zero gradient</div>
+            <div class="mcq-option" data-q="m4" data-val="B"><span class="opt-letter">B</span> Positive gradient</div>
+            <div class="mcq-option" data-q="m4" data-val="C"><span class="opt-letter">C</span> Negative gradient</div>
+            <div class="mcq-option" data-q="m4" data-val="D"><span class="opt-letter">D</span> Undefined gradient</div>
+          </div>
+          <div class="mcq-explanation">
+            <strong>Answer: C — Negative gradient</strong><br>
+            The coefficient of year is \(-2\). A negative coefficient means the output decreases as the input increases — the line slopes downward from left to right.
+          </div>
+        </div>
+
+        <div class="mcq-block" id="mcq5">
+          <p class="mcq-q">5. A GDP model gives: Year 0 → $2.0T, Year 5 → $3.5T. What is the annual growth rate? <span class="mcq-mark">(1 mark)</span></p>
+          <div class="mcq-options">
+            <div class="mcq-option" data-q="m5" data-val="A"><span class="opt-letter">A</span> $0.20T/year</div>
+            <div class="mcq-option" data-q="m5" data-val="B"><span class="opt-letter">B</span> $0.25T/year</div>
+            <div class="mcq-option" data-q="m5" data-val="C"><span class="opt-letter">C</span> $0.30T/year</div>
+            <div class="mcq-option" data-q="m5" data-val="D"><span class="opt-letter">D</span> $0.35T/year</div>
+          </div>
+          <div class="mcq-explanation">
+            <strong>Answer: C — $0.30T/year</strong><br>
+            Gradient = \(\dfrac{\text{rise}}{\text{run}} = \dfrac{3.5 - 2.0}{5 - 0} = \dfrac{1.5}{5} = 0.30\). The GDP grows by $0.30 trillion per year.
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Knowledge Check ── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quick Quiz</h2>
+        <p class="kc-intro">Answer all five questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <div class="complete-section">
+        <p style="font-size:13px; color:var(--gray-med);">Finished this lesson? Mark it as complete.</p>
+        <button class="complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Dark mode sync ──
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── SVG helpers ──
+  const NS = 'http://www.w3.org/2000/svg';
+  function makeLine(svg, x1, y1, x2, y2, stroke, sw) {
+    const l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+    l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+    l.setAttribute('stroke', stroke); l.setAttribute('stroke-width', sw);
+    svg.appendChild(l);
+  }
+  function makeText(svg, x, y, text, fill, fontSize, anchor) {
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', x); t.setAttribute('y', y);
+    t.setAttribute('fill', fill); t.setAttribute('font-size', fontSize);
+    t.setAttribute('font-family', 'Space Mono, monospace');
+    t.setAttribute('text-anchor', anchor || 'middle');
+    t.textContent = text;
+    svg.appendChild(t);
+  }
+  function makeCircle(svg, cx, cy, r, fill) {
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', cx); c.setAttribute('cy', cy);
+    c.setAttribute('r', r); c.setAttribute('fill', fill);
+    svg.appendChild(c);
+  }
+
+  function getCSSVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || (name === '--ink' ? '#000' : name === '--gray-light' ? '#ccc' : '#888');
+  }
+
+  // ── Draw scenario graph ──
+  function drawScenarioGraph(svgId, xVals, yVals, xLabel, yLabel, xMin, xMax, yMin, yMax) {
+    const svg = document.getElementById(svgId);
+    if (!svg) return;
+
+    const PAD_L = 40, PAD_T = 10, PAD_R = 12, PAD_B = 30;
+    const W = 160, H = 140;
+    const totalW = PAD_L + W + PAD_R;
+    const totalH = PAD_T + H + PAD_B;
+
+    svg.setAttribute('viewBox', `0 0 ${totalW} ${totalH}`);
+    svg.setAttribute('width', totalW);
+    svg.setAttribute('height', totalH);
+    svg.innerHTML = '';
+
+    const ink  = getCSSVar('--ink');
+    const gray = getCSSVar('--gray-light');
+    const grayMed = getCSSVar('--gray-med');
+
+    function px(x) { return PAD_L + (x - xMin) / (xMax - xMin) * W; }
+    function py(y) {
+      const clamped = Math.max(yMin, Math.min(yMax, y));
+      return PAD_T + (yMax - clamped) / (yMax - yMin) * H;
+    }
+
+    // Grid lines
+    const xSteps = 5, ySteps = 5;
+    for (let i = 0; i <= xSteps; i++) {
+      const xv = xMin + (xMax - xMin) * i / xSteps;
+      makeLine(svg, px(xv), PAD_T, px(xv), PAD_T + H, gray, 0.5);
+      const label = Number.isInteger(xv) ? xv.toFixed(0) : xv.toFixed(1);
+      makeText(svg, px(xv), PAD_T + H + 18, label, ink, 7, 'middle');
+    }
+    for (let i = 0; i <= ySteps; i++) {
+      const yv = yMin + (yMax - yMin) * i / ySteps;
+      makeLine(svg, PAD_L, py(yv), PAD_L + W, py(yv), gray, 0.5);
+      const label = Number.isInteger(yv) ? yv.toFixed(0) : yv.toFixed(1);
+      makeText(svg, PAD_L - 4, py(yv) + 3, label, ink, 7, 'end');
+    }
+
+    // Axes
+    makeLine(svg, PAD_L, PAD_T, PAD_L, PAD_T + H, ink, 1.5);
+    makeLine(svg, PAD_L, PAD_T + H, PAD_L + W, PAD_T + H, ink, 1.5);
+
+    // Data line (connect first to last, clamped to visible range)
+    if (xVals.length >= 2) {
+      const x0 = xVals[0],  y0 = yVals[0];
+      const xN = xVals[xVals.length - 1], yN = yVals[yVals.length - 1];
+      makeLine(svg, px(x0), py(y0), px(xN), py(yN), ink, 1.8);
+    }
+
+    // Data point dots
+    xVals.forEach((x, i) => {
+      makeCircle(svg, px(x), py(yVals[i]), 3, ink);
+    });
+
+    // Axis labels
+    makeText(svg, PAD_L + W / 2, totalH - 2, xLabel, grayMed, 7.5, 'middle');
+    const yLabelEl = document.createElementNS(NS, 'text');
+    yLabelEl.setAttribute('x', -(PAD_T + H / 2));
+    yLabelEl.setAttribute('y', 10);
+    yLabelEl.setAttribute('transform', 'rotate(-90)');
+    yLabelEl.setAttribute('text-anchor', 'middle');
+    yLabelEl.setAttribute('font-size', '7.5');
+    yLabelEl.setAttribute('font-family', 'Space Mono, monospace');
+    yLabelEl.setAttribute('fill', grayMed);
+    yLabelEl.textContent = yLabel;
+    svg.appendChild(yLabelEl);
+  }
+
+  // ── Scenario configuration ──
+  const SCENARIOS = {
+    distTime: {
+      xVals:    [0, 1, 2, 3, 4, 5],
+      xLabel:   'Time (h)',
+      yLabel:   'Distance (km)',
+      yMin:     0,
+      compute:  (xArr, speed) => xArr.map(t => speed * t),
+      yMaxFn:   (speed) => speed * 5 + 20,
+      eqFn:     (speed) => `d = ${speed} × t`,
+      fmtVal:   (v) => v.toFixed(0),
+      fmtY:     (y) => y.toFixed(0)
+    },
+    sports: {
+      xVals:    [0, 5, 10, 15, 20, 25],
+      xLabel:   'Practice (h)',
+      yLabel:   'Skill Score',
+      yMin:     0,
+      compute:  (xArr, rate) => xArr.map(h => 20 + rate * h),
+      yMaxFn:   (rate) => 20 + rate * 25 + 10,
+      eqFn:     (rate) => `skill = 20 + ${rate} × hours`,
+      fmtVal:   (v) => v.toFixed(0),
+      fmtY:     (y) => y.toFixed(0)
+    },
+    art: {
+      xVals:    [0, 5, 10, 15, 20, 25],
+      xLabel:   'Time (h)',
+      yLabel:   'Mastery (%)',
+      yMin:     0,
+      yMaxFixed: 100,
+      compute:  (xArr, rate) => xArr.map(h => Math.min(5 + rate * h, 100)),
+      eqFn:     (rate) => `mastery = 5 + ${rate} × hours`,
+      fmtVal:   (v) => v.toFixed(1),
+      fmtY:     (y) => y.toFixed(0)
+    },
+    energy: {
+      xVals:    [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+      xLabel:   'Year',
+      yLabel:   'Fossil Fuel (%)',
+      yMin:     0,
+      yMaxFixed: 100,
+      compute:  (xArr, rate) => xArr.map(yr => Math.max(0, 100 - rate * yr)),
+      eqFn:     (rate) => `fossil = 100 − ${rate} × year`,
+      fmtVal:   (v) => v.toFixed(1),
+      fmtY:     (y) => y.toFixed(0)
+    },
+    gdp: {
+      xVals:    [0, 2, 4, 6, 8, 10],
+      xLabel:   'Year',
+      yLabel:   'GDP ($ trillion)',
+      yMin:     0,
+      compute:  (xArr, rate) => xArr.map(yr => +(2.0 + rate * yr).toFixed(2)),
+      yMaxFn:   (rate) => +(2.0 + rate * 10 + 0.5).toFixed(1),
+      eqFn:     (rate) => `GDP = 2.0 + ${rate.toFixed(2)} × year`,
+      fmtVal:   (v) => v.toFixed(2),
+      fmtY:     (y) => y.toFixed(2)
+    }
+  };
+
+  // ── Update a scenario ──
+  function updateScenario(key, paramVal) {
+    const cfg = SCENARIOS[key];
+    const xVals = cfg.xVals;
+    const yVals = cfg.compute(xVals, paramVal);
+    const yMax  = cfg.yMaxFixed !== undefined ? cfg.yMaxFixed : cfg.yMaxFn(paramVal);
+    const yMin  = cfg.yMin !== undefined ? cfg.yMin : 0;
+
+    const valEl = document.getElementById(`val-${key}`);
+    if (valEl) valEl.textContent = cfg.fmtVal(paramVal);
+
+    const eqEl = document.getElementById(`eq-${key}`);
+    if (eqEl) eqEl.textContent = cfg.eqFn(paramVal);
+
+    const tbody = document.querySelector(`#table-${key} tbody`);
+    if (tbody) {
+      tbody.innerHTML = '';
+      xVals.forEach((x, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${x}</td><td class="computed">${cfg.fmtY(yVals[i])}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    drawScenarioGraph(
+      `svg-${key}`,
+      xVals, yVals,
+      cfg.xLabel, cfg.yLabel,
+      xVals[0], xVals[xVals.length - 1],
+      yMin, yMax
+    );
+  }
+
+  // ── Wire up sliders ──
+  Object.keys(SCENARIOS).forEach(key => {
+    const slider = document.getElementById(`slider-${key}`);
+    if (!slider) return;
+    slider.addEventListener('input', function() {
+      updateScenario(key, parseFloat(this.value));
+    });
+    updateScenario(key, parseFloat(slider.value));
+  });
+
+  // ── Tab switching ──
+  (function() {
+    const tabs   = document.querySelectorAll('.scenario-tab');
+    const panels = document.querySelectorAll('.scenario-panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.toggle('active', t === tab));
+        panels.forEach(p => p.classList.toggle('active', p.id === `panel-${target}`));
+        // Redraw graph with current CSS vars (needed for dark mode)
+        const slider = document.getElementById(`slider-${target}`);
+        if (slider) updateScenario(target, parseFloat(slider.value));
+      });
+    });
+  })();
+
+  // ── MCQ wiring ──
+  const mcqCorrect = {
+    'dT1': 'B', 'dT2': 'C', 'dT3': 'B',
+    'sp1': 'B', 'sp2': 'C', 'sp3': 'C',
+    'ar1': 'C', 'ar2': 'A', 'ar3': 'C',
+    'en1': 'C', 'en2': 'B', 'en3': 'C',
+    'gd1': 'B', 'gd2': 'A', 'gd3': 'C',
+    'm1':  'B', 'm2':  'B', 'm3':  'C', 'm4':  'C', 'm5':  'C'
+  };
+
+  document.querySelectorAll('.mcq-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q     = opt.dataset.q;
+      const block = opt.closest('.mcq-block');
+      if (block.dataset.answered) return;
+      block.dataset.answered = '1';
+      block.querySelectorAll('.mcq-option').forEach(o => {
+        if (o.dataset.val === mcqCorrect[q]) o.classList.add('correct-ans');
+        else if (o.dataset.val === opt.dataset.val) o.classList.add('wrong-ans');
+      });
+      const exp = block.querySelector('.mcq-explanation');
+      if (exp) exp.classList.add('show');
+    });
+  });
+
+  // ── Knowledge Check ──
+  const KC_QS = [
+    {
+      q: 'In the model skill = 20 + 3 × hours, what does the number 20 represent?',
+      opts: ['A) The gradient — how fast skill improves', 'B) The starting skill score before any practice', 'C) The total skill after 20 hours', 'D) The rate of improvement per hour'],
+      correct: 1,
+      explanation: 'B is correct. The 20 is the y-intercept — the skill score when hours = 0 (before any practice begins).'
+    },
+    {
+      q: 'If a model is y = 50 − 5x, what happens to y as x increases?',
+      opts: ['A) y increases at a rate of 5', 'B) y stays constant at 50', 'C) y decreases at a rate of 5', 'D) y doubles with each step'],
+      correct: 2,
+      explanation: 'C is correct. The gradient is −5, so y decreases by 5 for each 1-unit increase in x. This is a negative gradient relationship.'
+    },
+    {
+      q: 'A spreadsheet shows that y ÷ x = 4 for every row. Which equation models this?',
+      opts: ['A) y = x + 4', 'B) y = 4', 'C) y = 4x', 'D) x = 4y'],
+      correct: 2,
+      explanation: 'C is correct. A constant y/x ratio of 4 means direct variation: y = 4x. The graph passes through the origin.'
+    },
+    {
+      q: 'Using the model d = 75t, how far is a car travelling in 4 hours?',
+      opts: ['A) 250 km', 'B) 275 km', 'C) 300 km', 'D) 325 km'],
+      correct: 2,
+      explanation: 'C is correct. d = 75 × 4 = 300 km.'
+    },
+    {
+      q: 'Which change would make a graph of y = base + rate × x become STEEPER?',
+      opts: ['A) Increasing the base (y-intercept)', 'B) Decreasing the rate', 'C) Increasing the rate', 'D) Setting the base to zero'],
+      correct: 2,
+      explanation: 'C is correct. The rate is the gradient — it controls the steepness. A larger rate means a steeper slope. Changing the base moves the line up or down but does not change its steepness.'
+    }
+  ];
+
+  (function buildKC() {
+    const container = document.getElementById('kcQuestions');
+    const scoreEl   = document.getElementById('kcScore');
+    let answered = 0, score = 0;
+    KC_QS.forEach((qData, qi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kc-q-wrap';
+      const qEl = document.createElement('p');
+      qEl.className = 'kc-q';
+      qEl.textContent = `${qi + 1}. ${qData.q}`;
+      wrap.appendChild(qEl);
+      const optsEl = document.createElement('div');
+      optsEl.className = 'kc-options';
+      qData.opts.forEach((opt, oi) => {
+        const btn = document.createElement('button');
+        btn.className = 'kc-opt';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => {
+          if (wrap.dataset.answered) return;
+          wrap.dataset.answered = '1';
+          answered++;
+          const isCorrect = oi === qData.correct;
+          if (isCorrect) score++;
+          optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+            b.disabled = true;
+            if (i === qData.correct) b.classList.add('kc-correct');
+            else if (i === oi) b.classList.add('kc-wrong');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+          fb.textContent = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          wrap.appendChild(fb);
+          if (answered === KC_QS.length) showScore();
+        });
+        optsEl.appendChild(btn);
+      });
+      wrap.appendChild(optsEl);
+      container.appendChild(wrap);
+    });
+
+    function showScore() {
+      const pct = score / KC_QS.length;
+      const remark = pct === 1
+        ? 'Excellent — full marks!'
+        : pct >= 0.6
+          ? 'Good work. Review any incorrect answers above.'
+          : 'Keep practising — re-read the theory and try again.';
+      scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+      scoreEl.classList.add('show');
+      document.getElementById('kcResetBtn').addEventListener('click', () => {
+        container.innerHTML = '';
+        scoreEl.className = 'kc-score';
+        scoreEl.innerHTML = '';
+        answered = 0; score = 0;
+        buildKC();
+      });
+    }
+  })();
+
+  // ── Complete button ──
+  const TOPIC_ID = 6, LESSON_IDX = 3;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Lesson complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e) {}
+  });
+
+  // ── TOC IntersectionObserver ──
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('toc-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+</script>
+</body>
+</html>
