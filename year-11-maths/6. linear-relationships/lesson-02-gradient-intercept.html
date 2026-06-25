@@ -204,8 +204,13 @@
     h1, h2, h3, h4 { font-family: var(--font-display); }
     h1 { font-weight: 600; letter-spacing: 0.6px; }
     h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
-    .topbar, .eyebrow, .section-label, .side-label,
-    .toc-heading, .toc-link, .pill, .stepper-counter { font-family: var(--font-mono); }
+
+    /* ── Inline lesson link ── */
+    .lesson-link-btn { background:none; border:none; border-bottom:1px solid currentColor; padding:0; color:inherit; font-family:inherit; font-size:inherit; cursor:pointer; display:inline; }
+    .lesson-link-btn:hover { opacity:0.7; }
+
+    /* ── Homework mark ── */
+    .hw-mark { font-size:11px; color:var(--gray-med); margin-left:4px; }
 
     /* ── Responsive ── */
     @media (max-width:900px) {
@@ -262,8 +267,8 @@
         <li class="toc-item"><a class="toc-link" href="#formula">The Formula</a></li>
         <li class="toc-item"><a class="toc-link" href="#rearrange">Rearranging</a></li>
         <li class="toc-item"><a class="toc-link" href="#models">Linear Models</a></li>
-        <li class="toc-item"><a class="toc-link" href="#practice">Practice Questions</a></li>
         <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
       </ul>
     </nav>
 
@@ -456,7 +461,7 @@
           <div class="sub-q" style="margin-top:20px;">
             <label>(b) What is the equation for the cost C in terms of kilometres K?</label>
             <div class="answer-row">
-              <span style="font-family:var(--font-mono);">C =</span>
+              <span>\(C =\)</span>
               <input type="text" id="taxiEq" placeholder="e.g. 2K + 3">
               <button class="check-btn" id="checkTaxiEq">Check</button>
               <span class="ans-reveal" id="taxiEqAns">✓ C = 2K + 3</span>
@@ -465,7 +470,7 @@
           <div class="sub-q">
             <label>(c) How much would an 18 km trip cost?</label>
             <div class="answer-row">
-              <span style="font-family:var(--font-mono);">$</span>
+              <span>$</span>
               <input type="number" id="taxi18" placeholder="?">
               <button class="check-btn" id="checkTaxi18">Check</button>
               <span class="ans-reveal" id="taxi18Ans">✓ $39 (C = 2×18 + 3 = 39)</span>
@@ -505,7 +510,7 @@
           <div class="sub-q" style="margin-top:20px;">
             <label>(b) What is the equation for the debt D in terms of weeks W?</label>
             <div class="answer-row">
-              <span style="font-family:var(--font-mono);">D =</span>
+              <span>\(D =\)</span>
               <input type="text" id="debtEq" placeholder="e.g. −200W + 8000">
               <button class="check-btn" id="checkDebtEq">Check</button>
               <span class="ans-reveal" id="debtEqAns">✓ D = −200W + 8000</span>
@@ -514,7 +519,7 @@
           <div class="sub-q">
             <label>(c) How much does Jim owe after 27 weeks?</label>
             <div class="answer-row">
-              <span style="font-family:var(--font-mono);">$</span>
+              <span>$</span>
               <input type="number" id="debt27" placeholder="?">
               <button class="check-btn" id="checkDebt27">Check</button>
               <span class="ans-reveal" id="debt27Ans">✓ $2 600 (D = −200×27 + 8000 = 2600)</span>
@@ -537,7 +542,7 @@
           <div class="sub-q">
             <label>(a) What is the monthly cost for 150 minutes?</label>
             <div class="answer-row">
-              <span style="font-family:var(--font-mono);">C = $</span>
+              <span>\(C =\) $</span>
               <input type="number" step="0.01" id="phone150" placeholder="?">
               <button class="check-btn" id="checkPhone150">Check</button>
               <span class="ans-reveal" id="phone150Ans">✓ $35 (C = 0.10 × 150 + 20 = 15 + 20 = 35)</span>
@@ -546,7 +551,7 @@
           <div class="sub-q">
             <label>(b) If the bill is $32, how many minutes were used?</label>
             <div class="answer-row">
-              <span style="font-family:var(--font-mono);">M =</span>
+              <span>\(M =\)</span>
               <input type="number" id="phoneMins" placeholder="? mins">
               <button class="check-btn" id="checkPhoneMins">Check</button>
               <span class="ans-reveal" id="phoneMinsAns">✓ 120 min (32 = 0.10M + 20 → 0.10M = 12 → M = 120)</span>
@@ -555,106 +560,29 @@
         </div>
       </div>
 
-      <!-- ── MCQ ── -->
-      <div class="content-card" id="practice">
-        <p class="section-label">Practice Questions</p>
-        <h2>Multiple Choice</h2>
-
-        <div class="mcq-block" id="mcq1">
-          <p class="mcq-q">1. A straight line has equation \(x - 2y + 6 = 0\). What is its gradient and y-intercept? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="1" data-val="A"><span class="opt-letter">A</span> gradient = −½ , y-intercept = 3</div>
-            <div class="mcq-option" data-q="1" data-val="B"><span class="opt-letter">B</span> gradient = 2, y-intercept = −3</div>
-            <div class="mcq-option" data-q="1" data-val="C"><span class="opt-letter">C</span> gradient = 2, y-intercept = 3</div>
-            <div class="mcq-option" data-q="1" data-val="D"><span class="opt-letter">D</span> gradient = ½ , y-intercept = 3</div>
-          </div>
-          <div class="mcq-explanation" id="exp1">
-            <strong>Answer: D</strong><br>
-            Rearrange: \(x - 2y + 6 = 0 \Rightarrow 2y = x + 6 \Rightarrow y = \frac{1}{2}x + 3\).<br>
-            So \(m = \frac{1}{2}\) and \(b = 3\).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq2">
-          <p class="mcq-q">2. Tommy draws \(y = 5 - 2x\). Which describes the line correctly? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="2" data-val="A"><span class="opt-letter">A</span> Falls left-to-right, crosses y-axis at 5</div>
-            <div class="mcq-option" data-q="2" data-val="B"><span class="opt-letter">B</span> Rises left-to-right, crosses y-axis at 5</div>
-            <div class="mcq-option" data-q="2" data-val="C"><span class="opt-letter">C</span> Falls left-to-right, crosses y-axis at −5</div>
-            <div class="mcq-option" data-q="2" data-val="D"><span class="opt-letter">D</span> Rises left-to-right, crosses y-axis at −5</div>
-          </div>
-          <div class="mcq-explanation" id="exp2">
-            <strong>Answer: A</strong><br>
-            \(y = -2x + 5\) → \(m = -2\) (falls left-to-right), \(b = 5\) (y-intercept at 5).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq3">
-          <p class="mcq-q">3. A graph shows a line through (0, 4) and (2, 10). What is its equation? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="3" data-val="A"><span class="opt-letter">A</span> M = 3N + 4</div>
-            <div class="mcq-option" data-q="3" data-val="B"><span class="opt-letter">B</span> M = 0.6N + 4</div>
-            <div class="mcq-option" data-q="3" data-val="C"><span class="opt-letter">C</span> M = 4N + 0.6</div>
-            <div class="mcq-option" data-q="3" data-val="D"><span class="opt-letter">D</span> M = 4N + 3</div>
-          </div>
-          <div class="mcq-explanation" id="exp3">
-            <strong>Answer: A</strong><br>
-            rise = 10 − 4 = 6, run = 2 − 0 = 2, so \(m = 3\). y-intercept = 4 (from the point (0, 4)).<br>
-            Equation: M = 3N + 4.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq4">
-          <p class="mcq-q">4. A line has gradient −3 and y-intercept 4. What is its equation? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="4" data-val="A"><span class="opt-letter">A</span> \(y = 4 - 3x\)</div>
-            <div class="mcq-option" data-q="4" data-val="B"><span class="opt-letter">B</span> \(y = 4x - 3\)</div>
-            <div class="mcq-option" data-q="4" data-val="C"><span class="opt-letter">C</span> \(y = 3 - 4x\)</div>
-            <div class="mcq-option" data-q="4" data-val="D"><span class="opt-letter">D</span> \(y = 3x - 4\)</div>
-          </div>
-          <div class="mcq-explanation" id="exp4">
-            <strong>Answer: A — \(y = 4 - 3x\)</strong><br>
-            \(y = mx + b = -3x + 4\), which is the same as \(y = 4 - 3x\).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq5">
-          <p class="mcq-q">5. Which graph represents \(y = 2x - 4\)? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="5" data-val="A"><span class="opt-letter">A</span> Positive gradient, y-intercept at 4</div>
-            <div class="mcq-option" data-q="5" data-val="B"><span class="opt-letter">B</span> Positive gradient, y-intercept at −2</div>
-            <div class="mcq-option" data-q="5" data-val="C"><span class="opt-letter">C</span> Positive gradient, x-intercept at 2, y-intercept at −4</div>
-            <div class="mcq-option" data-q="5" data-val="D"><span class="opt-letter">D</span> Negative gradient, y-intercept at −4</div>
-          </div>
-          <div class="mcq-explanation" id="exp5">
-            <strong>Answer: C</strong><br>
-            \(m = 2\) (positive). y-intercept: \(x = 0 \Rightarrow y = -4\). x-intercept: \(y = 0 \Rightarrow 2x = 4 \Rightarrow x = 2\).
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Knowledge Check ── -->
+      <!-- ── Knowledge Check (MCQ + Quiz) ── -->
       <div class="kc-block" id="check">
         <p class="section-label">Knowledge Check</p>
-        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quick Quiz</h2>
-        <p class="kc-intro">Answer all three questions to see your score.</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
         <div id="kcQuestions"></div>
         <div class="kc-score" id="kcScore"></div>
       </div>
 
       <!-- ── Homework ── -->
-      <div class="note-block" style="margin-top:32px;">
-        <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:10px; font-family:var(--font-mono);">Homework</p>
-        <p style="font-weight:600; margin-bottom:12px;">Now that you've finished this lesson, complete the following questions from the Homework lesson:</p>
-        <ul style="margin-bottom:12px;">
-          <li><strong>Question 3</strong> — Rearrange \(x - 2y + 6 = 0\) into gradient-intercept form <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 4</strong> — Identify the correct sketch of \(y = 5 - 2x\) <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 6</strong> — Equation of a line from two points on a graph <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 9</strong> — Write the equation given gradient = −3, y-intercept = 4 <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 12</strong> — Temperature conversion linear model: gradient, equation, and substitution <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(3 marks)</span></li>
-          <li><strong>Question 15</strong> — Find the point of intersection of two lines <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(3 marks)</span></li>
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:4},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 3</strong> — Rearrange \(x - 2y + 6 = 0\) into gradient-intercept form <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 4</strong> — Identify the correct sketch of \(y = 5 - 2x\) <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 6</strong> — Equation of a line from two points on a graph <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 9</strong> — Write the equation given gradient \(= -3\), \(y\)-intercept \(= 4\) <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 12</strong> — Temperature conversion linear model: gradient, equation, and substitution <span class="hw-mark">(3 marks)</span></li>
+          <li><strong>Question 15</strong> — Find the point of intersection of two lines <span class="hw-mark">(3 marks)</span></li>
         </ul>
-        <p style="margin-bottom:0; font-size:13px; color:var(--gray-med);">Total: <strong style="color:var(--ink);">10 marks</strong> — Section I: Q3, Q4, Q6, Q9 &nbsp;·&nbsp; Section II: Q12, Q15</p>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">Total: <strong style="color:var(--ink);">10 marks</strong> — Section I: Q3, Q4, Q6, Q9 &nbsp;·&nbsp; Section II: Q12, Q15</p>
       </div>
 
       <!-- ── Mark complete ── -->
@@ -863,62 +791,69 @@
   });
 
   // ── MCQ ──
-  const mcqCorrect = { '1':'D', '2':'A', '3':'A', '4':'A', '5':'C' };
-  document.querySelectorAll('.mcq-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      const q = opt.dataset.q;
-      const block = document.getElementById(`mcq${q}`);
-      if (block.dataset.answered) return;
-      block.dataset.answered = '1';
-      const chosen = opt.dataset.val;
-      block.querySelectorAll('.mcq-option').forEach(o => {
-        if (o.dataset.val === mcqCorrect[q]) o.classList.add('correct-ans');
-        else if (o.dataset.val === chosen) o.classList.add('wrong-ans');
-      });
-      document.getElementById(`exp${q}`).classList.add('show');
-    });
-  });
-
-  // ── Knowledge Check ──
+  // ── Knowledge Check (7 questions) ──
   const KC_QS = [
     {
-      q: 'What is the gradient of the line y = −4x + 7?',
-      opts: ['A) 7', 'B) −4', 'C) 4', 'D) −7'],
-      correct: 1,
-      explanation: 'B is correct. In y = mx + b, the coefficient of x is the gradient. Here m = −4.'
-    },
-    {
-      q: 'A taxi charges $2.50 per km plus a $5 flag fall. Which equation models the cost C for d km?',
-      opts: ['A) C = 5d + 2.50', 'B) C = 2.50d − 5', 'C) C = 2.50d + 5', 'D) C = 5d − 2.50'],
-      correct: 2,
-      explanation: 'C is correct. Rate per km (gradient) = 2.50, fixed starting cost (y-intercept) = 5. So C = 2.50d + 5.'
-    },
-    {
-      q: 'The line 3y − 6x = 9 has y-intercept:',
-      opts: ['A) 9', 'B) −6', 'C) 2', 'D) 3'],
+      q: 'A straight line has equation \\(x - 2y + 6 = 0\\). What is its gradient and \\(y\\)-intercept?',
+      opts: ['A) gradient \\(= -\\tfrac{1}{2}\\), \\(y\\)-intercept \\(= 3\\)', 'B) gradient \\(= 2\\), \\(y\\)-intercept \\(= -3\\)', 'C) gradient \\(= 2\\), \\(y\\)-intercept \\(= 3\\)', 'D) gradient \\(= \\tfrac{1}{2}\\), \\(y\\)-intercept \\(= 3\\)'],
       correct: 3,
-      explanation: 'D is correct. Rearrange: 3y = 6x + 9 → y = 2x + 3. The y-intercept is b = 3.'
+      explanation: 'D is correct. Rearrange: \\(2y = x + 6 \\Rightarrow y = \\tfrac{1}{2}x + 3\\). So \\(m = \\tfrac{1}{2}\\) and \\(b = 3\\).'
+    },
+    {
+      q: 'Tommy draws \\(y = 5 - 2x\\). Which describes the line correctly?',
+      opts: ['A) Falls left-to-right, \\(y\\)-intercept at 5', 'B) Rises left-to-right, \\(y\\)-intercept at 5', 'C) Falls left-to-right, \\(y\\)-intercept at \\(-5\\)', 'D) Rises left-to-right, \\(y\\)-intercept at \\(-5\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(y = -2x + 5\\): \\(m = -2\\) (falls left-to-right), \\(b = 5\\) (\\(y\\)-intercept at 5).'
+    },
+    {
+      q: 'A line passes through \\((0, 4)\\) and \\((2, 10)\\). What is its equation?',
+      opts: ['A) \\(y = 3x + 4\\)', 'B) \\(y = 0.6x + 4\\)', 'C) \\(y = 4x + 0.6\\)', 'D) \\(y = 4x + 3\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(m = \\dfrac{10 - 4}{2 - 0} = 3\\). \\(y\\)-intercept \\(= 4\\) (from \\((0, 4)\\)). Equation: \\(y = 3x + 4\\).'
+    },
+    {
+      q: 'A line has gradient \\(-3\\) and \\(y\\)-intercept \\(4\\). What is its equation?',
+      opts: ['A) \\(y = 4 - 3x\\)', 'B) \\(y = 4x - 3\\)', 'C) \\(y = 3 - 4x\\)', 'D) \\(y = 3x - 4\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(y = mx + b = -3x + 4 = 4 - 3x\\).'
+    },
+    {
+      q: 'Which graph represents \\(y = 2x - 4\\)?',
+      opts: ['A) Positive gradient, \\(y\\)-intercept at 4', 'B) Positive gradient, \\(y\\)-intercept at \\(-2\\)', 'C) Positive gradient, \\(x\\)-intercept at 2, \\(y\\)-intercept at \\(-4\\)', 'D) Negative gradient, \\(y\\)-intercept at \\(-4\\)'],
+      correct: 2,
+      explanation: 'C is correct. \\(m = 2\\) (positive). \\(y\\)-intercept: \\(x = 0 \\Rightarrow y = -4\\). \\(x\\)-intercept: \\(y = 0 \\Rightarrow x = 2\\).'
+    },
+    {
+      q: 'What is the gradient of the line \\(y = -4x + 7\\)?',
+      opts: ['A) \\(7\\)', 'B) \\(-4\\)', 'C) \\(4\\)', 'D) \\(-7\\)'],
+      correct: 1,
+      explanation: 'B is correct. In \\(y = mx + b\\), the coefficient of \\(x\\) is the gradient. Here \\(m = -4\\).'
+    },
+    {
+      q: 'The line \\(3y - 6x = 9\\) has \\(y\\)-intercept:',
+      opts: ['A) \\(9\\)', 'B) \\(-6\\)', 'C) \\(2\\)', 'D) \\(3\\)'],
+      correct: 3,
+      explanation: 'D is correct. Rearrange: \\(3y = 6x + 9 \\Rightarrow y = 2x + 3\\). The \\(y\\)-intercept is \\(b = 3\\).'
     }
   ];
 
   (function buildKC() {
     const container = document.getElementById('kcQuestions');
     const scoreEl = document.getElementById('kcScore');
-    let answered = 0;
-    let score = 0;
+    let answered = 0, score = 0;
     KC_QS.forEach((qData, qi) => {
       const wrap = document.createElement('div');
       wrap.className = 'kc-q-wrap';
       const qEl = document.createElement('p');
       qEl.className = 'kc-q';
-      qEl.textContent = `${qi + 1}. ${qData.q}`;
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
       wrap.appendChild(qEl);
       const optsEl = document.createElement('div');
       optsEl.className = 'kc-options';
       qData.opts.forEach((opt, oi) => {
         const btn = document.createElement('button');
         btn.className = 'kc-opt';
-        btn.textContent = opt;
+        btn.innerHTML = opt;
         btn.addEventListener('click', () => {
           if (wrap.dataset.answered) return;
           wrap.dataset.answered = '1';
@@ -932,8 +867,11 @@
           });
           const fb = document.createElement('p');
           fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
-          fb.textContent = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
           wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
           if (answered === KC_QS.length) showScore();
         });
         optsEl.appendChild(btn);
@@ -941,9 +879,12 @@
       wrap.appendChild(optsEl);
       container.appendChild(wrap);
     });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
     function showScore() {
       const pct = score / KC_QS.length;
-      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.67 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
       scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
       scoreEl.classList.add('show');
       document.getElementById('kcResetBtn').addEventListener('click', () => {

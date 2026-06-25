@@ -200,8 +200,13 @@
     h1, h2, h3, h4 { font-family: var(--font-display); }
     h1 { font-weight: 600; letter-spacing: 0.6px; }
     h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
-    .topbar, .eyebrow, .section-label, .side-label,
-    .toc-heading, .toc-link, .pill, .stepper-counter { font-family: var(--font-mono); }
+
+    /* ── Inline lesson link ── */
+    .lesson-link-btn { background:none; border:none; border-bottom:1px solid currentColor; padding:0; color:inherit; font-family:inherit; font-size:inherit; cursor:pointer; display:inline; }
+    .lesson-link-btn:hover { opacity:0.7; }
+
+    /* ── Homework mark ── */
+    .hw-mark { font-size:11px; color:var(--gray-med); margin-left:4px; }
 
     /* ── Responsive ── */
     @media (max-width:900px) {
@@ -258,8 +263,8 @@
         <li class="toc-item"><a class="toc-link" href="#concept">What is Direct Variation?</a></li>
         <li class="toc-item"><a class="toc-link" href="#identify">Identifying It</a></li>
         <li class="toc-item"><a class="toc-link" href="#findk">Finding k</a></li>
-        <li class="toc-item"><a class="toc-link" href="#practice">Practice Questions</a></li>
         <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
       </ul>
     </nav>
 
@@ -542,104 +547,28 @@
         </div>
       </div>
 
-      <!-- ── MCQ ── -->
-      <div class="content-card" id="practice">
-        <p class="section-label">Practice Questions</p>
-        <h2>Multiple Choice</h2>
-
-        <div class="mcq-block" id="mcq1">
-          <p class="mcq-q">1. Two quantities V and W vary directly and W = 92 when V = 36.8. Which equation describes this? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="1" data-val="A"><span class="opt-letter">A</span> W = 1.5V</div>
-            <div class="mcq-option" data-q="1" data-val="B"><span class="opt-letter">B</span> W = 2.5V</div>
-            <div class="mcq-option" data-q="1" data-val="C"><span class="opt-letter">C</span> W = 5.0V</div>
-            <div class="mcq-option" data-q="1" data-val="D"><span class="opt-letter">D</span> W = 55.2V</div>
-          </div>
-          <div class="mcq-explanation" id="exp1">
-            <strong>Answer: B</strong><br>
-            \(k = \dfrac{W}{V} = \dfrac{92}{36.8} = 2.5\). So \(W = 2.5V\).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq2">
-          <p class="mcq-q">2. Relationship X passes through the origin. Relationship Y has a y-intercept of 3. Which is direct variation? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="2" data-val="A"><span class="opt-letter">A</span> Both relationships</div>
-            <div class="mcq-option" data-q="2" data-val="B"><span class="opt-letter">B</span> Neither relationship</div>
-            <div class="mcq-option" data-q="2" data-val="C"><span class="opt-letter">C</span> Relationship X only</div>
-            <div class="mcq-option" data-q="2" data-val="D"><span class="opt-letter">D</span> Relationship Y only</div>
-          </div>
-          <div class="mcq-explanation" id="exp2">
-            <strong>Answer: C — Relationship X only</strong><br>
-            Direct variation requires the graph to pass through \((0, 0)\). X does ✓. Y has y-intercept 3, so it does not ✗.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq3">
-          <p class="mcq-q">3. A fuel pump delivers 50 litres in 60 seconds. How long to fill an 80-litre tank? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="3" data-val="A"><span class="opt-letter">A</span> 1 minute and 20 seconds</div>
-            <div class="mcq-option" data-q="3" data-val="B"><span class="opt-letter">B</span> 1 minute and 30 seconds</div>
-            <div class="mcq-option" data-q="3" data-val="C"><span class="opt-letter">C</span> 1 minute and 40 seconds</div>
-            <div class="mcq-option" data-q="3" data-val="D"><span class="opt-letter">D</span> 2 minutes</div>
-          </div>
-          <div class="mcq-explanation" id="exp3">
-            <strong>Answer: C — 1 min 40 sec (100 seconds)</strong><br>
-            \(k = \dfrac{50}{60} = \dfrac{5}{6}\) L/s. For 80 L: \(80 = \dfrac{5}{6}T \Rightarrow T = 96\) s... <br>
-            Alternatively: \(k = \dfrac{\text{litres}}{\text{seconds}}\). Rate = 50/60. \(T = 80 \times \dfrac{60}{50} = 96\) s ≈ 1 min 36 sec. Closest: C.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq4">
-          <p class="mcq-q">4. The cost of fencing a square field varies directly with side length. A 30 m field costs $1 500. What does a 77 m field cost? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="4" data-val="A"><span class="opt-letter">A</span> $3 350</div>
-            <div class="mcq-option" data-q="4" data-val="B"><span class="opt-letter">B</span> $3 500</div>
-            <div class="mcq-option" data-q="4" data-val="C"><span class="opt-letter">C</span> $3 850</div>
-            <div class="mcq-option" data-q="4" data-val="D"><span class="opt-letter">D</span> $4 200</div>
-          </div>
-          <div class="mcq-explanation" id="exp4">
-            <strong>Answer: C — $3 850</strong><br>
-            \(k = \dfrac{1500}{30} = 50\) $/m. Cost = \(50 \times 77 = \$3\,850\).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq5">
-          <p class="mcq-q">5. A car wheel makes 600 revolutions over 1 500 m. Using \(D = kR\), how far does the car travel in 2 000 revolutions? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="5" data-val="A"><span class="opt-letter">A</span> 4 000 m</div>
-            <div class="mcq-option" data-q="5" data-val="B"><span class="opt-letter">B</span> 4 500 m</div>
-            <div class="mcq-option" data-q="5" data-val="C"><span class="opt-letter">C</span> 5 000 m</div>
-            <div class="mcq-option" data-q="5" data-val="D"><span class="opt-letter">D</span> 6 000 m</div>
-          </div>
-          <div class="mcq-explanation" id="exp5">
-            <strong>Answer: C — 5 000 m</strong><br>
-            \(k = \dfrac{1500}{600} = 2.5\). \(D = 2.5 \times 2000 = 5\,000\) m.
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Knowledge Check ── -->
+      <!-- ── Knowledge Check (MCQ + Quiz) ── -->
       <div class="kc-block" id="check">
         <p class="section-label">Knowledge Check</p>
-        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quick Quiz</h2>
-        <p class="kc-intro">Answer all three questions to see your score.</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
         <div id="kcQuestions"></div>
         <div class="kc-score" id="kcScore"></div>
       </div>
 
       <!-- ── Homework ── -->
-      <div class="note-block" style="margin-top:32px;">
-        <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:10px; font-family:var(--font-mono);">Homework</p>
-        <p style="font-weight:600; margin-bottom:12px;">Now that you've finished this lesson, complete the following questions from the Homework lesson:</p>
-        <ul style="margin-bottom:12px;">
-          <li><strong>Question 5</strong> — Find the constant of variation \(k\) when \(W\) and \(V\) vary directly <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 7</strong> — Identify which relationship is direct variation from two graphs <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 10</strong> — Fuel pump direct variation: find time to fill a tank <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 13</strong> — Wheel revolutions: find \(k\), write the equation, and solve <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(4 marks)</span></li>
-          <li><strong>Question 14</strong> — Fencing cost direct variation: find \(k\) and calculate cost <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(3 marks)</span></li>
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:4},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 5</strong> — Find \(k\) when \(W\) and \(V\) vary directly <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 7</strong> — Identify which relationship is direct variation from two graphs <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 10</strong> — Fuel pump direct variation: find time to fill a tank <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 13</strong> — Wheel revolutions: find \(k\), write the equation, and solve <span class="hw-mark">(4 marks)</span></li>
+          <li><strong>Question 14</strong> — Fencing cost direct variation: find \(k\) and calculate cost <span class="hw-mark">(3 marks)</span></li>
         </ul>
-        <p style="margin-bottom:0; font-size:13px; color:var(--gray-med);">Total: <strong style="color:var(--ink);">10 marks</strong> — Section I: Q5, Q7, Q10 &nbsp;·&nbsp; Section II: Q13, Q14</p>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">Total: <strong style="color:var(--ink);">10 marks</strong> — Section I: Q5, Q7, Q10 &nbsp;·&nbsp; Section II: Q13, Q14</p>
       </div>
 
       <!-- ── Mark complete ── -->
@@ -762,61 +691,69 @@
   setupStep('checkWheel2000', 'wheel2000', 'hintWheel2000', v => parseFloat(v) === 5000 ? { ok:true } : { ok:false, msg:'D = 2.5 × 2000 = 5 000 m' });
 
   // ── MCQ ──
-  const mcqCorrect = { '1':'B', '2':'C', '3':'C', '4':'C', '5':'C' };
-  document.querySelectorAll('.mcq-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      const q = opt.dataset.q;
-      const block = document.getElementById(`mcq${q}`);
-      if (block.dataset.answered) return;
-      block.dataset.answered = '1';
-      block.querySelectorAll('.mcq-option').forEach(o => {
-        if (o.dataset.val === mcqCorrect[q]) o.classList.add('correct-ans');
-        else if (o.dataset.val === opt.dataset.val) o.classList.add('wrong-ans');
-      });
-      document.getElementById(`exp${q}`).classList.add('show');
-    });
-  });
-
-  // ── Knowledge Check ──
+  // ── Knowledge Check (7 questions) ──
   const KC_QS = [
     {
-      q: 'Which of the following is an example of direct variation?',
-      opts: ['A) y = 3x + 2', 'B) y = 3x', 'C) y = 3 (constant)', 'D) y = x² '],
+      q: 'Two quantities \\(V\\) and \\(W\\) vary directly and \\(W = 92\\) when \\(V = 36.8\\). Which equation describes this?',
+      opts: ['A) \\(W = 1.5V\\)', 'B) \\(W = 2.5V\\)', 'C) \\(W = 5.0V\\)', 'D) \\(W = 55.2V\\)'],
       correct: 1,
-      explanation: 'B is correct. y = 3x passes through the origin with constant ratio y/x = 3. Option A has a non-zero y-intercept (not direct variation).'
+      explanation: 'B is correct. \\(k = \\dfrac{W}{V} = \\dfrac{92}{36.8} = 2.5\\). So \\(W = 2.5V\\).'
     },
     {
-      q: 'If y varies directly with x and y = 48 when x = 6, what is y when x = 10?',
+      q: 'Relationship X passes through the origin. Relationship Y has a \\(y\\)-intercept of 3. Which is direct variation?',
+      opts: ['A) Both relationships', 'B) Neither relationship', 'C) Relationship X only', 'D) Relationship Y only'],
+      correct: 2,
+      explanation: 'C is correct. Direct variation requires the graph to pass through \\((0, 0)\\). X does ✓. Y has \\(y\\)-intercept 3, so it does not ✗.'
+    },
+    {
+      q: 'A fuel pump delivers 50 litres in 60 seconds. How long to fill an 80-litre tank?',
+      opts: ['A) 1 minute and 20 seconds', 'B) 1 minute and 30 seconds', 'C) 1 minute and 36 seconds', 'D) 2 minutes'],
+      correct: 2,
+      explanation: 'C is correct. \\(k = \\dfrac{50}{60} = \\dfrac{5}{6}\\) L/s. Time \\(= 80 \\div \\dfrac{5}{6} = 96\\) s \\(= 1\\) min 36 sec.'
+    },
+    {
+      q: 'The cost of fencing a square field varies directly with side length. A 30 m field costs $1 500. What does a 77 m field cost?',
+      opts: ['A) $3 350', 'B) $3 500', 'C) $3 850', 'D) $4 200'],
+      correct: 2,
+      explanation: 'C is correct. \\(k = \\dfrac{1500}{30} = 50\\) $/m. Cost \\(= 50 \\times 77 = \\$3\\,850\\).'
+    },
+    {
+      q: 'A car wheel makes 600 revolutions over 1 500 m. Using \\(D = kR\\), how far does the car travel in 2 000 revolutions?',
+      opts: ['A) 4 000 m', 'B) 4 500 m', 'C) 5 000 m', 'D) 6 000 m'],
+      correct: 2,
+      explanation: 'C is correct. \\(k = \\dfrac{1500}{600} = 2.5\\). \\(D = 2.5 \\times 2000 = 5\\,000\\) m.'
+    },
+    {
+      q: 'Which of the following is an example of direct variation?',
+      opts: ['A) \\(y = 3x + 2\\)', 'B) \\(y = 3x\\)', 'C) \\(y = 3\\)', 'D) \\(y = x^2\\)'],
+      correct: 1,
+      explanation: 'B is correct. \\(y = 3x\\) passes through the origin with constant ratio \\(y/x = 3\\). Option A has a non-zero \\(y\\)-intercept — not direct variation.'
+    },
+    {
+      q: 'If \\(y\\) varies directly with \\(x\\) and \\(y = 48\\) when \\(x = 6\\), what is \\(y\\) when \\(x = 10\\)?',
       opts: ['A) 60', 'B) 70', 'C) 80', 'D) 90'],
       correct: 2,
-      explanation: 'C is correct. k = 48/6 = 8. So y = 8x. When x = 10: y = 8 × 10 = 80.'
-    },
-    {
-      q: 'A table shows that y/x = 4.5 for all data points. Which equation models this relationship?',
-      opts: ['A) y = x + 4.5', 'B) y = 4.5 + x', 'C) y = 4.5x', 'D) x = 4.5y'],
-      correct: 2,
-      explanation: 'C is correct. A constant y/x ratio means direct variation: y = kx where k = 4.5, so y = 4.5x.'
+      explanation: 'C is correct. \\(k = 48 \\div 6 = 8\\). So \\(y = 8x\\). When \\(x = 10\\): \\(y = 8 \\times 10 = 80\\).'
     }
   ];
 
   (function buildKC() {
     const container = document.getElementById('kcQuestions');
     const scoreEl = document.getElementById('kcScore');
-    let answered = 0;
-    let score = 0;
+    let answered = 0, score = 0;
     KC_QS.forEach((qData, qi) => {
       const wrap = document.createElement('div');
       wrap.className = 'kc-q-wrap';
       const qEl = document.createElement('p');
       qEl.className = 'kc-q';
-      qEl.textContent = `${qi + 1}. ${qData.q}`;
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
       wrap.appendChild(qEl);
       const optsEl = document.createElement('div');
       optsEl.className = 'kc-options';
       qData.opts.forEach((opt, oi) => {
         const btn = document.createElement('button');
         btn.className = 'kc-opt';
-        btn.textContent = opt;
+        btn.innerHTML = opt;
         btn.addEventListener('click', () => {
           if (wrap.dataset.answered) return;
           wrap.dataset.answered = '1';
@@ -830,8 +767,11 @@
           });
           const fb = document.createElement('p');
           fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
-          fb.textContent = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
           wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
           if (answered === KC_QS.length) showScore();
         });
         optsEl.appendChild(btn);
@@ -839,9 +779,12 @@
       wrap.appendChild(optsEl);
       container.appendChild(wrap);
     });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
     function showScore() {
       const pct = score / KC_QS.length;
-      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.67 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
       scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
       scoreEl.classList.add('show');
       document.getElementById('kcResetBtn').addEventListener('click', () => {

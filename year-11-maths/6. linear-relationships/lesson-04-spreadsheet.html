@@ -157,7 +157,10 @@
     h1, h2, h3, h4 { font-family: var(--font-display); }
     h1 { font-weight: 600; letter-spacing: 0.6px; }
     h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
-    .topbar, .eyebrow, .section-label, .side-label, .toc-heading, .toc-link, .pill { font-family: var(--font-mono); }
+
+    /* ── Lesson link & homework mark ── */
+    .lesson-link-btn { background: none; border: none; border-bottom: 1px solid currentColor; padding: 0; cursor: pointer; font-family: var(--font-display); font-size: inherit; color: var(--ink); line-height: 1.4; }
+    .hw-mark { font-family: var(--font-display); font-size: 11px; color: var(--gray-med); font-weight: 400; }
 
     /* ── Responsive ── */
     @media (max-width:900px) {
@@ -215,8 +218,8 @@
       <ul class="toc-list">
         <li class="toc-item"><a class="toc-link" href="#intro">What is Spreadsheet Modelling?</a></li>
         <li class="toc-item"><a class="toc-link" href="#scenarios">The Five Scenarios</a></li>
-        <li class="toc-item"><a class="toc-link" href="#practice">Practice Questions</a></li>
-        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Practice &amp; Quiz</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
       </ul>
     </nav>
 
@@ -293,7 +296,7 @@
           <div class="analysis-block">
             <h4>Analysis Questions</h4>
             <div class="mcq-block" id="dT-q1" style="margin-bottom:16px;">
-              <p class="mcq-q">1. At a speed of 80 km/h, how far would you travel in 3 hours? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">1. At a speed of 80 km/h, how far would you travel in 3 hours?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="dT1" data-val="A"><span class="opt-letter">A</span> 210 km</div>
                 <div class="mcq-option" data-q="dT1" data-val="B"><span class="opt-letter">B</span> 240 km</div>
@@ -306,7 +309,7 @@
               </div>
             </div>
             <div class="mcq-block" id="dT-q2" style="margin-bottom:16px;">
-              <p class="mcq-q">2. If the graph becomes steeper, what does that tell you about the speed? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">2. If the graph becomes steeper, what does that tell you about the speed?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="dT2" data-val="A"><span class="opt-letter">A</span> The speed has decreased</div>
                 <div class="mcq-option" data-q="dT2" data-val="B"><span class="opt-letter">B</span> The speed is constant</div>
@@ -319,7 +322,7 @@
               </div>
             </div>
             <div class="mcq-block" id="dT-q3">
-              <p class="mcq-q">3. This distance-time relationship is an example of direct variation because: <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">3. This distance-time relationship is an example of direct variation because:</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="dT3" data-val="A"><span class="opt-letter">A</span> The graph is a curve</div>
                 <div class="mcq-option" data-q="dT3" data-val="B"><span class="opt-letter">B</span> The line passes through the origin — when \(t = 0\), \(d = 0\)</div>
@@ -366,7 +369,7 @@
           <div class="analysis-block">
             <h4>Analysis Questions</h4>
             <div class="mcq-block" id="sp-q1" style="margin-bottom:16px;">
-              <p class="mcq-q">1. What does the y-intercept of 20 represent in this context? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">1. What does the y-intercept of 20 represent in this context?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="sp1" data-val="A"><span class="opt-letter">A</span> The number of practice hours needed</div>
                 <div class="mcq-option" data-q="sp1" data-val="B"><span class="opt-letter">B</span> The starting skill score before any practice begins</div>
@@ -379,7 +382,7 @@
               </div>
             </div>
             <div class="mcq-block" id="sp-q2" style="margin-bottom:16px;">
-              <p class="mcq-q">2. With a rate of 5 points/hour, what is the skill score after 12 hours of practice? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">2. With a rate of 5 points/hour, what is the skill score after 12 hours of practice?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="sp2" data-val="A"><span class="opt-letter">A</span> 60</div>
                 <div class="mcq-option" data-q="sp2" data-val="B"><span class="opt-letter">B</span> 70</div>
@@ -392,7 +395,7 @@
               </div>
             </div>
             <div class="mcq-block" id="sp-q3">
-              <p class="mcq-q">3. Why does this relationship NOT show direct variation? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">3. Why does this relationship NOT show direct variation?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="sp3" data-val="A"><span class="opt-letter">A</span> Because the rate changes at each step</div>
                 <div class="mcq-option" data-q="sp3" data-val="B"><span class="opt-letter">B</span> Because the graph is not a straight line</div>
@@ -401,7 +404,7 @@
               </div>
               <div class="mcq-explanation">
                 <strong>Answer: C</strong><br>
-                Direct variation requires the graph to pass through the origin. Here the line starts at (0, 20), so when hours = 0, skill = 20 ≠ 0. It is linear, but not proportional.
+                Direct variation requires the graph to pass through the origin. Here the line starts at \((0, 20)\), so when hours \(= 0\), skill \(= 20 \neq 0\). It is linear, but not proportional.
               </div>
             </div>
           </div>
@@ -439,7 +442,7 @@
           <div class="analysis-block">
             <h4>Analysis Questions</h4>
             <div class="mcq-block" id="ar-q1" style="margin-bottom:16px;">
-              <p class="mcq-q">1. At a rate of 4%/hour, how many hours of practice are needed to reach 85% mastery? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">1. At a rate of 4%/hour, how many hours of practice are needed to reach 85% mastery?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="ar1" data-val="A"><span class="opt-letter">A</span> 15 hours</div>
                 <div class="mcq-option" data-q="ar1" data-val="B"><span class="opt-letter">B</span> 18 hours</div>
@@ -452,7 +455,7 @@
               </div>
             </div>
             <div class="mcq-block" id="ar-q2" style="margin-bottom:16px;">
-              <p class="mcq-q">2. What is the starting mastery level (before any practice)? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">2. What is the starting mastery level (before any practice)?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="ar2" data-val="A"><span class="opt-letter">A</span> 5%</div>
                 <div class="mcq-option" data-q="ar2" data-val="B"><span class="opt-letter">B</span> 0%</div>
@@ -465,7 +468,7 @@
               </div>
             </div>
             <div class="mcq-block" id="ar-q3">
-              <p class="mcq-q">3. Which slider value would you use to reach full mastery (100%) in exactly 19 hours? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">3. Which slider value would you use to reach full mastery (100%) in exactly 19 hours?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="ar3" data-val="A"><span class="opt-letter">A</span> 3.5%/h</div>
                 <div class="mcq-option" data-q="ar3" data-val="B"><span class="opt-letter">B</span> 4.5%/h</div>
@@ -512,7 +515,7 @@
           <div class="analysis-block">
             <h4>Analysis Questions</h4>
             <div class="mcq-block" id="en-q1" style="margin-bottom:16px;">
-              <p class="mcq-q">1. At a rate of 3%/year, in how many years will fossil fuel usage fall below 40%? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">1. At a rate of 3%/year, in how many years will fossil fuel usage fall below 40%?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="en1" data-val="A"><span class="opt-letter">A</span> 15 years</div>
                 <div class="mcq-option" data-q="en1" data-val="B"><span class="opt-letter">B</span> 18 years</div>
@@ -525,7 +528,7 @@
               </div>
             </div>
             <div class="mcq-block" id="en-q2" style="margin-bottom:16px;">
-              <p class="mcq-q">2. The gradient of the fossil fuel graph is negative. What does this mean in context? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">2. The gradient of the fossil fuel graph is negative. What does this mean in context?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="en2" data-val="A"><span class="opt-letter">A</span> Fossil fuel usage is increasing each year</div>
                 <div class="mcq-option" data-q="en2" data-val="B"><span class="opt-letter">B</span> Fossil fuel usage is decreasing as renewable energy is adopted</div>
@@ -538,7 +541,7 @@
               </div>
             </div>
             <div class="mcq-block" id="en-q3">
-              <p class="mcq-q">3. At what rate does renewable energy need to be adopted for fossil fuel usage to reach zero in exactly 20 years? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">3. At what rate does renewable energy need to be adopted for fossil fuel usage to reach zero in exactly 20 years?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="en3" data-val="A"><span class="opt-letter">A</span> 3%/year</div>
                 <div class="mcq-option" data-q="en3" data-val="B"><span class="opt-letter">B</span> 4%/year</div>
@@ -585,7 +588,7 @@
           <div class="analysis-block">
             <h4>Analysis Questions</h4>
             <div class="mcq-block" id="gd-q1" style="margin-bottom:16px;">
-              <p class="mcq-q">1. At a growth rate of $0.30 trillion/year, what is the projected GDP after 8 years? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">1. At a growth rate of $0.30 trillion/year, what is the projected GDP after 8 years?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="gd1" data-val="A"><span class="opt-letter">A</span> $3.8 trillion</div>
                 <div class="mcq-option" data-q="gd1" data-val="B"><span class="opt-letter">B</span> $4.4 trillion</div>
@@ -598,7 +601,7 @@
               </div>
             </div>
             <div class="mcq-block" id="gd-q2" style="margin-bottom:16px;">
-              <p class="mcq-q">2. What does the y-intercept of $2.0 trillion represent in this model? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">2. What does the y-intercept of $2.0 trillion represent in this model?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="gd2" data-val="A"><span class="opt-letter">A</span> The GDP at Year 0 — the starting economic output</div>
                 <div class="mcq-option" data-q="gd2" data-val="B"><span class="opt-letter">B</span> The annual growth rate</div>
@@ -611,7 +614,7 @@
               </div>
             </div>
             <div class="mcq-block" id="gd-q3">
-              <p class="mcq-q">3. If the annual growth rate slows from $0.30 to $0.10 trillion/year, what happens to the graph? <span class="mcq-mark">(1 mark)</span></p>
+              <p class="mcq-q">3. If the annual growth rate slows from $0.30 to $0.10 trillion/year, what happens to the graph?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="gd3" data-val="A"><span class="opt-letter">A</span> The line shifts down but keeps the same slope</div>
                 <div class="mcq-option" data-q="gd3" data-val="B"><span class="opt-letter">B</span> The line becomes steeper</div>
@@ -628,89 +631,25 @@
 
       </div><!-- end scenarios card -->
 
-      <!-- ── Practice MCQs ── -->
-      <div class="content-card" id="practice">
-        <p class="section-label">Practice Questions</p>
-        <h2>Multiple Choice</h2>
-
-        <div class="mcq-block" id="mcq1">
-          <p class="mcq-q">1. A car travels at 90 km/h. Using the model \(d = 90t\), how far does it travel in 2.5 hours? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="m1" data-val="A"><span class="opt-letter">A</span> 200 km</div>
-            <div class="mcq-option" data-q="m1" data-val="B"><span class="opt-letter">B</span> 225 km</div>
-            <div class="mcq-option" data-q="m1" data-val="C"><span class="opt-letter">C</span> 250 km</div>
-            <div class="mcq-option" data-q="m1" data-val="D"><span class="opt-letter">D</span> 270 km</div>
-          </div>
-          <div class="mcq-explanation">
-            <strong>Answer: B — 225 km</strong><br>
-            \(d = 90 \times 2.5 = 225\) km.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq2">
-          <p class="mcq-q">2. A linear model has equation \(y = 15 + 4x\). What is the gradient? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="m2" data-val="A"><span class="opt-letter">A</span> 15</div>
-            <div class="mcq-option" data-q="m2" data-val="B"><span class="opt-letter">B</span> 4</div>
-            <div class="mcq-option" data-q="m2" data-val="C"><span class="opt-letter">C</span> 19</div>
-            <div class="mcq-option" data-q="m2" data-val="D"><span class="opt-letter">D</span> 60</div>
-          </div>
-          <div class="mcq-explanation">
-            <strong>Answer: B — 4</strong><br>
-            In \(y = mx + b\), the gradient is \(m\). Here \(m = 4\). The 15 is the y-intercept (starting value).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq3">
-          <p class="mcq-q">3. A spreadsheet model shows that when \(x\) increases by 1, \(y\) always increases by 3, and \(y = 0\) when \(x = 0\). Which equation models this? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="m3" data-val="A"><span class="opt-letter">A</span> \(y = x + 3\)</div>
-            <div class="mcq-option" data-q="m3" data-val="B"><span class="opt-letter">B</span> \(y = 3\)</div>
-            <div class="mcq-option" data-q="m3" data-val="C"><span class="opt-letter">C</span> \(y = 3x\)</div>
-            <div class="mcq-option" data-q="m3" data-val="D"><span class="opt-letter">D</span> \(y = x - 3\)</div>
-          </div>
-          <div class="mcq-explanation">
-            <strong>Answer: C — \(y = 3x\)</strong><br>
-            A constant increase of 3 per unit of \(x\), starting from zero, gives \(y = 3x\). This is direct variation with \(k = 3\).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq4">
-          <p class="mcq-q">4. The equation \(\text{fossil\_fuel} = 100 - 2 \times \text{year}\) has what type of gradient? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="m4" data-val="A"><span class="opt-letter">A</span> Zero gradient</div>
-            <div class="mcq-option" data-q="m4" data-val="B"><span class="opt-letter">B</span> Positive gradient</div>
-            <div class="mcq-option" data-q="m4" data-val="C"><span class="opt-letter">C</span> Negative gradient</div>
-            <div class="mcq-option" data-q="m4" data-val="D"><span class="opt-letter">D</span> Undefined gradient</div>
-          </div>
-          <div class="mcq-explanation">
-            <strong>Answer: C — Negative gradient</strong><br>
-            The coefficient of year is \(-2\). A negative coefficient means the output decreases as the input increases — the line slopes downward from left to right.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq5">
-          <p class="mcq-q">5. A GDP model gives: Year 0 → $2.0T, Year 5 → $3.5T. What is the annual growth rate? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="m5" data-val="A"><span class="opt-letter">A</span> $0.20T/year</div>
-            <div class="mcq-option" data-q="m5" data-val="B"><span class="opt-letter">B</span> $0.25T/year</div>
-            <div class="mcq-option" data-q="m5" data-val="C"><span class="opt-letter">C</span> $0.30T/year</div>
-            <div class="mcq-option" data-q="m5" data-val="D"><span class="opt-letter">D</span> $0.35T/year</div>
-          </div>
-          <div class="mcq-explanation">
-            <strong>Answer: C — $0.30T/year</strong><br>
-            Gradient = \(\dfrac{\text{rise}}{\text{run}} = \dfrac{3.5 - 2.0}{5 - 0} = \dfrac{1.5}{5} = 0.30\). The GDP grows by $0.30 trillion per year.
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Knowledge Check ── -->
+      <!-- ── Practice & Quiz ── -->
       <div class="kc-block" id="check">
-        <p class="section-label">Knowledge Check</p>
-        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quick Quiz</h2>
-        <p class="kc-intro">Answer all five questions to see your score.</p>
+        <p class="section-label">Practice &amp; Quiz</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Knowledge Check</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
         <div id="kcQuestions"></div>
         <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ── Homework ── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p>This is the final content lesson. Open the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:4},'*')">Homework lesson</button> to complete revision questions covering all three content lessons:</p>
+        <ul>
+          <li><strong>Questions 1, 2, 8</strong> (Section I) and <strong>Question 11</strong> (Section II) — Lesson 1: Graphing Linear Functions</li>
+          <li><strong>Questions 3, 4, 9, 12, 15</strong> — Lesson 2: Gradient &amp; Intercept</li>
+          <li><strong>Questions 5, 6, 7, 10, 13, 14</strong> — Lesson 3: Direct Variation</li>
+        </ul>
       </div>
 
       <div class="complete-section">
@@ -952,14 +891,13 @@
     });
   })();
 
-  // ── MCQ wiring ──
+  // ── Scenario MCQ wiring ──
   const mcqCorrect = {
     'dT1': 'B', 'dT2': 'C', 'dT3': 'B',
     'sp1': 'B', 'sp2': 'C', 'sp3': 'C',
     'ar1': 'C', 'ar2': 'A', 'ar3': 'C',
     'en1': 'C', 'en2': 'B', 'en3': 'C',
-    'gd1': 'B', 'gd2': 'A', 'gd3': 'C',
-    'm1':  'B', 'm2':  'B', 'm3':  'C', 'm4':  'C', 'm5':  'C'
+    'gd1': 'B', 'gd2': 'A', 'gd3': 'C'
   };
 
   document.querySelectorAll('.mcq-option').forEach(opt => {
@@ -977,37 +915,49 @@
     });
   });
 
-  // ── Knowledge Check ──
+  // ── Knowledge Check (7 questions) ──
   const KC_QS = [
     {
-      q: 'In the model skill = 20 + 3 × hours, what does the number 20 represent?',
+      q: 'A car travels at 90 km/h. Using the model \\(d = 90t\\), how far does it travel in 2.5 hours?',
+      opts: ['A) 200 km', 'B) 225 km', 'C) 250 km', 'D) 270 km'],
+      correct: 1,
+      explanation: 'B is correct. \\(d = 90 \\times 2.5 = 225\\) km.'
+    },
+    {
+      q: 'A linear model has equation \\(y = 15 + 4x\\). What is the gradient?',
+      opts: ['A) 15', 'B) 4', 'C) 19', 'D) 60'],
+      correct: 1,
+      explanation: 'B is correct. In \\(y = mx + b\\), the gradient is \\(m\\). Here \\(m = 4\\); the 15 is the \\(y\\)-intercept.'
+    },
+    {
+      q: 'A spreadsheet shows that when \\(x\\) increases by 1, \\(y\\) always increases by 3, and \\(y = 0\\) when \\(x = 0\\). Which equation models this?',
+      opts: ['A) \\(y = x + 3\\)', 'B) \\(y = 3\\)', 'C) \\(y = 3x\\)', 'D) \\(y = x - 3\\)'],
+      correct: 2,
+      explanation: 'C is correct. A constant increase of 3 per unit of \\(x\\), starting from zero, gives \\(y = 3x\\). This is direct variation with \\(k = 3\\).'
+    },
+    {
+      q: 'The equation \\(\\text{fossil} = 100 - 2 \\times \\text{year}\\) has what type of gradient?',
+      opts: ['A) Zero gradient', 'B) Positive gradient', 'C) Negative gradient', 'D) Undefined gradient'],
+      correct: 2,
+      explanation: 'C is correct. The coefficient of year is \\(-2\\). A negative coefficient means the output decreases as the input increases.'
+    },
+    {
+      q: 'A GDP model gives: Year 0 → $2.0T, Year 5 → $3.5T. What is the annual growth rate?',
+      opts: ['A) $0.20T/year', 'B) $0.25T/year', 'C) $0.30T/year', 'D) $0.35T/year'],
+      correct: 2,
+      explanation: 'C is correct. \\(m = \\dfrac{3.5 - 2.0}{5 - 0} = \\dfrac{1.5}{5} = 0.30\\). The GDP grows by $0.30 trillion per year.'
+    },
+    {
+      q: 'In the model \\(\\text{skill} = 20 + 3 \\times \\text{hours}\\), what does the 20 represent?',
       opts: ['A) The gradient — how fast skill improves', 'B) The starting skill score before any practice', 'C) The total skill after 20 hours', 'D) The rate of improvement per hour'],
       correct: 1,
-      explanation: 'B is correct. The 20 is the y-intercept — the skill score when hours = 0 (before any practice begins).'
+      explanation: 'B is correct. The 20 is the \\(y\\)-intercept — the skill score when hours \\(= 0\\), before any practice begins.'
     },
     {
-      q: 'If a model is y = 50 − 5x, what happens to y as x increases?',
-      opts: ['A) y increases at a rate of 5', 'B) y stays constant at 50', 'C) y decreases at a rate of 5', 'D) y doubles with each step'],
-      correct: 2,
-      explanation: 'C is correct. The gradient is −5, so y decreases by 5 for each 1-unit increase in x. This is a negative gradient relationship.'
-    },
-    {
-      q: 'A spreadsheet shows that y ÷ x = 4 for every row. Which equation models this?',
-      opts: ['A) y = x + 4', 'B) y = 4', 'C) y = 4x', 'D) x = 4y'],
-      correct: 2,
-      explanation: 'C is correct. A constant y/x ratio of 4 means direct variation: y = 4x. The graph passes through the origin.'
-    },
-    {
-      q: 'Using the model d = 75t, how far is a car travelling in 4 hours?',
-      opts: ['A) 250 km', 'B) 275 km', 'C) 300 km', 'D) 325 km'],
-      correct: 2,
-      explanation: 'C is correct. d = 75 × 4 = 300 km.'
-    },
-    {
-      q: 'Which change would make a graph of y = base + rate × x become STEEPER?',
+      q: 'Which change would make a graph of \\(y = \\text{base} + \\text{rate} \\times x\\) become steeper?',
       opts: ['A) Increasing the base (y-intercept)', 'B) Decreasing the rate', 'C) Increasing the rate', 'D) Setting the base to zero'],
       correct: 2,
-      explanation: 'C is correct. The rate is the gradient — it controls the steepness. A larger rate means a steeper slope. Changing the base moves the line up or down but does not change its steepness.'
+      explanation: 'C is correct. The rate is the gradient — it controls steepness. A larger rate means a steeper slope; changing the base only shifts the line up or down.'
     }
   ];
 
@@ -1020,14 +970,14 @@
       wrap.className = 'kc-q-wrap';
       const qEl = document.createElement('p');
       qEl.className = 'kc-q';
-      qEl.textContent = `${qi + 1}. ${qData.q}`;
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
       wrap.appendChild(qEl);
       const optsEl = document.createElement('div');
       optsEl.className = 'kc-options';
       qData.opts.forEach((opt, oi) => {
         const btn = document.createElement('button');
         btn.className = 'kc-opt';
-        btn.textContent = opt;
+        btn.innerHTML = opt;
         btn.addEventListener('click', () => {
           if (wrap.dataset.answered) return;
           wrap.dataset.answered = '1';
@@ -1041,8 +991,11 @@
           });
           const fb = document.createElement('p');
           fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
-          fb.textContent = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
           wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
           if (answered === KC_QS.length) showScore();
         });
         optsEl.appendChild(btn);
@@ -1050,6 +1003,9 @@
       wrap.appendChild(optsEl);
       container.appendChild(wrap);
     });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
 
     function showScore() {
       const pct = score / KC_QS.length;

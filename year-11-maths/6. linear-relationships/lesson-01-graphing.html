@@ -474,12 +474,12 @@
       border: 1px solid var(--gray-light);
       background: var(--gray-faint);
       padding: 16px 20px;
-      font-family: var(--font-mono);
       font-size: 13px;
-      line-height: 1.9;
+      line-height: 2;
       min-height: 80px;
-      white-space: pre-wrap;
     }
+    .grad-steps p { margin-bottom: 4px; }
+    .grad-steps p:last-child { margin-bottom: 0; }
 
     /* ── MCQ ── */
     .mcq-block {
@@ -601,6 +601,23 @@
       cursor: pointer;
     }
 
+    /* ── Homework mark indicator ── */
+    .hw-mark { font-size: 11px; color: var(--gray-med); margin-left: 4px; }
+
+    /* ── Inline lesson link ── */
+    .lesson-link-btn {
+      background: none;
+      border: none;
+      border-bottom: 1px solid currentColor;
+      padding: 0;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      cursor: pointer;
+      display: inline;
+    }
+    .lesson-link-btn:hover { opacity: 0.7; }
+
     /* ── Complete button ── */
     .complete-section {
       margin-top: 48px;
@@ -629,8 +646,9 @@
     h1, h2, h3, h4 { font-family: var(--font-display); }
     h1 { font-weight: 600; letter-spacing: 0.6px; }
     h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
-    .topbar, .eyebrow, .section-label, .side-label,
-    .toc-heading, .toc-link, .pill, .stepper-counter { font-family: var(--font-mono); }
+
+    /* ── Gradient type labels use display font ── */
+    .grad-type-card .label { font-family: var(--font-display); font-size: 12px; }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -689,11 +707,11 @@
     <nav class="toc" aria-label="Page contents">
       <p class="toc-heading">Contents</p>
       <ul class="toc-list">
-        <li class="toc-item"><a class="toc-link" href="#tables">Tables of Values</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tables">Table of Values</a></li>
         <li class="toc-item"><a class="toc-link" href="#gradient">Gradient</a></li>
         <li class="toc-item"><a class="toc-link" href="#yintercept">Y-Intercept</a></li>
-        <li class="toc-item"><a class="toc-link" href="#practice">Practice Questions</a></li>
         <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
       </ul>
     </nav>
 
@@ -703,7 +721,7 @@
       <!-- ── Section 1: Tables of Values ── -->
       <div class="content-card" id="tables">
         <p class="section-label">Part A</p>
-        <h2>Tables of Values</h2>
+        <h2>Table of Values</h2>
 
         <div class="definition-block">
           <p class="def-label">Definition — Linear Function</p>
@@ -733,13 +751,13 @@
           <table class="val-table" id="tbl1">
             <thead>
               <tr>
-                <th>x</th>
+                <th>\(x\)</th>
                 <td>-2</td><td>-1</td><td>0</td><td>1</td><td>2</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>y</th>
+                <th>\(y\)</th>
                 <td><input type="number" id="t1y0" placeholder="?" aria-label="y when x=-2"></td>
                 <td><input type="number" id="t1y1" placeholder="?" aria-label="y when x=-1"></td>
                 <td><input type="number" id="t1y2" placeholder="?" aria-label="y when x=0"></td>
@@ -765,13 +783,13 @@
           <table class="val-table" id="tbl2">
             <thead>
               <tr>
-                <th>x</th>
+                <th>\(x\)</th>
                 <td>-2</td><td>-1</td><td>0</td><td>1</td><td>2</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>y</th>
+                <th>\(y\)</th>
                 <td><input type="number" id="t2y0" placeholder="?" aria-label="y when x=-2"></td>
                 <td><input type="number" id="t2y1" placeholder="?" aria-label="y when x=-1"></td>
                 <td><input type="number" id="t2y2" placeholder="?" aria-label="y when x=0"></td>
@@ -820,7 +838,7 @@
 
         <div class="example-block">
           <p class="ex-label">Worked Example</p>
-          <p><strong>Find the gradient of the line through (1, 3) and (4, 9).</strong></p>
+          <p><strong>Find the gradient of the line through \((1, 3)\) and \((4, 9)\).</strong></p>
           <p>rise = \(y_2 - y_1\) = 9 − 3 = <strong>6</strong></p>
           <p>run = \(x_2 - x_1\) = 4 − 1 = <strong>3</strong></p>
           <p style="margin-bottom:0">\(m = \dfrac{6}{3} = \mathbf{2}\) &nbsp;— the line rises 2 units for every 1 unit across (positive gradient).</p>
@@ -876,7 +894,7 @@
         </div>
 
         <div class="note-block">
-          <p><strong>Quick method:</strong> If the equation is already in the form \(y = mx + b\), simply read off \(m\) (coefficient of x) and \(b\) (constant). If it is not in this form, rearrange it first — this is covered in Lesson 2.</p>
+          <p><strong>Quick method:</strong> If the equation is already in the form \(y = mx + b\), simply read off \(m\) (coefficient of \(x\)) and \(b\) (constant). If it is not in this form, rearrange it first — this is covered in <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:1},'*')">Lesson 2</button>.</p>
         </div>
 
         <!-- Exercise 3 -->
@@ -885,7 +903,7 @@
           <p style="margin-bottom:14px; font-size:13px;">For the line \(y = 2x - 2\), what is the y-intercept?</p>
           <p style="margin-bottom:14px; font-size:13px; color:var(--gray-med);">Hint: substitute \(x = 0\) into the equation, or read off the constant.</p>
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);">y-intercept =</span>
+            <span>\(y\text{-intercept} =\)</span>
             <input type="number" id="yintInput" style="width:80px; border:1px solid var(--gray-light); padding:8px; font-family:var(--font-mono); background:var(--canvas); color:var(--ink);" placeholder="?">
             <button class="check-btn" id="checkYint">Check</button>
           </div>
@@ -893,90 +911,27 @@
         </div>
       </div>
 
-      <!-- ── Section 4: Practice MCQ ── -->
-      <div class="content-card" id="practice">
-        <p class="section-label">Practice Questions</p>
-        <h2>Multiple Choice</h2>
-
-        <div class="mcq-block" id="mcq1">
-          <p class="mcq-q">1. A line passes through the points (0, 6) and (2, 0). What is the gradient of this line? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="1" data-val="A"><span class="opt-letter">A</span> 3</div>
-            <div class="mcq-option" data-q="1" data-val="B"><span class="opt-letter">B</span> −3</div>
-            <div class="mcq-option" data-q="1" data-val="C"><span class="opt-letter">C</span> 2</div>
-            <div class="mcq-option" data-q="1" data-val="D"><span class="opt-letter">D</span> −2</div>
-          </div>
-          <div class="mcq-explanation" id="exp1">
-            <strong>Answer: B — gradient = −3</strong><br>
-            rise = 0 − 6 = −6, run = 2 − 0 = 2<br>
-            \(m = \dfrac{-6}{2} = -3\). Negative because the line falls from left to right.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq2">
-          <p class="mcq-q">2. A line rises 12 units for every 4 units across. What is its gradient? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="2" data-val="A"><span class="opt-letter">A</span> −3</div>
-            <div class="mcq-option" data-q="2" data-val="B"><span class="opt-letter">B</span> −2</div>
-            <div class="mcq-option" data-q="2" data-val="C"><span class="opt-letter">C</span> 3</div>
-            <div class="mcq-option" data-q="2" data-val="D"><span class="opt-letter">D</span> 4</div>
-          </div>
-          <div class="mcq-explanation" id="exp2">
-            <strong>Answer: C — gradient = 3</strong><br>
-            \(m = \dfrac{\text{rise}}{\text{run}} = \dfrac{12}{4} = 3\). Positive because the line is rising.
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq3">
-          <p class="mcq-q">3. Which of the following lines has a negative gradient and a positive y-intercept? <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="3" data-val="A"><span class="opt-letter">A</span> \(y = 3x - 2\)</div>
-            <div class="mcq-option" data-q="3" data-val="B"><span class="opt-letter">B</span> \(y = -2x + 5\)</div>
-            <div class="mcq-option" data-q="3" data-val="C"><span class="opt-letter">C</span> \(y = 4x + 1\)</div>
-            <div class="mcq-option" data-q="3" data-val="D"><span class="opt-letter">D</span> \(y = -x - 3\)</div>
-          </div>
-          <div class="mcq-explanation" id="exp3">
-            <strong>Answer: B — \(y = -2x + 5\)</strong><br>
-            \(m = -2\) (negative ✓), \(b = 5\) (positive ✓). Option D has \(m = -1\) but \(b = -3\) (negative ✗).
-          </div>
-        </div>
-
-        <div class="mcq-block" id="mcq4">
-          <p class="mcq-q">4. The gradient of the line through \((-1, 1)\) and \((2, -5)\) is: <span class="mcq-mark">(1 mark)</span></p>
-          <div class="mcq-options">
-            <div class="mcq-option" data-q="4" data-val="A"><span class="opt-letter">A</span> 2</div>
-            <div class="mcq-option" data-q="4" data-val="B"><span class="opt-letter">B</span> −2</div>
-            <div class="mcq-option" data-q="4" data-val="C"><span class="opt-letter">C</span> −6</div>
-            <div class="mcq-option" data-q="4" data-val="D"><span class="opt-letter">D</span> −3</div>
-          </div>
-          <div class="mcq-explanation" id="exp4">
-            <strong>Answer: B — gradient = −2</strong><br>
-            rise = \(-5 - 1 = -6\), run = \(2 - (-1) = 3\)<br>
-            \(m = \dfrac{-6}{3} = -2\)
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Section 5: Knowledge Check ── -->
+      <!-- ── Section 4: Knowledge Check ── -->
       <div class="kc-block" id="check">
         <p class="section-label">Knowledge Check</p>
-        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quick Quiz</h2>
-        <p class="kc-intro">Answer all three questions — your score will appear automatically when you're done.</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
         <div id="kcQuestions"></div>
         <div class="kc-score" id="kcScore"></div>
       </div>
 
       <!-- ── Homework ── -->
-      <div class="note-block" style="margin-top:32px;">
-        <p style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:10px; font-family:var(--font-mono);">Homework</p>
-        <p style="font-weight:600; margin-bottom:12px;">Now that you've finished this lesson, complete the following questions from the Homework lesson:</p>
-        <ul style="margin-bottom:12px;">
-          <li><strong>Question 1</strong> — Gradient from a graph <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 2</strong> — Gradient from two points <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 8</strong> — Identify the graph of \(y = 2x - 4\) <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(1 mark)</span></li>
-          <li><strong>Question 11</strong> — Gradient, equation, and substitution for a line through two points <span style="font-family:var(--font-mono); font-size:11px; color:var(--gray-med);">(3 marks)</span></li>
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:4},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 1</strong> — Gradient from a graph <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 2</strong> — Gradient from two points <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 8</strong> — Identify the graph of \(y = 2x - 4\) <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 11</strong> — Gradient, equation, and substitution for a line through two points <span class="hw-mark">(3 marks)</span></li>
         </ul>
-        <p style="margin-bottom:0; font-size:13px; color:var(--gray-med);">Total: <strong style="color:var(--ink);">6 marks</strong> — Section I: Q1, Q2, Q8 &nbsp;·&nbsp; Section II: Q11</p>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">Total: <strong style="color:var(--ink);">6 marks</strong> — Section I: Q1, Q2, Q8 &nbsp;·&nbsp; Section II: Q11</p>
       </div>
 
       <!-- ── Mark complete ── -->
@@ -1079,7 +1034,7 @@
     },
     {
       title: 'Step 2 — Substitute x to find y',
-      body: '<p>For each x-value, substitute into the equation to calculate y. For <strong>y = 2x + 1</strong>:</p><ul><li>x = −2 → y = 2(−2) + 1 = <strong>−3</strong></li><li>x = 0 → y = 2(0) + 1 = <strong>1</strong></li><li>x = 2 → y = 2(2) + 1 = <strong>5</strong></li></ul>'
+      body: '<p>For each \\(x\\)-value, substitute into the equation to calculate \\(y\\). For <strong>\\(y = 2x + 1\\)</strong>:</p><ul><li>\\(x = -2 \\Rightarrow y = 2(-2) + 1 = \\mathbf{-3}\\)</li><li>\\(x = 0 \\Rightarrow y = 2(0) + 1 = \\mathbf{1}\\)</li><li>\\(x = 2 \\Rightarrow y = 2(2) + 1 = \\mathbf{5}\\)</li></ul>'
     },
     {
       title: 'Step 3 — Plot the (x, y) points',
@@ -1110,6 +1065,9 @@
     function render() {
       const stage = SKETCH_STAGES[current];
       panelEl.innerHTML = `<h4>${stage.title}</h4>${stage.body}`;
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(panelEl, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+      }
       counterEl.textContent = `Step ${current + 1} of ${SKETCH_STAGES.length}`;
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current === SKETCH_STAGES.length - 1;
@@ -1194,20 +1152,30 @@
     const y2 = parseFloat(document.getElementById('gy2').value);
     const steps = document.getElementById('gradSteps');
     if (isNaN(x1)||isNaN(y1)||isNaN(x2)||isNaN(y2)) {
-      steps.textContent = 'Please enter valid numbers for all four fields.'; return;
+      steps.innerHTML = '<p>Please enter valid numbers for all four fields.</p>'; return;
     }
     if (x1 === x2) {
-      steps.textContent = 'x₁ and x₂ are the same — the gradient is undefined (vertical line).'; return;
+      steps.innerHTML = '<p>\\(x_1\\) and \\(x_2\\) are the same — the gradient is undefined (vertical line).</p>';
+      if (typeof renderMathInElement !== 'undefined') renderMathInElement(steps, { delimiters: [{ left: '\\(', right: '\\)', display: false }], throwOnError: false });
+      return;
     }
     const rise = y2 - y1;
     const run  = x2 - x1;
     const m    = rise / run;
-    const mStr = Number.isInteger(m) ? m.toString() : m.toFixed(4).replace(/\.?0+$/, '');
-    steps.textContent =
-      `rise = y₂ − y₁ = ${y2} − (${y1}) = ${rise}\n` +
-      `run  = x₂ − x₁ = ${x2} − (${x1}) = ${run}\n\n` +
-      `m = rise / run = ${rise} / ${run} = ${mStr}\n\n` +
-      `${m > 0 ? '↗ Positive gradient — line rises left to right.' : m < 0 ? '↘ Negative gradient — line falls left to right.' : '→ Zero gradient — horizontal line.'}`;
+    const fmt = n => Number.isInteger(n) ? String(n) : n.toFixed(4).replace(/\.?0+$/, '');
+    const frac = (a, b) => Number.isInteger(a/b) ? String(a/b) : `\\dfrac{${a}}{${b}}`;
+    const dirSymbol = m > 0 ? '↗' : m < 0 ? '↘' : '→';
+    const dirText   = m > 0 ? 'Positive gradient — line rises left to right.'
+                    : m < 0 ? 'Negative gradient — line falls left to right.'
+                    : 'Zero gradient — horizontal line.';
+    steps.innerHTML =
+      `<p>\\(\\text{rise} = y_2 - y_1 = ${y2} - (${y1}) = ${rise}\\)</p>` +
+      `<p>\\(\\text{run} = x_2 - x_1 = ${x2} - (${x1}) = ${run}\\)</p>` +
+      `<p>\\(m = \\dfrac{\\text{rise}}{\\text{run}} = ${frac(rise,run)} = ${fmt(m)}\\)</p>` +
+      `<p style="margin-top:8px; color:var(--gray-med)">${dirSymbol} ${dirText}</p>`;
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(steps, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
   });
 
   // ── Y-intercept check ──
@@ -1224,49 +1192,56 @@
   });
 
   // ── MCQ ──
-  const mcqCorrect = { '1': 'B', '2': 'C', '3': 'B', '4': 'B' };
-  document.querySelectorAll('.mcq-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      const q = opt.dataset.q;
-      const block = document.getElementById(`mcq${q}`);
-      if (block.dataset.answered) return;
-      block.dataset.answered = '1';
-      const chosen = opt.dataset.val;
-      block.querySelectorAll('.mcq-option').forEach(o => {
-        if (o.dataset.val === mcqCorrect[q]) o.classList.add('correct-ans');
-        else if (o.dataset.val === chosen) o.classList.add('wrong-ans');
-      });
-      document.getElementById(`exp${q}`).classList.add('show');
-    });
-  });
-
-  // ── Knowledge Check ──
+  // ── Knowledge Check (7 questions) ──
   const KC_QS = [
     {
-      q: 'Which equation has a gradient of 3 and a y-intercept of −2?',
-      opts: ['A) y = 2x − 3', 'B) y = 3x − 2', 'C) y = −2x + 3', 'D) y = −3x + 2'],
+      q: 'A line passes through \\((0, 6)\\) and \\((2, 0)\\). What is the gradient?',
+      opts: ['A) \\(3\\)', 'B) \\(-3\\)', 'C) \\(2\\)', 'D) \\(-2\\)'],
       correct: 1,
-      explanation: 'B is correct. In y = 3x − 2, the coefficient of x is 3 (gradient) and the constant is −2 (y-intercept).'
+      explanation: 'B is correct. \\(m = \\dfrac{0 - 6}{2 - 0} = \\dfrac{-6}{2} = -3\\). Negative — the line falls from left to right.'
     },
     {
-      q: 'A line passes through (0, 4) and (2, 10). What is its gradient?',
-      opts: ['A) 2', 'B) 3', 'C) 4', 'D) 5'],
-      correct: 1,
-      explanation: 'B is correct. rise = 10 − 4 = 6, run = 2 − 0 = 2, so m = 6/2 = 3.'
+      q: 'A line rises 12 units for every 4 units across. What is its gradient?',
+      opts: ['A) \\(-3\\)', 'B) \\(-2\\)', 'C) \\(3\\)', 'D) \\(4\\)'],
+      correct: 2,
+      explanation: 'C is correct. \\(m = \\dfrac{\\text{rise}}{\\text{run}} = \\dfrac{12}{4} = 3\\). Positive — the line is rising.'
     },
     {
-      q: 'What is the y-intercept of the line y = 5x − 7?',
-      opts: ['A) 5', 'B) −5', 'C) 7', 'D) −7'],
+      q: 'Which line has a negative gradient and a positive \\(y\\)-intercept?',
+      opts: ['A) \\(y = 3x - 2\\)', 'B) \\(y = -2x + 5\\)', 'C) \\(y = 4x + 1\\)', 'D) \\(y = -x - 3\\)'],
+      correct: 1,
+      explanation: 'B is correct. \\(m = -2\\) (negative ✓), \\(b = 5\\) (positive ✓). Option D has \\(m = -1\\) but \\(b = -3\\) (negative ✗).'
+    },
+    {
+      q: 'The gradient of the line through \\((-1, 1)\\) and \\((2, -5)\\) is:',
+      opts: ['A) \\(2\\)', 'B) \\(-2\\)', 'C) \\(-6\\)', 'D) \\(-3\\)'],
+      correct: 1,
+      explanation: 'B is correct. \\(m = \\dfrac{-5 - 1}{2 - (-1)} = \\dfrac{-6}{3} = -2\\).'
+    },
+    {
+      q: 'Which equation has a gradient of 3 and a \\(y\\)-intercept of \\(-2\\)?',
+      opts: ['A) \\(y = 2x - 3\\)', 'B) \\(y = 3x - 2\\)', 'C) \\(y = -2x + 3\\)', 'D) \\(y = -3x + 2\\)'],
+      correct: 1,
+      explanation: 'B is correct. In \\(y = 3x - 2\\), the coefficient of \\(x\\) is 3 (gradient) and the constant is \\(-2\\) (\\(y\\)-intercept).'
+    },
+    {
+      q: 'A line passes through \\((0, 4)\\) and \\((2, 10)\\). What is its gradient?',
+      opts: ['A) \\(2\\)', 'B) \\(3\\)', 'C) \\(4\\)', 'D) \\(5\\)'],
+      correct: 1,
+      explanation: 'B is correct. \\(m = \\dfrac{10 - 4}{2 - 0} = \\dfrac{6}{2} = 3\\).'
+    },
+    {
+      q: 'What is the \\(y\\)-intercept of the line \\(y = 5x - 7\\)?',
+      opts: ['A) \\(5\\)', 'B) \\(-5\\)', 'C) \\(7\\)', 'D) \\(-7\\)'],
       correct: 3,
-      explanation: 'D is correct. In y = 5x − 7, the constant term b = −7. Substituting x = 0: y = 5(0) − 7 = −7.'
+      explanation: 'D is correct. In \\(y = mx + b\\), the constant \\(b = -7\\). When \\(x = 0\\): \\(y = 5(0) - 7 = -7\\).'
     }
   ];
 
   (function buildKC() {
     const container = document.getElementById('kcQuestions');
     const scoreEl = document.getElementById('kcScore');
-    let answered = 0;
-    let score = 0;
+    let answered = 0, score = 0;
 
     KC_QS.forEach((qData, qi) => {
       const wrap = document.createElement('div');
@@ -1274,7 +1249,7 @@
 
       const qEl = document.createElement('p');
       qEl.className = 'kc-q';
-      qEl.textContent = `${qi + 1}. ${qData.q}`;
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
       wrap.appendChild(qEl);
 
       const optsEl = document.createElement('div');
@@ -1283,9 +1258,7 @@
       qData.opts.forEach((opt, oi) => {
         const btn = document.createElement('button');
         btn.className = 'kc-opt';
-        btn.textContent = opt;
-        btn.dataset.qi = qi;
-        btn.dataset.oi = oi;
+        btn.innerHTML = opt;
         btn.addEventListener('click', () => {
           if (wrap.dataset.answered) return;
           wrap.dataset.answered = '1';
@@ -1299,8 +1272,11 @@
           });
           const fb = document.createElement('p');
           fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
-          fb.textContent = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
           wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
           if (answered === KC_QS.length) showScore();
         });
         optsEl.appendChild(btn);
@@ -1310,9 +1286,13 @@
       container.appendChild(wrap);
     });
 
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
+
     function showScore() {
       const pct = score / KC_QS.length;
-      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.67 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
       scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
       scoreEl.classList.add('show');
       document.getElementById('kcResetBtn').addEventListener('click', () => {
