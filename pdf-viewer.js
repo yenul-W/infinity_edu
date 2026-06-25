@@ -714,6 +714,13 @@
       }
     });
 
+    // ── Cross-frame lesson navigation (from lesson iframes) ──────
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-load-lesson' && typeof e.data.lessonIndex === 'number') {
+        loadLesson(e.data.lessonIndex, 'slides');
+      }
+    });
+
     // ── Init ─────────────────────────────────────────────────────
     buildSidebar();
     loadLesson(0, 'slides');
