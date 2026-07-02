@@ -753,7 +753,10 @@
       qData.opts.forEach((opt, oi) => {
         const btn = document.createElement('button');
         btn.className = 'kc-opt';
-        btn.innerHTML = opt;
+        const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+        const letter = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+        const content = letterMatch ? letterMatch[2] : opt;
+        btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
         btn.addEventListener('click', () => {
           if (wrap.dataset.answered) return;
           wrap.dataset.answered = '1';

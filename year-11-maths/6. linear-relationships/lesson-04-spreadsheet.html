@@ -153,6 +153,74 @@
     .analysis-block { margin-top:24px; border-top:1px solid var(--gray-light); padding-top:20px; }
     .analysis-block h4 { font-size:14px; font-weight:600; margin-bottom:16px; }
 
+    /* ── Formula bar ── */
+    .ss-formula-bar { display:flex; align-items:center; border:1px solid var(--ink); border-bottom:none; font-family:var(--font-mono); font-size:12px; height:28px; margin-top:16px; }
+    .ss-formula-bar-fx { padding:0 10px; border-right:1px solid var(--gray-light); color:var(--gray-med); font-style:italic; font-size:11px; height:100%; display:flex; align-items:center; min-width:28px; justify-content:center; }
+    .ss-formula-bar-ref { padding:0 8px; border-right:1px solid var(--gray-light); font-weight:700; font-size:11px; color:var(--ink); height:100%; display:flex; align-items:center; min-width:36px; white-space:nowrap; }
+    .ss-formula-bar-expr { padding:0 10px; color:var(--ink); flex:1; height:100%; display:flex; align-items:center; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+
+    /* ── Excel-style grid ── */
+    .ss-excel-grid { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; }
+    .ss-excel-grid .col-header { background:var(--gray-faint); border:1px solid var(--gray-light); padding:4px 8px; text-align:center; font-size:11px; font-weight:700; letter-spacing:0.06em; color:var(--gray-med); user-select:none; }
+    .ss-excel-grid .row-num { background:var(--gray-faint); border:1px solid var(--gray-light); padding:5px 7px; text-align:center; font-size:10px; color:var(--gray-med); min-width:28px; user-select:none; }
+    .ss-excel-grid .param-cell { border:1px solid var(--gray-light); padding:5px 10px; text-align:center; font-weight:700; color:var(--ink); background:var(--gray-faint); cursor:pointer; }
+    .ss-excel-grid .param-label-cell { border:1px solid var(--gray-light); padding:5px 10px; font-size:11px; color:var(--gray-med); letter-spacing:0.04em; background:var(--gray-faint); }
+    .ss-excel-grid .x-cell { border:1px solid var(--gray-light); padding:5px 10px; text-align:center; color:var(--gray-med); background:var(--gray-faint); }
+    .ss-excel-grid .y-cell { border:1px solid var(--gray-light); padding:5px 10px; text-align:center; color:var(--ink); cursor:pointer; transition:background 0.1s; }
+    .ss-excel-grid .y-cell:hover { background:var(--gray-faint); }
+    .ss-excel-grid .y-cell.cell-selected { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+    html.dark-mode .ss-excel-grid .col-header,
+    html.dark-mode .ss-excel-grid .row-num,
+    html.dark-mode .ss-excel-grid .x-cell,
+    html.dark-mode .ss-excel-grid .param-label-cell,
+    html.dark-mode .ss-excel-grid .param-cell { background:var(--gray-faint); }
+
+    /* ── What-If predictor ── */
+    .ss-whatif { margin-top:12px; border:1px solid var(--gray-light); padding:14px 16px; font-family:var(--font-mono); font-size:12px; }
+    .ss-whatif-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .ss-whatif-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+    .ss-whatif-row span { color:var(--gray-med); font-size:12px; }
+    .ss-whatif-input { width:72px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono); font-size:12px; color:var(--ink); padding:2px 4px; text-align:center; outline:none; }
+    .ss-whatif-input:focus { background:var(--gray-faint); }
+    .ss-whatif-result { font-weight:700; color:var(--ink); min-width:50px; display:inline-block; }
+
+    /* ── Goal Seek ── */
+    .ss-goalseek { margin-top:8px; border:1px solid var(--gray-light); padding:14px 16px; font-family:var(--font-mono); font-size:12px; }
+    .ss-goalseek-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .ss-goalseek-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+    .ss-goalseek-row span { color:var(--gray-med); font-size:12px; }
+    .ss-goalseek-input { width:72px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono); font-size:12px; color:var(--ink); padding:2px 4px; text-align:center; outline:none; }
+    .ss-goalseek-input:focus { background:var(--gray-faint); }
+    .ss-goalseek-result { font-weight:700; color:var(--ink); min-width:50px; display:inline-block; }
+    .ss-goalseek-working { font-size:11px; color:var(--gray-med); padding:6px 10px; border-left:2px solid var(--gray-light); min-height:18px; font-family:var(--font-mono); letter-spacing:0.02em; line-height:1.6; }
+
+    /* ── Formula Skills section ── */
+    .fs-grid-wrap { margin:20px 0; overflow-x:auto; }
+    .fs-grid { border-collapse:collapse; font-family:var(--font-mono); font-size:12px; min-width:200px; }
+    .fs-grid .col-header, .fs-grid .row-num { background:var(--gray-faint); border:1px solid var(--gray-light); padding:4px 8px; text-align:center; font-size:11px; font-weight:700; letter-spacing:0.06em; color:var(--gray-med); user-select:none; }
+    .fs-grid td { border:1px solid var(--gray-light); padding:5px 14px; text-align:center; min-width:80px; }
+    .fs-cell-value { color:var(--ink); }
+    .fs-cell-empty { color:var(--gray-light); font-size:11px; }
+    .fs-cell-filled { background:var(--gray-faint); color:var(--ink); }
+    .fs-cell-target { background:var(--ink); color:var(--canvas); cursor:pointer; font-size:13px; }
+    .fs-cell-highlight { outline:2px solid var(--ink); outline-offset:-2px; }
+    .fs-step { margin-bottom:16px; padding:16px 20px; border:1px solid var(--gray-light); }
+    .fs-step-num { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .fs-step p { font-size:13px; margin-bottom:10px; }
+    .fs-step p:last-child { margin-bottom:0; }
+    .fs-formula-input { width:220px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono); font-size:13px; color:var(--ink); padding:4px 6px; outline:none; }
+    .fs-formula-input:focus { background:var(--gray-faint); }
+    .fs-formula-feedback { margin-top:8px; font-family:var(--font-mono); font-size:12px; min-height:18px; }
+    .fs-formula-feedback.correct { color:#00a050; }
+    .fs-formula-feedback.wrong   { color:#c00000; }
+    .fs-fill-btn { border:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:7px 16px; cursor:pointer; transition:background 0.1s,color 0.1s; margin-top:10px; }
+    .fs-fill-btn:hover { background:var(--ink); color:var(--canvas); }
+    .fs-fill-btn:disabled { opacity:0.4; cursor:default; }
+    .fs-done-msg { display:none; margin-top:14px; padding:12px 16px; border:1px solid var(--ink); font-family:var(--font-mono); font-size:12px; background:var(--gray-faint); letter-spacing:0.02em; }
+    .fs-done-msg.show { display:block; }
+    .fs-next-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:4px 0; cursor:pointer; margin-top:10px; }
+    .fs-next-btn:hover { color:var(--gray-med); border-bottom-color:var(--gray-med); }
+
     /* ── Sociotype typography ── */
     h1, h2, h3, h4 { font-family: var(--font-display); }
     h1 { font-weight: 600; letter-spacing: 0.6px; }
@@ -218,6 +286,7 @@
       <ul class="toc-list">
         <li class="toc-item"><a class="toc-link" href="#intro">What is Spreadsheet Modelling?</a></li>
         <li class="toc-item"><a class="toc-link" href="#scenarios">The Five Scenarios</a></li>
+        <li class="toc-item"><a class="toc-link" href="#formula-skills">Formula Skills</a></li>
         <li class="toc-item"><a class="toc-link" href="#check">Practice &amp; Quiz</a></li>
         <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
       </ul>
@@ -281,10 +350,34 @@
                   <input type="range" id="slider-distTime" min="20" max="120" step="10" value="60">
                   <div class="ss-eq-live" id="eq-distTime">d = 60 × t</div>
                 </div>
-                <table class="ss-table" id="table-distTime">
-                  <thead><tr><th>Time (h)</th><th>Distance (km)</th></tr></thead>
+                <div class="ss-formula-bar" id="fbar-distTime">
+                  <div class="ss-formula-bar-fx">fx</div>
+                  <div class="ss-formula-bar-ref" id="fbar-ref-distTime">B1</div>
+                  <div class="ss-formula-bar-expr" id="fbar-expr-distTime">60  (Speed km/h)</div>
+                </div>
+                <table class="ss-excel-grid" id="table-distTime">
+                  <thead><tr><th class="col-header" style="width:28px;"></th><th class="col-header">A</th><th class="col-header">B</th></tr></thead>
                   <tbody></tbody>
                 </table>
+                <div class="ss-whatif">
+                  <p class="ss-whatif-label">What-If Predictor</p>
+                  <div class="ss-whatif-row">
+                    <span>If Time (h) =</span>
+                    <input type="number" class="ss-whatif-input" id="wi-x-distTime" placeholder="e.g. 3.5" step="any">
+                    <span>, then Distance (km) =</span>
+                    <span class="ss-whatif-result" id="wi-y-distTime">—</span>
+                  </div>
+                </div>
+                <div class="ss-goalseek">
+                  <p class="ss-goalseek-label">Goal Seek</p>
+                  <div class="ss-goalseek-row">
+                    <span>To achieve Distance (km) =</span>
+                    <input type="number" class="ss-goalseek-input" id="gs-y-distTime" placeholder="e.g. 350" step="any">
+                    <span>, Time (h) =</span>
+                    <span class="ss-goalseek-result" id="gs-x-distTime">—</span>
+                  </div>
+                  <div class="ss-goalseek-working" id="gs-working-distTime"></div>
+                </div>
               </div>
               <div>
                 <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
@@ -354,10 +447,34 @@
                   <input type="range" id="slider-sports" min="1" max="10" step="1" value="3">
                   <div class="ss-eq-live" id="eq-sports">skill = 20 + 3 × hours</div>
                 </div>
-                <table class="ss-table" id="table-sports">
-                  <thead><tr><th>Practice (h)</th><th>Skill Score</th></tr></thead>
+                <div class="ss-formula-bar" id="fbar-sports">
+                  <div class="ss-formula-bar-fx">fx</div>
+                  <div class="ss-formula-bar-ref" id="fbar-ref-sports">B1</div>
+                  <div class="ss-formula-bar-expr" id="fbar-expr-sports">3  (Rate pts/h)</div>
+                </div>
+                <table class="ss-excel-grid" id="table-sports">
+                  <thead><tr><th class="col-header" style="width:28px;"></th><th class="col-header">A</th><th class="col-header">B</th></tr></thead>
                   <tbody></tbody>
                 </table>
+                <div class="ss-whatif">
+                  <p class="ss-whatif-label">What-If Predictor</p>
+                  <div class="ss-whatif-row">
+                    <span>If Practice (h) =</span>
+                    <input type="number" class="ss-whatif-input" id="wi-x-sports" placeholder="e.g. 12" step="any">
+                    <span>, then Skill Score =</span>
+                    <span class="ss-whatif-result" id="wi-y-sports">—</span>
+                  </div>
+                </div>
+                <div class="ss-goalseek">
+                  <p class="ss-goalseek-label">Goal Seek</p>
+                  <div class="ss-goalseek-row">
+                    <span>To achieve Skill Score =</span>
+                    <input type="number" class="ss-goalseek-input" id="gs-y-sports" placeholder="e.g. 80" step="any">
+                    <span>, Practice (h) =</span>
+                    <span class="ss-goalseek-result" id="gs-x-sports">—</span>
+                  </div>
+                  <div class="ss-goalseek-working" id="gs-working-sports"></div>
+                </div>
               </div>
               <div>
                 <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
@@ -427,10 +544,34 @@
                   <input type="range" id="slider-art" min="0.5" max="8" step="0.5" value="2">
                   <div class="ss-eq-live" id="eq-art">mastery = 5 + 2 × hours</div>
                 </div>
-                <table class="ss-table" id="table-art">
-                  <thead><tr><th>Time (h)</th><th>Mastery (%)</th></tr></thead>
+                <div class="ss-formula-bar" id="fbar-art">
+                  <div class="ss-formula-bar-fx">fx</div>
+                  <div class="ss-formula-bar-ref" id="fbar-ref-art">B1</div>
+                  <div class="ss-formula-bar-expr" id="fbar-expr-art">2.0  (Rate %/h)</div>
+                </div>
+                <table class="ss-excel-grid" id="table-art">
+                  <thead><tr><th class="col-header" style="width:28px;"></th><th class="col-header">A</th><th class="col-header">B</th></tr></thead>
                   <tbody></tbody>
                 </table>
+                <div class="ss-whatif">
+                  <p class="ss-whatif-label">What-If Predictor</p>
+                  <div class="ss-whatif-row">
+                    <span>If Time (h) =</span>
+                    <input type="number" class="ss-whatif-input" id="wi-x-art" placeholder="e.g. 19" step="any">
+                    <span>, then Mastery (%) =</span>
+                    <span class="ss-whatif-result" id="wi-y-art">—</span>
+                  </div>
+                </div>
+                <div class="ss-goalseek">
+                  <p class="ss-goalseek-label">Goal Seek</p>
+                  <div class="ss-goalseek-row">
+                    <span>To achieve Mastery (%) =</span>
+                    <input type="number" class="ss-goalseek-input" id="gs-y-art" placeholder="e.g. 85" step="any">
+                    <span>, Time (h) =</span>
+                    <span class="ss-goalseek-result" id="gs-x-art">—</span>
+                  </div>
+                  <div class="ss-goalseek-working" id="gs-working-art"></div>
+                </div>
               </div>
               <div>
                 <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
@@ -500,10 +641,34 @@
                   <input type="range" id="slider-energy" min="1" max="5" step="0.5" value="2">
                   <div class="ss-eq-live" id="eq-energy">fossil = 100 − 2 × year</div>
                 </div>
-                <table class="ss-table" id="table-energy">
-                  <thead><tr><th>Year</th><th>Fossil Fuel (%)</th></tr></thead>
+                <div class="ss-formula-bar" id="fbar-energy">
+                  <div class="ss-formula-bar-fx">fx</div>
+                  <div class="ss-formula-bar-ref" id="fbar-ref-energy">B1</div>
+                  <div class="ss-formula-bar-expr" id="fbar-expr-energy">2.0  (Rate %/yr)</div>
+                </div>
+                <table class="ss-excel-grid" id="table-energy">
+                  <thead><tr><th class="col-header" style="width:28px;"></th><th class="col-header">A</th><th class="col-header">B</th></tr></thead>
                   <tbody></tbody>
                 </table>
+                <div class="ss-whatif">
+                  <p class="ss-whatif-label">What-If Predictor</p>
+                  <div class="ss-whatif-row">
+                    <span>If Year =</span>
+                    <input type="number" class="ss-whatif-input" id="wi-x-energy" placeholder="e.g. 15" step="any">
+                    <span>, then Fossil Fuel (%) =</span>
+                    <span class="ss-whatif-result" id="wi-y-energy">—</span>
+                  </div>
+                </div>
+                <div class="ss-goalseek">
+                  <p class="ss-goalseek-label">Goal Seek</p>
+                  <div class="ss-goalseek-row">
+                    <span>To achieve Fossil Fuel (%) =</span>
+                    <input type="number" class="ss-goalseek-input" id="gs-y-energy" placeholder="e.g. 40" step="any">
+                    <span>, Year =</span>
+                    <span class="ss-goalseek-result" id="gs-x-energy">—</span>
+                  </div>
+                  <div class="ss-goalseek-working" id="gs-working-energy"></div>
+                </div>
               </div>
               <div>
                 <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
@@ -573,10 +738,34 @@
                   <input type="range" id="slider-gdp" min="0.10" max="0.50" step="0.05" value="0.20">
                   <div class="ss-eq-live" id="eq-gdp">GDP = 2.0 + 0.20 × year</div>
                 </div>
-                <table class="ss-table" id="table-gdp">
-                  <thead><tr><th>Year</th><th>GDP ($ trillion)</th></tr></thead>
+                <div class="ss-formula-bar" id="fbar-gdp">
+                  <div class="ss-formula-bar-fx">fx</div>
+                  <div class="ss-formula-bar-ref" id="fbar-ref-gdp">B1</div>
+                  <div class="ss-formula-bar-expr" id="fbar-expr-gdp">0.20  (Rate $T/yr)</div>
+                </div>
+                <table class="ss-excel-grid" id="table-gdp">
+                  <thead><tr><th class="col-header" style="width:28px;"></th><th class="col-header">A</th><th class="col-header">B</th></tr></thead>
                   <tbody></tbody>
                 </table>
+                <div class="ss-whatif">
+                  <p class="ss-whatif-label">What-If Predictor</p>
+                  <div class="ss-whatif-row">
+                    <span>If Year =</span>
+                    <input type="number" class="ss-whatif-input" id="wi-x-gdp" placeholder="e.g. 7" step="any">
+                    <span>, then GDP ($ trillion) =</span>
+                    <span class="ss-whatif-result" id="wi-y-gdp">—</span>
+                  </div>
+                </div>
+                <div class="ss-goalseek">
+                  <p class="ss-goalseek-label">Goal Seek</p>
+                  <div class="ss-goalseek-row">
+                    <span>To achieve GDP ($ trillion) =</span>
+                    <input type="number" class="ss-goalseek-input" id="gs-y-gdp" placeholder="e.g. 4.0" step="any">
+                    <span>, Year =</span>
+                    <span class="ss-goalseek-result" id="gs-x-gdp">—</span>
+                  </div>
+                  <div class="ss-goalseek-working" id="gs-working-gdp"></div>
+                </div>
               </div>
               <div>
                 <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
@@ -630,6 +819,74 @@
         </div>
 
       </div><!-- end scenarios card -->
+
+      <!-- ── Formula Skills ── -->
+      <div class="content-card" id="formula-skills">
+        <p class="section-label">Guided Exercise</p>
+        <h2>Formula Skills</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Practice entering formulas exactly as you would in Excel. We use the <strong>Distance &amp; Time</strong> scenario — the speed is stored in cell B1, time values are in column A, and your formula fills column B.</p>
+
+        <!-- Mini formula bar for the exercise -->
+        <div class="ss-formula-bar" style="margin-top:0; margin-bottom:0;">
+          <div class="ss-formula-bar-fx">fx</div>
+          <div class="ss-formula-bar-ref" id="fs-fbar-ref">—</div>
+          <div class="ss-formula-bar-expr" id="fs-fbar-expr">Click a cell to see its value or formula</div>
+        </div>
+
+        <!-- Static exercise grid -->
+        <div class="fs-grid-wrap">
+          <table class="fs-grid" id="fs-grid">
+            <thead>
+              <tr>
+                <th class="row-num"></th>
+                <th class="col-header">A</th>
+                <th class="col-header">B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-num">1</td>
+                <td class="fs-cell-value" style="color:var(--gray-med); font-size:11px; letter-spacing:0.04em;">Speed (km/h)</td>
+                <td class="fs-cell-value" id="fs-B1">60</td>
+              </tr>
+              <tr><td class="row-num">2</td><td class="fs-cell-value">0</td><td class="fs-cell-target" id="fs-B2">?</td></tr>
+              <tr><td class="row-num">3</td><td class="fs-cell-value">1</td><td class="fs-cell-empty" id="fs-B3">empty</td></tr>
+              <tr><td class="row-num">4</td><td class="fs-cell-value">2</td><td class="fs-cell-empty" id="fs-B4">empty</td></tr>
+              <tr><td class="row-num">5</td><td class="fs-cell-value">3</td><td class="fs-cell-empty" id="fs-B5">empty</td></tr>
+              <tr><td class="row-num">6</td><td class="fs-cell-value">4</td><td class="fs-cell-empty" id="fs-B6">empty</td></tr>
+              <tr><td class="row-num">7</td><td class="fs-cell-value">5</td><td class="fs-cell-empty" id="fs-B7">empty</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="fs-step" id="fs-step1">
+          <p class="fs-step-num">Step 1 of 3</p>
+          <p>The <strong>speed parameter</strong> (60 km/h) is stored in cell <strong>B1</strong>. Click on cell B1 in the grid above to select it.</p>
+          <p style="font-size:12px; color:var(--gray-med); font-family:var(--font-mono);">In Excel you type the parameter value directly into cell B1 and press Enter.</p>
+          <button class="fs-next-btn" onclick="fsNextStep(2)">Got it — move to Step 2</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="fs-step" id="fs-step2" style="display:none;">
+          <p class="fs-step-num">Step 2 of 3</p>
+          <p>Cell <strong>B2</strong> should calculate the distance when time = 0. Type the Excel formula for B2 below. Use <code style="font-family:var(--font-mono);">$B$1</code> so the reference to speed stays fixed when you fill down.</p>
+          <input type="text" class="fs-formula-input" id="fs-formula-input" placeholder="=$B$1*A2" autocomplete="off" spellcheck="false">
+          <p class="fs-formula-feedback" id="fs-formula-feedback"></p>
+          <p style="font-size:12px; color:var(--gray-med); margin-top:10px; font-family:var(--font-mono);">Accepted: =$B$1*A2 &nbsp;|&nbsp; =B1*A2 &nbsp;|&nbsp; =$B$1×A2</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="fs-step" id="fs-step3" style="display:none;">
+          <p class="fs-step-num">Step 3 of 3</p>
+          <p>Your formula in B2 is correct. Now click <strong>Fill Down</strong> to populate B3:B7 — in Excel you select B2:B7 and press <kbd style="font-family:var(--font-mono); border:1px solid var(--gray-light); padding:1px 5px; font-size:11px;">Ctrl+D</kbd>.</p>
+          <button class="fs-fill-btn" id="fs-fill-btn" onclick="fsFillDown()">Fill Down B3:B7</button>
+        </div>
+
+        <div class="fs-done-msg" id="fs-done-msg">
+          Well done — you have built a working spreadsheet model for distance vs. time. One formula in B2, filled down the column. This is exactly how Excel works for linear models.
+        </div>
+      </div>
 
       <!-- ── Practice & Quiz ── -->
       <div class="kc-block" id="check">
@@ -776,59 +1033,96 @@
   // ── Scenario configuration ──
   const SCENARIOS = {
     distTime: {
-      xVals:    [0, 1, 2, 3, 4, 5],
-      xLabel:   'Time (h)',
-      yLabel:   'Distance (km)',
-      yMin:     0,
-      compute:  (xArr, speed) => xArr.map(t => speed * t),
-      yMaxFn:   (speed) => speed * 5 + 20,
-      eqFn:     (speed) => `d = ${speed} × t`,
-      fmtVal:   (v) => v.toFixed(0),
-      fmtY:     (y) => y.toFixed(0)
+      xVals:       [0, 1, 2, 3, 4, 5],
+      xLabel:      'Time (h)',
+      yLabel:      'Distance (km)',
+      yMin:        0,
+      compute:     (xArr, speed) => xArr.map(t => speed * t),
+      yMaxFn:      (speed) => speed * 5 + 20,
+      eqFn:        (speed) => `d = ${speed} × t`,
+      fmtVal:      (v) => v.toFixed(0),
+      fmtY:        (y) => y.toFixed(0),
+      paramLabel:  'Speed (km/h)',
+      cellFormula: (rowIdx) => `= $B$1 × A${rowIdx + 2}`,
+      goalSeekFn:  (targetY, speed) => targetY / speed,
+      goalSeekSteps: (targetY, speed) => {
+        const t = (targetY / speed).toFixed(2);
+        return `d = ${speed} × t  →  t = d ÷ ${speed} = ${targetY} ÷ ${speed} = ${t} h`;
+      }
     },
     sports: {
-      xVals:    [0, 5, 10, 15, 20, 25],
-      xLabel:   'Practice (h)',
-      yLabel:   'Skill Score',
-      yMin:     0,
-      compute:  (xArr, rate) => xArr.map(h => 20 + rate * h),
-      yMaxFn:   (rate) => 20 + rate * 25 + 10,
-      eqFn:     (rate) => `skill = 20 + ${rate} × hours`,
-      fmtVal:   (v) => v.toFixed(0),
-      fmtY:     (y) => y.toFixed(0)
+      xVals:       [0, 5, 10, 15, 20, 25],
+      xLabel:      'Practice (h)',
+      yLabel:      'Skill Score',
+      yMin:        0,
+      compute:     (xArr, rate) => xArr.map(h => 20 + rate * h),
+      yMaxFn:      (rate) => 20 + rate * 25 + 10,
+      eqFn:        (rate) => `skill = 20 + ${rate} × hours`,
+      fmtVal:      (v) => v.toFixed(0),
+      fmtY:        (y) => y.toFixed(0),
+      paramLabel:  'Rate (pts/h)',
+      cellFormula: (rowIdx) => `= 20 + $B$1 × A${rowIdx + 2}`,
+      goalSeekFn:  (targetY, rate) => (targetY - 20) / rate,
+      goalSeekSteps: (targetY, rate) => {
+        const h = ((targetY - 20) / rate).toFixed(2);
+        return `skill = 20 + ${rate} × h  →  h = (${targetY} − 20) ÷ ${rate} = ${h} h`;
+      }
     },
     art: {
-      xVals:    [0, 5, 10, 15, 20, 25],
-      xLabel:   'Time (h)',
-      yLabel:   'Mastery (%)',
-      yMin:     0,
-      yMaxFixed: 100,
-      compute:  (xArr, rate) => xArr.map(h => Math.min(5 + rate * h, 100)),
-      eqFn:     (rate) => `mastery = 5 + ${rate} × hours`,
-      fmtVal:   (v) => v.toFixed(1),
-      fmtY:     (y) => y.toFixed(0)
+      xVals:       [0, 5, 10, 15, 20, 25],
+      xLabel:      'Time (h)',
+      yLabel:      'Mastery (%)',
+      yMin:        0,
+      yMaxFixed:   100,
+      compute:     (xArr, rate) => xArr.map(h => Math.min(5 + rate * h, 100)),
+      eqFn:        (rate) => `mastery = 5 + ${rate} × hours`,
+      fmtVal:      (v) => v.toFixed(1),
+      fmtY:        (y) => y.toFixed(0),
+      paramLabel:  'Rate (%/h)',
+      cellFormula: (rowIdx) => `= MIN(5 + $B$1 × A${rowIdx + 2}, 100)`,
+      goalSeekFn:  (targetY, rate) => (Math.min(targetY, 100) - 5) / rate,
+      goalSeekSteps: (targetY, rate) => {
+        const tgt = Math.min(targetY, 100);
+        const h = ((tgt - 5) / rate).toFixed(2);
+        return `mastery = 5 + ${rate} × h  →  h = (${tgt} − 5) ÷ ${rate} = ${h} h`;
+      }
     },
     energy: {
-      xVals:    [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-      xLabel:   'Year',
-      yLabel:   'Fossil Fuel (%)',
-      yMin:     0,
-      yMaxFixed: 100,
-      compute:  (xArr, rate) => xArr.map(yr => Math.max(0, 100 - rate * yr)),
-      eqFn:     (rate) => `fossil = 100 − ${rate} × year`,
-      fmtVal:   (v) => v.toFixed(1),
-      fmtY:     (y) => y.toFixed(0)
+      xVals:       [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+      xLabel:      'Year',
+      yLabel:      'Fossil Fuel (%)',
+      yMin:        0,
+      yMaxFixed:   100,
+      compute:     (xArr, rate) => xArr.map(yr => Math.max(0, 100 - rate * yr)),
+      eqFn:        (rate) => `fossil = 100 − ${rate} × year`,
+      fmtVal:      (v) => v.toFixed(1),
+      fmtY:        (y) => y.toFixed(0),
+      paramLabel:  'Rate (%/yr)',
+      cellFormula: (rowIdx) => `= MAX(100 − $B$1 × A${rowIdx + 2}, 0)`,
+      goalSeekFn:  (targetY, rate) => (100 - Math.max(targetY, 0)) / rate,
+      goalSeekSteps: (targetY, rate) => {
+        const tgt = Math.max(targetY, 0);
+        const yr = ((100 - tgt) / rate).toFixed(2);
+        return `fossil = 100 − ${rate} × yr  →  yr = (100 − ${tgt}) ÷ ${rate} = ${yr} yr`;
+      }
     },
     gdp: {
-      xVals:    [0, 2, 4, 6, 8, 10],
-      xLabel:   'Year',
-      yLabel:   'GDP ($ trillion)',
-      yMin:     0,
-      compute:  (xArr, rate) => xArr.map(yr => +(2.0 + rate * yr).toFixed(2)),
-      yMaxFn:   (rate) => +(2.0 + rate * 10 + 0.5).toFixed(1),
-      eqFn:     (rate) => `GDP = 2.0 + ${rate.toFixed(2)} × year`,
-      fmtVal:   (v) => v.toFixed(2),
-      fmtY:     (y) => y.toFixed(2)
+      xVals:       [0, 2, 4, 6, 8, 10],
+      xLabel:      'Year',
+      yLabel:      'GDP ($ trillion)',
+      yMin:        0,
+      compute:     (xArr, rate) => xArr.map(yr => +(2.0 + rate * yr).toFixed(2)),
+      yMaxFn:      (rate) => +(2.0 + rate * 10 + 0.5).toFixed(1),
+      eqFn:        (rate) => `GDP = 2.0 + ${rate.toFixed(2)} × year`,
+      fmtVal:      (v) => v.toFixed(2),
+      fmtY:        (y) => y.toFixed(2),
+      paramLabel:  'Rate ($T/yr)',
+      cellFormula: (rowIdx) => `= 2.0 + $B$1 × A${rowIdx + 2}`,
+      goalSeekFn:  (targetY, rate) => (targetY - 2.0) / rate,
+      goalSeekSteps: (targetY, rate) => {
+        const yr = ((targetY - 2.0) / rate).toFixed(2);
+        return `GDP = 2.0 + ${rate.toFixed(2)} × yr  →  yr = (${targetY} − 2.0) ÷ ${rate.toFixed(2)} = ${yr} yr`;
+      }
     }
   };
 
@@ -849,11 +1143,81 @@
     const tbody = document.querySelector(`#table-${key} tbody`);
     if (tbody) {
       tbody.innerHTML = '';
+
+      // Row 1: parameter row
+      const paramRow = document.createElement('tr');
+      paramRow.innerHTML =
+        `<td class="row-num">1</td>` +
+        `<td class="param-label-cell">${cfg.paramLabel}</td>` +
+        `<td class="param-cell" id="cell-B1-${key}">${cfg.fmtVal(paramVal)}</td>`;
+      tbody.appendChild(paramRow);
+
+      // Rows 2+: data rows
       xVals.forEach((x, i) => {
+        const rowNum = i + 2;
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${x}</td><td class="computed">${cfg.fmtY(yVals[i])}</td>`;
+        tr.innerHTML =
+          `<td class="row-num">${rowNum}</td>` +
+          `<td class="x-cell">${x}</td>` +
+          `<td class="y-cell" id="cell-B${rowNum}-${key}" ` +
+              `data-row="${rowNum}" data-key="${key}" data-idx="${i}">` +
+              `${cfg.fmtY(yVals[i])}</td>`;
         tbody.appendChild(tr);
       });
+
+      // Wire computed cell clicks → formula bar
+      tbody.querySelectorAll('.y-cell').forEach(cell => {
+        cell.addEventListener('click', () => {
+          tbody.querySelectorAll('.y-cell').forEach(c => c.classList.remove('cell-selected'));
+          cell.classList.add('cell-selected');
+          const refEl  = document.getElementById(`fbar-ref-${key}`);
+          const exprEl = document.getElementById(`fbar-expr-${key}`);
+          if (refEl)  refEl.textContent  = `B${cell.dataset.row}`;
+          if (exprEl) exprEl.textContent = SCENARIOS[key].cellFormula(parseInt(cell.dataset.idx));
+        });
+      });
+
+      // Wire B1 param cell click
+      const b1 = document.getElementById(`cell-B1-${key}`);
+      if (b1) {
+        b1.addEventListener('click', () => {
+          tbody.querySelectorAll('.y-cell').forEach(c => c.classList.remove('cell-selected'));
+          const refEl  = document.getElementById(`fbar-ref-${key}`);
+          const exprEl = document.getElementById(`fbar-expr-${key}`);
+          if (refEl)  refEl.textContent  = 'B1';
+          if (exprEl) exprEl.textContent = `${cfg.fmtVal(paramVal)}  (${cfg.paramLabel})`;
+        });
+      }
+
+      // Reset formula bar on slider change
+      const fbarRef  = document.getElementById(`fbar-ref-${key}`);
+      const fbarExpr = document.getElementById(`fbar-expr-${key}`);
+      if (fbarRef)  fbarRef.textContent  = 'B1';
+      if (fbarExpr) fbarExpr.textContent = `${cfg.fmtVal(paramVal)}  (${cfg.paramLabel})`;
+    }
+
+    // Re-run what-if if there's a value
+    const wiX = document.getElementById(`wi-x-${key}`);
+    const wiY = document.getElementById(`wi-y-${key}`);
+    if (wiX && wiY && wiX.value !== '') {
+      const xIn = parseFloat(wiX.value);
+      if (!isNaN(xIn)) {
+        const result = cfg.compute([xIn], paramVal)[0];
+        wiY.textContent = isFinite(result) ? cfg.fmtY(result) : '—';
+      }
+    }
+
+    // Re-run goal seek if there's a value
+    const gsY = document.getElementById(`gs-y-${key}`);
+    const gsX = document.getElementById(`gs-x-${key}`);
+    const gsW = document.getElementById(`gs-working-${key}`);
+    if (gsY && gsX && gsY.value !== '') {
+      const yIn = parseFloat(gsY.value);
+      if (!isNaN(yIn)) {
+        const xResult = cfg.goalSeekFn(yIn, paramVal);
+        if (gsX) gsX.textContent = isFinite(xResult) ? xResult.toFixed(2) : '—';
+        if (gsW) gsW.textContent = isFinite(xResult) ? cfg.goalSeekSteps(yIn, paramVal) : '';
+      }
     }
 
     drawScenarioGraph(
@@ -873,6 +1237,40 @@
       updateScenario(key, parseFloat(this.value));
     });
     updateScenario(key, parseFloat(slider.value));
+  });
+
+  // ── Wire What-If inputs ──
+  Object.keys(SCENARIOS).forEach(key => {
+    const wiX = document.getElementById(`wi-x-${key}`);
+    const wiY = document.getElementById(`wi-y-${key}`);
+    if (!wiX || !wiY) return;
+    wiX.addEventListener('input', function() {
+      const param = parseFloat(document.getElementById(`slider-${key}`).value);
+      const x = parseFloat(this.value);
+      if (isNaN(x)) { wiY.textContent = '—'; return; }
+      const result = SCENARIOS[key].compute([x], param)[0];
+      wiY.textContent = isFinite(result) ? SCENARIOS[key].fmtY(result) : '—';
+    });
+  });
+
+  // ── Wire Goal Seek inputs ──
+  Object.keys(SCENARIOS).forEach(key => {
+    const gsY = document.getElementById(`gs-y-${key}`);
+    const gsX = document.getElementById(`gs-x-${key}`);
+    const gsW = document.getElementById(`gs-working-${key}`);
+    if (!gsY) return;
+    gsY.addEventListener('input', function() {
+      const param = parseFloat(document.getElementById(`slider-${key}`).value);
+      const y = parseFloat(this.value);
+      if (isNaN(y)) {
+        if (gsX) gsX.textContent = '—';
+        if (gsW) gsW.textContent = '';
+        return;
+      }
+      const x = SCENARIOS[key].goalSeekFn(y, param);
+      if (gsX) gsX.textContent = isFinite(x) ? x.toFixed(2) : '—';
+      if (gsW) gsW.textContent = isFinite(x) ? SCENARIOS[key].goalSeekSteps(y, param) : '';
+    });
   });
 
   // ── Tab switching ──
@@ -977,7 +1375,10 @@
       qData.opts.forEach((opt, oi) => {
         const btn = document.createElement('button');
         btn.className = 'kc-opt';
-        btn.innerHTML = opt;
+        const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+        const letter = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+        const content = letterMatch ? letterMatch[2] : opt;
+        btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
         btn.addEventListener('click', () => {
           if (wrap.dataset.answered) return;
           wrap.dataset.answered = '1';
@@ -1057,6 +1458,85 @@
       });
     }, { rootMargin: '-20% 0px -70% 0px' });
     document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+
+  // ── Formula Skills guided exercise ──
+  (function() {
+    const speed = 60, xVals = [0,1,2,3,4,5];
+
+    function setFSBar(ref, expr) {
+      const r = document.getElementById('fs-fbar-ref');
+      const e = document.getElementById('fs-fbar-expr');
+      if (r) r.textContent = ref;
+      if (e) e.textContent = expr;
+    }
+
+    const B1 = document.getElementById('fs-B1');
+    if (B1) {
+      B1.style.cursor = 'pointer';
+      B1.addEventListener('click', () => {
+        document.querySelectorAll('.fs-cell-highlight').forEach(c => c.classList.remove('fs-cell-highlight'));
+        B1.classList.add('fs-cell-highlight');
+        setFSBar('B1', speed + '  (Speed km/h)');
+      });
+    }
+
+    window.fsNextStep = function(toStep) {
+      const prev = document.getElementById('fs-step' + (toStep - 1));
+      if (prev) { prev.style.opacity = '0.5'; prev.style.pointerEvents = 'none'; }
+      const next = document.getElementById('fs-step' + toStep);
+      if (next) next.style.display = 'block';
+      if (toStep === 2) wireFormulaInput();
+    };
+
+    function wireFormulaInput() {
+      const input    = document.getElementById('fs-formula-input');
+      const feedback = document.getElementById('fs-formula-feedback');
+      if (!input) return;
+      input.focus();
+      input.addEventListener('input', function() {
+        const v = this.value.trim().toLowerCase().replace(/×/g,'*').replace(/\s/g,'');
+        const ok = /^=\$?b\$?1\*\$?a\$?2$/.test(v) || /^=\$?a\$?2\*\$?b\$?1$/.test(v);
+        if (ok) {
+          feedback.textContent = '✓ Correct! B2 = 60 × 0 = 0';
+          feedback.style.color = 'var(--ink)';
+          feedback.style.fontWeight = '700';
+          input.disabled = true;
+          const B2 = document.getElementById('fs-B2');
+          if (B2) { B2.textContent = '0'; B2.className = 'fs-cell-filled'; }
+          setFSBar('B2', '= $B$1 × A2');
+          setTimeout(() => fsNextStep(3), 700);
+        } else if (v.length > 2) {
+          feedback.textContent = '✗ Not quite — try  =$B$1*A2';
+          feedback.style.color = 'var(--gray-med)';
+          feedback.style.fontWeight = 'normal';
+        } else {
+          feedback.textContent = '';
+        }
+      });
+    }
+
+    window.fsFillDown = function() {
+      const btn = document.getElementById('fs-fill-btn');
+      if (btn) btn.disabled = true;
+      let i = 1;
+      function next() {
+        if (i >= xVals.length) {
+          const done = document.getElementById('fs-done-msg');
+          if (done) done.style.display = 'block';
+          const step3 = document.getElementById('fs-step3');
+          if (step3) { step3.style.opacity = '0.5'; step3.style.pointerEvents = 'none'; }
+          return;
+        }
+        const rowNum = i + 2;
+        const cell = document.getElementById('fs-B' + rowNum);
+        if (cell) { cell.textContent = (speed * xVals[i]).toString(); cell.className = 'fs-cell-filled'; }
+        setFSBar('B' + rowNum, '= $B$1 × A' + rowNum);
+        i++;
+        setTimeout(next, 300);
+      }
+      next();
+    };
   })();
 </script>
 </body>
