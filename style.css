@@ -1468,6 +1468,13 @@ html.dark-mode body.sociotype .pdf-page {
   border-color: #333;
 }
 
+/* File-kind lesson — extra download link (e.g. homework spreadsheet) */
+body.sociotype .pdf-file-links {
+  align-self: center;
+  margin: auto;
+  display: none;
+}
+
 /* HTML-kind lesson iframe */
 body.sociotype .pdf-html-frame {
   width: 100%;

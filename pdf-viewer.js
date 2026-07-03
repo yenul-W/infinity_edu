@@ -91,6 +91,12 @@
       if (currentKind === 'pdf' && currentFile) loadPdf(currentFile);
     });
 
+    // ── File mode — extra download (e.g. a homework spreadsheet) ──
+    const pdfFileLinks = document.createElement('div');
+    pdfFileLinks.className = 'pdf-file-links';
+    pdfFileLinks.style.display = 'none';
+    pdfStage.insertBefore(pdfFileLinks, canvasWrapper);
+
     // ── 2. Scroll progress bar ──────────────────────────────────
     const scrollBar = document.createElement('div');
     scrollBar.className = 'pdf-scroll-progress';
@@ -229,7 +235,7 @@
         let inner = `
           <div class="lesson-group-header">
             <span class="lesson-group-num">${lesson.homework ? 'Homework' : lesson.revision ? 'Revision' : 'Lesson ' + lesson.num}</span>
-            <span class="lesson-kind-badge">${lesson.kind === 'html' ? 'INTERACTIVE' : (lesson.kind || 'pdf').toUpperCase()}</span>
+            <span class="lesson-kind-badge">${lesson.kind === 'html' ? 'INTERACTIVE' : lesson.kind === 'file' ? 'SPREADSHEET' : (lesson.kind || 'pdf').toUpperCase()}</span>
           </div>`;
 
         if (!lesson.homework && !lesson.revision) {
@@ -540,6 +546,25 @@
       htmlFrame.src = url;
     }
 
+    function showFileMode(extraFile) {
+      pageControls.style.display = 'none';
+      zoomControls.style.display = 'none';
+      pdfLoading.style.display = 'none';
+      pdfError.style.display = 'none';
+      canvasWrapper.style.display = 'none';
+      htmlFrame.style.display = 'none';
+      htmlFrame.src = 'about:blank';
+
+      if (extraFile) {
+        pdfFileLinks.innerHTML =
+          `<a class="pdf-btn" href="${extraFile.file}" download>${extraFile.label}</a>`;
+        pdfFileLinks.style.display = 'flex';
+      } else {
+        pdfFileLinks.innerHTML = '';
+        pdfFileLinks.style.display = 'none';
+      }
+    }
+
     // ── Load lesson ───────────────────────────────────────────────
     async function loadLesson(idx, variant) {
       const lesson = lessons[idx];
@@ -565,10 +590,18 @@
 
       if (currentKind === 'html') {
         downloadBtn.style.display = 'none';
+        pdfFileLinks.style.display = 'none';
         showHtmlMode(file);
         return;
       }
 
+      if (currentKind === 'file') {
+        downloadBtn.style.display = '';
+        showFileMode(lesson.extraFile);
+        return;
+      }
+
+      pdfFileLinks.style.display = 'none';
       downloadBtn.style.display = '';
       showPdfMode();
       await loadPdf(file);
