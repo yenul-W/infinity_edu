@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Gradient-Intercept Formula &amp; Linear Models</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #000;
+      --canvas: #fff;
+      --gray-med: #818181;
+      --gray-light: #d6d6d6;
+      --gray-faint: #f2f2f2;
+      --font-display: 'Poppins', sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior: smooth; }
+    body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
+    a { color: inherit; }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    /* ── Hero ── */
+    .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
+    .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
+    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; letter-spacing:0.04em; color:var(--gray-med); }
+
+    /* ── Layout ── */
+    .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
+    .toc { position:sticky; top:24px; }
+    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-list { list-style:none; }
+    .toc-item { margin-bottom:2px; }
+    .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s, border-color 0.15s; }
+    .toc-link:hover { color:var(--ink); }
+    .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
+
+    /* ── Content cards ── */
+    .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
+    h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
+    p { margin-bottom:14px; }
+    ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
+
+    /* ── Definition / example / note blocks ── */
+    .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block p:last-child { margin-bottom:0; }
+    .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block p:last-child { margin-bottom:0; }
+    .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
+    .note-block p:last-child { margin-bottom:0; }
+
+    /* ── Stepper ── */
+    .stepper { border:1px solid var(--ink); margin-bottom:28px; }
+    .stepper-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--gray-light); background:var(--gray-faint); }
+    .stepper-nodes { display:flex; gap:8px; }
+    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono); font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s, border-color 0.15s, color 0.15s; }
+    .stepper-node:hover { border-color:var(--ink); }
+    .stepper-node.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+    .stepper-node.visited { border-color:var(--ink); }
+    .stepper-counter { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); }
+    .stepper-panel { padding:24px 28px; min-height:160px; }
+    .stepper-panel h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .stepper-panel p:last-child { margin-bottom:0; }
+    .stepper-nav { display:flex; gap:12px; padding:14px 20px; border-top:1px solid var(--gray-light); }
+    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s, color 0.15s; }
+    .stepper-btn:hover:not(:disabled) { background:var(--ink); color:var(--canvas); }
+    .stepper-btn:disabled { opacity:0.35; cursor:default; }
+
+    /* ── Formula box ── */
+    .formula-box { border:1px solid var(--gray-light); background:var(--gray-faint); padding:14px 20px; margin:14px 0; text-align:center; font-size:15px; }
+
+    /* ── Interpretation table ── */
+    .interp-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:18px; }
+    .interp-table th, .interp-table td { border:1px solid var(--gray-light); padding:10px 16px; }
+    .interp-table th { background:var(--gray-faint); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    .interp-table td:first-child { font-family:var(--font-mono); font-weight:600; }
+
+    /* ── Live graph ── */
+    .live-graph-wrap { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start; }
+    .sliders { display:flex; flex-direction:column; gap:18px; }
+    .slider-group { display:flex; flex-direction:column; gap:6px; }
+    .slider-group label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; }
+    .slider-val { font-family:var(--font-mono); font-size:20px; font-weight:700; color:var(--ink); min-width:40px; display:inline-block; }
+    input[type=range] { width:100%; accent-color:var(--ink); }
+    .eq-live { font-family:var(--font-mono); font-size:16px; font-weight:700; margin-top:16px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); }
+    .graph-wrap { border:1px solid var(--gray-light); display:inline-block; }
+    .graph-wrap svg { display:block; }
+
+    /* ── Identify m and b table ── */
+    .id-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:18px; }
+    .id-table th, .id-table td { border:1px solid var(--gray-light); padding:10px 14px; }
+    .id-table th { background:var(--gray-faint); font-family:var(--font-mono); font-weight:700; font-size:12px; }
+    .id-table td:first-child { font-family:var(--font-mono); font-weight:600; }
+    .id-table input { width:70px; border:1px solid var(--gray-light); padding:6px; font-family:var(--font-mono); font-size:12px; background:var(--canvas); color:var(--ink); text-align:center; }
+    .id-table td.correct { background:rgba(0,160,80,0.1); }
+    .id-table td.wrong   { background:rgba(200,0,0,0.1); }
+
+    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; }
+    .check-btn:hover { background:var(--ink); color:var(--canvas); }
+    .feedback { margin-top:14px; font-size:13px; min-height:20px; color:var(--gray-med); }
+    .feedback.correct { color:#00a050; font-weight:600; }
+    .feedback.wrong   { color:#c00000; }
+
+    /* ── Interactive block ── */
+    .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .interactive-block h3 { margin-bottom:18px; }
+
+    /* ── Model tables ── */
+    .model-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .model-block h3 { margin-bottom:10px; }
+    .model-intro { font-size:13px; color:var(--gray-med); margin-bottom:18px; }
+    .model-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:13px; margin-bottom:18px; }
+    .model-table th, .model-table td { border:1px solid var(--gray-light); padding:10px 14px; text-align:center; }
+    .model-table th { background:var(--gray-faint); font-weight:700; }
+    .model-table input { width:70px; border:none; background:transparent; font-family:var(--font-mono); font-size:13px; color:var(--ink); text-align:center; outline:none; }
+    .model-table td.correct { background:rgba(0,160,80,0.1); }
+    .model-table td.wrong   { background:rgba(200,0,0,0.1); }
+
+    .sub-q { margin-top:16px; }
+    .sub-q label { display:block; font-size:13px; font-weight:600; margin-bottom:8px; }
+    .sub-q .answer-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+    .sub-q input[type=text], .sub-q input[type=number] { border:1px solid var(--gray-light); padding:8px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:160px; }
+    .sub-q .ans-reveal { font-size:13px; color:#00a050; display:none; margin-left:8px; }
+    .sub-q .ans-reveal.show { display:inline; }
+
+    /* ── MCQ ── */
+    .mcq-block { border:1px solid var(--ink); padding:24px 28px; margin-bottom:24px; }
+    .mcq-q { font-size:14px; font-weight:600; margin-bottom:16px; }
+    .mcq-mark { font-size:11px; font-weight:400; color:var(--gray-med); margin-left:6px; }
+    .mcq-options { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+    .mcq-option { display:flex; align-items:flex-start; gap:10px; padding:10px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; }
+    .mcq-option:hover { background:var(--gray-faint); }
+    .mcq-option.correct-ans { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .mcq-option.wrong-ans   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .mcq-option.correct-ans { background:rgba(0,160,80,0.12); }
+    html.dark-mode .mcq-option.wrong-ans   { background:rgba(200,0,0,0.12); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .mcq-explanation { border-top:1px solid var(--gray-light); padding-top:14px; font-size:13px; color:var(--gray-med); display:none; }
+    .mcq-explanation.show { display:block; }
+
+    /* ── Knowledge check ── */
+    .kc-block { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .kc-intro { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .kc-q-wrap { margin-bottom:24px; }
+    .kc-q { font-size:14px; font-weight:600; margin-bottom:12px; }
+    .kc-options { display:flex; flex-direction:column; gap:6px; }
+    .kc-opt { display:flex; align-items:flex-start; gap:10px; padding:9px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; background:transparent; color:var(--ink); text-align:left; width:100%; }
+    .kc-opt:hover:not([disabled]) { background:var(--gray-faint); }
+    .kc-opt.kc-correct { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .kc-opt.kc-wrong   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .kc-opt.kc-correct { background:rgba(0,160,80,0.14); }
+    html.dark-mode .kc-opt.kc-wrong   { background:rgba(200,0,0,0.14); }
+    .kc-feedback { font-size:12px; color:var(--gray-med); margin-top:8px; min-height:18px; }
+    .kc-feedback.correct { color:#00a050; }
+    .kc-feedback.wrong   { color:#c00000; }
+    .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
+    .kc-score.show { display:block; }
+    .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+
+    /* ── Complete button ── */
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    /* ── Sociotype typography ── */
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    h1 { font-weight: 600; letter-spacing: 0.6px; }
+    h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
+
+    /* ── Inline lesson link ── */
+    .lesson-link-btn { background:none; border:none; border-bottom:1px solid currentColor; padding:0; color:inherit; font-family:inherit; font-size:inherit; cursor:pointer; display:inline; }
+    .lesson-link-btn:hover { opacity:0.7; }
+
+    /* ── Homework mark ── */
+    .hw-mark { font-size:11px; color:var(--gray-med); margin-left:4px; }
+
+    /* ── Responsive ── */
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .toc { position:static; display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-side { border-left:none; border-top:1px solid var(--gray-light); padding-left:0; padding-top:20px; }
+      .live-graph-wrap { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .hero, .content-card, .kc-block { padding:24px 20px; }
+      .interactive-block, .model-block, .mcq-block { padding:20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Linear Relationships · Lesson 2</span>
+    </div>
+    <span>MS-A2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2 of 3</p>
+      <h1>Gradient-Intercept<br>Formula &amp; Linear Models</h1>
+      <p class="subtitle">Master \(y = mx + b\), identify gradient and y-intercept from any equation, then apply linear functions to real-world situations.</p>
+      <div class="hero-meta">
+        <span class="pill">Gradient-Intercept Formula</span>
+        <span class="pill">Linear Models</span>
+        <span class="pill">~25 min</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Key Takeaways</p>
+      <ul class="side-list">
+        <li>In \(y = mx + b\), \(m\) is the gradient and \(b\) is the y-intercept</li>
+        <li>Rearrange any linear equation into \(y = mx + b\) form before reading off \(m\) and \(b\)</li>
+        <li>The gradient of a linear model = the rate of change</li>
+        <li>The y-intercept of a linear model = the fixed starting value</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#formula">The Formula</a></li>
+        <li class="toc-item"><a class="toc-link" href="#rearrange">Rearranging</a></li>
+        <li class="toc-item"><a class="toc-link" href="#models">Linear Models</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <!-- ── Part A: The Formula ── -->
+      <div class="content-card" id="formula">
+        <p class="section-label">Part A</p>
+        <h2>The Gradient-Intercept Formula</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Definition — Gradient-Intercept Form</p>
+          <p>The <strong>gradient-intercept form</strong> of a linear equation is:</p>
+          <div class="formula-box">\[y = mx + b\]</div>
+          <ul style="margin-bottom:10px;">
+            <li><strong>\(m\)</strong> is the <em>gradient</em> — it controls the steepness and direction of the line.</li>
+            <li><strong>\(b\)</strong> is the <em>y-intercept</em> — the value of y where the line crosses the y-axis (when \(x = 0\)).</li>
+          </ul>
+          <p style="margin-bottom:0">When an equation is in this form, you can read off \(m\) and \(b\) directly without any calculation.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — Sketching a line</p>
+          <p><strong>Sketch the line \(y = 3x - 2\).</strong></p>
+          <ol style="margin-bottom:10px;">
+            <li>Identify \(b = -2\). Plot the y-intercept at \((0, -2)\).</li>
+            <li>Identify \(m = 3\). From \((0, -2)\) move 1 unit right and 3 units up. Plot the second point at \((1, 1)\).</li>
+            <li>Draw a straight line through the two points and extend with arrows.</li>
+          </ol>
+          <p style="margin-bottom:0">You can verify: when \(x = 2\), \(y = 3(2) - 2 = 4\). The point \((2, 4)\) should lie on your line.</p>
+        </div>
+
+        <!-- Live interactive graph -->
+        <div class="interactive-block">
+          <h3>Interactive Explorer — Adjust \(m\) and \(b\)</h3>
+          <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Use the sliders to change the gradient and y-intercept. Watch how the line changes.</p>
+          <div class="live-graph-wrap">
+            <div>
+              <div class="sliders">
+                <div class="slider-group">
+                  <label>Gradient (m) = <span class="slider-val" id="mVal">2</span></label>
+                  <input type="range" id="mSlider" min="-4" max="4" step="0.5" value="2">
+                </div>
+                <div class="slider-group">
+                  <label>Y-intercept (b) = <span class="slider-val" id="bVal">1</span></label>
+                  <input type="range" id="bSlider" min="-6" max="6" step="1" value="1">
+                </div>
+              </div>
+              <div class="eq-live" id="eqLive">y = 2x + 1</div>
+              <p style="font-size:12px; color:var(--gray-med); margin-top:12px;">
+                Changing <strong>m</strong> rotates the line.<br>
+                Changing <strong>b</strong> slides it up or down.
+              </p>
+            </div>
+            <div class="graph-wrap">
+              <svg id="liveGraph" width="280" height="280"></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Identify m and b exercise -->
+        <div class="interactive-block">
+          <h3>Exercise — Identify gradient and y-intercept</h3>
+          <p style="font-size:13px; color:var(--gray-med); margin-bottom:18px;">For each equation, enter the gradient (\(m\)) and y-intercept (\(b\)). Rearrange into \(y = mx + b\) form first if needed.</p>
+          <table class="id-table" id="idTable">
+            <thead>
+              <tr>
+                <th>Equation</th>
+                <th>Gradient (m)</th>
+                <th>Y-intercept (b)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-m="-3" data-b="1">
+                <td>y = −3x + 1</td>
+                <td><input type="number" placeholder="m" aria-label="gradient"></td>
+                <td><input type="number" placeholder="b" aria-label="y-intercept"></td>
+              </tr>
+              <tr data-m="0.4" data-b="-3">
+                <td>y = 2x/5 − 3</td>
+                <td><input type="number" placeholder="m" aria-label="gradient"></td>
+                <td><input type="number" placeholder="b" aria-label="y-intercept"></td>
+              </tr>
+              <tr data-m="-1" data-b="5">
+                <td>y = 5 − x</td>
+                <td><input type="number" placeholder="m" aria-label="gradient"></td>
+                <td><input type="number" placeholder="b" aria-label="y-intercept"></td>
+              </tr>
+              <tr data-m="7" data-b="0">
+                <td>y = 7x</td>
+                <td><input type="number" placeholder="m" aria-label="gradient"></td>
+                <td><input type="number" placeholder="b" aria-label="y-intercept"></td>
+              </tr>
+              <tr data-m="2" data-b="2">
+                <td>y − 2 − 2x = 0</td>
+                <td><input type="number" placeholder="m" aria-label="gradient"></td>
+                <td><input type="number" placeholder="b" aria-label="y-intercept"></td>
+              </tr>
+              <tr data-m="0" data-b="8">
+                <td>y = 8</td>
+                <td><input type="number" placeholder="m" aria-label="gradient"></td>
+                <td><input type="number" placeholder="b" aria-label="y-intercept"></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="check-btn" id="checkId">Check all</button>
+          <div class="feedback" id="fbId"></div>
+        </div>
+      </div>
+
+      <!-- ── Rearranging ── -->
+      <div class="content-card" id="rearrange">
+        <p class="section-label">Part A (continued)</p>
+        <h2>Rearranging into Gradient-Intercept Form</h2>
+
+        <p>Many linear equations are not given in \(y = mx + b\) form. You need to rearrange them before you can read off the gradient and y-intercept.</p>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example</p>
+          <p><strong>Find the gradient and y-intercept of \(x - 2y + 6 = 0\).</strong></p>
+          <p>Rearrange to make y the subject:</p>
+          <p>\(x - 2y + 6 = 0\)</p>
+          <p>\(-2y = -x - 6\)</p>
+          <p>\(y = \dfrac{1}{2}x + 3\)</p>
+          <p style="margin-bottom:0">So \(m = \dfrac{1}{2}\) and \(b = 3\). The line has a positive gradient and crosses the y-axis at 3.</p>
+        </div>
+
+        <div class="note-block">
+          <p style="margin-bottom:0"><strong>Remember:</strong> Divide every term by the coefficient of y, including the sign. If dividing by a negative number, the inequality (if present) would flip — but for equations, just proceed carefully with signs.</p>
+        </div>
+
+        <h3 style="margin-top:8px; margin-bottom:14px;">Steps to rearrange</h3>
+        <div class="stepper" id="stepperRearrange">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperRearrangeNodes"></div>
+            <div class="stepper-counter" id="stepperRearrangeCounter">Step 1 of 4</div>
+          </div>
+          <div class="stepper-panel" id="stepperRearrangePanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperRearrangePrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperRearrangeNext">Next &#8594;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Part B: Linear Models ── -->
+      <div class="content-card" id="models">
+        <p class="section-label">Part B</p>
+        <h2>Linear Models</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Definition — Linear Model</p>
+          <p>A <strong>linear model</strong> uses a linear equation to describe a real-world relationship. Once you write the equation, you can predict output values for any input.</p>
+          <p style="margin-bottom:0">In a linear model \(y = mx + b\):</p>
+        </div>
+
+        <table class="interp-table" style="margin-bottom:24px;">
+          <thead>
+            <tr><th>Parameter</th><th>Meaning in a real-world model</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\(m\) (gradient)</td><td>Rate of change — how much y changes per unit of x</td><td>$2 per kilometre driven</td></tr>
+            <tr><td>\(b\) (y-intercept)</td><td>Fixed starting value — the value of y when x = 0</td><td>$3 flag fall before the taxi moves</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Taxi problem -->
+        <div class="model-block">
+          <h3>Example 1 — Taxi fare</h3>
+          <p class="model-intro">A taxi charges a flag fall of $3 and then $2 per kilometre. Complete the table, find the equation, and answer the questions.</p>
+          <table class="model-table" id="taxiTable">
+            <thead>
+              <tr><th>Distance (K km)</th><th>0</th><th>10</th><th>20</th><th>30</th><th>40</th><th>50</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Cost (C $)</th>
+                <td><input type="number" id="t0" placeholder="?"></td>
+                <td><input type="number" id="t10" placeholder="?"></td>
+                <td><input type="number" id="t20" placeholder="?"></td>
+                <td><input type="number" id="t30" placeholder="?"></td>
+                <td><input type="number" id="t40" placeholder="?"></td>
+                <td><input type="number" id="t50" placeholder="?"></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="check-btn" id="checkTaxi">Check table</button>
+          <div class="feedback" id="fbTaxi"></div>
+
+          <div class="sub-q" style="margin-top:20px;">
+            <label>(b) What is the equation for the cost C in terms of kilometres K?</label>
+            <div class="answer-row">
+              <span>\(C =\)</span>
+              <input type="text" id="taxiEq" placeholder="e.g. 2K + 3">
+              <button class="check-btn" id="checkTaxiEq">Check</button>
+              <span class="ans-reveal" id="taxiEqAns">✓ C = 2K + 3</span>
+            </div>
+          </div>
+          <div class="sub-q">
+            <label>(c) How much would an 18 km trip cost?</label>
+            <div class="answer-row">
+              <span>$</span>
+              <input type="number" id="taxi18" placeholder="?">
+              <button class="check-btn" id="checkTaxi18">Check</button>
+              <span class="ans-reveal" id="taxi18Ans">✓ $39 (C = 2×18 + 3 = 39)</span>
+            </div>
+          </div>
+          <div class="sub-q">
+            <label>(d) What does the gradient represent in this context?</label>
+            <p style="font-size:13px; color:var(--gray-med); margin-top:6px; margin-bottom:0; padding:12px 16px; border:1px solid var(--gray-light); background:var(--gray-faint);">
+              <strong>Answer:</strong> The gradient (\(m = 2\)) represents the cost per kilometre — $2 for every km travelled. The y-intercept (\(b = 3\)) is the flag fall — the fixed charge you pay just to get in the taxi.
+            </p>
+          </div>
+        </div>
+
+        <!-- Debt problem -->
+        <div class="model-block">
+          <h3>Example 2 — Paying off a debt</h3>
+          <p class="model-intro">Jim borrowed $8 000 and pays back $200 each week. Complete the table, find the equation, and answer the question.</p>
+          <table class="model-table" id="debtTable">
+            <thead>
+              <tr><th>Weeks (W)</th><th>0</th><th>5</th><th>10</th><th>20</th><th>30</th><th>40</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Debt (D $)</th>
+                <td><input type="number" id="d0" placeholder="?"></td>
+                <td><input type="number" id="d5" placeholder="?"></td>
+                <td><input type="number" id="d10" placeholder="?"></td>
+                <td><input type="number" id="d20" placeholder="?"></td>
+                <td><input type="number" id="d30" placeholder="?"></td>
+                <td><input type="number" id="d40" placeholder="?"></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="check-btn" id="checkDebt">Check table</button>
+          <div class="feedback" id="fbDebt"></div>
+
+          <div class="sub-q" style="margin-top:20px;">
+            <label>(b) What is the equation for the debt D in terms of weeks W?</label>
+            <div class="answer-row">
+              <span>\(D =\)</span>
+              <input type="text" id="debtEq" placeholder="e.g. −200W + 8000">
+              <button class="check-btn" id="checkDebtEq">Check</button>
+              <span class="ans-reveal" id="debtEqAns">✓ D = −200W + 8000</span>
+            </div>
+          </div>
+          <div class="sub-q">
+            <label>(c) How much does Jim owe after 27 weeks?</label>
+            <div class="answer-row">
+              <span>$</span>
+              <input type="number" id="debt27" placeholder="?">
+              <button class="check-btn" id="checkDebt27">Check</button>
+              <span class="ans-reveal" id="debt27Ans">✓ $2 600 (D = −200×27 + 8000 = 2600)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone plan -->
+        <div class="model-block">
+          <h3>Example 3 — Phone plan</h3>
+          <p class="model-intro">A phone plan charges a flat monthly fee of $20 plus $0.10 per minute of calls. Let M be minutes used and C be the monthly cost in dollars.</p>
+          <div class="example-block" style="margin-bottom:18px;">
+            <p class="ex-label">Setting up the model</p>
+            <ul style="margin-bottom:0;">
+              <li>Fixed charge (y-intercept): \(b = 20\)</li>
+              <li>Rate of change (gradient): \(m = 0.10\) per minute</li>
+              <li>Equation: \(C = 0.10M + 20\)</li>
+            </ul>
+          </div>
+          <div class="sub-q">
+            <label>(a) What is the monthly cost for 150 minutes?</label>
+            <div class="answer-row">
+              <span>\(C =\) $</span>
+              <input type="number" step="0.01" id="phone150" placeholder="?">
+              <button class="check-btn" id="checkPhone150">Check</button>
+              <span class="ans-reveal" id="phone150Ans">✓ $35 (C = 0.10 × 150 + 20 = 15 + 20 = 35)</span>
+            </div>
+          </div>
+          <div class="sub-q">
+            <label>(b) If the bill is $32, how many minutes were used?</label>
+            <div class="answer-row">
+              <span>\(M =\)</span>
+              <input type="number" id="phoneMins" placeholder="? mins">
+              <button class="check-btn" id="checkPhoneMins">Check</button>
+              <span class="ans-reveal" id="phoneMinsAns">✓ 120 min (32 = 0.10M + 20 → 0.10M = 12 → M = 120)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Knowledge Check (MCQ + Quiz) ── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ── Homework ── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:4},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 3</strong> — Rearrange \(x - 2y + 6 = 0\) into gradient-intercept form <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 4</strong> — Identify the correct sketch of \(y = 5 - 2x\) <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 6</strong> — Equation of a line from two points on a graph <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 9</strong> — Write the equation given gradient \(= -3\), \(y\)-intercept \(= 4\) <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 12</strong> — Temperature conversion linear model: gradient, equation, and substitution <span class="hw-mark">(3 marks)</span></li>
+          <li><strong>Question 15</strong> — Find the point of intersection of two lines <span class="hw-mark">(3 marks)</span></li>
+        </ul>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">Total: <strong style="color:var(--ink);">10 marks</strong> — Section I: Q3, Q4, Q6, Q9 &nbsp;·&nbsp; Section II: Q12, Q15</p>
+      </div>
+
+      <!-- ── Mark complete ── -->
+      <div class="complete-section">
+        <p style="font-size:13px; color:var(--gray-med);">Finished this lesson? Mark it as complete.</p>
+        <button class="complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Dark mode sync ──
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── SVG live graph ──
+  function drawLiveGraph(m, b) {
+    const svg = document.getElementById('liveGraph');
+    const W = 250, H = 250, PAD = 15;
+    const xMin = -5, xMax = 5, yMin = -7, yMax = 7;
+    svg.setAttribute('width', W + PAD*2);
+    svg.setAttribute('height', H + PAD*2);
+    svg.setAttribute('viewBox', `0 0 ${W + PAD*2} ${H + PAD*2}`);
+    svg.innerHTML = '';
+    const ns = 'http://www.w3.org/2000/svg';
+    const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#000';
+    const gray = getComputedStyle(document.documentElement).getPropertyValue('--gray-light').trim() || '#ccc';
+
+    function px(x) { return PAD + (x - xMin)/(xMax - xMin)*W; }
+    function py(y) { return PAD + (yMax - y)/(yMax - yMin)*H; }
+
+    for (let gx = xMin; gx <= xMax; gx++) {
+      const l = document.createElementNS(ns,'line');
+      l.setAttribute('x1',px(gx)); l.setAttribute('y1',PAD);
+      l.setAttribute('x2',px(gx)); l.setAttribute('y2',PAD+H);
+      l.setAttribute('stroke',gray); l.setAttribute('stroke-width','0.5'); svg.appendChild(l);
+    }
+    for (let gy = yMin; gy <= yMax; gy++) {
+      const l = document.createElementNS(ns,'line');
+      l.setAttribute('x1',PAD); l.setAttribute('y1',py(gy));
+      l.setAttribute('x2',PAD+W); l.setAttribute('y2',py(gy));
+      l.setAttribute('stroke',gray); l.setAttribute('stroke-width','0.5'); svg.appendChild(l);
+    }
+    const ax = document.createElementNS(ns,'line');
+    ax.setAttribute('x1',PAD); ax.setAttribute('y1',py(0)); ax.setAttribute('x2',PAD+W); ax.setAttribute('y2',py(0));
+    ax.setAttribute('stroke',ink); ax.setAttribute('stroke-width','1.5'); svg.appendChild(ax);
+    const ay = document.createElementNS(ns,'line');
+    ay.setAttribute('x1',px(0)); ay.setAttribute('y1',PAD); ay.setAttribute('x2',px(0)); ay.setAttribute('y2',PAD+H);
+    ay.setAttribute('stroke',ink); ay.setAttribute('stroke-width','1.5'); svg.appendChild(ay);
+
+    [-4,-2,2,4].forEach(v => {
+      const t = document.createElementNS(ns,'text'); t.setAttribute('x',px(v)); t.setAttribute('y',py(0)+14); t.setAttribute('text-anchor','middle'); t.setAttribute('font-size','9'); t.setAttribute('fill',ink); t.textContent=v; svg.appendChild(t);
+      const t2 = document.createElementNS(ns,'text'); t2.setAttribute('x',px(0)-8); t2.setAttribute('y',py(v)+3); t2.setAttribute('text-anchor','end'); t2.setAttribute('font-size','9'); t2.setAttribute('fill',ink); t2.textContent=v; svg.appendChild(t2);
+    });
+
+    const line = document.createElementNS(ns,'line');
+    line.setAttribute('x1',px(xMin)); line.setAttribute('y1',py(m*xMin+b));
+    line.setAttribute('x2',px(xMax)); line.setAttribute('y2',py(m*xMax+b));
+    line.setAttribute('stroke',ink); line.setAttribute('stroke-width','2'); svg.appendChild(line);
+
+    const c = document.createElementNS(ns,'circle');
+    c.setAttribute('cx',px(0)); c.setAttribute('cy',py(b)); c.setAttribute('r','4'); c.setAttribute('fill',ink); svg.appendChild(c);
+  }
+
+  function updateLiveGraph() {
+    const m = parseFloat(document.getElementById('mSlider').value);
+    const b = parseFloat(document.getElementById('bSlider').value);
+    document.getElementById('mVal').textContent = m;
+    document.getElementById('bVal').textContent = b;
+    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
+    const mStr = m === 1 ? '' : m === -1 ? '−' : m;
+    document.getElementById('eqLive').textContent = `y = ${mStr}x ${bStr}`;
+    drawLiveGraph(m, b);
+  }
+  document.getElementById('mSlider').addEventListener('input', updateLiveGraph);
+  document.getElementById('bSlider').addEventListener('input', updateLiveGraph);
+  updateLiveGraph();
+
+  // ── Identify m and b ──
+  document.getElementById('checkId').addEventListener('click', () => {
+    let correct = 0, total = 0;
+    document.querySelectorAll('#idTable tbody tr').forEach(row => {
+      const expectedM = parseFloat(row.dataset.m);
+      const expectedB = parseFloat(row.dataset.b);
+      const cells = row.querySelectorAll('td');
+      const mCell = cells[1], bCell = cells[2];
+      const mIn = mCell.querySelector('input'), bIn = bCell.querySelector('input');
+      const mVal = parseFloat(mIn.value), bVal = parseFloat(bIn.value);
+      total += 2;
+      if (Math.abs(mVal - expectedM) < 0.01) { mCell.classList.add('correct'); mCell.classList.remove('wrong'); correct++; }
+      else { mCell.classList.add('wrong'); mCell.classList.remove('correct'); }
+      if (Math.abs(bVal - expectedB) < 0.01) { bCell.classList.add('correct'); bCell.classList.remove('wrong'); correct++; }
+      else { bCell.classList.add('wrong'); bCell.classList.remove('correct'); }
+    });
+    const fb = document.getElementById('fbId');
+    if (correct === total) { fb.textContent = `All ${total/2} equations correct! Tip: rearrange into y = mx + b form first.`; fb.className = 'feedback correct'; }
+    else { fb.textContent = `${correct}/${total} correct. For y = 5 − x: rewrite as y = −1x + 5. For y − 2 − 2x = 0: rearrange to y = 2x + 2.`; fb.className = 'feedback wrong'; }
+  });
+
+  // ── Stepper: Rearranging ──
+  const REARRANGE_STAGES = [
+    { title: 'Step 1 — Identify the equation', body: '<p>Write down the equation you need to rearrange. Example: <strong>2y = 4x + 6</strong>.</p><p style="margin-bottom:0">Your goal is to isolate y on the left side so the equation is in the form y = mx + b.</p>' },
+    { title: 'Step 2 — Divide by the coefficient of y', body: '<p>Divide every term on both sides by the number in front of y. For <strong>2y = 4x + 6</strong>, divide by 2:</p><p>   y = 2x + 3</p><p style="margin-bottom:0">Make sure to divide every term, including the constant.</p>' },
+    { title: 'Step 3 — Write in y = mx + b form', body: '<p>The result is <strong>y = 2x + 3</strong>, which is now in gradient-intercept form.</p><p style="margin-bottom:0">Check: does it look like y = (some number)x + (some number)? If so, you\'re done.</p>' },
+    { title: 'Step 4 — Read off m and b', body: '<p>From <strong>y = 2x + 3</strong>:</p><ul><li>Gradient: m = 2 (coefficient of x)</li><li>Y-intercept: b = 3 (the constant)</li></ul><p style="margin-bottom:0">The line rises steeply (m = 2) and crosses the y-axis at 3.</p>' }
+  ];
+
+  (function() {
+    let current = 0;
+    const nodesEl = document.getElementById('stepperRearrangeNodes');
+    const panelEl = document.getElementById('stepperRearrangePanel');
+    const counterEl = document.getElementById('stepperRearrangeCounter');
+    const prevBtn = document.getElementById('stepperRearrangePrev');
+    const nextBtn = document.getElementById('stepperRearrangeNext');
+    REARRANGE_STAGES.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'stepper-node' + (i === 0 ? ' active' : '');
+      btn.textContent = i + 1;
+      btn.addEventListener('click', () => { current = i; render(); });
+      nodesEl.appendChild(btn);
+    });
+    function render() {
+      const stage = REARRANGE_STAGES[current];
+      panelEl.innerHTML = `<h4>${stage.title}</h4>${stage.body}`;
+      counterEl.textContent = `Step ${current + 1} of ${REARRANGE_STAGES.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === REARRANGE_STAGES.length - 1;
+      nodesEl.querySelectorAll('.stepper-node').forEach((n, i) => {
+        n.classList.toggle('active', i === current);
+        n.classList.toggle('visited', i < current);
+      });
+    }
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+    nextBtn.addEventListener('click', () => { if (current < REARRANGE_STAGES.length - 1) { current++; render(); } });
+    render();
+  })();
+
+  // ── Taxi table ──
+  const taxiAns = { t0:3, t10:23, t20:43, t30:63, t40:83, t50:103 };
+  document.getElementById('checkTaxi').addEventListener('click', () => {
+    let ok = true;
+    Object.entries(taxiAns).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      const td = el.closest('td');
+      if (parseFloat(el.value) === val) { td.classList.add('correct'); td.classList.remove('wrong'); }
+      else { td.classList.add('wrong'); td.classList.remove('correct'); ok = false; }
+    });
+    const fb = document.getElementById('fbTaxi');
+    if (ok) { fb.textContent = 'Table correct! Use C = 2K + 3 to check each value.'; fb.className = 'feedback correct'; }
+    else { fb.textContent = 'Some values wrong. Formula: C = 2 × K + 3 (flag fall $3, $2 per km).'; fb.className = 'feedback wrong'; }
+  });
+  document.getElementById('checkTaxiEq').addEventListener('click', () => {
+    const v = document.getElementById('taxiEq').value.replace(/\s/g,'').toLowerCase();
+    if (v.includes('2k+3')) { document.getElementById('taxiEqAns').classList.add('show'); }
+    else { alert('The rate is $2/km and the flag fall is $3, so C = 2K + 3.'); }
+  });
+  document.getElementById('checkTaxi18').addEventListener('click', () => {
+    if (parseFloat(document.getElementById('taxi18').value) === 39) { document.getElementById('taxi18Ans').classList.add('show'); }
+    else { alert('C = 2(18) + 3 = 36 + 3 = $39'); }
+  });
+
+  // ── Debt table ──
+  const debtAns = { d0:8000, d5:7000, d10:6000, d20:4000, d30:2000, d40:0 };
+  document.getElementById('checkDebt').addEventListener('click', () => {
+    let ok = true;
+    Object.entries(debtAns).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      const td = el.closest('td');
+      if (parseFloat(el.value) === val) { td.classList.add('correct'); td.classList.remove('wrong'); }
+      else { td.classList.add('wrong'); td.classList.remove('correct'); ok = false; }
+    });
+    const fb = document.getElementById('fbDebt');
+    if (ok) { fb.textContent = 'Correct! Debt decreases by $200 each week from $8 000.'; fb.className = 'feedback correct'; }
+    else { fb.textContent = 'Some values wrong. D = 8000 − 200W for each week W.'; fb.className = 'feedback wrong'; }
+  });
+  document.getElementById('checkDebtEq').addEventListener('click', () => {
+    const v = document.getElementById('debtEq').value.replace(/\s/g,'').toLowerCase();
+    if (v.includes('-200w+8000') || v.includes('8000-200w')) { document.getElementById('debtEqAns').classList.add('show'); }
+    else { alert('D = −200W + 8000 (starts at $8000, decreases by $200 per week).'); }
+  });
+  document.getElementById('checkDebt27').addEventListener('click', () => {
+    if (parseFloat(document.getElementById('debt27').value) === 2600) { document.getElementById('debt27Ans').classList.add('show'); }
+    else { alert('D = −200(27) + 8000 = −5400 + 8000 = $2 600'); }
+  });
+
+  // ── Phone plan ──
+  document.getElementById('checkPhone150').addEventListener('click', () => {
+    if (Math.abs(parseFloat(document.getElementById('phone150').value) - 35) < 0.01) {
+      document.getElementById('phone150Ans').classList.add('show');
+    } else { alert('C = 0.10 × 150 + 20 = 15 + 20 = $35'); }
+  });
+  document.getElementById('checkPhoneMins').addEventListener('click', () => {
+    if (parseFloat(document.getElementById('phoneMins').value) === 120) {
+      document.getElementById('phoneMinsAns').classList.add('show');
+    } else { alert('32 = 0.10M + 20 → 0.10M = 12 → M = 120 minutes'); }
+  });
+
+  // ── MCQ ──
+  // ── Knowledge Check (7 questions) ──
+  const KC_QS = [
+    {
+      q: 'A straight line has equation \\(x - 2y + 6 = 0\\). What is its gradient and \\(y\\)-intercept?',
+      opts: ['A) gradient \\(= -\\tfrac{1}{2}\\), \\(y\\)-intercept \\(= 3\\)', 'B) gradient \\(= 2\\), \\(y\\)-intercept \\(= -3\\)', 'C) gradient \\(= 2\\), \\(y\\)-intercept \\(= 3\\)', 'D) gradient \\(= \\tfrac{1}{2}\\), \\(y\\)-intercept \\(= 3\\)'],
+      correct: 3,
+      explanation: 'D is correct. Rearrange: \\(2y = x + 6 \\Rightarrow y = \\tfrac{1}{2}x + 3\\). So \\(m = \\tfrac{1}{2}\\) and \\(b = 3\\).'
+    },
+    {
+      q: 'Tommy draws \\(y = 5 - 2x\\). Which describes the line correctly?',
+      opts: ['A) Falls left-to-right, \\(y\\)-intercept at 5', 'B) Rises left-to-right, \\(y\\)-intercept at 5', 'C) Falls left-to-right, \\(y\\)-intercept at \\(-5\\)', 'D) Rises left-to-right, \\(y\\)-intercept at \\(-5\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(y = -2x + 5\\): \\(m = -2\\) (falls left-to-right), \\(b = 5\\) (\\(y\\)-intercept at 5).'
+    },
+    {
+      q: 'A line passes through \\((0, 4)\\) and \\((2, 10)\\). What is its equation?',
+      opts: ['A) \\(y = 3x + 4\\)', 'B) \\(y = 0.6x + 4\\)', 'C) \\(y = 4x + 0.6\\)', 'D) \\(y = 4x + 3\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(m = \\dfrac{10 - 4}{2 - 0} = 3\\). \\(y\\)-intercept \\(= 4\\) (from \\((0, 4)\\)). Equation: \\(y = 3x + 4\\).'
+    },
+    {
+      q: 'A line has gradient \\(-3\\) and \\(y\\)-intercept \\(4\\). What is its equation?',
+      opts: ['A) \\(y = 4 - 3x\\)', 'B) \\(y = 4x - 3\\)', 'C) \\(y = 3 - 4x\\)', 'D) \\(y = 3x - 4\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(y = mx + b = -3x + 4 = 4 - 3x\\).'
+    },
+    {
+      q: 'Which graph represents \\(y = 2x - 4\\)?',
+      opts: ['A) Positive gradient, \\(y\\)-intercept at 4', 'B) Positive gradient, \\(y\\)-intercept at \\(-2\\)', 'C) Positive gradient, \\(x\\)-intercept at 2, \\(y\\)-intercept at \\(-4\\)', 'D) Negative gradient, \\(y\\)-intercept at \\(-4\\)'],
+      correct: 2,
+      explanation: 'C is correct. \\(m = 2\\) (positive). \\(y\\)-intercept: \\(x = 0 \\Rightarrow y = -4\\). \\(x\\)-intercept: \\(y = 0 \\Rightarrow x = 2\\).'
+    },
+    {
+      q: 'What is the gradient of the line \\(y = -4x + 7\\)?',
+      opts: ['A) \\(7\\)', 'B) \\(-4\\)', 'C) \\(4\\)', 'D) \\(-7\\)'],
+      correct: 1,
+      explanation: 'B is correct. In \\(y = mx + b\\), the coefficient of \\(x\\) is the gradient. Here \\(m = -4\\).'
+    },
+    {
+      q: 'The line \\(3y - 6x = 9\\) has \\(y\\)-intercept:',
+      opts: ['A) \\(9\\)', 'B) \\(-6\\)', 'C) \\(2\\)', 'D) \\(3\\)'],
+      correct: 3,
+      explanation: 'D is correct. Rearrange: \\(3y = 6x + 9 \\Rightarrow y = 2x + 3\\). The \\(y\\)-intercept is \\(b = 3\\).'
+    }
+  ];
+
+  (function buildKC() {
+    const container = document.getElementById('kcQuestions');
+    const scoreEl = document.getElementById('kcScore');
+    let answered = 0, score = 0;
+    KC_QS.forEach((qData, qi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kc-q-wrap';
+      const qEl = document.createElement('p');
+      qEl.className = 'kc-q';
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+      wrap.appendChild(qEl);
+      const optsEl = document.createElement('div');
+      optsEl.className = 'kc-options';
+      qData.opts.forEach((opt, oi) => {
+        const btn = document.createElement('button');
+        btn.className = 'kc-opt';
+        const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+        const letter = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+        const content = letterMatch ? letterMatch[2] : opt;
+        btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+        btn.addEventListener('click', () => {
+          if (wrap.dataset.answered) return;
+          wrap.dataset.answered = '1';
+          answered++;
+          const isCorrect = oi === qData.correct;
+          if (isCorrect) score++;
+          optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+            b.disabled = true;
+            if (i === qData.correct) b.classList.add('kc-correct');
+            else if (i === oi) b.classList.add('kc-wrong');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
+          if (answered === KC_QS.length) showScore();
+        });
+        optsEl.appendChild(btn);
+      });
+      wrap.appendChild(optsEl);
+      container.appendChild(wrap);
+    });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
+    function showScore() {
+      const pct = score / KC_QS.length;
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+      scoreEl.classList.add('show');
+      document.getElementById('kcResetBtn').addEventListener('click', () => {
+        container.innerHTML = ''; scoreEl.className = 'kc-score'; scoreEl.innerHTML = '';
+        answered = 0; score = 0; buildKC();
+      });
+    }
+  })();
+
+  // ── Complete button ──
+  const TOPIC_ID = 6, LESSON_IDX = 1;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Lesson complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e){}
+  });
+
+  // ── TOC IntersectionObserver ──
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('toc-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+</script>
+</body>
+</html>

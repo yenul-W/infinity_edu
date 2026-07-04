@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Linear Relationships</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false})"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#000; --canvas:#fff; --gray-med:#818181; --gray-light:#d6d6d6; --gray-faint:#f2f2f2;
+      --font-body:system-ui,-apple-system,"Segoe UI",sans-serif;
+      --font-mono:"Space Mono","Courier New",monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-body); font-size:14px; line-height:1.6; color:var(--ink); background:var(--canvas); }
+    .page { max-width:900px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+
+    .hero { border:1px solid var(--ink); padding:32px 36px 28px; margin-bottom:48px; }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:10px; }
+    h1 { font-size:clamp(24px,3.5vw,36px); font-weight:400; line-height:1.15; margin-bottom:12px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; color:var(--gray-med); }
+
+    /* Score tracker */
+    .score-bar { border:1px solid var(--gray-light); padding:14px 20px; display:flex; align-items:center; gap:20px; margin-bottom:36px; flex-wrap:wrap; }
+    .score-label { font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .score-val { font-family:var(--font-mono); font-size:22px; font-weight:700; }
+    .score-track { flex:1; min-width:120px; height:4px; background:var(--gray-light); }
+    .score-fill { height:100%; background:var(--ink); transition:width 0.4s ease; width:0%; }
+
+    /* Section headings */
+    h2 { font-size:18px; font-weight:600; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--gray-light); }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:6px; }
+    .section { margin-bottom:48px; }
+
+    /* MCQ */
+    .mcq-block { border:1px solid var(--ink); padding:22px 26px; margin-bottom:20px; }
+    .mcq-num { font-family:var(--font-mono); font-size:11px; color:var(--gray-med); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; }
+    .mcq-q { font-size:14px; font-weight:600; margin-bottom:16px; }
+    .mcq-mark { font-size:11px; font-weight:400; color:var(--gray-med); }
+    .mcq-options { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+    .mcq-option { display:flex; align-items:flex-start; gap:10px; padding:9px 13px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; }
+    .mcq-option:hover { background:var(--gray-faint); }
+    .mcq-option.selected { border-color:var(--ink); }
+    .mcq-option.correct-ans { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .mcq-option.wrong-ans { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:14px; }
+    .mcq-explanation { border-top:1px solid var(--gray-light); padding-top:12px; font-size:13px; color:var(--gray-med); display:none; line-height:1.8; }
+    .mcq-explanation.show { display:block; }
+
+    /* Long questions */
+    .lq-block { border:1px solid var(--ink); padding:24px 28px; margin-bottom:24px; }
+    .lq-block h3 { font-size:15px; font-weight:700; margin-bottom:6px; }
+    .lq-intro { font-size:13px; color:var(--gray-med); margin-bottom:16px; }
+    .lq-part { margin-bottom:18px; }
+    .lq-part-label { font-size:13px; font-weight:600; margin-bottom:8px; display:block; }
+    .answer-input { border:1px solid var(--gray-light); padding:8px 12px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:180px; }
+    .answer-input:focus { outline:1px solid var(--ink); }
+    .lq-part .row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+    .check-btn { border:1px solid var(--ink); padding:7px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.07em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
+    .check-btn:hover { background:var(--ink); color:var(--canvas); }
+    .reveal-btn { border:none; border-bottom:1px solid var(--gray-med); background:transparent; color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.07em; text-transform:uppercase; cursor:pointer; padding:2px 0; }
+    .reveal-btn:hover { color:var(--ink); border-bottom-color:var(--ink); }
+    .ans-box { background:var(--gray-faint); border:1px solid var(--gray-light); padding:12px 16px; font-size:13px; line-height:1.8; display:none; margin-top:10px; }
+    .ans-box.show { display:block; }
+    .ans-box strong { font-family:var(--font-mono); }
+    .hint-text { font-size:12px; color:var(--gray-med); font-style:italic; }
+    .marks-chip { display:inline-flex; border:1px solid var(--gray-light); padding:2px 8px; font-size:11px; color:var(--gray-med); margin-left:8px; }
+    .lesson-badge { display:inline-block; border:1px solid var(--gray-light); padding:2px 8px; font-size:10px; letter-spacing:0.07em; text-transform:uppercase; color:var(--gray-med); margin-left:8px; vertical-align:middle; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Linear Relationships · Homework</span>
+    </div>
+    <span>MS-A2</span>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow"> </p>
+    <h1>Homework</h1>
+    <p class="subtitle">Work through Section I (10 multiple choice) and Section II (5 longer questions).</p>
+    <div class="hero-meta">
+      <span class="pill">Section I · 10 marks</span>
+      <span class="pill">Section II · 13 marks</span>
+      <span class="pill">Total · 23 marks</span>
+    </div>
+  </div>
+
+  <!-- Score tracker -->
+  <div class="score-bar">
+    <span class="score-label">Score</span>
+    <span class="score-val" id="scoreVal">0 / 10</span>
+    <div class="score-track"><div class="score-fill" id="scoreFill"></div></div>
+    <span class="hint-text" id="scoreHint">Section I only</span>
+  </div>
+
+  <!-- ── Section I ── -->
+  <div class="section">
+    <p class="section-label">Section I</p>
+    <h2>Multiple Choice &nbsp;<span style="font-weight:400;font-size:14px;color:var(--gray-med);">1 mark each · 10 marks total</span></h2>
+
+    <div class="mcq-block" id="hw1">
+      <p class="mcq-num">Question 1 <span class="lesson-badge">Lesson 1</span></p>
+      <p class="mcq-q">In the diagram, a line passes through \((0, 6)\) and \((2, 0)\). What is the gradient?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="1" data-val="A"><span class="opt-letter">A</span> \(-6\)</div>
+        <div class="mcq-option" data-q="1" data-val="B"><span class="opt-letter">B</span> \(-3\)</div>
+        <div class="mcq-option" data-q="1" data-val="C"><span class="opt-letter">C</span> \(2\)</div>
+        <div class="mcq-option" data-q="1" data-val="D"><span class="opt-letter">D</span> \(3\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp1">
+        <strong>Answer: B — gradient \(= -3\)</strong><br>
+        \(m = \dfrac{\text{rise}}{\text{run}} = \dfrac{0 - 6}{2 - 0} = \dfrac{-6}{2} = -3\). The line falls from left to right.
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw2">
+      <p class="mcq-num">Question 2 <span class="lesson-badge">Lesson 1</span></p>
+      <p class="mcq-q">A line passes through \((-4, 0)\) and \((0, 12)\). What is the gradient?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="2" data-val="A"><span class="opt-letter">A</span> \(-3\)</div>
+        <div class="mcq-option" data-q="2" data-val="B"><span class="opt-letter">B</span> \(-2\)</div>
+        <div class="mcq-option" data-q="2" data-val="C"><span class="opt-letter">C</span> \(3\)</div>
+        <div class="mcq-option" data-q="2" data-val="D"><span class="opt-letter">D</span> \(4\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp2">
+        <strong>Answer: C — gradient \(= 3\)</strong><br>
+        \(m = \dfrac{12 - 0}{0 - (-4)} = \dfrac{12}{4} = 3\). Positive — rising left to right.
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw3">
+      <p class="mcq-num">Question 3 <span class="lesson-badge">Lesson 2</span></p>
+      <p class="mcq-q">A straight line has equation \(x - 2y + 6 = 0\). Which statement is true?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="3" data-val="A"><span class="opt-letter">A</span> gradient \(= -\tfrac{1}{2}\) and \(y\)-intercept \(= 3\)</div>
+        <div class="mcq-option" data-q="3" data-val="B"><span class="opt-letter">B</span> gradient \(= 2\) and \(y\)-intercept \(= -3\)</div>
+        <div class="mcq-option" data-q="3" data-val="C"><span class="opt-letter">C</span> gradient \(= 2\) and \(y\)-intercept \(= 3\)</div>
+        <div class="mcq-option" data-q="3" data-val="D"><span class="opt-letter">D</span> gradient \(= \tfrac{1}{2}\) and \(y\)-intercept \(= 3\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp3">
+        <strong>Answer: D</strong><br>
+        Rearrange: \(2y = x + 6\), so \(y = \tfrac{1}{2}x + 3\). Gradient \(= \tfrac{1}{2}\), \(y\)-intercept \(= 3\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw4">
+      <p class="mcq-num">Question 4 <span class="lesson-badge">Lesson 2</span></p>
+      <p class="mcq-q">Tommy draws \(y = 5 - 2x\). Which sketch is correct?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="4" data-val="A"><span class="opt-letter">A</span> Falls left-to-right, \(y\)-intercept at 5</div>
+        <div class="mcq-option" data-q="4" data-val="B"><span class="opt-letter">B</span> Rises left-to-right, \(y\)-intercept at 5</div>
+        <div class="mcq-option" data-q="4" data-val="C"><span class="opt-letter">C</span> Falls left-to-right, \(y\)-intercept at \(-5\)</div>
+        <div class="mcq-option" data-q="4" data-val="D"><span class="opt-letter">D</span> Rises left-to-right, \(y\)-intercept at \(-5\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp4">
+        <strong>Answer: A</strong><br>
+        \(y = -2x + 5\). Gradient \(= -2\) (falls left to right), \(y\)-intercept \(= 5\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw5">
+      <p class="mcq-num">Question 5 <span class="lesson-badge">Lesson 3</span></p>
+      <p class="mcq-q">\(V\) and \(W\) vary directly. \(W = 92.0\) when \(V = 36.8\). Which equation describes this?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="5" data-val="A"><span class="opt-letter">A</span> \(W = 1.5V\)</div>
+        <div class="mcq-option" data-q="5" data-val="B"><span class="opt-letter">B</span> \(W = 2.5V\)</div>
+        <div class="mcq-option" data-q="5" data-val="C"><span class="opt-letter">C</span> \(W = 5.0V\)</div>
+        <div class="mcq-option" data-q="5" data-val="D"><span class="opt-letter">D</span> \(W = 55.2V\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp5">
+        <strong>Answer: B — \(W = 2.5V\)</strong><br>
+        \(k = \dfrac{W}{V} = \dfrac{92.0}{36.8} = 2.5\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw6">
+      <p class="mcq-num">Question 6 <span class="lesson-badge">Lesson 3</span></p>
+      <p class="mcq-q">A graph shows \(M\) vs \(N\). Points \((0, 4)\) and \((2, 10)\) lie on the line. What is its equation?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="6" data-val="A"><span class="opt-letter">A</span> \(M = 3N + 4\)</div>
+        <div class="mcq-option" data-q="6" data-val="B"><span class="opt-letter">B</span> \(M = 0.6N + 4\)</div>
+        <div class="mcq-option" data-q="6" data-val="C"><span class="opt-letter">C</span> \(M = 4N + 0.6\)</div>
+        <div class="mcq-option" data-q="6" data-val="D"><span class="opt-letter">D</span> \(M = 4N + 3\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp6">
+        <strong>Answer: A — \(M = 3N + 4\)</strong><br>
+        \(m = \dfrac{10 - 4}{2 - 0} = \dfrac{6}{2} = 3\). \(y\)-intercept \(= 4\) (from point \((0, 4)\)). Equation: \(M = 3N + 4\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw7">
+      <p class="mcq-num">Question 7 <span class="lesson-badge">Lesson 3</span></p>
+      <p class="mcq-q">Two relationships are graphed. Relationship X passes through the origin. Relationship Y has a \(y\)-intercept of 8. Which is direct variation?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="7" data-val="A"><span class="opt-letter">A</span> Both relationships</div>
+        <div class="mcq-option" data-q="7" data-val="B"><span class="opt-letter">B</span> Neither relationship</div>
+        <div class="mcq-option" data-q="7" data-val="C"><span class="opt-letter">C</span> Relationship X only</div>
+        <div class="mcq-option" data-q="7" data-val="D"><span class="opt-letter">D</span> Relationship Y only</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp7">
+        <strong>Answer: C — Relationship X only</strong><br>
+        Direct variation requires the graph to pass through the origin \((0, 0)\). Relationship X does; Y has \(y\)-intercept \(= 8 \neq 0\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw8">
+      <p class="mcq-num">Question 8 <span class="lesson-badge">Lesson 1</span></p>
+      <p class="mcq-q">Which graph represents \(y = 2x - 4\)?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="8" data-val="A"><span class="opt-letter">A</span> Negative gradient, \(y\)-intercept at 4, \(x\)-intercept at 2</div>
+        <div class="mcq-option" data-q="8" data-val="B"><span class="opt-letter">B</span> Positive gradient, \(y\)-intercept at 4, \(x\)-intercept at \(-2\)</div>
+        <div class="mcq-option" data-q="8" data-val="C"><span class="opt-letter">C</span> Negative gradient, \(x\)-intercept at \(-2\), \(y\)-intercept at \(-4\)</div>
+        <div class="mcq-option" data-q="8" data-val="D"><span class="opt-letter">D</span> Positive gradient, \(x\)-intercept at 2, \(y\)-intercept at \(-4\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp8">
+        <strong>Answer: D</strong><br>
+        \(m = 2\) (positive). \(y\)-intercept: set \(x = 0 \Rightarrow y = -4\). \(x\)-intercept: set \(y = 0 \Rightarrow 2x = 4 \Rightarrow x = 2\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw9">
+      <p class="mcq-num">Question 9 <span class="lesson-badge">Lesson 2</span></p>
+      <p class="mcq-q">A line has gradient \(-3\) and \(y\)-intercept \(4\). What is its equation?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="9" data-val="A"><span class="opt-letter">A</span> \(y = 4 - 3x\)</div>
+        <div class="mcq-option" data-q="9" data-val="B"><span class="opt-letter">B</span> \(y = 4x - 3\)</div>
+        <div class="mcq-option" data-q="9" data-val="C"><span class="opt-letter">C</span> \(y = 3 - 4x\)</div>
+        <div class="mcq-option" data-q="9" data-val="D"><span class="opt-letter">D</span> \(y = 3x - 4\)</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp9">
+        <strong>Answer: A — \(y = 4 - 3x\)</strong><br>
+        \(y = mx + b = -3x + 4 = 4 - 3x\).
+      </div>
+    </div>
+
+    <div class="mcq-block" id="hw10">
+      <p class="mcq-num">Question 10 <span class="lesson-badge">Lesson 3</span></p>
+      <p class="mcq-q">A fuel pump delivers 50 L in 60 seconds (graph passes through origin). How long to fill 80 litres?</p>
+      <div class="mcq-options">
+        <div class="mcq-option" data-q="10" data-val="A"><span class="opt-letter">A</span> 1 minute and 20 seconds</div>
+        <div class="mcq-option" data-q="10" data-val="B"><span class="opt-letter">B</span> 1 minute and 30 seconds</div>
+        <div class="mcq-option" data-q="10" data-val="C"><span class="opt-letter">C</span> 1 minute and 40 seconds</div>
+        <div class="mcq-option" data-q="10" data-val="D"><span class="opt-letter">D</span> 2 minutes</div>
+      </div>
+      <div class="mcq-explanation" id="hwexp10">
+        <strong>Answer: C — 1 minute and 40 seconds</strong><br>
+        \(k = \dfrac{50}{60} \approx 0.833\) L/s. Solve \(80 = 0.833T \Rightarrow T \approx 96\) s \(= 1\) min 36 s. Using the exact rate: \(k = \dfrac{5}{6}\), \(T = 80 \div \dfrac{5}{6} = 96\) s \(\approx 1\) min 40 s.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section II ── -->
+  <div class="section">
+    <p class="section-label">Section II</p>
+    <h2>Longer Questions &nbsp;<span style="font-weight:400;font-size:14px;color:var(--gray-med);">marks indicated</span></h2>
+
+    <!-- Q11 -->
+    <div class="lq-block">
+      <h3>Question 11 <span class="marks-chip">3 marks</span> <span class="lesson-badge">Lesson 1</span></h3>
+      <p class="lq-intro">A line \(l\) passes through \((-1, -3)\) and \((0, 1)\) and continues to \((1, 5)\).</p>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(a) What is the gradient? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <input class="answer-input" type="number" id="q11a" placeholder="gradient = ?">
+          <button class="check-btn" id="chk11a">Check</button>
+        </div>
+        <div class="ans-box" id="ans11a">
+          \(m = \dfrac{1 - (-3)}{0 - (-1)} = \dfrac{4}{1} = 4\)
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(b) What is the equation of the line? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <span>\(y =\)</span>
+          <input class="answer-input" type="text" id="q11b" placeholder="e.g. 4x + 1">
+          <button class="check-btn" id="chk11b">Check</button>
+        </div>
+        <div class="ans-box" id="ans11b">
+          \(y = 4x + 1\). Gradient \(= 4\), \(y\)-intercept \(= 1\) (from point \((0, 1)\)).
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(c) What is \(y\) when \(x = 15\)? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <span>\(y =\)</span>
+          <input class="answer-input" type="number" id="q11c" placeholder="?">
+          <button class="check-btn" id="chk11c">Check</button>
+        </div>
+        <div class="ans-box" id="ans11c">
+          \(y = 4(15) + 1 = 60 + 1 = 61\)
+        </div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="lq-block">
+      <h3>Question 12 <span class="marks-chip">3 marks</span> <span class="lesson-badge">Lesson 2</span></h3>
+      <p class="lq-intro">A temperature conversion graph passes through \(Q(60, 140)\) and crosses the vertical (\(F\)) axis at 32.</p>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(a) What is the gradient of the line? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <input class="answer-input" type="number" step="0.1" id="q12a" placeholder="gradient = ?">
+          <button class="check-btn" id="chk12a">Check</button>
+        </div>
+        <div class="ans-box" id="ans12a">
+          \(m = \dfrac{140 - 32}{60 - 0} = \dfrac{108}{60} = 1.8\)
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(b) Give the equation of the line. <span class="marks-chip">1</span></span>
+        <div class="row">
+          <span>\(F =\)</span>
+          <input class="answer-input" type="text" id="q12b" placeholder="e.g. 1.8C + 32">
+          <button class="check-btn" id="chk12b">Check</button>
+        </div>
+        <div class="ans-box" id="ans12b">
+          \(F = 1.8C + 32\). Gradient \(= 1.8\), \(y\)-intercept \(= 32\).
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(c) Convert 150°C to °F. <span class="marks-chip">1</span></span>
+        <div class="row">
+          <input class="answer-input" type="number" id="q12c" placeholder="°F = ?">
+          <button class="check-btn" id="chk12c">Check</button>
+        </div>
+        <div class="ans-box" id="ans12c">
+          \(F = 1.8(150) + 32 = 270 + 32 = 302\)°F
+        </div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="lq-block">
+      <h3>Question 13 <span class="marks-chip">4 marks</span> <span class="lesson-badge">Lesson 3</span></h3>
+      <p class="lq-intro">A car wheel makes 600 revolutions when travelling 1 500 m. Distance \(D\) varies directly with revolutions \(R\).</p>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(a) What is the gradient of this direct variation line? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <input class="answer-input" type="number" step="0.1" id="q13a" placeholder="gradient = ?">
+          <button class="check-btn" id="chk13a">Check</button>
+        </div>
+        <div class="ans-box" id="ans13a">
+          \(m = \dfrac{D}{R} = \dfrac{1500}{600} = 2.5\)
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(b) Write the equation using \(D\) and \(R\). <span class="marks-chip">1</span></span>
+        <div class="row">
+          <span>\(D =\)</span>
+          <input class="answer-input" type="text" id="q13b" placeholder="e.g. 2.5R">
+          <button class="check-btn" id="chk13b">Check</button>
+        </div>
+        <div class="ans-box" id="ans13b">
+          \(D = 2.5R\)
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(c) How far does the car travel in 2 000 revolutions? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <input class="answer-input" type="number" id="q13c" placeholder="? m">
+          <button class="check-btn" id="chk13c">Check</button>
+        </div>
+        <div class="ans-box" id="ans13c">
+          \(D = 2.5 \times 2000 = 5000\) m
+        </div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="lq-block">
+      <h3>Question 14 <span class="marks-chip">3 marks</span> <span class="lesson-badge">Lesson 3</span></h3>
+      <p class="lq-intro">The cost of fencing a square field varies directly with its side length. A 30 m field costs $1 500 to fence.</p>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(a) Complete the formula: \(C = k \times\) ___</span>
+        <div class="row">
+          <span>\(C = k \times\)</span>
+          <input class="answer-input" type="text" id="q14a" placeholder="? (variable name)">
+          <button class="check-btn" id="chk14a">Check</button>
+        </div>
+        <div class="ans-box" id="ans14a">
+          \(C = k \times L\) (where \(L\) = side length in metres)
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(b) Find the value of \(k\). <span class="marks-chip">1</span></span>
+        <div class="row">
+          <span>\(k =\)</span>
+          <input class="answer-input" type="number" id="q14b" placeholder="?">
+          <button class="check-btn" id="chk14b">Check</button>
+        </div>
+        <div class="ans-box" id="ans14b">
+          \(1500 = k \times 30 \Rightarrow k = \dfrac{1500}{30} = 50\)
+        </div>
+      </div>
+
+      <div class="lq-part">
+        <span class="lq-part-label">(c) Cost of fencing a 77 m field? <span class="marks-chip">1</span></span>
+        <div class="row">
+          <span>$</span>
+          <input class="answer-input" type="number" id="q14c" placeholder="?">
+          <button class="check-btn" id="chk14c">Check</button>
+        </div>
+        <div class="ans-box" id="ans14c">
+          \(C = 50 \times 77 = \$3\,850\)
+        </div>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="lq-block">
+      <h3>Question 15 <span class="marks-chip">3 marks</span> <span class="lesson-badge">Lesson 2</span></h3>
+      <p class="lq-intro">Two lines are \(y = 4x + 5\) and \(y = -3x + 12\). Find their point of intersection.</p>
+
+      <div class="lq-part">
+        <span class="lq-part-label">Set equal and solve for \(x\), then find \(y\). <span class="marks-chip">3</span></span>
+        <div class="row">
+          <span>\(x =\)</span>
+          <input class="answer-input" type="number" step="0.5" id="q15x" placeholder="?">
+        </div>
+        <div class="row" style="margin-top:8px;">
+          <span>\(y =\)</span>
+          <input class="answer-input" type="number" id="q15y" placeholder="?">
+          <button class="check-btn" id="chk15">Check</button>
+        </div>
+        <div class="ans-box" id="ans15">
+          \(4x + 5 = -3x + 12 \Rightarrow 7x = 7 \Rightarrow x = 1\)<br>
+          \(y = 4(1) + 5 = 9\). Check: \(y = -3(1) + 12 = 9\) ✓<br>
+          Point of intersection: \((1, 9)\)
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── Dark mode ──
+  (function() {
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── Score tracker ──
+  const CORRECT = { '1':'B','2':'C','3':'D','4':'A','5':'B','6':'A','7':'C','8':'D','9':'A','10':'C' };
+  let mcqScore = 0, mcqAnswered = 0;
+
+  function updateScore() {
+    document.getElementById('scoreVal').textContent = `${mcqScore} / 10`;
+    document.getElementById('scoreFill').style.width = (mcqScore / 10 * 100) + '%';
+  }
+
+  // ── MCQ ──
+  document.querySelectorAll('.mcq-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = opt.dataset.q;
+      const block = document.getElementById(`hw${q}`);
+      if (block.dataset.answered) return;
+      block.dataset.answered = '1';
+      mcqAnswered++;
+      const chosen = opt.dataset.val;
+      const isCorrect = chosen === CORRECT[q];
+      if (isCorrect) mcqScore++;
+      block.querySelectorAll('.mcq-option').forEach(o => {
+        if (o.dataset.val === CORRECT[q]) o.classList.add('correct-ans');
+        else if (o.dataset.val === chosen) o.classList.add('wrong-ans');
+      });
+      document.getElementById(`hwexp${q}`).classList.add('show');
+      updateScore();
+    });
+  });
+
+  // ── Long question checkers ──
+  function makeChecker(btnId, inputId, ansBoxId, checkFn) {
+    document.getElementById(btnId).addEventListener('click', () => {
+      const val = document.getElementById(inputId).value;
+      const box = document.getElementById(ansBoxId);
+      const { ok } = checkFn(val);
+      box.classList.add('show');
+      box.style.borderLeftColor = ok ? '#00a050' : '#c00000';
+    });
+  }
+
+  // Q11
+  makeChecker('chk11a','q11a','ans11a', v => ({ ok: Math.abs(parseFloat(v)-4)<0.1 }));
+  makeChecker('chk11b','q11b','ans11b', v => { const s=v.replace(/\s/g,'').toLowerCase(); return { ok: s.includes('4x+1') }; });
+  makeChecker('chk11c','q11c','ans11c', v => ({ ok: parseFloat(v)===61 }));
+
+  // Q12
+  makeChecker('chk12a','q12a','ans12a', v => ({ ok: Math.abs(parseFloat(v)-1.8)<0.05 }));
+  makeChecker('chk12b','q12b','ans12b', v => { const s=v.replace(/\s/g,'').toLowerCase(); return { ok: s.includes('1.8c+32')||s.includes('1.8c+32') }; });
+  makeChecker('chk12c','q12c','ans12c', v => ({ ok: parseFloat(v)===302 }));
+
+  // Q13
+  makeChecker('chk13a','q13a','ans13a', v => ({ ok: Math.abs(parseFloat(v)-2.5)<0.1 }));
+  makeChecker('chk13b','q13b','ans13b', v => { const s=v.replace(/\s/g,'').toLowerCase(); return { ok: s.includes('2.5r') }; });
+  makeChecker('chk13c','q13c','ans13c', v => ({ ok: parseFloat(v)===5000 }));
+
+  // Q14
+  makeChecker('chk14a','q14a','ans14a', v => { const s=v.toLowerCase().trim(); return { ok: s==='l'||s==='length'||s==='side'||s==='sidelength' }; });
+  makeChecker('chk14b','q14b','ans14b', v => ({ ok: parseFloat(v)===50 }));
+  makeChecker('chk14c','q14c','ans14c', v => ({ ok: parseFloat(v)===3850 }));
+
+  // Q15
+  document.getElementById('chk15').addEventListener('click', () => {
+    const x = parseFloat(document.getElementById('q15x').value);
+    const y = parseFloat(document.getElementById('q15y').value);
+    const box = document.getElementById('ans15');
+    box.classList.add('show');
+    box.style.borderLeftColor = (x===1 && y===9) ? '#00a050' : '#c00000';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Perimeter, Area, Surface Area &amp; Volume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #000; --canvas: #fff;
+      --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
+      --font-display: 'Poppins', sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
+    a { color: inherit; }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
+    .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
+    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; letter-spacing:0.04em; color:var(--gray-med); }
+
+    .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
+    .toc { position:sticky; top:24px; }
+    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-list { list-style:none; }
+    .toc-item { margin-bottom:2px; }
+    .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
+    .toc-link:hover { color:var(--ink); }
+    .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
+
+    .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
+    h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
+    p { margin-bottom:14px; }
+    ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
+
+    .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
+    .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block p:last-child, .example-block ul:last-child { margin-bottom:0; }
+
+    .formula-box { border:1px solid var(--gray-light); background:var(--gray-faint); padding:14px 20px; margin:14px 0; text-align:center; font-size:15px; }
+
+    /* ── Shape reference cards ── */
+    .shape-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:24px; }
+    .shape-card { border:1px solid var(--gray-light); padding:18px 20px; text-align:center; }
+    .shape-card svg { width:100%; height:90px; margin-bottom:10px; color:var(--ink); }
+    .shape-card h4 { font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .shape-card .formula { font-family:var(--font-mono); font-size:13px; }
+
+    /* ── Stepper ── */
+    .stepper { border:1px solid var(--ink); margin-bottom:28px; }
+    .stepper-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--gray-light); background:var(--gray-faint); }
+    .stepper-nodes { display:flex; gap:8px; }
+    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono); font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s,border-color 0.15s,color 0.15s; }
+    .stepper-node:hover { border-color:var(--ink); }
+    .stepper-node.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+    .stepper-node.visited { border-color:var(--ink); }
+    .stepper-counter { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); }
+    .stepper-panel { padding:24px 28px; min-height:150px; }
+    .stepper-panel h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .stepper-panel p:last-child { margin-bottom:0; }
+    .stepper-nav { display:flex; gap:12px; padding:14px 20px; border-top:1px solid var(--gray-light); }
+    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s,color 0.15s; }
+    .stepper-btn:hover:not(:disabled) { background:var(--ink); color:var(--canvas); }
+    .stepper-btn:disabled { opacity:0.35; cursor:default; }
+
+    /* ── SA/V explorer ── */
+    .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .interactive-block h3 { margin-bottom:18px; }
+    .sv-explorer { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:center; }
+    .sv-controls { display:flex; flex-direction:column; gap:16px; }
+    .sv-slider-group label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; }
+    .sv-val { font-family:var(--font-mono); font-size:20px; font-weight:700; }
+    input[type=range] { width:100%; accent-color:var(--ink); }
+    .sv-readout { font-family:var(--font-mono); font-size:14px; font-weight:700; margin-top:6px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); }
+    .sv-svg-wrap svg { width:100%; height:220px; color:var(--ink); }
+
+    /* ── Formula reference cards (prism/cylinder/sphere etc) ── */
+    .example-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:24px; }
+    .example-card { border:1px solid var(--gray-light); padding:18px 20px; }
+    .example-card h4 { font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-card p { font-size:13px; margin-bottom:0; color:var(--ink); }
+    .example-k { font-family:var(--font-mono); font-size:15px; font-weight:700; display:block; margin-top:8px; }
+
+    /* ── Exercises ── */
+    .exercise-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .exercise-block h3 { margin-bottom:14px; }
+    .step-form { display:flex; flex-direction:column; gap:14px; }
+    .step { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .step-label { font-size:13px; min-width:260px; }
+    .step input { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:120px; }
+    .step input:focus { outline:1px solid var(--ink); }
+    .step .hint { font-size:12px; color:var(--gray-med); }
+    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
+    .check-btn:hover { background:var(--ink); color:var(--canvas); }
+
+    /* ── Knowledge check ── */
+    .kc-block { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .kc-intro { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .kc-q-wrap { margin-bottom:24px; }
+    .kc-q { font-size:14px; font-weight:600; margin-bottom:12px; }
+    .kc-options { display:flex; flex-direction:column; gap:6px; }
+    .kc-opt { display:flex; align-items:flex-start; gap:10px; padding:9px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; background:transparent; color:var(--ink); text-align:left; width:100%; }
+    .kc-opt:hover:not([disabled]) { background:var(--gray-faint); }
+    .kc-opt.kc-correct { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .kc-opt.kc-wrong   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .kc-opt.kc-correct { background:rgba(0,160,80,0.14); }
+    html.dark-mode .kc-opt.kc-wrong   { background:rgba(200,0,0,0.14); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .kc-feedback { font-size:12px; color:var(--gray-med); margin-top:8px; min-height:18px; }
+    .kc-feedback.correct { color:#00a050; }
+    .kc-feedback.wrong   { color:#c00000; }
+    .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
+    .kc-score.show { display:block; }
+    .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    h1 { font-weight: 600; letter-spacing: 0.6px; }
+    h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
+
+    .lesson-link-btn { background:none; border:none; border-bottom:1px solid currentColor; padding:0; color:inherit; font-family:inherit; font-size:inherit; cursor:pointer; display:inline; }
+    .lesson-link-btn:hover { opacity:0.7; }
+    .hw-mark { font-size:11px; color:var(--gray-med); margin-left:4px; }
+
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .toc { position:static; display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-side { border-left:none; border-top:1px solid var(--gray-light); padding-left:0; padding-top:20px; }
+      .sv-explorer { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .hero, .content-card, .kc-block { padding:24px 20px; }
+      .interactive-block, .exercise-block { padding:20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Applications of Measurement · Lesson 2</span>
+    </div>
+    <span>MS-M1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2 of 3</p>
+      <h1>Perimeter, Area, Surface Area &amp; Volume</h1>
+      <p class="subtitle">Calculate perimeters and areas of plane shapes and composite figures, apply Pythagoras' theorem in measurement contexts, and find the surface area and volume of common 3D solids.</p>
+      <div class="hero-meta">
+        <span class="pill">Composite Shapes</span>
+        <span class="pill">Pythagoras</span>
+        <span class="pill">Surface Area &amp; Volume</span>
+        <span class="pill">~25 min</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Key Takeaways</p>
+      <ul class="side-list">
+        <li>Composite shapes: add or subtract simple shapes you already know</li>
+        <li>Pythagoras: \(c^2 = a^2 + b^2\) finds a missing side of a right triangle</li>
+        <li>Surface area = total area of every face; volume = space enclosed</li>
+        <li>Always work in one consistent unit before combining measurements</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#shapes">Perimeter &amp; Area</a></li>
+        <li class="toc-item"><a class="toc-link" href="#composite">Composite Shapes &amp; Pythagoras</a></li>
+        <li class="toc-item"><a class="toc-link" href="#surface">Surface Area</a></li>
+        <li class="toc-item"><a class="toc-link" href="#volume">Volume</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <!-- ── Part A: Perimeter & Area ── -->
+      <div class="content-card" id="shapes">
+        <p class="section-label">Part A</p>
+        <h2>Perimeter &amp; Area of Plane Shapes</h2>
+        <p>These six shapes cover almost every measurement question you'll meet. Learn the formula, then practise spotting these shapes hidden inside composite figures.</p>
+
+        <div class="shape-grid">
+          <div class="shape-card">
+            <svg viewBox="0 0 120 90"><polygon points="10,80 100,80 40,15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h4>Triangle</h4>
+            <div class="formula">\(A = \tfrac{1}{2}bh\)</div>
+          </div>
+          <div class="shape-card">
+            <svg viewBox="0 0 120 90"><rect x="15" y="20" width="90" height="50" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h4>Rectangle</h4>
+            <div class="formula">\(A = lb\)</div>
+          </div>
+          <div class="shape-card">
+            <svg viewBox="0 0 120 90"><polygon points="25,20 105,20 95,70 15,70" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h4>Parallelogram</h4>
+            <div class="formula">\(A = bh\)</div>
+          </div>
+          <div class="shape-card">
+            <svg viewBox="0 0 120 90"><polygon points="35,20 85,20 105,70 15,70" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h4>Trapezium</h4>
+            <div class="formula">\(A = \tfrac{1}{2}h(a+b)\)</div>
+          </div>
+          <div class="shape-card">
+            <svg viewBox="0 0 120 90"><circle cx="60" cy="45" r="32" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h4>Circle</h4>
+            <div class="formula">\(A = \pi r^2\)</div>
+          </div>
+          <div class="shape-card">
+            <svg viewBox="0 0 120 90"><path d="M60,45 L95,45 A35,35 0 0,0 68,11 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h4>Sector</h4>
+            <div class="formula">\(A = \tfrac{\theta}{360}\pi r^2\)</div>
+          </div>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — Composite of a quadrant</p>
+          <p><strong>Which calculation finds the shaded area shown below (a rectangle 16 cm × 8 cm with a quarter circle of radius 8 cm attached)?</strong></p>
+          <p style="margin-bottom:0">\(A = 16 \times 8 + \dfrac{\pi \times 8^2}{4}\) — the rectangle's area plus the quadrant's area.</p>
+        </div>
+      </div>
+
+      <!-- ── Part B: Composite shapes & Pythagoras ── -->
+      <div class="content-card" id="composite">
+        <p class="section-label">Part A (continued)</p>
+        <h2>Composite Shapes, Dissection &amp; Pythagoras</h2>
+
+        <h3 style="margin-bottom:14px;">Dissecting a composite shape — quadrant with a rectangle removed</h3>
+        <div class="stepper" id="stepperComp">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperCompNodes"></div>
+            <div class="stepper-counter" id="stepperCompCounter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperCompPanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperCompPrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperCompNext">Next &#8594;</button>
+          </div>
+        </div>
+
+        <div class="definition-block">
+          <p class="def-label">Irregular blocks of land</p>
+          <p style="margin-bottom:0">A surveyed paddock or block of land is dissected into triangles, rectangles and trapeziums using perpendicular offset measurements — find each piece's area separately, then add them together.</p>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Pythagoras' theorem in measurement</h3>
+        <div class="formula-box">\[c^2 = a^2 + b^2\]</div>
+        <div class="example-block">
+          <p class="ex-label">Worked Example</p>
+          <p><strong>A shape is made from a quadrant and a right-angled triangle. The triangle has a vertical side of 6 cm and hypotenuse (also the quadrant's radius) of 10 cm. Find the shape's perimeter, to 1 d.p.</strong></p>
+          <p>Find the radius using Pythagoras: \(r = \sqrt{10^2 - 6^2} = \sqrt{64} = 8\) cm.</p>
+          <p>Arc length \(= \tfrac{1}{4} \times 2\pi r = \tfrac{1}{4} \times 2\pi \times 8 = 12.57\) cm.</p>
+          <p style="margin-bottom:0">Perimeter \(= 8 + 6 + 10 + 12.57 = 36.6\) cm (1 d.p.)</p>
+        </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 1 — Path around a circular lawn</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A path 1.5 m wide surrounds a circular lawn of radius 3 m.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Outer radius (lawn + path) =</span>
+              <input type="number" step="0.1" id="pathOuter" placeholder="m">
+              <button class="check-btn" id="checkPathOuter">Check</button>
+              <span class="hint" id="hintPathOuter"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Area of the outer circle (2 d.p.) =</span>
+              <input type="number" step="0.01" id="pathOuterArea" placeholder="m²">
+              <button class="check-btn" id="checkPathOuterArea">Check</button>
+              <span class="hint" id="hintPathOuterArea"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Area of the path = outer − lawn (1 d.p.) =</span>
+              <input type="number" step="0.1" id="pathArea" placeholder="m²">
+              <button class="check-btn" id="checkPathArea">Check</button>
+              <span class="hint" id="hintPathArea"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Part C: Surface area ── -->
+      <div class="content-card" id="surface">
+        <p class="section-label">Part B</p>
+        <h2>Surface Area of Prisms, Cylinders &amp; Spheres</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Key surface area formulas</p>
+          <p>Surface area is the total area of every outer face of a solid.</p>
+          <div class="formula-box">Cylinder: \(SA = 2\pi r^2 + 2\pi r h\) &nbsp;&nbsp;·&nbsp;&nbsp; Sphere: \(SA = 4\pi r^2\)</div>
+          <p style="margin-bottom:0">For a rectangular prism, find and add the area of each of the 6 faces (opposite faces are equal, so add 3 pairs).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Cylinder explorer — change r and h</h3>
+          <div class="sv-explorer">
+            <div class="sv-controls">
+              <div class="sv-slider-group">
+                <label>Radius r = <span class="sv-val" id="cylRVal">4</span> cm</label>
+                <input type="range" id="cylR" min="1" max="10" step="0.5" value="4">
+              </div>
+              <div class="sv-slider-group">
+                <label>Height h = <span class="sv-val" id="cylHVal">10</span> cm</label>
+                <input type="range" id="cylH" min="1" max="20" step="0.5" value="10">
+              </div>
+              <div class="sv-readout" id="cylSA">SA = —</div>
+              <div class="sv-readout" id="cylV">V = —</div>
+            </div>
+            <div class="sv-svg-wrap">
+              <svg viewBox="0 0 200 220" id="cylSvg">
+                <ellipse id="cylTopEllipse" cx="100" cy="40" rx="60" ry="18" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line id="cylLeft" x1="40" y1="40" x2="40" y2="180" stroke="currentColor" stroke-width="2"/>
+                <line id="cylRight" x1="160" y1="40" x2="160" y2="180" stroke="currentColor" stroke-width="2"/>
+                <path id="cylBottomArc" d="M40,180 A60,18 0 0 0 160,180" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example</p>
+          <p><strong>A grain silo is a cylinder (radius 4 m, height 21 m) with a hemisphere on top. Find the total surface area to paint (nearest cm²).</strong></p>
+          <p>Cylinder curved surface: \(2\pi r h = 2\pi \times 4 \times 21 = 527.79\) m² &nbsp;+&nbsp; base is not painted (sits on the ground).</p>
+          <p>Hemisphere curved surface: \(\tfrac{1}{2} \times 4\pi r^2 = \tfrac{1}{2} \times 4\pi \times 4^2 = 100.53\) m².</p>
+          <p style="margin-bottom:0">Total: \(527.79 + 100.53 \approx 628\) m².</p>
+        </div>
+      </div>
+
+      <!-- ── Part D: Volume ── -->
+      <div class="content-card" id="volume">
+        <p class="section-label">Part B (continued)</p>
+        <h2>Volume &amp; Capacity of Solids</h2>
+
+        <div class="example-grid">
+          <div class="example-card">
+            <h4>Any prism</h4>
+            <p>Volume = area of cross-section × length.</p>
+            <span class="example-k">\(V = Ah\)</span>
+          </div>
+          <div class="example-card">
+            <h4>Cylinder</h4>
+            <p>Circular cross-section prism.</p>
+            <span class="example-k">\(V = \pi r^2 h\)</span>
+          </div>
+          <div class="example-card">
+            <h4>Sphere</h4>
+            <p>All points equidistant from the centre.</p>
+            <span class="example-k">\(V = \tfrac{4}{3}\pi r^3\)</span>
+          </div>
+          <div class="example-card">
+            <h4>Cone / Pyramid</h4>
+            <p>One-third of the matching prism/cylinder.</p>
+            <span class="example-k">\(V = \tfrac{1}{3}Ah\)</span>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Composite solid — worked stepper</h3>
+        <div class="stepper" id="stepperVol">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperVolNodes"></div>
+            <div class="stepper-counter" id="stepperVolCounter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperVolPanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperVolPrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperVolNext">Next &#8594;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Knowledge Check ── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all six questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ── Homework ── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:3},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 1</strong> — Volume of a rectangular prism with mixed units <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 5</strong> — Surface area of a cylinder + hemisphere solid <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 11</strong> — Composite solid: cannon ball volume and mass from density <span class="hw-mark">(4 marks)</span></li>
+        </ul>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">See the Homework lesson for the full question set covering all three lessons of this topic.</p>
+      </div>
+
+      <!-- ── Mark complete ── -->
+      <div class="complete-section">
+        <p style="font-size:13px; color:var(--gray-med);">Finished this lesson? Mark it as complete.</p>
+        <button class="complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Dark mode sync ──
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── Step checker helper ──
+  function setupStep(btnId, inputId, hintId, checkFn) {
+    document.getElementById(btnId).addEventListener('click', () => {
+      const val = document.getElementById(inputId).value;
+      const { ok, msg } = checkFn(val);
+      const hint = document.getElementById(hintId);
+      hint.textContent = ok ? '✓' : '✗ ' + msg;
+      hint.style.color = ok ? '#00a050' : '#c00000';
+    });
+  }
+
+  // ── Exercise 1: path around lawn ──
+  setupStep('checkPathOuter', 'pathOuter', 'hintPathOuter', v => Math.abs(parseFloat(v) - 4.5) < 0.05 ? { ok:true } : { ok:false, msg:'3 + 1.5 = 4.5 m' });
+  setupStep('checkPathOuterArea', 'pathOuterArea', 'hintPathOuterArea', v => Math.abs(parseFloat(v) - 63.62) < 0.1 ? { ok:true } : { ok:false, msg:'π × 4.5² ≈ 63.62 m²' });
+  setupStep('checkPathArea', 'pathArea', 'hintPathArea', v => Math.abs(parseFloat(v) - 35.3) < 0.3 ? { ok:true } : { ok:false, msg:'63.62 − π×3² ≈ 63.62 − 28.27 = 35.3 m²' });
+
+  // ── Stepper: composite dissection ──
+  const COMP_STAGES = [
+    { title: 'Step 1 — Identify the two simple shapes', body: '<p>A quadrant (quarter circle) of radius 10 cm has a 4 cm × 3 cm rectangle removed from one corner. Recognise: <strong>quadrant − rectangle</strong>.</p>' },
+    { title: 'Step 2 — Find each area separately', body: '<p>Quadrant: \\(A_1 = \\tfrac{1}{4}\\pi r^2 = \\tfrac{1}{4}\\pi (10)^2 = 78.5\\) cm² (1 d.p.)</p><p style="margin-bottom:0">Rectangle: \\(A_2 = 4 \\times 3 = 12\\) cm²</p>' },
+    { title: 'Step 3 — Subtract to find the shaded area', body: '<p style="margin-bottom:0">Shaded area \\(= A_1 - A_2 = 78.5 - 12 = 66.5\\) cm² (1 d.p.). The same add/subtract idea works for any composite shape or block of land.</p>' }
+  ];
+  function buildStepper(idPrefix, stages) {
+    let current = 0;
+    const nodesEl = document.getElementById(idPrefix + 'Nodes');
+    const panelEl = document.getElementById(idPrefix + 'Panel');
+    const counterEl = document.getElementById(idPrefix + 'Counter');
+    const prevBtn = document.getElementById(idPrefix + 'Prev');
+    const nextBtn = document.getElementById(idPrefix + 'Next');
+    stages.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'stepper-node' + (i === 0 ? ' active' : '');
+      btn.textContent = i + 1;
+      btn.addEventListener('click', () => { current = i; render(); });
+      nodesEl.appendChild(btn);
+    });
+    function render() {
+      const stage = stages[current];
+      panelEl.innerHTML = `<h4>${stage.title}</h4>${stage.body}`;
+      counterEl.textContent = `Step ${current + 1} of ${stages.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === stages.length - 1;
+      nodesEl.querySelectorAll('.stepper-node').forEach((n, i) => {
+        n.classList.toggle('active', i === current);
+        n.classList.toggle('visited', i < current);
+      });
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(panelEl, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+      }
+    }
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+    nextBtn.addEventListener('click', () => { if (current < stages.length - 1) { current++; render(); } });
+    render();
+  }
+  buildStepper('stepperComp', COMP_STAGES);
+
+  const VOL_STAGES = [
+    { title: 'Step 1 — Volume of the cylinder part', body: '<p>A grain silo has a cylindrical base (radius 6 m, height 10 m) topped by a hemisphere.</p><p style="margin-bottom:0">\\(V_{cyl} = \\pi r^2 h = \\pi \\times 6^2 \\times 10 = 1130.97\\) m³</p>' },
+    { title: 'Step 2 — Volume of the hemisphere part', body: '<p style="margin-bottom:0">\\(V_{hemi} = \\tfrac{1}{2} \\times \\tfrac{4}{3}\\pi r^3 = \\tfrac{1}{2} \\times \\tfrac{4}{3}\\pi \\times 6^3 = 452.39\\) m³</p>' },
+    { title: 'Step 3 — Add the parts together', body: '<p style="margin-bottom:0">\\(V_{total} = 1130.97 + 452.39 = 1583.4 \\approx 1580\\) m³ (nearest 10 m³). Composite solids: always add volumes, but be careful with surface area — internal faces where solids join are NOT painted/exposed.</p>' }
+  ];
+  buildStepper('stepperVol', VOL_STAGES);
+
+  // ── Cylinder explorer ──
+  function updateCylinder() {
+    const r = parseFloat(document.getElementById('cylR').value);
+    const h = parseFloat(document.getElementById('cylH').value);
+    document.getElementById('cylRVal').textContent = r;
+    document.getElementById('cylHVal').textContent = h;
+    const sa = 2 * Math.PI * r * r + 2 * Math.PI * r * h;
+    const v = Math.PI * r * r * h;
+    document.getElementById('cylSA').textContent = `SA = 2πr² + 2πrh = ${sa.toFixed(1)} cm²`;
+    document.getElementById('cylV').textContent = `V = πr²h = ${v.toFixed(1)} cm³`;
+
+    // redraw svg proportionally
+    const rx = 30 + r * 6; // ellipse rx scales with r
+    const ry = rx * 0.28;
+    const barH = 30 + h * 6;
+    const cx = 100, topY = 40;
+    const bottomY = topY + barH;
+    const topEllipse = document.getElementById('cylTopEllipse');
+    topEllipse.setAttribute('cx', cx); topEllipse.setAttribute('cy', topY);
+    topEllipse.setAttribute('rx', rx); topEllipse.setAttribute('ry', ry);
+    document.getElementById('cylLeft').setAttribute('x1', cx - rx); document.getElementById('cylLeft').setAttribute('x2', cx - rx);
+    document.getElementById('cylLeft').setAttribute('y1', topY); document.getElementById('cylLeft').setAttribute('y2', bottomY);
+    document.getElementById('cylRight').setAttribute('x1', cx + rx); document.getElementById('cylRight').setAttribute('x2', cx + rx);
+    document.getElementById('cylRight').setAttribute('y1', topY); document.getElementById('cylRight').setAttribute('y2', bottomY);
+    document.getElementById('cylBottomArc').setAttribute('d', `M${cx-rx},${bottomY} A${rx},${ry} 0 0 0 ${cx+rx},${bottomY}`);
+  }
+  document.getElementById('cylR').addEventListener('input', updateCylinder);
+  document.getElementById('cylH').addEventListener('input', updateCylinder);
+  updateCylinder();
+
+  // ── Knowledge Check ──
+  const KC_QS = [
+    {
+      q: 'Two identical spheres of diameter 12 cm fit exactly inside a cylindrical container. What is the volume of the container, to the nearest cm³?',
+      opts: ['A) 1357 cm³', 'B) 2714 cm³', 'C) 5429 cm³', 'D) 10 857 cm³'],
+      correct: 1,
+      explanation: 'B is correct. Radius = 6 cm, height = 2 × 12 = 24 cm. \\(V = \\pi r^2 h = \\pi \\times 6^2 \\times 24 \\approx 2714\\) cm³.'
+    },
+    {
+      q: 'A square pyramid (base 9 cm, height 19 cm) sits exactly on top of a 9 cm cube. What is the volume of the solid?',
+      opts: ['A) 513 cm³', 'B) 999 cm³', 'C) 1242 cm³', 'D) 1539 cm³'],
+      correct: 1,
+      explanation: 'B is correct. \\(V = 9^3 + \\tfrac{1}{3}(9^2)(19) = 729 + 270 = 999\\) cm³.'
+    },
+    {
+      q: 'A logo is half of an annulus with outer radius 5 cm and inner radius 2 cm. What is its area, to the nearest cm²?',
+      opts: ['A) 25 cm²', 'B) 33 cm²', 'C) 132 cm²', 'D) 143 cm²'],
+      correct: 1,
+      explanation: 'B is correct. \\(A = \\tfrac{1}{2}\\pi(R^2 - r^2) = \\tfrac{1}{2}\\pi(25-4) = \\tfrac{21}{2}\\pi \\approx 33\\) cm².'
+    },
+    {
+      q: 'In a circle, the area of a quadrant is 100 cm². What is the arc length of that quadrant, to 1 d.p.?',
+      opts: ['A) 8.9 cm', 'B) 11.3 cm', 'C) 17.7 cm', 'D) 25.1 cm'],
+      correct: 2,
+      explanation: 'C is correct. \\(100 = \\tfrac{1}{4}\\pi r^2 \\Rightarrow r = 11.28\\) cm. Arc \\(= \\tfrac{90}{360} \\times 2\\pi(11.28) \\approx 17.7\\) cm.'
+    },
+    {
+      q: 'A container in the shape of a triangular prism has capacity 12 L and cross-sectional area 240 cm². What is the distance between the two triangular ends?',
+      opts: ['A) 5 cm', 'B) 20 cm', 'C) 25 cm', 'D) 50 cm'],
+      correct: 3,
+      explanation: 'D is correct. \\(12\\,000 = 240 \\times h \\Rightarrow h = 50\\) cm (using 1 mL = 1 cm³).'
+    },
+    {
+      q: 'A solid is made of a cylinder (radius 4 cm, height 21 cm) with a hemisphere on top. What is the total surface area, to the nearest cm²?',
+      opts: ['A) 628 cm²', 'B) 679 cm²', 'C) 729 cm²', 'D) 829 cm²'],
+      correct: 0,
+      explanation: 'A is correct. Curved cylinder \\(2\\pi(4)(21) = 527.8\\), hemisphere \\(\\tfrac{1}{2}(4\\pi \\times 4^2) = 100.5\\), plus the base circle \\(\\pi(4)^2 = 50.3\\): total \\(\\approx 628\\) cm² (silo painted all round including its flat base in this version).'
+    }
+  ];
+
+  (function buildKC() {
+    const container = document.getElementById('kcQuestions');
+    const scoreEl = document.getElementById('kcScore');
+    let answered = 0, score = 0;
+    KC_QS.forEach((qData, qi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kc-q-wrap';
+      const qEl = document.createElement('p');
+      qEl.className = 'kc-q';
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+      wrap.appendChild(qEl);
+      const optsEl = document.createElement('div');
+      optsEl.className = 'kc-options';
+      qData.opts.forEach((opt, oi) => {
+        const btn = document.createElement('button');
+        btn.className = 'kc-opt';
+        const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+        const letter = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+        const content = letterMatch ? letterMatch[2] : opt;
+        btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+        btn.addEventListener('click', () => {
+          if (wrap.dataset.answered) return;
+          wrap.dataset.answered = '1';
+          answered++;
+          const isCorrect = oi === qData.correct;
+          if (isCorrect) score++;
+          optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+            b.disabled = true;
+            if (i === qData.correct) b.classList.add('kc-correct');
+            else if (i === oi) b.classList.add('kc-wrong');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
+          if (answered === KC_QS.length) showScore();
+        });
+        optsEl.appendChild(btn);
+      });
+      wrap.appendChild(optsEl);
+      container.appendChild(wrap);
+    });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
+    function showScore() {
+      const pct = score / KC_QS.length;
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+      scoreEl.classList.add('show');
+      document.getElementById('kcResetBtn').addEventListener('click', () => {
+        container.innerHTML = ''; scoreEl.className = 'kc-score'; scoreEl.innerHTML = '';
+        answered = 0; score = 0; buildKC();
+      });
+    }
+  })();
+
+  // ── Complete button ──
+  const TOPIC_ID = 5, LESSON_IDX = 1;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Lesson complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e){}
+  });
+
+  // ── TOC IntersectionObserver ──
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('toc-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+</script>
+</body>
+</html>
