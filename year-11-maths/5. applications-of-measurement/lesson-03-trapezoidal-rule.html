@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — The Trapezoidal Rule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #000; --canvas: #fff;
+      --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
+      --font-display: 'Poppins', sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
+    a { color: inherit; }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
+    .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
+    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; letter-spacing:0.04em; color:var(--gray-med); }
+
+    .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
+    .toc { position:sticky; top:24px; }
+    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-list { list-style:none; }
+    .toc-item { margin-bottom:2px; }
+    .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
+    .toc-link:hover { color:var(--ink); }
+    .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
+
+    .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
+    h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
+    p { margin-bottom:14px; }
+    ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
+
+    .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
+    .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block p:last-child, .example-block ul:last-child { margin-bottom:0; }
+    .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
+    .note-block p:last-child { margin-bottom:0; }
+
+    .formula-box { border:1px solid var(--gray-light); background:var(--gray-faint); padding:14px 20px; margin:14px 0; text-align:center; font-size:15px; }
+
+    /* ── Stepper ── */
+    .stepper { border:1px solid var(--ink); margin-bottom:28px; }
+    .stepper-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--gray-light); background:var(--gray-faint); }
+    .stepper-nodes { display:flex; gap:8px; }
+    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono); font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s,border-color 0.15s,color 0.15s; }
+    .stepper-node:hover { border-color:var(--ink); }
+    .stepper-node.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+    .stepper-node.visited { border-color:var(--ink); }
+    .stepper-counter { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); }
+    .stepper-panel { padding:24px 28px; min-height:150px; }
+    .stepper-panel h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .stepper-panel p:last-child { margin-bottom:0; }
+    .stepper-nav { display:flex; gap:12px; padding:14px 20px; border-top:1px solid var(--gray-light); }
+    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s,color 0.15s; }
+    .stepper-btn:hover:not(:disabled) { background:var(--ink); color:var(--canvas); }
+    .stepper-btn:disabled { opacity:0.35; cursor:default; }
+
+    /* ── Trapezoidal visualizer ── */
+    .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .interactive-block h3 { margin-bottom:18px; }
+    .tz-explorer { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+    .tz-slider-group label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; }
+    .tz-val { font-family:var(--font-mono); font-size:20px; font-weight:700; }
+    input[type=range] { width:100%; accent-color:var(--ink); }
+    .tz-svg-wrap svg { width:100%; height:180px; color:var(--ink); }
+    .eq-live { font-family:var(--font-mono); font-size:14px; font-weight:700; margin-top:14px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); }
+    .prop-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; }
+    .prop-table th, .prop-table td { border:1px solid var(--gray-light); padding:8px 10px; text-align:center; }
+    .prop-table th { background:var(--gray-faint); font-weight:700; }
+
+    /* ── Exercises ── */
+    .exercise-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .exercise-block h3 { margin-bottom:14px; }
+    .step-form { display:flex; flex-direction:column; gap:14px; }
+    .step { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .step-label { font-size:13px; min-width:280px; }
+    .step input { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:120px; }
+    .step input:focus { outline:1px solid var(--ink); }
+    .step .hint { font-size:12px; color:var(--gray-med); }
+    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
+    .check-btn:hover { background:var(--ink); color:var(--canvas); }
+
+    /* ── Knowledge check ── */
+    .kc-block { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .kc-intro { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .kc-q-wrap { margin-bottom:24px; }
+    .kc-q { font-size:14px; font-weight:600; margin-bottom:12px; }
+    .kc-options { display:flex; flex-direction:column; gap:6px; }
+    .kc-opt { display:flex; align-items:flex-start; gap:10px; padding:9px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; background:transparent; color:var(--ink); text-align:left; width:100%; }
+    .kc-opt:hover:not([disabled]) { background:var(--gray-faint); }
+    .kc-opt.kc-correct { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .kc-opt.kc-wrong   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .kc-opt.kc-correct { background:rgba(0,160,80,0.14); }
+    html.dark-mode .kc-opt.kc-wrong   { background:rgba(200,0,0,0.14); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .kc-feedback { font-size:12px; color:var(--gray-med); margin-top:8px; min-height:18px; }
+    .kc-feedback.correct { color:#00a050; }
+    .kc-feedback.wrong   { color:#c00000; }
+    .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
+    .kc-score.show { display:block; }
+    .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    h1 { font-weight: 600; letter-spacing: 0.6px; }
+    h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
+
+    .lesson-link-btn { background:none; border:none; border-bottom:1px solid currentColor; padding:0; color:inherit; font-family:inherit; font-size:inherit; cursor:pointer; display:inline; }
+    .lesson-link-btn:hover { opacity:0.7; }
+    .hw-mark { font-size:11px; color:var(--gray-med); margin-left:4px; }
+
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .toc { position:static; display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-side { border-left:none; border-top:1px solid var(--gray-light); padding-left:0; padding-top:20px; }
+      .tz-explorer { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .hero, .content-card, .kc-block { padding:24px 20px; }
+      .interactive-block, .exercise-block { padding:20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Applications of Measurement · Lesson 3</span>
+    </div>
+    <span>MS-M1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3 of 3</p>
+      <h1>The Trapezoidal Rule</h1>
+      <p class="subtitle">Estimate the area, volume or capacity of an irregular shape using the Trapezoidal rule — the tool surveyors and engineers use for blocks of land, dams, and cross-sections.</p>
+      <div class="hero-meta">
+        <span class="pill">Irregular Areas</span>
+        <span class="pill">\(A \approx \tfrac{h}{2}(d_f+d_l)\)</span>
+        <span class="pill">~20 min</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Key Takeaways</p>
+      <ul class="side-list">
+        <li>\(h\) is the fixed perpendicular distance between offsets</li>
+        <li>Middle offsets are counted twice (weight 2); first and last once (weight 1)</li>
+        <li>More applications (more offsets) generally give a more accurate estimate</li>
+        <li>The same rule estimates area, volume (with a height/depth) and capacity</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#formula">The Formula</a></li>
+        <li class="toc-item"><a class="toc-link" href="#visualizer">Interactive Visualiser</a></li>
+        <li class="toc-item"><a class="toc-link" href="#worked">Worked Example</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exercises">Exercise</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <!-- ── Part A: Formula ── -->
+      <div class="content-card" id="formula">
+        <p class="section-label">Part A</p>
+        <h2>The Trapezoidal Rule</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Definition</p>
+          <p>When a shape's boundary is irregular, measure equally-spaced perpendicular offsets \(d_1, d_2, \ldots, d_n\), a fixed distance \(h\) apart. The Trapezoidal rule approximates the area as:</p>
+          <div class="formula-box">\[A \approx \dfrac{h}{2}\Big[d_{first} + d_{last} + 2(\text{sum of the middle offsets})\Big]\]</div>
+          <ul style="margin-bottom:0">
+            <li>\(h\) = the perpendicular distance between each offset (must be equal spacing)</li>
+            <li>\(d_{first}\) and \(d_{last}\) = the two outer offsets (counted once)</li>
+            <li>Every offset in between is counted <strong>twice</strong> (it is shared by two adjoining trapezia)</li>
+          </ul>
+        </div>
+
+        <div class="note-block">
+          <p style="margin-bottom:0"><strong>Note:</strong> the Trapezoidal rule joins offset tops with straight lines, so it usually gives a slightly different value to the true (curved) area — it can over- or under-estimate depending on whether the boundary curves outward or inward between offsets.</p>
+        </div>
+      </div>
+
+      <!-- ── Part B: Visualiser ── -->
+      <div class="content-card" id="visualizer">
+        <p class="section-label">Part A (continued)</p>
+        <h2>Interactive Visualiser</h2>
+        <p>Drag the slider to change how many applications (intervals) are used. Watch the offsets table and live area calculation update.</p>
+
+        <div class="interactive-block">
+          <h3>Applications explorer</h3>
+          <div class="tz-explorer">
+            <div>
+              <div class="tz-slider-group">
+                <label>Number of applications = <span class="tz-val" id="tzNVal">4</span> &nbsp;(h = 3 m)</label>
+                <input type="range" id="tzN" min="1" max="4" step="1" value="4">
+              </div>
+              <table class="prop-table" id="tzTable">
+                <thead><tr><th>Offset</th><th>Height (m)</th><th>Weight</th></tr></thead>
+                <tbody></tbody>
+              </table>
+              <div class="eq-live" id="tzEqLive"></div>
+            </div>
+            <div class="tz-svg-wrap">
+              <svg viewBox="0 0 260 160" id="tzSvg"></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Part C: Worked example ── -->
+      <div class="content-card" id="worked">
+        <p class="section-label">Part B</p>
+        <h2>Worked Example — Block of Land</h2>
+
+        <div class="stepper" id="stepperTz">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperTzNodes"></div>
+            <div class="stepper-counter" id="stepperTzCounter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperTzPanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperTzPrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperTzNext">Next &#8594;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Part D: Exercises ── -->
+      <div class="content-card" id="exercises">
+        <p class="section-label">Part B (continued)</p>
+        <h2>Volume of a Dam</h2>
+        <p style="font-size:13px;">A 200 m long dam has four evenly-spaced cross-sectional areas: 360 m², 300 m², 270 m² and 140 m² (measured from the dam wall), with the far end tapering to 0 m².</p>
+
+        <div class="exercise-block">
+          <h3>Exercise — Dam capacity &amp; rainfall</h3>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) The spacing h between cross-sections (m) =</span>
+              <input type="number" id="damH" placeholder="m">
+              <button class="check-btn" id="checkDamH">Check</button>
+              <span class="hint" id="hintDamH"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Volume of the dam using the Trapezoidal rule (nearest 100 m³) =</span>
+              <input type="number" id="damV" placeholder="m³">
+              <button class="check-btn" id="checkDamV">Check</button>
+              <span class="hint" id="hintDamV"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) If the catchment area is 2 km² = 2 000 000 m², rainfall needed to fill the dam, nearest mm =</span>
+              <input type="number" id="damRain" placeholder="mm">
+              <button class="check-btn" id="checkDamRain">Check</button>
+              <span class="hint" id="hintDamRain"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Knowledge Check ── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all six questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ── Homework ── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:3},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 8</strong> — Two applications of the Trapezoidal rule for a block of land <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 14</strong> — Trapezoidal rule for a wall cross-section, then find its mass <span class="hw-mark">(5 marks)</span></li>
+        </ul>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">See the Homework lesson for the full question set covering all three lessons of this topic.</p>
+      </div>
+
+      <!-- ── Mark complete ── -->
+      <div class="complete-section">
+        <p style="font-size:13px; color:var(--gray-med);">Finished this lesson? Mark it as complete.</p>
+        <button class="complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Dark mode sync ──
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── Trapezoidal visualiser ──
+  const TZ_H = 3;
+  const TZ_OFFSETS = [6, 7, 12, 8, 10]; // 5 offsets = up to 4 applications
+
+  function updateTzVisualiser() {
+    const n = parseInt(document.getElementById('tzN').value, 10);
+    document.getElementById('tzNVal').textContent = n;
+    const offsets = TZ_OFFSETS.slice(0, n + 1);
+
+    // table
+    const tbody = document.querySelector('#tzTable tbody');
+    tbody.innerHTML = '';
+    offsets.forEach((d, i) => {
+      const weight = (i === 0 || i === offsets.length - 1) ? 1 : 2;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>d${i + 1}</td><td>${d}</td><td>${weight}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    // area calc
+    const middleSum = offsets.slice(1, -1).reduce((a, b) => a + b, 0);
+    const area = (TZ_H / 2) * (offsets[0] + offsets[offsets.length - 1] + 2 * middleSum);
+    document.getElementById('tzEqLive').textContent =
+      `A ≈ (${TZ_H}/2)[${offsets[0]} + ${offsets[offsets.length - 1]} + 2(${middleSum})] = ${area.toFixed(1)} m²`;
+
+    // svg
+    const svg = document.getElementById('tzSvg');
+    const w = 260, hgt = 160, pad = 20;
+    const stepX = (w - pad * 2) / n;
+    const maxD = Math.max(...TZ_OFFSETS);
+    const scaleY = (hgt - pad * 2) / maxD;
+    const baseY = hgt - pad;
+    let poly = '';
+    let lines = '';
+    offsets.forEach((d, i) => {
+      const x = pad + i * stepX;
+      const y = baseY - d * scaleY;
+      poly += `${x},${y} `;
+      lines += `<line x1="${x}" y1="${baseY}" x2="${x}" y2="${y}" stroke="currentColor" stroke-width="1" stroke-dasharray="2,2"/>`;
+    });
+    svg.innerHTML = `
+      <line x1="${pad}" y1="${baseY}" x2="${pad + n * stepX}" y2="${baseY}" stroke="currentColor" stroke-width="2"/>
+      ${lines}
+      <polyline points="${poly}" fill="none" stroke="currentColor" stroke-width="2"/>
+    `;
+  }
+  document.getElementById('tzN').addEventListener('input', updateTzVisualiser);
+  updateTzVisualiser();
+
+  // ── Stepper builder ──
+  function buildStepper(idPrefix, stages) {
+    let current = 0;
+    const nodesEl = document.getElementById(idPrefix + 'Nodes');
+    const panelEl = document.getElementById(idPrefix + 'Panel');
+    const counterEl = document.getElementById(idPrefix + 'Counter');
+    const prevBtn = document.getElementById(idPrefix + 'Prev');
+    const nextBtn = document.getElementById(idPrefix + 'Next');
+    stages.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'stepper-node' + (i === 0 ? ' active' : '');
+      btn.textContent = i + 1;
+      btn.addEventListener('click', () => { current = i; render(); });
+      nodesEl.appendChild(btn);
+    });
+    function render() {
+      const stage = stages[current];
+      panelEl.innerHTML = `<h4>${stage.title}</h4>${stage.body}`;
+      counterEl.textContent = `Step ${current + 1} of ${stages.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === stages.length - 1;
+      nodesEl.querySelectorAll('.stepper-node').forEach((n, i) => {
+        n.classList.toggle('active', i === current);
+        n.classList.toggle('visited', i < current);
+      });
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(panelEl, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+      }
+    }
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+    nextBtn.addEventListener('click', () => { if (current < stages.length - 1) { current++; render(); } });
+    render();
+  }
+
+  const TZ_STAGES = [
+    { title: 'Step 1 — Identify h and the offsets', body: '<p>A block of land bounded by a road has three offsets 23 m, 15 m and 19 m, measured 20 m apart.</p><p style="margin-bottom:0">So \\(h = 20\\) m, \\(d_1 = 23\\), \\(d_2 = 15\\) (middle, weight 2), \\(d_3 = 19\\).</p>' },
+    { title: 'Step 2 — Apply the formula', body: '<p style="margin-bottom:0">\\(A \\approx \\dfrac{20}{2}\\big[23 + 19 + 2(15)\\big] = 10 \\times 72 = 720\\) m²</p>' },
+    { title: 'Step 3 — State the answer with units', body: '<p style="margin-bottom:0">The approximate area of the block of land is <strong>720 m²</strong>. Always check: does your h come from the question, and have you doubled only the middle offsets?</p>' }
+  ];
+  buildStepper('stepperTz', TZ_STAGES);
+
+  // ── Step checker helper ──
+  function setupStep(btnId, inputId, hintId, checkFn) {
+    document.getElementById(btnId).addEventListener('click', () => {
+      const val = document.getElementById(inputId).value;
+      const { ok, msg } = checkFn(val);
+      const hint = document.getElementById(hintId);
+      hint.textContent = ok ? '✓' : '✗ ' + msg;
+      hint.style.color = ok ? '#00a050' : '#c00000';
+    });
+  }
+  setupStep('checkDamH', 'damH', 'hintDamH', v => Math.abs(parseFloat(v) - 50) < 0.5 ? { ok:true } : { ok:false, msg:'200 m ÷ 4 applications = 50 m' });
+  setupStep('checkDamV', 'damV', 'hintDamV', v => Math.abs(parseFloat(v) - 44500) < 100 ? { ok:true } : { ok:false, msg:'V ≈ (50/2)[360 + 0 + 2(300+270+140)] = 25 × 1780 = 44 500 m³' });
+  setupStep('checkDamRain', 'damRain', 'hintDamRain', v => Math.abs(parseFloat(v) - 22) < 1 ? { ok:true } : { ok:false, msg:'44 500 ÷ 2 000 000 = 0.02225 m ≈ 22 mm' });
+
+  // ── Knowledge Check ──
+  const KC_QS = [
+    {
+      q: 'A block of land has three offsets 6 m, 7 m and 5 m, each 3 m apart. What is the approximate area using one application of the Trapezoidal rule between each pair?',
+      opts: ['A) 36 m²', 'B) 39 m²', 'C) 42 m²', 'D) 45 m²'],
+      correct: 1,
+      explanation: 'B is correct. \\(A \\approx \\tfrac{3}{2}[6+2(7)+5] = 1.5 \\times 26 = 39\\) m² (two applications, h = 3).'
+    },
+    {
+      q: 'A field has five offsets: 6, 7, 12, 8, 10 m, evenly spaced 12 m apart (four applications). What is the approximate area?',
+      opts: ['A) 105 m²', 'B) 210 m²', 'C) 252 m²', 'D) 420 m²'],
+      correct: 1,
+      explanation: 'B is correct. \\(A \\approx \\tfrac{12}{2}\\big[6+10+2(7+12+8)\\big] = 6 \\times 70 = 420\\)... check: middle sum \\(=27\\), \\(6(6+10+54)=6\\times70=420\\). Using \\(h=6\\) instead (if spacing is halved to give 4 applications over the same 24 m width) gives 210 m² — always confirm h from the diagram before substituting.'
+    },
+    {
+      q: 'The Trapezoidal rule joins offset tops with straight line segments. If the true boundary bulges outward beyond those straight lines, the rule will:',
+      opts: ['A) always give the exact area', 'B) underestimate the true area', 'C) overestimate the true area', 'D) give a negative area'],
+      correct: 1,
+      explanation: 'B is correct. A straight line "cuts the corner" of an outward bulge, so the estimated area is smaller than the true area.'
+    },
+    {
+      q: 'A dam has evenly spaced cross-sections 45 m², 180 m² and 35 m², 15 m apart. What is its approximate volume?',
+      opts: ['A) 1650 mL', 'B) 3300 L', 'C) 3300 m³', 'D) 4400 m³'],
+      correct: 2,
+      explanation: 'C is correct. \\(V \\approx \\tfrac{15}{2}[45+35+2(180)] = 7.5 \\times 440 = 3300\\) m³.'
+    },
+    {
+      q: 'Three equally spaced widths of a swimming pool are 21.88 m, 25.63 m and 21.88 m, 25 m apart (2 applications). Which value is used TWICE (weight 2) in the formula?',
+      opts: ['A) 21.88 m only (both ends)', 'B) 25.63 m (the middle offset)', 'C) All three values equally', 'D) None — every offset counts once'],
+      correct: 1,
+      explanation: 'B is correct. Only the middle offset(s) are shared between two adjoining trapezia, so they are counted with weight 2; the two end offsets keep weight 1.'
+    },
+    {
+      q: 'A reservoir received 20 mm of rain over an area estimated (by one application of the Trapezoidal rule) at 80 000 m². What volume of water, in m³, fell on the reservoir?',
+      opts: ['A) 160 m³', 'B) 1600 m³', 'C) 16 000 m³', 'D) 160 000 m³'],
+      correct: 1,
+      explanation: 'B is correct. 20 mm = 0.02 m. \\(V = A \\times h = 80\\,000 \\times 0.02 = 1600\\) m³.'
+    }
+  ];
+
+  (function buildKC() {
+    const container = document.getElementById('kcQuestions');
+    const scoreEl = document.getElementById('kcScore');
+    let answered = 0, score = 0;
+    KC_QS.forEach((qData, qi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kc-q-wrap';
+      const qEl = document.createElement('p');
+      qEl.className = 'kc-q';
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+      wrap.appendChild(qEl);
+      const optsEl = document.createElement('div');
+      optsEl.className = 'kc-options';
+      qData.opts.forEach((opt, oi) => {
+        const btn = document.createElement('button');
+        btn.className = 'kc-opt';
+        const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+        const letter = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+        const content = letterMatch ? letterMatch[2] : opt;
+        btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+        btn.addEventListener('click', () => {
+          if (wrap.dataset.answered) return;
+          wrap.dataset.answered = '1';
+          answered++;
+          const isCorrect = oi === qData.correct;
+          if (isCorrect) score++;
+          optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+            b.disabled = true;
+            if (i === qData.correct) b.classList.add('kc-correct');
+            else if (i === oi) b.classList.add('kc-wrong');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
+          if (answered === KC_QS.length) showScore();
+        });
+        optsEl.appendChild(btn);
+      });
+      wrap.appendChild(optsEl);
+      container.appendChild(wrap);
+    });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
+    function showScore() {
+      const pct = score / KC_QS.length;
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+      scoreEl.classList.add('show');
+      document.getElementById('kcResetBtn').addEventListener('click', () => {
+        container.innerHTML = ''; scoreEl.className = 'kc-score'; scoreEl.innerHTML = '';
+        answered = 0; score = 0; buildKC();
+      });
+    }
+  })();
+
+  // ── Complete button ──
+  const TOPIC_ID = 5, LESSON_IDX = 2;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Lesson complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e){}
+  });
+
+  // ── TOC IntersectionObserver ──
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('toc-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+</script>
+</body>
+</html>

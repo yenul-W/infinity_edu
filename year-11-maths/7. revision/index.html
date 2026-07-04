@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision Papers — Year 11 Maths Standard</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Sociotype tokens ── */
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-ink-black:    #000000;
+      --color-medium-gray:  #818181;
+      --color-light-gray:   #d6d6d6;
+      --color-faded-gray:   #9d9d9d;
+      --font-mono: 'Space Mono', monospace;
+      --font-body: 'Outfit', sans-serif;
+      --text-caption: 11px;
+      --tracking-caption: 0.08em;
+      --text-body: 14px;
+      --tracking-body: 0.35px;
+      --spacing-8:  8px;
+      --spacing-12: 12px;
+      --spacing-24: 24px;
+    }
+    html.dark-mode {
+      --color-canvas-white: #0a0a0a;
+      --color-ink-black:    #f0f0f0;
+      --color-light-gray:   #2a2a2a;
+      --color-faded-gray:   #5a5a5a;
+    }
+
+    /* ── Layout ── */
+    .papers-main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px var(--spacing-24) 120px;
+    }
+    .papers-intro {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-medium-gray);
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+
+    /* ── Provider sections ── */
+    .provider-section { margin-bottom: 56px; }
+    .provider-name {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: var(--tracking-caption);
+      text-transform: uppercase;
+      color: var(--color-ink-black);
+      border-bottom: 1px solid var(--color-light-gray);
+      padding-bottom: var(--spacing-8);
+      margin-bottom: var(--spacing-12);
+    }
+
+    /* ── Paper rows ── */
+    .paper-list { display: flex; flex-direction: column; }
+    .paper-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+    .paper-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      letter-spacing: var(--tracking-caption);
+      color: var(--color-ink-black);
+      min-width: 48px;
+    }
+
+    /* ── Ghost download buttons ── */
+    .paper-btn {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      letter-spacing: var(--tracking-caption);
+      color: var(--color-ink-black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-ink-black);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .paper-btn:hover {
+      color: var(--color-medium-gray);
+      border-color: var(--color-medium-gray);
+    }
+
+    /* ── override the pdf-viewer overflow lock from style.css ── */
+    body.sociotype.papers-body {
+      height: auto;
+      min-height: 100dvh;
+      overflow-y: auto;
+      background: var(--color-canvas-white);
+      color: var(--color-ink-black);
+    }
+  </style>
+</head>
+<body class="sociotype papers-body">
+
+  <header class="topic-header">
+    <div class="header-inner">
+      <div class="header-nav">
+        <a href="../../index.html" class="back-link">&larr; All Topics</a>
+        <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode">
+          <span class="toggle-icon">dark</span>
+        </button>
+      </div>
+      <h1 class="topic-page-title">Revision <em>Papers</em></h1>
+    </div>
+  </header>
+
+  <main class="papers-main">
+    <p class="papers-intro">Past preliminary papers from leading NSW providers. Download and complete under exam conditions, then check the solutions.</p>
+
+    <!-- Independent -->
+    <section class="provider-section">
+      <h2 class="provider-name">Independent</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2023 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2023 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2022 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2022 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2021 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2021 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2020</span>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2020 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Independent/Independent Math Std 2 Prelim 2020 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Maths Bank -->
+    <section class="provider-section">
+      <h2 class="provider-name">Maths Bank</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/Maths Bank/2022 Year 11 Mathematics Standard Preliminary Examination.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Maths Bank/2022 Year 11 Mathematics Standard Preliminary Examination Marking Guidelines.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Neap -->
+    <section class="provider-section">
+      <h2 class="provider-name">Neap</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/Neap/NEAP Math Std 2 Prelim 2023 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Neap/NEAP Math Std 2 Prelim 2023 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/Neap/NEAP Math Std 2 Prelim 2021 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Neap/NEAP Math Std 2 Prelim 2021 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PEM -->
+    <section class="provider-section">
+      <h2 class="provider-name">PEM</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2023 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2023 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2022 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2022 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2021 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2021 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2020</span>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2020 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/PEM/PEM Math Std 2 Prelim 2020 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- QATS -->
+    <section class="provider-section">
+      <h2 class="provider-name">QATS</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2023 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2023 Solutions.pdf" download>&#8595; Solutions</a>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2023 Corrections to Answers.pdf" download>&#8595; Corrections</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2022 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2022 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2021 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2021 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2020</span>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2020 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/QATS/QATS Math Std 2 Prelim 2020 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- S & G -->
+    <section class="provider-section">
+      <h2 class="provider-name">S &amp; G</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2023 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2023 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2022 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2022 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2021 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2021 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2020</span>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2020 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/S & G/S & G Math Std 2 Prelim 2020 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEC -->
+    <section class="provider-section">
+      <h2 class="provider-name">TEC</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/TEC/TEC Math Std 2 Prelim 2023 Paper + Sols.pdf" download>&#8595; Paper + Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/TEC/TEC Math Std 2 Prelim 2022 Paper + Sols.pdf" download>&#8595; Paper + Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/TEC/TEC Math Std 2 Prelim 2021 Paper + Sols.pdf" download>&#8595; Paper + Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trial Maths -->
+    <section class="provider-section">
+      <h2 class="provider-name">Trial Maths</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/Trial Maths/trialmaths 2022.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Trial Maths/trialmaths 2022 sols.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/Trial Maths/trialmaths 2021.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Trial Maths/trialmaths 2021 sols.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2020</span>
+          <a class="paper-btn" href="PAPERS/Trial Maths/trialmaths 2020.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Trial Maths/trialmaths 2020 sols.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Western Math -->
+    <section class="provider-section">
+      <h2 class="provider-name">Western Mathematics</h2>
+      <div class="paper-list">
+        <div class="paper-row">
+          <span class="paper-year">2023</span>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2023 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2023 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2022</span>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2022 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2022 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2021</span>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2021 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2021 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+        <div class="paper-row">
+          <span class="paper-year">2020</span>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2020 Paper.pdf" download>&#8595; Paper</a>
+          <a class="paper-btn" href="PAPERS/Western Math/WME Math Std 2 Prelim 2020 Solutions.pdf" download>&#8595; Solutions</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = toggle.querySelector('.toggle-icon');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const isNight = () => { const h = new Date().getHours(); return h < 6 || h >= 19; };
+    const dark = saved ? saved === 'dark' : isNight();
+    if (dark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { toggleIcon.textContent = 'dark'; }
+    toggle.addEventListener('click', () => {
+      const d = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', d ? 'dark' : 'light');
+      toggleIcon.textContent = d ? 'light' : 'dark';
+    });
+  </script>
+  <script src="../../question-popup.js"></script>
+</body>
+</html>

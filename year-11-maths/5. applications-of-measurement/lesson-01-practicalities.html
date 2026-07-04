@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Units, Precision &amp; Practicalities of Measurement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #000; --canvas: #fff;
+      --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
+      --font-display: 'Poppins', sans-serif;
+      --font-mono: 'Space Mono', 'Courier New', monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
+    a { color: inherit; }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    /* ── Hero ── */
+    .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
+    .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
+    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .pill { display:inline-flex; align-items:center; border:1px solid var(--gray-light); padding:4px 12px; font-size:11px; letter-spacing:0.04em; color:var(--gray-med); }
+
+    /* ── Layout ── */
+    .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
+    .toc { position:sticky; top:24px; }
+    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-list { list-style:none; }
+    .toc-item { margin-bottom:2px; }
+    .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
+    .toc-link:hover { color:var(--ink); }
+    .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
+
+    /* ── Content cards ── */
+    .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
+    h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
+    p { margin-bottom:14px; }
+    ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
+
+    /* ── Definition / example / note blocks ── */
+    .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
+    .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block p:last-child, .example-block ul:last-child { margin-bottom:0; }
+    .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
+    .note-block p:last-child { margin-bottom:0; }
+
+    /* ── Formula box ── */
+    .formula-box { border:1px solid var(--gray-light); background:var(--gray-faint); padding:14px 20px; margin:14px 0; text-align:center; font-size:15px; }
+
+    /* ── Stepper ── */
+    .stepper { border:1px solid var(--ink); margin-bottom:28px; }
+    .stepper-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--gray-light); background:var(--gray-faint); }
+    .stepper-nodes { display:flex; gap:8px; }
+    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono); font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s,border-color 0.15s,color 0.15s; }
+    .stepper-node:hover { border-color:var(--ink); }
+    .stepper-node.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
+    .stepper-node.visited { border-color:var(--ink); }
+    .stepper-counter { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); }
+    .stepper-panel { padding:24px 28px; min-height:140px; }
+    .stepper-panel h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .stepper-panel p:last-child { margin-bottom:0; }
+    .stepper-nav { display:flex; gap:12px; padding:14px 20px; border-top:1px solid var(--gray-light); }
+    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s,color 0.15s; }
+    .stepper-btn:hover:not(:disabled) { background:var(--ink); color:var(--canvas); }
+    .stepper-btn:disabled { opacity:0.35; cursor:default; }
+
+    /* ── Reference tables ── */
+    .ref-table, .contrast-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px; }
+    .ref-table th, .ref-table td, .contrast-table th, .contrast-table td { border:1px solid var(--gray-light); padding:9px 14px; text-align:center; }
+    .ref-table th, .contrast-table th { background:var(--gray-faint); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    .ref-table td:first-child, .contrast-table td:first-child { text-align:left; }
+
+    /* ── Converter widgets ── */
+    .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .interactive-block h3 { margin-bottom:18px; }
+    .converter { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+    .converter input[type=number] { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:14px; background:var(--canvas); color:var(--ink); width:110px; }
+    .converter select { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); }
+    .converter .eq-sign { font-family:var(--font-mono); font-size:16px; }
+    .converter-result { font-family:var(--font-mono); font-size:18px; font-weight:700; border:1px solid var(--gray-light); background:var(--gray-faint); padding:10px 16px; min-width:140px; text-align:center; }
+    .converter-note { font-size:12px; color:var(--gray-med); }
+
+    /* ── Exercises ── */
+    .exercise-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
+    .exercise-block h3 { margin-bottom:14px; }
+    .step-form { display:flex; flex-direction:column; gap:14px; }
+    .step { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .step-label { font-size:13px; min-width:260px; }
+    .step input { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:120px; }
+    .step input:focus { outline:1px solid var(--ink); }
+    .step .hint { font-size:12px; color:var(--gray-med); }
+    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
+    .check-btn:hover { background:var(--ink); color:var(--canvas); }
+    .feedback { margin-top:10px; font-size:13px; min-height:18px; color:var(--gray-med); }
+    .feedback.correct { color:#00a050; font-weight:600; }
+    .feedback.wrong { color:#c00000; }
+
+    /* ── MCQ / Knowledge check ── */
+    .kc-block { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
+    .kc-intro { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .kc-q-wrap { margin-bottom:24px; }
+    .kc-q { font-size:14px; font-weight:600; margin-bottom:12px; }
+    .kc-options { display:flex; flex-direction:column; gap:6px; }
+    .kc-opt { display:flex; align-items:flex-start; gap:10px; padding:9px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; background:transparent; color:var(--ink); text-align:left; width:100%; }
+    .kc-opt:hover:not([disabled]) { background:var(--gray-faint); }
+    .kc-opt.kc-correct { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .kc-opt.kc-wrong   { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    html.dark-mode .kc-opt.kc-correct { background:rgba(0,160,80,0.14); }
+    html.dark-mode .kc-opt.kc-wrong   { background:rgba(200,0,0,0.14); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .kc-feedback { font-size:12px; color:var(--gray-med); margin-top:8px; min-height:18px; }
+    .kc-feedback.correct { color:#00a050; }
+    .kc-feedback.wrong   { color:#c00000; }
+    .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
+    .kc-score.show { display:block; }
+    .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+
+    /* ── Complete button ── */
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    h1 { font-weight: 600; letter-spacing: 0.6px; }
+    h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; }
+
+    .lesson-link-btn { background:none; border:none; border-bottom:1px solid currentColor; padding:0; color:inherit; font-family:inherit; font-size:inherit; cursor:pointer; display:inline; }
+    .lesson-link-btn:hover { opacity:0.7; }
+    .hw-mark { font-size:11px; color:var(--gray-med); margin-left:4px; }
+
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .toc { position:static; display:none; }
+      .hero { grid-template-columns:1fr; }
+      .hero-side { border-left:none; border-top:1px solid var(--gray-light); padding-left:0; padding-top:20px; }
+    }
+    @media (max-width:600px) {
+      .hero, .content-card, .kc-block { padding:24px 20px; }
+      .interactive-block, .exercise-block { padding:20px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Applications of Measurement · Lesson 1</span>
+    </div>
+    <span>MS-M1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1 of 3</p>
+      <h1>Units, Precision &amp; Practicalities of Measurement</h1>
+      <p class="subtitle">Convert confidently between metric units of length, area, volume, capacity and mass, apply scientific notation with standard prefixes, and understand how precise any measurement really is.</p>
+      <div class="hero-meta">
+        <span class="pill">Unit Conversion</span>
+        <span class="pill">Scientific Notation</span>
+        <span class="pill">Percentage Error</span>
+        <span class="pill">~25 min</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Key Takeaways</p>
+      <ul class="side-list">
+        <li>Each step of the length ladder (mm–cm–m–km) is a ×10 jump</li>
+        <li>Area units jump by ×100 per step; volume units by ×1000</li>
+        <li>1 cm³ = 1 mL and 1 m³ = 1000 L — the volume/capacity bridge</li>
+        <li>Absolute error = half the smallest unit of measurement (precision)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <nav class="toc" aria-label="Page contents">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#length">Length &amp; Area Units</a></li>
+        <li class="toc-item"><a class="toc-link" href="#volcap">Volume &amp; Capacity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mass-sci">Mass &amp; Scientific Notation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#error">Measurement Error</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+
+      <!-- ── Part A: Length & Area ── -->
+      <div class="content-card" id="length">
+        <p class="section-label">Part A</p>
+        <h2>Length &amp; Area Units</h2>
+
+        <div class="definition-block">
+          <p class="def-label">The metric length ladder</p>
+          <p>Every step up the ladder multiplies by 10. Every step down divides by 10.</p>
+          <table class="ref-table">
+            <thead><tr><th>mm</th><th>cm</th><th>m</th><th>km</th></tr></thead>
+            <tbody><tr><td>1</td><td>×10</td><td>×1000</td><td>×1 000 000</td></tr></tbody>
+          </table>
+          <p style="margin-bottom:0">So 1 m = 100 cm = 1000 mm, and 1 km = 1000 m.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Length converter</h3>
+          <div class="converter">
+            <input type="number" id="lenIn" value="1" step="any">
+            <select id="lenFrom"></select>
+            <span class="eq-sign">=</span>
+            <div class="converter-result" id="lenOut"></div>
+            <select id="lenTo"></select>
+          </div>
+          <p class="converter-note">Change any value and watch the conversion update instantly.</p>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Area units</h3>
+        <div class="definition-block">
+          <p class="def-label">Squaring the ladder</p>
+          <p>Because area is a squared quantity, each conversion factor is squared too — so the jump between area units is ×100 per step, not ×10.</p>
+          <table class="ref-table">
+            <thead><tr><th>mm²</th><th>cm²</th><th>m²</th><th>ha</th><th>km²</th></tr></thead>
+            <tbody><tr><td>1</td><td>×100</td><td>×1 000 000</td><td>×10 000 000 000</td><td>×1 000 000 000 000</td></tr></tbody>
+          </table>
+          <p>Key facts: 1 cm² = 100 mm² (10 × 10), 1 m² = 10 000 cm², 1 hectare (ha) = 10 000 m², 1 km² = 100 ha.</p>
+          <p style="margin-bottom:0"><strong>Common mistake:</strong> converting area with the length factor (×100 instead of ×10 000 for m²→cm²) — always square the length factor.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Area converter</h3>
+          <div class="converter">
+            <input type="number" id="areaIn" value="1" step="any">
+            <select id="areaFrom"></select>
+            <span class="eq-sign">=</span>
+            <div class="converter-result" id="areaOut"></div>
+            <select id="areaTo"></select>
+          </div>
+          <p class="converter-note">Try converting 12.5 hectares to m² — you'll need it in Exercise 1 below.</p>
+        </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 1 — Flood water over a paddock</h3>
+          <p style="font-size:13px; margin-bottom:18px;">During a flood, 12.5 hectares of land was covered by water to a depth of 30 cm. (1 hectare = 10 000 m², 1 m³ = 1000 L)</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Area in m² =</span>
+              <input type="number" id="fArea" placeholder="m²">
+              <button class="check-btn" id="checkFArea">Check</button>
+              <span class="hint" id="hintFArea"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Depth in m =</span>
+              <input type="number" step="0.01" id="fDepth" placeholder="m">
+              <button class="check-btn" id="checkFDepth">Check</button>
+              <span class="hint" id="hintFDepth"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Volume of water in kL (V = Area × depth, 1 m³ = 1 kL) =</span>
+              <input type="number" id="fVol" placeholder="kL">
+              <button class="check-btn" id="checkFVol">Check</button>
+              <span class="hint" id="hintFVol"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Part B: Volume & Capacity ── -->
+      <div class="content-card" id="volcap">
+        <p class="section-label">Part B</p>
+        <h2>Volume &amp; Capacity</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Volume units and the capacity bridge</p>
+          <p>Volume units jump by ×1000 per step (the length factor cubed). Capacity units (mL, L, kL, ML) run alongside them:</p>
+          <table class="ref-table">
+            <thead><tr><th>mm³</th><th>cm³</th><th>m³</th></tr></thead>
+            <tbody><tr><td>1</td><td>×1000</td><td>×1 000 000 000</td></tr></tbody>
+          </table>
+          <div class="formula-box">1 cm³ = 1 mL &nbsp;&nbsp;·&nbsp;&nbsp; 1 m³ = 1000 L = 1 kL &nbsp;&nbsp;·&nbsp;&nbsp; 1 ML = 1 000 000 L</div>
+          <p style="margin-bottom:0">This bridge is exactly what makes Exercise 1 above work: a volume in cubic metres converts directly to kilolitres.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Volume &amp; capacity converter</h3>
+          <div class="converter">
+            <input type="number" id="volIn" value="1" step="any">
+            <select id="volFrom"></select>
+            <span class="eq-sign">=</span>
+            <div class="converter-result" id="volOut"></div>
+            <select id="volTo"></select>
+          </div>
+          <p class="converter-note">Includes both solid-volume units (mm³, cm³, m³) and capacity units (mL, L, kL, ML) in one ladder.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example</p>
+          <p><strong>A rectangular prism measures 30 cm × 5 cm × 4 m. What is its volume in cubic centimetres?</strong></p>
+          <p>Convert every length to the same unit first: \(4\text{ m} = 400\text{ cm}\).</p>
+          <p style="margin-bottom:0">\(V = l \times b \times h = 30 \times 5 \times 400 = 60\,000\text{ cm}^3\)</p>
+        </div>
+      </div>
+
+      <!-- ── Part C: Mass & Scientific Notation ── -->
+      <div class="content-card" id="mass-sci">
+        <p class="section-label">Part C</p>
+        <h2>Mass &amp; Scientific Notation</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Metric mass units</p>
+          <table class="ref-table">
+            <thead><tr><th>mg</th><th>g</th><th>kg</th><th>t</th></tr></thead>
+            <tbody><tr><td>1</td><td>×1000</td><td>×1 000 000</td><td>×1 000 000 000</td></tr></tbody>
+          </table>
+          <p style="margin-bottom:0">1 g = 1000 mg, 1 kg = 1000 g, 1 tonne (t) = 1000 kg.</p>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Standard prefixes in scientific notation</h3>
+        <table class="ref-table" style="margin-bottom:24px;">
+          <thead><tr><th>Prefix</th><th>Symbol</th><th>Factor</th></tr></thead>
+          <tbody>
+            <tr><td>nano</td><td>n</td><td>\(10^{-9}\)</td></tr>
+            <tr><td>micro</td><td>µ</td><td>\(10^{-6}\)</td></tr>
+            <tr><td>milli</td><td>m</td><td>\(10^{-3}\)</td></tr>
+            <tr><td>centi</td><td>c</td><td>\(10^{-2}\)</td></tr>
+            <tr><td>kilo</td><td>k</td><td>\(10^{3}\)</td></tr>
+            <tr><td>mega</td><td>M</td><td>\(10^{6}\)</td></tr>
+            <tr><td>giga</td><td>G</td><td>\(10^{9}\)</td></tr>
+            <tr><td>tera</td><td>T</td><td>\(10^{12}\)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — Scientific notation with significant figures</p>
+          <p><strong>Write 0.000 000 326 mm in scientific notation.</strong></p>
+          <p>Move the decimal point until one non-zero digit sits before it: \(0.000\,000\,326 = 3.26 \times 10^{-7}\).</p>
+          <p style="margin-bottom:0">Answer: \(3.26 \times 10^{-7}\) mm (3 significant figures).</p>
+        </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 2 — Standard form &amp; significant figures</h3>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Write 1 560 200 km in standard form, correct to 2 sig. figs.</span>
+              <input type="text" id="sciA" placeholder="e.g. 1.6 x 10^6">
+              <button class="check-btn" id="checkSciA">Check</button>
+              <span class="hint" id="hintSciA"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) A grain of sand has mass 15 micrograms. Express this in kilograms (standard form).</span>
+              <input type="text" id="sciB" placeholder="e.g. 1.5 x 10^-8">
+              <button class="check-btn" id="checkSciB">Check</button>
+              <span class="hint" id="hintSciB"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Round 208.345 to 2 significant figures.</span>
+              <input type="number" id="sciC" placeholder="?">
+              <button class="check-btn" id="checkSciC">Check</button>
+              <span class="hint" id="hintSciC"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Part D: Measurement Error ── -->
+      <div class="content-card" id="error">
+        <p class="section-label">Part D</p>
+        <h2>Precision &amp; Measurement Error</h2>
+
+        <div class="definition-block">
+          <p class="def-label">Absolute error &amp; percentage error</p>
+          <p>Every measuring instrument has a limit of precision. The <strong>absolute error</strong> is half of the smallest unit the instrument can measure:</p>
+          <div class="formula-box">\[\text{Absolute error} = \tfrac{1}{2} \times \text{precision}\]</div>
+          <div class="formula-box">\[\% \text{ error} = \dfrac{\text{absolute error}}{\text{measurement}} \times 100\%\]</div>
+          <p style="margin-bottom:0">The true value always lies between (measurement − absolute error) and (measurement + absolute error) — the <em>lower</em> and <em>upper</em> limits.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example</p>
+          <p><strong>The length of a window is measured as 2.4 m, to the nearest 0.1 m. Find the percentage error.</strong></p>
+          <p>Absolute error \(= \tfrac{1}{2} \times 0.1 = 0.05\) m.</p>
+          <p style="margin-bottom:0">\(\% \text{error} = \dfrac{0.05}{2.4} \times 100 \approx 2.08\%\)</p>
+        </div>
+
+        <div class="stepper" id="stepperErr">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperErrNodes"></div>
+            <div class="stepper-counter" id="stepperErrCounter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperErrPanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperErrPrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperErrNext">Next &#8594;</button>
+          </div>
+        </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 3 — Percentage error &amp; limits</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A netball court is measured as 30.50 m long, correct to the nearest centimetre.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Absolute error (in m) =</span>
+              <input type="number" step="0.001" id="courtAbs" placeholder="m">
+              <button class="check-btn" id="checkCourtAbs">Check</button>
+              <span class="hint" id="hintCourtAbs"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Lower limit of the length (m) =</span>
+              <input type="number" step="0.001" id="courtLow" placeholder="m">
+              <button class="check-btn" id="checkCourtLow">Check</button>
+              <span class="hint" id="hintCourtLow"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Percentage error, to 2 d.p. (%) =</span>
+              <input type="number" step="0.01" id="courtPct" placeholder="%">
+              <button class="check-btn" id="checkCourtPct">Check</button>
+              <span class="hint" id="hintCourtPct"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Knowledge Check ── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all six questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ── Homework ── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework Questions</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">Complete the following questions from the <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson',lessonIndex:3},'*')">Homework lesson</button>:</p>
+        <ul style="margin-bottom:16px; line-height:2.2;">
+          <li><strong>Question 2</strong> — Scientific notation and standard prefixes <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 4</strong> — Percentage error of a measured length <span class="hw-mark">(1 mark)</span></li>
+          <li><strong>Question 13</strong> — Absolute error, limits and percentage error of a measurement <span class="hw-mark">(4 marks)</span></li>
+        </ul>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:0;">See the Homework lesson for the full question set covering all three lessons of this topic.</p>
+      </div>
+
+      <!-- ── Mark complete ── -->
+      <div class="complete-section">
+        <p style="font-size:13px; color:var(--gray-med);">Finished this lesson? Mark it as complete.</p>
+        <button class="complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Dark mode sync ──
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── Generic converter builder ──
+  function buildConverter(prefix, units, factors, defaultVal, decimals) {
+    const inEl = document.getElementById(prefix + 'In');
+    const fromEl = document.getElementById(prefix + 'From');
+    const toEl = document.getElementById(prefix + 'To');
+    const outEl = document.getElementById(prefix + 'Out');
+    units.forEach((u, i) => {
+      const o1 = document.createElement('option'); o1.value = u; o1.textContent = u; fromEl.appendChild(o1);
+      const o2 = document.createElement('option'); o2.value = u; o2.textContent = u; toEl.appendChild(o2);
+    });
+    fromEl.value = units[defaultVal[0]];
+    toEl.value = units[defaultVal[1]];
+    function update() {
+      const val = parseFloat(inEl.value) || 0;
+      const base = val * factors[fromEl.value];
+      const result = base / factors[toEl.value];
+      outEl.textContent = (Math.abs(result) >= 1e9 || (Math.abs(result) < 1e-6 && result !== 0))
+        ? result.toExponential(3)
+        : result.toLocaleString(undefined, { maximumFractionDigits: decimals });
+    }
+    [inEl, fromEl, toEl].forEach(el => el.addEventListener('input', update));
+    update();
+  }
+
+  buildConverter('len', ['mm','cm','m','km'], { mm:1, cm:10, m:1000, km:1000000 }, [0,2], 6);
+  buildConverter('area', ['mm²','cm²','m²','ha','km²'], { 'mm²':1, 'cm²':100, 'm²':1000000, 'ha':10000000000, 'km²':1000000000000 }, [3,1], 6);
+  buildConverter('vol', ['mm³','cm³','mL','m³','L','kL','ML'], { 'mm³':0.000001, 'cm³':0.001, 'mL':0.001, 'm³':1000, 'L':1, 'kL':1000, 'ML':1000000 }, [3,4], 6);
+
+  // ── Step checker helper ──
+  function setupStep(btnId, inputId, hintId, checkFn) {
+    document.getElementById(btnId).addEventListener('click', () => {
+      const val = document.getElementById(inputId).value;
+      const { ok, msg } = checkFn(val);
+      const hint = document.getElementById(hintId);
+      hint.textContent = ok ? '✓' : '✗ ' + msg;
+      hint.style.color = ok ? '#00a050' : '#c00000';
+    });
+  }
+
+  // ── Exercise 1: flood water ──
+  setupStep('checkFArea', 'fArea', 'hintFArea', v => Math.abs(parseFloat(v) - 125000) < 1 ? { ok:true } : { ok:false, msg:'12.5 × 10 000 = 125 000 m²' });
+  setupStep('checkFDepth', 'fDepth', 'hintFDepth', v => Math.abs(parseFloat(v) - 0.3) < 0.001 ? { ok:true } : { ok:false, msg:'30 cm ÷ 100 = 0.3 m' });
+  setupStep('checkFVol', 'fVol', 'hintFVol', v => Math.abs(parseFloat(v) - 37500) < 1 ? { ok:true } : { ok:false, msg:'125 000 × 0.3 = 37 500 m³ = 37 500 kL' });
+
+  // ── Exercise 2: scientific notation ──
+  setupStep('checkSciA', 'sciA', 'hintSciA', v => { const s = v.replace(/\s/g,'').toLowerCase().replace('×','x'); return (s.includes('1.6x10^6') || s.includes('1.6x10 6')) ? { ok:true } : { ok:false, msg:'1 560 200 = 1.5602 × 10⁶ ≈ 1.6 × 10⁶ km' }; });
+  setupStep('checkSciB', 'sciB', 'hintSciB', v => { const s = v.replace(/\s/g,'').toLowerCase().replace('×','x'); return (s.includes('1.5x10^-8') || s.includes('1.5x10-8')) ? { ok:true } : { ok:false, msg:'15 µg = 15 × 10⁻⁹ g = 1.5 × 10⁻⁸ kg' }; });
+  setupStep('checkSciC', 'sciC', 'hintSciC', v => parseFloat(v) === 210 ? { ok:true } : { ok:false, msg:'208.345 → 210 (2 sig. figs)' });
+
+  // ── Exercise 3: netball court ──
+  setupStep('checkCourtAbs', 'courtAbs', 'hintCourtAbs', v => Math.abs(parseFloat(v) - 0.005) < 0.0005 ? { ok:true } : { ok:false, msg:'½ × 0.01 = 0.005 m' });
+  setupStep('checkCourtLow', 'courtLow', 'hintCourtLow', v => Math.abs(parseFloat(v) - 30.495) < 0.001 ? { ok:true } : { ok:false, msg:'30.50 − 0.005 = 30.495 m' });
+  setupStep('checkCourtPct', 'courtPct', 'hintCourtPct', v => Math.abs(parseFloat(v) - 0.02) < 0.005 ? { ok:true } : { ok:false, msg:'0.005 ÷ 30.50 × 100 ≈ 0.02%' });
+
+  // ── Stepper: Measurement error method ──
+  const ERR_STAGES = [
+    { title: 'Step 1 — Find the precision', body: '<p>Look at the smallest unit shown in the measurement. E.g. "measured to the nearest 0.1 m" means the precision is 0.1 m.</p>' },
+    { title: 'Step 2 — Halve it for the absolute error', body: '<p>Absolute error \\(= \\tfrac{1}{2} \\times \\text{precision}\\). This is the maximum possible difference between the measurement and the true value.</p>' },
+    { title: 'Step 3 — Divide by the measurement for % error', body: '<p style="margin-bottom:0">\\(\\% \\text{error} = \\dfrac{\\text{absolute error}}{\\text{measurement}} \\times 100\\%\\). Smaller percentage error means a more precise measurement relative to its size.</p>' }
+  ];
+  (function() {
+    let current = 0;
+    const nodesEl = document.getElementById('stepperErrNodes');
+    const panelEl = document.getElementById('stepperErrPanel');
+    const counterEl = document.getElementById('stepperErrCounter');
+    const prevBtn = document.getElementById('stepperErrPrev');
+    const nextBtn = document.getElementById('stepperErrNext');
+    ERR_STAGES.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'stepper-node' + (i === 0 ? ' active' : '');
+      btn.textContent = i + 1;
+      btn.addEventListener('click', () => { current = i; render(); });
+      nodesEl.appendChild(btn);
+    });
+    function render() {
+      const stage = ERR_STAGES[current];
+      panelEl.innerHTML = `<h4>${stage.title}</h4>${stage.body}`;
+      counterEl.textContent = `Step ${current + 1} of ${ERR_STAGES.length}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === ERR_STAGES.length - 1;
+      nodesEl.querySelectorAll('.stepper-node').forEach((n, i) => {
+        n.classList.toggle('active', i === current);
+        n.classList.toggle('visited', i < current);
+      });
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(panelEl, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+      }
+    }
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; render(); } });
+    nextBtn.addEventListener('click', () => { if (current < ERR_STAGES.length - 1) { current++; render(); } });
+    render();
+  })();
+
+  // ── Knowledge Check ──
+  const KC_QS = [
+    {
+      q: 'What is \\(0.000\\,000\\,326\\) mm expressed in scientific notation?',
+      opts: ['A) \\(0.326 \\times 10^{-6}\\) mm', 'B) \\(3.26 \\times 10^{-7}\\) mm', 'C) \\(3.26 \\times 10^{6}\\) mm', 'D) \\(0.326 \\times 10^{6}\\) mm'],
+      correct: 1,
+      explanation: 'B is correct. Move the decimal point 7 places right of a single non-zero leading digit: \\(3.26 \\times 10^{-7}\\).'
+    },
+    {
+      q: 'A measurement of 72 cm is increased by 20%, then the result is decreased by 20%. What is the new measurement, to the nearest cm?',
+      opts: ['A) 46 cm', 'B) 69 cm', 'C) 72 cm', 'D) 104 cm'],
+      correct: 1,
+      explanation: 'B is correct. \\(72 \\times 1.2 \\times 0.8 = 69.12 \\approx 69\\) cm. Increasing then decreasing by the same percentage does NOT return the original value.'
+    },
+    {
+      q: 'A cockroach\'s length is recorded as 5.2 cm. What is the upper limit of accuracy of this measurement?',
+      opts: ['A) 5.21 cm', 'B) 5.25 cm', 'C) 5.5 cm', 'D) 5.9 cm'],
+      correct: 1,
+      explanation: 'B is correct. Precision is 0.1 cm, so absolute error \\(= 0.05\\) cm. Upper limit \\(= 5.2 + 0.05 = 5.25\\) cm.'
+    },
+    {
+      q: 'Peter rides his bike at 27 km/h. What is this speed in m/s?',
+      opts: ['A) 7.5 m/s', 'B) 18.75 m/s', 'C) 97.2 m/s', 'D) 450 m/s'],
+      correct: 0,
+      explanation: 'A is correct. \\(27\\,000 \\text{ m} \\div 3600 \\text{ s} = 7.5\\) m/s.'
+    },
+    {
+      q: 'How many square centimetres are in 0.0075 m²?',
+      opts: ['A) 0.75', 'B) 7.5', 'C) 75', 'D) 7500'],
+      correct: 2,
+      explanation: 'C is correct. \\(1 \\text{ m}^2 = 10\\,000 \\text{ cm}^2\\), so \\(0.0075 \\times 10\\,000 = 75\\) cm².'
+    },
+    {
+      q: 'The mass of a sample of microbes is 50 mg, and there are approximately \\(2.5 \\times 10^{6}\\) microbes in the sample. What is the approximate mass of one microbe, in grams?',
+      opts: ['A) \\(2 \\times 10^{-8}\\) g', 'B) \\(2 \\times 10^{-5}\\) g', 'C) \\(5 \\times 10^{-8}\\) g', 'D) \\(2 \\times 10^{8}\\) g'],
+      correct: 0,
+      explanation: 'A is correct. \\(50 \\text{ mg} = 0.05 \\text{ g} = 5 \\times 10^{-2}\\) g. Mass of one microbe \\(= \\dfrac{5 \\times 10^{-2}}{2.5 \\times 10^{6}} = 2 \\times 10^{-8}\\) g.'
+    }
+  ];
+
+  (function buildKC() {
+    const container = document.getElementById('kcQuestions');
+    const scoreEl = document.getElementById('kcScore');
+    let answered = 0, score = 0;
+    KC_QS.forEach((qData, qi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'kc-q-wrap';
+      const qEl = document.createElement('p');
+      qEl.className = 'kc-q';
+      qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+      wrap.appendChild(qEl);
+      const optsEl = document.createElement('div');
+      optsEl.className = 'kc-options';
+      qData.opts.forEach((opt, oi) => {
+        const btn = document.createElement('button');
+        btn.className = 'kc-opt';
+        const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+        const letter = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+        const content = letterMatch ? letterMatch[2] : opt;
+        btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+        btn.addEventListener('click', () => {
+          if (wrap.dataset.answered) return;
+          wrap.dataset.answered = '1';
+          answered++;
+          const isCorrect = oi === qData.correct;
+          if (isCorrect) score++;
+          optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+            b.disabled = true;
+            if (i === qData.correct) b.classList.add('kc-correct');
+            else if (i === oi) b.classList.add('kc-wrong');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          wrap.appendChild(fb);
+          if (typeof renderMathInElement !== 'undefined') {
+            renderMathInElement(wrap, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+          }
+          if (answered === KC_QS.length) showScore();
+        });
+        optsEl.appendChild(btn);
+      });
+      wrap.appendChild(optsEl);
+      container.appendChild(wrap);
+    });
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(container, { delimiters: [{ left: '\\(', right: '\\)', display: false }, { left: '\\[', right: '\\]', display: true }], throwOnError: false });
+    }
+    function showScore() {
+      const pct = score / KC_QS.length;
+      const remark = pct === 1 ? 'Excellent — full marks!' : pct >= 0.6 ? 'Good work. Review any incorrect answers.' : 'Keep practising — re-read the theory and try again.';
+      scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong><p class="kc-remark">${remark}</p><button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+      scoreEl.classList.add('show');
+      document.getElementById('kcResetBtn').addEventListener('click', () => {
+        container.innerHTML = ''; scoreEl.className = 'kc-score'; scoreEl.innerHTML = '';
+        answered = 0; score = 0; buildKC();
+      });
+    }
+  })();
+
+  // ── Complete button ──
+  const TOPIC_ID = 5, LESSON_IDX = 0;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Lesson complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e){}
+  });
+
+  // ── TOC IntersectionObserver ──
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    if (!links.length) return;
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('toc-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('toc-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('[id]').forEach(s => obs.observe(s));
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications of Measurement — Year 11 Maths Standard</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="sociotype">
+
+  <header class="topic-header">
+    <div class="header-inner">
+      <div class="header-nav">
+        <a href="../../index.html" class="back-link">&larr; All Topics</a>
+        <div class="header-actions">
+          <a class="syllabus-chip-inline" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fad74ae493" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
+          <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode"><span class="toggle-icon">dark</span></button>
+        </div>
+      </div>
+      <h1 class="topic-page-title">Applications of <em>Measurement</em></h1>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="pdf-viewer-container">
+      <div class="lessons-sidebar" id="lessonsList"></div>
+      <div class="pdf-viewer-main">
+        <div class="pdf-controls">
+          <div class="control-group" id="fileControls">
+            <button class="pdf-btn" id="downloadBtn">&#8595; Download</button>
+            <a class="pdf-btn" id="openExternalBtn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+            <button class="pdf-btn" id="printSyllabusBtn">&#8942; Print Syllabus</button>
+          </div>
+          <div class="control-group" id="pageControls">
+            <button class="pdf-nav-arrow" id="prevPage" disabled>&#8592;</button>
+            <input class="page-info" id="pageInfo" type="text" inputmode="numeric" placeholder="–" disabled><span class="page-sep" id="pageTotal">/ –</span>
+            <button class="pdf-nav-arrow" id="nextPage" disabled>&#8594;</button>
+          </div>
+          <div class="control-group" id="zoomControls">
+            <div class="zoom-control">
+              <button class="zoom-btn" id="zoomOut">&#8722;</button>
+              <span class="zoom-display" id="zoomDisplay">–</span>
+              <button class="zoom-btn" id="zoomIn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-stage" id="pdfStage">
+          <div class="pdf-loading" id="pdfLoading">
+            <div class="pdf-loading-spinner"></div>
+            <p>Loading</p>
+          </div>
+          <div class="pdf-canvas-wrapper" id="pdfCanvasWrapper" style="display:none"></div>
+          <iframe class="pdf-html-frame" id="pdfHtmlFrame" src="about:blank" title="Lesson"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="../../pdf-viewer.js"></script>
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = toggle.querySelector('.toggle-icon');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefersDark;
+    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
+    toggle.addEventListener('click', () => {
+      const nowDark = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      toggleIcon.textContent = nowDark ? 'light' : 'dark';
+      const frame = document.getElementById('pdfHtmlFrame');
+      try { if (frame && frame.contentDocument && frame.contentDocument.documentElement) { frame.contentDocument.documentElement.classList.toggle('dark-mode', nowDark); } } catch (e) {}
+      try { if (frame && frame.contentWindow) { frame.contentWindow.postMessage({ type: 'ie-theme', dark: nowDark }, '*'); } } catch (e) {}
+    });
+
+    const TOPIC_ID = 5;
+
+    const lessons = [
+      {
+        num: 1,
+        title: 'Units, Precision & Practicalities of Measurement',
+        slides: 'lesson-01-practicalities.html',
+        annotated: null,
+        kind: 'html',
+        syllabus: [
+          'Identify and convert between metric units of length (mm, cm, m, km)',
+          'Identify and convert between metric units of area (mm², cm², m², km²/ha)',
+          'Identify and convert between metric units of volume and capacity (mm³/cm³/m³, mL/L/kL/ML)',
+          'Identify and convert between metric units of mass (mg, g, kg, t)',
+          'Apply scientific notation to standard prefixes (nano to tera) with significant figures',
+          'Calculate absolute and percentage error in a measurement'
+        ]
+      },
+      {
+        num: 2,
+        title: 'Perimeter, Area, Surface Area & Volume',
+        slides: 'lesson-02-perimeter-area-volume.html',
+        annotated: null,
+        kind: 'html',
+        syllabus: [
+          'Calculate perimeters and areas of triangles, rectangles, parallelograms, trapeziums, circles and sectors',
+          'Apply Pythagoras’ theorem to solve measurement problems involving right-angled triangles',
+          'Calculate perimeters and areas of composite shapes and irregular blocks of land by dissection',
+          'Solve problems involving the surface area of prisms, cylinders, spheres and composite solids',
+          'Solve problems involving the volume and capacity of prisms, cylinders, spheres, cones and pyramids'
+        ]
+      },
+      {
+        num: 3,
+        title: 'The Trapezoidal Rule',
+        slides: 'lesson-03-trapezoidal-rule.html',
+        annotated: null,
+        kind: 'html',
+        syllabus: [
+          'Apply the Trapezoidal rule to estimate the area of an irregular shape',
+          'Use up to four applications of the Trapezoidal rule for area, volume and capacity problems',
+          'Interpret whether the Trapezoidal rule over- or under-estimates the true area'
+        ]
+      },
+      {
+        num: 4,
+        homework: true,
+        slides: 'lesson-04-homework.html',
+        annotated: null,
+        kind: 'html',
+        syllabus: []
+      },
+      {
+        num: 5,
+        title: 'Revision',
+        revision: true,
+        slides: 'lesson-05-revision.html',
+        annotated: null,
+        kind: 'html',
+        syllabus: [
+          'Review all Applications of Measurement dot-points',
+          'Mixed exam-style practice questions with worked solutions'
+        ]
+      }
+    ];
+
+    initPdfViewer({ topicId: TOPIC_ID, lessons });
+  </script>
+  <script src="../../question-popup.js"></script>
+</body>
+</html>
