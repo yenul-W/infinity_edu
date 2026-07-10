@@ -36,7 +36,7 @@
     html { scroll-behavior:smooth; }
     body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
     a { color: inherit; }
-    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+    .page { max-width:1400px; margin:0 auto; padding:24px 24px 120px; }
 
     .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
     .topbar-left { display:flex; flex-direction:column; gap:2px; }
@@ -188,7 +188,7 @@
       <div class="hero-meta">
         <span class="pill">Irregular Areas</span>
         <span class="pill">\(A \approx \tfrac{h}{2}(d_f+d_l)\)</span>
-        <span class="pill">~20 min</span>
+        <span class="pill">~50 min</span>
       </div>
     </div>
     <div class="hero-side">
@@ -282,6 +282,27 @@
             <button class="stepper-btn" id="stepperTzNext">Next &#8594;</button>
           </div>
         </div>
+
+        <h3 style="margin-bottom:14px;">Worked Example — River cross-section (5 offsets)</h3>
+        <div class="stepper" id="stepperTz2">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperTz2Nodes"></div>
+            <div class="stepper-counter" id="stepperTz2Counter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperTz2Panel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperTz2Prev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperTz2Next">Next &#8594;</button>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Over-estimate or under-estimate?</h3>
+        <div class="example-block">
+          <p class="ex-label">Predict, then check</p>
+          <p><strong>A channel's true boundary bulges outward (convex) between each pair of offsets, like a gently curved riverbank. Does the Trapezoidal rule over-estimate or under-estimate the true cross-sectional area?</strong></p>
+          <p>The rule joins the tops of the offsets with straight lines. Where the true boundary bulges outward beyond that straight line, the straight-line trapezium "cuts the corner" and misses that extra sliver of area.</p>
+          <p style="margin-bottom:0"><strong>Under-estimate.</strong> Conversely, if the boundary curves inward (concave) between offsets, the straight line overshoots the true boundary and the rule over-estimates.</p>
+        </div>
       </div>
 
       <!-- ── Part D: Exercises ── -->
@@ -313,13 +334,45 @@
             </div>
           </div>
         </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 2 — Swimming pool volume</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A swimming pool is 25 m long. Three equally spaced widths, 12.5 m apart, are measured: 21.88 m, 25.63 m and 21.88 m. The pool has a constant depth of 1.5 m.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Surface area of the pool using the Trapezoidal rule (1 d.p.) =</span>
+              <input type="number" step="0.1" id="poolArea" placeholder="m²">
+              <button class="check-btn" id="checkPoolArea">Check</button>
+              <span class="hint" id="hintPoolArea"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Volume of water needed to fill the pool, nearest m³ =</span>
+              <input type="number" step="1" id="poolVol" placeholder="m³">
+              <button class="check-btn" id="checkPoolVol">Check</button>
+              <span class="hint" id="hintPoolVol"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 3 — Working backwards</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A block of land was estimated at 540 m² using the Trapezoidal rule with three equally-spaced offsets 30 m apart: the first offset was 8 m and the last was 10 m.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Rearrange the formula to find the middle offset \(d_2\) =</span>
+              <input type="number" step="0.1" id="backD2" placeholder="m">
+              <button class="check-btn" id="checkBackD2">Check</button>
+              <span class="hint" id="hintBackD2"></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ── Knowledge Check ── -->
       <div class="kc-block" id="check">
         <p class="section-label">Knowledge Check</p>
         <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
-        <p class="kc-intro">Answer all six questions to see your score.</p>
+        <p class="kc-intro">Answer all twelve questions to see your score.</p>
         <div id="kcQuestions"></div>
         <div class="kc-score" id="kcScore"></div>
       </div>
@@ -449,6 +502,13 @@
   ];
   buildStepper('stepperTz', TZ_STAGES);
 
+  const TZ2_STAGES = [
+    { title: 'Step 1 — Identify h and the offsets', body: '<p>A river cross-section has five offsets 2.1 m, 3.4 m, 4.8 m, 3.9 m and 1.5 m, measured 4 m apart.</p><p style="margin-bottom:0">So \\(h = 4\\) m; \\(d_1 = 2.1\\), \\(d_5 = 1.5\\) (weight 1 each); \\(d_2 = 3.4\\), \\(d_3 = 4.8\\), \\(d_4 = 3.9\\) (weight 2 each, the middle offsets).</p>' },
+    { title: 'Step 2 — Apply the formula', body: '<p style="margin-bottom:0">\\(A \\approx \\dfrac{4}{2}\\big[2.1 + 1.5 + 2(3.4+4.8+3.9)\\big] = 2 \\times 27.8 = 55.6\\) m²</p>' },
+    { title: 'Step 3 — State the answer with units', body: '<p style="margin-bottom:0">The approximate cross-sectional area of the river is <strong>55.6 m²</strong>. With five offsets there are four applications of the rule, but the formula only ever changes the middle-offset sum — the outer two offsets always keep weight 1.</p>' }
+  ];
+  buildStepper('stepperTz2', TZ2_STAGES);
+
   // ── Step checker helper ──
   function setupStep(btnId, inputId, hintId, checkFn) {
     document.getElementById(btnId).addEventListener('click', () => {
@@ -462,6 +522,13 @@
   setupStep('checkDamH', 'damH', 'hintDamH', v => Math.abs(parseFloat(v) - 50) < 0.5 ? { ok:true } : { ok:false, msg:'200 m ÷ 4 applications = 50 m' });
   setupStep('checkDamV', 'damV', 'hintDamV', v => Math.abs(parseFloat(v) - 44500) < 100 ? { ok:true } : { ok:false, msg:'V ≈ (50/2)[360 + 0 + 2(300+270+140)] = 25 × 1780 = 44 500 m³' });
   setupStep('checkDamRain', 'damRain', 'hintDamRain', v => Math.abs(parseFloat(v) - 22) < 1 ? { ok:true } : { ok:false, msg:'44 500 ÷ 2 000 000 = 0.02225 m ≈ 22 mm' });
+
+  // ── Exercise 2: swimming pool ──
+  setupStep('checkPoolArea', 'poolArea', 'hintPoolArea', v => Math.abs(parseFloat(v) - 593.9) < 1 ? { ok:true } : { ok:false, msg:'A ≈ (12.5/2)[21.88 + 21.88 + 2(25.63)] ≈ 593.9 m²' });
+  setupStep('checkPoolVol', 'poolVol', 'hintPoolVol', v => Math.abs(parseFloat(v) - 891) < 3 ? { ok:true } : { ok:false, msg:'593.9 × 1.5 ≈ 891 m³' });
+
+  // ── Exercise 3: working backwards ──
+  setupStep('checkBackD2', 'backD2', 'hintBackD2', v => Math.abs(parseFloat(v) - 9) < 0.2 ? { ok:true } : { ok:false, msg:'540 = 15[8 + 10 + 2d₂] ⟹ 2d₂ = 18 ⟹ d₂ = 9 m' });
 
   // ── Knowledge Check ──
   const KC_QS = [
@@ -500,6 +567,42 @@
       opts: ['A) 160 m³', 'B) 1600 m³', 'C) 16 000 m³', 'D) 160 000 m³'],
       correct: 1,
       explanation: 'B is correct. 20 mm = 0.02 m. \\(V = A \\times h = 80\\,000 \\times 0.02 = 1600\\) m³.'
+    },
+    {
+      q: 'Five equally spaced offsets 3 m apart are 4, 6, 9, 7 and 5 m. What is the approximate area?',
+      opts: ['A) 66 m²', 'B) 73.5 m²', 'C) 79.5 m²', 'D) 132 m²'],
+      correct: 2,
+      explanation: 'C is correct. \\(A \\approx \\tfrac{3}{2}\\big[4+5+2(6+9+7)\\big] = 1.5 \\times [9+44] = 1.5 \\times 53 = 79.5\\) m².'
+    },
+    {
+      q: 'A dam cross-section area was estimated at 300 m² using three offsets 10 m apart, with outer offsets 18 m and 22 m. What was the middle offset?',
+      opts: ['A) 8 m', 'B) 10 m', 'C) 12 m', 'D) 15 m'],
+      correct: 1,
+      explanation: 'B is correct. \\(300 = \\tfrac{10}{2}[18+22+2d_2] = 5[40+2d_2] \\Rightarrow 60 = 40+2d_2 \\Rightarrow d_2 = 10\\) m.'
+    },
+    {
+      q: 'A channel\'s true boundary curves inward (concave) between each offset. Compared to the true area, the Trapezoidal rule estimate will be:',
+      opts: ['A) exactly equal', 'B) an under-estimate', 'C) an over-estimate', 'D) impossible to tell without numbers'],
+      correct: 2,
+      explanation: 'C is correct. A straight line between offsets overshoots a boundary that curves inward, so the estimate is larger than the true area.'
+    },
+    {
+      q: 'A cutting has a cross-sectional area estimated at 45 m² using the Trapezoidal rule. If the cutting is 60 m long, what is its volume?',
+      opts: ['A) 0.75 m³', 'B) 105 m³', 'C) 2700 m³', 'D) 27 000 m³'],
+      correct: 2,
+      explanation: 'C is correct. \\(V = A \\times \\text{length} = 45 \\times 60 = 2700\\) m³.'
+    },
+    {
+      q: 'Which condition is required before the Trapezoidal rule formula \\(A \\approx \\tfrac{h}{2}[d_{first}+d_{last}+2(\\text{middle sum})]\\) can be applied?',
+      opts: ['A) There must be an odd number of offsets', 'B) The offsets must be equally spaced', 'C) The shape must be a perfect circle', 'D) All offsets must be equal in length'],
+      correct: 1,
+      explanation: 'B is correct. \\(h\\) is a single fixed spacing value, so the offsets must be equally spaced for the formula to apply directly.'
+    },
+    {
+      q: 'A swimming pool 20 m long has three equally spaced widths (10 m apart) of 8 m, 10 m and 8 m, and a constant depth of 1.2 m. What volume of water does it hold, to the nearest m³?',
+      opts: ['A) 96 m³', 'B) 180 m³', 'C) 216 m³', 'D) 240 m³'],
+      correct: 2,
+      explanation: 'C is correct. Area \\(\\approx \\tfrac{10}{2}[8+8+2(10)] = 5 \\times 36 = 180\\) m². Volume \\(= 180 \\times 1.2 = 216\\) m³.'
     }
   ];
 
