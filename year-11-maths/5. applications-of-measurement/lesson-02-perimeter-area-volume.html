@@ -36,7 +36,7 @@
     html { scroll-behavior:smooth; }
     body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
     a { color: inherit; }
-    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+    .page { max-width:1400px; margin:0 auto; padding:24px 24px 120px; }
 
     .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
     .topbar-left { display:flex; flex-direction:column; gap:2px; }
@@ -199,7 +199,7 @@
         <span class="pill">Composite Shapes</span>
         <span class="pill">Pythagoras</span>
         <span class="pill">Surface Area &amp; Volume</span>
-        <span class="pill">~25 min</span>
+        <span class="pill">~55 min</span>
       </div>
     </div>
     <div class="hero-side">
@@ -332,6 +332,57 @@
             </div>
           </div>
         </div>
+
+        <h3 style="margin-bottom:14px;">Pythagoras' theorem — practice in isolation</h3>
+        <div class="example-block">
+          <p class="ex-label">Worked Example</p>
+          <p><strong>A ladder leans against a wall. Its foot is 1.5 m from the base of the wall and it reaches 4 m up the wall. How long is the ladder, to 1 d.p.?</strong></p>
+          <p style="margin-bottom:0">\(\text{ladder}^2 = 1.5^2 + 4^2 = 2.25 + 16 = 18.25 \Rightarrow \text{ladder} = \sqrt{18.25} \approx 4.3\) m.</p>
+        </div>
+        <div class="exercise-block">
+          <h3>Exercise 2 — Diagonal brace</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A rectangular gate is 2.4 m wide and 1.8 m high. A diagonal timber brace runs corner to corner.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Length of the brace, to 1 d.p. =</span>
+              <input type="number" step="0.1" id="braceLen" placeholder="m">
+              <button class="check-btn" id="checkBraceLen">Check</button>
+              <span class="hint" id="hintBraceLen"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) A second brace of the same length is added on the other diagonal. Total length of both braces, to 1 d.p. =</span>
+              <input type="number" step="0.1" id="braceTotal" placeholder="m">
+              <button class="check-btn" id="checkBraceTotal">Check</button>
+              <span class="hint" id="hintBraceTotal"></span>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Dissecting a surveyed block of land</h3>
+        <div class="exercise-block">
+          <h3>Exercise 3 — Block of land by offsets</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A surveyor records a block of land as a rectangle 30 m × 18 m with a triangular extension: a further 12 m along the 30 m side with a perpendicular offset of 18 m, then tapering to a point (i.e. the triangle has base 12 m and height 18 m).</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Area of the rectangular section =</span>
+              <input type="number" step="1" id="blockRect" placeholder="m²">
+              <button class="check-btn" id="checkBlockRect">Check</button>
+              <span class="hint" id="hintBlockRect"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Area of the triangular section =</span>
+              <input type="number" step="1" id="blockTri" placeholder="m²">
+              <button class="check-btn" id="checkBlockTri">Check</button>
+              <span class="hint" id="hintBlockTri"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(c) Total area of the block =</span>
+              <input type="number" step="1" id="blockTotal" placeholder="m²">
+              <button class="check-btn" id="checkBlockTotal">Check</button>
+              <span class="hint" id="hintBlockTotal"></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ── Part C: Surface area ── -->
@@ -379,6 +430,27 @@
           <p>Hemisphere curved surface: \(\tfrac{1}{2} \times 4\pi r^2 = \tfrac{1}{2} \times 4\pi \times 4^2 = 100.53\) m².</p>
           <p style="margin-bottom:0">Total: \(527.79 + 100.53 \approx 628\) m².</p>
         </div>
+
+        <div class="example-block">
+          <p class="ex-label">Worked Example — Composite prism</p>
+          <p><strong>A garden shed's cross-section is a rectangle (2 m wide, 2 m tall) topped by an isosceles triangle (base 2 m, height 0.8 m). The shed is 3 m long. Find the total surface area to be painted, excluding the base (nearest 0.1 m²).</strong></p>
+          <p>Two rectangular side walls (trapezium-shaped, but split into rectangle + triangle each): front &amp; back faces \(= 2 \times \left(2 \times 2 + \tfrac{1}{2}\times 2\times0.8\right) = 2\times(4+0.8) = 9.6\) m².</p>
+          <p>Two long rectangular walls: \(2 \times (2\times3) = 12\) m². Two sloped roof panels: slant length \(=\sqrt{1^2+0.8^2}=1.28\) m, so \(2\times(1.28\times3)=7.68\) m².</p>
+          <p style="margin-bottom:0">Total \(= 9.6 + 12 + 7.68 = 29.3\) m² (1 d.p.) — only visible faces are painted, so the base is excluded.</p>
+        </div>
+
+        <h3 style="margin-bottom:14px;">Composite solid — surface area stepper</h3>
+        <div class="stepper" id="stepperSA">
+          <div class="stepper-header">
+            <div class="stepper-nodes" id="stepperSANodes"></div>
+            <div class="stepper-counter" id="stepperSACounter">Step 1 of 3</div>
+          </div>
+          <div class="stepper-panel" id="stepperSAPanel"></div>
+          <div class="stepper-nav">
+            <button class="stepper-btn" id="stepperSAPrev" disabled>&#8592; Previous</button>
+            <button class="stepper-btn" id="stepperSANext">Next &#8594;</button>
+          </div>
+        </div>
       </div>
 
       <!-- ── Part D: Volume ── -->
@@ -421,13 +493,51 @@
             <button class="stepper-btn" id="stepperVolNext">Next &#8594;</button>
           </div>
         </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 4 — Water tank capacity</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A cylindrical water tank has radius 1.2 m and height 2.5 m.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Volume of the tank, to 2 d.p. =</span>
+              <input type="number" step="0.01" id="tankVol" placeholder="m³">
+              <button class="check-btn" id="checkTankVol">Check</button>
+              <span class="hint" id="hintTankVol"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) Capacity in litres (1 m³ = 1000 L), nearest litre =</span>
+              <input type="number" step="1" id="tankLitres" placeholder="L">
+              <button class="check-btn" id="checkTankLitres">Check</button>
+              <span class="hint" id="hintTankLitres"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-block">
+          <h3>Exercise 5 — Conical hopper</h3>
+          <p style="font-size:13px; margin-bottom:18px;">A grain hopper is a cone with radius 1.4 m and vertical height 2 m.</p>
+          <div class="step-form">
+            <div class="step">
+              <span class="step-label">(a) Volume of the hopper, to 2 d.p. =</span>
+              <input type="number" step="0.01" id="hopperVol" placeholder="m³">
+              <button class="check-btn" id="checkHopperVol">Check</button>
+              <span class="hint" id="hintHopperVol"></span>
+            </div>
+            <div class="step">
+              <span class="step-label">(b) If a cylindrical silo of the same radius sits on top with height 4 m, total volume of the combined solid, to 2 d.p. =</span>
+              <input type="number" step="0.01" id="hopperTotal" placeholder="m³">
+              <button class="check-btn" id="checkHopperTotal">Check</button>
+              <span class="hint" id="hintHopperTotal"></span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ── Knowledge Check ── -->
       <div class="kc-block" id="check">
         <p class="section-label">Knowledge Check</p>
         <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
-        <p class="kc-intro">Answer all six questions to see your score.</p>
+        <p class="kc-intro">Answer all twelve questions to see your score.</p>
         <div id="kcQuestions"></div>
         <div class="kc-score" id="kcScore"></div>
       </div>
@@ -484,6 +594,23 @@
   setupStep('checkPathOuterArea', 'pathOuterArea', 'hintPathOuterArea', v => Math.abs(parseFloat(v) - 63.62) < 0.1 ? { ok:true } : { ok:false, msg:'π × 4.5² ≈ 63.62 m²' });
   setupStep('checkPathArea', 'pathArea', 'hintPathArea', v => Math.abs(parseFloat(v) - 35.3) < 0.3 ? { ok:true } : { ok:false, msg:'63.62 − π×3² ≈ 63.62 − 28.27 = 35.3 m²' });
 
+  // ── Exercise 2: diagonal brace ──
+  setupStep('checkBraceLen', 'braceLen', 'hintBraceLen', v => Math.abs(parseFloat(v) - 3.0) < 0.05 ? { ok:true } : { ok:false, msg:'√(2.4² + 1.8²) = √9 = 3.0 m' });
+  setupStep('checkBraceTotal', 'braceTotal', 'hintBraceTotal', v => Math.abs(parseFloat(v) - 6.0) < 0.05 ? { ok:true } : { ok:false, msg:'Both diagonals are equal in a rectangle: 2 × 3.0 = 6.0 m' });
+
+  // ── Exercise 3: block of land ──
+  setupStep('checkBlockRect', 'blockRect', 'hintBlockRect', v => Math.abs(parseFloat(v) - 540) < 1 ? { ok:true } : { ok:false, msg:'30 × 18 = 540 m²' });
+  setupStep('checkBlockTri', 'blockTri', 'hintBlockTri', v => Math.abs(parseFloat(v) - 108) < 1 ? { ok:true } : { ok:false, msg:'½ × 12 × 18 = 108 m²' });
+  setupStep('checkBlockTotal', 'blockTotal', 'hintBlockTotal', v => Math.abs(parseFloat(v) - 648) < 1 ? { ok:true } : { ok:false, msg:'540 + 108 = 648 m²' });
+
+  // ── Exercise 4: water tank ──
+  setupStep('checkTankVol', 'tankVol', 'hintTankVol', v => Math.abs(parseFloat(v) - 11.31) < 0.05 ? { ok:true } : { ok:false, msg:'π × 1.2² × 2.5 ≈ 11.31 m³' });
+  setupStep('checkTankLitres', 'tankLitres', 'hintTankLitres', v => Math.abs(parseFloat(v) - 11310) < 20 ? { ok:true } : { ok:false, msg:'11.31 m³ × 1000 ≈ 11 310 L' });
+
+  // ── Exercise 5: conical hopper ──
+  setupStep('checkHopperVol', 'hopperVol', 'hintHopperVol', v => Math.abs(parseFloat(v) - 4.11) < 0.05 ? { ok:true } : { ok:false, msg:'⅓ × π × 1.4² × 2 ≈ 4.11 m³' });
+  setupStep('checkHopperTotal', 'hopperTotal', 'hintHopperTotal', v => Math.abs(parseFloat(v) - 28.74) < 0.1 ? { ok:true } : { ok:false, msg:'Cone 4.11 + cylinder (π×1.4²×4 ≈ 24.63) ≈ 28.74 m³' });
+
   // ── Stepper: composite dissection ──
   const COMP_STAGES = [
     { title: 'Step 1 — Identify the two simple shapes', body: '<p>A quadrant (quarter circle) of radius 10 cm has a 4 cm × 3 cm rectangle removed from one corner. Recognise: <strong>quadrant − rectangle</strong>.</p>' },
@@ -530,6 +657,13 @@
     { title: 'Step 3 — Add the parts together', body: '<p style="margin-bottom:0">\\(V_{total} = 1130.97 + 452.39 = 1583.4 \\approx 1580\\) m³ (nearest 10 m³). Composite solids: always add volumes, but be careful with surface area — internal faces where solids join are NOT painted/exposed.</p>' }
   ];
   buildStepper('stepperVol', VOL_STAGES);
+
+  const SA_STAGES = [
+    { title: 'Step 1 — Identify the visible curved surfaces', body: '<p>A grain silo has a cylindrical body (radius 3 m, height 5 m) topped by a cone (same radius, slant height 5 m). It sits on the ground.</p><p style="margin-bottom:0">Visible surfaces: the cylinder\'s curved surface + the cone\'s curved surface. The cylinder\'s top and the cone\'s base are internal (where the two solids join) and are not painted; the cylinder\'s bottom sits on the ground.</p>' },
+    { title: 'Step 2 — Find each curved surface area', body: '<p>Cylinder curved surface: \\(2\\pi r h = 2\\pi \\times 3 \\times 5 = 94.25\\) m² (2 d.p.)</p><p style="margin-bottom:0">Cone curved surface: \\(\\pi r l = \\pi \\times 3 \\times 5 = 47.12\\) m² (2 d.p.), where \\(l\\) is the slant height (given directly here).</p>' },
+    { title: 'Step 3 — Add the parts together', body: '<p style="margin-bottom:0">Total surface area \\(= 94.25 + 47.12 = 141.4\\) m² (1 d.p.). As with volume, always add areas for composite solids — but only count faces that are actually exposed.</p>' }
+  ];
+  buildStepper('stepperSA', SA_STAGES);
 
   // ── Cylinder explorer ──
   function updateCylinder() {
@@ -598,6 +732,42 @@
       opts: ['A) 628 cm²', 'B) 679 cm²', 'C) 729 cm²', 'D) 829 cm²'],
       correct: 0,
       explanation: 'A is correct. Curved cylinder \\(2\\pi(4)(21) = 527.8\\), hemisphere \\(\\tfrac{1}{2}(4\\pi \\times 4^2) = 100.5\\), plus the base circle \\(\\pi(4)^2 = 50.3\\): total \\(\\approx 628\\) cm² (silo painted all round including its flat base in this version).'
+    },
+    {
+      q: 'A right-angled triangle has a base of 9 cm and a hypotenuse of 15 cm. What is its height?',
+      opts: ['A) 6 cm', 'B) 10 cm', 'C) 12 cm', 'D) 17.5 cm'],
+      correct: 2,
+      explanation: 'C is correct. \\(h = \\sqrt{15^2 - 9^2} = \\sqrt{144} = 12\\) cm.'
+    },
+    {
+      q: 'A composite shape is a semicircle of radius 5 cm attached to a rectangle 10 cm × 7 cm along the semicircle\'s diameter. What is the total area, to the nearest cm²?',
+      opts: ['A) 70 cm²', 'B) 109 cm²', 'C) 149 cm²', 'D) 179 cm²'],
+      correct: 1,
+      explanation: 'B is correct. Rectangle \\(10 \\times 7 = 70\\), semicircle \\(\\tfrac{1}{2}\\pi(5)^2 = 39.3\\): total \\(\\approx 109\\) cm².'
+    },
+    {
+      q: 'A rectangular prism (4 m × 3 m × 2 m) has a pyramid-shaped cavity of volume 7.5 m³ removed from inside it. What is the remaining volume?',
+      opts: ['A) 16.5 m³', 'B) 17.5 m³', 'C) 24 m³', 'D) 31.5 m³'],
+      correct: 0,
+      explanation: 'A is correct. Prism volume \\(= 4\\times3\\times2 = 24\\) m³. Remaining \\(= 24 - 7.5 = 16.5\\) m³.'
+    },
+    {
+      q: 'A cone has radius 5 cm and height 12 cm. What is its volume, to the nearest cm³?',
+      opts: ['A) 314 cm³', 'B) 628 cm³', 'C) 942 cm³', 'D) 1885 cm³'],
+      correct: 0,
+      explanation: 'A is correct. \\(V = \\tfrac{1}{3}\\pi r^2 h = \\tfrac{1}{3}\\pi(25)(12) = 100\\pi \\approx 314\\) cm³.'
+    },
+    {
+      q: 'A cylindrical tank of radius 0.8 m and height 1.5 m is filled with water. What is its capacity, to the nearest litre? (1 m³ = 1000 L)',
+      opts: ['A) 1206 L', 'B) 2413 L', 'C) 3016 L', 'D) 4826 L'],
+      correct: 2,
+      explanation: 'C is correct. \\(V = \\pi(0.8)^2(1.5) = \\pi \\times 0.64 \\times 1.5 \\approx 3.016\\) m³ \\(= 3016\\) L.'
+    },
+    {
+      q: 'A block of land is dissected into a rectangle 25 m × 12 m and a right-angled triangle (legs 12 m and 9 m) attached along one 12 m side. What is the total area of the block?',
+      opts: ['A) 300 m²', 'B) 327 m²', 'C) 354 m²', 'D) 408 m²'],
+      correct: 2,
+      explanation: 'C is correct. Rectangle \\(= 25 \\times 12 = 300\\) m², triangle \\(= \\tfrac{1}{2}\\times12\\times9 = 54\\) m²: total \\(= 354\\) m².'
     }
   ];
 
