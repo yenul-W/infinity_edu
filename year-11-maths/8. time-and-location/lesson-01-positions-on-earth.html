@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — Positions on the Earth's Surface</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  });
+</script>
+<style>
+:root {
+  --ink: #000;
+  --canvas: #fff;
+  --gray-med: #818181;
+  --gray-light: #d6d6d6;
+  --gray-faint: #f2f2f2;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+html.dark-mode {
+  --ink: #f0f0f0;
+  --canvas: #111;
+  --gray-med: #888;
+  --gray-light: #333;
+  --gray-faint: #1a1a1a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: 0.35px;
+  color: var(--ink);
+  background: var(--canvas);
+  margin: 0;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-med);
+}
+.topbar-left { display: flex; gap: 16px; }
+.topbar-topic { color: var(--ink); font-weight: 700; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+}
+.eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.hero-main h1 { font-size: 40px; line-height: 1; letter-spacing: 0.6px; margin: 0 0 16px; }
+.subtitle { font-size: 15px; color: var(--gray-med); max-width: 52ch; margin: 0 0 20px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; border: 1px solid var(--gray-light); padding: 5px 10px; color: var(--gray-med); }
+.hero-side { border-left: 1px solid var(--gray-light); padding-left: 24px; }
+.side-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.side-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.side-list li { padding: 8px 0; border-bottom: 1px solid var(--gray-light); }
+.side-list li:last-child { border-bottom: none; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: start; }
+.toc { position: sticky; top: 24px; }
+.toc-heading { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 12px; font-family: var(--font-mono); }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-link { display: block; font-size: 12px; color: var(--gray-med); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--gray-light); transition: color 0.15s, border-color 0.15s; }
+.toc-link:hover { color: var(--ink); }
+.toc-link.toc-active { color: var(--ink); border-left: 2px solid var(--ink); padding-left: 10px; }
+
+/* Content cards */
+.content-card { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 8px; }
+h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; border-bottom: 1px solid var(--gray-light); padding-bottom: 16px; margin: 0 0 24px; }
+h3 { font-size: 16px; margin: 28px 0 10px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 600; }
+
+.example-block { border-left: 2px solid var(--ink); padding: 14px 18px; margin: 18px 0; background: var(--gray-faint); }
+.example-block .example-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 8px; }
+
+table.coord-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+table.coord-table th, table.coord-table td { border: 1px solid var(--gray-light); padding: 8px 12px; text-align: left; }
+table.coord-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray-med); }
+
+/* Knowledge Check */
+.kc-block { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.kc-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 24px; }
+.kc-q-wrap { margin-bottom: 24px; }
+.kc-q { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.kc-options { display: flex; flex-direction: column; gap: 6px; }
+.kc-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 14px; border: 1px solid var(--gray-light);
+  cursor: pointer; font-size: 13px; transition: background 0.12s;
+  user-select: none; background: transparent; color: var(--ink);
+  text-align: left; width: 100%; font-family: var(--font-display);
+}
+.kc-opt:hover:not([disabled]) { background: var(--gray-faint); }
+.kc-opt.kc-correct { border-color: #00a050; background: rgba(0,160,80,0.08); }
+.kc-opt.kc-wrong   { border-color: #c00000; background: rgba(200,0,0,0.08); }
+html.dark-mode .kc-opt.kc-correct { background: rgba(0,160,80,0.14); }
+html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
+.kc-feedback { font-size: 12px; color: var(--gray-med); margin-top: 8px; min-height: 18px; }
+.kc-feedback.correct { color: #00a050; }
+.kc-feedback.wrong   { color: #c00000; }
+.kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
+.kc-score.show { display: block; }
+.kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 0; cursor: pointer; font-family: var(--font-display); }
+.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 700; min-width: 16px; padding-top: 1px; }
+
+.lesson-link-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--ink);
+}
+.lesson-link-btn:hover { background: var(--gray-faint); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--gray-light); padding-top: 20px; }
+  .layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 — Time and Location</span>
+      <span>Year 11 Mathematics Standard</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Positions on the Earth's Surface</h1>
+      <p class="subtitle">Use latitude and longitude to describe any position on Earth, and use longitude differences to work out time differences between places.</p>
+      <div class="hero-meta">
+        <span class="pill">Latitude &amp; longitude</span>
+        <span class="pill">Position coordinates</span>
+        <span class="pill">Longitude &amp; time</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Latitude and longitude</li>
+        <li>Locating positions, with and without digital tools</li>
+        <li>Time differences from longitude</li>
+        <li>Knowledge check</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#latlong">Latitude &amp; Longitude</a></li>
+        <li class="toc-item"><a class="toc-link" href="#locating">Locating Positions</a></li>
+        <li class="toc-item"><a class="toc-link" href="#longitude-time">Longitude &amp; Time</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="latlong">
+        <p class="section-label">Theory</p>
+        <h2>Latitude and Longitude</h2>
+        <p>Every point on Earth's surface can be described with two angles measured from the centre of the Earth: <strong>latitude</strong> and <strong>longitude</strong>.</p>
+
+        <h3>Latitude</h3>
+        <p>Latitude measures how far a point is <strong>north or south</strong> of the <strong>equator</strong> (0°). Lines of latitude are horizontal circles running parallel to the equator, called <strong>parallels</strong>. Latitude ranges from 0° at the equator to 90°N at the North Pole and 90°S at the South Pole.</p>
+
+        <h3>Longitude</h3>
+        <p>Longitude measures how far a point is <strong>east or west</strong> of the <strong>Prime Meridian</strong> (0°), which passes through Greenwich, England. Lines of longitude are called <strong>meridians</strong> — they run from pole to pole. Longitude ranges from 0° to 180°E and 0° to 180°W.</p>
+
+        <h3>Position coordinates</h3>
+        <p>A position is written as <strong>(latitude, longitude)</strong>, each with a direction letter. For example, Sydney is located at approximately \(33.9°\text{S}, 151.2°\text{E}\).</p>
+
+        <table class="coord-table">
+          <tr><th>City</th><th>Latitude</th><th>Longitude</th></tr>
+          <tr><td>Sydney, Australia</td><td>33.9° S</td><td>151.2° E</td></tr>
+          <tr><td>London, UK</td><td>51.5° N</td><td>0.1° W</td></tr>
+          <tr><td>Tokyo, Japan</td><td>35.7° N</td><td>139.7° E</td></tr>
+          <tr><td>Los Angeles, USA</td><td>34.1° N</td><td>118.2° W</td></tr>
+        </table>
+
+        <p>Degrees can be split into <strong>minutes</strong> (1° = 60′) for greater precision, e.g. \(33°54'\text{S}\) means 33 degrees and 54 minutes south.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>A ship is located at \(20°\text{S}, 60°\text{W}\). Describe its position in words.</p>
+          <p>The ship is 20 degrees south of the equator and 60 degrees west of the Prime Meridian — placing it in the South Atlantic Ocean, off the coast of South America.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="locating">
+        <p class="section-label">Theory</p>
+        <h2>Locating Positions</h2>
+        <p><strong>Without digital tools:</strong> use a printed map or globe with latitude/longitude grid lines. Find the horizontal line matching the latitude and the vertical line matching the longitude — the position is where they cross.</p>
+        <p><strong>With digital tools:</strong> mapping apps (e.g. Google Maps) display coordinates directly, or let you search a place name to reveal its latitude and longitude. GPS devices report position as a live coordinate pair.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>On a world map with grid lines every 10°, a city sits 3 lines above the equator and 4 lines to the right of the Prime Meridian. What are its approximate coordinates?</p>
+          <p>Latitude \(= 3 \times 10° = 30°\text{N}\); Longitude \(= 4 \times 10° = 40°\text{E}\). Approximate position: \(30°\text{N}, 40°\text{E}\).</p>
+        </div>
+
+        <p>When reading coordinates, always check the direction letters (N/S and E/W) — mixing these up places you on the opposite side of the world.</p>
+      </div>
+
+      <div class="content-card" id="longitude-time">
+        <p class="section-label">Theory</p>
+        <h2>Longitude and Time Differences</h2>
+        <p>Earth rotates 360° every 24 hours, so it turns \(360° \div 24 = 15°\) of longitude every hour. This gives the key rule:</p>
+        <div class="example-block">
+          <p class="example-label">Key Rule</p>
+          <p>\[ \text{Time difference (hours)} = \dfrac{\text{difference in longitude (°)}}{15} \]</p>
+          <p>Places <strong>east</strong> of another location are <strong>ahead</strong> in time. Places <strong>west</strong> are <strong>behind</strong>.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>City A is at \(30°\text{E}\) and City B is at \(75°\text{E}\). Find the time difference and state which city is ahead.</p>
+          <p>Difference in longitude \(= 75° - 30° = 45°\)</p>
+          <p>Time difference \(= 45 \div 15 = 3\) hours</p>
+          <p>City B is further east, so City B is 3 hours ahead of City A.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Perth is at approximately \(116°\text{E}\) and Sydney is at approximately \(151°\text{E}\). If it is 2:00 pm in Perth, what time is it in Sydney (ignoring daylight saving)?</p>
+          <p>Difference in longitude \(= 151° - 116° = 35°\)</p>
+          <p>Time difference \(= 35 \div 15 = 2\tfrac{1}{3}\) hours \(\approx 2\) hours 20 minutes</p>
+          <p>Sydney is east of Perth, so Sydney is ahead: \(2\text{:}00\text{ pm} + 2\text{h }20\text{min} = 4\text{:}20\text{ pm}\).</p>
+        </div>
+      </div>
+
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Continue to Lesson 2 to apply these ideas to time zones, elapsed time and UTC.
+        </p>
+        <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson', lessonIndex: 1}, '*')">
+          Open Lesson 2
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const KC_QS = [
+  {
+    q: 'What does latitude measure?',
+    opts: [
+      'A) Distance east or west of the Prime Meridian',
+      'B) Distance north or south of the equator',
+      'C) The height of a location above sea level',
+      'D) The time zone of a location'
+    ],
+    correct: 1,
+    explanation: 'Latitude measures how far a point is north or south of the equator (0°).'
+  },
+  {
+    q: 'What does longitude measure?',
+    opts: [
+      'A) Distance north or south of the equator',
+      'B) Distance above sea level',
+      'C) Distance east or west of the Prime Meridian',
+      'D) Distance from the nearest pole'
+    ],
+    correct: 2,
+    explanation: 'Longitude measures how far a point is east or west of the Prime Meridian (0°), which passes through Greenwich, England.'
+  },
+  {
+    q: 'A city is located at \\(40°\\text{N}, 20°\\text{E}\\). Which statement is correct?',
+    opts: [
+      'A) It is 40° south of the equator and 20° east of the Prime Meridian',
+      'B) It is 40° north of the equator and 20° west of the Prime Meridian',
+      'C) It is 40° north of the equator and 20° east of the Prime Meridian',
+      'D) It is 20° north of the equator and 40° east of the Prime Meridian'
+    ],
+    correct: 2,
+    explanation: 'The latitude 40°N places it 40° north of the equator; the longitude 20°E places it 20° east of the Prime Meridian.'
+  },
+  {
+    q: 'Two cities are at \\(10°\\text{E}\\) and \\(55°\\text{E}\\). What is the time difference between them?',
+    opts: [
+      'A) 1 hour',
+      'B) 2 hours',
+      'C) 3 hours',
+      'D) 4 hours'
+    ],
+    correct: 2,
+    explanation: 'Difference in longitude \\(= 55° - 10° = 45°\\). Time difference \\(= 45 \\div 15 = 3\\) hours.'
+  },
+  {
+    q: 'City P is at \\(20°\\text{W}\\) and City Q is at \\(40°\\text{E}\\). Which city is ahead in time, and by how much?',
+    opts: [
+      'A) City P is ahead by 4 hours',
+      'B) City Q is ahead by 4 hours',
+      'C) City P is ahead by 2 hours',
+      'D) City Q is ahead by 2 hours'
+    ],
+    correct: 1,
+    explanation: 'Difference in longitude \\(= 40° - (-20°) = 60°\\). Time difference \\(= 60 \\div 15 = 4\\) hours. City Q is further east, so it is ahead by 4 hours.'
+  },
+  {
+    q: 'A location has coordinates \\(15°\\text{S}, 45°\\text{W}\\). Which of the following best describes it?',
+    opts: [
+      'A) North of the equator, east of the Prime Meridian',
+      'B) South of the equator, west of the Prime Meridian',
+      'C) South of the equator, east of the Prime Meridian',
+      'D) North of the equator, west of the Prime Meridian'
+    ],
+    correct: 1,
+    explanation: '15°S places it south of the equator; 45°W places it west of the Prime Meridian.'
+  },
+  {
+    q: 'It is 9:00 am at a location on the Prime Meridian (0°). What time is it at a location \\(30°\\text{W}\\) of it?',
+    opts: [
+      'A) 7:00 am',
+      'B) 11:00 am',
+      'C) 9:00 am',
+      'D) 6:00 am'
+    ],
+    correct: 0,
+    explanation: 'Time difference \\(= 30 \\div 15 = 2\\) hours. \\(30°\\text{W}\\) is west, so it is behind: \\(9\\text{:}00\\text{ am} - 2\\text{h} = 7\\text{:}00\\text{ am}\\).'
+  }
+];
+
+(function buildKC() {
+  const container = document.getElementById('kcQuestions');
+  const scoreEl   = document.getElementById('kcScore');
+  let answered = 0, score = 0;
+
+  KC_QS.forEach((qData, qi) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'kc-q-wrap';
+
+    const qEl = document.createElement('p');
+    qEl.className = 'kc-q';
+    qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+    wrap.appendChild(qEl);
+
+    const optsEl = document.createElement('div');
+    optsEl.className = 'kc-options';
+
+    qData.opts.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'kc-opt';
+      const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+      const letter  = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+      const content = letterMatch ? letterMatch[2] : opt;
+      btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+
+      btn.addEventListener('click', () => {
+        if (wrap.dataset.answered) return;
+        wrap.dataset.answered = '1';
+        answered++;
+        const isCorrect = oi === qData.correct;
+        if (isCorrect) score++;
+        optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+          b.disabled = true;
+          if (i === qData.correct) b.classList.add('kc-correct');
+          else if (i === oi)       b.classList.add('kc-wrong');
+        });
+        const fb = document.createElement('p');
+        fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+        fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+        wrap.appendChild(fb);
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(wrap, {
+            delimiters: [
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true }
+            ],
+            throwOnError: false
+          });
+        }
+        if (answered === KC_QS.length) showScore();
+      });
+      optsEl.appendChild(btn);
+    });
+
+    wrap.appendChild(optsEl);
+    container.appendChild(wrap);
+  });
+
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false
+    });
+  }
+
+  function showScore() {
+    const pct    = score / KC_QS.length;
+    const remark = pct === 1    ? 'Excellent — full marks!'
+                 : pct >= 0.6  ? 'Good work. Review any incorrect answers.'
+                               : 'Keep practising — re-read the theory and try again.';
+    scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong>
+      <p class="kc-remark">${remark}</p>
+      <button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+    scoreEl.classList.add('show');
+    document.getElementById('kcResetBtn').addEventListener('click', () => {
+      container.innerHTML = '';
+      scoreEl.className   = 'kc-score';
+      scoreEl.innerHTML   = '';
+      answered = 0; score = 0;
+      buildKC();
+    });
+
+    const TOPIC_ID   = 8;
+    const LESSON_IDX = 0;
+    localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1');
+    window.parent.postMessage({ type: 'ie-lesson-complete', topicId: TOPIC_ID, lessonIndex: LESSON_IDX }, '*');
+  }
+})();
+
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'ie-theme') {
+    document.documentElement.classList.toggle('dark-mode', e.data.dark);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.parent.postMessage({ type: 'ie-theme-request' }, '*');
+});
+</script>
+</body>
+</html>

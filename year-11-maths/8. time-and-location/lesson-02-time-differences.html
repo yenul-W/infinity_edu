@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2 — Time and Time Differences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  });
+</script>
+<style>
+:root {
+  --ink: #000;
+  --canvas: #fff;
+  --gray-med: #818181;
+  --gray-light: #d6d6d6;
+  --gray-faint: #f2f2f2;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+html.dark-mode {
+  --ink: #f0f0f0;
+  --canvas: #111;
+  --gray-med: #888;
+  --gray-light: #333;
+  --gray-faint: #1a1a1a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: 0.35px;
+  color: var(--ink);
+  background: var(--canvas);
+  margin: 0;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-med);
+}
+.topbar-left { display: flex; gap: 16px; }
+.topbar-topic { color: var(--ink); font-weight: 700; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+}
+.eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.hero-main h1 { font-size: 40px; line-height: 1; letter-spacing: 0.6px; margin: 0 0 16px; }
+.subtitle { font-size: 15px; color: var(--gray-med); max-width: 52ch; margin: 0 0 20px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; border: 1px solid var(--gray-light); padding: 5px 10px; color: var(--gray-med); }
+.hero-side { border-left: 1px solid var(--gray-light); padding-left: 24px; }
+.side-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.side-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.side-list li { padding: 8px 0; border-bottom: 1px solid var(--gray-light); }
+.side-list li:last-child { border-bottom: none; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: start; }
+.toc { position: sticky; top: 24px; }
+.toc-heading { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 12px; font-family: var(--font-mono); }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-link { display: block; font-size: 12px; color: var(--gray-med); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--gray-light); transition: color 0.15s, border-color 0.15s; }
+.toc-link:hover { color: var(--ink); }
+.toc-link.toc-active { color: var(--ink); border-left: 2px solid var(--ink); padding-left: 10px; }
+
+/* Content cards */
+.content-card { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 8px; }
+h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; border-bottom: 1px solid var(--gray-light); padding-bottom: 16px; margin: 0 0 24px; }
+h3 { font-size: 16px; margin: 28px 0 10px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 600; }
+
+.example-block { border-left: 2px solid var(--ink); padding: 14px 18px; margin: 18px 0; background: var(--gray-faint); }
+.example-block .example-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 8px; }
+
+table.coord-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+table.coord-table th, table.coord-table td { border: 1px solid var(--gray-light); padding: 8px 12px; text-align: left; }
+table.coord-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray-med); }
+
+/* Knowledge Check */
+.kc-block { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.kc-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 24px; }
+.kc-q-wrap { margin-bottom: 24px; }
+.kc-q { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.kc-options { display: flex; flex-direction: column; gap: 6px; }
+.kc-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 14px; border: 1px solid var(--gray-light);
+  cursor: pointer; font-size: 13px; transition: background 0.12s;
+  user-select: none; background: transparent; color: var(--ink);
+  text-align: left; width: 100%; font-family: var(--font-display);
+}
+.kc-opt:hover:not([disabled]) { background: var(--gray-faint); }
+.kc-opt.kc-correct { border-color: #00a050; background: rgba(0,160,80,0.08); }
+.kc-opt.kc-wrong   { border-color: #c00000; background: rgba(200,0,0,0.08); }
+html.dark-mode .kc-opt.kc-correct { background: rgba(0,160,80,0.14); }
+html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
+.kc-feedback { font-size: 12px; color: var(--gray-med); margin-top: 8px; min-height: 18px; }
+.kc-feedback.correct { color: #00a050; }
+.kc-feedback.wrong   { color: #c00000; }
+.kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
+.kc-score.show { display: block; }
+.kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 0; cursor: pointer; font-family: var(--font-display); }
+.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 700; min-width: 16px; padding-top: 1px; }
+
+.lesson-link-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--ink);
+}
+.lesson-link-btn:hover { background: var(--gray-faint); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--gray-light); padding-top: 20px; }
+  .layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 — Time and Location</span>
+      <span>Year 11 Mathematics Standard</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Time and Time Differences</h1>
+      <p class="subtitle">Convert between units of time, work with 12-hour and 24-hour clocks, and solve real-world problems involving Australian time zones, daylight saving and UTC.</p>
+      <div class="hero-meta">
+        <span class="pill">Time conversions</span>
+        <span class="pill">12h / 24h time</span>
+        <span class="pill">Time zones &amp; UTC</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Converting seconds, minutes, hours</li>
+        <li>12-hour and 24-hour time</li>
+        <li>Elapsed time problems</li>
+        <li>Time zones, daylight saving &amp; UTC</li>
+        <li>Knowledge check</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#units">Converting Time Units</a></li>
+        <li class="toc-item"><a class="toc-link" href="#formats">12-Hour &amp; 24-Hour Time</a></li>
+        <li class="toc-item"><a class="toc-link" href="#elapsed">Elapsed Time</a></li>
+        <li class="toc-item"><a class="toc-link" href="#zones">Time Zones &amp; Daylight Saving</a></li>
+        <li class="toc-item"><a class="toc-link" href="#utc">UTC</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="units">
+        <p class="section-label">Theory</p>
+        <h2>Converting Time Units</h2>
+        <p>The base conversions between seconds, minutes and hours are:</p>
+        <ul>
+          <li>\(1\) minute \(= 60\) seconds</li>
+          <li>\(1\) hour \(= 60\) minutes \(= 3600\) seconds</li>
+        </ul>
+        <p>To convert to a smaller unit, <strong>multiply</strong>. To convert to a larger unit, <strong>divide</strong>.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Convert 2.5 hours into minutes, then into seconds.</p>
+          <p>\(2.5 \times 60 = 150\) minutes</p>
+          <p>\(150 \times 60 = 9000\) seconds</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Convert 258 seconds into minutes and seconds.</p>
+          <p>\(258 \div 60 = 4\) remainder \(18\), so \(258\) seconds \(= 4\) minutes \(18\) seconds.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="formats">
+        <p class="section-label">Theory</p>
+        <h2>12-Hour and 24-Hour Time</h2>
+        <p><strong>12-hour time</strong> uses the numbers 12:00 to 11:59 twice each day, labelled <strong>am</strong> (midnight to just before noon) or <strong>pm</strong> (noon to just before midnight).</p>
+        <p><strong>24-hour time</strong> runs from 0000 to 2359, with no am/pm label — hours are written as 4 digits (hhmm).</p>
+
+        <table class="coord-table">
+          <tr><th>12-hour time</th><th>24-hour time</th></tr>
+          <tr><td>12:00 am (midnight)</td><td>0000</td></tr>
+          <tr><td>9:15 am</td><td>0915</td></tr>
+          <tr><td>12:00 pm (noon)</td><td>1200</td></tr>
+          <tr><td>3:40 pm</td><td>1540</td></tr>
+          <tr><td>11:52 pm</td><td>2352</td></tr>
+        </table>
+
+        <p><strong>Converting pm to 24-hour time:</strong> add 12 to the hour (except 12 pm, which stays 1200). <strong>Converting am to 24-hour time:</strong> keep the hour the same (except 12 am, which becomes 0000).</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Convert 7:25 pm to 24-hour time, and convert 0640 to 12-hour time.</p>
+          <p>\(7\text{:}25\text{ pm} = 7 + 12 = 19\), so \(7\text{:}25\text{ pm} = 1925\).</p>
+          <p>\(0640 = 6\text{:}40\text{ am}\) (hour is less than 12, so it stays am).</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="elapsed">
+        <p class="section-label">Theory</p>
+        <h2>Elapsed Time</h2>
+        <p>To find elapsed time, subtract the start time from the finish time. It's often easiest in 24-hour time, breaking the calculation into hours and minutes separately, or counting forward in convenient steps (e.g. to the next hour, then in hours, then remaining minutes).</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>A train departs at 9:45 am and arrives at 1:20 pm. How long is the journey?</p>
+          <p>9:45 am to 12:00 pm \(= 2\) h \(15\) min</p>
+          <p>12:00 pm to 1:20 pm \(= 1\) h \(20\) min</p>
+          <p>Total \(= 2\text{h }15\text{min} + 1\text{h }20\text{min} = 3\text{h }35\text{min}\)</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>A flight leaves at 2340 and lands at 0615 the next day. Find the flight duration.</p>
+          <p>2340 to 0000 (midnight) \(= 20\) min</p>
+          <p>0000 to 0615 \(= 6\)h \(15\)min</p>
+          <p>Total \(= 20\text{min} + 6\text{h }15\text{min} = 6\text{h }35\text{min}\)</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="zones">
+        <p class="section-label">Theory</p>
+        <h2>Time Zones and Daylight Saving</h2>
+        <p>Australia has three main standard time zones:</p>
+        <ul>
+          <li><strong>Eastern Standard Time (AEST)</strong>, UTC+10 — NSW, VIC, QLD, TAS, ACT</li>
+          <li><strong>Central Standard Time (ACST)</strong>, UTC+9:30 — SA, NT</li>
+          <li><strong>Western Standard Time (AWST)</strong>, UTC+8 — WA</li>
+        </ul>
+        <p>During <strong>daylight saving</strong> (typically early October to early April), clocks in NSW, VIC, SA, TAS and ACT move <strong>forward 1 hour</strong> (AEDT = UTC+11, ACDT = UTC+10:30). QLD, NT and WA do not observe daylight saving.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>It is 3:00 pm AEST in Sydney (not daylight saving). What time is it in Perth (AWST)?</p>
+          <p>AEST is UTC+10, AWST is UTC+8, a difference of \(2\) hours. Perth is behind Sydney, so it is \(3\text{:}00\text{ pm} - 2\text{h} = 1\text{:}00\text{ pm}\) in Perth.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>During daylight saving, it is 6:00 pm AEDT in Sydney. What time is it in Brisbane (which does not observe daylight saving)?</p>
+          <p>AEDT is UTC+11, Brisbane stays on AEST (UTC+10), a difference of \(1\) hour. Brisbane is behind Sydney, so it is \(6\text{:}00\text{ pm} - 1\text{h} = 5\text{:}00\text{ pm}\) in Brisbane.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="utc">
+        <p class="section-label">Theory</p>
+        <h2>Coordinated Universal Time (UTC)</h2>
+        <p><strong>UTC</strong> is the global time standard, based on the Prime Meridian (0° longitude). Every location's local time can be written as an offset from UTC, e.g. Sydney (AEST) is <strong>UTC+10</strong>, meaning local time is 10 hours ahead of UTC.</p>
+        <p>To convert local time to UTC, <strong>subtract</strong> the offset. To convert UTC to local time, <strong>add</strong> the offset.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>It is 8:00 pm AEST (UTC+10) in Sydney. What is the UTC time?</p>
+          <p>\(8\text{:}00\text{ pm} - 10\text{h} = 10\text{:}00\text{ am}\) UTC (same day).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>UTC time is 22:00. What is the local time in Perth (AWST, UTC+8)?</p>
+          <p>\(22\text{:}00 + 8\text{h} = 30\text{:}00 = 06\text{:}00\) the next day, so it is 6:00 am the next day in Perth.</p>
+        </div>
+      </div>
+
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Complete all questions before the next lesson.
+        </p>
+        <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson', lessonIndex: 0}, '*')">
+          Review Lesson 1
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const KC_QS = [
+  {
+    q: 'Convert 3 hours 15 minutes into minutes.',
+    opts: [
+      'A) 180 minutes',
+      'B) 195 minutes',
+      'C) 315 minutes',
+      'D) 200 minutes'
+    ],
+    correct: 1,
+    explanation: '\\(3 \\times 60 = 180\\) minutes, plus the extra \\(15\\) minutes \\(= 195\\) minutes.'
+  },
+  {
+    q: 'Convert 4:45 pm to 24-hour time.',
+    opts: [
+      'A) 0445',
+      'B) 1645',
+      'C) 1745',
+      'D) 1545'
+    ],
+    correct: 1,
+    explanation: 'Add 12 to the pm hour: \\(4 + 12 = 16\\), so 4:45 pm \\(= 1645\\).'
+  },
+  {
+    q: 'Convert 2210 (24-hour time) to 12-hour time.',
+    opts: [
+      'A) 10:10 am',
+      'B) 10:10 pm',
+      'C) 12:10 pm',
+      'D) 8:10 pm'
+    ],
+    correct: 1,
+    explanation: '\\(22 - 12 = 10\\), and since the hour was 13 or greater it is pm: 2210 \\(=\\) 10:10 pm.'
+  },
+  {
+    q: 'A movie starts at 7:50 pm and finishes at 10:05 pm. How long is the movie?',
+    opts: [
+      'A) 2 hours 5 minutes',
+      'B) 2 hours 15 minutes',
+      'C) 2 hours 25 minutes',
+      'D) 1 hour 55 minutes'
+    ],
+    correct: 1,
+    explanation: '7:50 pm to 10:00 pm is 2 hours 10 minutes, plus 5 more minutes to 10:05 pm \\(= 2\\) hours \\(15\\) minutes.'
+  },
+  {
+    q: 'Which Australian state or territory does NOT observe daylight saving?',
+    opts: [
+      'A) New South Wales',
+      'B) Victoria',
+      'C) Queensland',
+      'D) Tasmania'
+    ],
+    correct: 2,
+    explanation: 'Queensland, along with the Northern Territory and Western Australia, does not observe daylight saving.'
+  },
+  {
+    q: 'It is 4:00 pm AEST (UTC+10) in Sydney, outside daylight saving. What time is it in Adelaide (ACST, UTC+9:30)?',
+    opts: [
+      'A) 3:30 pm',
+      'B) 4:30 pm',
+      'C) 3:00 pm',
+      'D) 4:00 pm'
+    ],
+    correct: 0,
+    explanation: 'The difference between UTC+10 and UTC+9:30 is 30 minutes. Adelaide is behind Sydney, so it is \\(4\\text{:}00\\text{ pm} - 30\\text{min} = 3\\text{:}30\\text{ pm}\\).'
+  },
+  {
+    q: 'It is 5:00 pm AEST (UTC+10) in Brisbane. What is the equivalent UTC time?',
+    opts: [
+      'A) 3:00 am (same day)',
+      'B) 7:00 am (same day)',
+      'C) 7:00 pm (same day)',
+      'D) 3:00 pm (same day)'
+    ],
+    correct: 1,
+    explanation: 'To convert local time to UTC, subtract the offset: \\(5\\text{:}00\\text{ pm} - 10\\text{h} = 7\\text{:}00\\text{ am}\\) UTC (same day).'
+  }
+];
+
+(function buildKC() {
+  const container = document.getElementById('kcQuestions');
+  const scoreEl   = document.getElementById('kcScore');
+  let answered = 0, score = 0;
+
+  KC_QS.forEach((qData, qi) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'kc-q-wrap';
+
+    const qEl = document.createElement('p');
+    qEl.className = 'kc-q';
+    qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+    wrap.appendChild(qEl);
+
+    const optsEl = document.createElement('div');
+    optsEl.className = 'kc-options';
+
+    qData.opts.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'kc-opt';
+      const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+      const letter  = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+      const content = letterMatch ? letterMatch[2] : opt;
+      btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+
+      btn.addEventListener('click', () => {
+        if (wrap.dataset.answered) return;
+        wrap.dataset.answered = '1';
+        answered++;
+        const isCorrect = oi === qData.correct;
+        if (isCorrect) score++;
+        optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+          b.disabled = true;
+          if (i === qData.correct) b.classList.add('kc-correct');
+          else if (i === oi)       b.classList.add('kc-wrong');
+        });
+        const fb = document.createElement('p');
+        fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+        fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+        wrap.appendChild(fb);
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(wrap, {
+            delimiters: [
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true }
+            ],
+            throwOnError: false
+          });
+        }
+        if (answered === KC_QS.length) showScore();
+      });
+      optsEl.appendChild(btn);
+    });
+
+    wrap.appendChild(optsEl);
+    container.appendChild(wrap);
+  });
+
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false
+    });
+  }
+
+  function showScore() {
+    const pct    = score / KC_QS.length;
+    const remark = pct === 1    ? 'Excellent — full marks!'
+                 : pct >= 0.6  ? 'Good work. Review any incorrect answers.'
+                               : 'Keep practising — re-read the theory and try again.';
+    scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong>
+      <p class="kc-remark">${remark}</p>
+      <button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+    scoreEl.classList.add('show');
+    document.getElementById('kcResetBtn').addEventListener('click', () => {
+      container.innerHTML = '';
+      scoreEl.className   = 'kc-score';
+      scoreEl.innerHTML   = '';
+      answered = 0; score = 0;
+      buildKC();
+    });
+
+    const TOPIC_ID   = 8;
+    const LESSON_IDX = 1;
+    localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1');
+    window.parent.postMessage({ type: 'ie-lesson-complete', topicId: TOPIC_ID, lessonIndex: LESSON_IDX }, '*');
+  }
+})();
+
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'ie-theme') {
+    document.documentElement.classList.toggle('dark-mode', e.data.dark);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.parent.postMessage({ type: 'ie-theme-request' }, '*');
+});
+</script>
+</body>
+</html>
