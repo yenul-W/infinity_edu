@@ -47,7 +47,7 @@
       <div class="topic-card topic-card-1" id="card-1" onclick="window.location.href='year-11-maths/1. formulas-and-equations/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-1" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-1" loop muted playsinline preload="none">
             <source src="assets/city-gifs/nyc-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -69,7 +69,7 @@
       <div class="topic-card topic-card-6" id="card-6" onclick="window.location.href='year-11-maths/2. linear-relationships/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-6" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-6" loop muted playsinline preload="none">
             <source src="assets/city-gifs/seq-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -91,7 +91,7 @@
       <div class="topic-card topic-card-2" id="card-2" onclick="window.location.href='year-11-maths/3. earning-money/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-2" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-2" loop muted playsinline preload="none">
             <source src="assets/city-gifs/la-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -113,7 +113,7 @@
       <div class="topic-card topic-card-3" id="card-3" onclick="window.location.href='year-11-maths/4. managing-money/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-3" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-3" loop muted playsinline preload="none">
             <source src="assets/city-gifs/melbourne-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -135,7 +135,7 @@
       <div class="topic-card topic-card-5" id="card-5" onclick="window.location.href='year-11-maths/5. applications-of-measurement/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-5" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-5" loop muted playsinline preload="none">
             <source src="assets/city-gifs/green-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -157,7 +157,7 @@
       <div class="topic-card topic-card-4" id="card-4" onclick="window.location.href='year-11-maths/6. data-analysis/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-4" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-4" loop muted playsinline preload="none">
             <source src="assets/city-gifs/chicago-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -175,11 +175,33 @@
         </div>
       </div>
 
+      <!-- 08 Time and Location — London -->
+      <div class="topic-card topic-card-8" id="card-8" onclick="window.location.href='year-11-maths/8. time-and-location/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
+        <div class="card-scene">
+          <video class="scene-video" id="vid-8" loop muted playsinline preload="none">
+            <source src="assets/city-gifs/london-day.mp4" type="video/mp4">
+          </video>
+          <div class="scene-gradient"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-top-row">
+            <span class="card-num">08</span>
+          </div>
+          <h2 class="card-title">Time and Location</h2>
+          <p class="card-desc">Latitude, longitude, time zones and UTC</p>
+          <div class="card-footer">
+            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa136ea49c" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+          </div>
+        </div>
+      </div>
+
       <!-- 07 Revision — Thailand -->
       <div class="topic-card topic-card-7" id="card-7" onclick="window.location.href='year-11-maths/7. revision/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
-          <video class="scene-video" id="vid-7" autoplay loop muted playsinline>
+          <video class="scene-video" id="vid-7" loop muted playsinline preload="none">
             <source src="assets/city-gifs/th-day.mp4" type="video/mp4">
           </video>
           <div class="scene-gradient"></div>
@@ -276,15 +298,40 @@
       'vid-5': { day: 'assets/city-gifs/green-day.mp4',     night: 'assets/city-gifs/green-night.mp4' },
       'vid-6': { day: 'assets/city-gifs/seq-day.mp4',       night: 'assets/city-gifs/seq-night.mp4' },
       'vid-7': { day: 'assets/city-gifs/th-day.mp4',        night: 'assets/city-gifs/th-night.mp4' },
+      'vid-8': { day: 'assets/city-gifs/london-day.mp4',    night: 'assets/city-gifs/london-night.mp4' },
     };
+    // Videos are heavy (~15MB each); only load/play the ones scrolled into view.
+    let videosDark = false;
     function applyVideoSrcs(dark) {
+      videosDark = dark;
       for (const [id, srcs] of Object.entries(VIDEO_SRCS)) {
         const vid = document.getElementById(id);
-        if (!vid) continue;
+        if (!vid || !vid.dataset.loaded) continue;
         vid.querySelector('source').src = dark ? srcs.night : srcs.day;
         vid.load();
+        if (vid.dataset.visible === '1') vid.play().catch(() => {});
       }
     }
+    const videoObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const vid = entry.target;
+        vid.dataset.visible = entry.isIntersecting ? '1' : '0';
+        if (entry.isIntersecting) {
+          if (!vid.dataset.loaded) {
+            const srcs = VIDEO_SRCS[vid.id];
+            if (srcs) {
+              vid.querySelector('source').src = videosDark ? srcs.night : srcs.day;
+              vid.load();
+              vid.dataset.loaded = '1';
+            }
+          }
+          vid.play().catch(() => {});
+        } else {
+          vid.pause();
+        }
+      });
+    }, { rootMargin: '200px' });
+    document.querySelectorAll('.scene-video').forEach(v => videoObserver.observe(v));
     function isNightByTime() {
       const h = new Date().getHours();
       return h < 6 || h >= 19;
@@ -355,7 +402,7 @@
     setInterval(updateLiveStatus, 60000);
 
     // ── Completion badges + progress rings ──────────────────────
-    const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6], 5: [0,1,2,4], 6: [0,1,2,4] };
+    const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6], 5: [0,1,2,4], 6: [0,1,2,4], 8: [0,1,2] };
     const CIRC = 2 * Math.PI * 12;
     function checkCompletionBadges() {
       let totalDone = 0, totalLessons = 0;
@@ -414,7 +461,7 @@
 
     // ── 5. Recently-viewed — update CTA text on visited cards ──
     function checkLastVisited() {
-      for (let tid = 1; tid <= 6; tid++) {
+      for (let tid = 1; tid <= 8; tid++) {
         const raw = localStorage.getItem(`ie_last_${tid}`);
         if (!raw) continue;
         try {

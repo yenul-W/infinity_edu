@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Time and Location</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#000; --canvas:#fff; --gray-med:#818181; --gray-light:#d6d6d6; --gray-faint:#f2f2f2;
+      --font-body:system-ui,-apple-system,"Segoe UI",sans-serif;
+      --font-mono:"Space Mono","Courier New",monospace;
+    }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--font-body); font-size:14px; line-height:1.6; color:var(--ink); background:var(--canvas); }
+    .page { max-width:1100px; margin:0 auto; padding:24px 24px 120px; }
+
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar-left { display:flex; flex-direction:column; gap:2px; }
+    .topbar-topic { color:var(--ink); font-weight:700; }
+
+    .hero { border:1px solid var(--ink); padding:32px 36px 28px; margin-bottom:48px; }
+    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:10px; }
+    h1 { font-size:clamp(24px,3.5vw,36px); font-weight:400; line-height:1.15; margin-bottom:12px; }
+    .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); }
+
+    /* ── Summary cards ── */
+    .section { margin-bottom:48px; }
+    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    h2 { font-size:20px; font-weight:600; margin-bottom:20px; }
+
+    .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-bottom:32px; }
+    .summary-card { border:1px solid var(--ink); padding:22px 24px; }
+    .summary-card h3 { font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .formula-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+    .formula-list li { font-family:var(--font-mono); font-size:13px; border-bottom:1px solid var(--gray-light); padding-bottom:8px; }
+    .formula-list li:last-child { border-bottom:none; padding-bottom:0; }
+    .formula-list .note { font-family:var(--font-body); font-size:11px; color:var(--gray-med); display:block; margin-top:2px; }
+
+    .errors-card { border:1px solid var(--gray-light); padding:20px 24px; margin-bottom:32px; }
+    .errors-card h3 { font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .error-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .error-item { display:flex; gap:10px; align-items:flex-start; font-size:13px; }
+    .error-icon { font-family:var(--font-mono); font-size:11px; padding:2px 6px; border:1px solid var(--gray-light); background:var(--gray-faint); white-space:nowrap; }
+
+    /* ── Quiz ── */
+    .quiz-header { display:flex; align-items:center; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
+    .quiz-progress { font-family:var(--font-mono); font-size:13px; color:var(--gray-med); }
+    .score-display { font-family:var(--font-mono); font-size:18px; font-weight:700; }
+    .progress-track { flex:1; min-width:100px; height:3px; background:var(--gray-light); }
+    .progress-fill { height:100%; background:var(--ink); transition:width 0.3s ease; width:0%; }
+
+    .quiz-card { border:1px solid var(--ink); padding:24px 28px; margin-bottom:20px; display:none; }
+    .quiz-card.active { display:block; }
+    .quiz-num { font-family:var(--font-mono); font-size:11px; color:var(--gray-med); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; }
+    .quiz-q { font-size:15px; font-weight:600; margin-bottom:18px; line-height:1.5; }
+    .quiz-options { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+    .quiz-option { display:flex; align-items:flex-start; gap:10px; padding:10px 14px; border:1px solid var(--gray-light); cursor:pointer; font-size:13px; transition:background 0.12s; user-select:none; }
+    .quiz-option:hover { background:var(--gray-faint); }
+    .quiz-option.correct-ans { border-color:#00a050; background:rgba(0,160,80,0.08); }
+    .quiz-option.wrong-ans { border-color:#c00000; background:rgba(200,0,0,0.08); }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:14px; }
+    .quiz-explanation { border-top:1px solid var(--gray-light); padding-top:12px; font-size:13px; color:var(--gray-med); display:none; line-height:1.8; }
+    .quiz-explanation.show { display:block; }
+    .quiz-next { display:inline-block; margin-top:16px; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; display:none; }
+    .quiz-next:hover { background:var(--ink); color:var(--canvas); }
+    .quiz-next.show { display:inline-block; }
+
+    /* ── Final result ── */
+    .quiz-result { border:1px solid var(--ink); padding:36px; text-align:center; display:none; }
+    .quiz-result.show { display:block; }
+    .result-score { font-family:var(--font-mono); font-size:48px; font-weight:700; margin-bottom:8px; }
+    .result-label { font-size:13px; color:var(--gray-med); margin-bottom:24px; }
+    .result-msg { font-size:15px; margin-bottom:24px; }
+    .restart-btn { border:1px solid var(--ink); padding:10px 28px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); }
+    .restart-btn:hover { background:var(--ink); color:var(--canvas); }
+
+    .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
+
+    @media (max-width:600px) {
+      .hero { padding:24px 20px; }
+      .quiz-card, .summary-card { padding:18px 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>Year 11 Mathematics Standard</span>
+      <span class="topbar-topic">Time and Location · Revision</span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <p class="eyebrow">Revision</p>
+    <h1>Topic Summary &amp; Mixed Quiz</h1>
+    <p class="subtitle">Review the key ideas from both lessons, then test yourself with 10 mixed exam-style questions.</p>
+  </div>
+
+  <!-- ── Summary ── -->
+  <div class="section">
+    <p class="section-label">Quick Reference</p>
+    <h2>Key Formulas &amp; Concepts</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h3>Lesson 1 — Positions on the Earth's Surface</h3>
+        <ul class="formula-list">
+          <li>Latitude<span class="note">distance north/south of the equator (0°)</span></li>
+          <li>Longitude<span class="note">distance east/west of the Prime Meridian (0°)</span></li>
+          <li>Position = (latitude, longitude)<span class="note">e.g. 33.9°S, 151.2°E</span></li>
+          <li>Time difference (h) = longitude diff ÷ 15<span class="note">east = ahead, west = behind</span></li>
+        </ul>
+      </div>
+      <div class="summary-card">
+        <h3>Lesson 2 — Time and Time Differences</h3>
+        <ul class="formula-list">
+          <li>1 min = 60 s, 1 h = 60 min = 3600 s<span class="note">multiply to go smaller, divide to go larger</span></li>
+          <li>pm → 24h: add 12<span class="note">12 pm stays 1200; am hour stays the same (12 am = 0000)</span></li>
+          <li>AEST = UTC+10, ACST = UTC+9:30, AWST = UTC+8<span class="note">daylight saving adds 1 hour (not QLD, NT, WA)</span></li>
+          <li>Local → UTC: subtract offset<span class="note">UTC → local: add offset</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="errors-card">
+      <h3>Common Mistakes to Avoid</h3>
+      <ul class="error-list">
+        <li class="error-item"><span class="error-icon">!</span> <span>Mixing up the N/S and E/W direction letters — they change which hemisphere/side of the Prime Meridian a point is on.</span></li>
+        <li class="error-item"><span class="error-icon">!</span> <span>Forgetting that east means ahead in time and west means behind.</span></li>
+        <li class="error-item"><span class="error-icon">!</span> <span>Off-by-12 errors converting pm to 24-hour time — remember 12 pm stays 1200, not 2400.</span></li>
+        <li class="error-item"><span class="error-icon">!</span> <span>Adding instead of subtracting (or vice versa) when converting between local time and UTC.</span></li>
+        <li class="error-item"><span class="error-icon">!</span> <span>Forgetting that Queensland, the Northern Territory and Western Australia do not observe daylight saving.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Quiz ── -->
+  <div class="section">
+    <p class="section-label">Mixed Practice</p>
+    <h2>Revision Quiz — 10 Questions</h2>
+
+    <div class="quiz-header">
+      <span class="quiz-progress">Question <span id="qNum">1</span> of 10</span>
+      <div class="progress-track"><div class="progress-fill" id="qFill"></div></div>
+      <span class="score-display" id="qScore">0 / 0</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-card active" id="q1">
+      <p class="quiz-num">Question 1 · Latitude &amp; Longitude</p>
+      <p class="quiz-q">A location is at 15°N, 60°W. Which statement is correct?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="1" data-val="A"><span class="opt-letter">A</span> North of the equator, east of the Prime Meridian</div>
+        <div class="quiz-option" data-q="1" data-val="B"><span class="opt-letter">B</span> South of the equator, west of the Prime Meridian</div>
+        <div class="quiz-option" data-q="1" data-val="C"><span class="opt-letter">C</span> North of the equator, west of the Prime Meridian</div>
+        <div class="quiz-option" data-q="1" data-val="D"><span class="opt-letter">D</span> South of the equator, east of the Prime Meridian</div>
+      </div>
+      <div class="quiz-explanation" id="qexp1">
+        <strong>Answer: C</strong><br>
+        15°N places it north of the equator; 60°W places it west of the Prime Meridian.
+      </div>
+      <button class="quiz-next" id="qnxt1">Next →</button>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-card" id="q2">
+      <p class="quiz-num">Question 2 · Longitude &amp; Time</p>
+      <p class="quiz-q">Two cities differ by 60° of longitude. What is the time difference between them?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="2" data-val="A"><span class="opt-letter">A</span> 2 hours</div>
+        <div class="quiz-option" data-q="2" data-val="B"><span class="opt-letter">B</span> 4 hours</div>
+        <div class="quiz-option" data-q="2" data-val="C"><span class="opt-letter">C</span> 6 hours</div>
+        <div class="quiz-option" data-q="2" data-val="D"><span class="opt-letter">D</span> 8 hours</div>
+      </div>
+      <div class="quiz-explanation" id="qexp2">
+        <strong>Answer: B — 4 hours</strong><br>
+        Time difference = 60 ÷ 15 = 4 hours.
+      </div>
+      <button class="quiz-next" id="qnxt2">Next →</button>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-card" id="q3">
+      <p class="quiz-num">Question 3 · Time Conversion</p>
+      <p class="quiz-q">Convert 6:15 pm to 24-hour time.</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="3" data-val="A"><span class="opt-letter">A</span> 0615</div>
+        <div class="quiz-option" data-q="3" data-val="B"><span class="opt-letter">B</span> 1815</div>
+        <div class="quiz-option" data-q="3" data-val="C"><span class="opt-letter">C</span> 1715</div>
+        <div class="quiz-option" data-q="3" data-val="D"><span class="opt-letter">D</span> 0715</div>
+      </div>
+      <div class="quiz-explanation" id="qexp3">
+        <strong>Answer: B — 1815</strong><br>
+        Add 12 to the pm hour: 6 + 12 = 18, so 6:15 pm = 1815.
+      </div>
+      <button class="quiz-next" id="qnxt3">Next →</button>
+    </div>
+
+    <!-- Q4 -->
+    <div class="quiz-card" id="q4">
+      <p class="quiz-num">Question 4 · Time Conversion</p>
+      <p class="quiz-q">Convert 2330 (24-hour time) to 12-hour time.</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="4" data-val="A"><span class="opt-letter">A</span> 11:30 am</div>
+        <div class="quiz-option" data-q="4" data-val="B"><span class="opt-letter">B</span> 1:30 pm</div>
+        <div class="quiz-option" data-q="4" data-val="C"><span class="opt-letter">C</span> 11:30 pm</div>
+        <div class="quiz-option" data-q="4" data-val="D"><span class="opt-letter">D</span> 9:30 pm</div>
+      </div>
+      <div class="quiz-explanation" id="qexp4">
+        <strong>Answer: C — 11:30 pm</strong><br>
+        23 − 12 = 11, and since the hour was 13 or greater it is pm: 2330 = 11:30 pm.
+      </div>
+      <button class="quiz-next" id="qnxt4">Next →</button>
+    </div>
+
+    <!-- Q5 -->
+    <div class="quiz-card" id="q5">
+      <p class="quiz-num">Question 5 · Elapsed Time</p>
+      <p class="quiz-q">A flight departs at 10:15 am and lands at 3:50 pm. How long is the flight?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="5" data-val="A"><span class="opt-letter">A</span> 5 hours 35 minutes</div>
+        <div class="quiz-option" data-q="5" data-val="B"><span class="opt-letter">B</span> 4 hours 35 minutes</div>
+        <div class="quiz-option" data-q="5" data-val="C"><span class="opt-letter">C</span> 5 hours 25 minutes</div>
+        <div class="quiz-option" data-q="5" data-val="D"><span class="opt-letter">D</span> 6 hours 5 minutes</div>
+      </div>
+      <div class="quiz-explanation" id="qexp5">
+        <strong>Answer: A — 5 hours 35 minutes</strong><br>
+        10:15 am to 3:00 pm is 4 h 45 min; plus 50 more minutes = 5 h 35 min.
+      </div>
+      <button class="quiz-next" id="qnxt5">Next →</button>
+    </div>
+
+    <!-- Q6 -->
+    <div class="quiz-card" id="q6">
+      <p class="quiz-num">Question 6 · Time Zones</p>
+      <p class="quiz-q">Which describes Queensland's time zone arrangement?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="6" data-val="A"><span class="opt-letter">A</span> AEST, observes daylight saving</div>
+        <div class="quiz-option" data-q="6" data-val="B"><span class="opt-letter">B</span> AEST, does not observe daylight saving</div>
+        <div class="quiz-option" data-q="6" data-val="C"><span class="opt-letter">C</span> ACST, observes daylight saving</div>
+        <div class="quiz-option" data-q="6" data-val="D"><span class="opt-letter">D</span> AWST, does not observe daylight saving</div>
+      </div>
+      <div class="quiz-explanation" id="qexp6">
+        <strong>Answer: B</strong><br>
+        Queensland is in the AEST zone (UTC+10) but does not observe daylight saving.
+      </div>
+      <button class="quiz-next" id="qnxt6">Next →</button>
+    </div>
+
+    <!-- Q7 -->
+    <div class="quiz-card" id="q7">
+      <p class="quiz-num">Question 7 · Time Zones</p>
+      <p class="quiz-q">It is 4:00 pm AEDT in Sydney (daylight saving in effect). What is the time in Queensland, which stays on AEST?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="7" data-val="A"><span class="opt-letter">A</span> 3:00 pm</div>
+        <div class="quiz-option" data-q="7" data-val="B"><span class="opt-letter">B</span> 5:00 pm</div>
+        <div class="quiz-option" data-q="7" data-val="C"><span class="opt-letter">C</span> 4:00 pm</div>
+        <div class="quiz-option" data-q="7" data-val="D"><span class="opt-letter">D</span> 2:00 pm</div>
+      </div>
+      <div class="quiz-explanation" id="qexp7">
+        <strong>Answer: A — 3:00 pm</strong><br>
+        AEDT is UTC+11, AEST is UTC+10, a 1-hour difference. Queensland is behind: 4:00 pm − 1 h = 3:00 pm.
+      </div>
+      <button class="quiz-next" id="qnxt7">Next →</button>
+    </div>
+
+    <!-- Q8 -->
+    <div class="quiz-card" id="q8">
+      <p class="quiz-num">Question 8 · UTC</p>
+      <p class="quiz-q">Local time is 9:00 am AEST (UTC+10). What is the UTC time?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="8" data-val="A"><span class="opt-letter">A</span> 11:00 pm (previous day)</div>
+        <div class="quiz-option" data-q="8" data-val="B"><span class="opt-letter">B</span> 7:00 pm (same day)</div>
+        <div class="quiz-option" data-q="8" data-val="C"><span class="opt-letter">C</span> 11:00 am</div>
+        <div class="quiz-option" data-q="8" data-val="D"><span class="opt-letter">D</span> 7:00 am</div>
+      </div>
+      <div class="quiz-explanation" id="qexp8">
+        <strong>Answer: A — 11:00 pm (previous day)</strong><br>
+        Subtract the offset: 9:00 am − 10 h = 11:00 pm the previous day.
+      </div>
+      <button class="quiz-next" id="qnxt8">Next →</button>
+    </div>
+
+    <!-- Q9 -->
+    <div class="quiz-card" id="q9">
+      <p class="quiz-num">Question 9 · UTC</p>
+      <p class="quiz-q">UTC time is 14:00. What is the local time in Perth (AWST, UTC+8)?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="9" data-val="A"><span class="opt-letter">A</span> 6:00 am</div>
+        <div class="quiz-option" data-q="9" data-val="B"><span class="opt-letter">B</span> 10:00 pm</div>
+        <div class="quiz-option" data-q="9" data-val="C"><span class="opt-letter">C</span> 10:00 am</div>
+        <div class="quiz-option" data-q="9" data-val="D"><span class="opt-letter">D</span> 6:00 pm</div>
+      </div>
+      <div class="quiz-explanation" id="qexp9">
+        <strong>Answer: B — 10:00 pm</strong><br>
+        Add the offset: 14:00 + 8 h = 22:00 = 10:00 pm.
+      </div>
+      <button class="quiz-next" id="qnxt9">Next →</button>
+    </div>
+
+    <!-- Q10 -->
+    <div class="quiz-card" id="q10">
+      <p class="quiz-num">Question 10 · Mixed</p>
+      <p class="quiz-q">A location is at 10°S, 25°E. Which statement is correct?</p>
+      <div class="quiz-options">
+        <div class="quiz-option" data-q="10" data-val="A"><span class="opt-letter">A</span> South of the equator, east of the Prime Meridian</div>
+        <div class="quiz-option" data-q="10" data-val="B"><span class="opt-letter">B</span> North of the equator, west of the Prime Meridian</div>
+        <div class="quiz-option" data-q="10" data-val="C"><span class="opt-letter">C</span> South of the equator, west of the Prime Meridian</div>
+        <div class="quiz-option" data-q="10" data-val="D"><span class="opt-letter">D</span> North of the equator, east of the Prime Meridian</div>
+      </div>
+      <div class="quiz-explanation" id="qexp10">
+        <strong>Answer: A</strong><br>
+        10°S places it south of the equator; 25°E places it east of the Prime Meridian.
+      </div>
+      <button class="quiz-next" id="qnxt10">View results →</button>
+    </div>
+
+    <!-- Result -->
+    <div class="quiz-result" id="quizResult">
+      <div class="result-score" id="resultScore">0/10</div>
+      <p class="result-label">questions correct</p>
+      <p class="result-msg" id="resultMsg"></p>
+      <button class="restart-btn" id="restartBtn">Try again →</button>
+    </div>
+  </div>
+
+  <div class="complete-section">
+    <p style="font-size:13px; color:var(--gray-med);">Finished revision? Mark it as complete to track your progress.</p>
+    <button class="complete-btn" id="completeBtn">Mark as complete</button>
+  </div>
+
+</div>
+
+<script>
+  // ── Dark mode ──
+  (function() {
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-mode');
+    window.addEventListener('message', e => {
+      if (e.data && e.data.type === 'ie-theme') {
+        document.documentElement.classList.toggle('dark-mode', e.data.dark);
+        localStorage.setItem('theme', e.data.dark ? 'dark' : 'light');
+      }
+    });
+  })();
+
+  // ── Quiz ──
+  const CORRECT = { '1':'C','2':'B','3':'B','4':'C','5':'A','6':'B','7':'A','8':'A','9':'B','10':'A' };
+  const TOTAL = 10;
+  let current = 1, score = 0, answered = 0;
+
+  function updateProgress() {
+    document.getElementById('qNum').textContent = Math.min(current, TOTAL);
+    document.getElementById('qFill').style.width = ((current - 1) / TOTAL * 100) + '%';
+    document.getElementById('qScore').textContent = `${score} / ${answered}`;
+  }
+
+  document.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = opt.dataset.q;
+      const card = document.getElementById(`q${q}`);
+      if (card.dataset.answered) return;
+      card.dataset.answered = '1';
+      answered++;
+      const chosen = opt.dataset.val;
+      const ok = chosen === CORRECT[q];
+      if (ok) score++;
+      card.querySelectorAll('.quiz-option').forEach(o => {
+        if (o.dataset.val === CORRECT[q]) o.classList.add('correct-ans');
+        else if (o.dataset.val === chosen) o.classList.add('wrong-ans');
+      });
+      document.getElementById(`qexp${q}`).classList.add('show');
+      document.getElementById(`qnxt${q}`).classList.add('show');
+      updateProgress();
+    });
+  });
+
+  for (let i = 1; i <= TOTAL; i++) {
+    (function(num) {
+      document.getElementById(`qnxt${num}`).addEventListener('click', () => {
+        document.getElementById(`q${num}`).classList.remove('active');
+        if (num < TOTAL) {
+          current = num + 1;
+          document.getElementById(`q${current}`).classList.add('active');
+          updateProgress();
+        } else {
+          document.getElementById('quizResult').classList.add('show');
+          document.getElementById('resultScore').textContent = `${score}/${TOTAL}`;
+          const pct = score / TOTAL;
+          let msg = pct >= 0.9 ? 'Outstanding work — you have mastered time and location!' :
+                    pct >= 0.7 ? 'Well done! Review any questions you got wrong and try again.' :
+                    pct >= 0.5 ? 'Good effort. Go back and re-read the lessons for the topics you missed.' :
+                                 'Keep practising — revisit the lesson summaries above and try again.';
+          document.getElementById('resultMsg').textContent = msg;
+          document.getElementById('qFill').style.width = '100%';
+          document.getElementById('qScore').textContent = `${score} / ${TOTAL}`;
+        }
+      });
+    })(i);
+  }
+
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    score = 0; answered = 0; current = 1;
+    for (let i = 1; i <= TOTAL; i++) {
+      const card = document.getElementById(`q${i}`);
+      delete card.dataset.answered;
+      card.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('correct-ans','wrong-ans'));
+      document.getElementById(`qexp${i}`).classList.remove('show');
+      document.getElementById(`qnxt${i}`).classList.remove('show');
+      card.classList.remove('active');
+    }
+    document.getElementById('quizResult').classList.remove('show');
+    document.getElementById('q1').classList.add('active');
+    updateProgress();
+  });
+
+  updateProgress();
+
+  // ── Complete button ──
+  const TOPIC_ID = 8, LESSON_IDX = 2;
+  const completeBtn = document.getElementById('completeBtn');
+  function refreshCompleteState() {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    completeBtn.textContent = done ? '✓ Revision complete' : 'Mark as complete';
+    completeBtn.classList.toggle('done', done);
+  }
+  refreshCompleteState();
+  completeBtn.addEventListener('click', () => {
+    const done = localStorage.getItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`) === '1';
+    if (done) { localStorage.removeItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`); }
+    else { localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1'); }
+    refreshCompleteState();
+    try { window.parent.postMessage({ type: 'ie-lesson-done' }, '*'); } catch(e){}
+  });
+</script>
+</body>
+</html>
