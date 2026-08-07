@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2 — Shortest Paths and Spanning Trees</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  });
+</script>
+<style>
+:root {
+  --ink: #000;
+  --canvas: #fff;
+  --gray-med: #818181;
+  --gray-light: #d6d6d6;
+  --gray-faint: #f2f2f2;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+html.dark-mode {
+  --ink: #f0f0f0;
+  --canvas: #111;
+  --gray-med: #888;
+  --gray-light: #333;
+  --gray-faint: #1a1a1a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: 0.35px;
+  color: var(--ink);
+  background: var(--canvas);
+  margin: 0;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-med);
+}
+.topbar-left { display: flex; gap: 16px; }
+.topbar-topic { color: var(--ink); font-weight: 700; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+}
+.eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.hero-main h1 { font-size: 40px; line-height: 1; letter-spacing: 0.6px; margin: 0 0 16px; }
+.subtitle { font-size: 15px; color: var(--gray-med); max-width: 52ch; margin: 0 0 20px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; border: 1px solid var(--gray-light); padding: 5px 10px; color: var(--gray-med); }
+.hero-side { border-left: 1px solid var(--gray-light); padding-left: 24px; }
+.side-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.side-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.side-list li { padding: 8px 0; border-bottom: 1px solid var(--gray-light); }
+.side-list li:last-child { border-bottom: none; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: start; }
+.toc { position: sticky; top: 24px; }
+.toc-heading { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 12px; font-family: var(--font-mono); }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-link { display: block; font-size: 12px; color: var(--gray-med); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--gray-light); transition: color 0.15s, border-color 0.15s; }
+.toc-link:hover { color: var(--ink); }
+.toc-link.toc-active { color: var(--ink); border-left: 2px solid var(--ink); padding-left: 10px; }
+
+/* Content cards */
+.content-card { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 8px; }
+h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; border-bottom: 1px solid var(--gray-light); padding-bottom: 16px; margin: 0 0 24px; }
+h3 { font-size: 16px; margin: 28px 0 10px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 600; }
+
+.example-block { border-left: 2px solid var(--ink); padding: 14px 18px; margin: 18px 0; background: var(--gray-faint); }
+.example-block .example-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 8px; }
+
+table.coord-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+table.coord-table th, table.coord-table td { border: 1px solid var(--gray-light); padding: 8px 12px; text-align: left; }
+table.coord-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray-med); }
+
+/* Network diagrams */
+.diagram-wrap { display: flex; justify-content: center; margin: 20px 0; }
+.diagram-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.diagram-col { text-align: center; }
+svg.network-diagram { max-width: 100%; height: auto; }
+.node-circle { fill: var(--canvas); stroke: var(--ink); stroke-width: 2; }
+.node-label { fill: var(--ink); font-family: var(--font-mono); font-size: 14px; font-weight: 700; }
+.edge-line { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.edge-line-faint { stroke: var(--gray-light); stroke-width: 1.5; fill: none; }
+.edge-tree { stroke: var(--ink); stroke-width: 3; fill: none; }
+.edge-shortest { stroke: var(--ink); stroke-width: 3; stroke-dasharray: 7 5; fill: none; }
+.edge-weight-label { fill: var(--gray-med); font-family: var(--font-mono); font-size: 12px; }
+.diagram-caption { text-align: center; font-size: 12px; color: var(--gray-med); margin-top: 4px; }
+
+/* Interactive exercises */
+.interactive-block { border: 1px solid var(--ink); padding: 24px 28px; margin: 20px 0; }
+.interactive-block h3 { margin-top: 0; margin-bottom: 6px; }
+.interactive-block .exercise-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 16px; }
+.exercise-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.exercise-row label { font-size: 13px; }
+.exercise-input { border: 1px solid var(--gray-light); padding: 8px 12px; font-family: var(--font-mono); font-size: 13px; background: var(--canvas); color: var(--ink); width: 130px; }
+.exercise-input:focus { outline: 1px solid var(--ink); }
+.exercise-check-btn { border: 1px solid var(--ink); padding: 8px 20px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; background: transparent; color: var(--ink); transition: background 0.15s, color 0.15s; }
+.exercise-check-btn:hover { background: var(--ink); color: var(--canvas); }
+.exercise-feedback { font-size: 13px; margin-top: 6px; min-height: 18px; color: var(--gray-med); }
+.exercise-feedback.correct { color: #00a050; font-weight: 600; }
+.exercise-feedback.wrong { color: #c00000; }
+
+/* Knowledge Check */
+.kc-block { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.kc-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 24px; }
+.kc-q-wrap { margin-bottom: 24px; }
+.kc-q { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.kc-options { display: flex; flex-direction: column; gap: 6px; }
+.kc-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 14px; border: 1px solid var(--gray-light);
+  cursor: pointer; font-size: 13px; transition: background 0.12s;
+  user-select: none; background: transparent; color: var(--ink);
+  text-align: left; width: 100%; font-family: var(--font-display);
+}
+.kc-opt:hover:not([disabled]) { background: var(--gray-faint); }
+.kc-opt.kc-correct { border-color: #00a050; background: rgba(0,160,80,0.08); }
+.kc-opt.kc-wrong   { border-color: #c00000; background: rgba(200,0,0,0.08); }
+html.dark-mode .kc-opt.kc-correct { background: rgba(0,160,80,0.14); }
+html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
+.kc-feedback { font-size: 12px; color: var(--gray-med); margin-top: 8px; min-height: 18px; }
+.kc-feedback.correct { color: #00a050; }
+.kc-feedback.wrong   { color: #c00000; }
+.kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
+.kc-score.show { display: block; }
+.kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 0; cursor: pointer; font-family: var(--font-display); }
+.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 700; min-width: 16px; padding-top: 1px; }
+
+.lesson-link-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--ink);
+}
+.lesson-link-btn:hover { background: var(--gray-faint); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--gray-light); padding-top: 20px; }
+  .layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 — Networks, Paths and Trees</span>
+      <span>Year 11 Mathematics Standard</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Shortest Paths and Spanning Trees</h1>
+      <p class="subtitle">Learn what paths, trees and spanning trees are, how to build a minimum spanning tree, and how to find shortest paths in a network.</p>
+      <div class="hero-meta">
+        <span class="pill">Paths &amp; trees</span>
+        <span class="pill">Minimum spanning tree</span>
+        <span class="pill">Shortest path</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Paths and trees</li>
+        <li>Eulerian trails &amp; circuits</li>
+        <li>The K&ouml;nigsberg bridge problem</li>
+        <li>Hamiltonian paths &amp; cycles</li>
+        <li>Spanning trees &amp; minimum spanning trees</li>
+        <li>Kruskal's algorithm</li>
+        <li>Prim's algorithm</li>
+        <li>Solving minimal connector problems</li>
+        <li>Shortest paths in networks</li>
+        <li>Dijkstra's algorithm</li>
+        <li>Practice: putting it all together</li>
+        <li>Knowledge check</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#paths-trees">Paths &amp; Trees</a></li>
+        <li class="toc-item"><a class="toc-link" href="#eulerian">Eulerian Trails &amp; Circuits</a></li>
+        <li class="toc-item"><a class="toc-link" href="#konigsberg">K&ouml;nigsberg Bridge Problem</a></li>
+        <li class="toc-item"><a class="toc-link" href="#hamiltonian">Hamiltonian Paths &amp; Cycles</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spanning-trees">Spanning Trees</a></li>
+        <li class="toc-item"><a class="toc-link" href="#kruskals">Kruskal's Algorithm</a></li>
+        <li class="toc-item"><a class="toc-link" href="#prims">Prim's Algorithm</a></li>
+        <li class="toc-item"><a class="toc-link" href="#connector">Solving Connector Problems</a></li>
+        <li class="toc-item"><a class="toc-link" href="#shortest-path">Shortest Paths</a></li>
+        <li class="toc-item"><a class="toc-link" href="#dijkstra">Dijkstra's Algorithm</a></li>
+        <li class="toc-item"><a class="toc-link" href="#shortest-vs-mst">Shortest Path vs MST</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice-all">Practice: All Together</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Next Steps</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="paths-trees">
+        <p class="section-label">Theory</p>
+        <h2>Paths and Trees</h2>
+
+        <h3>Walk, Trail, Path, Circuit and Cycle</h3>
+        <p>A route through a network can be classified more precisely depending on whether it repeats vertices or edges, and whether it starts and ends at the same vertex:</p>
+        <ul>
+          <li><strong>Walk</strong> — any route along edges from one vertex to another; vertices and edges may be repeated freely.</li>
+          <li><strong>Trail</strong> — a walk that does <strong>not</strong> repeat any edge (vertices may still repeat).</li>
+          <li><strong>Path</strong> — a trail that also does <strong>not</strong> repeat any vertex. Every path is a trail, and every trail is a walk, but not the other way around.</li>
+          <li><strong>Circuit</strong> — a <strong>closed</strong> trail: it starts and ends at the same vertex, with no repeated edge (other vertices along the way may repeat).</li>
+          <li><strong>Cycle</strong> — a <strong>closed</strong> path: it starts and ends at the same vertex, with no repeated edge and no repeated vertex other than that shared start/end.</li>
+        </ul>
+        <table class="coord-table">
+          <tr><th>Term</th><th>Repeats an edge?</th><th>Repeats a vertex?</th><th>Closed (starts = ends)?</th></tr>
+          <tr><td>Walk</td><td>Allowed</td><td>Allowed</td><td>Not required</td></tr>
+          <tr><td>Trail</td><td>Not allowed</td><td>Allowed</td><td>Not required</td></tr>
+          <tr><td>Path</td><td>Not allowed</td><td>Not allowed</td><td>Not required</td></tr>
+          <tr><td>Circuit</td><td>Not allowed</td><td>Allowed (except start/end)</td><td>Required</td></tr>
+          <tr><td>Cycle</td><td>Not allowed</td><td>Not allowed (except start/end)</td><td>Required</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Using the network below (edges A&#8211;B, B&#8211;C, C&#8211;D, D&#8211;A, A&#8211;C), classify the route A &#8594; B &#8594; C &#8594; A &#8594; D.</p>
+          <p>The edges used are A&#8211;B, B&#8211;C, C&#8211;A and A&#8211;D — no edge is repeated, so it's at least a trail. However, vertex A is visited twice, so it is <strong>not</strong> a path. It also doesn't finish where it started (it ends at D, not A), so it is <strong>not</strong> a circuit either. This route is a trail (and therefore also a walk), but not a path, circuit or cycle.</p>
+        </div>
+
+        <p>A <strong>tree</strong> is a connected network that contains <strong>no cycles</strong> — there is exactly one path between any two vertices in a tree. A network that contains a cycle (a route that starts and ends at the same vertex without repeating an edge or vertex) is <strong>not</strong> a tree.</p>
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+              <line class="edge-line" x1="40" y1="40" x2="140" y2="40"></line>
+              <line class="edge-line" x1="140" y1="40" x2="140" y2="140"></line>
+              <line class="edge-line" x1="140" y1="140" x2="40" y2="140"></line>
+              <line class="edge-line" x1="40" y1="140" x2="40" y2="40"></line>
+              <line class="edge-line" x1="40" y1="40" x2="140" y2="140"></line>
+              <circle class="node-circle" cx="40" cy="40" r="15"></circle>
+              <text class="node-label" x="40" y="45" text-anchor="middle">A</text>
+              <circle class="node-circle" cx="140" cy="40" r="15"></circle>
+              <text class="node-label" x="140" y="45" text-anchor="middle">B</text>
+              <circle class="node-circle" cx="140" cy="140" r="15"></circle>
+              <text class="node-label" x="140" y="145" text-anchor="middle">C</text>
+              <circle class="node-circle" cx="40" cy="140" r="15"></circle>
+              <text class="node-label" x="40" y="145" text-anchor="middle">D</text>
+            </svg>
+            <p class="diagram-caption">Contains a cycle (A&#8211;B&#8211;C&#8211;D&#8211;A) &#8212; not a tree</p>
+          </div>
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+              <line class="edge-line" x1="40" y1="40" x2="140" y2="40"></line>
+              <line class="edge-line" x1="140" y1="40" x2="140" y2="140"></line>
+              <line class="edge-line" x1="140" y1="140" x2="40" y2="140"></line>
+              <circle class="node-circle" cx="40" cy="40" r="15"></circle>
+              <text class="node-label" x="40" y="45" text-anchor="middle">A</text>
+              <circle class="node-circle" cx="140" cy="40" r="15"></circle>
+              <text class="node-label" x="140" y="45" text-anchor="middle">B</text>
+              <circle class="node-circle" cx="140" cy="140" r="15"></circle>
+              <text class="node-label" x="140" y="145" text-anchor="middle">C</text>
+              <circle class="node-circle" cx="40" cy="140" r="15"></circle>
+              <text class="node-label" x="40" y="145" text-anchor="middle">D</text>
+            </svg>
+            <p class="diagram-caption">No cycles, still connected &#8212; a tree</p>
+          </div>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 1 — Tree or Not?</h3>
+          <p class="exercise-intro">For each edge set on vertices P, Q, R, S, decide whether it forms a tree.</p>
+          <div class="exercise-row">
+            <label for="ex1-set1">Edges P&#8211;Q, Q&#8211;R, R&#8211;S, S&#8211;P — tree or not a tree?</label>
+            <input class="exercise-input" type="text" id="ex1-set1" placeholder="tree / not a tree">
+          </div>
+          <div class="exercise-row">
+            <label for="ex1-set2">Edges P&#8211;Q, Q&#8211;R, R&#8211;S — tree or not a tree?</label>
+            <input class="exercise-input" type="text" id="ex1-set2" placeholder="tree / not a tree">
+          </div>
+          <button class="exercise-check-btn" id="ex1-check">Check</button>
+          <p class="exercise-feedback" id="ex1-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="eulerian">
+        <p class="section-label">Theory</p>
+        <h2>Eulerian Trails and Circuits</h2>
+        <p>An <strong>Eulerian trail</strong> is a trail that uses <strong>every edge</strong> of a network exactly once (vertices may be revisited). An <strong>Eulerian circuit</strong> is a closed Eulerian trail — it uses every edge exactly once and finishes back where it started.</p>
+        <p>Whether one exists can be tested just by looking at the degrees of the vertices:</p>
+        <ul>
+          <li>An Eulerian <strong>circuit</strong> exists if and only if the network is connected and <strong>every</strong> vertex has even degree.</li>
+          <li>An Eulerian <strong>trail</strong> (that isn't necessarily closed) exists if and only if the network is connected and <strong>exactly 0 or 2</strong> vertices have odd degree. If there are 2 odd vertices, every Eulerian trail must start at one and end at the other.</li>
+          <li>If more than 2 vertices have odd degree, <strong>no</strong> Eulerian trail (or circuit) exists at all.</li>
+        </ul>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+            <line class="edge-line" x1="40" y1="40" x2="140" y2="40"></line>
+            <line class="edge-line" x1="140" y1="40" x2="140" y2="140"></line>
+            <line class="edge-line" x1="140" y1="140" x2="40" y2="140"></line>
+            <line class="edge-line" x1="40" y1="140" x2="40" y2="40"></line>
+            <line class="edge-line" x1="40" y1="40" x2="140" y2="140"></line>
+            <circle class="node-circle" cx="40" cy="40" r="15"></circle>
+            <text class="node-label" x="40" y="45" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="140" cy="40" r="15"></circle>
+            <text class="node-label" x="140" y="45" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="140" cy="140" r="15"></circle>
+            <text class="node-label" x="140" y="145" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="40" cy="140" r="15"></circle>
+            <text class="node-label" x="40" y="145" text-anchor="middle">D</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The same network from earlier in this lesson (edges A&#8211;B, B&#8211;C, C&#8211;D, D&#8211;A, A&#8211;C)</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Does this network have an Eulerian trail or circuit?</p>
+          <p>Degrees: \(\deg(A) = 3\) (edges to B, D, C), \(\deg(B) = 2\), \(\deg(C) = 3\) (edges to B, D, A), \(\deg(D) = 2\).</p>
+          <p>Exactly two vertices (A and C) have odd degree, so an <strong>Eulerian trail</strong> exists — it must start at A and end at C (or start at C and end at A), for example A&#8594;B&#8594;C&#8594;D&#8594;A&#8594;C. Since not every vertex has even degree, there is <strong>no Eulerian circuit</strong>.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="konigsberg">
+        <p class="section-label">History</p>
+        <h2>The K&#246;nigsberg Bridge Problem</h2>
+        <p>The Eulerian trail test was first developed by Leonhard Euler in 1736 to settle a famous puzzle. The city of K&#246;nigsberg was built around four landmasses — two river banks and two islands — joined by seven bridges. Could a resident walk through the city and cross every bridge <strong>exactly once</strong>?</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 440 360" width="440" height="360">
+            <line class="edge-line" x1="200" y1="60" x2="90" y2="190"></line>
+            <line class="edge-line" x1="200" y1="320" x2="90" y2="190"></line>
+            <line class="edge-line" x1="200" y1="60" x2="350" y2="190"></line>
+            <line class="edge-line" x1="200" y1="320" x2="350" y2="190"></line>
+            <line class="edge-line" x1="90" y1="190" x2="350" y2="190"></line>
+            <text class="edge-weight-label" x="130" y="115" text-anchor="middle">&#215;2</text>
+            <text class="edge-weight-label" x="130" y="270" text-anchor="middle">&#215;2</text>
+            <circle class="node-circle" cx="200" cy="60" r="20"></circle>
+            <text class="node-label" x="200" y="65" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="90" cy="190" r="20"></circle>
+            <text class="node-label" x="90" y="195" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="200" cy="320" r="20"></circle>
+            <text class="node-label" x="200" y="325" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="350" cy="190" r="20"></circle>
+            <text class="node-label" x="350" y="195" text-anchor="middle">D</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">A = North bank, B = South bank, C = Kneiphof island, D = East region &#8212; A&#8211;C and B&#8211;C each have 2 bridges</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Model K&#246;nigsberg as a network and decide whether the walk is possible.</p>
+          <p>Degrees: \(\deg(A) = 3\) (2 bridges to C, 1 to D), \(\deg(B) = 3\) (2 bridges to C, 1 to D), \(\deg(C) = 5\) (2 to A, 2 to B, 1 to D), \(\deg(D) = 3\) (1 each to A, B, C).</p>
+          <p>All <strong>four</strong> vertices have odd degree — far more than the 0 or 2 allowed for an Eulerian trail. Euler proved that <strong>no route exists</strong> that crosses every bridge exactly once, whatever the starting point.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="hamiltonian">
+        <p class="section-label">Theory</p>
+        <h2>Hamiltonian Paths and Cycles</h2>
+        <p>A <strong>Hamiltonian path</strong> visits every <strong>vertex</strong> of a network exactly once (it doesn't need to use every edge). A <strong>Hamiltonian cycle</strong> is a closed Hamiltonian path — it visits every vertex exactly once and returns to its starting vertex.</p>
+        <p>This is a different focus from Euler's trails and circuits: Eulerian routes are about using every <em>edge</em> once, while Hamiltonian routes are about visiting every <em>vertex</em> once.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Does the network from the Eulerian Trails section (vertices A, B, C, D) have a Hamiltonian cycle?</p>
+          <p>Yes — the route A&#8594;B&#8594;C&#8594;D&#8594;A visits every vertex exactly once and returns to A, using edges A&#8211;B, B&#8211;C, C&#8211;D and D&#8211;A. This is the same cycle we identified earlier in "Paths and Trees"; it happens to also be a Hamiltonian cycle.</p>
+        </div>
+
+        <p>Unlike Euler's clean degree-based test, there is <strong>no simple general rule</strong> for deciding whether a Hamiltonian path or cycle exists — in general you have to search for one directly. For example, a network made of two triangles joined at a single shared vertex has no Hamiltonian cycle, because the shared vertex would need to be visited twice to travel from one triangle to the other.</p>
+      </div>
+
+      <div class="content-card" id="spanning-trees">
+        <p class="section-label">Theory</p>
+        <h2>Spanning Trees and Minimum Spanning Trees</h2>
+        <p>A <strong>spanning tree</strong> of a network is a tree that includes <strong>every vertex</strong> of the original network, using only a subset of its edges (with no cycles). A network can have several different spanning trees.</p>
+        <p>A <strong>minimum spanning tree (MST)</strong> is the spanning tree whose edges have the <strong>smallest possible total weight</strong>. It is the cheapest way to keep every vertex connected.</p>
+      </div>
+
+      <div class="content-card" id="kruskals">
+        <p class="section-label">Theory</p>
+        <h2>Finding a Minimum Spanning Tree: Kruskal's Algorithm</h2>
+        <p>One reliable method — called <strong>Kruskal's algorithm</strong> — is:</p>
+        <ol>
+          <li>List every edge in order from smallest to largest weight.</li>
+          <li>Add edges one at a time, smallest first, <strong>skipping any edge that would create a cycle</strong> with edges already chosen.</li>
+          <li>Stop once every vertex is connected (a network with \(n\) vertices needs exactly \(n-1\) edges in its spanning tree).</li>
+        </ol>
+        <p>Consider this weighted network of four relay stations, A, B, C and D:</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 260" width="400" height="260">
+            <line class="edge-line-faint" x1="80" y1="50" x2="320" y2="210"></line>
+            <line class="edge-line-faint" x1="320" y1="50" x2="80" y2="210"></line>
+            <line class="edge-tree" x1="80" y1="50" x2="320" y2="50"></line>
+            <line class="edge-tree" x1="80" y1="50" x2="80" y2="210"></line>
+            <line class="edge-tree" x1="320" y1="50" x2="320" y2="210"></line>
+            <text class="edge-weight-label" x="200" y="40" text-anchor="middle">2</text>
+            <text class="edge-weight-label" x="60" y="130" text-anchor="middle">1</text>
+            <text class="edge-weight-label" x="340" y="130" text-anchor="middle">1</text>
+            <text class="edge-weight-label" x="220" y="150" text-anchor="middle">2</text>
+            <text class="edge-weight-label" x="150" y="110" text-anchor="middle">5</text>
+            <text class="edge-weight-label" x="200" y="225" text-anchor="middle">2</text>
+            <circle class="node-circle" cx="80" cy="50" r="20"></circle>
+            <text class="node-label" x="80" y="55" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="320" cy="50" r="20"></circle>
+            <text class="node-label" x="320" y="55" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="80" cy="210" r="20"></circle>
+            <text class="node-label" x="80" y="215" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="320" cy="210" r="20"></circle>
+            <text class="node-label" x="320" y="215" text-anchor="middle">D</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">Bold edges show the minimum spanning tree; faint edges were not needed</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Edges sorted by weight: A&#8211;C (1), B&#8211;D (1), A&#8211;B (2), B&#8211;C (2), C&#8211;D (2), A&#8211;D (5).</p>
+          <p>Add A&#8211;C (1) &#8212; no cycle. Add B&#8211;D (1) &#8212; no cycle (a separate pair). Add A&#8211;B (2) &#8212; connects the two pairs, no cycle. All 4 vertices are now connected with 3 edges, so the tree is complete.</p>
+          <p>B&#8211;C, C&#8211;D and A&#8211;D are skipped, since each would create a cycle. Minimum spanning tree weight \(= 1 + 1 + 2 = 4\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 2 — Build a Minimum Spanning Tree</h3>
+          <p class="exercise-intro">Here is a new weighted network of five relay stations, M, N, O, P and Q:</p>
+          <div class="diagram-wrap">
+            <svg class="network-diagram" viewBox="0 0 400 290" width="400" height="290">
+              <line class="edge-line" x1="60" y1="150" x2="160" y2="60"></line>
+              <line class="edge-line" x1="160" y1="60" x2="280" y2="60"></line>
+              <line class="edge-line" x1="280" y1="60" x2="340" y2="150"></line>
+              <line class="edge-line" x1="340" y1="150" x2="220" y2="230"></line>
+              <line class="edge-line" x1="60" y1="150" x2="220" y2="230"></line>
+              <line class="edge-line" x1="160" y1="60" x2="340" y2="150"></line>
+              <text class="edge-weight-label" x="95" y="95" text-anchor="middle">3</text>
+              <text class="edge-weight-label" x="220" y="48" text-anchor="middle">4</text>
+              <text class="edge-weight-label" x="320" y="95" text-anchor="middle">2</text>
+              <text class="edge-weight-label" x="295" y="200" text-anchor="middle">5</text>
+              <text class="edge-weight-label" x="130" y="205" text-anchor="middle">8</text>
+              <text class="edge-weight-label" x="260" y="115" text-anchor="middle">6</text>
+              <circle class="node-circle" cx="60" cy="150" r="18"></circle>
+              <text class="node-label" x="60" y="155" text-anchor="middle">M</text>
+              <circle class="node-circle" cx="160" cy="60" r="18"></circle>
+              <text class="node-label" x="160" y="65" text-anchor="middle">N</text>
+              <circle class="node-circle" cx="280" cy="60" r="18"></circle>
+              <text class="node-label" x="280" y="65" text-anchor="middle">O</text>
+              <circle class="node-circle" cx="340" cy="150" r="18"></circle>
+              <text class="node-label" x="340" y="155" text-anchor="middle">P</text>
+              <circle class="node-circle" cx="220" cy="230" r="18"></circle>
+              <text class="node-label" x="220" y="235" text-anchor="middle">Q</text>
+            </svg>
+          </div>
+          <p class="diagram-caption">M&#8211;N (3), N&#8211;O (4), O&#8211;P (2), P&#8211;Q (5), M&#8211;Q (8), N&#8211;P (6)</p>
+          <p class="exercise-intro">List the edges from smallest to largest weight, then add them one at a time (skipping any that would create a cycle) to find the minimum spanning tree.</p>
+          <div class="exercise-row">
+            <label for="ex2-mst">Total weight of the minimum spanning tree?</label>
+            <input class="exercise-input" type="number" id="ex2-mst" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex2-check">Check</button>
+          <p class="exercise-feedback" id="ex2-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="prims">
+        <p class="section-label">Theory</p>
+        <h2>Prim's Algorithm</h2>
+        <p>Kruskal's algorithm builds the minimum spanning tree by picking cheap edges from anywhere in the network. <strong>Prim's algorithm</strong> takes a different approach — it grows a single tree outward from one starting vertex:</p>
+        <ol>
+          <li>Start with any one vertex as the (one-vertex) tree.</li>
+          <li>Look at every edge connecting a vertex <strong>already in the tree</strong> to a vertex <strong>not yet in the tree</strong>, and add the cheapest one.</li>
+          <li>Repeat until every vertex has been added.</li>
+        </ol>
+        <p>Because every edge added always joins a new vertex to the growing tree, Prim's algorithm can never create a cycle — there's no need to check for one.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Apply Prim's algorithm to the M, N, O, P, Q network from Exercise 2, starting at M.</p>
+          <p>Tree = {M}. Cheapest edge out of M: M&#8211;N (3). Add N. Tree = {M, N}.</p>
+          <p>Cheapest edge out of {M, N}: N&#8211;O (4). Add O. Tree = {M, N, O}.</p>
+          <p>Cheapest edge out of {M, N, O}: O&#8211;P (2). Add P. Tree = {M, N, O, P}.</p>
+          <p>Cheapest edge out of {M, N, O, P}: P&#8211;Q (5), versus M&#8211;Q (8) — P&#8211;Q is cheaper. Add Q. All 5 stations are now connected.</p>
+          <p>Total weight \(= 3 + 4 + 2 + 5 = 14\) — exactly the same minimum spanning tree Kruskal's algorithm found, reached by a different process. Whichever correct method you use, the minimum total weight for a given network is always the same.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 3 — Prim's from a Different Start</h3>
+          <p class="exercise-intro">Apply Prim's algorithm to the same M, N, O, P, Q network, but this time start at Q instead of M.</p>
+          <div class="exercise-row">
+            <label for="ex3-prims">Total weight of the minimum spanning tree?</label>
+            <input class="exercise-input" type="number" id="ex3-prims" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex3-check">Check</button>
+          <p class="exercise-feedback" id="ex3-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="connector">
+        <p class="section-label">Theory</p>
+        <h2>Solving Minimal Connector Problems</h2>
+        <p>Minimum spanning trees solve <strong>connector problems</strong> — real-world situations where you need to connect every location in a network (with roads, cables, pipes, etc.) using the least possible total length or cost, without needing every possible direct connection. Either Kruskal's or Prim's algorithm can be used to solve them — both always find the same minimum total.</p>
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>A telecommunications company wants to connect relay stations A, B, C and D from the diagram above using the least total cable length. What is the minimum length required, and which links should be built?</p>
+          <p>This is exactly the minimum spanning tree found above: build A&#8211;C, B&#8211;D and A&#8211;B, for a total cable length of \(4\) units. Building B&#8211;C, C&#8211;D or A&#8211;D as well would waste cable, since every station is already connected.</p>
+        </div>
+
+        <p>Connector problems are often given as a table rather than a diagram — the same algorithms apply either way.</p>
+        <div class="example-block">
+          <p class="example-label">Worked Example — Solved From Scratch</p>
+          <p>A water authority needs to lay pipes connecting five pumping stations, G, H, I, J and K. The possible pipe routes and their costs (in $10,000s) are:</p>
+          <table class="coord-table">
+            <tr><th>Route</th><th>Cost</th></tr>
+            <tr><td>G &#8211; H</td><td>6</td></tr>
+            <tr><td>H &#8211; I</td><td>3</td></tr>
+            <tr><td>I &#8211; J</td><td>4</td></tr>
+            <tr><td>J &#8211; K</td><td>2</td></tr>
+            <tr><td>H &#8211; J</td><td>5</td></tr>
+            <tr><td>G &#8211; K</td><td>9</td></tr>
+          </table>
+          <p>Sorted by cost: J&#8211;K (2), H&#8211;I (3), I&#8211;J (4), H&#8211;J (5), G&#8211;H (6), G&#8211;K (9).</p>
+          <p>Add J&#8211;K (2) &#8212; no cycle. Add H&#8211;I (3) &#8212; no cycle, a separate pair. Add I&#8211;J (4) &#8212; connects {H,I} and {J,K}, no cycle. Skip H&#8211;J (5), since H and J are already connected (it would create a cycle). Add G&#8211;H (6) &#8212; connects G. All 5 stations are now connected with 4 pipes, so the network is complete.</p>
+          <p>Minimum total cost \(= 2 + 3 + 4 + 6 = 15\), i.e. \(\$150{,}000\). Skip G&#8211;K (9) &#8212; it's not needed.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 4 — Connector Costs</h3>
+          <p class="exercise-intro">Using the M, N, O, P, Q network from Exercise 2, suppose cable costs $1000 per weight-unit.</p>
+          <div class="exercise-row">
+            <label for="ex4-cost">What is the minimum total cost to connect all 5 stations?</label>
+            <input class="exercise-input" type="number" id="ex4-cost" placeholder="$?" style="width:160px;">
+          </div>
+          <button class="exercise-check-btn" id="ex4-check">Check</button>
+          <p class="exercise-feedback" id="ex4-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="shortest-path">
+        <p class="section-label">Theory</p>
+        <h2>Shortest Paths in Networks</h2>
+        <p>The <strong>shortest path</strong> between two vertices is the route between them with the smallest total weight. For small networks (up to 10 vertices), the shortest path can be found by listing the possible routes and comparing their total weights.</p>
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Using the network of relay stations above, find the shortest path from A to D.</p>
+          <p>Route A&#8211;B&#8211;D: \(2 + 1 = 3\)</p>
+          <p>Route A&#8211;C&#8211;D: \(1 + 2 = 3\)</p>
+          <p>Route A&#8211;D direct: \(5\)</p>
+          <p>The shortest path has weight \(3\) — there are two equally short routes, A&#8211;B&#8211;D and A&#8211;C&#8211;D.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 5 — Find the Shortest Path</h3>
+          <p class="exercise-intro">Using the M, N, O, P, Q network from Exercise 2, find the shortest path from M to Q. Compare the direct edge against routes through the other stations.</p>
+          <div class="exercise-row">
+            <label for="ex5-shortest">What is the weight of the shortest path from M to Q?</label>
+            <input class="exercise-input" type="number" id="ex5-shortest" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex5-check">Check</button>
+          <p class="exercise-feedback" id="ex5-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="dijkstra">
+        <p class="section-label">Theory</p>
+        <h2>Dijkstra's Algorithm</h2>
+        <p>Listing every possible route works for tiny networks, but becomes impractical as a network grows. <strong>Dijkstra's algorithm</strong> is a systematic method that finds the shortest distance from one starting vertex to every other vertex, one step at a time:</p>
+        <ol>
+          <li>Give the starting vertex a distance of \(0\), and every other vertex a tentative distance of \(\infty\) (unknown).</li>
+          <li>Visit the unvisited vertex with the smallest tentative distance ("settle" it — its distance is now final).</li>
+          <li>For each of its neighbours, check if the route through the settled vertex is shorter than their current tentative distance; if so, update it.</li>
+          <li>Repeat steps 2–3 until every vertex has been settled.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Apply Dijkstra's algorithm to the M, N, O, P, Q network, starting at M.</p>
+          <table class="coord-table">
+            <tr><th>Step</th><th>Settled</th><th>M</th><th>N</th><th>O</th><th>P</th><th>Q</th></tr>
+            <tr><td>Start</td><td>&#8211;</td><td>0</td><td>&#8734;</td><td>&#8734;</td><td>&#8734;</td><td>&#8734;</td></tr>
+            <tr><td>1</td><td>M</td><td>0</td><td>3</td><td>&#8734;</td><td>&#8734;</td><td>8</td></tr>
+            <tr><td>2</td><td>N</td><td>0</td><td>3</td><td>7</td><td>9</td><td>8</td></tr>
+            <tr><td>3</td><td>Q</td><td>0</td><td>3</td><td>7</td><td>9</td><td>8</td></tr>
+            <tr><td>4</td><td>O</td><td>0</td><td>3</td><td>7</td><td>9</td><td>8</td></tr>
+            <tr><td>5</td><td>P</td><td>0</td><td>3</td><td>7</td><td>9</td><td>8</td></tr>
+          </table>
+          <p>Step 1: settle M (distance 0). Its neighbours N and Q get tentative distances \(0+3=3\) and \(0+8=8\).</p>
+          <p>Step 2: the smallest unsettled distance is N (3). Settle N. Its neighbours: O gets \(3+4=7\); P gets \(3+6=9\).</p>
+          <p>Step 3: the smallest remaining is Q (8), which is less than P's 9 — settle Q. Its only unsettled neighbour, P, would get \(8+5=13\) via Q, which is worse than P's existing 9, so no update.</p>
+          <p>Step 4: settle O (7). Its neighbour P would get \(7+2=9\) via O — the same as P's existing distance, so no change.</p>
+          <p>Step 5: only P remains — settle it (9). Every vertex is now settled.</p>
+          <p>Final shortest distances from M: \(N=3\), \(O=7\), \(Q=8\), \(P=9\). This matches the earlier result that the shortest path from M to Q has weight 8 — Dijkstra's algorithm just finds it (and every other distance from M) systematically, without having to list every possible route by hand.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 6 — Run Dijkstra's Algorithm</h3>
+          <p class="exercise-intro">Apply Dijkstra's algorithm to the same M, N, O, P, Q network, but starting at P instead of M.</p>
+          <div class="exercise-row">
+            <label for="ex6-dijkstra">What is the shortest distance from P to M?</label>
+            <input class="exercise-input" type="number" id="ex6-dijkstra" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex6-check">Check</button>
+          <p class="exercise-feedback" id="ex6-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="shortest-vs-mst">
+        <p class="section-label">Theory</p>
+        <h2>Shortest Path vs Minimum Spanning Tree</h2>
+        <p>A shortest path between two vertices is <strong>not necessarily</strong> the same as the route between them within a minimum spanning tree, and it isn't always the "best" choice if other factors matter too. The MST minimises the <em>total</em> weight connecting every vertex — it does not aim to minimise the distance between any one specific pair.</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 260" width="400" height="260">
+            <line class="edge-line-faint" x1="80" y1="50" x2="320" y2="210"></line>
+            <line class="edge-line-faint" x1="320" y1="50" x2="80" y2="210"></line>
+            <line class="edge-tree" x1="80" y1="50" x2="320" y2="50"></line>
+            <line class="edge-tree" x1="80" y1="50" x2="80" y2="210"></line>
+            <line class="edge-shortest" x1="320" y1="50" x2="320" y2="210"></line>
+            <text class="edge-weight-label" x="200" y="40" text-anchor="middle">2</text>
+            <text class="edge-weight-label" x="60" y="130" text-anchor="middle">1</text>
+            <text class="edge-weight-label" x="340" y="130" text-anchor="middle">1</text>
+            <text class="edge-weight-label" x="220" y="150" text-anchor="middle">2</text>
+            <text class="edge-weight-label" x="150" y="110" text-anchor="middle">5</text>
+            <text class="edge-weight-label" x="200" y="225" text-anchor="middle">2</text>
+            <circle class="node-circle" cx="80" cy="50" r="20"></circle>
+            <text class="node-label" x="80" y="55" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="320" cy="50" r="20"></circle>
+            <text class="node-label" x="320" y="55" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="80" cy="210" r="20"></circle>
+            <text class="node-label" x="80" y="215" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="320" cy="210" r="20"></circle>
+            <text class="node-label" x="320" y="215" text-anchor="middle">D</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">Solid bold = minimum spanning tree; dashed = the direct shortest path C&#8211;D (not part of the MST)</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Using the same network, compare the shortest path from C to D with the route between C and D inside the minimum spanning tree.</p>
+          <p>Direct edge C&#8211;D: weight \(2\).</p>
+          <p>Route within the MST, C&#8211;A&#8211;B&#8211;D: \(1 + 2 + 1 = 4\).</p>
+          <p>The shortest path from C to D is the direct edge (weight 2) — but that edge was <strong>not</strong> included in the minimum spanning tree, since it would have created a cycle. This shows that a shortest path is not necessarily contained in any minimum spanning tree.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>The same idea applies to the M, N, O, P, Q network from Exercise 2. Compare the shortest path from M to Q with the route between them inside the minimum spanning tree.</p>
+          <p>Direct edge M&#8211;Q: weight \(8\).</p>
+          <p>Route within the MST, M&#8211;N&#8211;O&#8211;P&#8211;Q: \(3 + 4 + 2 + 5 = 14\).</p>
+          <p>Once again, the shortest path (the direct edge, weight 8) is <strong>not</strong> part of the minimum spanning tree — it was excluded because it would have created a cycle, even though it's the fastest route between just these two stations.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="practice-all">
+        <p class="section-label">Practice</p>
+        <h2>Practice: Putting It All Together</h2>
+        <p>Here is a new weighted network of six vertices, R, S, T, U, V and W.</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 440 340" width="440" height="340">
+            <line class="edge-line" x1="90" y1="70" x2="250" y2="40"></line>
+            <line class="edge-line" x1="250" y1="40" x2="390" y2="110"></line>
+            <line class="edge-line" x1="390" y1="110" x2="390" y2="250"></line>
+            <line class="edge-line" x1="390" y1="250" x2="250" y2="320"></line>
+            <line class="edge-line" x1="250" y1="320" x2="90" y2="290"></line>
+            <line class="edge-line" x1="90" y1="290" x2="90" y2="70"></line>
+            <line class="edge-line" x1="90" y1="70" x2="250" y2="320"></line>
+            <line class="edge-line" x1="250" y1="40" x2="390" y2="250"></line>
+            <text class="edge-weight-label" x="170" y="45" text-anchor="middle">4</text>
+            <text class="edge-weight-label" x="325" y="65" text-anchor="middle">3</text>
+            <text class="edge-weight-label" x="405" y="180" text-anchor="middle">2</text>
+            <text class="edge-weight-label" x="325" y="295" text-anchor="middle">5</text>
+            <text class="edge-weight-label" x="170" y="315" text-anchor="middle">4</text>
+            <text class="edge-weight-label" x="65" y="180" text-anchor="middle">6</text>
+            <text class="edge-weight-label" x="190" y="195" text-anchor="middle">9</text>
+            <text class="edge-weight-label" x="340" y="140" text-anchor="middle">7</text>
+            <circle class="node-circle" cx="90" cy="70" r="18"></circle>
+            <text class="node-label" x="90" y="75" text-anchor="middle">R</text>
+            <circle class="node-circle" cx="250" cy="40" r="18"></circle>
+            <text class="node-label" x="250" y="45" text-anchor="middle">S</text>
+            <circle class="node-circle" cx="390" cy="110" r="18"></circle>
+            <text class="node-label" x="390" y="115" text-anchor="middle">T</text>
+            <circle class="node-circle" cx="390" cy="250" r="18"></circle>
+            <text class="node-label" x="390" y="255" text-anchor="middle">U</text>
+            <circle class="node-circle" cx="250" cy="320" r="18"></circle>
+            <text class="node-label" x="250" y="325" text-anchor="middle">V</text>
+            <circle class="node-circle" cx="90" cy="290" r="18"></circle>
+            <text class="node-label" x="90" y="295" text-anchor="middle">W</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">R&#8211;S (4), S&#8211;T (3), T&#8211;U (2), U&#8211;V (5), V&#8211;W (4), W&#8211;R (6), R&#8211;V (9), S&#8211;U (7)</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Find the minimum spanning tree of this network.</p>
+          <p>Sorted edges: T&#8211;U (2), S&#8211;T (3), R&#8211;S (4), V&#8211;W (4), U&#8211;V (5), W&#8211;R (6), S&#8211;U (7), R&#8211;V (9).</p>
+          <p>Add T&#8211;U, S&#8211;T, R&#8211;S, V&#8211;W (no cycles so far — two separate groups: {R,S,T,U} and {V,W}). Add U&#8211;V — this connects the two groups. All 6 vertices are now connected with 5 edges, so the tree is complete.</p>
+          <p>Minimum spanning tree weight \(= 2 + 3 + 4 + 4 + 5 = 18\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Find the shortest path from R to U.</p>
+          <p>Route R&#8211;S&#8211;T&#8211;U: \(4 + 3 + 2 = 9\)</p>
+          <p>Route R&#8211;V&#8211;U (using the diagonal): \(9 + 5 = 14\)</p>
+          <p>The shortest path from R to U is R&#8211;S&#8211;T&#8211;U, with weight \(9\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 7 — Mixed Practice</h3>
+          <p class="exercise-intro">Use the R, S, T, U, V, W network above to answer these questions.</p>
+          <div class="exercise-row">
+            <label for="ex7-mst">What is the total weight of this network's minimum spanning tree?</label>
+            <input class="exercise-input" type="number" id="ex7-mst" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex7-shortest">What is the weight of the shortest path from S to W?</label>
+            <input class="exercise-input" type="number" id="ex7-shortest" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex7-check">Check</button>
+          <p class="exercise-feedback" id="ex7-feedback"></p>
+        </div>
+      </div>
+
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <div class="content-card" id="homework">
+        <p class="section-label">Next Steps</p>
+        <h2>Next Steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Continue to the Homework to practise both lessons together.
+        </p>
+        <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson', lessonIndex: 2}, '*')">
+          Open Homework
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const KC_QS = [
+  {
+    q: 'What is a path in a network?',
+    opts: [
+      'A) Any network with weighted edges',
+      'B) A route between vertices that does not repeat any vertex',
+      'C) A network with a cycle',
+      'D) The vertex with the highest degree'
+    ],
+    correct: 1,
+    explanation: 'A path is a route through a network from one vertex to another that does not repeat any vertex.'
+  },
+  {
+    q: 'What distinguishes a tree from a general network?',
+    opts: [
+      'A) A tree must be weighted',
+      'B) A tree must be directed',
+      'C) A tree is connected and contains no cycles',
+      'D) A tree must include every vertex in the original network'
+    ],
+    correct: 2,
+    explanation: 'A tree is a connected network with no cycles — there is exactly one path between any two of its vertices.'
+  },
+  {
+    q: 'What is a spanning tree of a network?',
+    opts: [
+      'A) Any single edge in the network',
+      'B) A tree that includes every vertex of the original network',
+      'C) The shortest path between two vertices',
+      'D) A network with the maximum possible number of edges'
+    ],
+    correct: 1,
+    explanation: 'A spanning tree is a tree (connected, no cycles) that includes every vertex of the original network.'
+  },
+  {
+    q: 'When building a minimum spanning tree by adding edges from smallest to largest weight, what should you do if the next edge would create a cycle?',
+    opts: [
+      'A) Add it anyway',
+      'B) Skip it and move to the next smallest edge',
+      'C) Stop the process immediately',
+      'D) Remove a vertex from the network'
+    ],
+    correct: 1,
+    explanation: 'Any edge that would create a cycle is skipped — only edges that connect previously separate parts of the network are added.'
+  },
+  {
+    q: 'A network has 6 vertices. How many edges will its minimum spanning tree contain?',
+    opts: [
+      'A) 4',
+      'B) 5',
+      'C) 6',
+      'D) 7'
+    ],
+    correct: 1,
+    explanation: 'A spanning tree of a network with \\(n\\) vertices always has \\(n - 1\\) edges — here, \\(6 - 1 = 5\\).'
+  },
+  {
+    q: 'What kind of real-world problem does a minimum spanning tree solve?',
+    opts: [
+      'A) Finding the fastest route between two specific cities',
+      'B) Connecting every location in a network for the least total cost',
+      'C) Counting the degree of every vertex',
+      'D) Finding a cycle in the network'
+    ],
+    correct: 1,
+    explanation: 'Minimum spanning trees solve "connector problems" — connecting every vertex in a network for the smallest total weight.'
+  },
+  {
+    q: 'Why can the shortest path between two vertices sometimes NOT be part of any minimum spanning tree?',
+    opts: [
+      'A) Because shortest paths are always directed',
+      'B) Because the MST minimises the total weight connecting all vertices, not the distance between any one specific pair',
+      'C) Because minimum spanning trees never contain the cheapest edge',
+      'D) Because shortest paths must always contain a cycle'
+    ],
+    correct: 1,
+    explanation: 'An MST is built to minimise total weight across the whole network, so a cheap "shortcut" edge between two particular vertices can be excluded from the MST even though it gives the shortest path between just those two vertices.'
+  }
+];
+
+(function buildKC() {
+  const container = document.getElementById('kcQuestions');
+  const scoreEl   = document.getElementById('kcScore');
+  let answered = 0, score = 0;
+
+  KC_QS.forEach((qData, qi) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'kc-q-wrap';
+
+    const qEl = document.createElement('p');
+    qEl.className = 'kc-q';
+    qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+    wrap.appendChild(qEl);
+
+    const optsEl = document.createElement('div');
+    optsEl.className = 'kc-options';
+
+    qData.opts.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'kc-opt';
+      const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+      const letter  = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+      const content = letterMatch ? letterMatch[2] : opt;
+      btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+
+      btn.addEventListener('click', () => {
+        if (wrap.dataset.answered) return;
+        wrap.dataset.answered = '1';
+        answered++;
+        const isCorrect = oi === qData.correct;
+        if (isCorrect) score++;
+        optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+          b.disabled = true;
+          if (i === qData.correct) b.classList.add('kc-correct');
+          else if (i === oi)       b.classList.add('kc-wrong');
+        });
+        const fb = document.createElement('p');
+        fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+        fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+        wrap.appendChild(fb);
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(wrap, {
+            delimiters: [
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true }
+            ],
+            throwOnError: false
+          });
+        }
+        if (answered === KC_QS.length) showScore();
+      });
+      optsEl.appendChild(btn);
+    });
+
+    wrap.appendChild(optsEl);
+    container.appendChild(wrap);
+  });
+
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false
+    });
+  }
+
+  function showScore() {
+    const pct    = score / KC_QS.length;
+    const remark = pct === 1    ? 'Excellent — full marks!'
+                 : pct >= 0.6  ? 'Good work. Review any incorrect answers.'
+                               : 'Keep practising — re-read the theory and try again.';
+    scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong>
+      <p class="kc-remark">${remark}</p>
+      <button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+    scoreEl.classList.add('show');
+    document.getElementById('kcResetBtn').addEventListener('click', () => {
+      container.innerHTML = '';
+      scoreEl.className   = 'kc-score';
+      scoreEl.innerHTML   = '';
+      answered = 0; score = 0;
+      buildKC();
+    });
+
+    const TOPIC_ID   = 9;
+    const LESSON_IDX = 1;
+    localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1');
+    window.parent.postMessage({ type: 'ie-lesson-complete', topicId: TOPIC_ID, lessonIndex: LESSON_IDX }, '*');
+  }
+})();
+
+// ── Interactive exercises ──
+function makeExerciseChecker(btnId, feedbackId, checkFn) {
+  document.getElementById(btnId).addEventListener('click', () => {
+    const fb = document.getElementById(feedbackId);
+    const ok = checkFn();
+    fb.textContent = ok ? '✓ Correct — well done.' : '✗ Not quite — check your working and try again.';
+    fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+  });
+}
+
+makeExerciseChecker('ex1-check', 'ex1-feedback', () => {
+  const s1 = document.getElementById('ex1-set1').value.trim().toLowerCase();
+  const s2 = document.getElementById('ex1-set2').value.trim().toLowerCase();
+  return s1.startsWith('not') && s2 === 'tree';
+});
+
+makeExerciseChecker('ex2-check', 'ex2-feedback', () =>
+  parseFloat(document.getElementById('ex2-mst').value) === 14
+);
+
+makeExerciseChecker('ex3-check', 'ex3-feedback', () =>
+  parseFloat(document.getElementById('ex3-prims').value) === 14
+);
+
+makeExerciseChecker('ex4-check', 'ex4-feedback', () =>
+  parseFloat(document.getElementById('ex4-cost').value) === 14000
+);
+
+makeExerciseChecker('ex5-check', 'ex5-feedback', () =>
+  parseFloat(document.getElementById('ex5-shortest').value) === 8
+);
+
+makeExerciseChecker('ex6-check', 'ex6-feedback', () =>
+  parseFloat(document.getElementById('ex6-dijkstra').value) === 9
+);
+
+makeExerciseChecker('ex7-check', 'ex7-feedback', () =>
+  parseFloat(document.getElementById('ex7-mst').value) === 18 &&
+  parseFloat(document.getElementById('ex7-shortest').value) === 10
+);
+
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'ie-theme') {
+    document.documentElement.classList.toggle('dark-mode', e.data.dark);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.parent.postMessage({ type: 'ie-theme-request' }, '*');
+});
+</script>
+</body>
+</html>

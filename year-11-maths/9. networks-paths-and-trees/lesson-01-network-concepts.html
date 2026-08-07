@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — Network Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+  });
+</script>
+<style>
+:root {
+  --ink: #000;
+  --canvas: #fff;
+  --gray-med: #818181;
+  --gray-light: #d6d6d6;
+  --gray-faint: #f2f2f2;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+html.dark-mode {
+  --ink: #f0f0f0;
+  --canvas: #111;
+  --gray-med: #888;
+  --gray-light: #333;
+  --gray-faint: #1a1a1a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: 0.35px;
+  color: var(--ink);
+  background: var(--canvas);
+  margin: 0;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-med);
+}
+.topbar-left { display: flex; gap: 16px; }
+.topbar-topic { color: var(--ink); font-weight: 700; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+}
+.eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.hero-main h1 { font-size: 40px; line-height: 1; letter-spacing: 0.6px; margin: 0 0 16px; }
+.subtitle { font-size: 15px; color: var(--gray-med); max-width: 52ch; margin: 0 0 20px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; border: 1px solid var(--gray-light); padding: 5px 10px; color: var(--gray-med); }
+.hero-side { border-left: 1px solid var(--gray-light); padding-left: 24px; }
+.side-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 12px; }
+.side-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.side-list li { padding: 8px 0; border-bottom: 1px solid var(--gray-light); }
+.side-list li:last-child { border-bottom: none; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: start; }
+.toc { position: sticky; top: 24px; }
+.toc-heading { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 12px; font-family: var(--font-mono); }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-link { display: block; font-size: 12px; color: var(--gray-med); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--gray-light); transition: color 0.15s, border-color 0.15s; }
+.toc-link:hover { color: var(--ink); }
+.toc-link.toc-active { color: var(--ink); border-left: 2px solid var(--ink); padding-left: 10px; }
+
+/* Content cards */
+.content-card { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin: 0 0 8px; }
+h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; border-bottom: 1px solid var(--gray-light); padding-bottom: 16px; margin: 0 0 24px; }
+h3 { font-size: 16px; margin: 28px 0 10px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 600; }
+
+.example-block { border-left: 2px solid var(--ink); padding: 14px 18px; margin: 18px 0; background: var(--gray-faint); }
+.example-block .example-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 8px; }
+
+table.coord-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+table.coord-table th, table.coord-table td { border: 1px solid var(--gray-light); padding: 8px 12px; text-align: left; }
+table.coord-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gray-med); }
+
+/* Network diagrams */
+.diagram-wrap { display: flex; justify-content: center; margin: 20px 0; }
+.diagram-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.diagram-col { text-align: center; }
+svg.network-diagram { max-width: 100%; height: auto; }
+.node-circle { fill: var(--canvas); stroke: var(--ink); stroke-width: 2; }
+.node-label { fill: var(--ink); font-family: var(--font-mono); font-size: 14px; font-weight: 700; }
+.edge-line { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.edge-weight-label { fill: var(--gray-med); font-family: var(--font-mono); font-size: 12px; }
+.diagram-caption { text-align: center; font-size: 12px; color: var(--gray-med); margin-top: 4px; }
+.arrowhead-fill { fill: var(--ink); }
+
+/* Interactive exercises */
+.interactive-block { border: 1px solid var(--ink); padding: 24px 28px; margin: 20px 0; }
+.interactive-block h3 { margin-top: 0; margin-bottom: 6px; }
+.interactive-block .exercise-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 16px; }
+.exercise-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.exercise-row label { font-size: 13px; }
+.exercise-input { border: 1px solid var(--gray-light); padding: 8px 12px; font-family: var(--font-mono); font-size: 13px; background: var(--canvas); color: var(--ink); width: 130px; }
+.exercise-input:focus { outline: 1px solid var(--ink); }
+.exercise-check-btn { border: 1px solid var(--ink); padding: 8px 20px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; background: transparent; color: var(--ink); transition: background 0.15s, color 0.15s; }
+.exercise-check-btn:hover { background: var(--ink); color: var(--canvas); }
+.exercise-feedback { font-size: 13px; margin-top: 6px; min-height: 18px; color: var(--gray-med); }
+.exercise-feedback.correct { color: #00a050; font-weight: 600; }
+.exercise-feedback.wrong { color: #c00000; }
+
+/* Knowledge Check */
+.kc-block { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.kc-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 24px; }
+.kc-q-wrap { margin-bottom: 24px; }
+.kc-q { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.kc-options { display: flex; flex-direction: column; gap: 6px; }
+.kc-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 14px; border: 1px solid var(--gray-light);
+  cursor: pointer; font-size: 13px; transition: background 0.12s;
+  user-select: none; background: transparent; color: var(--ink);
+  text-align: left; width: 100%; font-family: var(--font-display);
+}
+.kc-opt:hover:not([disabled]) { background: var(--gray-faint); }
+.kc-opt.kc-correct { border-color: #00a050; background: rgba(0,160,80,0.08); }
+.kc-opt.kc-wrong   { border-color: #c00000; background: rgba(200,0,0,0.08); }
+html.dark-mode .kc-opt.kc-correct { background: rgba(0,160,80,0.14); }
+html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
+.kc-feedback { font-size: 12px; color: var(--gray-med); margin-top: 8px; min-height: 18px; }
+.kc-feedback.correct { color: #00a050; }
+.kc-feedback.wrong   { color: #c00000; }
+.kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
+.kc-score.show { display: block; }
+.kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 0; cursor: pointer; font-family: var(--font-display); }
+.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 700; min-width: 16px; padding-top: 1px; }
+
+.lesson-link-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--ink);
+}
+.lesson-link-btn:hover { background: var(--gray-faint); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--gray-light); padding-top: 20px; }
+  .layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 — Networks, Paths and Trees</span>
+      <span>Year 11 Mathematics Standard</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Network Concepts</h1>
+      <p class="subtitle">Represent real-world systems as networks of vertices and edges, and learn the language used to describe them.</p>
+      <div class="hero-meta">
+        <span class="pill">Vertices &amp; edges</span>
+        <span class="pill">Weighted &amp; directed</span>
+        <span class="pill">Degree</span>
+        <span class="pill">Diagrams from tables</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What is a network?</li>
+        <li>Network terminology</li>
+        <li>Connected graphs</li>
+        <li>Isomorphic graphs</li>
+        <li>Weighted and directed networks</li>
+        <li>Degree of a vertex</li>
+        <li>Constructing diagrams from tables</li>
+        <li>Practice: putting it all together</li>
+        <li>Knowledge check</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#what-is">What Is a Network?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#terminology">Terminology</a></li>
+        <li class="toc-item"><a class="toc-link" href="#connected">Connected Graphs</a></li>
+        <li class="toc-item"><a class="toc-link" href="#isomorphic">Isomorphic Graphs</a></li>
+        <li class="toc-item"><a class="toc-link" href="#weighted-directed">Weighted &amp; Directed</a></li>
+        <li class="toc-item"><a class="toc-link" href="#degree">Degree of a Vertex</a></li>
+        <li class="toc-item"><a class="toc-link" href="#constructing">Constructing Diagrams</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice-all">Practice: All Together</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Next Steps</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="what-is">
+        <p class="section-label">Theory</p>
+        <h2>What Is a Network?</h2>
+        <p>A <strong>network</strong> (also called a graph) is a collection of objects, called <strong>vertices</strong>, connected by lines called <strong>edges</strong>. Networks are used to model countless real-world systems:</p>
+        <ul>
+          <li><strong>Road networks</strong> — towns/intersections are vertices, roads are edges</li>
+          <li><strong>Social networks</strong> — people are vertices, friendships/connections are edges</li>
+          <li><strong>Computer networks</strong> — devices are vertices, cables/wireless links are edges</li>
+          <li><strong>Utility networks</strong> — substations or pumping stations are vertices, power lines or pipes are edges</li>
+        </ul>
+        <p>The diagram below shows a simple network with five vertices, labelled A to E, and six edges connecting them.</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 240" width="400" height="240">
+            <line class="edge-line" x1="70" y1="50" x2="220" y2="40"></line>
+            <line class="edge-line" x1="220" y1="40" x2="340" y2="110"></line>
+            <line class="edge-line" x1="70" y1="50" x2="120" y2="180"></line>
+            <line class="edge-line" x1="220" y1="40" x2="120" y2="180"></line>
+            <line class="edge-line" x1="120" y1="180" x2="280" y2="190"></line>
+            <line class="edge-line" x1="340" y1="110" x2="280" y2="190"></line>
+            <circle class="node-circle" cx="70" cy="50" r="18"></circle>
+            <text class="node-label" x="70" y="55" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="220" cy="40" r="18"></circle>
+            <text class="node-label" x="220" y="45" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="340" cy="110" r="18"></circle>
+            <text class="node-label" x="340" y="115" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="120" cy="180" r="18"></circle>
+            <text class="node-label" x="120" y="185" text-anchor="middle">D</text>
+            <circle class="node-circle" cx="280" cy="190" r="18"></circle>
+            <text class="node-label" x="280" y="195" text-anchor="middle">E</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">A network with 5 vertices (A–E) and 6 edges</p>
+      </div>
+
+      <div class="content-card" id="terminology">
+        <p class="section-label">Theory</p>
+        <h2>Network Terminology</h2>
+        <p>Two key words describe every network:</p>
+        <ul>
+          <li><strong>Vertex</strong> (plural: vertices) — an object or point in the network, shown as a circle/dot</li>
+          <li><strong>Edge</strong> — a line connecting two vertices, representing a direct connection between them</li>
+        </ul>
+        <p>In the diagram above, A, B, C, D and E are vertices, and each line segment (e.g. A–B, B–C) is an edge. Not every pair of vertices needs to be directly connected — for example, A and C are not directly joined by an edge.</p>
+
+        <div class="interactive-block">
+          <h3>Exercise 1 — Count the Vertices and Edges</h3>
+          <p class="exercise-intro">Look back at the network diagram in "What Is a Network?" above.</p>
+          <div class="exercise-row">
+            <label for="ex1-vertices">How many vertices does it have?</label>
+            <input class="exercise-input" type="number" id="ex1-vertices" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex1-edges">How many edges does it have?</label>
+            <input class="exercise-input" type="number" id="ex1-edges" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex1-check">Check</button>
+          <p class="exercise-feedback" id="ex1-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="connected">
+        <p class="section-label">Theory</p>
+        <h2>Connected Graphs</h2>
+        <p>A network is <strong>connected</strong> if there is a path between every pair of vertices — you can get from any vertex to any other vertex by travelling along edges. A network is <strong>disconnected</strong> if at least one pair of vertices has no such path between them.</p>
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+              <line class="edge-line" x1="40" y1="40" x2="140" y2="40"></line>
+              <line class="edge-line" x1="140" y1="40" x2="140" y2="140"></line>
+              <line class="edge-line" x1="140" y1="140" x2="40" y2="140"></line>
+              <line class="edge-line" x1="40" y1="140" x2="40" y2="40"></line>
+              <circle class="node-circle" cx="40" cy="40" r="15"></circle>
+              <text class="node-label" x="40" y="45" text-anchor="middle">W</text>
+              <circle class="node-circle" cx="140" cy="40" r="15"></circle>
+              <text class="node-label" x="140" y="45" text-anchor="middle">X</text>
+              <circle class="node-circle" cx="140" cy="140" r="15"></circle>
+              <text class="node-label" x="140" y="145" text-anchor="middle">Y</text>
+              <circle class="node-circle" cx="40" cy="140" r="15"></circle>
+              <text class="node-label" x="40" y="145" text-anchor="middle">Z</text>
+            </svg>
+            <p class="diagram-caption">Connected &#8212; every vertex is reachable from every other</p>
+          </div>
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+              <line class="edge-line" x1="40" y1="40" x2="140" y2="40"></line>
+              <line class="edge-line" x1="40" y1="140" x2="140" y2="140"></line>
+              <circle class="node-circle" cx="40" cy="40" r="15"></circle>
+              <text class="node-label" x="40" y="45" text-anchor="middle">W</text>
+              <circle class="node-circle" cx="140" cy="40" r="15"></circle>
+              <text class="node-label" x="140" y="45" text-anchor="middle">X</text>
+              <circle class="node-circle" cx="140" cy="140" r="15"></circle>
+              <text class="node-label" x="140" y="145" text-anchor="middle">Y</text>
+              <circle class="node-circle" cx="40" cy="140" r="15"></circle>
+              <text class="node-label" x="40" y="145" text-anchor="middle">Z</text>
+            </svg>
+            <p class="diagram-caption">Disconnected &#8212; no path exists between {W,X} and {Y,Z}</p>
+          </div>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>In the disconnected diagram above, is there a path from W to Y?</p>
+          <p>No — W and X are only connected to each other, and Y and Z are only connected to each other. There is no edge (or chain of edges) joining the two pairs, so the network is disconnected and no W&#8211;Y path exists.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="isomorphic">
+        <p class="section-label">Theory</p>
+        <h2>Isomorphic Graphs</h2>
+        <p>Two networks are <strong>isomorphic</strong> if they have exactly the same structure — a one-to-one correspondence between their vertices that preserves every edge — even if they are drawn differently, rotated, or use different vertex labels. Isomorphic graphs are "the same network" in disguise.</p>
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+              <line class="edge-line" x1="40" y1="40" x2="140" y2="40"></line>
+              <line class="edge-line" x1="140" y1="40" x2="140" y2="140"></line>
+              <line class="edge-line" x1="140" y1="140" x2="40" y2="140"></line>
+              <line class="edge-line" x1="40" y1="140" x2="40" y2="40"></line>
+              <circle class="node-circle" cx="40" cy="40" r="15"></circle>
+              <text class="node-label" x="40" y="45" text-anchor="middle">1</text>
+              <circle class="node-circle" cx="140" cy="40" r="15"></circle>
+              <text class="node-label" x="140" y="45" text-anchor="middle">2</text>
+              <circle class="node-circle" cx="140" cy="140" r="15"></circle>
+              <text class="node-label" x="140" y="145" text-anchor="middle">3</text>
+              <circle class="node-circle" cx="40" cy="140" r="15"></circle>
+              <text class="node-label" x="40" y="145" text-anchor="middle">4</text>
+            </svg>
+            <p class="diagram-caption">Drawn as a square: 1&#8211;2&#8211;3&#8211;4&#8211;1</p>
+          </div>
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 180 180" width="180" height="180">
+              <line class="edge-line" x1="90" y1="20" x2="160" y2="90"></line>
+              <line class="edge-line" x1="160" y1="90" x2="90" y2="160"></line>
+              <line class="edge-line" x1="90" y1="160" x2="20" y2="90"></line>
+              <line class="edge-line" x1="20" y1="90" x2="90" y2="20"></line>
+              <circle class="node-circle" cx="90" cy="20" r="15"></circle>
+              <text class="node-label" x="90" y="25" text-anchor="middle">a</text>
+              <circle class="node-circle" cx="160" cy="90" r="15"></circle>
+              <text class="node-label" x="160" y="95" text-anchor="middle">b</text>
+              <circle class="node-circle" cx="90" cy="160" r="15"></circle>
+              <text class="node-label" x="90" y="165" text-anchor="middle">c</text>
+              <circle class="node-circle" cx="20" cy="90" r="15"></circle>
+              <text class="node-label" x="20" y="95" text-anchor="middle">d</text>
+            </svg>
+            <p class="diagram-caption">Drawn as a diamond: a&#8211;b&#8211;c&#8211;d&#8211;a</p>
+          </div>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Show that these two graphs are isomorphic.</p>
+          <p>Match \(1\leftrightarrow a\), \(2\leftrightarrow b\), \(3\leftrightarrow c\), \(4\leftrightarrow d\). Every edge in the square graph (1&#8211;2, 2&#8211;3, 3&#8211;4, 4&#8211;1) corresponds to an edge in the diamond graph (a&#8211;b, b&#8211;c, c&#8211;d, d&#8211;a) under this matching, so the two graphs are isomorphic — they're the same 4-cycle, just drawn differently.</p>
+          <p>Note: two graphs having the same degree sequence is <strong>necessary</strong> for them to be isomorphic, but not <strong>sufficient</strong> — you still need to check that a matching exists which preserves every edge.</p>
+        </div>
+      </div>
+
+      <div class="content-card" id="weighted-directed">
+        <p class="section-label">Theory</p>
+        <h2>Weighted and Directed Networks</h2>
+        <p>Networks can carry extra information:</p>
+        <ul>
+          <li>A <strong>weighted</strong> network labels each edge with a number (the "weight") — e.g. distance, cost, or time.</li>
+          <li>A <strong>directed</strong> network uses arrows to show that a connection only goes one way (e.g. a one-way street).</li>
+        </ul>
+        <p>The diagram below is both weighted and directed: each arrow shows the direction of travel, and each number is the weight of that edge.</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 260" width="400" height="260">
+            <defs>
+              <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path class="arrowhead-fill" d="M0,0 L10,5 L0,10 z"></path>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="78" y1="137" x2="182" y2="63" marker-end="url(#arrowhead)"></line>
+            <line class="edge-line" x1="218" y1="63" x2="322" y2="137" marker-end="url(#arrowhead)"></line>
+            <line class="edge-line" x1="79" y1="161" x2="181" y2="219" marker-end="url(#arrowhead)"></line>
+            <line class="edge-line" x1="219" y1="219" x2="321" y2="161" marker-end="url(#arrowhead)"></line>
+            <text class="edge-weight-label" x="146" y="88" text-anchor="middle">7</text>
+            <text class="edge-weight-label" x="285" y="88" text-anchor="middle">4</text>
+            <text class="edge-weight-label" x="105" y="205" text-anchor="middle">9</text>
+            <text class="edge-weight-label" x="295" y="205" text-anchor="middle">6</text>
+            <circle class="node-circle" cx="60" cy="150" r="18"></circle>
+            <text class="node-label" x="60" y="155" text-anchor="middle">P</text>
+            <circle class="node-circle" cx="200" cy="50" r="18"></circle>
+            <text class="node-label" x="200" y="55" text-anchor="middle">Q</text>
+            <circle class="node-circle" cx="340" cy="150" r="18"></circle>
+            <text class="node-label" x="340" y="155" text-anchor="middle">R</text>
+            <circle class="node-circle" cx="200" cy="230" r="18"></circle>
+            <text class="node-label" x="200" y="235" text-anchor="middle">S</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">A weighted, directed network: P&#8594;Q (7), Q&#8594;R (4), P&#8594;S (9), S&#8594;R (6)</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Using the diagram above, what is the total weight of travelling from P to R via S (i.e. P &#8594; S &#8594; R)?</p>
+          <p>P &#8594; S has weight 9, and S &#8594; R has weight 6. Total \(= 9 + 6 = 15\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 2 — Reading a Weighted, Directed Network</h3>
+          <p class="exercise-intro">Use the P, Q, R, S diagram above to answer these questions.</p>
+          <div class="exercise-row">
+            <label for="ex2-weight">What is the weight of the edge from Q to R?</label>
+            <input class="exercise-input" type="number" id="ex2-weight" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex2-direct">Is there an edge directly from R to P? (yes/no)</label>
+            <input class="exercise-input" type="text" id="ex2-direct" placeholder="yes or no">
+          </div>
+          <button class="exercise-check-btn" id="ex2-check">Check</button>
+          <p class="exercise-feedback" id="ex2-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="degree">
+        <p class="section-label">Theory</p>
+        <h2>Degree of a Vertex</h2>
+        <p>The <strong>degree</strong> of a vertex is the number of edges connected to it. In the diagram below, vertex X is connected to four other vertices, so X has degree 4.</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 260" width="400" height="260">
+            <line class="edge-line" x1="200" y1="140" x2="200" y2="50"></line>
+            <line class="edge-line" x1="200" y1="140" x2="310" y2="140"></line>
+            <line class="edge-line" x1="200" y1="140" x2="200" y2="230"></line>
+            <line class="edge-line" x1="200" y1="140" x2="90" y2="140"></line>
+            <line class="edge-line" x1="200" y1="50" x2="115" y2="20"></line>
+            <circle class="node-circle" cx="200" cy="140" r="20"></circle>
+            <text class="node-label" x="200" y="145" text-anchor="middle">X</text>
+            <circle class="node-circle" cx="200" cy="50" r="18"></circle>
+            <text class="node-label" x="200" y="55" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="310" cy="140" r="18"></circle>
+            <text class="node-label" x="310" y="145" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="200" cy="230" r="18"></circle>
+            <text class="node-label" x="200" y="235" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="90" cy="140" r="18"></circle>
+            <text class="node-label" x="90" y="145" text-anchor="middle">D</text>
+            <circle class="node-circle" cx="115" cy="20" r="16"></circle>
+            <text class="node-label" x="115" y="25" text-anchor="middle">E</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">deg(X) = 4, since 4 edges meet at X. Vertex A also connects to E, so deg(A) = 2.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>What is the degree of vertex D in the diagram above?</p>
+          <p>D has only one edge (to X), so \(\deg(D) = 1\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 3 — Calculating Degree</h3>
+          <p class="exercise-intro">Using the same diagram, find the degree of each of these vertices.</p>
+          <div class="exercise-row">
+            <label for="ex3-b">deg(B) =</label>
+            <input class="exercise-input" type="number" id="ex3-b" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex3-c">deg(C) =</label>
+            <input class="exercise-input" type="number" id="ex3-c" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex3-e">deg(E) =</label>
+            <input class="exercise-input" type="number" id="ex3-e" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex3-check">Check</button>
+          <p class="exercise-feedback" id="ex3-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="constructing">
+        <p class="section-label">Theory</p>
+        <h2>Constructing Diagrams from Tables</h2>
+        <p>Networks are often given as a table of distances (or costs, or times) between locations. To draw the network, place a vertex for each location, then draw an edge — labelled with its weight — for each entry in the table.</p>
+        <table class="coord-table">
+          <tr><th>Route</th><th>Distance (km)</th></tr>
+          <tr><td>Alder &#8211; Birchwood</td><td>12</td></tr>
+          <tr><td>Alder &#8211; Cedar</td><td>18</td></tr>
+          <tr><td>Birchwood &#8211; Cedar</td><td>9</td></tr>
+          <tr><td>Birchwood &#8211; Dunmore</td><td>15</td></tr>
+          <tr><td>Cedar &#8211; Dunmore</td><td>11</td></tr>
+        </table>
+        <p>There is no direct road between Alder and Dunmore, so no edge is drawn between them. The resulting network diagram is:</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 280" width="400" height="280">
+            <line class="edge-line" x1="98" y1="60" x2="302" y2="60"></line>
+            <line class="edge-line" x1="98" y1="60" x2="302" y2="220"></line>
+            <line class="edge-line" x1="302" y1="60" x2="302" y2="220"></line>
+            <line class="edge-line" x1="302" y1="60" x2="98" y2="220"></line>
+            <line class="edge-line" x1="302" y1="220" x2="98" y2="220"></line>
+            <text class="edge-weight-label" x="200" y="50" text-anchor="middle">12</text>
+            <text class="edge-weight-label" x="130" y="150" text-anchor="middle">18</text>
+            <text class="edge-weight-label" x="316" y="140" text-anchor="middle">9</text>
+            <text class="edge-weight-label" x="270" y="150" text-anchor="middle">15</text>
+            <text class="edge-weight-label" x="200" y="238" text-anchor="middle">11</text>
+            <circle class="node-circle" cx="80" cy="60" r="20"></circle>
+            <text class="node-label" x="80" y="65" text-anchor="middle">A</text>
+            <circle class="node-circle" cx="320" cy="60" r="20"></circle>
+            <text class="node-label" x="320" y="65" text-anchor="middle">B</text>
+            <circle class="node-circle" cx="320" cy="220" r="20"></circle>
+            <text class="node-label" x="320" y="225" text-anchor="middle">C</text>
+            <circle class="node-circle" cx="80" cy="220" r="20"></circle>
+            <text class="node-label" x="80" y="225" text-anchor="middle">D</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">A = Alder, B = Birchwood, C = Cedar, D = Dunmore (distances in km)</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>Using the network above, what is the total distance travelling from Alder to Dunmore via Birchwood (A &#8594; B &#8594; D)?</p>
+          <p>A&#8211;B is 12 km and B&#8211;D is 15 km. Total \(= 12 + 15 = 27\) km.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>What is the degree of Birchwood (B) in this network?</p>
+          <p>B connects to A, C and D, so \(\deg(B) = 3\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 4 — Build Your Own Network</h3>
+          <p class="exercise-intro">A new distance table describes four towns: Elmwood (E), Fairview (F), Greenhill (G) and Harbor (H).</p>
+          <table class="coord-table">
+            <tr><th>Route</th><th>Distance (km)</th></tr>
+            <tr><td>Elmwood &#8211; Fairview</td><td>7</td></tr>
+            <tr><td>Fairview &#8211; Greenhill</td><td>5</td></tr>
+            <tr><td>Greenhill &#8211; Harbor</td><td>9</td></tr>
+            <tr><td>Elmwood &#8211; Harbor</td><td>12</td></tr>
+            <tr><td>Fairview &#8211; Harbor</td><td>6</td></tr>
+          </table>
+          <div class="exercise-row">
+            <label for="ex4-dist">Total distance travelling E &#8594; F &#8594; H (km)?</label>
+            <input class="exercise-input" type="number" id="ex4-dist" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex4-deg">What is deg(Fairview)?</label>
+            <input class="exercise-input" type="number" id="ex4-deg" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex4-check">Check</button>
+          <p class="exercise-feedback" id="ex4-feedback"></p>
+        </div>
+      </div>
+
+      <div class="content-card" id="practice-all">
+        <p class="section-label">Practice</p>
+        <h2>Practice: Putting It All Together</h2>
+        <p>The diagram below combines everything from this lesson: it has six vertices, weighted edges, and one directed edge.</p>
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 420 300" width="420" height="300">
+            <defs>
+              <marker id="arrowhead2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path class="arrowhead-fill" d="M0,0 L10,5 L0,10 z"></path>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="80" y1="60" x2="210" y2="30"></line>
+            <line class="edge-line" x1="210" y1="30" x2="340" y2="70"></line>
+            <line class="edge-line" x1="80" y1="60" x2="90" y2="200"></line>
+            <line class="edge-line" x1="210" y1="30" x2="210" y2="160"></line>
+            <line class="edge-line" x1="90" y1="200" x2="210" y2="160"></line>
+            <line class="edge-line" x1="210" y1="160" x2="340" y2="220"></line>
+            <line class="edge-line" x1="340" y1="70" x2="340" y2="220" marker-end="url(#arrowhead2)"></line>
+            <text class="edge-weight-label" x="145" y="30" text-anchor="middle">6</text>
+            <text class="edge-weight-label" x="275" y="35" text-anchor="middle">8</text>
+            <text class="edge-weight-label" x="60" y="135" text-anchor="middle">10</text>
+            <text class="edge-weight-label" x="225" y="95" text-anchor="middle">4</text>
+            <text class="edge-weight-label" x="150" y="195" text-anchor="middle">5</text>
+            <text class="edge-weight-label" x="275" y="205" text-anchor="middle">7</text>
+            <text class="edge-weight-label" x="360" y="145" text-anchor="middle">3</text>
+            <circle class="node-circle" cx="80" cy="60" r="18"></circle>
+            <text class="node-label" x="80" y="65" text-anchor="middle">V1</text>
+            <circle class="node-circle" cx="210" cy="30" r="18"></circle>
+            <text class="node-label" x="210" y="35" text-anchor="middle">V2</text>
+            <circle class="node-circle" cx="340" cy="70" r="18"></circle>
+            <text class="node-label" x="340" y="75" text-anchor="middle">V3</text>
+            <circle class="node-circle" cx="90" cy="200" r="18"></circle>
+            <text class="node-label" x="90" y="205" text-anchor="middle">V4</text>
+            <circle class="node-circle" cx="210" cy="160" r="18"></circle>
+            <text class="node-label" x="210" y="165" text-anchor="middle">V5</text>
+            <circle class="node-circle" cx="340" cy="220" r="18"></circle>
+            <text class="node-label" x="340" y="225" text-anchor="middle">V6</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">V3&#8594;V6 is directed (weight 3); every other edge can be travelled either way</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>What is deg(V5)?</p>
+          <p>V5 connects to V2, V4 and V6, so \(\deg(V5) = 3\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked Example</p>
+          <p>What is the total weight travelling V1 &#8594; V2 &#8594; V3 &#8594; V6?</p>
+          <p>V1&#8211;V2 is 6, V2&#8211;V3 is 8, V3&#8594;V6 is 3. Total \(= 6 + 8 + 3 = 17\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Exercise 5 — Mixed Practice</h3>
+          <p class="exercise-intro">Use the diagram above to answer these questions.</p>
+          <div class="exercise-row">
+            <label for="ex5-deg">What is deg(V2)?</label>
+            <input class="exercise-input" type="number" id="ex5-deg" placeholder="?">
+          </div>
+          <div class="exercise-row">
+            <label for="ex5-directed">Which single edge in this diagram is directed?</label>
+            <input class="exercise-input" type="text" id="ex5-directed" placeholder="e.g. V1-V2" style="width:160px;">
+          </div>
+          <div class="exercise-row">
+            <label for="ex5-weight">What is the total weight travelling V1 &#8594; V4 &#8594; V5?</label>
+            <input class="exercise-input" type="number" id="ex5-weight" placeholder="?">
+          </div>
+          <button class="exercise-check-btn" id="ex5-check">Check</button>
+          <p class="exercise-feedback" id="ex5-feedback"></p>
+        </div>
+      </div>
+
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <div class="content-card" id="homework">
+        <p class="section-label">Next Steps</p>
+        <h2>Next Steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Continue to Lesson 2 to learn about paths, trees and spanning trees.
+        </p>
+        <button class="lesson-link-btn" onclick="window.parent.postMessage({type:'ie-load-lesson', lessonIndex: 1}, '*')">
+          Open Lesson 2
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const KC_QS = [
+  {
+    q: 'In network terminology, what is a vertex?',
+    opts: [
+      'A) A line connecting two objects',
+      'B) An object or point in the network',
+      'C) The weight assigned to a connection',
+      'D) The direction of a connection'
+    ],
+    correct: 1,
+    explanation: 'A vertex is an object or point in the network — edges are the lines that connect vertices.'
+  },
+  {
+    q: 'What does an edge represent in a network?',
+    opts: [
+      'A) An object in the network',
+      'B) The total number of vertices',
+      'C) A connection between two vertices',
+      'D) The degree of a vertex'
+    ],
+    correct: 2,
+    explanation: 'An edge is a line connecting two vertices, representing a direct connection between them.'
+  },
+  {
+    q: 'What extra information does a "weighted" network provide, compared to a plain network?',
+    opts: [
+      'A) A number (e.g. distance or cost) on each edge',
+      'B) An arrow showing direction on each edge',
+      'C) A colour for each vertex',
+      'D) The total number of edges'
+    ],
+    correct: 0,
+    explanation: 'A weighted network labels each edge with a number representing distance, cost, time or similar.'
+  },
+  {
+    q: 'A vertex has 3 edges connected to it. What is its degree?',
+    opts: [
+      'A) 1',
+      'B) 2',
+      'C) 3',
+      'D) 6'
+    ],
+    correct: 2,
+    explanation: 'The degree of a vertex is the number of edges connected to it — here, 3.'
+  },
+  {
+    q: 'In a directed network, what does an arrow on an edge indicate?',
+    opts: [
+      'A) The weight of the connection',
+      'B) That the connection only goes one way',
+      'C) The number of vertices',
+      'D) That two vertices are not connected'
+    ],
+    correct: 1,
+    explanation: 'A directed edge (shown with an arrow) means the connection only goes in the direction the arrow points, like a one-way street.'
+  },
+  {
+    q: 'A distance table lists no entry for the route between Town X and Town Y. What does this mean for the network diagram?',
+    opts: [
+      'A) X and Y are the same vertex',
+      'B) There is no edge directly connecting X and Y',
+      'C) X and Y have degree 0',
+      'D) The diagram cannot be drawn'
+    ],
+    correct: 1,
+    explanation: 'If a table has no entry for a pair of locations, no edge is drawn directly between them — they may still be reachable via other vertices.'
+  },
+  {
+    q: 'Four towns W, X, Y, Z are connected: W&#8211;X (5 km), X&#8211;Y (3 km), Y&#8211;Z (4 km). What is the total distance travelling W &#8594; X &#8594; Y &#8594; Z?',
+    opts: [
+      'A) 8 km',
+      'B) 9 km',
+      'C) 12 km',
+      'D) 7 km'
+    ],
+    correct: 2,
+    explanation: 'Total \\(= 5 + 3 + 4 = 12\\) km.'
+  }
+];
+
+(function buildKC() {
+  const container = document.getElementById('kcQuestions');
+  const scoreEl   = document.getElementById('kcScore');
+  let answered = 0, score = 0;
+
+  KC_QS.forEach((qData, qi) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'kc-q-wrap';
+
+    const qEl = document.createElement('p');
+    qEl.className = 'kc-q';
+    qEl.innerHTML = `${qi + 1}. ${qData.q}`;
+    wrap.appendChild(qEl);
+
+    const optsEl = document.createElement('div');
+    optsEl.className = 'kc-options';
+
+    qData.opts.forEach((opt, oi) => {
+      const btn = document.createElement('button');
+      btn.className = 'kc-opt';
+      const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
+      const letter  = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
+      const content = letterMatch ? letterMatch[2] : opt;
+      btn.innerHTML = `<span class="opt-letter">${letter}</span><span>${content}</span>`;
+
+      btn.addEventListener('click', () => {
+        if (wrap.dataset.answered) return;
+        wrap.dataset.answered = '1';
+        answered++;
+        const isCorrect = oi === qData.correct;
+        if (isCorrect) score++;
+        optsEl.querySelectorAll('.kc-opt').forEach((b, i) => {
+          b.disabled = true;
+          if (i === qData.correct) b.classList.add('kc-correct');
+          else if (i === oi)       b.classList.add('kc-wrong');
+        });
+        const fb = document.createElement('p');
+        fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
+        fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+        wrap.appendChild(fb);
+        if (typeof renderMathInElement !== 'undefined') {
+          renderMathInElement(wrap, {
+            delimiters: [
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true }
+            ],
+            throwOnError: false
+          });
+        }
+        if (answered === KC_QS.length) showScore();
+      });
+      optsEl.appendChild(btn);
+    });
+
+    wrap.appendChild(optsEl);
+    container.appendChild(wrap);
+  });
+
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false
+    });
+  }
+
+  function showScore() {
+    const pct    = score / KC_QS.length;
+    const remark = pct === 1    ? 'Excellent — full marks!'
+                 : pct >= 0.6  ? 'Good work. Review any incorrect answers.'
+                               : 'Keep practising — re-read the theory and try again.';
+    scoreEl.innerHTML = `Score: <strong>${score} / ${KC_QS.length}</strong>
+      <p class="kc-remark">${remark}</p>
+      <button class="kc-reset" id="kcResetBtn">Reset quiz</button>`;
+    scoreEl.classList.add('show');
+    document.getElementById('kcResetBtn').addEventListener('click', () => {
+      container.innerHTML = '';
+      scoreEl.className   = 'kc-score';
+      scoreEl.innerHTML   = '';
+      answered = 0; score = 0;
+      buildKC();
+    });
+
+    const TOPIC_ID   = 9;
+    const LESSON_IDX = 0;
+    localStorage.setItem(`ie_done_${TOPIC_ID}_${LESSON_IDX}`, '1');
+    window.parent.postMessage({ type: 'ie-lesson-complete', topicId: TOPIC_ID, lessonIndex: LESSON_IDX }, '*');
+  }
+})();
+
+// ── Interactive exercises ──
+function makeExerciseChecker(btnId, feedbackId, checkFn) {
+  document.getElementById(btnId).addEventListener('click', () => {
+    const fb = document.getElementById(feedbackId);
+    const ok = checkFn();
+    fb.textContent = ok ? '✓ Correct — well done.' : '✗ Not quite — check your working and try again.';
+    fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+  });
+}
+
+makeExerciseChecker('ex1-check', 'ex1-feedback', () =>
+  parseFloat(document.getElementById('ex1-vertices').value) === 5 &&
+  parseFloat(document.getElementById('ex1-edges').value) === 6
+);
+
+makeExerciseChecker('ex2-check', 'ex2-feedback', () =>
+  parseFloat(document.getElementById('ex2-weight').value) === 4 &&
+  document.getElementById('ex2-direct').value.trim().toLowerCase().startsWith('n')
+);
+
+makeExerciseChecker('ex3-check', 'ex3-feedback', () =>
+  parseFloat(document.getElementById('ex3-b').value) === 1 &&
+  parseFloat(document.getElementById('ex3-c').value) === 1 &&
+  parseFloat(document.getElementById('ex3-e').value) === 1
+);
+
+makeExerciseChecker('ex4-check', 'ex4-feedback', () =>
+  parseFloat(document.getElementById('ex4-dist').value) === 13 &&
+  parseFloat(document.getElementById('ex4-deg').value) === 3
+);
+
+makeExerciseChecker('ex5-check', 'ex5-feedback', () => {
+  const directed = document.getElementById('ex5-directed').value.replace(/\s/g, '').toLowerCase();
+  return parseFloat(document.getElementById('ex5-deg').value) === 3 &&
+    (directed.includes('v3-v6') || directed.includes('v3v6')) &&
+    parseFloat(document.getElementById('ex5-weight').value) === 15;
+});
+
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'ie-theme') {
+    document.documentElement.classList.toggle('dark-mode', e.data.dark);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.parent.postMessage({ type: 'ie-theme-request' }, '*');
+});
+</script>
+</body>
+</html>

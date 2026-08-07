@@ -197,6 +197,28 @@
         </div>
       </div>
 
+      <!-- 09 Networks, Paths and Trees — LAX -->
+      <div class="topic-card topic-card-9" id="card-9" onclick="window.location.href='year-11-maths/9. networks-paths-and-trees/index.html'" style="cursor:pointer;">
+        <span class="complete-badge">&#10003; Complete</span>
+        <div class="card-scene">
+          <video class="scene-video" id="vid-9" loop muted playsinline preload="none">
+            <source src="assets/city-gifs/lax-day.mp4" type="video/mp4">
+          </video>
+          <div class="scene-gradient"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-top-row">
+            <span class="card-num">09</span>
+          </div>
+          <h2 class="card-title">Networks, Paths and Trees</h2>
+          <p class="card-desc">Vertices, edges, shortest paths and spanning trees</p>
+          <div class="card-footer">
+            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fabf235394" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+          </div>
+        </div>
+      </div>
+
       <!-- 07 Revision — Thailand -->
       <div class="topic-card topic-card-7" id="card-7" onclick="window.location.href='year-11-maths/7. revision/index.html'" style="cursor:pointer;">
         <span class="complete-badge">&#10003; Complete</span>
@@ -299,6 +321,7 @@
       'vid-6': { day: 'assets/city-gifs/seq-day.mp4',       night: 'assets/city-gifs/seq-night.mp4' },
       'vid-7': { day: 'assets/city-gifs/th-day.mp4',        night: 'assets/city-gifs/th-night.mp4' },
       'vid-8': { day: 'assets/city-gifs/london-day.mp4',    night: 'assets/city-gifs/london-night.mp4' },
+      'vid-9': { day: 'assets/city-gifs/lax-day.mp4',       night: 'assets/city-gifs/lax-night.mp4' },
     };
     // Videos are heavy (~15MB each); only load/play the ones scrolled into view.
     let videosDark = false;
@@ -402,7 +425,7 @@
     setInterval(updateLiveStatus, 60000);
 
     // ── Completion badges + progress rings ──────────────────────
-    const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6], 5: [0,1,2,4], 6: [0,1,2,4], 8: [0,1,2] };
+    const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6], 5: [0,1,2,4], 6: [0,1,2,4], 8: [0,1,2], 9: [0,1,2] };
     const CIRC = 2 * Math.PI * 12;
     function checkCompletionBadges() {
       let totalDone = 0, totalLessons = 0;
@@ -461,7 +484,7 @@
 
     // ── 5. Recently-viewed — update CTA text on visited cards ──
     function checkLastVisited() {
-      for (let tid = 1; tid <= 8; tid++) {
+      for (let tid = 1; tid <= 9; tid++) {
         const raw = localStorage.getItem(`ie_last_${tid}`);
         if (!raw) continue;
         try {
