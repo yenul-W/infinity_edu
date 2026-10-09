@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — The Sine &amp; Cosine Rules</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 4 &mdash; Trigonometry</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>The Sine &amp; Cosine Rules</h1>
+      <p class="subtitle">SOH CAH TOA needs a right angle. Most real triangles do not have one.
+        Two rules extend trigonometry to every triangle &mdash; and knowing which to reach for is
+        most of the skill.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-04</span>
+        <span class="pill">Sine rule</span>
+        <span class="pill">Cosine rule</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Labelling any triangle</li>
+        <li>The sine rule for sides</li>
+        <li>The sine rule for angles</li>
+        <li>When the angle is obtuse</li>
+        <li>The cosine rule for sides</li>
+        <li>The cosine rule for angles</li>
+        <li>Choosing between them</li>
+        <li>Solving a triangle completely</li>
+        <li>Class activity: the third side</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#labelling">1 &nbsp;Labelling convention</a></li>
+        <li class="toc-item"><a class="toc-link" href="#sine-side">2 &nbsp;Sine rule &mdash; sides</a></li>
+        <li class="toc-item"><a class="toc-link" href="#sine-angle">3 &nbsp;Sine rule &mdash; angles</a></li>
+        <li class="toc-item"><a class="toc-link" href="#obtuse">4 &nbsp;When the angle is obtuse</a></li>
+        <li class="toc-item"><a class="toc-link" href="#cosine-side">5 &nbsp;Cosine rule &mdash; sides</a></li>
+        <li class="toc-item"><a class="toc-link" href="#cosine-angle">6 &nbsp;Cosine rule &mdash; angles</a></li>
+        <li class="toc-item"><a class="toc-link" href="#choosing">7 &nbsp;Choosing the rule</a></li>
+        <li class="toc-item"><a class="toc-link" href="#solving">8 &nbsp;Solving completely</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. LABELLING ─────────── -->
+      <div class="content-card" id="labelling">
+        <p class="section-label">Theory</p>
+        <h2>Labelling any triangle</h2>
+
+        <p>Both rules rely on one convention, and getting it wrong is the fastest way to lose
+          marks.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The convention</p>
+          <p style="margin-bottom:0;">Angles are named with <strong>capital letters</strong>
+            \(A\), \(B\), \(C\). Each side takes the <strong>lower-case letter of the angle
+            opposite it</strong>: side \(a\) is opposite angle \(A\), side \(b\) opposite \(B\),
+            side \(c\) opposite \(C\).</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 300 210" width="300">
+            <polygon class="tri-fill" points="40,170 260,170 130,40"/>
+            <text class="node-label" x="28" y="186">A</text>
+            <text class="node-label" x="266" y="186">B</text>
+            <text class="node-label" x="124" y="30">C</text>
+            <text class="side-label-text" x="150" y="190" text-anchor="middle">c</text>
+            <text class="side-label-text" x="70" y="100">b</text>
+            <text class="side-label-text" x="208" y="100">a</text>
+            <path class="angle-arc" d="M 68 170 A 28 28 0 0 0 57 148"/>
+            <path class="angle-arc" d="M 232 170 A 28 28 0 0 1 246 148"/>
+            <path class="angle-arc" d="M 117 62 A 26 26 0 0 0 145 63"/>
+          </svg>
+        </div>
+        <p class="diagram-caption">Side \(a\) is opposite angle \(A\), and so on. The longest side
+          is always opposite the largest angle.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Two facts to check your answers against</p>
+          <ul style="margin-bottom:0;">
+            <li>The three angles sum to \(180°\).</li>
+            <li>The <strong>largest angle is opposite the longest side</strong>, and the smallest
+              angle opposite the shortest side. If your answer breaks this, it is wrong.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. SINE SIDE ─────────── -->
+      <div class="content-card" id="sine-side">
+        <p class="section-label">Theory</p>
+        <h2>The sine rule &mdash; finding a side</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Sine rule (side form)</p>
+          \[\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}\]
+          <p class="formula-where">Put the <strong>sides on top</strong> when you are looking for a
+            side. Use only the two fractions you need — never all three at once.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">When to use it</p>
+          <p style="margin-bottom:0;">Use the sine rule when you have a <strong>matching
+            pair</strong> — a side and the angle opposite it — plus one more piece of
+            information.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>In triangle \(ABC\), \(A = 52°\), \(B = 71°\) and \(a = 14\) cm. Find \(b\).</p>
+          <p>We have the matching pair \(a\) and \(A\), and we want \(b\) with its opposite angle
+            \(B\) known. Use those two fractions:</p>
+          \[\frac{b}{\sin 71°} = \frac{14}{\sin 52°}\]
+          \[b = \frac{14 \times \sin 71°}{\sin 52°} = \frac{14 \times 0.94552}{0.78801} = 16.80 \text{ cm}\]
+          <p><strong>Check:</strong> \(B > A\), so \(b\) should be longer than \(a\). It is. ✓</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; finding the third angle first</p>
+          <p>In triangle \(ABC\), \(A = 43°\), \(C = 28°\) and \(a = 9\) m. Find \(c\).</p>
+          <p>Here the pair \(a, A\) is known and \(C\) is given, so we can go straight to it:</p>
+          \[c = \frac{9 \times \sin 28°}{\sin 43°} = \frac{9 \times 0.46947}{0.68200} = 6.20 \text{ m}\]
+          <p>If instead you had been asked for \(b\), you would first need
+            \(B = 180° - 43° - 28° = 109°\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Sine rule explorer</h3>
+          <p class="exercise-intro">Set two angles and one side. The triangle is drawn to scale
+            and the remaining sides are calculated by the sine rule.</p>
+          <div id="sineSliders"></div>
+          <div class="diagram-wrap"><div id="sineDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Angle C</div>
+              <div class="readout-value" id="roAngC">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Side b</div>
+              <div class="readout-value" id="roSideB">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Side c</div>
+              <div class="readout-value" id="roSideC">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="sineNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In triangle \(ABC\), \(A = 38°\), \(B = 81°\) and \(a = 12\) cm. Find \(b\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[b = \frac{12 \times \sin 81°}{\sin 38°} = 19.25 \text{ cm}\]
+                <p>Check: \(B &gt; A\), so \(b &gt; a\) ✓</p>
+              </div></details></li>
+            <li>In triangle \(ABC\), \(A = 105°\), \(C = 33°\) and \(c = 7.5\) m. Find \(a\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[a = \frac{7.5 \times \sin 105°}{\sin 33°} = 13.30 \text{ m}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. SINE ANGLE ─────────── -->
+      <div class="content-card" id="sine-angle">
+        <p class="section-label">Theory</p>
+        <h2>The sine rule &mdash; finding an angle</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Sine rule (angle form)</p>
+          \[\frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c}\]
+          <p class="formula-where">Flip the rule so the <strong>sines are on top</strong> when
+            hunting for an angle. It keeps the unknown in the numerator, which is easier to solve.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>In triangle \(ABC\), \(a = 12\) m, \(b = 9\) m and \(A = 67°\). Find angle \(B\).</p>
+          \[\frac{\sin B}{9} = \frac{\sin 67°}{12}\]
+          \[\sin B = \frac{9 \times \sin 67°}{12} = \frac{9 \times 0.92050}{12} = 0.69038\]
+          \[B = \sin^{-1}(0.69038) = 43.66° \approx 43°40'\]
+          <p><strong>Check:</strong> \(b < a\), so \(B\) should be smaller than \(A\). It is. ✓</p>
+        </div>
+
+        <p>The syllabus restricts this to cases <strong>excluding the ambiguous case</strong>
+          &mdash; you will not be asked to decide between two possible triangles. But you do need
+          to handle one specific situation: when the question tells you the angle is obtuse.</p>
+      </div>
+
+      <!-- ─────────── 4. OBTUSE ─────────── -->
+      <div class="content-card" id="obtuse">
+        <p class="section-label">Theory</p>
+        <h2>When you are told the angle is obtuse</h2>
+
+        <p>Your calculator's \(\sin^{-1}\) always returns an <strong>acute</strong> angle. But two
+          different angles share the same sine.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The supplementary relationship</p>
+          \[\sin \theta = \sin (180° - \theta)\]
+          <p class="formula-where">For example \(\sin 40° = \sin 140° = 0.6428\). If the question
+            states the angle is obtuse, take \(180°\) minus the calculator's answer.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two angles, one sine</h3>
+          <p class="exercise-intro">Slide the acute angle and watch its obtuse partner. Both have
+            exactly the same sine value.</p>
+          <div id="suppSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Acute angle</div>
+              <div class="readout-value" id="roAcute">40°</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Obtuse partner</div>
+              <div class="readout-value" id="roObtuse">140°</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Both have sine</div>
+              <div class="readout-value" id="roSinBoth">0.6428</div>
+            </div>
+          </div>
+          <div class="plot-wrap" id="plotSine"></div>
+          <p class="diagram-caption">\(y = \sin\theta\) between 0° and 180° &mdash; symmetric about
+            90°, so every value below the peak is reached twice.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>In triangle \(ABC\), \(a = 8\) cm, \(b = 11\) cm and \(A = 34°\). Angle \(B\) is known
+            to be obtuse. Find \(B\).</p>
+          \[\frac{\sin B}{11} = \frac{\sin 34°}{8}\]
+          \[\sin B = \frac{11 \times 0.55919}{8} = 0.76889\]
+          <p>The calculator gives \(\sin^{-1}(0.76889) = 50.25°\), which is acute. Since we are
+            told \(B\) is obtuse:</p>
+          \[B = 180° - 50.25° = 129.75° \approx 129°45'\]
+          <p><strong>Check:</strong> \(b > a\), so \(B\) must exceed \(A = 34°\) — and \(129.75°\)
+            does. The remaining angle \(C = 180 - 34 - 129.75 = 16.25°\), which is positive, so the
+            triangle is valid. ✓</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In triangle \(ABC\), \(a = 15\), \(b = 11\) and \(A = 72°\). Find angle \(B\) to
+              the nearest minute.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[\sin B = \frac{11 \times \sin 72°}{15} = 0.69745 \;\Rightarrow\; B = 44.22° \approx 44°13'\]
+                <p>Acute is right here: \(b &lt; a\), so \(B &lt; A\).</p>
+              </div></details></li>
+            <li>In triangle \(ABC\), \(a = 6\), \(b = 9\) and \(A = 30°\). Angle \(B\) is obtuse.
+              Find \(B\) and \(C\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[\sin B = \frac{9 \times 0.5}{6} = 0.75 \;\Rightarrow\; \sin^{-1}(0.75) = 48.59°\]
+                <p>\(B\) is obtuse: \(B = 180° - 48.59° = 131.41° \approx 131°25'\).</p>
+                <p>\(C = 180° - 30° - 131.41° = 18.59°\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. COSINE SIDE ─────────── -->
+      <div class="content-card" id="cosine-side">
+        <p class="section-label">Theory</p>
+        <h2>The cosine rule &mdash; finding a side</h2>
+
+        <p>The sine rule needs a matching side–angle pair. When you do not have one, use the
+          cosine rule.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Cosine rule (side form)</p>
+          \[c^{2} = a^{2} + b^{2} - 2ab\cos C\]
+          <p class="formula-where">\(C\) is the angle <strong>between</strong> sides \(a\) and
+            \(b\) — the <em>included</em> angle — and \(c\) is the side opposite it.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">When to use it</p>
+          <p style="margin-bottom:0;">Use the cosine rule when you know <strong>two sides and the
+            angle between them</strong> (SAS), and want the third side.</p>
+        </div>
+
+        <p>Notice the resemblance to Pythagoras. If \(C = 90°\) then \(\cos 90° = 0\) and the rule
+          collapses to \(c^2 = a^2 + b^2\). The cosine rule is Pythagoras generalised to any angle.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A triangle has \(a = 7\) m, \(b = 10\) m and the included angle \(C = 58°\). Find
+            \(c\).</p>
+          \[c^{2} = 7^{2} + 10^{2} - 2(7)(10)\cos 58°\]
+          \[= 49 + 100 - 140 \times 0.52992\]
+          \[= 149 - 74.19 = 74.81\]
+          \[c = \sqrt{74.81} = 8.65 \text{ m}\]
+          <p><strong>Do not forget the square root.</strong> Stopping at 74.81 is the most common
+            error in cosine rule questions.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; an obtuse included angle</p>
+          <p>A triangle has \(a = 12\) cm, \(b = 15\) cm and \(C = 112°\). Find \(c\).</p>
+          <p>Here \(\cos 112° = -0.37461\), which is <strong>negative</strong>:</p>
+          \[c^{2} = 144 + 225 - 2(12)(15)(-0.37461)\]
+          \[= 369 + 134.86 = 503.86\]
+          \[c = \sqrt{503.86} = 22.45 \text{ cm}\]
+          <p>Subtracting a negative <em>adds</em>. This is correct: an obtuse included angle opens
+            the triangle out, making the opposite side longer than it would be at 90°
+            (\(\sqrt{369} = 19.2\) cm).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Cosine rule explorer</h3>
+          <p class="exercise-intro">Fix two sides and swing the included angle. Watch the third
+            side grow, and see the cosine term change sign as the angle passes 90°.</p>
+          <div id="cosSliders"></div>
+          <div class="diagram-wrap"><div id="cosDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">cos C</div>
+              <div class="readout-value" id="roCosC">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">c²</div>
+              <div class="readout-value" id="roCSq">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Side c</div>
+              <div class="readout-value" id="roC">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="cosNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A triangle has \(a = 5.5\) m, \(b = 8\) m and \(C = 75°\). Find \(c\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[c^2 = 5.5^2 + 8^2 - 2(5.5)(8)\cos 75° = 30.25 + 64 - 22.78 = 71.47\]
+                \[c = \sqrt{71.47} = 8.45 \text{ m}\]
+              </div></details></li>
+            <li>A triangle has \(a = 20\) cm, \(b = 26\) cm and \(C = 135°\). Find \(c\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\cos 135° = -0.70711\), so the last term is added:</p>
+                \[c^2 = 400 + 676 + 735.39 = 1811.39 \;\Rightarrow\; c = 42.56 \text{ cm}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. COSINE ANGLE ─────────── -->
+      <div class="content-card" id="cosine-angle">
+        <p class="section-label">Theory</p>
+        <h2>The cosine rule &mdash; finding an angle</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Cosine rule (angle form)</p>
+          \[\cos C = \frac{a^{2} + b^{2} - c^{2}}{2ab}\]
+          <p class="formula-where">Use when you know <strong>all three sides</strong> (SSS). The
+            angle you find is the one opposite side \(c\) — the side that appears with the minus
+            sign.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>A triangle has sides 8 m, 11 m and 15 m. Find the largest angle.</p>
+          <p>The largest angle is opposite the longest side, so put \(c = 15\), \(a = 8\),
+            \(b = 11\):</p>
+          \[\cos C = \frac{8^{2} + 11^{2} - 15^{2}}{2(8)(11)} = \frac{64 + 121 - 225}{176}\]
+          \[= \frac{-40}{176} = -0.22727\]
+          \[C = \cos^{-1}(-0.22727) = 103.14° \approx 103°08'\]
+          <p><strong>A negative cosine means an obtuse angle</strong> — and unlike sine, the
+            calculator handles this automatically, returning an angle above 90°. No adjustment is
+            needed.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Find the smallest angle in a triangle with sides 6, 9 and 12 cm.</p>
+          <p>The smallest angle faces the shortest side, so set \(c = 6\), \(a = 9\), \(b = 12\):</p>
+          \[\cos C = \frac{81 + 144 - 36}{2(9)(12)} = \frac{189}{216} = 0.875\]
+          \[C = \cos^{-1}(0.875) = 28.96° \approx 28°58'\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A triangle has sides 7 m, 8 m and 12 m. Find the largest angle to the nearest
+              minute.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[\cos C = \frac{49 + 64 - 144}{2(7)(8)} = \frac{-31}{112} = -0.27679\]
+                \[C = 106.07° \approx 106°04'\]
+              </div></details></li>
+            <li>An isosceles triangle has sides 10 cm, 10 cm and 6 cm. Find the smallest angle.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>It is opposite the 6 cm side:</p>
+                \[\cos C = \frac{100 + 100 - 36}{200} = 0.82 \;\Rightarrow\; C = 34.92° \approx 34°55'\]
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise both rules</h3>
+          <p class="exercise-intro">Decide which rule applies, then compute. Answers to 2 decimal
+            places; angles in degrees.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(A = 48°\), \(B = 62°\), \(a = 20\). Find \(b\).</label>
+            <input class="exercise-input" id="trA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-tr="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTrA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(a = 9\), \(b = 13\), \(C = 47°\). Find \(c\).</label>
+            <input class="exercise-input" id="trB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-tr="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTrB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Sides 5, 7, 10. Find the largest angle (degrees).</label>
+            <input class="exercise-input" id="trC" type="text" inputmode="decimal" placeholder="?°">
+            <button class="exercise-check-btn" data-tr="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTrC"></p>
+
+          <div class="exercise-row">
+            <label>(d) \(a = 14\), \(b = 10\), \(A = 71°\). Find angle \(B\) (degrees).</label>
+            <input class="exercise-input" id="trD" type="text" inputmode="decimal" placeholder="?°">
+            <button class="exercise-check-btn" data-tr="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTrD"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. CHOOSING ─────────── -->
+      <div class="content-card" id="choosing">
+        <p class="section-label">Method</p>
+        <h2>Choosing the right rule</h2>
+
+        <p>Mark the triangle with what you know, then read off the case:</p>
+
+        <table class="coord-table">
+          <tr><th>You know</th><th>Case</th><th>Use</th></tr>
+          <tr><td>A right angle</td><td>—</td><td><strong>SOH CAH TOA</strong> — always simplest</td></tr>
+          <tr><td>Two angles and any side</td><td>AAS</td><td><strong>Sine rule</strong></td></tr>
+          <tr><td>Two sides and an angle opposite one of them</td><td>SSA</td><td><strong>Sine rule</strong> (angle form)</td></tr>
+          <tr><td>Two sides and the angle between them</td><td>SAS</td><td><strong>Cosine rule</strong> (side form)</td></tr>
+          <tr><td>All three sides</td><td>SSS</td><td><strong>Cosine rule</strong> (angle form)</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The one-question test</p>
+          <p style="margin-bottom:0;">Do you have a <strong>matching pair</strong> — a side and the
+            angle directly opposite it? If yes, sine rule. If no, cosine rule. That single question
+            resolves almost every problem.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Which rule?</h3>
+          <p class="exercise-intro">Type <code>sine</code>, <code>cosine</code> or
+            <code>soh cah toa</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) You know all three sides and want an angle. &rarr;</label>
+            <input class="exercise-input" id="whA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhA"></p>
+
+          <div class="exercise-row">
+            <label>(b) You know \(A\), \(B\) and side \(a\), and want side \(c\). &rarr;</label>
+            <input class="exercise-input" id="whB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhB"></p>
+
+          <div class="exercise-row">
+            <label>(c) You know sides \(a\), \(b\) and the angle \(C\) between them. &rarr;</label>
+            <input class="exercise-input" id="whC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhC"></p>
+
+          <div class="exercise-row">
+            <label>(d) The triangle has a right angle and you know one side and one angle. &rarr;</label>
+            <input class="exercise-input" id="whD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhD"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; exam style</p>
+          <p>A block of land \(ABCD\) is divided by the diagonal \(AC = 48\) m. In triangle
+            \(ABC\), \(AB = 35\) m and \(\angle BAC = 52°\). In triangle \(ACD\),
+            \(\angle CAD = 38°\) and \(\angle ACD = 70°\).</p>
+          <p><strong>(a) Find \(BC\).</strong> [2 marks]</p>
+          <p>Triangle \(ABC\): two sides and the included angle (SAS), so the cosine rule.</p>
+          \[BC^2 = 35^2 + 48^2 - 2(35)(48)\cos 52° = 1460.38 \;\Rightarrow\; BC = 38.21 \text{ m}\]
+          <p><strong>(b) Find \(CD\).</strong> [2 marks]</p>
+          <p>Triangle \(ACD\): two angles and a side. The angle opposite \(AC\) is
+            \(\angle D = 180° - 38° - 70° = 72°\), giving a matching pair, so the sine rule.</p>
+          \[CD = \frac{48 \times \sin 38°}{\sin 72°} = 31.07 \text{ m}\]
+          <p><strong>Exam tip:</strong> state which rule you are using and why &mdash; "SAS, so
+            cosine rule" &mdash; before calculating.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 8. SOLVING COMPLETELY ─────────── -->
+      <div class="content-card" id="solving">
+        <p class="section-label">Method</p>
+        <h2>Solving a triangle completely</h2>
+
+        <p>To <strong>solve</strong> a triangle means to find every side and every angle. It
+          usually takes both rules in turn:</p>
+        <ol>
+          <li>Use the <strong>cosine rule</strong> first if you have SAS or SSS.</li>
+          <li>Then use the <strong>sine rule</strong> for a second angle &mdash; but choose the
+            <strong>smallest angle</strong> (opposite the shortest side). It must be acute, so the
+            calculator's answer is always correct.</li>
+          <li>Find the last angle from the angle sum, \(180°\).</li>
+        </ol>
+
+        <div class="formula-box">
+          <p class="formula-label">Why the smallest angle?</p>
+          <p style="margin-bottom:0;">A triangle can have at most one obtuse angle, and it is
+            always the largest. If you use the sine rule on the largest angle, the calculator may
+            give an acute answer when the true angle is obtuse. The smallest angle is never
+            obtuse.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10</p>
+          <p>Solve triangle \(ABC\) with \(a = 9\), \(b = 14\) and \(C = 40°\).</p>
+          <p><strong>Side \(c\)</strong> (SAS, cosine rule):</p>
+          \[c^2 = 81 + 196 - 2(9)(14)\cos 40° = 83.96 \;\Rightarrow\; c = 9.16\]
+          <p><strong>Smallest angle.</strong> The shortest side is \(a = 9\), so find \(A\):</p>
+          \[\sin A = \frac{9 \times \sin 40°}{9.16} = 0.6314 \;\Rightarrow\; A = 39.15° \approx 39°09'\]
+          <p><strong>Last angle:</strong> \(B = 180° - 40° - 39.15° = 100.85° \approx 100°51'\).</p>
+          <p>Notice \(B\) is obtuse. Using the sine rule for \(B\) would have given 79.15°
+            &mdash; wrong. Choosing the smallest angle avoided the trap.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Solve triangle \(ABC\) with \(b = 12\), \(c = 7\) and \(A = 52°\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(a^2 = 144 + 49 - 2(12)(7)\cos 52° = 89.57\), so \(a = 9.46\).</p>
+                <p>Shortest side is \(c = 7\): \(\sin C = \dfrac{7 \sin 52°}{9.46} = 0.5829\), so
+                  \(C = 35.65° \approx 35°39'\).</p>
+                <p>\(B = 180° - 52° - 35.65° = 92.35° \approx 92°21'\) &mdash; obtuse again.</p>
+              </div></details></li>
+            <li>Solve the triangle with sides 6 cm, 8 cm and 11 cm.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Largest angle (opposite 11): \(\cos\theta = \dfrac{36 + 64 - 121}{96} = -0.21875\),
+                  so \(\theta = 102.64° \approx 102°38'\).</p>
+                <p>Smallest angle (opposite 6): \(\sin\phi = \dfrac{6 \sin 102.64°}{11} = 0.5322\),
+                  so \(\phi = 32.16° \approx 32°09'\).</p>
+                <p>Third angle: \(180° - 102.64° - 32.16° = 45.20° \approx 45°12'\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>How long can the third side be?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#cosine-side">cosine rule explorer</a> with side \(a = 8\) and side \(b = 6\).</p>
+        <ol>
+          <li>Record side \(c\) for included angles of 30°, 60°, 90°, 120°, 150° and 170°.</li>
+          <li>At which angle is \(c = 10\)? Why that angle, and why that value?</li>
+          <li>As the angle gets close to 180°, what value does \(c\) approach? And as it gets close
+            to 0°? Explain both using a sketch of the two sides.</li>
+          <li>Can a triangle have sides 8, 6 and 15? Use your answer to step 3.</li>
+          <li>Is \(c\) proportional to the angle? Use your table to justify your answer.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Angle \(C\)</th><td>30°</td><td>60°</td><td>90°</td><td>120°</td><td>150°</td><td>170°</td></tr>
+            <tr><th>Side \(c\)</th><td>4.11</td><td>7.21</td><td>10.00</td><td>12.17</td><td>13.53</td><td>13.95</td></tr>
+          </table>
+          <p><strong>2.</strong> At 90°, \(\cos 90° = 0\) and the rule becomes Pythagoras:
+            \(\sqrt{64 + 36} = 10\).</p>
+          <p><strong>3.</strong> Near 180° the sides lie almost in a straight line, end to end, so
+            \(c \to 8 + 6 = 14\). Near 0° they fold together, so \(c \to 8 - 6 = 2\).</p>
+          <p><strong>4.</strong> No. The third side must be less than \(8 + 6 = 14\) (and more
+            than 2) &mdash; the <strong>triangle inequality</strong>.</p>
+          <p><strong>5.</strong> No. Doubling the angle from 30° to 60° does not double \(c\), and
+            \(c\) grows more slowly as the angle approaches 180°.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Draw and label a diagram for every question before you start.
+          Then reveal the worked solution and mark yourself honestly.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 adds the area formula and bearings, then combines everything into full
+          navigation problems.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-4', LESSON_IDX = 1;
+  var NS = 'http://www.w3.org/2000/svg';
+  var D2R = Math.PI / 180;
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function toDMS(dec) {
+    var d = Math.floor(dec), m = Math.round((dec - d) * 60);
+    if (m === 60) { d += 1; m = 0; }
+    return d + '°' + (m < 10 ? '0' + m : m) + "'";
+  }
+
+  /* Draw triangle ABC from vertex coordinates, scaled into the box. */
+  function drawTriangle(mount, A, B, C, labels) {
+    var W = 320, H = 220, PAD = 40;
+    var xs = [A[0], B[0], C[0]], ys = [A[1], B[1], C[1]];
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    var sc = Math.min((W - 2 * PAD) / Math.max(maxX - minX, 0.001),
+                      (H - 2 * PAD) / Math.max(maxY - minY, 0.001));
+    function px(p) { return [PAD + (p[0] - minX) * sc, H - PAD - (p[1] - minY) * sc]; }
+    var a = px(A), b = px(B), c = px(C);
+
+    var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+    svg.appendChild(svgEl('polygon', { class: 'tri-fill',
+      points: a[0] + ',' + a[1] + ' ' + b[0] + ',' + b[1] + ' ' + c[0] + ',' + c[1] }));
+    svg.appendChild(svgEl('text', { class: 'node-label', x: a[0] - 16, y: a[1] + 6 }, 'A'));
+    svg.appendChild(svgEl('text', { class: 'node-label', x: b[0] + 8,  y: b[1] + 6 }, 'B'));
+    svg.appendChild(svgEl('text', { class: 'node-label', x: c[0] - 4,  y: c[1] - 10 }, 'C'));
+    if (labels) {
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (a[0] + b[0]) / 2, y: Math.max(a[1], b[1]) + 18, 'text-anchor': 'middle' }, labels.c));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (a[0] + c[0]) / 2 - 18, y: (a[1] + c[1]) / 2 }, labels.b));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (b[0] + c[0]) / 2 + 6,  y: (b[1] + c[1]) / 2 }, labels.a));
+    }
+    mount.innerHTML = '';
+    mount.appendChild(svg);
+  }
+
+  /* ── Sine rule explorer ───────────────────────────────────── */
+  (function () {
+    var A = 52, B = 71, a = 14;
+    var mount = document.getElementById('sineDiagram');
+
+    function update() {
+      var C = 180 - A - B;
+      var note = document.getElementById('sineNote');
+      if (C <= 1) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Angles A and B sum to ' + (A + B) + '°, leaving no room for angle C. A triangle\'s angles must total 180°.';
+        document.getElementById('roAngC').textContent = 'invalid';
+        document.getElementById('roSideB').textContent = '—';
+        document.getElementById('roSideC').textContent = '—';
+        mount.innerHTML = '';
+        return;
+      }
+      var b = a * Math.sin(B * D2R) / Math.sin(A * D2R);
+      var c = a * Math.sin(C * D2R) / Math.sin(A * D2R);
+
+      // Place A at origin, B along the x-axis at distance c, then locate C.
+      var Apt = [0, 0], Bpt = [c, 0];
+      var Cpt = [b * Math.cos(A * D2R), b * Math.sin(A * D2R)];
+      drawTriangle(mount, Apt, Bpt, Cpt, { a: a.toFixed(1), b: b.toFixed(1), c: c.toFixed(1) });
+
+      document.getElementById('roAngC').textContent  = C.toFixed(0) + '°';
+      document.getElementById('roSideB').textContent = b.toFixed(2);
+      document.getElementById('roSideC').textContent = c.toFixed(2);
+
+      var biggest = (A >= B && A >= C) ? 'a' : (B >= C ? 'b' : 'c');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Angle C = 180 − ' + A + ' − ' + B + ' = ' + C.toFixed(0) +
+        '°. The largest angle is ' + (A >= B && A >= C ? 'A' : (B >= C ? 'B' : 'C')) +
+        ', so the longest side should be ' + biggest + ' — check it against the diagram.';
+    }
+
+    var host = 'sineSliders';
+    IE.slider({ mount: host, label: 'Angle A', min: 15, max: 120, step: 1, value: A,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { A = v; update(); } });
+    IE.slider({ mount: host, label: 'Angle B', min: 15, max: 120, step: 1, value: B,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { B = v; update(); } });
+    IE.slider({ mount: host, label: 'Side a', min: 5, max: 30, step: 1, value: a,
+                onInput: function (v) { a = v; update(); } });
+    update();
+  })();
+
+  /* ── Supplementary angles ─────────────────────────────────── */
+  (function () {
+    var ang = 40;
+    var redraw = IE.plot('plotSine', {
+      width: 460, height: 230,
+      xMin: 0, xMax: 180, yMin: 0, yMax: 1.1, xStep: 30, yStep: 0.25,
+      xLabel: 'θ°', yLabel: 'sin θ',
+      curves: [{ fn: function (t) { return Math.sin(t * D2R); } }]
+    });
+
+    function update() {
+      var s = Math.sin(ang * D2R);
+      redraw({
+        points: [
+          { x: ang, y: s, label: ang + '°' },
+          { x: 180 - ang, y: s, label: (180 - ang) + '°', hollow: true }
+        ],
+        markers: [{ x: ang, y: s }, { x: 180 - ang, y: s }]
+      });
+      document.getElementById('roAcute').textContent   = ang + '°';
+      document.getElementById('roObtuse').textContent  = (180 - ang) + '°';
+      document.getElementById('roSinBoth').textContent = s.toFixed(4);
+    }
+    IE.slider({ mount: 'suppSliders', label: 'Acute angle', min: 5, max: 89, step: 1, value: ang,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { ang = v; update(); } });
+    update();
+  })();
+
+  /* ── Cosine rule explorer ─────────────────────────────────── */
+  (function () {
+    var a = 7, b = 10, C = 58;
+    var mount = document.getElementById('cosDiagram');
+
+    function update() {
+      var cosC = Math.cos(C * D2R);
+      var cSq = a * a + b * b - 2 * a * b * cosC;
+      var c = Math.sqrt(cSq);
+
+      // Place C at the origin with sides a and b radiating out at angle C.
+      var Cpt = [0, 0];
+      var Bpt = [a, 0];
+      var Apt = [b * Math.cos(C * D2R), b * Math.sin(C * D2R)];
+      drawTriangle(mount, Apt, Bpt, Cpt, { a: a.toFixed(1), b: b.toFixed(1), c: c.toFixed(2) });
+
+      document.getElementById('roCosC').textContent = cosC.toFixed(5);
+      document.getElementById('roCSq').textContent  = cSq.toFixed(2);
+      document.getElementById('roC').textContent    = c.toFixed(2);
+
+      var note = document.getElementById('cosNote');
+      var pyth = Math.sqrt(a * a + b * b);
+      if (C < 89.5) {
+        note.className = 'exercise-feedback';
+        note.textContent = 'cos C is positive, so the −2ab cos C term subtracts: c = ' + c.toFixed(2) +
+          ' is shorter than the right-angled case (' + pyth.toFixed(2) + ').';
+      } else if (C > 90.5) {
+        note.className = 'exercise-feedback';
+        note.textContent = 'cos C is negative, so subtracting it adds: c = ' + c.toFixed(2) +
+          ' is longer than the right-angled case (' + pyth.toFixed(2) + ').';
+      } else {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'At C = 90°, cos C = 0 and the rule collapses to Pythagoras: c² = a² + b².';
+      }
+    }
+
+    var host = 'cosSliders';
+    IE.slider({ mount: host, label: 'Side a', min: 3, max: 20, step: 1, value: a,
+                onInput: function (v) { a = v; update(); } });
+    IE.slider({ mount: host, label: 'Side b', min: 3, max: 20, step: 1, value: b,
+                onInput: function (v) { b = v; update(); } });
+    IE.slider({ mount: host, label: 'Angle C', min: 10, max: 170, step: 1, value: C,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { C = v; update(); } });
+    update();
+  })();
+
+  /* ── Rule exercises ───────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [20 * Math.sin(62 * D2R) / Math.sin(48 * D2R),
+          'Matching pair a and A, so the sine rule: b = 20 × sin 62° ÷ sin 48°.'],
+      B: [Math.sqrt(81 + 169 - 2 * 9 * 13 * Math.cos(47 * D2R)),
+          'Two sides and the included angle — cosine rule: c² = 9² + 13² − 2(9)(13)cos 47°, then square root.'],
+      C: [Math.acos((25 + 49 - 100) / (2 * 5 * 7)) / D2R,
+          'Three sides — cosine rule (angle form). The largest angle faces the longest side (10): cos C = (25 + 49 − 100) ÷ 70 = −0.371.'],
+      D: [Math.asin(10 * Math.sin(71 * D2R) / 14) / D2R,
+          'Matching pair a and A — sine rule (angle form): sin B = 10 × sin 71° ÷ 14.']
+    };
+    document.querySelectorAll('[data-tr]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.tr, fb = document.getElementById('fbTr' + k);
+        var g = parseFloat((document.getElementById('tr' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.03;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(2) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Which rule? ──────────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['cosine', 'Three sides (SSS) and no matching pair — cosine rule in angle form.'],
+      B: ['sine',   'Two angles and a side (AAS). You have the matching pair a and A, so use the sine rule (find C = 180 − A − B first).'],
+      C: ['cosine', 'Two sides and the included angle (SAS) — cosine rule in side form.'],
+      D: ['soh cah toa', 'With a right angle present, the basic ratios are always simpler than either rule.']
+    };
+    document.querySelectorAll('[data-wh]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.wh, fb = document.getElementById('fbWh' + k);
+        var v = (document.getElementById('wh' + k).value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type an answer.'; return; }
+        var ok = v.indexOf(ANS[k][0]) !== -1 || (ANS[k][0] === 'soh cah toa' && /soh|toa|ratio/.test(v));
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ It is the ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'In triangle \\(ABC\\), which side is opposite angle \\(B\\)?',
+      opts: ['A) Side \\(a\\)', 'B) Side \\(b\\)', 'C) Side \\(c\\)', 'D) The hypotenuse'],
+      correct: 1,
+      explanation: 'B is correct. Each side takes the lower-case letter of the angle opposite it, so side \\(b\\) faces angle \\(B\\). "Hypotenuse" only has meaning in a right-angled triangle.'
+    },
+    {
+      q: 'You know two sides of a triangle and the angle between them, and want the third side. Which rule applies?',
+      opts: ['A) Sine rule', 'B) Cosine rule', 'C) SOH CAH TOA', 'D) Pythagoras'],
+      correct: 1,
+      explanation: 'B is correct. This is the SAS case, with no matching side–angle pair, so the sine rule cannot start. Use \\(c^{2} = a^{2} + b^{2} - 2ab\\cos C\\).'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(A = 40°\\), \\(B = 65°\\) and \\(a = 18\\). Which equation finds \\(b\\)?',
+      opts: [
+        'A) \\(\\dfrac{b}{\\sin 65°} = \\dfrac{18}{\\sin 40°}\\)',
+        'B) \\(\\dfrac{b}{\\sin 40°} = \\dfrac{18}{\\sin 65°}\\)',
+        'C) \\(b^{2} = 18^{2} - 2(18)\\cos 65°\\)',
+        'D) \\(b = 18 \\times \\tan 65°\\)'
+      ],
+      correct: 0,
+      explanation: 'A is correct. The sine rule pairs each side with its own opposite angle: \\(b\\) with \\(\\sin B = \\sin 65°\\), and \\(a = 18\\) with \\(\\sin A = \\sin 40°\\). Option B pairs them the wrong way round.'
+    },
+    {
+      q: 'A triangle has \\(a = 6\\), \\(b = 9\\), \\(C = 120°\\). What is \\(c^{2}\\)?',
+      opts: ['A) 63', 'B) 117', 'C) 171', 'D) 9'],
+      correct: 2,
+      explanation: 'C is correct. \\(\\cos 120° = -0.5\\), so \\(c^{2} = 36 + 81 - 2(6)(9)(-0.5) = 117 + 54 = 171\\). Option B forgets that subtracting a negative adds.'
+    },
+    {
+      q: 'A triangle has sides 7, 9 and 13. Using \\(\\cos C = \\dfrac{a^2 + b^2 - c^2}{2ab}\\) with \\(c = 13\\), what does a negative result tell you?',
+      opts: [
+        'A) You have made an arithmetic error',
+        'B) The angle opposite the side of length 13 is obtuse',
+        'C) The triangle is impossible',
+        'D) You must add 180° to the answer'
+      ],
+      correct: 1,
+      explanation: 'B is correct. A negative cosine corresponds to an angle between 90° and 180°. Unlike inverse sine, \\(\\cos^{-1}\\) returns the obtuse angle directly — no adjustment needed.'
+    },
+    {
+      q: 'In a triangle, \\(a = 10\\), \\(b = 14\\) and \\(A = 38°\\). Angle \\(B\\) is known to be obtuse. Given \\(\\sin^{-1}(0.8621) = 59.55°\\), what is \\(B\\)?',
+      opts: ['A) 59.55°', 'B) 120.45°', 'C) 30.45°', 'D) 82.45°'],
+      correct: 1,
+      explanation: 'B is correct. The calculator always returns the acute solution, but \\(\\sin\\theta = \\sin(180° - \\theta)\\). Since \\(B\\) is stated to be obtuse, \\(B = 180° - 59.55° = 120.45°\\).'
+    },
+    {
+      q: 'Why does the cosine rule reduce to Pythagoras\' theorem when \\(C = 90°\\)?',
+      opts: [
+        'A) Because \\(\\cos 90° = 1\\)',
+        'B) Because \\(\\cos 90° = 0\\), so the final term vanishes',
+        'C) Because \\(a = b\\) in a right-angled triangle',
+        'D) It does not — they are unrelated'
+      ],
+      correct: 1,
+      explanation: 'B is correct. With \\(\\cos 90° = 0\\), the term \\(-2ab\\cos C\\) becomes zero and \\(c^{2} = a^{2} + b^{2} - 0\\). The cosine rule is Pythagoras generalised to any included angle.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'In triangle \\(ABC\\), \\(A = 55°\\), \\(B = 63°\\) and \\(a = 22\\) cm. Find side \\(b\\), to 2 decimal places.',
+      marks: 3,
+      steps: [
+        'A matching pair (\\(a\\) and \\(A\\)) is known, so use the sine rule.',
+        '\\(\\dfrac{b}{\\sin 63°} = \\dfrac{22}{\\sin 55°}\\).',
+        '\\(b = \\dfrac{22 \\times 0.89101}{0.81915}\\).',
+        'Check: \\(B > A\\), so \\(b > a\\) ✓'
+      ],
+      answer: '\\(b \\approx 23.93\\) cm'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(A = 47°\\), \\(C = 29°\\) and \\(c = 15\\) m. Find side \\(a\\).',
+      marks: 3,
+      steps: [
+        'The matching pair here is \\(c\\) and \\(C\\).',
+        '\\(\\dfrac{a}{\\sin 47°} = \\dfrac{15}{\\sin 29°}\\).',
+        '\\(a = \\dfrac{15 \\times 0.73135}{0.48481}\\).'
+      ],
+      answer: '\\(a \\approx 22.63\\) m'
+    },
+    {
+      q: 'A triangle has \\(a = 11\\), \\(b = 16\\) and included angle \\(C = 52°\\). Find \\(c\\).',
+      marks: 3,
+      steps: [
+        'Two sides with the angle between them — cosine rule.',
+        '\\(c^{2} = 121 + 256 - 2(11)(16)\\cos 52°\\).',
+        '\\(= 377 - 352 \\times 0.61566 = 377 - 216.71 = 160.29\\).',
+        '\\(c = \\sqrt{160.29}\\) — do not forget the square root.'
+      ],
+      answer: '\\(c \\approx 12.66\\)'
+    },
+    {
+      q: 'A triangle has \\(a = 14\\) m, \\(b = 9\\) m and \\(C = 118°\\). Find \\(c\\).',
+      marks: 3,
+      steps: [
+        '\\(\\cos 118° = -0.46947\\), which is negative.',
+        '\\(c^{2} = 196 + 81 - 2(14)(9)(-0.46947)\\).',
+        '\\(= 277 + 118.31 = 395.31\\).',
+        '\\(c = \\sqrt{395.31}\\). Subtracting a negative adds, so \\(c\\) exceeds \\(\\sqrt{277} = 16.64\\) ✓'
+      ],
+      answer: '\\(c \\approx 19.88\\) m'
+    },
+    {
+      q: 'A triangle has sides 9, 12 and 17 cm. Find the largest angle, in degrees and minutes.',
+      marks: 4,
+      steps: [
+        'The largest angle is opposite the longest side, so set \\(c = 17\\), \\(a = 9\\), \\(b = 12\\).',
+        '\\(\\cos C = \\dfrac{81 + 144 - 289}{2(9)(12)} = \\dfrac{-64}{216} = -0.29630\\).',
+        '\\(C = \\cos^{-1}(-0.29630) = 107.24°\\).',
+        '\\(0.24 \\times 60 = 14.4\\), so about \\(107°14\'\\). The negative cosine correctly gives an obtuse angle.'
+      ],
+      answer: 'About \\(107°14\'\\)'
+    },
+    {
+      q: 'Find the smallest angle in a triangle with sides 8, 13 and 15 m.',
+      marks: 4,
+      steps: [
+        'The smallest angle faces the shortest side, so set \\(c = 8\\), \\(a = 13\\), \\(b = 15\\).',
+        '\\(\\cos C = \\dfrac{169 + 225 - 64}{2(13)(15)} = \\dfrac{330}{390}\\).',
+        '\\(= 0.84615\\).',
+        '\\(C = \\cos^{-1}(0.84615)\\).'
+      ],
+      answer: 'About \\(32.20°\\), or \\(32°12\'\\)'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(a = 17\\), \\(b = 12\\) and \\(A = 74°\\). Find angle \\(B\\), to the nearest minute.',
+      marks: 4,
+      steps: [
+        'Matching pair \\(a\\) and \\(A\\) — sine rule in angle form.',
+        '\\(\\dfrac{\\sin B}{12} = \\dfrac{\\sin 74°}{17}\\).',
+        '\\(\\sin B = \\dfrac{12 \\times 0.96126}{17} = 0.67854\\).',
+        '\\(B = \\sin^{-1}(0.67854) = 42.73°\\), so about \\(42°44\'\\).',
+        'Check: \\(b < a\\), so \\(B < A\\) ✓'
+      ],
+      answer: 'About \\(42°44\'\\)'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(a = 7\\) cm, \\(b = 12\\) cm and \\(A = 29°\\). Angle \\(B\\) is obtuse. Find \\(B\\) and then \\(C\\).',
+      marks: 5,
+      steps: [
+        '\\(\\dfrac{\\sin B}{12} = \\dfrac{\\sin 29°}{7}\\).',
+        '\\(\\sin B = \\dfrac{12 \\times 0.48481}{7} = 0.83110\\).',
+        'The calculator gives \\(\\sin^{-1}(0.83110) = 56.965°\\), which is acute.',
+        'Since \\(B\\) is obtuse: \\(B = 180° - 56.965° = 123.04°\\).',
+        '\\(C = 180° - 29° - 123.04° = 27.96°\\), which is positive, so the triangle is valid ✓'
+      ],
+      answer: '\\(B \\approx 123.04°\\) (about \\(123°02\'\\)) and \\(C \\approx 27.96°\\).'
+    },
+    {
+      q: 'Explain why a calculator cannot tell you directly whether an angle found by the sine rule is acute or obtuse.',
+      marks: 3,
+      steps: [
+        '\\(\\sin\\theta = \\sin(180° - \\theta)\\), so two different angles share every sine value below 1.',
+        'For example \\(\\sin 50° = \\sin 130° = 0.766\\).',
+        'The \\(\\sin^{-1}\\) function must return a single value, and it is defined to return the acute one.',
+        'So extra information from the question — or a check that the angles still sum to 180° — is needed.'
+      ],
+      answer: 'Because sine takes the same value at \\(\\theta\\) and \\(180° - \\theta\\), two triangles can fit the same data. \\(\\sin^{-1}\\) is defined to return only the acute solution, so the question must tell you the angle is obtuse (or you must check the angle sum).'
+    },
+    {
+      q: 'Two ships leave port together. Ship A travels 40 km and ship B travels 55 km, with an angle of 63° between their courses. How far apart are they?',
+      marks: 4,
+      steps: [
+        'The two distances and the angle between them form an SAS triangle.',
+        'Use the cosine rule: \\(d^{2} = 40^{2} + 55^{2} - 2(40)(55)\\cos 63°\\).',
+        '\\(= 1600 + 3025 - 4400 \\times 0.45399\\).',
+        '\\(= 4625 - 1997.56 = 2627.44\\), so \\(d = \\sqrt{2627.44}\\).'
+      ],
+      answer: 'About 51.26 km apart.'
+    },
+    {
+      q: 'A triangular park has sides 85 m, 110 m and 140 m. Find all three angles and verify they sum to 180°.',
+      marks: 5,
+      steps: [
+        'Largest angle, opposite 140: \\(\\cos C = \\dfrac{85^2 + 110^2 - 140^2}{2(85)(110)} = \\dfrac{7225 + 12100 - 19600}{18700} = \\dfrac{-275}{18700} = -0.014706\\).',
+        '\\(C = 90.84°\\).',
+        'Angle opposite 110: \\(\\cos B = \\dfrac{7225 + 19600 - 12100}{2(85)(140)} = \\dfrac{14725}{23800} = 0.61870\\), so \\(B = 51.77°\\).',
+        'Third angle: \\(A = 180 - 90.84 - 51.77 = 37.39°\\).',
+        'Check: \\(90.84 + 51.77 + 37.39 = 180.00\\) ✓ and the largest angle faces the longest side ✓'
+      ],
+      answer: 'About \\(37.39°\\), \\(51.77°\\) and \\(90.84°\\), summing to 180°.'
+    },
+    {
+      q: 'A student uses the sine rule on a triangle where they know sides 8, 11 and the angle 40° between them. Explain why this fails and what they should do.',
+      marks: 3,
+      steps: [
+        'The sine rule needs a matching pair — a side together with the angle directly opposite it.',
+        'Here the 40° angle lies between the two known sides, so it is not opposite either of them.',
+        'Every sine-rule fraction would therefore contain two unknowns.',
+        'This is the SAS case, which requires the cosine rule.'
+      ],
+      answer: 'The 40° angle is included between the two known sides, not opposite either, so there is no matching pair to start the sine rule. They should use the cosine rule: \\(c^2 = 8^2 + 11^2 - 2(8)(11)\\cos 40°\\).'
+    },
+    {
+      q: 'A triangle has \\(A = 38°\\), \\(b = 24\\) m and \\(c = 31\\) m. Find side \\(a\\), then angle \\(B\\).',
+      marks: 5,
+      steps: [
+        'The 38° angle lies between sides \\(b\\) and \\(c\\), so start with the cosine rule.',
+        '\\(a^{2} = 24^{2} + 31^{2} - 2(24)(31)\\cos 38° = 576 + 961 - 1488 \\times 0.78801\\).',
+        '\\(= 1537 - 1172.56 = 364.44\\), so \\(a = 19.09\\) m.',
+        'Now a matching pair exists, so use the sine rule: \\(\\sin B = \\dfrac{24 \\times \\sin 38°}{19.09} = \\dfrac{24 \\times 0.61566}{19.09} = 0.77400\\).',
+        '\\(B = \\sin^{-1}(0.77400) = 50.72°\\). Check: \\(b < c\\) so \\(B < C\\), and \\(C = 91.28°\\) ✓'
+      ],
+      answer: '\\(a \\approx 19.09\\) m and \\(B \\approx 50.72°\\).'
+    },
+    {
+      q: 'A surveyor measures a triangular block: one side 62 m, another 48 m, with an angle of 97° between them. Find the third side and the shortest side\'s opposite angle.',
+      marks: 5,
+      steps: [
+        'Cosine rule with the included angle: \\(c^{2} = 62^{2} + 48^{2} - 2(62)(48)\\cos 97°\\).',
+        '\\(\\cos 97° = -0.12187\\), so \\(c^{2} = 3844 + 2304 + 725.37 = 6873.37\\).',
+        '\\(c = 82.90\\) m.',
+        'The shortest side is 48 m, so find its opposite angle by the sine rule: \\(\\sin\\theta = \\dfrac{48 \\times \\sin 97°}{82.90} = \\dfrac{48 \\times 0.99255}{82.90} = 0.57478\\).',
+        '\\(\\theta = 35.09°\\). Check: \\(35.09 + 97 + 47.91 = 180\\) ✓'
+      ],
+      answer: 'Third side about 82.90 m; the angle opposite the 48 m side is about \\(35.09°\\).'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

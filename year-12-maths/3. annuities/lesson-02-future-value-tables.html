@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Future Value &amp; Interest Factor Tables</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 3 &mdash; Annuities</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Future Value &amp; Interest Factor Tables</h1>
+      <p class="subtitle">Building a 30-row table by hand is not practical in an exam. An interest
+        factor table collapses the whole calculation into a single multiplication &mdash; and
+        reading one correctly is a guaranteed source of marks.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-03</span>
+        <span class="pill">Future value</span>
+        <span class="pill">Interest factors</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What an interest factor is</li>
+        <li>Reading a future value table</li>
+        <li>Finding the future value</li>
+        <li>Working backwards to the contribution</li>
+        <li>Finding the term or the rate</li>
+        <li>Matching the period to the rate</li>
+        <li>Class activity: saving for a goal</li>
+        <li>Knowledge check &amp; extended practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#factor">1 &nbsp;What is an interest factor?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#reading">2 &nbsp;Reading the table</a></li>
+        <li class="toc-item"><a class="toc-link" href="#fv">3 &nbsp;Finding future value</a></li>
+        <li class="toc-item"><a class="toc-link" href="#backwards">4 &nbsp;Finding the contribution</a></li>
+        <li class="toc-item"><a class="toc-link" href="#reverse">5 &nbsp;How long &amp; what rate?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#periods">6 &nbsp;Non-annual periods</a></li>
+        <li class="toc-item"><a class="toc-link" href="#varying">7 &nbsp;Varying the parameters</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. FACTOR ─────────── -->
+      <div class="content-card" id="factor">
+        <p class="section-label">Theory</p>
+        <h2>What is an interest factor?</h2>
+
+        <p>In Lesson 1 we found that $1,000 contributed annually for 3 years at 10% grows to
+          $3,310. Notice what happens if we contribute $1 instead:</p>
+
+        <table class="coord-table">
+          <tr><th>Year</th><th>Opening</th><th>Interest (10%)</th><th>Contribution</th><th>Closing</th></tr>
+          <tr><td>1</td><td>0.0000</td><td>0.0000</td><td>1.0000</td><td>1.0000</td></tr>
+          <tr><td>2</td><td>1.0000</td><td>0.1000</td><td>1.0000</td><td>2.1000</td></tr>
+          <tr><td>3</td><td>2.1000</td><td>0.2100</td><td>1.0000</td><td>3.3100</td></tr>
+        </table>
+
+        <p>The answer is <strong>3.3100</strong>. And \(1000 \times 3.3100 = \$3\,310\) &mdash;
+          exactly the earlier result.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The interest factor</p>
+          <p style="margin-bottom:0;">A <strong>future value interest factor</strong> is the final
+            value of an annuity of <strong>$1 per period</strong>. Because annuities scale
+            proportionally, you multiply the factor by your actual contribution to get the answer.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Using a future value table</p>
+          \[FV = (\text{contribution per period}) \times (\text{interest factor})\]
+          <p class="formula-where">Look up the factor at the row for the number of periods \(n\)
+            and the column for the interest rate \(r\) <strong>per period</strong>.</p>
+        </div>
+
+        <p>For reference, the factor is generated by
+          \(\dfrac{(1+r)^{n} - 1}{r}\), but in this course you <em>read it from the table</em>
+          rather than calculating it. The table is provided in the exam.</p>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Build the $1-per-year table for 3 years at 5% to find the interest factor. Use it
+              to find the future value of $600 per year for 3 years at 5%.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Closing balances: 1.0000, then \(1 + 0.05 + 1 = 2.0500\), then
+                  \(2.05 + 0.1025 + 1 = 3.1525\).</p>
+                <p>\(FV = 600 \times 3.1525 = \$1\,891.50\).</p>
+              </div></details></li>
+            <li>Why is the interest factor for \(n = 1\) equal to 1.0000 at every interest rate?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The single $1 contribution arrives at the end of the only period, so it earns no
+                  interest. The balance is just the $1 contributed.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. READING ─────────── -->
+      <div class="content-card" id="reading">
+        <p class="section-label">Method</p>
+        <h2>Reading a future value table</h2>
+
+        <p>A future value interest factor table for an annuity of $1 per period:</p>
+
+        <div style="overflow-x:auto;">
+          <table class="coord-table" id="fvTable"></table>
+        </div>
+        <p class="diagram-caption">Future value of an annuity of $1 per period, at the end of
+          \(n\) periods.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Three checks before you use a factor</p>
+          <ol style="margin-bottom:0;">
+            <li>Is \(n\) the number of <strong>periods</strong>, not necessarily years?</li>
+            <li>Is the rate the rate <strong>per period</strong>, not per annum?</li>
+            <li>Does the factor look sensible? It should always be <strong>at least \(n\)</strong>
+              &mdash; you contributed $1 \(n\) times, and interest can only add to that.</li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Table reader</h3>
+          <p class="exercise-intro">Pick a rate and a number of periods, and see the factor
+            highlighted along with the calculation it produces.</p>
+          <div id="readSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Interest factor</div>
+              <div class="readout-value" id="roFactor">3.3100</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Future value</div>
+              <div class="readout-value" id="roFV">$3,310.00</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total contributed</div>
+              <div class="readout-value" id="roCont">$3,000.00</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Interest earned</div>
+              <div class="readout-value" id="roInt">$310.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. FV ─────────── -->
+      <div class="content-card" id="fv">
+        <p class="section-label">Application</p>
+        <h2>Finding the future value</h2>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Dev contributes $4,000 at the end of each year for 8 years into an account earning
+            5% per annum. Use the table to find the future value.</p>
+          <p>From the table at \(n = 8\), \(r = 5\%\), the factor is <strong>9.5491</strong>.</p>
+          \[FV = 4000 \times 9.5491 = \$38\,196.40\]
+          <p><strong>Sense check:</strong> he contributed \(8 \times 4000 = \$32\,000\), so the
+            interest is $6,196.40. The factor 9.5491 is comfortably above 8, as it must be.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; with an existing balance</p>
+          <p>Ellie has $20,000 already invested and adds $3,000 at the end of each year for
+            10 years, all at 6% per annum. Find the total.</p>
+          <p>Treat the two parts separately and add them.</p>
+          <p><strong>The lump sum</strong> uses ordinary compound interest:</p>
+          \[20000 \times 1.06^{10} = 20000 \times 1.79085 = \$35\,817.00\]
+          <p><strong>The annuity</strong> uses the factor at \(n = 10\), \(r = 6\%\), which is
+            13.1808:</p>
+          \[3000 \times 13.1808 = \$39\,542.40\]
+          <p><strong>Total:</strong> \(35817.00 + 39542.40 = \$75\,359.40\)</p>
+          <p>This split is a very common exam structure &mdash; never try to force both parts
+            through one formula.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise using the table</h3>
+          <p class="exercise-intro">Use the factor table above. Answers to the nearest cent.</p>
+
+          <div class="exercise-row">
+            <label>(a) $2,500 per year for 6 years at 4% p.a. Find \(FV\).</label>
+            <input class="exercise-input" id="fvA" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-fv="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbFvA"></p>
+
+          <div class="exercise-row">
+            <label>(b) $1,200 per year for 12 years at 7% p.a. Find \(FV\).</label>
+            <input class="exercise-input" id="fvB" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-fv="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbFvB"></p>
+
+          <div class="exercise-row">
+            <label>(c) For (b), how much of the final balance is interest?</label>
+            <input class="exercise-input" id="fvC" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-fv="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbFvC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$3,500 is contributed at the end of each year for 9 years at 3% per annum. Use the
+              table to find the future value and the interest earned.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Factor at \(n = 9\), \(r = 3\%\): 10.1591. \(FV = 3500 \times 10.1591 = \$35\,556.85\).</p>
+                <p>Contributed \(9 \times 3500 = \$31\,500\), so interest is $4,056.85.</p>
+              </div></details></li>
+            <li>Noah has $10,000 invested and adds $1,800 at the end of each year for 12 years, all
+              at 4% per annum. Find the total.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Lump sum: \(10000 \times 1.04^{12} = \$16\,010.32\).</p>
+                <p>Annuity: factor 15.0258, so \(1800 \times 15.0258 = \$27\,046.44\).</p>
+                <p><strong>Total:</strong> $43,056.76.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. BACKWARDS ─────────── -->
+      <div class="content-card" id="backwards">
+        <p class="section-label">Application</p>
+        <h2>Working backwards to the contribution</h2>
+
+        <p>The syllabus asks you to <em>determine the contribution amount required to achieve a
+          given future value</em>. Same formula, rearranged:</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Finding the required contribution</p>
+          \[\text{Contribution} = \frac{\text{target future value}}{\text{interest factor}}\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Josh wants $50,000 in 10 years. His account pays 6% per annum. How much must he
+            contribute at the end of each year?</p>
+          <p>At \(n = 10\), \(r = 6\%\), the factor is 13.1808.</p>
+          \[\text{Contribution} = \frac{50000}{13.1808} = \$3\,793.53\]
+          <p><strong>Check:</strong> \(3793.53 \times 13.1808 = \$50\,000\) ✓. He contributes
+            \(10 \times 3793.53 = \$37\,935.30\) in total, so interest provides the remaining
+            $12,064.70.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; the equivalent single sum</p>
+          <p>The syllabus also asks for <em>the single sum contribution required to produce an
+            equivalent future value</em>. What one-off amount invested today at 6% would also give
+            Josh $50,000 in 10 years?</p>
+          <p>This is a present value question, using ordinary compound interest:</p>
+          \[PV = \frac{50000}{1.06^{10}} = \frac{50000}{1.79085} = \$27\,920.99\]
+          <p><strong>The comparison that earns the marks:</strong> a single $27,921 today
+            achieves the same goal as $37,935 paid in instalments. The lump sum is smaller
+            because <em>all</em> of it compounds for the full 10 years, whereas the instalments
+            each compound for less.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Target planner</h3>
+          <p class="exercise-intro">Set a savings target, a rate and a term. The planner shows
+            both routes: regular contributions, or one lump sum today.</p>
+          <div id="targetSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Factor used</div>
+              <div class="readout-value" id="roTFactor">13.1808</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Contribution needed</div>
+              <div class="readout-value" id="roTContrib">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total you pay in</div>
+              <div class="readout-value" id="roTTotal">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Or one lump sum today</div>
+              <div class="readout-value" id="roTLump">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="targetNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; exam style</p>
+          <p>Liam wants $30,000 for a house deposit in 5 years. His account pays 5% per annum,
+            compounded annually.</p>
+          <p><strong>(a) Find the annual contribution he needs.</strong> [1 mark]</p>
+          <p>Factor at \(n = 5\), \(r = 5\%\): 5.5256.
+            \(\;30000 \div 5.5256 = \$5\,429.27\).</p>
+          <p><strong>(b) Liam can only save $5,000 a year. By how much will he fall short?</strong>
+            [1 mark]</p>
+          <p>\(5000 \times 5.5256 = \$27\,628\), a shortfall of \(30000 - 27628 = \$2\,372\).</p>
+          <p><strong>(c) His grandmother offers a single gift today to cover the shortfall. How much
+            should she give?</strong> [2 marks]</p>
+          <p>The gift must grow to $2,372 in 5 years at 5%:</p>
+          \[PV = \frac{2372}{1.05^{5}} = \$1\,858.52\]
+          <p>A gift of about $1,859 today, plus $5,000 a year, reaches the $30,000 target.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Ava wants $45,000 in 15 years at 7% per annum. Find the annual contribution she
+              needs.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Factor at \(n = 15\), \(r = 7\%\): 25.1290. \(45000 \div 25.1290 = \$1\,790.76\)
+                  per year.</p>
+              </div></details></li>
+            <li>What single sum invested today at 7% per annum would also give Ava $45,000 in
+              15 years? Compare it with her total contributions.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(PV = 45000 \div 1.07^{15} = \$16\,310.07\).</p>
+                <p>Her instalments total \(15 \times 1790.76 = \$26\,861.40\), about $10,550 more
+                  than the single sum.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. TABLE IN REVERSE ─────────── -->
+      <div class="content-card" id="reverse">
+        <p class="section-label">Method</p>
+        <h2>Using the table in reverse: how long, and what rate?</h2>
+
+        <p>Sometimes the question gives the contribution and the target and asks how long it will
+          take, or what rate is needed. Work out the factor you need, then search the table for
+          it.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The factor you need</p>
+          \[\text{required factor} = \frac{\text{target}}{\text{contribution}}\]
+          <p class="formula-where"><strong>How long?</strong> Go down the column for the rate
+            until the factor first reaches the required value.<br>
+            <strong>What rate?</strong> Go along the row for \(n\) until the factor first reaches
+            the required value.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>Kai saves $2,000 at the end of each year towards a $25,000 goal.</p>
+          <p><strong>(a) At 6% per annum, how many years will it take?</strong></p>
+          <p>Required factor: \(25000 \div 2000 = 12.5\). Down the 6% column: \(n = 9\) gives
+            11.4913 (not enough), \(n = 10\) gives 13.1808. Kai reaches his goal after
+            <strong>10 years</strong>.</p>
+          <p><strong>(b) What rate would get him there in exactly 10 years?</strong></p>
+          <p>Along the \(n = 10\) row: 4% gives 12.0061 (not enough), 5% gives 12.5779. He needs
+            <strong>at least 5%</strong> per annum.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$1,500 is saved at the end of each year at 8% per annum. How many years until the
+              balance first exceeds $20,000?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Required factor: \(20000 \div 1500 = 13.3333\). In the 8% column, \(n = 9\) gives
+                  12.4876 and \(n = 10\) gives 14.4866.</p>
+                <p><strong>Answer:</strong> 10 years.</p>
+              </div></details></li>
+            <li>What annual rate (to the nearest whole per cent in the table) turns $3,000 a year
+              for 12 years into at least $45,000?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Required factor: \(45000 \div 3000 = 15\). Along \(n = 12\): 3% gives 14.1920,
+                  4% gives 15.0258.</p>
+                <p><strong>Answer:</strong> 4% per annum.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. PERIODS ─────────── -->
+      <div class="content-card" id="periods">
+        <p class="section-label">Method</p>
+        <h2>When the period is not a year</h2>
+
+        <p>Interest factor tables are indexed by <strong>periods</strong> and
+          <strong>rate per period</strong> &mdash; never by years and annual rates. Convert both,
+          exactly as with compound interest.</p>
+
+        <table class="coord-table">
+          <tr><th>Contributions</th><th>Periods per year</th><th>Rate per period</th><th>\(n\) for 5 years</th></tr>
+          <tr><td>Yearly</td><td>1</td><td>annual rate</td><td>5</td></tr>
+          <tr><td>Six-monthly</td><td>2</td><td>annual ÷ 2</td><td>10</td></tr>
+          <tr><td>Quarterly</td><td>4</td><td>annual ÷ 4</td><td>20</td></tr>
+          <tr><td>Monthly</td><td>12</td><td>annual ÷ 12</td><td>60</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>Amara contributes $1,500 at the end of every six months for 6 years, at 8% per annum
+            compounded six-monthly. Find the future value.</p>
+          <p>Six-monthly means 2 periods per year:</p>
+          \[r = \frac{8\%}{2} = 4\% \text{ per period} \qquad n = 6 \times 2 = 12 \text{ periods}\]
+          <p>At \(n = 12\), \(r = 4\%\), the factor is 15.0258.</p>
+          \[FV = 1500 \times 15.0258 = \$22\,538.70\]
+          <p><strong>The trap:</strong> looking up \(n = 6\) at \(r = 8\%\) gives 7.3359 and an
+            answer of $11,003.85 &mdash; less than half the correct value. Convert both, always.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$600 is contributed at the end of every quarter for 3 years at 8% per annum,
+              compounded quarterly. Find the future value.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 8\% \div 4 = 2\%\), \(n = 3 \times 4 = 12\). Factor: 13.4121.</p>
+                <p>\(FV = 600 \times 13.4121 = \$8\,047.26\).</p>
+              </div></details></li>
+            <li>$250 is saved at the end of every month for one year at 12% per annum, compounded
+              monthly. Find the future value.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 12\% \div 12 = 1\%\), \(n = 12\). Factor: 12.6825.</p>
+                <p>\(FV = 250 \times 12.6825 = \$3\,170.63\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. VARYING ─────────── -->
+      <div class="content-card" id="varying">
+        <p class="section-label">Evaluation</p>
+        <h2>Varying the parameters</h2>
+
+        <p>The syllabus asks you to <em>examine the effect of varying the amount initially
+          invested, the value of the periodic payment, the interest rate and the duration</em>.
+          Each behaves differently.</p>
+
+        <table class="coord-table">
+          <tr><th>Change</th><th>Effect on future value</th><th>Why</th></tr>
+          <tr>
+            <td>Double the contribution</td>
+            <td><strong>Exactly doubles</strong></td>
+            <td>\(FV\) is directly proportional to the contribution — the factor is unchanged</td>
+          </tr>
+          <tr>
+            <td>Double the initial lump sum</td>
+            <td>Doubles only that part</td>
+            <td>The annuity component is untouched</td>
+          </tr>
+          <tr>
+            <td>Increase the rate</td>
+            <td>Increases more than proportionally</td>
+            <td>The factor grows faster than linearly — interest compounds on interest</td>
+          </tr>
+          <tr>
+            <td>Extend the duration</td>
+            <td><strong>The largest effect of all</strong></td>
+            <td>Adds contributions <em>and</em> gives every earlier contribution more time</td>
+          </tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; which change helps most?</p>
+          <p>Base case: $2,000 per year for 20 years at 6% (factor 36.7856), giving
+            \(FV = \$73\,571.20\). Now change one thing at a time.</p>
+          <table class="coord-table">
+            <tr><th>Change</th><th>New factor</th><th>New \(FV\)</th><th>Gain</th></tr>
+            <tr><td>Base case</td><td>36.7856</td><td>$73 571</td><td>—</td></tr>
+            <tr><td>Contribution → $2 500</td><td>36.7856</td><td>$91 964</td><td>+$18 393</td></tr>
+            <tr><td>Rate → 8%</td><td>45.7620</td><td>$91 524</td><td>+$17 953</td></tr>
+            <tr><td>Term → 25 years</td><td>54.8645</td><td>$109 729</td><td>+$36 158</td></tr>
+          </table>
+          <p>Five extra years adds almost twice as much as a 25% larger contribution. <strong>Time
+            is the most powerful variable in an annuity</strong> — the argument for starting
+            superannuation early.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Parameter explorer</h3>
+          <p class="exercise-intro">Change one variable at a time and watch the future value. The
+            chart shows the balance building period by period.</p>
+          <div id="varySliders"></div>
+          <div class="plot-wrap" id="plotVary"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Factor</div>
+              <div class="readout-value" id="roVFactor">36.7856</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Future value</div>
+              <div class="readout-value" id="roVFV">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Contributed</div>
+              <div class="readout-value" id="roVCont">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Interest share</div>
+              <div class="readout-value" id="roVShare">0%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Saving for a goal: instalments or a lump sum?</h2>
+        <p><strong>About 10 minutes &middot; groups of three.</strong> Each person takes one goal
+          and uses the <a href="#backwards">target planner</a>.</p>
+        <table class="coord-table">
+          <tr><th>Person</th><th>Goal</th><th>Target</th><th>Years</th></tr>
+          <tr><td>1</td><td>Travel</td><td>$10,000</td><td>2</td></tr>
+          <tr><td>2</td><td>Car</td><td>$30,000</td><td>5</td></tr>
+          <tr><td>3</td><td>House deposit</td><td>$100,000</td><td>8</td></tr>
+        </table>
+        <ol>
+          <li>At 5% per annum, record the annual contribution, the total paid in, and the lump sum
+            that would do the same job today.</li>
+          <li>Work out how much interest does for you in each plan: target minus total paid in.</li>
+          <li>Repeat at 7%. Whose goal benefits most from the higher rate, and why?</li>
+          <li>As a group, explain why the gap between instalments and a lump sum is so small for
+            the travel goal but so large for the house deposit.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Goal</th><th>Rate</th><th>Contribution</th><th>Total paid in</th><th>Lump sum today</th></tr>
+            <tr><td>Travel</td><td>5%</td><td>$4,878.05</td><td>$9,756</td><td>$9,070</td></tr>
+            <tr><td>Travel</td><td>7%</td><td>$4,830.92</td><td>$9,662</td><td>$8,734</td></tr>
+            <tr><td>Car</td><td>5%</td><td>$5,429.24</td><td>$27,146</td><td>$23,506</td></tr>
+            <tr><td>Car</td><td>7%</td><td>$5,216.72</td><td>$26,084</td><td>$21,390</td></tr>
+            <tr><td>House</td><td>5%</td><td>$10,472.18</td><td>$83,777</td><td>$67,684</td></tr>
+            <tr><td>House</td><td>7%</td><td>$9,746.78</td><td>$77,974</td><td>$58,201</td></tr>
+          </table>
+          <p><strong>2.</strong> At 5%, interest supplies $244 (travel), $2,854 (car) and $16,223
+            (house).</p>
+          <p><strong>3.</strong> The house deposit: the higher rate cuts its total paid in by about
+            $5,800, compared with less than $100 for travel. The longer the term, the more periods
+            for the rate to compound.</p>
+          <p><strong>4.</strong> Over 2 years there is little time for any money to grow, so
+            instalments and a lump sum cost almost the same. Over 8 years the lump sum compounds
+            for the full term while later instalments barely compound, so the lump sum is far
+            cheaper.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 turns the question around: how much is a stream of future payments worth
+          <em>today</em>?</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-3', LESSON_IDX = 1;
+
+  var RATES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  var PERIODS = [1,2,3,4,5,6,7,8,9,10,11,12,15,20,25,30];
+
+  /* Future value interest factor for an annuity of $1 per period. */
+  function fvFactor(r, n) { return (Math.pow(1 + r, n) - 1) / r; }
+
+  function money(v) {
+    return '$' + v.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function money0(v) { return '$' + Math.round(v).toLocaleString('en-AU'); }
+
+  /* ── Render the factor table ──────────────────────────────── */
+  (function () {
+    var t = document.getElementById('fvTable');
+    var html = '<tr><th>n \\ r</th>' + RATES.map(function (r) { return '<th>' + r + '%</th>'; }).join('') + '</tr>';
+    PERIODS.forEach(function (n) {
+      html += '<tr><th>' + n + '</th>' + RATES.map(function (r) {
+        return '<td data-n="' + n + '" data-r="' + r + '">' + fvFactor(r / 100, n).toFixed(4) + '</td>';
+      }).join('') + '</tr>';
+    });
+    t.innerHTML = html;
+  })();
+
+  function highlight(n, r) {
+    document.querySelectorAll('#fvTable td').forEach(function (td) {
+      var on = (+td.dataset.n === n && +td.dataset.r === r);
+      td.style.background = on ? 'var(--gray-faint)' : '';
+      td.style.fontWeight = on ? '700' : '';
+      td.style.outline    = on ? '2px solid var(--ink)' : '';
+    });
+  }
+
+  /* ── Table reader ─────────────────────────────────────────── */
+  (function () {
+    var rate = 10, n = 3, contrib = 1000;
+
+    function update() {
+      var f = fvFactor(rate / 100, n);
+      var fv = contrib * f;
+      highlight(n, rate);
+      document.getElementById('roFactor').textContent = f.toFixed(4);
+      document.getElementById('roFV').textContent     = money(fv);
+      document.getElementById('roCont').textContent   = money(contrib * n);
+      document.getElementById('roInt').textContent    = money(fv - contrib * n);
+    }
+
+    var host = 'readSliders';
+    IE.slider({ mount: host, label: 'Rate per period', min: 1, max: 10, step: 1, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Periods n', min: 1, max: 12, step: 1, value: n,
+                onInput: function (v) { n = v; update(); } });
+    IE.slider({ mount: host, label: 'Contribution', min: 500, max: 10000, step: 500, value: contrib,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { contrib = v; update(); } });
+    update();
+  })();
+
+  /* ── Table exercises ──────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [2500 * fvFactor(0.04, 6),  'At n = 6, r = 4% the factor is ' + fvFactor(0.04,6).toFixed(4) + '. FV = 2500 × ' + fvFactor(0.04,6).toFixed(4) + '.'],
+      B: [1200 * fvFactor(0.07, 12), 'At n = 12, r = 7% the factor is ' + fvFactor(0.07,12).toFixed(4) + '. FV = 1200 × ' + fvFactor(0.07,12).toFixed(4) + '.'],
+      C: [1200 * fvFactor(0.07, 12) - 1200 * 12, 'Total contributed is 12 × $1200 = $14 400, so subtract that from the future value.']
+    };
+    document.querySelectorAll('[data-fv]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.fv;
+        var fb = document.getElementById('fbFv' + k);
+        var raw = (document.getElementById('fv' + k).value || '').replace(/[$,\s]/g, '');
+        var g = parseFloat(raw);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter an amount.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 1;   // within $1 for table rounding
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + money(ANS[k][0]) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Target planner ───────────────────────────────────────── */
+  (function () {
+    var target = 50000, rate = 6, years = 10;
+
+    function update() {
+      var f = fvFactor(rate / 100, years);
+      var contrib = target / f;
+      var lump = target / Math.pow(1 + rate / 100, years);
+
+      document.getElementById('roTFactor').textContent  = f.toFixed(4);
+      document.getElementById('roTContrib').textContent = money(contrib);
+      document.getElementById('roTTotal').textContent   = money0(contrib * years);
+      document.getElementById('roTLump').textContent    = money0(lump);
+
+      var note = document.getElementById('targetNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Paying in instalments costs ' + money0(contrib * years) + ' in total, versus ' +
+        money0(lump) + ' as a single sum today — a difference of ' + money0(contrib * years - lump) +
+        '. The lump sum is smaller because all of it compounds for the full ' + years + ' years.';
+    }
+
+    var host = 'targetSliders';
+    IE.slider({ mount: host, label: 'Target', min: 10000, max: 500000, step: 10000, value: target,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { target = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per year', min: 1, max: 10, step: 1, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 2, max: 30, step: 1, value: years,
+                onInput: function (v) { years = v; update(); } });
+    update();
+  })();
+
+  /* ── Parameter explorer ───────────────────────────────────── */
+  (function () {
+    var contrib = 2000, rate = 6, years = 20;
+    var redraw = IE.plot('plotVary', { xMin: 0, xMax: 20, yMin: 0, yMax: 80000, xStep: 5, yStep: 20000, xLabel: 'year', yLabel: '$', curves: [] });
+
+    function update() {
+      var r = rate / 100;
+      var f = fvFactor(r, years);
+      var fv = contrib * f;
+      var contributed = contrib * years;
+
+      function balAt(n) {
+        var i = Math.max(0, Math.round(n));
+        if (i === 0) return 0;
+        return contrib * fvFactor(r, Math.min(i, years));
+      }
+      function conAt(n) {
+        var i = Math.max(0, Math.round(n));
+        return Math.min(i, years) * contrib;
+      }
+
+      redraw({
+        xMax: years,
+        xStep: Math.max(1, Math.round(years / 5)),
+        yMax: fv * 1.1,
+        yStep: Math.max(1000, Math.round(fv / 5 / 1000) * 1000),
+        curves: [
+          { fn: balAt },
+          { fn: conAt, className: 'plot-curve-2' }
+        ]
+      });
+
+      document.getElementById('roVFactor').textContent = f.toFixed(4);
+      document.getElementById('roVFV').textContent     = money0(fv);
+      document.getElementById('roVCont').textContent   = money0(contributed);
+      document.getElementById('roVShare').textContent  =
+        (Math.round((fv - contributed) / fv * 1000) / 10) + '%';
+    }
+
+    var host = 'varySliders';
+    IE.slider({ mount: host, label: 'Contribution', min: 500, max: 10000, step: 500, value: contrib,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { contrib = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per year', min: 1, max: 12, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 5, max: 40, step: 1, value: years,
+                onInput: function (v) { years = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'What does an interest factor of 9.5491 represent?',
+      opts: [
+        'A) The interest rate as a percentage',
+        'B) The future value of an annuity of $1 per period',
+        'C) The number of periods in the annuity',
+        'D) The total interest earned in dollars'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Each factor is the final value of an annuity of exactly $1 per period. Multiply it by the actual contribution to get the future value.'
+    },
+    {
+      q: '$3,000 is contributed at the end of each year for 6 years. The interest factor is 7.3359. What is the future value?',
+      opts: ['A) $18,000', 'B) $22,007.70', 'C) $2,445.30', 'D) $44,015.40'],
+      correct: 1,
+      explanation: 'B is correct. \\(FV = 3000 \\times 7.3359 = \\$22\\,007.70\\). Option A is the total contributed with no interest; option C divides instead of multiplying.'
+    },
+    {
+      q: 'Sara wants $80,000 in 12 years. The interest factor for her account is 17.8885. What annual contribution does she need?',
+      opts: ['A) $1,431,080', 'B) $6,666.67', 'C) $4,472.01', 'D) $80,000'],
+      correct: 2,
+      explanation: 'C is correct. Rearranging, contribution \\(= \\dfrac{80000}{17.8885} = \\$4\\,472.01\\). Option B wrongly divides the target by the number of years, ignoring interest entirely.'
+    },
+    {
+      q: 'Contributions of $800 are made at the end of every quarter for 5 years at 8% per annum. Which row and column of the table should be used?',
+      opts: [
+        'A) \\(n = 5\\), \\(r = 8\\%\\)',
+        'B) \\(n = 20\\), \\(r = 2\\%\\)',
+        'C) \\(n = 20\\), \\(r = 8\\%\\)',
+        'D) \\(n = 5\\), \\(r = 2\\%\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Quarterly means 4 periods per year: \\(n = 5 \\times 4 = 20\\) periods and \\(r = 8\\% \\div 4 = 2\\%\\) per period. Both must be converted, not just one.'
+    },
+    {
+      q: 'An interest factor table shows 12.0061 for \\(n = 10\\). Which is a valid sense check?',
+      opts: [
+        'A) The factor should be less than 10',
+        'B) The factor should be at least 10, since $1 was contributed 10 times',
+        'C) The factor should equal the interest rate',
+        'D) The factor should be exactly 10'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Ten contributions of $1 total $10 even with no interest, so any valid factor for \\(n = 10\\) must exceed 10. A factor below \\(n\\) means you have read the wrong row or column.'
+    },
+    {
+      q: 'Doubling the periodic contribution while leaving the rate and term unchanged will:',
+      opts: [
+        'A) More than double the future value',
+        'B) Exactly double the future value',
+        'C) Less than double the future value',
+        'D) Have no effect on the future value'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(FV = \\text{contribution} \\times \\text{factor}\\), and the factor depends only on \\(r\\) and \\(n\\). Doubling one term of a product exactly doubles the result.'
+    },
+    {
+      q: 'Which change usually produces the largest increase in an annuity\'s future value?',
+      opts: [
+        'A) A modest increase in the contribution',
+        'B) Extending the term by several periods',
+        'C) Rounding the interest factor up',
+        'D) Contributing at the end rather than the start of each period'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Extending the term adds more contributions <em>and</em> gives every earlier contribution longer to compound, so the factor grows disproportionately. This is why starting superannuation early matters more than contributing slightly more.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain what a future value interest factor of 11.4639 means, and how it is used.',
+      marks: 2,
+      steps: [
+        'The factor is the future value of an annuity of $1 per period, at the given rate and number of periods.',
+        'So contributing $1 each period would produce $11.4639 at the end.',
+        'Because annuities scale proportionally, multiply the factor by the actual contribution.'
+      ],
+      answer: 'It means $1 contributed at the end of each period would accumulate to $11.4639. To use it, multiply by the actual periodic contribution: \\(FV = \\text{contribution} \\times 11.4639\\).'
+    },
+    {
+      q: '$5,000 is contributed at the end of each year for 9 years at 5% per annum. The interest factor is 11.0266. Find the future value and the interest earned.',
+      marks: 3,
+      steps: [
+        '\\(FV = 5000 \\times 11.0266\\).',
+        '\\(= \\$55\\,133.00\\).',
+        'Total contributed \\(= 9 \\times 5000 = \\$45\\,000\\).',
+        'Interest \\(= 55133 - 45000\\).'
+      ],
+      answer: 'Future value $55,133.00; interest earned $10,133.00.'
+    },
+    {
+      q: 'Marcus contributes $2,200 at the end of each year for 15 years at 7% per annum. The interest factor is 25.1290. Find the future value.',
+      marks: 2,
+      steps: [
+        '\\(FV = 2200 \\times 25.1290\\).',
+        'Sense check: the factor 25.129 is comfortably above \\(n = 15\\) ✓'
+      ],
+      answer: '$55,283.80'
+    },
+    {
+      q: 'Tara wants $120,000 in 20 years. Her fund earns 6% per annum, with an interest factor of 36.7856. Find the annual contribution required, and the total she will pay in.',
+      marks: 4,
+      steps: [
+        'Contribution \\(= \\dfrac{\\text{target}}{\\text{factor}} = \\dfrac{120000}{36.7856}\\).',
+        '\\(= \\$3\\,262.15\\).',
+        'Total paid in \\(= 20 \\times 3262.15\\).',
+        '\\(= \\$65\\,243.00\\), so interest supplies the remaining $54,757.'
+      ],
+      answer: 'About $3,262.15 per year, totalling $65,243 of contributions — interest provides the other $54,757.'
+    },
+    {
+      q: 'For Tara\'s goal above, calculate instead the single sum she could invest today at 6% to reach $120,000 in 20 years, and explain why it is less than her total contributions.',
+      marks: 4,
+      steps: [
+        'This is a present value calculation: \\(PV = \\dfrac{FV}{(1+r)^{n}}\\).',
+        '\\(1.06^{20} = 3.20714\\).',
+        '\\(PV = \\dfrac{120000}{3.20714} = \\$37\\,417.80\\).',
+        'Every dollar of the lump sum compounds for the full 20 years.',
+        'Her instalments compound for 19, 18, … 1, 0 years respectively — far less time on average.'
+      ],
+      answer: 'About $37,418 today. It is much less than the $65,243 of instalments because the whole lump sum earns interest for all 20 years, whereas each instalment has progressively less time to grow.'
+    },
+    {
+      q: 'Contributions of $900 are made at the end of every six months for 8 years, at 6% per annum compounded six-monthly. State the correct \\(n\\) and \\(r\\), then find the future value given a factor of 20.1569.',
+      marks: 4,
+      steps: [
+        'Six-monthly means 2 periods per year.',
+        '\\(r = \\dfrac{6\\%}{2} = 3\\%\\) per period.',
+        '\\(n = 8 \\times 2 = 16\\) periods.',
+        '\\(FV = 900 \\times 20.1569\\).'
+      ],
+      answer: '\\(n = 16\\), \\(r = 3\\%\\); future value $18,141.21.'
+    },
+    {
+      q: 'A student uses \\(n = 8\\) and \\(r = 6\\%\\) for an annuity paid quarterly over 8 years at 6% per annum. Explain the error and state the correct values.',
+      marks: 3,
+      steps: [
+        'The table is indexed by periods and rate per period, not by years and annual rate.',
+        'Quarterly contributions over 8 years give \\(8 \\times 4 = 32\\) periods.',
+        'The rate per quarter is \\(6\\% \\div 4 = 1.5\\%\\).',
+        'Using \\(n = 8\\), \\(r = 6\\%\\) would drastically understate the future value.'
+      ],
+      answer: 'They failed to convert for the compounding frequency. The correct values are \\(n = 32\\) periods and \\(r = 1.5\\%\\) per period.'
+    },
+    {
+      q: 'Bianca has $15,000 already invested and adds $2,000 at the end of each year for 10 years, all at 5% per annum. The annuity factor is 12.5779 and \\(1.05^{10} = 1.62889\\). Find the total value after 10 years.',
+      marks: 4,
+      steps: [
+        'Treat the two components separately.',
+        'Lump sum: \\(15000 \\times 1.62889 = \\$24\\,433.35\\).',
+        'Annuity: \\(2000 \\times 12.5779 = \\$25\\,155.80\\).',
+        'Total: \\(24433.35 + 25155.80\\).'
+      ],
+      answer: '$49,589.15'
+    },
+    {
+      q: 'An annuity of $4,000 per year runs for 10 years. Compare the future value at 4% (factor 12.0061) and at 8% (factor 14.4866). State the difference and explain why it is more than proportional.',
+      marks: 4,
+      steps: [
+        'At 4%: \\(FV = 4000 \\times 12.0061 = \\$48\\,024.40\\).',
+        'At 8%: \\(FV = 4000 \\times 14.4866 = \\$57\\,946.40\\).',
+        'Difference: \\(57946.40 - 48024.40 = \\$9\\,922\\).',
+        'The contributions are identical ($40,000), so the whole difference is extra interest.',
+        'Doubling the rate does not double the future value, because the $40,000 of contributions is a fixed floor that earns nothing extra.'
+      ],
+      answer: '$48,024.40 versus $57,946.40 — a difference of $9,922. The interest earned rises from $8,024 to $17,946, more than doubling, even though the total future value rises by only about 21%, because the $40,000 contributed is unaffected by the rate.'
+    },
+    {
+      q: 'Compare an annuity of $3,000 per year at 6% over 15 years (factor 23.2760) with the same annuity over 25 years (factor 54.8645). Comment on the effect of duration.',
+      marks: 4,
+      steps: [
+        '15 years: \\(FV = 3000 \\times 23.2760 = \\$69\\,828\\), from $45,000 of contributions.',
+        '25 years: \\(FV = 3000 \\times 54.8645 = \\$164\\,593.50\\), from $75,000 of contributions.',
+        'Contributions rose by 67%, but the future value rose by 136%.',
+        'Interest grew from $24,828 to $89,594 — more than tripling.'
+      ],
+      answer: 'The 15-year annuity reaches $69,828; the 25-year annuity reaches $164,593.50. Ten extra years adds $30,000 of contributions but $94,765 of value, because the extra time benefits every earlier contribution as well as adding new ones.'
+    },
+    {
+      q: 'A fund states that a $1,000 annual contribution for 30 years at 7% produces $94,461. Verify the interest factor being used and check it is plausible.',
+      marks: 3,
+      steps: [
+        'Rearrange: factor \\(= \\dfrac{FV}{\\text{contribution}} = \\dfrac{94461}{1000}\\).',
+        'So the factor is 94.461.',
+        'Plausibility: it must exceed \\(n = 30\\), and it does, by a large margin.',
+        'A factor over three times \\(n\\) is reasonable for 30 periods at 7%, where compounding has a long time to work.'
+      ],
+      answer: 'The factor is 94.461. It is plausible: it comfortably exceeds \\(n = 30\\), and the ratio of about 3.15 is consistent with 30 periods at a 7% rate.'
+    },
+    {
+      q: 'Explain why an interest factor can never be less than the number of periods \\(n\\).',
+      marks: 2,
+      steps: [
+        'The factor is the future value of $1 contributed at the end of each of \\(n\\) periods.',
+        'The contributions alone total $\\(n\\), before any interest.',
+        'Interest can only add to that total — it is never negative for a positive rate.',
+        'So the factor is \\(n\\) plus the accumulated interest, hence at least \\(n\\).'
+      ],
+      answer: 'Because \\(n\\) contributions of $1 total $\\(n\\) even with zero interest, and any positive interest rate only adds to that. A factor below \\(n\\) means the wrong row or column has been read.'
+    },
+    {
+      q: 'Jonah can save $500 per month. His fund pays 6% per annum compounded monthly, and the interest factor for 10 years is 163.8793. Find his balance after 10 years, and state how much is interest.',
+      marks: 4,
+      steps: [
+        'Monthly: \\(r = \\dfrac{0.06}{12} = 0.005\\) and \\(n = 10 \\times 12 = 120\\) periods.',
+        '\\(FV = 500 \\times 163.8793\\).',
+        '\\(= \\$81\\,939.65\\).',
+        'Contributed \\(= 120 \\times 500 = \\$60\\,000\\), so interest \\(= \\$21\\,939.65\\).'
+      ],
+      answer: 'Balance about $81,939.65, of which $21,939.65 (about 27%) is interest.'
+    },
+    {
+      q: 'A financial adviser claims that halving the term of an annuity while doubling the contribution leaves the future value unchanged. Test this claim using $2,000 per year for 20 years at 6% (factor 36.7856) versus $4,000 per year for 10 years at 6% (factor 13.1808).',
+      marks: 4,
+      steps: [
+        'Option 1: \\(2000 \\times 36.7856 = \\$73\\,571.20\\).',
+        'Option 2: \\(4000 \\times 13.1808 = \\$52\\,723.20\\).',
+        'The totals contributed are identical ($40,000 each).',
+        'But option 1 gives $20,848 more.',
+        'The claim fails because the factor is not proportional to \\(n\\) — it grows much faster.'
+      ],
+      answer: 'The claim is false. Both options contribute $40,000, but 20 years at $2,000 gives $73,571.20 while 10 years at $4,000 gives only $52,723.20 — $20,848 less. Time matters far more than the size of each contribution, because the factor grows faster than linearly in \\(n\\).'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

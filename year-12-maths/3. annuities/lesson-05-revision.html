@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Annuities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 3 &mdash; Annuities</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>Annuities</h1>
+      <p class="subtitle">Every dot-point of MST-12-S2-03 in one place: the method sheet, a
+        decision guide for choosing FV or PV, the mistakes that cost marks, and a mixed exam-style
+        paper with full solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-03</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Method sheet</li>
+        <li>FV or PV? A decision guide</li>
+        <li>Interest factor tables</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#methods">1 &nbsp;Method sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#decide">2 &nbsp;FV or PV?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tables">3 &nbsp;Factor tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">4 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">5 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. METHODS ─────────── -->
+      <div class="content-card" id="methods">
+        <p class="section-label">Reference</p>
+        <h2>Method sheet</h2>
+
+        <h3>Tabular modelling</h3>
+        <div class="formula-box">
+          <p class="formula-label">Accumulating annuity (paying in)</p>
+          \[\text{Interest} = \text{Opening} \times r\]
+          \[\text{Closing} = \text{Opening} + \text{Interest} + \text{Contribution}\]
+        </div>
+        <div class="formula-box">
+          <p class="formula-label">Drawdown annuity (taking out)</p>
+          \[\text{Closing} = \text{Opening} + \text{Interest} - \text{Withdrawal}\]
+          <p class="formula-where">Each closing balance becomes the next opening balance. If the
+            withdrawal equals the interest, the capital is preserved forever.</p>
+        </div>
+
+        <h3>Using interest factor tables</h3>
+        <div class="formula-box">
+          \[FV = \text{contribution} \times (\text{FV factor}) \qquad
+            \text{contribution} = \frac{FV}{\text{FV factor}}\]
+          \[PV = \text{payment} \times (\text{PV factor}) \qquad
+            \text{payment} = \frac{PV}{\text{PV factor}}\]
+          <p class="formula-where">Always look up the rate <strong>per period</strong> and the
+            number of <strong>periods</strong> — convert for the compounding frequency first.</p>
+        </div>
+
+        <h3>Sense checks that catch most errors</h3>
+        <table class="coord-table">
+          <tr><th>Quantity</th><th>Must be</th><th>Because</th></tr>
+          <tr><td>FV factor</td><td>Greater than \(n\)</td><td>\(n\) contributions of $1 total $\(n\), plus interest</td></tr>
+          <tr><td>PV factor</td><td>Less than \(n\)</td><td>Each payment is discounted back to today</td></tr>
+          <tr><td>Final balance</td><td>= opening + contributions + interest</td><td>Reconciliation of the whole table</td></tr>
+        </table>
+
+        <h3>The equivalent single sum</h3>
+        <div class="formula-box">
+          \[PV_{\text{lump sum}} = \frac{FV}{(1+r)^{n}}\]
+          <p class="formula-where">Use ordinary compound interest — <em>not</em> an annuity factor
+            — when the question asks for a one-off amount equivalent to a stream of payments.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. DECIDE ─────────── -->
+      <div class="content-card" id="decide">
+        <p class="section-label">Method</p>
+        <h2>Future value or present value?</h2>
+
+        <p>Picking the wrong table costs more marks in this topic than any arithmetic slip. These
+          phrases tell you which one:</p>
+
+        <table class="coord-table">
+          <tr><th>The question says…</th><th>Use</th></tr>
+          <tr><td>"contributes each year", "how much will they have"</td><td><strong>FV</strong> factor</td></tr>
+          <tr><td>"what will the account be worth in \(n\) years"</td><td><strong>FV</strong> factor</td></tr>
+          <tr><td>"how much must be contributed to reach $X"</td><td><strong>FV</strong>: divide target by factor</td></tr>
+          <tr><td>"how much is needed today", "lump sum required"</td><td><strong>PV</strong> factor</td></tr>
+          <tr><td>"pays $X per year for \(n\) years" (a fund paying out)</td><td><strong>PV</strong> factor</td></tr>
+          <tr><td>"find the loan repayment"</td><td><strong>PV</strong>: divide loan by factor</td></tr>
+          <tr><td>"lump sum now or instalments?"</td><td><strong>PV</strong> of the instalments, then compare</td></tr>
+          <tr><td>"single sum equivalent to a future amount"</td><td>\((1+r)^{n}\) — plain compound interest</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The one-line test</p>
+          <p style="margin-bottom:0;">Are the regular payments going <strong>in</strong> to build
+            something up? That is future value. Are they coming <strong>out</strong> of a sum that
+            already exists? That is present value.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Choose the method</h3>
+          <p class="exercise-intro">Type <code>FV</code>, <code>PV</code> or <code>compound</code>
+            for each scenario.</p>
+
+          <div class="exercise-row">
+            <label>(a) "Find the annual repayment on a $30 000 loan over 6 years." &rarr;</label>
+            <input class="exercise-input" id="mdA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdA"></p>
+
+          <div class="exercise-row">
+            <label>(b) "$400 is deposited monthly for 20 years. Find the balance." &rarr;</label>
+            <input class="exercise-input" id="mdB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdB"></p>
+
+          <div class="exercise-row">
+            <label>(c) "How much is needed now to pay $20 000 a year for 15 years?" &rarr;</label>
+            <input class="exercise-input" id="mdC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdC"></p>
+
+          <div class="exercise-row">
+            <label>(d) "What single sum today grows to $50 000 in 10 years?" &rarr;</label>
+            <input class="exercise-input" id="mdD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdD"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>The two directions, side by side</h3>
+          <p class="exercise-intro">The same $5,000 per year at 6%: accumulating for 20 years,
+            then drawing down over 20 years.</p>
+          <div class="plot-wrap" id="plotBoth"></div>
+          <p class="diagram-caption">Accumulation builds the balance; drawdown returns it to zero.
+            The peak is the point where future value becomes present value.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. TABLES ─────────── -->
+      <div class="content-card" id="tables">
+        <p class="section-label">Reference</p>
+        <h2>Interest factor tables</h2>
+
+        <h3>Future value of an annuity of $1 per period</h3>
+        <div style="overflow-x:auto;"><table class="coord-table" id="fvTable"></table></div>
+
+        <h3>Present value of an annuity of $1 per period</h3>
+        <div style="overflow-x:auto;"><table class="coord-table" id="pvTable"></table></div>
+
+        <div class="formula-box">
+          <p class="formula-label">Converting for the compounding period</p>
+          <p style="margin-bottom:0;">Six-monthly: rate ÷ 2, periods × 2. Quarterly: ÷ 4, × 4.
+            Monthly: ÷ 12, × 12. <strong>Both</strong> conversions, every time.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CHECKLIST ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 5. MISTAKES ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Using \(FV = PV(1+r)^n\) on the total contributed</td>
+            <td>Each contribution compounds for a different time. Use the annuity factor.</td>
+          </tr>
+          <tr>
+            <td>Reading the FV table when the question wants PV</td>
+            <td>Money going <em>in</em> → FV. Money coming <em>out</em> of an existing sum → PV.</td>
+          </tr>
+          <tr>
+            <td>Converting the rate but not the number of periods</td>
+            <td>Quarterly over 5 years is \(n = 20\) <em>and</em> \(r = \) annual ÷ 4.</td>
+          </tr>
+          <tr>
+            <td>Charging interest on the first contribution in year 1</td>
+            <td>Contributions arrive at the <em>end</em> of the period, so year 1 earns $0 from an empty account.</td>
+          </tr>
+          <tr>
+            <td>Multiplying by the factor when finding a contribution</td>
+            <td>Working backwards means <em>dividing</em>: contribution = target ÷ factor.</td>
+          </tr>
+          <tr>
+            <td>Combining a lump sum and an annuity in one formula</td>
+            <td>Calculate them separately — \((1+r)^n\) for the lump sum, the factor for the annuity — then add.</td>
+          </tr>
+          <tr>
+            <td>Comparing a lump sum with the undiscounted total of instalments</td>
+            <td>Always compare present values. $210,000 over 15 years is not worth $210,000 today.</td>
+          </tr>
+          <tr>
+            <td>Accepting a PV factor greater than \(n\)</td>
+            <td>Impossible. You have read the FV table by mistake.</td>
+          </tr>
+          <tr>
+            <td>Not stating that the decision depends on the interest rate</td>
+            <td>Lump-sum-vs-instalments answers reverse at different rates. Say so.</td>
+          </tr>
+          <tr>
+            <td>Rounding the factor to 2 decimal places mid-calculation</td>
+            <td>Keep all four decimals; round only the final dollar answer.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes, calculator
+          and the tables above allowed &mdash; then mark yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident
+            with every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-3', LESSON_IDX = 4;
+
+  var RATES = [1,2,3,4,5,6,7,8,9,10];
+  var PERIODS = [1,2,3,4,5,6,7,8,9,10,12,15,20,25,30];
+  function fvF(r, n) { return (Math.pow(1 + r, n) - 1) / r; }
+  function pvF(r, n) { return (1 - Math.pow(1 + r, -n)) / r; }
+
+  (function buildTables() {
+    function build(id, fn) {
+      var html = '<tr><th>n \\ r</th>' + RATES.map(function (r) { return '<th>' + r + '%</th>'; }).join('') + '</tr>';
+      PERIODS.forEach(function (n) {
+        html += '<tr><th>' + n + '</th>' + RATES.map(function (r) {
+          return '<td>' + fn(r / 100, n).toFixed(4) + '</td>';
+        }).join('') + '</tr>';
+      });
+      document.getElementById(id).innerHTML = html;
+    }
+    build('fvTable', fvF);
+    build('pvTable', pvF);
+  })();
+
+  /* ── Choose the method ────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['pv', 'A loan is a present-value annuity: a lump sum today exhausted by regular repayments. Repayment = loan ÷ PV factor.'],
+      B: ['fv', 'Regular deposits building a balance is a future-value annuity.'],
+      C: ['pv', 'A lump sum needed today to fund future payments is exactly present value.'],
+      D: ['compound', 'A single sum growing to a single future amount uses plain compound interest, \\(PV = FV \\div (1+r)^{n}\\) — no annuity factor.']
+    };
+    document.querySelectorAll('[data-md]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.md;
+        var fb = document.getElementById('fbMd' + k);
+        var v  = (document.getElementById('md' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type FV, PV or compound.'; return; }
+        var ok = v === ANS[k][0];
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.innerHTML = (ok ? '✓ Correct. ' : '✗ It is ' + ANS[k][0].toUpperCase() + '. ') + ANS[k][1];
+        IE.tex(fb);
+      });
+    });
+  })();
+
+  /* ── Accumulation then drawdown ───────────────────────────── */
+  (function () {
+    var r = 0.06, contrib = 5000, work = 20, retire = 20;
+    var peak = contrib * fvF(r, work);
+    var income = peak / pvF(r, retire);
+    IE.plot('plotBoth', {
+      width: 520, height: 320,
+      xMin: 0, xMax: work + retire, yMin: 0, yMax: peak * 1.12,
+      xStep: 5, yStep: Math.max(10000, Math.round(peak / 5 / 10000) * 10000),
+      xLabel: 'year', yLabel: 'balance $',
+      curves: [{ fn: function (t) {
+        var i = Math.max(0, Math.round(t));
+        if (i <= work) return contrib * fvF(r, i);
+        var k = i - work;
+        return k >= retire ? 0 : income * pvF(r, retire - k);
+      } }],
+      points: [{ x: work, y: peak, label: 'peak' }],
+      markers: [{ x: work, y: peak }]
+    });
+  })();
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Identify an annuity as an investment account with regular equal contributions and interest compounding each period',
+      'Identify an annuity as a single sum from which regular equal withdrawals are made',
+      'Model an annuity in tabular form for up to four time periods',
+      'Use a spreadsheet to model an annuity',
+      'Use a table of interest factors to calculate the future value of an annuity',
+      'Use a table of interest factors to calculate the present value of an annuity',
+      'Determine the contribution amount required to achieve a given future value',
+      'Determine the single sum contribution required to produce an equivalent future value',
+      'Examine the effect of varying the amount initially invested on the total value',
+      'Examine the effect of varying the periodic payment on the total value',
+      'Examine the effect of varying the interest rate on the total value',
+      'Examine the effect of varying the duration of the annuity on the total value',
+      'Solve annuity problems involving superannuation',
+      'Solve annuity problems involving savings accounts',
+      'Solve annuity problems involving loan repayments'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none'; ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0'; li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+
+    var tally = document.createElement('p');
+    tally.style.marginTop = '16px';
+    tally.style.fontFamily = 'var(--font-mono)';
+    tally.style.fontSize = '12px';
+    tally.style.color = 'var(--gray-med)';
+    mount.appendChild(tally);
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'State whether each requires a future value factor, a present value factor, or plain compound interest. (a) The annual repayment on a car loan. (b) The balance after 20 years of monthly deposits. (c) The single sum needed today to grow to $40,000 in 8 years.',
+      marks: 3,
+      steps: [
+        '(a) A loan is a lump sum today exhausted by regular repayments — present value.',
+        '(b) Regular deposits building a balance — future value.',
+        '(c) One sum growing to one future amount — plain compound interest, \\(PV = FV \\div (1+r)^{n}\\).'
+      ],
+      answer: '(a) PV factor. (b) FV factor. (c) Compound interest — no annuity factor involved.'
+    },
+    {
+      q: 'Model the first three years of an annuity where $5,000 is contributed at the end of each year at 4% per annum.',
+      marks: 3,
+      steps: [
+        'Year 1: \\(0 + 0 + 5000 = \\$5\\,000.00\\).',
+        'Year 2: interest \\(= 5000 \\times 0.04 = \\$200\\); closing \\(= 5000 + 200 + 5000 = \\$10\\,200.00\\).',
+        'Year 3: interest \\(= 10200 \\times 0.04 = \\$408\\); closing \\(= 10200 + 408 + 5000 = \\$15\\,608.00\\).'
+      ],
+      answer: 'Closing balances $5,000.00, $10,200.00, $15,608.00.'
+    },
+    {
+      q: '$2,800 is contributed at the end of each year for 12 years at 7% per annum. Use the tables to find the future value and the interest earned.',
+      marks: 3,
+      steps: [
+        'FV factor at \\(n = 12\\), \\(r = 7\\%\\) is 17.8885.',
+        '\\(FV = 2800 \\times 17.8885 = \\$50\\,087.80\\).',
+        'Contributed \\(= 12 \\times 2800 = \\$33\\,600\\).',
+        'Interest \\(= 50087.80 - 33600\\).'
+      ],
+      answer: 'Future value about $50,087.80; interest about $16,487.80.'
+    },
+    {
+      q: 'A fund pays $18,000 per year for 12 years at 6% per annum. Find the lump sum needed today.',
+      marks: 3,
+      steps: [
+        'PV factor at \\(n = 12\\), \\(r = 6\\%\\) is 8.3838.',
+        '\\(PV = 18000 \\times 8.3838\\).',
+        'Sense check: 8.3838 < 12 ✓'
+      ],
+      answer: 'About $150,908.40'
+    },
+    {
+      q: 'Nina wants $90,000 in 15 years. Her account pays 5% per annum. Find the annual contribution required and the total she pays in.',
+      marks: 4,
+      steps: [
+        'FV factor at \\(n = 15\\), \\(r = 5\\%\\) is 21.5786.',
+        'Contribution \\(= \\dfrac{90000}{21.5786} = \\$4\\,170.83\\).',
+        'Total paid in \\(= 15 \\times 4170.83\\).',
+        '\\(= \\$62\\,562.45\\), so interest supplies $27,437.55.'
+      ],
+      answer: 'About $4,170.83 per year, totalling $62,562 of contributions.'
+    },
+    {
+      q: 'Contributions of $1,600 are made at the end of every six months for 10 years at 6% per annum compounded six-monthly. State \\(n\\) and \\(r\\), then find the future value.',
+      marks: 4,
+      steps: [
+        'Six-monthly means 2 periods per year: \\(n = 10 \\times 2 = 20\\), \\(r = 6\\% \\div 2 = 3\\%\\).',
+        'FV factor at \\(n = 20\\), \\(r = 3\\%\\) is 26.8704.',
+        '\\(FV = 1600 \\times 26.8704\\).',
+        'Using \\(n = 10\\), \\(r = 6\\%\\) instead would give a badly understated answer.'
+      ],
+      answer: '\\(n = 20\\), \\(r = 3\\%\\); future value about $42,992.64.'
+    },
+    {
+      q: 'Omar borrows $52,000 over 10 years at 8% per annum, repaid annually. Find the annual repayment and total interest, then verify year 1 with a table row.',
+      marks: 5,
+      steps: [
+        'PV factor at \\(n = 10\\), \\(r = 8\\%\\) is 6.7101.',
+        'Repayment \\(= \\dfrac{52000}{6.7101} = \\$7\\,749.60\\).',
+        'Total repaid \\(= 10 \\times 7749.60 = \\$77\\,496\\), so interest \\(= \\$25\\,496\\).',
+        'Year 1: interest \\(= 52000 \\times 0.08 = \\$4\\,160\\).',
+        'Closing \\(= 52000 + 4160 - 7749.60 = \\$48\\,410.40\\) — the balance is reducing ✓'
+      ],
+      answer: 'Repayment about $7,749.60 per year; total interest about $25,496. After year 1 the balance is $48,410.40.'
+    },
+    {
+      q: 'A retiree invests $520,000 at 6% per annum and withdraws $48,000 at the end of each year. Model the first three years and comment on the trend.',
+      marks: 5,
+      steps: [
+        'Year 1: interest \\(= 520000 \\times 0.06 = \\$31\\,200\\); closing \\(= 520000 + 31200 - 48000 = \\$503\\,200\\).',
+        'Year 2: interest \\(= 503200 \\times 0.06 = \\$30\\,192\\); closing \\(= 503200 + 30192 - 48000 = \\$485\\,392\\).',
+        'Year 3: interest \\(= 485392 \\times 0.06 = \\$29\\,123.52\\); closing \\(= 485392 + 29123.52 - 48000 = \\$466\\,515.52\\).',
+        'The fund falls by $16,800, then $17,808, then $18,876.48 — an accelerating decline.'
+      ],
+      answer: 'Closing balances $503,200, $485,392 and $466,515.52. The fund falls faster each year because the shrinking balance earns less interest, so more of each withdrawal comes from capital.'
+    },
+    {
+      q: 'For the retiree above, find the withdrawal that would preserve the capital, and explain what happens at $48,000 instead.',
+      marks: 3,
+      steps: [
+        'Capital is preserved when the withdrawal equals the interest: \\(520000 \\times 0.06 = \\$31\\,200\\).',
+        'At $48,000 the withdrawal exceeds the interest by $16,800 in year 1.',
+        'That excess comes out of capital, reducing next year\'s interest.',
+        'The shortfall grows each year, so the fund depletes at an accelerating rate.'
+      ],
+      answer: '$31,200 per year would preserve the capital indefinitely. At $48,000 the capital is eroded by $16,800 in year 1, and by progressively more each year as the reduced balance earns less interest.'
+    },
+    {
+      q: 'Farrah has $25,000 invested and adds $4,000 at the end of each year for 10 years, all at 6% per annum. Given \\(1.06^{10} = 1.79085\\), find the total after 10 years.',
+      marks: 4,
+      steps: [
+        'Handle the lump sum and the annuity separately.',
+        'Lump sum: \\(25000 \\times 1.79085 = \\$44\\,771.25\\).',
+        'Annuity: FV factor at \\(n = 10\\), \\(r = 6\\%\\) is 13.1808, so \\(4000 \\times 13.1808 = \\$52\\,723.20\\).',
+        'Total: \\(44771.25 + 52723.20\\).'
+      ],
+      answer: 'About $97,494.45'
+    },
+    {
+      q: 'A prize offers $95,000 now or $11,000 per year for 12 years. Money can be invested at 7% per annum. Which is better, and by how much?',
+      marks: 4,
+      steps: [
+        'PV factor at \\(n = 12\\), \\(r = 7\\%\\) is 7.9427.',
+        'PV of instalments \\(= 11000 \\times 7.9427 = \\$87\\,369.70\\).',
+        'Compare with $95,000 now.',
+        'The instalments total $132,000, but that ignores the time value of money.'
+      ],
+      answer: 'The lump sum is better by about $7,630 in today\'s money, despite the instalments totalling $132,000.'
+    },
+    {
+      q: 'Repeat the previous comparison at 3% per annum, where the PV factor for 12 years is 9.9540. Explain why the recommendation changes.',
+      marks: 4,
+      steps: [
+        'PV of instalments \\(= 11000 \\times 9.9540 = \\$109\\,494\\).',
+        'This exceeds the $95,000 lump sum by $14,494.',
+        'At 3% a lump sum grows slowly, so receiving money early is worth much less.',
+        'Distant payments are also discounted only lightly at a low rate.'
+      ],
+      answer: 'At 3% the instalments are worth $109,494 — $14,494 more than the lump sum, reversing the decision. The comparison always depends on the interest rate available, which must be stated in the answer.'
+    },
+    {
+      q: 'Sam contributes $8,000 per year for 30 years at 7% (FV factor 94.4608), then retires and draws income for 25 years at 7% (PV factor 11.6536). Find his retirement balance and annual income, and compare with what he contributed.',
+      marks: 6,
+      steps: [
+        'Accumulation: \\(FV = 8000 \\times 94.4608 = \\$755\\,686.40\\).',
+        'Contributed \\(= 30 \\times 8000 = \\$240\\,000\\), so interest supplied $515,686.',
+        'Drawdown: income \\(= \\dfrac{755686.40}{11.6536} = \\$64\\,845.53\\) per year.',
+        'Total received in retirement \\(= 25 \\times 64845.53 = \\$1\\,621\\,138.25\\).',
+        'That is about 6.8 times what he contributed.'
+      ],
+      answer: 'Retirement balance about $755,686; income about $64,846 per year for 25 years, totalling about $1.62 million from $240,000 of contributions — roughly 6.8 times as much, thanks to compounding in both phases.'
+    },
+    {
+      q: 'Explain why an annuity of $2,000 per year for 30 years produces far more than three times an annuity of $2,000 per year for 10 years, at the same rate.',
+      marks: 3,
+      steps: [
+        'Tripling the term triples the number of contributions, but that alone would only triple the contributed total.',
+        'Each earlier contribution also has far longer to compound.',
+        'At 6%, the factor rises from 13.1808 at \\(n = 10\\) to 79.0582 at \\(n = 30\\) — six times, not three.',
+        'The factor grows faster than linearly in \\(n\\) because interest compounds on interest.'
+      ],
+      answer: 'Because the interest factor grows faster than linearly. At 6% the factor goes from 13.1808 to 79.0582 — a sixfold increase for a threefold increase in term — since the extra 20 years benefit every earlier contribution, not just the new ones.'
+    },
+    {
+      q: 'A superannuation fund advertises that contributing $300 per month from age 25 will give "a comfortable retirement". At 7% per annum compounded monthly over 40 years the FV factor is 2,624.81. Calculate the balance at 65, then evaluate the claim if the retiree needs $60,000 per year for 25 years (PV factor 11.6536 at 7% annual).',
+      marks: 6,
+      steps: [
+        'Accumulation: \\(FV = 300 \\times 2624.81 = \\$787\\,443\\).',
+        'Contributed \\(= 480 \\times 300 = \\$144\\,000\\); interest supplied $643,443.',
+        'Income supported: \\(\\dfrac{787443}{11.6536} = \\$67\\,570.60\\) per year.',
+        'The requirement is $60,000 per year.',
+        'Since $67,571 > $60,000, the claim is supported — with about $7,570 a year to spare.',
+        'Caveats: the figures ignore inflation, and assume a constant 7% return for 65 years.'
+      ],
+      answer: 'The balance reaches about $787,443, supporting an income of about $67,571 a year for 25 years — above the $60,000 needed, so the claim holds in nominal terms. However, it assumes a steady 7% return for 40 years and ignores inflation, which would substantially reduce the real purchasing power of $60,000 by then.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  IE.completeBanner({
+    mount: 'completeBtn', topicId: TOPIC_ID, lessonIdx: LESSON_IDX,
+    label: 'Mark as complete', doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Trigonometry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 4 &mdash; Trigonometry</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>Trigonometry</h1>
+      <p class="subtitle">Every dot-point of MST-12-S2-04 in one place: the formula sheet, a
+        decision flow for choosing the right tool, the mistakes that cost marks, and a mixed
+        exam-style paper with full solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-04</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Formula sheet</li>
+        <li>Which tool do I use?</li>
+        <li>Bearings reference</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#formulas">1 &nbsp;Formula sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#decide">2 &nbsp;Which tool?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#bearings">3 &nbsp;Bearings reference</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">4 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">5 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. FORMULAS ─────────── -->
+      <div class="content-card" id="formulas">
+        <p class="section-label">Reference</p>
+        <h2>Formula sheet</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Right-angled triangles only</p>
+          \[\sin \theta = \frac{\text{opp}}{\text{hyp}} \qquad
+            \cos \theta = \frac{\text{adj}}{\text{hyp}} \qquad
+            \tan \theta = \frac{\text{opp}}{\text{adj}}\]
+          <p class="formula-where">Inverses \(\sin^{-1}\), \(\cos^{-1}\), \(\tan^{-1}\) find the
+            angle. The hypotenuse is always opposite the right angle.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Sine rule — needs a matching side–angle pair</p>
+          \[\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} \quad \text{(finding a side)}\]
+          \[\frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c} \quad \text{(finding an angle)}\]
+          <p class="formula-where">Put the unknown on top. If told the angle is obtuse, take
+            \(180°\) minus the calculator's answer.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Cosine rule — no matching pair needed</p>
+          \[c^{2} = a^{2} + b^{2} - 2ab\cos C \quad \text{(SAS → find a side)}\]
+          \[\cos C = \frac{a^{2} + b^{2} - c^{2}}{2ab} \quad \text{(SSS → find an angle)}\]
+          <p class="formula-where">A negative cosine gives an obtuse angle automatically — no
+            adjustment needed. Remember the square root when finding a side.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Area and angle measure</p>
+          \[A = \frac{1}{2}ab\sin C \qquad\qquad 1° = 60' \qquad 1' = 60''\]
+          <p class="formula-where">\(C\) must be the angle <em>between</em> sides \(a\) and \(b\).
+            Decimal → minutes: multiply by 60. Minutes → decimal: divide by 60.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Facts that check your work</p>
+          <ul style="margin-bottom:0;">
+            <li>Angles of a triangle sum to \(180°\).</li>
+            <li>The longest side is opposite the largest angle.</li>
+            <li>\(\sin\theta = \sin(180° - \theta)\), so inverse sine is ambiguous.</li>
+            <li>\(\sin\theta \le 1\) always — a ratio above 1 means the sides are mixed up.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. DECIDE ─────────── -->
+      <div class="content-card" id="decide">
+        <p class="section-label">Method</p>
+        <h2>Which tool do I use?</h2>
+
+        <table class="coord-table">
+          <tr><th>What you have</th><th>Case</th><th>Tool</th></tr>
+          <tr><td>A right angle</td><td>—</td><td>SOH CAH TOA</td></tr>
+          <tr><td>Two angles and any side</td><td>AAS</td><td>Sine rule</td></tr>
+          <tr><td>Two sides and an angle opposite one of them</td><td>SSA</td><td>Sine rule (angle form)</td></tr>
+          <tr><td>Two sides and the angle between them</td><td>SAS</td><td>Cosine rule (side form)</td></tr>
+          <tr><td>Three sides</td><td>SSS</td><td>Cosine rule (angle form)</td></tr>
+          <tr><td>Two sides + included angle, want area</td><td>SAS</td><td>\(A = \tfrac12 ab\sin C\)</td></tr>
+          <tr><td>Three sides, want area</td><td>SSS</td><td>Cosine rule, then area formula</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The one-question test</p>
+          <p style="margin-bottom:0;">Is there a <strong>matching pair</strong> — a side and the
+            angle directly opposite it? <strong>Yes</strong> → sine rule.
+            <strong>No</strong> → cosine rule. A right angle beats both.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Which tool?</h3>
+          <p class="exercise-intro">Type <code>sine</code>, <code>cosine</code> or
+            <code>soh cah toa</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) Sides 6, 9, 14 &mdash; find the largest angle. &rarr;</label>
+            <input class="exercise-input" id="whA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(A = 40°\), \(a = 12\), \(b = 9\) &mdash; find angle \(B\). &rarr;</label>
+            <input class="exercise-input" id="whB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Sides 8 and 11 with 63° between them &mdash; find the third side. &rarr;</label>
+            <input class="exercise-input" id="whC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhC"></p>
+
+          <div class="exercise-row">
+            <label>(d) Angle of elevation 35°, horizontal distance 60 m &mdash; find the height. &rarr;</label>
+            <input class="exercise-input" id="whD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-wh="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbWhD"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. BEARINGS ─────────── -->
+      <div class="content-card" id="bearings">
+        <p class="section-label">Reference</p>
+        <h2>Bearings reference</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Two systems</p>
+          <p style="margin-bottom:0;">
+            <strong>True bearings</strong> — clockwise from north, three digits: \(000°\) to \(359°\).<br>
+            <strong>Compass bearings</strong> — N or S, an acute angle, then E or W: \(N35°E\), \(S62°W\).
+          </p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>Quadrant</th><th>True bearing range</th><th>Compass form</th><th>Convert</th></tr>
+          <tr><td>North-east</td><td>\(000°\)–\(090°\)</td><td>\(N\theta E\)</td><td>\(\theta = \) bearing</td></tr>
+          <tr><td>South-east</td><td>\(090°\)–\(180°\)</td><td>\(S\theta E\)</td><td>\(\theta = 180° - \) bearing</td></tr>
+          <tr><td>South-west</td><td>\(180°\)–\(270°\)</td><td>\(S\theta W\)</td><td>\(\theta = \) bearing \(- 180°\)</td></tr>
+          <tr><td>North-west</td><td>\(270°\)–\(360°\)</td><td>\(N\theta W\)</td><td>\(\theta = 360° - \) bearing</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">Back bearings and interior angles</p>
+          <p style="margin-bottom:0;">
+            <strong>Back bearing:</strong> add 180° if the bearing is under 180°, subtract 180° if
+            it is 180° or more.<br><br>
+            <strong>Interior angle at a turning point:</strong> take the <em>back bearing</em> of
+            the incoming leg, then find the difference from the outgoing bearing. The raw difference
+            between the two bearings is the angle <em>turned through</em>, not the interior angle.
+          </p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Bearing converter</h3>
+          <p class="exercise-intro">Drag to see all three forms at once.</p>
+          <div id="bearSliders"></div>
+          <div class="diagram-wrap"><div id="bearDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">True</div>
+              <div class="readout-value" id="roTrue">045°</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Compass</div>
+              <div class="readout-value" id="roCompass">N45°E</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Back bearing</div>
+              <div class="readout-value" id="roBack">225°</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CHECKLIST ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 5. MISTAKES ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Calculator in radian mode</td>
+            <td>Check for DEG before the first calculation. Every answer will be wrong otherwise.</td>
+          </tr>
+          <tr>
+            <td>Labelling opposite/adjacent from the wrong angle</td>
+            <td>Label the diagram relative to the angle in the question, every time.</td>
+          </tr>
+          <tr>
+            <td>Multiplying when the unknown is on the bottom</td>
+            <td>\(\sin\theta = \frac{k}{x}\) means \(x = \frac{k}{\sin\theta}\) — divide.</td>
+          </tr>
+          <tr>
+            <td>Forgetting the square root in the cosine rule</td>
+            <td>The rule gives \(c^{2}\). Take the root.</td>
+          </tr>
+          <tr>
+            <td>Treating \(\cos\) of an obtuse angle as positive</td>
+            <td>It is negative, and subtracting it <em>adds</em> to \(c^{2}\).</td>
+          </tr>
+          <tr>
+            <td>Accepting the acute answer when told the angle is obtuse</td>
+            <td>Take \(180°\) minus the calculator's value.</td>
+          </tr>
+          <tr>
+            <td>Using the area formula with a non-included angle</td>
+            <td>\(C\) must sit between \(a\) and \(b\). Find the right angle first if necessary.</td>
+          </tr>
+          <tr>
+            <td>Forgetting to add the observer's eye height</td>
+            <td>The triangle starts at eye level, not the ground.</td>
+          </tr>
+          <tr>
+            <td>Putting the depression angle at the top of the triangle</td>
+            <td>Transfer it to the bottom, where it becomes the angle of elevation.</td>
+          </tr>
+          <tr>
+            <td>Subtracting raw bearings for the interior angle</td>
+            <td>Take the back bearing of the incoming leg first.</td>
+          </tr>
+          <tr>
+            <td>Writing a true bearing as \(45°\)</td>
+            <td>True bearings take three digits: \(045°\).</td>
+          </tr>
+          <tr>
+            <td>Rounding mid-calculation</td>
+            <td>Keep full precision in the calculator; round only the final answer.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes with a
+          calculator &mdash; then mark yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident
+            with every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-4', LESSON_IDX = 4;
+  var NS = 'http://www.w3.org/2000/svg';
+  var D2R = Math.PI / 180;
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function pad3(v) { return ('00' + Math.round(v)).slice(-3) + '°'; }
+  function toCompass(t) {
+    t = ((t % 360) + 360) % 360;
+    if (Math.abs(t) < 0.5 || Math.abs(t - 360) < 0.5) return 'N';
+    if (Math.abs(t - 90) < 0.5)  return 'E';
+    if (Math.abs(t - 180) < 0.5) return 'S';
+    if (Math.abs(t - 270) < 0.5) return 'W';
+    if (t < 90)  return 'N' + Math.round(t) + '°E';
+    if (t < 180) return 'S' + Math.round(180 - t) + '°E';
+    if (t < 270) return 'S' + Math.round(t - 180) + '°W';
+    return 'N' + Math.round(360 - t) + '°W';
+  }
+  function backBearing(t) { return t < 180 ? t + 180 : t - 180; }
+
+  /* ── Which tool? ──────────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['cosine', 'Three sides (SSS) — no matching pair, so the cosine rule in angle form.'],
+      B: ['sine',   'Side \\(a\\) with its opposite angle \\(A\\) is a matching pair, so the sine rule works.'],
+      C: ['cosine', 'Two sides with the angle between them (SAS) — cosine rule in side form.'],
+      D: ['soh cah toa', 'An angle of elevation with a horizontal distance makes a right-angled triangle: use tan.']
+    };
+    document.querySelectorAll('[data-wh]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.wh, fb = document.getElementById('fbWh' + k);
+        var v = (document.getElementById('wh' + k).value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type an answer.'; return; }
+        var ok = v.indexOf(ANS[k][0]) !== -1 || (ANS[k][0] === 'soh cah toa' && /soh|toa|tan|ratio/.test(v));
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.innerHTML = (ok ? '✓ Correct. ' : '✗ It is the ' + ANS[k][0] + '. ') + ANS[k][1];
+        IE.tex(fb);
+      });
+    });
+  })();
+
+  /* ── Bearing converter ────────────────────────────────────── */
+  (function () {
+    var t = 45;
+    var mount = document.getElementById('bearDiagram');
+    function update() {
+      var W = 240, H = 240, cx = 120, cy = 120, R = 84;
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      svg.appendChild(svgEl('circle', { cx: cx, cy: cy, r: R, fill: 'none', class: 'edge-line', 'stroke-dasharray': '4 4' }));
+      svg.appendChild(svgEl('line', { class: 'dim-line', x1: cx, y1: cy - R - 10, x2: cx, y2: cy + R + 10 }));
+      svg.appendChild(svgEl('line', { class: 'dim-line', x1: cx - R - 10, y1: cy, x2: cx + R + 10, y2: cy }));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx - 6, y: cy - R - 16 }, 'N'));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx - 5, y: cy + R + 28 }, 'S'));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx + R + 16, y: cy + 6 }, 'E'));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx - R - 28, y: cy + 6 }, 'W'));
+      svg.appendChild(svgEl('line', { class: 'edge-line',
+        x1: cx, y1: cy, x2: cx + R * Math.sin(t * D2R), y2: cy - R * Math.cos(t * D2R), 'stroke-width': 2.6 }));
+      svg.appendChild(svgEl('line', { class: 'edge-line', 'stroke-dasharray': '5 4',
+        x1: cx, y1: cy, x2: cx - R * Math.sin(t * D2R), y2: cy + R * Math.cos(t * D2R) }));
+      svg.appendChild(svgEl('circle', { class: 'node-circle', cx: cx, cy: cy, r: 5 }));
+      var ar = 38, large = t > 180 ? 1 : 0;
+      svg.appendChild(svgEl('path', { class: 'angle-arc',
+        d: 'M ' + cx + ' ' + (cy - ar) + ' A ' + ar + ' ' + ar + ' 0 ' + large + ' 1 ' +
+           (cx + ar * Math.sin(t * D2R)) + ' ' + (cy - ar * Math.cos(t * D2R)) }));
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roTrue').textContent    = pad3(t);
+      document.getElementById('roCompass').textContent = toCompass(t);
+      document.getElementById('roBack').textContent    = pad3(backBearing(t));
+    }
+    IE.slider({ mount: 'bearSliders', label: 'Bearing', min: 0, max: 359, step: 1, value: t,
+                format: function (v) { return pad3(v); },
+                onInput: function (v) { t = v; update(); } });
+    update();
+  })();
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Apply trigonometric ratios to right-angled triangles to find unknown sides',
+      'Apply trigonometric ratios to right-angled triangles to find unknown angles',
+      'Work in degrees, and in degrees and minutes',
+      'Apply the sine rule a/sin A = b/sin B = c/sin C to find an unknown side',
+      'Apply the sine rule sin A/a = sin B/b = sin C/c to find an unknown angle',
+      'Apply the sine rule when the unknown angle is known to be obtuse',
+      'Apply the cosine rule c² = a² + b² − 2ab cos C to find an unknown side',
+      'Apply the cosine rule cos C = (a² + b² − c²)/(2ab) to find an unknown angle',
+      'Apply the area formula A = ½ab sin C to solve problems in a range of contexts',
+      'Identify and interpret angles of elevation and angles of depression',
+      'Convert between angles of elevation and angles of depression',
+      'Construct and interpret compass bearings',
+      'Construct and interpret true bearings',
+      'Convert between compass bearings and true bearings',
+      'Solve practical problems involving right-angled and non-right-angled triangles',
+      'Solve practical problems involving angles of elevation and depression',
+      'Solve practical problems involving true and compass bearings'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none'; ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0'; li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+    var tally = document.createElement('p');
+    tally.style.cssText = 'margin-top:16px;font-family:var(--font-mono);font-size:12px;color:var(--gray-med);';
+    mount.appendChild(tally);
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'A right-angled triangle has a hypotenuse of 26 cm and an angle of 37°. Find the side adjacent to that angle.',
+      marks: 2,
+      steps: [
+        'Adjacent and hypotenuse means cosine.',
+        '\\(\\cos 37° = \\dfrac{x}{26}\\).',
+        '\\(x = 26 \\times \\cos 37° = 26 \\times 0.79864\\).'
+      ],
+      answer: '20.76 cm'
+    },
+    {
+      q: 'Convert 58.7° to degrees and minutes, and 42°36\' to a decimal.',
+      marks: 2,
+      steps: [
+        '\\(0.7 \\times 60 = 42\\), so \\(58.7° = 58°42\'\\).',
+        '\\(36 \\div 60 = 0.6\\), so \\(42°36\' = 42.6°\\).'
+      ],
+      answer: "58°42' and 42.6°"
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(A = 57°\\), \\(B = 44°\\) and \\(a = 31\\) m. Find side \\(b\\).',
+      marks: 3,
+      steps: [
+        'Matching pair \\(a\\) and \\(A\\) — sine rule.',
+        '\\(b = \\dfrac{31 \\times \\sin 44°}{\\sin 57°}\\).',
+        '\\(= \\dfrac{31 \\times 0.69466}{0.83867}\\).',
+        'Check: \\(B < A\\) so \\(b < a\\) ✓'
+      ],
+      answer: 'About 25.68 m'
+    },
+    {
+      q: 'A triangle has \\(a = 17\\), \\(b = 23\\) and included angle \\(C = 68°\\). Find \\(c\\).',
+      marks: 3,
+      steps: [
+        'SAS — cosine rule.',
+        '\\(c^{2} = 289 + 529 - 2(17)(23)\\cos 68°\\).',
+        '\\(= 818 - 782 \\times 0.37461 = 818 - 292.94 = 525.06\\).',
+        '\\(c = \\sqrt{525.06}\\).'
+      ],
+      answer: 'About 22.91'
+    },
+    {
+      q: 'Find the area of a triangle with sides 21 m and 28 m and an included angle of 49°.',
+      marks: 2,
+      steps: [
+        '\\(A = \\tfrac12(21)(28)\\sin 49°\\).',
+        '\\(= 294 \\times 0.75471\\).'
+      ],
+      answer: 'About 221.89 m²'
+    },
+    {
+      q: 'A triangle has sides 13, 18 and 24 cm. Find the largest angle, to the nearest minute.',
+      marks: 4,
+      steps: [
+        'The largest angle faces the longest side: \\(c = 24\\), \\(a = 13\\), \\(b = 18\\).',
+        '\\(\\cos C = \\dfrac{169 + 324 - 576}{2(13)(18)} = \\dfrac{-83}{468} = -0.17735\\).',
+        '\\(C = \\cos^{-1}(-0.17735) = 100.21°\\).',
+        '\\(0.21 \\times 60 = 12.6\\), so about \\(100°13\'\\).'
+      ],
+      answer: "About 100°13'"
+    },
+    {
+      q: 'An observer with eye height 1.7 m stands 72 m from a tower. The angle of elevation to the top is 39°. Find the tower\'s height.',
+      marks: 4,
+      steps: [
+        '\\(\\tan 39° = \\dfrac{h}{72}\\), so \\(h = 72 \\times 0.80978 = 58.30\\) m above eye level.',
+        'Add the eye height: \\(58.30 + 1.7\\).',
+        'The triangle starts at eye level, not the ground.'
+      ],
+      answer: '60.00 m'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(a = 11\\), \\(b = 17\\) and \\(A = 33°\\). Angle \\(B\\) is obtuse. Find \\(B\\) and \\(C\\).',
+      marks: 5,
+      steps: [
+        '\\(\\sin B = \\dfrac{17 \\times \\sin 33°}{11} = \\dfrac{17 \\times 0.54464}{11} = 0.84172\\).',
+        'The calculator gives \\(\\sin^{-1}(0.84172) = 57.35°\\), which is acute.',
+        'Since \\(B\\) is obtuse: \\(B = 180 - 57.35 = 122.65°\\).',
+        '\\(C = 180 - 33 - 122.65 = 24.35°\\).',
+        'The positive third angle confirms the triangle is valid ✓'
+      ],
+      answer: '\\(B \\approx 122.65°\\) and \\(C \\approx 24.35°\\).'
+    },
+    {
+      q: 'Convert \\(S37°E\\) to a true bearing, \\(283°\\) to a compass bearing, and find the back bearing of \\(064°\\).',
+      marks: 3,
+      steps: [
+        '\\(S37°E\\) is in the south-east quadrant: \\(180° - 37° = 143°\\).',
+        '\\(283°\\) is in the north-west quadrant: \\(360° - 283° = 77°\\), so \\(N77°W\\).',
+        '\\(064° < 180°\\), so add 180°: \\(064° + 180° = 244°\\).'
+      ],
+      answer: '\\(143°\\); \\(N77°W\\); \\(244°\\)'
+    },
+    {
+      q: 'From a cliff 165 m high, the angles of depression to two boats in line are 34° and 19°. Find the distance between them.',
+      marks: 5,
+      steps: [
+        'Each depression angle becomes an elevation angle at the boat.',
+        'Nearer boat: \\(d_1 = \\dfrac{165}{\\tan 34°} = \\dfrac{165}{0.67451} = 244.62\\) m.',
+        'Further boat: \\(d_2 = \\dfrac{165}{\\tan 19°} = \\dfrac{165}{0.34433} = 479.19\\) m.',
+        'The smaller angle gives the greater distance ✓',
+        'Distance apart: \\(479.19 - 244.62\\).'
+      ],
+      answer: 'About 234.57 m apart.'
+    },
+    {
+      q: 'A ship sails 68 km on a bearing of \\(054°\\), then 51 km on a bearing of \\(137°\\). Find its distance from the start.',
+      marks: 5,
+      steps: [
+        'Back bearing of leg 1: \\(054° + 180° = 234°\\).',
+        'Interior angle: \\(234° - 137° = 97°\\).',
+        '\\(d^{2} = 68^{2} + 51^{2} - 2(68)(51)\\cos 97°\\).',
+        '\\(\\cos 97° = -0.12187\\), so \\(d^{2} = 4624 + 2601 + 845.29 = 8070.29\\).',
+        '\\(d = \\sqrt{8070.29}\\).'
+      ],
+      answer: 'About 89.83 km'
+    },
+    {
+      q: 'For the ship above, find the bearing on which it must sail to return directly to its start.',
+      marks: 5,
+      steps: [
+        'Angle at the start, by the sine rule: \\(\\sin\\theta = \\dfrac{51 \\times \\sin 97°}{89.83} = \\dfrac{51 \\times 0.99255}{89.83} = 0.56354\\).',
+        '\\(\\theta = 34.29°\\).',
+        'Bearing of the finish from the start: \\(054° + 34.29° = 88.29°\\).',
+        'The return bearing is the back bearing of that.',
+        '\\(88.29° + 180° = 268.29°\\).'
+      ],
+      answer: 'About \\(268°\\).'
+    },
+    {
+      q: 'Find the area of a triangle with sides 14, 19 and 25 m.',
+      marks: 5,
+      steps: [
+        'No angle given, so use the cosine rule first.',
+        'Angle between the 14 and 19 sides (opposite 25): \\(\\cos C = \\dfrac{196 + 361 - 625}{2(14)(19)} = \\dfrac{-68}{532} = -0.12782\\).',
+        '\\(C = 97.34°\\).',
+        'Area \\(= \\tfrac12(14)(19)\\sin 97.34°\\).',
+        '\\(= 133 \\times 0.99180\\).'
+      ],
+      answer: 'About 131.91 m²'
+    },
+    {
+      q: 'Two fire towers P and Q are 1,200 m apart, with Q on a bearing of \\(085°\\) from P. A fire is at bearing \\(040°\\) from P and \\(310°\\) from Q. Find the distance from Q to the fire.',
+      marks: 6,
+      steps: [
+        'Angle at P, between PQ (\\(085°\\)) and the fire (\\(040°\\)): \\(85 - 40 = 45°\\).',
+        'Back bearing of PQ, giving the direction of P from Q: \\(085° + 180° = 265°\\).',
+        'Angle at Q, between QP (\\(265°\\)) and the fire (\\(310°\\)): \\(310 - 265 = 45°\\).',
+        'Third angle, at the fire: \\(180 - 45 - 45 = 90°\\).',
+        'Sine rule: \\(\\dfrac{QF}{\\sin 45°} = \\dfrac{1200}{\\sin 90°}\\).',
+        '\\(QF = 1200 \\times 0.70711\\).'
+      ],
+      answer: 'About 848.53 m from Q to the fire.'
+    },
+    {
+      q: 'A surveyor walks 240 m from A on a bearing of \\(318°\\) to B, then 185 m on a bearing of \\(047°\\) to C. Find (a) the distance AC, (b) the bearing of C from A, and (c) the area of triangle ABC.',
+      marks: 7,
+      steps: [
+        '(a) Back bearing of AB: \\(318° - 180° = 138°\\). Interior angle at B: \\(138° - 047° = 91°\\).',
+        '\\(AC^{2} = 240^{2} + 185^{2} - 2(240)(185)\\cos 91° = 57600 + 34225 + 1549.6 = 93374.6\\).',
+        '\\(AC = 305.57\\) m.',
+        '(b) Angle at A: \\(\\sin A = \\dfrac{185 \\times \\sin 91°}{305.57} = \\dfrac{185 \\times 0.99985}{305.57} = 0.60539\\), so \\(A = 37.25°\\).',
+        'The second leg turns eastward from the \\(318°\\) course, so the bearing of C from A is \\(318° + 37.25° = 355.25°\\).',
+        '(c) Area \\(= \\tfrac12(240)(185)\\sin 91° = 22200 \\times 0.99985\\).'
+      ],
+      answer: '(a) About 305.57 m. (b) About \\(355°\\). (c) About 22,196.7 m².'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  IE.completeBanner({
+    mount: 'completeBtn', topicId: TOPIC_ID, lessonIdx: LESSON_IDX,
+    label: 'Mark as complete', doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

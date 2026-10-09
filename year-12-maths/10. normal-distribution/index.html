@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Normal Distribution &mdash; Year 12 Maths Standard 2</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+</head>
+<body class="sociotype">
+
+  <header class="topic-header">
+    <div class="header-inner">
+      <div class="header-nav">
+        <a href="../../year-12.html" class="back-link">&larr; All Topics</a>
+        <div class="header-actions">
+          <a class="syllabus-chip-inline" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa92309f60" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
+          <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode"><span class="toggle-icon">dark</span></button>
+        </div>
+      </div>
+      <h1 class="topic-page-title">The Normal <em>Distribution</em></h1>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="pdf-viewer-container">
+      <div class="lessons-sidebar" id="lessonsList"></div>
+      <div class="pdf-viewer-main">
+        <div class="pdf-controls">
+          <div class="control-group" id="fileControls">
+            <button class="pdf-btn" id="downloadBtn">&#8595; Download</button>
+            <a class="pdf-btn" id="openExternalBtn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+            <button class="pdf-btn" id="printSyllabusBtn">&#8942; Print Syllabus</button>
+          </div>
+          <div class="control-group" id="pageControls">
+            <button class="pdf-nav-arrow" id="prevPage" disabled>&#8592;</button>
+            <input class="page-info" id="pageInfo" type="text" inputmode="numeric" placeholder="–" disabled><span class="page-sep" id="pageTotal">/ –</span>
+            <button class="pdf-nav-arrow" id="nextPage" disabled>&#8594;</button>
+          </div>
+          <div class="control-group" id="zoomControls">
+            <div class="zoom-control">
+              <button class="zoom-btn" id="zoomOut">&#8722;</button>
+              <span class="zoom-display" id="zoomDisplay">–</span>
+              <button class="zoom-btn" id="zoomIn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-stage" id="pdfStage">
+          <div class="pdf-loading" id="pdfLoading">
+            <div class="pdf-loading-spinner"></div>
+            <p>Loading</p>
+          </div>
+          <div class="pdf-canvas-wrapper" id="pdfCanvasWrapper" style="display:none"></div>
+          <iframe class="pdf-html-frame" id="pdfHtmlFrame" src="about:blank" title="Lesson"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../pdf-viewer.js"></script>
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = toggle.querySelector('.toggle-icon');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefersDark;
+    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
+    toggle.addEventListener('click', () => {
+      const nowDark = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      toggleIcon.textContent = nowDark ? 'light' : 'dark';
+      const frame = document.getElementById('pdfHtmlFrame');
+      try { if (frame && frame.contentDocument && frame.contentDocument.documentElement) { frame.contentDocument.documentElement.classList.toggle('dark-mode', nowDark); } } catch (e) {}
+      try { if (frame && frame.contentWindow) { frame.contentWindow.postMessage({ type: 'ie-theme', dark: nowDark }, '*'); } } catch (e) {}
+    });
+
+    const TOPIC_ID = 'y12-10';
+
+    const lessons = [
+      {
+        num: 1,
+        title: "Normally Distributed Datasets",
+        slides: "lesson-01-normal-datasets.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Recognise that a random variable that is normally distributed can be represented by a bell-shaped curve",
+          "Explain that the mean, median and mode are approximately equal for data arising from a random variable that is normally distributed"
+        ]
+      },
+      {
+        num: 2,
+        title: "Calculating z-scores",
+        slides: "lesson-02-z-scores.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Describe the z-score as the number of standard deviations that a value is above or below the mean",
+          "Recognise that the set of z-scores for data arising from a random variable that is normally distributed has a mean of 0 and standard deviation of 1",
+          "Calculate the z-score corresponding to a specific value in a dataset by applying the formula z = (x - mean) / standard deviation",
+          "Use z-scores to compare scores from different datasets and justify conclusions in the context of the problem"
+        ]
+      },
+      {
+        num: 3,
+        title: "The Empirical Rule & Probability",
+        slides: "lesson-03-empirical-rule.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Model and apply the empirical rule, where approximately 68% of data will have z-scores between -1 and 1, approximately 95% between -2 and 2, and approximately 99.7% between -3 and 3",
+          "Calculate probabilities using z-scores and the empirical rule",
+          "Represent probabilities by shading areas under the normal curve",
+          "Use z-scores to identify probabilities of events less or more extreme than a given event and solve problems",
+          "Use z-scores to make judgements related to outcomes of a given event or sets of data"
+        ]
+      },
+      {
+        num: 4,
+        homework: true,
+        slides: "lesson-04-homework.html",
+        annotated: null,
+        kind: "html",
+        syllabus: []
+      },
+      {
+        num: 5,
+        title: "Revision",
+        revision: true,
+        slides: "lesson-05-revision.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Review all The Normal Distribution dot-points",
+          "Mixed exam-style practice with full worked solutions"
+        ]
+      }
+    ];
+
+    initPdfViewer({ topicId: TOPIC_ID, lessons });
+  </script>
+  <script src="../../question-popup.js"></script>
+</body>
+</html>

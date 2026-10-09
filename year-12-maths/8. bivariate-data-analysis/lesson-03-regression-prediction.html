@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Least-Squares Regression &amp; Prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 &mdash; Bivariate Data Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Least-Squares Regression &amp; Prediction</h1>
+      <p class="subtitle">The line of best fit, computed properly. Then the real point of all this
+        &mdash; making predictions, and knowing exactly how far you can trust them.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-08</span>
+        <span class="pill">Least-squares line</span>
+        <span class="pill">Interpolation &amp; extrapolation</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What least squares means</li>
+        <li>Finding the line on a calculator</li>
+        <li>Interpreting the coefficients</li>
+        <li>Making predictions</li>
+        <li>Interpolation vs extrapolation</li>
+        <li>Judging reliability</li>
+        <li>Spreadsheet modelling</li>
+        <li>Class activity: where does the model break?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#leastsq">1 &nbsp;What least squares means</a></li>
+        <li class="toc-item"><a class="toc-link" href="#calculator">2 &nbsp;Using the calculator</a></li>
+        <li class="toc-item"><a class="toc-link" href="#interpret">3 &nbsp;Interpreting the line</a></li>
+        <li class="toc-item"><a class="toc-link" href="#predict">4 &nbsp;Making predictions</a></li>
+        <li class="toc-item"><a class="toc-link" href="#limits">5 &nbsp;Interpolation &amp; extrapolation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#reliability">6 &nbsp;How reliable is it?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spreadsheet">7 &nbsp;Spreadsheet modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. LEAST SQUARES ─────────── -->
+      <div class="content-card" id="leastsq">
+        <p class="section-label">Theory</p>
+        <h2>What least squares means</h2>
+
+        <p>A line drawn by eye is a judgement call &mdash; two people get two different lines. The
+          <strong>least-squares regression line</strong> is defined precisely, so everyone gets the
+          same answer.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The least-squares criterion</p>
+          <p style="margin-bottom:0;">For each data point, the <strong>residual</strong> is the
+            vertical distance from the point to the line. The least-squares line is the one that
+            makes the <strong>sum of the squared residuals as small as possible</strong>.</p>
+        </div>
+
+        <p><strong>Why squared?</strong> Squaring makes every residual positive, so points above
+          and below cannot cancel out. It also penalises large misses much more heavily than small
+          ones, which is why the line is pulled noticeably towards outliers.</p>
+
+        <div class="interactive-block">
+          <h3>Residuals in action</h3>
+          <p class="exercise-intro">Move your line and watch the residuals — the vertical gaps.
+            The dashed line is the true least-squares line; no other line makes the sum of squares
+            smaller.</p>
+          <div id="resSliders"></div>
+          <div class="plot-wrap" id="plotRes"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Your line</div>
+              <div class="readout-value" id="roYour">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Sum of squared residuals</div>
+              <div class="readout-value" id="roSS">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Minimum possible</div>
+              <div class="readout-value" id="roSSMin">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="resNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">A property worth knowing</p>
+          <p style="margin-bottom:0;">The least-squares line <strong>always passes through
+            \((\bar{x}, \bar{y})\)</strong> — the point given by the mean of each variable. This is
+            a useful check on your calculator work.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. CALCULATOR ─────────── -->
+      <div class="content-card" id="calculator">
+        <p class="section-label">Method</p>
+        <h2>Finding the line on a scientific calculator</h2>
+
+        <p>The syllabus requires you to <em>determine the equation of the least-squares regression
+          line using a scientific calculator</em>. You are not expected to compute it by hand.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The general procedure</p>
+          <ol style="margin-bottom:0;">
+            <li>Enter <strong>statistics mode</strong> with two variables (often
+              <code>MODE → STAT → A+BX</code>).</li>
+            <li>Type the \(x\) values in one column and the \(y\) values in the other, keeping the
+              pairs aligned.</li>
+            <li>Read off \(A\), \(B\) and \(r\) from the regression menu.</li>
+            <li>Write the equation, matching the calculator's convention to \(y = mx + c\).</li>
+          </ol>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The notation trap</p>
+          <p style="margin-bottom:0;">Most scientific calculators give the line as
+            \(y = A + Bx\), so <strong>\(A\) is the intercept and \(B\) is the gradient</strong> —
+            the opposite of what the letters suggest. Check which is which before writing your
+            answer.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>For the car data (age 1–10 years, value $38k–$11k), a calculator returns
+            \(A = 38.06\), \(B = -2.83\), \(r = -0.996\).</p>
+          <p><strong>Equation:</strong></p>
+          \[v = 38.06 - 2.83a\]
+          <p><strong>Check:</strong> the gradient is negative, matching the negative \(r\) and the
+            downward trend ✓. The correlation of \(-0.996\) is very strong.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Rounding</p>
+          <p style="margin-bottom:0;">Keep the full calculator values when making predictions, and
+            round only the final answer. Rounding the gradient to 1 decimal place before predicting
+            can shift the answer noticeably.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Enter hours studied \(x\) = 2, 4, 5, 7, 8, 10 and test mark \(y\) = 52, 58, 61,
+              70, 72, 80. Find the least-squares regression line.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(A = 44.21\), \(B = 3.548\), \(r = 0.997\).</p>
+                <p>\(\text{Mark} = 44.21 + 3.548 \times \text{hours}\).</p>
+              </div></details></li>
+            <li>A calculator shows \(A = 12.5\) and \(B = 0.84\) for \(y = A + Bx\). Write the
+              equation in the form \(y = mx + c\) and name the gradient.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(y = 0.84x + 12.5\). The gradient is \(B = 0.84\); the intercept is
+                  \(A = 12.5\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. INTERPRET ─────────── -->
+      <div class="content-card" id="interpret">
+        <p class="section-label">Method</p>
+        <h2>Interpreting the gradient and intercept</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The two interpretations</p>
+          <p style="margin-bottom:0;">
+            <strong>Gradient:</strong> "For each 1-unit increase in [\(x\) with units], [\(y\)]
+            increases/decreases by [\(m\)] [units of \(y\)]."<br><br>
+            <strong>Intercept:</strong> "When [\(x\)] is 0, [\(y\)] is predicted to be [\(c\)]
+            [units]." — but only state this if \(x = 0\) is meaningful.
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>Interpret \(v = 38.06 - 2.83a\), where \(v\) is value in $000 and \(a\) is age in
+            years.</p>
+          <p><strong>Gradient:</strong> "For each additional year of age, a car's value decreases
+            by about $2,830."</p>
+          <p><strong>Intercept:</strong> "A brand-new car (age 0) is predicted to be worth about
+            $38,060." Here \(a = 0\) is meaningful &mdash; a new car &mdash; and it is close to
+            the data range, so the interpretation is sound.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; when the intercept is meaningless</p>
+          <p>A regression of a child's weight (kg) on height (cm) gives \(w = 0.63h - 42.1\).</p>
+          <p><strong>Gradient:</strong> "For each extra centimetre of height, weight increases by
+            about 0.63 kg." Meaningful ✓</p>
+          <p><strong>Intercept:</strong> a child of height 0 cm would weigh \(-42.1\) kg. This is
+            <strong>not meaningful</strong> &mdash; zero height is impossible and lies far outside
+            the data. Say so rather than inventing an interpretation.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Build and interpret a regression</h3>
+          <p class="exercise-intro">Change the data spread and trend; the least-squares line and
+            its interpretation update.</p>
+          <div id="regSliders"></div>
+          <div class="plot-wrap" id="plotReg"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Equation</div>
+              <div class="readout-value" id="roEq">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Pearson's r</div>
+              <div class="readout-value" id="roRr">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="regNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>For \(H = 1.6t + 22\), where \(H\) is a plant's height (cm) and \(t\) is days since
+              planting out, interpret the gradient and intercept.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Gradient: the plant grows about 1.6 cm per day. Intercept: it was about 22 cm
+                  tall when planted out (day 0) &mdash; meaningful.</p>
+              </div></details></li>
+            <li>A household's daily gas use \(G\) (MJ) against average temperature \(T\) (°C),
+              from data for 5&ndash;25°C, is \(G = 120 - 4.5T\). Interpret both constants.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Gradient: each 1°C warmer is associated with about 4.5 MJ less gas per day.
+                  Intercept: at 0°C the model predicts 120 MJ. This is a modest extrapolation
+                  (data start at 5°C), so treat it with some caution.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. PREDICT ─────────── -->
+      <div class="content-card" id="predict">
+        <p class="section-label">Method</p>
+        <h2>Making predictions</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The method</p>
+          <p style="margin-bottom:0;">To predict \(y\), substitute the given \(x\) into the
+            regression equation. To find the \(x\) that gives a particular \(y\), solve the
+            equation for \(x\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Using \(v = 38.06 - 2.83a\), predict the value of a 7-year-old car.</p>
+          \[v = 38.06 - 2.83(7) = 38.06 - 19.81 = 18.25\]
+          <p>About <strong>$18,250</strong>.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; predicting \(x\) from \(y\)</p>
+          <p>At what age is the car predicted to be worth $25,000?</p>
+          \[25 = 38.06 - 2.83a\]
+          \[2.83a = 13.06 \quad\Rightarrow\quad a = 4.6 \text{ years}\]
+          <p>About 4 years and 7 months.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Prediction tool</h3>
+          <p class="exercise-intro">Slide the age to see the predicted value, with a clear warning
+            when you move outside the data range.</p>
+          <div id="predSliders"></div>
+          <div class="plot-wrap" id="plotPred"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Age</div>
+              <div class="readout-value" id="roAge">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Predicted value</div>
+              <div class="readout-value" id="roVal">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Prediction type</div>
+              <div class="readout-value" id="roType">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="predNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Using \(\text{Mark} = 44.21 + 3.548h\), predict the mark for 6 hours of study.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(44.21 + 3.548 \times 6 = 65.5\), so about 66 marks.</p>
+              </div></details></li>
+            <li>How many hours of study does the model predict for a mark of 75?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[75 = 44.21 + 3.548h \;\Rightarrow\; h = \frac{30.79}{3.548} = 8.7 \text{ hours}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. LIMITS ─────────── -->
+      <div class="content-card" id="limits">
+        <p class="section-label">Evaluation</p>
+        <h2>Interpolation and extrapolation</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The two kinds of prediction</p>
+          <p style="margin-bottom:0;">
+            <strong>Interpolation</strong> — predicting <em>within</em> the range of the original
+            data. Generally <strong>reliable</strong>, because the relationship has been observed
+            there.<br><br>
+            <strong>Extrapolation</strong> — predicting <em>outside</em> the range of the data.
+            <strong>Unreliable</strong>, because there is no evidence the pattern continues.
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>The car data covers ages 1 to 10 years, with \(v = 38.06 - 2.83a\).</p>
+          <p><strong>(a) Predict the value at 6 years.</strong></p>
+          \[v = 38.06 - 2.83(6) = 21.08\]
+          <p>About $21,080. This is <strong>interpolation</strong> (6 is within 1–10), so it is
+            reliable.</p>
+          <p><strong>(b) Predict the value at 16 years.</strong></p>
+          \[v = 38.06 - 2.83(16) = 38.06 - 45.28 = -7.22\]
+          <p>The model predicts <strong>negative $7,220</strong>, which is impossible. This is
+            <strong>extrapolation</strong>, far beyond the data, and the linear model has broken
+            down &mdash; in reality depreciation slows and cars retain a residual value.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Other limitations to mention</p>
+          <ul style="margin-bottom:0;">
+            <li>A strong \(r\) shows association, <strong>not causation</strong>.</li>
+            <li>The model assumes the relationship stays <strong>linear</strong>.</li>
+            <li>Predictions are <strong>averages</strong>, not guarantees for any individual.</li>
+            <li>Conditions may change over time, invalidating the model.</li>
+            <li>A small sample makes every conclusion less reliable.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; a model answer</p>
+          <p>"Using the model, predict a car's value at 20 years and comment."</p>
+          <p style="border-left:2px solid var(--ink); padding-left:14px;">
+            "\(v = 38.06 - 2.83(20) = -18.54\), so the model predicts a value of
+            \(-\$18\,540\).<br><br>
+            This is <strong>not a sensible prediction</strong>. A car cannot have a negative value.
+            The prediction requires <strong>extrapolation</strong> well beyond the data range of
+            1 to 10 years, where there is no evidence the linear relationship still holds. In
+            reality depreciation slows with age and cars retain a residual or scrap value, so the
+            true relationship flattens out rather than continuing to fall."
+          </p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Using \(G = 120 - 4.5T\) (data 5&ndash;25°C), predict daily gas use at 15°C and
+              at 35°C. Comment on each.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>15°C: \(120 - 67.5 = 52.5\) MJ &mdash; interpolation, reliable.</p>
+                <p>35°C: \(120 - 157.5 = -37.5\) MJ &mdash; impossible. This is extrapolation; in
+                  reality gas use levels off near a minimum (hot water, cooking) rather than going
+                  negative.</p>
+              </div></details></li>
+            <li>Data on hours studied cover 2 to 10 hours. Is predicting the mark for 25 hours of
+              study reasonable?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No: \(44.21 + 3.548 \times 25 = 132.9\), above the maximum possible mark. It is
+                  extrapolation far beyond the data, where the linear pattern cannot continue.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. RELIABILITY ─────────── -->
+      <div class="content-card" id="reliability">
+        <p class="section-label">Evaluation</p>
+        <h2>Judging how reliable a prediction is</h2>
+
+        <p>Exam questions often ask "how reliable is this prediction?" A strong answer weighs
+          several factors, not just one:</p>
+
+        <table class="coord-table">
+          <tr><th>Factor</th><th>More reliable</th><th>Less reliable</th></tr>
+          <tr><td>Strength of \(r\)</td><td>\(|r|\) close to 1</td><td>\(|r|\) weak or moderate</td></tr>
+          <tr><td>Position of \(x\)</td><td>Interpolation</td><td>Extrapolation</td></tr>
+          <tr><td>Sample size</td><td>Many data points</td><td>Only a few</td></tr>
+          <tr><td>Form</td><td>Clearly linear</td><td>Curved pattern</td></tr>
+          <tr><td>Who it is for</td><td>An average of many</td><td>One individual</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">Checking a prediction against reality: the residual</p>
+          \[\text{residual} = \text{actual value} - \text{predicted value}\]
+          <p class="formula-where">A positive residual means the actual value was higher than
+            predicted; negative means lower. Small residuals across the data mean the model fits
+            well.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Two predictions of next week's sales:</p>
+          <ul>
+            <li>Model A: \(r = 0.95\), 40 weeks of data, predicting within the data range.</li>
+            <li>Model B: \(r = 0.45\), 8 weeks of data, predicting outside the data range.</li>
+          </ul>
+          <p>Model A is far more reliable on every factor: a very strong correlation, a large
+            sample and interpolation. Model B has a weak correlation, a small sample <em>and</em>
+            extrapolates &mdash; its prediction should not be trusted.</p>
+          <p><strong>Residual:</strong> on an 18°C day the gas model \(G = 120 - 4.5T\) predicts
+            39 MJ, but the household used 41 MJ. The residual is \(41 - 39 = 2\) MJ: the model
+            underestimated by 2 MJ, a small error.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A model of house price against floor area has \(r = 0.84\) from 45 houses with
+              areas 90&ndash;340 m². Rate the reliability of predictions for (a) a 200 m² house and
+              (b) a 600 m² house.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Fairly reliable: strong \(r\), a reasonable sample, interpolation. (b)
+                  Unreliable: far outside the data, and very large houses may follow a different
+                  pattern.</p>
+              </div></details></li>
+            <li>Using \(\text{Mark} = 44.21 + 3.548h\), a student who studied 7 hours scored 70.
+              Find the residual and interpret it.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Predicted: \(44.21 + 3.548 \times 7 = 69.05\). Residual:
+                  \(70 - 69.05 = 0.95\). The student scored about 1 mark more than predicted.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. SPREADSHEET ─────────── -->
+      <div class="content-card" id="spreadsheet">
+        <p class="section-label">Technology</p>
+        <h2>Spreadsheet modelling</h2>
+
+        <p>The syllabus asks you to <em>use a spreadsheet to construct a scatter plot and the
+          least-squares regression line</em>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The steps</p>
+          <ol style="margin-bottom:0;">
+            <li>Put the <strong>independent</strong> variable in column A and the
+              <strong>dependent</strong> in column B.</li>
+            <li>Select both columns and insert a <strong>Scatter (XY)</strong> chart — never a line
+              chart, which would join the points.</li>
+            <li>Right-click a point → <strong>Add Trendline</strong> → Linear.</li>
+            <li>Tick <strong>Display Equation on chart</strong> and
+              <strong>Display R-squared value</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Useful functions</p>
+          <ul style="margin-bottom:0;">
+            <li><code>=SLOPE(B2:B9, A2:A9)</code> — the gradient. Note the \(y\) range comes
+              <strong>first</strong>.</li>
+            <li><code>=INTERCEPT(B2:B9, A2:A9)</code> — the \(y\)-intercept.</li>
+            <li><code>=CORREL(A2:A9, B2:B9)</code> — Pearson's \(r\).</li>
+            <li><code>=FORECAST(x, B2:B9, A2:A9)</code> — a prediction at a given \(x\).</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">\(R^2\) versus \(r\)</p>
+          <p style="margin-bottom:0;">Spreadsheets usually display \(R^2\), the
+            <strong>square</strong> of Pearson's \(r\). So \(R^2 = 0.81\) corresponds to
+            \(r = \pm 0.9\) — and you must read the <strong>direction from the gradient</strong>,
+            because squaring destroys the sign.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>A spreadsheet trendline reads \(y = -2.83x + 38.06\) with \(R^2 = 0.992\). Find \(r\)
+            and describe the association.</p>
+          \[r = \pm\sqrt{0.992} = \pm 0.996\]
+          <p>The gradient is negative, so \(r = -0.996\): a very strong negative linear
+            association.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10 &mdash; exam style</p>
+          <p>A shop records weekly advertising spend \(x\) (in $100s, from 2 to 12) and weekly
+            sales \(y\) (in $000s). A spreadsheet trendline gives \(y = 1.35x + 8.2\) with
+            \(R^2 = 0.7744\).</p>
+          <p><strong>(a) Find \(r\) and describe the association.</strong> [2 marks]</p>
+          <p>\(r = +\sqrt{0.7744} = 0.88\) (positive, because the gradient is positive): a strong
+            positive linear association.</p>
+          <p><strong>(b) Interpret the gradient.</strong> [1 mark]</p>
+          <p>Each extra $100 spent on advertising is associated with about $1,350 more in weekly
+            sales.</p>
+          <p><strong>(c) Predict sales for a week with $900 of advertising.</strong> [1 mark]</p>
+          <p>\(x = 9\): \(y = 1.35(9) + 8.2 = 20.35\), so about $20,350.</p>
+          <p><strong>(d) The manager plans to spend $3,000 in one week. Comment.</strong>
+            [1 mark]</p>
+          <p>\(x = 30\) is far beyond the data (up to 12). Extrapolating is unreliable: sales
+            cannot keep rising at the same rate, as customer demand is limited.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Where does the model break?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#predict">prediction tool</a>, which uses the least-squares line for the car
+          data (ages 1&ndash;10 years).</p>
+        <ol>
+          <li>Record the predicted values at ages 0, 6, 10, 12, 13 and 14. Label each as
+            interpolation or extrapolation.</li>
+          <li>Between which two ages does the model first predict a negative value?</li>
+          <li>Is the age-0 prediction sensible? Compare it with the youngest car in the
+            data.</li>
+          <li>As a pair, decide on a sensible range of ages for using this model, and justify
+            it.</li>
+          <li>Sketch what you think the true relationship looks like from 0 to 18 years. Why
+            would a straight line be the wrong shape?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Age</th><td>0</td><td>6</td><td>10</td><td>12</td><td>13</td><td>14</td></tr>
+            <tr><th>Predicted</th><td>$39,081</td><td>$21,289</td><td>$9,428</td><td>$3,497</td><td>$532</td><td>&minus;$2,434</td></tr>
+            <tr><th>Type</th><td>extrap.</td><td>interp.</td><td>interp.</td><td>extrap.</td><td>extrap.</td><td>extrap.</td></tr>
+          </table>
+          <p><strong>2.</strong> Between 13 and 14 years (the line crosses zero at about 13.2
+            years).</p>
+          <p><strong>3.</strong> It is close to the 1-year-old car ($38,000), so a little above it
+            is plausible &mdash; a mild extrapolation.</p>
+          <p><strong>4.</strong> Roughly 1 to 10 years, the range of the data, perhaps with a
+            little leeway at either end.</p>
+          <p><strong>5.</strong> The true curve falls steeply at first then levels off towards a
+            scrap value &mdash; more like exponential decay than a straight line. A straight line
+            must eventually go negative.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">For every prediction, state whether it is interpolation or
+          extrapolation and comment on its reliability.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-8', LESSON_IDX = 2;
+
+  function stats(pts) {
+    var n = pts.length, sx = 0, sy = 0;
+    pts.forEach(function (p) { sx += p[0]; sy += p[1]; });
+    var mx = sx / n, my = sy / n, sxy = 0, sxx = 0, syy = 0;
+    pts.forEach(function (p) {
+      sxy += (p[0] - mx) * (p[1] - my);
+      sxx += (p[0] - mx) * (p[0] - mx);
+      syy += (p[1] - my) * (p[1] - my);
+    });
+    var r = (sxx && syy) ? sxy / Math.sqrt(sxx * syy) : 0;
+    var m = sxx ? sxy / sxx : 0;
+    return { r: r, m: m, c: my - m * mx, mx: mx, my: my };
+  }
+  function ssr(pts, m, c) {
+    return pts.reduce(function (s, p) { var d = p[1] - (m * p[0] + c); return s + d * d; }, 0);
+  }
+
+  var CARS = [[1,38],[2,33],[3,30],[4,26],[5,24],[6,20],[8,15],[10,11]];
+  var CAR_FIT = stats(CARS);
+
+  /* ── Residuals ────────────────────────────────────────────── */
+  (function () {
+    var m = -2.2, c = 35;
+    var best = stats(CARS);
+    var bestSS = ssr(CARS, best.m, best.c);
+    var redraw = IE.plot('plotRes', {
+      width: 460, height: 300, xMin: 0, xMax: 11, yMin: 0, yMax: 42,
+      xStep: 2, yStep: 10, xLabel: 'age (years)', yLabel: 'value ($000)', points: []
+    });
+
+    function update() {
+      // Residuals drawn as dashed markers from each point down to the line
+      redraw({
+        points: CARS.map(function (p) { return { x: p[0], y: p[1] }; }),
+        markers: CARS.map(function (p) { return { x: p[0], y: m * p[0] + c }; }),
+        curves: [
+          { fn: function (x) { return m * x + c; } },
+          { fn: function (x) { return best.m * x + best.c; }, className: 'plot-curve-2' }
+        ]
+      });
+      var ss = ssr(CARS, m, c);
+      document.getElementById('roYour').textContent  = 'y = ' + m.toFixed(2) + 'x + ' + c.toFixed(1);
+      document.getElementById('roSS').textContent    = ss.toFixed(2);
+      document.getElementById('roSSMin').textContent = bestSS.toFixed(2);
+      var note = document.getElementById('resNote');
+      if (ss <= bestSS * 1.02) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'You have essentially found the least-squares line: y = ' +
+          best.m.toFixed(2) + 'x + ' + best.c.toFixed(2) + '. No other line gives a smaller sum of squares than ' +
+          bestSS.toFixed(2) + '.';
+      } else {
+        note.className = 'exercise-feedback';
+        note.textContent = 'Your sum of squared residuals is ' + ss.toFixed(2) + ', against a minimum of ' +
+          bestSS.toFixed(2) + '. Adjust the sliders to reduce it — the dashed line shows the target.';
+      }
+    }
+    var host = 'resSliders';
+    IE.slider({ mount: host, label: 'Gradient', min: -5, max: 0, step: 0.05, value: m,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { m = v; update(); } });
+    IE.slider({ mount: host, label: 'y-intercept', min: 20, max: 50, step: 0.5, value: c,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { c = v; update(); } });
+    update();
+  })();
+
+  /* ── Regression builder ───────────────────────────────────── */
+  (function () {
+    var grad = -2.8, noise = 1.2;
+    var SEED = [0.4,-0.9,0.6,-0.3,1.0,-0.5,0.2,0.8,-1.0,0.35,-0.7,0.55];
+    var redraw = IE.plot('plotReg', {
+      width: 460, height: 280, xMin: 0, xMax: 11, yMin: 0, yMax: 45,
+      xStep: 2, yStep: 10, xLabel: 'x', yLabel: 'y', points: []
+    });
+
+    function update() {
+      var pts = SEED.map(function (e, i) {
+        var x = 0.8 + i * 0.85;
+        return [x, 25 + grad * (x - 5.5) + e * noise * 3];
+      });
+      var s = stats(pts);
+      redraw({
+        points: pts.map(function (p) { return { x: p[0], y: Math.max(0, Math.min(45, p[1])) }; }),
+        curves: [{ fn: function (x) { return s.m * x + s.c; }, className: 'plot-curve-2' }]
+      });
+      document.getElementById('roEq').textContent = 'y = ' + s.m.toFixed(2) + 'x + ' + s.c.toFixed(2);
+      document.getElementById('roRr').textContent = s.r.toFixed(3);
+      var note = document.getElementById('regNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Gradient ' + s.m.toFixed(2) + ': for each 1-unit increase in x, y ' +
+        (s.m < 0 ? 'decreases' : 'increases') + ' by about ' + Math.abs(s.m).toFixed(2) +
+        '. Intercept ' + s.c.toFixed(2) + ': the predicted y when x = 0. The line always passes through the mean point (' +
+        s.mx.toFixed(2) + ', ' + s.my.toFixed(2) + ').';
+    }
+    var host = 'regSliders';
+    IE.slider({ mount: host, label: 'Trend', min: -5, max: 5, step: 0.2, value: grad,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { grad = v; update(); } });
+    IE.slider({ mount: host, label: 'Scatter', min: 0, max: 4, step: 0.1, value: noise,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { noise = v; update(); } });
+    update();
+  })();
+
+  /* ── Prediction tool ──────────────────────────────────────── */
+  (function () {
+    var age = 6;
+    var LO = 1, HI = 10;
+    var redraw = IE.plot('plotPred', {
+      width: 460, height: 290, xMin: 0, xMax: 18, yMin: -12, yMax: 42,
+      xStep: 3, yStep: 10, xLabel: 'age (years)', yLabel: 'value ($000)', points: []
+    });
+
+    function update() {
+      var v = CAR_FIT.m * age + CAR_FIT.c;
+      var inside = age >= LO && age <= HI;
+      redraw({
+        points: CARS.map(function (p) { return { x: p[0], y: p[1] }; })
+                    .concat([{ x: age, y: v, hollow: true, label: v.toFixed(1) }]),
+        markers: [{ x: age, y: v }],
+        curves: [{ fn: function (x) { return CAR_FIT.m * x + CAR_FIT.c; }, className: 'plot-curve-2' }]
+      });
+      document.getElementById('roAge').textContent  = age + ' years';
+      document.getElementById('roVal').textContent  = '$' + (v * 1000).toLocaleString('en-AU', { maximumFractionDigits: 0 });
+      document.getElementById('roType').textContent = inside ? 'interpolation' : 'extrapolation';
+      var note = document.getElementById('predNote');
+      if (inside) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Age ' + age + ' lies within the data range of ' + LO + '–' + HI +
+          ' years, so this is interpolation — a reliable prediction.';
+      } else if (v < 0) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Age ' + age + ' is outside the data range (' + LO + '–' + HI +
+          '), so this is extrapolation. The model predicts a negative value, which is impossible — the linear model has clearly broken down.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Age ' + age + ' is outside the data range (' + LO + '–' + HI +
+          '), so this is extrapolation. There is no evidence the linear relationship continues here, so the prediction is unreliable.';
+      }
+    }
+    IE.slider({ mount: 'predSliders', label: 'Car age', min: 0, max: 18, step: 1, value: age,
+                format: function (v) { return v + ' yr'; },
+                onInput: function (v) { age = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'What does the least-squares regression line minimise?',
+      opts: [
+        'A) The number of points above the line',
+        'B) The sum of the squared vertical distances from the points to the line',
+        'C) The gradient of the line',
+        'D) The correlation coefficient'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Each residual is the vertical gap from a point to the line; squaring prevents positive and negative gaps cancelling, and the least-squares line makes that total as small as possible.'
+    },
+    {
+      q: 'A calculator gives \\(A = 24.5\\) and \\(B = -1.8\\) for a regression in the form \\(y = A + Bx\\). What is the equation?',
+      opts: [
+        'A) \\(y = 24.5x - 1.8\\)',
+        'B) \\(y = -1.8x + 24.5\\)',
+        'C) \\(y = 1.8x - 24.5\\)',
+        'D) \\(y = -24.5x + 1.8\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. In \\(y = A + Bx\\), \\(A\\) is the intercept and \\(B\\) is the gradient — the opposite of what the letters suggest. So the gradient is \\(-1.8\\) and the intercept is 24.5.'
+    },
+    {
+      q: 'For \\(v = 38.06 - 2.83a\\) (value in $000, age in years), what does the gradient mean?',
+      opts: [
+        'A) A new car is worth $2,830',
+        'B) The car\'s value falls by about $2,830 per year',
+        'C) The car is worth $38,060 after 2.83 years',
+        'D) The car gains $2,830 in value per year'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The gradient gives the change in \\(y\\) per 1-unit increase in \\(x\\). Being negative, it means the value decreases by 2.83 thousand dollars for each extra year of age.'
+    },
+    {
+      q: 'Data covers ages 2 to 12 years. Predicting at age 8 is:',
+      opts: [
+        'A) Extrapolation, and unreliable',
+        'B) Interpolation, and generally reliable',
+        'C) Impossible without more data',
+        'D) Interpolation, but unreliable'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Age 8 lies within the observed range of 2–12, so this is interpolation. The relationship has been observed there, making the prediction generally reliable.'
+    },
+    {
+      q: 'A model gives a predicted car value of \\(-\\$9\\,000\\) at 18 years, from data covering 1–10 years. What is the best comment?',
+      opts: [
+        'A) The car owes $9,000',
+        'B) The calculation must be wrong',
+        'C) This is extrapolation far outside the data; a negative value is impossible, so the linear model has broken down',
+        'D) The prediction is reliable because the equation was applied correctly'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The arithmetic is fine, but the model is being used well beyond the data range where there is no evidence the linear trend continues. In reality depreciation slows and cars retain a residual value.'
+    },
+    {
+      q: 'A spreadsheet trendline shows \\(R^2 = 0.64\\) with a positive gradient. What is Pearson\'s \\(r\\)?',
+      opts: ['A) 0.64', 'B) 0.41', 'C) 0.8', 'D) \\(-0.8\\)'],
+      correct: 2,
+      explanation: 'C is correct. \\(r = \\pm\\sqrt{R^2} = \\pm\\sqrt{0.64} = \\pm 0.8\\), and since the gradient is positive, \\(r = +0.8\\). Squaring destroys the sign, so the direction must come from the gradient.'
+    },
+    {
+      q: 'Which point does the least-squares regression line always pass through?',
+      opts: [
+        'A) The origin',
+        'B) The first data point',
+        'C) The point \\((\\bar{x}, \\bar{y})\\)',
+        'D) The median of the data'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The least-squares line always passes through the mean of \\(x\\) and the mean of \\(y\\) — a useful check on your calculator work.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain what the least-squares regression line minimises, and why the residuals are squared.',
+      marks: 3,
+      steps: [
+        'The residual is the vertical distance from each data point to the line.',
+        'The line minimises the sum of the <em>squared</em> residuals.',
+        'Squaring makes every residual positive, so points above and below cannot cancel out.',
+        'It also penalises large misses far more heavily than small ones.'
+      ],
+      answer: 'It minimises the sum of the squared vertical distances (residuals) from the points to the line. Squaring prevents positive and negative residuals cancelling, and gives more weight to large deviations.'
+    },
+    {
+      q: 'A calculator returns \\(A = 52.4\\), \\(B = -3.15\\), \\(r = -0.94\\) for \\(y = A + Bx\\). Write the equation and describe the association.',
+      marks: 3,
+      steps: [
+        'In \\(y = A + Bx\\), \\(A\\) is the intercept and \\(B\\) the gradient.',
+        'So the equation is \\(y = -3.15x + 52.4\\).',
+        '\\(|r| = 0.94\\) is very strong, and the sign is negative.'
+      ],
+      answer: '\\(y = -3.15x + 52.4\\); a very strong negative linear association.'
+    },
+    {
+      q: 'For \\(C = 4.2d + 38\\), where \\(C\\) is delivery cost in dollars and \\(d\\) is distance in km, interpret the gradient and intercept.',
+      marks: 4,
+      steps: [
+        'The gradient is the change in cost per extra kilometre.',
+        'Each additional kilometre adds $4.20 to the cost.',
+        'The intercept is the predicted cost at \\(d = 0\\).',
+        'A zero-distance delivery costs $38 — a meaningful fixed or base charge.'
+      ],
+      answer: 'Gradient: each extra kilometre costs $4.20 more. Intercept: a base charge of $38 applies before any distance is travelled — meaningful here, since \\(d = 0\\) represents the fixed component.'
+    },
+    {
+      q: 'A regression of a child\'s weight (kg) on age (years) gives \\(w = 2.8a + 6.5\\), from data on children aged 3 to 12. Interpret both coefficients and comment on the intercept.',
+      marks: 4,
+      steps: [
+        'Gradient: each additional year of age is associated with about 2.8 kg more weight.',
+        'Intercept: at age 0, the predicted weight is 6.5 kg.',
+        'A newborn weighing 6.5 kg is unusually heavy — typical is around 3.5 kg.',
+        'Age 0 lies outside the data range of 3–12, so the intercept should not be relied upon.'
+      ],
+      answer: 'Gradient: about 2.8 kg per year of age. Intercept: predicts 6.5 kg at birth, which is too heavy for a newborn — it lies outside the data range (3–12 years), so it is an unreliable extrapolation rather than a meaningful figure.'
+    },
+    {
+      q: 'Using \\(v = 41.2 - 3.1a\\) (value in $000), predict the value of a 5-year-old car and of a 15-year-old car. Data covers ages 1 to 9.',
+      marks: 5,
+      steps: [
+        'At \\(a = 5\\): \\(v = 41.2 - 15.5 = 25.7\\), so about $25,700.',
+        'Age 5 is within 1–9, so this is interpolation — reliable.',
+        'At \\(a = 15\\): \\(v = 41.2 - 46.5 = -5.3\\).',
+        'This predicts \\(-\\$5\\,300\\), which is impossible.',
+        'Age 15 is well outside the data range, so this is extrapolation and the model has broken down.'
+      ],
+      answer: 'At 5 years: about $25,700 — interpolation, reliable. At 15 years: \\(-\\$5\\,300\\) — extrapolation far outside the data, giving an impossible negative value; the linear model does not hold there.'
+    },
+    {
+      q: 'Explain the difference between interpolation and extrapolation, and why one is more reliable.',
+      marks: 4,
+      steps: [
+        'Interpolation predicts within the range of the observed data.',
+        'The relationship has actually been observed across that range, so the model is supported by evidence.',
+        'Extrapolation predicts outside the range.',
+        'There is no evidence the pattern continues, and relationships often change beyond the observed values.'
+      ],
+      answer: 'Interpolation predicts inside the data range and is generally reliable, because the relationship was observed there. Extrapolation predicts outside it and is unreliable, since nothing guarantees the linear trend continues — and it often does not.'
+    },
+    {
+      q: 'Using \\(y = 0.65x + 12.4\\), find the value of \\(x\\) that gives \\(y = 30\\).',
+      marks: 3,
+      steps: [
+        'Substitute: \\(30 = 0.65x + 12.4\\).',
+        '\\(0.65x = 30 - 12.4 = 17.6\\).',
+        '\\(x = \\dfrac{17.6}{0.65}\\).'
+      ],
+      answer: '\\(x \\approx 27.08\\)'
+    },
+    {
+      q: 'A spreadsheet trendline shows \\(y = -0.48x + 91.3\\) with \\(R^2 = 0.7225\\). Find \\(r\\) and describe the association.',
+      marks: 4,
+      steps: [
+        '\\(r = \\pm\\sqrt{R^2} = \\pm\\sqrt{0.7225} = \\pm 0.85\\).',
+        'The gradient is negative, so \\(r = -0.85\\).',
+        '\\(|r| = 0.85\\) falls in the strong band.',
+        'Squaring removes the sign, so the direction must be read from the gradient.'
+      ],
+      answer: '\\(r = -0.85\\): a strong negative linear association. The sign comes from the negative gradient, since \\(R^2\\) alone cannot indicate direction.'
+    },
+    {
+      q: 'List the spreadsheet functions for the gradient, the intercept, Pearson\'s \\(r\\) and a prediction, noting any argument-order trap.',
+      marks: 4,
+      steps: [
+        'Gradient: <code>=SLOPE(y-range, x-range)</code>.',
+        'Intercept: <code>=INTERCEPT(y-range, x-range)</code>.',
+        'Correlation: <code>=CORREL(range1, range2)</code>.',
+        'Prediction: <code>=FORECAST(x, y-range, x-range)</code>.',
+        'The trap: SLOPE and INTERCEPT take the <em>y</em> range first, which is the reverse of the usual reading order.'
+      ],
+      answer: '<code>=SLOPE(B2:B9,A2:A9)</code>, <code>=INTERCEPT(B2:B9,A2:A9)</code>, <code>=CORREL(A2:A9,B2:B9)</code>, <code>=FORECAST(x,B2:B9,A2:A9)</code>. Note that SLOPE and INTERCEPT require the \\(y\\) values first.'
+    },
+    {
+      q: 'A study of 40 houses gives \\(P = 3.8A + 210\\), where \\(P\\) is price in $000 and \\(A\\) is floor area in m², with \\(r = 0.87\\) and areas from 80 to 320 m². Predict the price of a 200 m² house and comment on reliability.',
+      marks: 5,
+      steps: [
+        '\\(P = 3.8(200) + 210 = 760 + 210 = 970\\).',
+        'The predicted price is $970,000.',
+        '200 m² lies within the range 80–320, so this is interpolation.',
+        '\\(r = 0.87\\) is strong, and the sample of 40 is reasonable.',
+        'The prediction is an average — individual houses vary with location, condition and features.'
+      ],
+      answer: 'About $970,000. This is interpolation within the 80–320 m² range, with a strong correlation and a reasonable sample, so it is reliable as an <em>average</em>. Individual houses will differ according to location and condition.'
+    },
+    {
+      q: 'For the house data above, explain why predicting the price of a 600 m² house would be unwise.',
+      marks: 4,
+      steps: [
+        '600 m² is far outside the observed range of 80–320 m².',
+        'This is extrapolation, with no evidence the linear relationship continues.',
+        'Very large houses may occupy a different market segment with different price dynamics.',
+        'The relationship may flatten or steepen well beyond the data.'
+      ],
+      answer: 'Because 600 m² is nearly double the largest observed house, making it extrapolation. There is no evidence the $3,800 per m² rate still applies — very large houses belong to a different market where price per square metre may behave quite differently.'
+    },
+    {
+      q: 'Explain why the least-squares line always passes through \\((\\bar{x}, \\bar{y})\\), and how this can be used as a check.',
+      marks: 3,
+      steps: [
+        'The least-squares criterion forces the residuals to sum to zero.',
+        'That means the line balances the data vertically at the mean of \\(x\\).',
+        'So substituting \\(\\bar{x}\\) into the equation gives \\(\\bar{y}\\).',
+        'You can verify a calculator result by computing both means and checking the equation.'
+      ],
+      answer: 'Because the residuals sum to zero, the line passes through the mean point. To check a regression, calculate \\(\\bar{x}\\) and \\(\\bar{y}\\), substitute \\(\\bar{x}\\) into your equation, and confirm the result equals \\(\\bar{y}\\).'
+    },
+    {
+      q: 'Data on hours studied (2–14) and exam mark gives \\(M = 4.1h + 32\\) with \\(r = 0.79\\). A student studies 9 hours. Predict their mark and state three limitations.',
+      marks: 6,
+      steps: [
+        '\\(M = 4.1(9) + 32 = 36.9 + 32 = 68.9\\), so about 69.',
+        '9 hours lies within 2–14, so this is interpolation.',
+        'Limitation 1: the prediction is an average — individual students vary considerably.',
+        'Limitation 2: \\(r = 0.79\\) is strong but not perfect, so there is real scatter about the line.',
+        'Limitation 3: association is not causation — motivation and ability may drive both.',
+        'The model also assumes the relationship stays linear.'
+      ],
+      answer: 'About 69 marks — interpolation, so reasonably reliable. Limitations: it predicts an average rather than an individual outcome; \\(r = 0.79\\) leaves substantial unexplained scatter; and the association does not prove that studying <em>causes</em> higher marks, since motivation and prior ability could influence both.'
+    },
+    {
+      q: 'A researcher fits a least-squares line to data with a clear curved pattern and reports \\(r = 0.42\\) with a prediction. Critique this analysis fully.',
+      marks: 6,
+      steps: [
+        'The form is non-linear, so a linear model is inappropriate.',
+        'Pearson\'s \\(r\\) measures only linear association, so 0.42 understates the true strength.',
+        'The regression line will systematically over-predict in some regions and under-predict in others.',
+        'The residuals would show a clear pattern rather than being randomly scattered.',
+        'The researcher should have inspected the scatter plot before fitting.',
+        'A non-linear model — or a transformation of the data — would be appropriate.'
+      ],
+      answer: 'The analysis is invalid because the relationship is non-linear. \\(r = 0.42\\) understates a relationship that may be very strong, and the straight line will bias predictions systematically — over-predicting in some ranges, under-predicting in others. The scatter plot should have been examined first, and a non-linear model used instead.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

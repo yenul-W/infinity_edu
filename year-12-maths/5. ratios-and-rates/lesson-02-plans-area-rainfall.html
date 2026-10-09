@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Site Plans, Area &amp; Rainfall</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 5 &mdash; Ratios &amp; Rates</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Site Plans, Area &amp; Rainfall</h1>
+      <p class="subtitle">Real blocks of land are rarely neat rectangles. The trapezoidal rule
+        handles any irregular shape &mdash; and once you have an area, one small formula tells you
+        how much rain falls on it.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-05</span>
+        <span class="pill">Trapezoidal rule</span>
+        <span class="pill">\(V = Ah\)</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Perimeter and area from a plan</li>
+        <li>Composite shapes</li>
+        <li>The trapezoidal rule</li>
+        <li>Irregular blocks and aerial photos</li>
+        <li>Radial surveys</li>
+        <li>Rainfall volume \(V = Ah\)</li>
+        <li>Capacity and tanks</li>
+        <li>Class activity: testing the trapezoidal rule</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#composite">1 &nbsp;Composite shapes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#trapezoidal">2 &nbsp;The trapezoidal rule</a></li>
+        <li class="toc-item"><a class="toc-link" href="#irregular">3 &nbsp;Irregular blocks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#radial">4 &nbsp;Radial surveys</a></li>
+        <li class="toc-item"><a class="toc-link" href="#rainfall">5 &nbsp;Rainfall volume</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tanks">6 &nbsp;Tanks &amp; capacity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. COMPOSITE ─────────── -->
+      <div class="content-card" id="composite">
+        <p class="section-label">Method</p>
+        <h2>Perimeter and area of composite shapes</h2>
+
+        <p>Most blocks of land are made from rectangles, triangles and part-circles joined
+          together. The technique is always the same: <strong>split, calculate, combine</strong>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Area formulas you need</p>
+          \[A_{\text{rectangle}} = lw \qquad A_{\text{triangle}} = \tfrac12 bh \qquad
+            A_{\text{circle}} = \pi r^{2}\]
+          \[A_{\text{trapezium}} = \tfrac12 h(a + b)\]
+          <p class="formula-where">In the trapezium formula, \(a\) and \(b\) are the two parallel
+            sides and \(h\) is the perpendicular distance between them.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Perimeter warning</p>
+          <p style="margin-bottom:0;">The perimeter is the distance <strong>around the
+            outside</strong> only. When you split a shape into pieces, the internal cut lines are
+            <em>not</em> part of the perimeter — but they <em>are</em> needed for the areas.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 240" width="400">
+            <polygon class="tri-fill" points="50,200 50,80 200,80 200,40 350,40 350,200"/>
+            <line class="edge-line" x1="200" y1="80" x2="350" y2="80" stroke-dasharray="5 4"/>
+            <text class="side-label-text" x="125" y="145" text-anchor="middle">A</text>
+            <text class="side-label-text" x="275" y="65" text-anchor="middle">B</text>
+            <text class="side-label-text" x="275" y="145" text-anchor="middle">C</text>
+            <text class="angle-label-text" x="125" y="216" text-anchor="middle">15 m</text>
+            <text class="angle-label-text" x="275" y="216" text-anchor="middle">15 m</text>
+            <text class="angle-label-text" x="36" y="145" transform="rotate(-90 36 145)" text-anchor="middle">12 m</text>
+            <text class="angle-label-text" x="366" y="120" transform="rotate(-90 366 120)" text-anchor="middle">16 m</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">An L-shaped block split into rectangles. The dashed line is an
+          internal cut &mdash; it helps with area but is not part of the perimeter.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Find the area and perimeter of the L-shaped block above.</p>
+          <p><strong>Area by splitting.</strong> The left rectangle is 15 m × 12 m; the right
+            rectangle is 15 m × 16 m:</p>
+          \[A = (15 \times 12) + (15 \times 16) = 180 + 240 = 420 \text{ m}^{2}\]
+          <p><strong>Perimeter.</strong> Going around the outside: 12 + 15 + 4 + 15 + 16 + 30:</p>
+          \[P = 12 + 15 + 4 + 15 + 16 + 30 = 92 \text{ m}\]
+          <p>The 4 m step is the difference between the 16 m and 12 m sides. The dashed internal
+            line is excluded.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>L-shaped block calculator</h3>
+          <p class="exercise-intro">Adjust the dimensions and see the area and perimeter update,
+            with the split shown.</p>
+          <div id="lSliders"></div>
+          <div class="diagram-wrap"><div id="lDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Left rectangle</div>
+              <div class="readout-value" id="roLeft">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Right rectangle</div>
+              <div class="readout-value" id="roRight">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total area</div>
+              <div class="readout-value" id="roLArea">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Perimeter</div>
+              <div class="readout-value" id="roLPerim">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A lawn is a 24 m by 18 m rectangle with a semicircle on one 18 m side. Find its
+              area and perimeter.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Area: \(24 \times 18 + \tfrac12 \pi (9)^2 = 432 + 127.23 = 559.23\) m².</p>
+                <p>Perimeter: the 18 m side next to the semicircle is internal, so
+                  \(24 + 24 + 18 + \tfrac12(2\pi \times 9) = 66 + 28.27 = 94.27\) m.</p>
+              </div></details></li>
+            <li>A 10 m by 8 m corner is cut out of a 30 m by 20 m rectangular block. Find the area
+              and perimeter of what remains.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Area: \(600 - 80 = 520\) m².</p>
+                <p>Perimeter: the two new edges (10 m and 8 m) exactly replace the two removed
+                  edges, so it is still \(2(30 + 20) = 100\) m.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. TRAPEZOIDAL ─────────── -->
+      <div class="content-card" id="trapezoidal">
+        <p class="section-label">Theory</p>
+        <h2>The trapezoidal rule</h2>
+
+        <p>When a boundary is curved or irregular &mdash; a river frontage, a coastline, an aerial
+          photograph &mdash; no standard formula applies. The trapezoidal rule approximates the
+          area by slicing the shape into strips and treating each as a trapezium.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">One application (a single strip)</p>
+          \[A \approx \frac{h}{2}(d_{f} + d_{l})\]
+          <p class="formula-where">\(h\) is the width of the strip, and \(d_f\) and \(d_l\) are the
+            first and last perpendicular offsets (the two parallel sides).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Several applications</p>
+          \[A \approx \frac{h}{2}\Big[d_{f} + d_{l} + 2(d_{2} + d_{3} + \dots + d_{n-1})\Big]\]
+          <p class="formula-where">The <strong>end offsets are counted once</strong>; every
+            <strong>middle offset is counted twice</strong>, because each internal offset is shared
+            by the strip on either side of it. \(h\) is the constant strip width.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 420 240" width="420">
+            <path class="tri-fill" d="M 50 200 L 50 130 Q 110 95 140 110 Q 200 135 230 85 Q 290 40 320 70 Q 350 95 370 80 L 370 200 Z"/>
+            <line class="edge-line" x1="50" y1="200" x2="370" y2="200" stroke-width="2"/>
+            <line class="dim-line" x1="50"  y1="200" x2="50"  y2="130"/>
+            <line class="dim-line" x1="130" y1="200" x2="130" y2="108"/>
+            <line class="dim-line" x1="210" y1="200" x2="210" y2="95"/>
+            <line class="dim-line" x1="290" y1="200" x2="290" y2="52"/>
+            <line class="dim-line" x1="370" y1="200" x2="370" y2="80"/>
+            <text class="angle-label-text" x="50"  y="216" text-anchor="middle">d₁</text>
+            <text class="angle-label-text" x="130" y="216" text-anchor="middle">d₂</text>
+            <text class="angle-label-text" x="210" y="216" text-anchor="middle">d₃</text>
+            <text class="angle-label-text" x="290" y="216" text-anchor="middle">d₄</text>
+            <text class="angle-label-text" x="370" y="216" text-anchor="middle">d₅</text>
+            <text class="angle-label-text" x="90"  y="234" text-anchor="middle">h</text>
+            <text class="angle-label-text" x="170" y="234" text-anchor="middle">h</text>
+            <text class="angle-label-text" x="250" y="234" text-anchor="middle">h</text>
+            <text class="angle-label-text" x="330" y="234" text-anchor="middle">h</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">Five offsets create four strips. \(d_1\) and \(d_5\) are counted
+          once; \(d_2\), \(d_3\) and \(d_4\) are counted twice.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; one application</p>
+          <p>A block of land is 30 m wide. The boundary offsets at each end are 18 m and 26 m.
+            Estimate the area.</p>
+          \[A \approx \frac{30}{2}(18 + 26) = 15 \times 44 = 660 \text{ m}^{2}\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; several applications</p>
+          <p>Offsets measured at 20 m intervals across a block are 12, 19, 23, 17 and 9 metres.
+            Estimate the area.</p>
+          <p>Five offsets means four strips, with \(h = 20\):</p>
+          \[A \approx \frac{20}{2}\Big[12 + 9 + 2(19 + 23 + 17)\Big]\]
+          \[= 10\Big[21 + 2(59)\Big] = 10(21 + 118) = 10 \times 139 = 1\,390 \text{ m}^{2}\]
+          <p><strong>The two most common errors:</strong> doubling the end offsets, and using the
+            number of offsets instead of the number of strips when finding \(h\).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Finding \(h\) from a total width</p>
+          \[h = \frac{\text{total width}}{\text{number of strips}} = \frac{\text{total width}}{\text{number of offsets} - 1}\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Trapezoidal rule calculator</h3>
+          <p class="exercise-intro">Drag the offsets to reshape the boundary. The calculation is
+            shown term by term.</p>
+          <div id="trapSliders"></div>
+          <div class="plot-wrap" id="plotTrap"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Strips</div>
+              <div class="readout-value" id="roStrips">4</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Ends (once)</div>
+              <div class="readout-value" id="roEnds">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Middles (doubled)</div>
+              <div class="readout-value" id="roMids">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Estimated area</div>
+              <div class="readout-value" id="roTrapArea">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="trapNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Offsets of 6, 10, 13 and 9 m are measured at 8 m intervals. Estimate the area.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[A \approx \frac{8}{2}\Big[6 + 9 + 2(10 + 13)\Big] = 4(15 + 46) = 244 \text{ m}^2\]
+              </div></details></li>
+            <li>A block 48 m wide has five equally spaced offsets: 15, 22, 26, 20 and 12 m. Estimate
+              its area.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Five offsets make 4 strips, so \(h = 48 \div 4 = 12\) m.</p>
+                \[A \approx \frac{12}{2}\Big[15 + 12 + 2(22 + 26 + 20)\Big] = 6(27 + 136) = 978 \text{ m}^2\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. IRREGULAR ─────────── -->
+      <div class="content-card" id="irregular">
+        <p class="section-label">Application</p>
+        <h2>Irregular blocks, aerial photos and maps</h2>
+
+        <p>The syllabus asks you to <em>calculate the perimeter or area of a section of land using
+          the trapezoidal rule where appropriate, from a site plan, an aerial photograph, a radial
+          survey or a map that includes a scale</em>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The workflow</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Measure</strong> the offsets on the photo or plan, in centimetres.</li>
+            <li><strong>Convert</strong> each to real metres using the scale.</li>
+            <li><strong>Apply</strong> the trapezoidal rule to the real measurements.</li>
+            <li><strong>State</strong> that the answer is an estimate.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>On an aerial photo with scale \(1 : 2\,000\), offsets measured at 1.5 cm intervals are
+            2.1, 3.4, 4.0, 3.1 and 1.8 cm. Estimate the real area of the block.</p>
+          <p><strong>Convert lengths.</strong> At \(1 : 2\,000\), 1 cm represents 2,000 cm = 20 m:</p>
+          \[h = 1.5 \times 20 = 30 \text{ m}\]
+          <p>Offsets become \(42, 68, 80, 62, 36\) m.</p>
+          <p><strong>Apply the rule</strong> (4 strips):</p>
+          \[A \approx \frac{30}{2}\Big[42 + 36 + 2(68 + 80 + 62)\Big]\]
+          \[= 15\Big[78 + 2(210)\Big] = 15(78 + 420) = 15 \times 498 = 7\,470 \text{ m}^{2}\]
+          <p>That is about 0.75 hectares.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Why it is only an estimate</p>
+          <p style="margin-bottom:0;">The rule replaces each curved segment with a straight line.
+            Where the boundary bulges <em>outward</em> between offsets the rule
+            <strong>underestimates</strong>; where it curves <em>inward</em> it
+            <strong>overestimates</strong>. Using <strong>more, narrower strips</strong> improves
+            the accuracy.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. RADIAL SURVEY ─────────── -->
+      <div class="content-card" id="radial">
+        <p class="section-label">Application</p>
+        <h2>Radial surveys</h2>
+
+        <p>The syllabus lists the <strong>radial survey</strong> as another source for area and
+          perimeter. A surveyor stands at a point O inside the block and measures the distance and
+          bearing to each corner. Joining O to the corners splits the block into triangles.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Radial survey method</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>Angle at O</strong> between neighbouring corners = difference of their
+              bearings. All the angles at O must sum to 360°.</li>
+            <li><strong>Area</strong> of each triangle: \(\tfrac12 ab\sin\theta\), where \(a\) and
+              \(b\) are the two distances from O and \(\theta\) is the angle between them.</li>
+            <li><strong>Boundary length</strong> between neighbouring corners: cosine rule,
+              \(c^2 = a^2 + b^2 - 2ab\cos\theta\).</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A triangular block ABC is surveyed from O: \(OA = 30\) m at \(040°\),
+            \(OB = 45\) m at \(130°\), \(OC = 38\) m at \(250°\). Find its area and perimeter.</p>
+          <p><strong>Angles at O:</strong> \(\angle AOB = 90°\), \(\angle BOC = 120°\),
+            \(\angle COA = 360° - 250° + 40° = 150°\). Check: \(90 + 120 + 150 = 360\) ✓</p>
+          <p><strong>Area:</strong></p>
+          \[\tfrac12(30)(45)\sin 90° + \tfrac12(45)(38)\sin 120° + \tfrac12(38)(30)\sin 150°\]
+          \[= 675 + 740.45 + 285 = 1\,700.45 \text{ m}^2\]
+          <p><strong>Perimeter:</strong></p>
+          \[AB = \sqrt{30^2 + 45^2} = 54.08 \qquad
+            BC = \sqrt{45^2 + 38^2 - 2(45)(38)\cos 120°} = 71.97\]
+          \[CA = \sqrt{38^2 + 30^2 - 2(38)(30)\cos 150°} = 65.72\]
+          <p>Perimeter \(\approx 54.08 + 71.97 + 65.72 = 191.77\) m.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A block is surveyed from O: \(OA = 20\) m at \(000°\), \(OB = 25\) m at \(080°\),
+              \(OC = 22\) m at \(190°\), \(OD = 18\) m at \(280°\). Find its area.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Angles at O: 80°, 110°, 90°, 80° (sum 360° ✓).</p>
+                \[\tfrac12\big[20(25)\sin 80° + 25(22)\sin 110° + 22(18)\sin 90° + 18(20)\sin 80°\big] = 879.88 \text{ m}^2\]
+              </div></details></li>
+            <li>For the same block, find the length of boundary AB.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[AB = \sqrt{20^2 + 25^2 - 2(20)(25)\cos 80°} = 29.18 \text{ m}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. RAINFALL ─────────── -->
+      <div class="content-card" id="rainfall">
+        <p class="section-label">Application</p>
+        <h2>Rainfall volume</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Volume of rainfall</p>
+          \[V = Ah\]
+          <p class="formula-where">\(V\) is the volume, \(A\) is the area of land, and \(h\) is the
+            depth of rain. <strong>The units must match</strong> — if \(A\) is in m² then \(h\)
+            must be in metres, giving \(V\) in cubic metres.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The conversions you will need</p>
+          \[1 \text{ m}^{3} = 1\,000 \text{ L} \qquad 1\text{ kL} = 1\,000\text{ L} = 1\text{ m}^{3}\]
+          \[1\text{ mm} = 0.001\text{ m} \qquad 1\text{ ha} = 10\,000\text{ m}^{2}\]
+          <p class="formula-where">Rainfall is almost always given in <strong>millimetres</strong>,
+            so dividing by 1000 to get metres is the first step in nearly every question.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>How much water falls on a roof measuring 12 m by 8 m during 25 mm of rain?</p>
+          <p><strong>Area:</strong> \(12 \times 8 = 96\) m².</p>
+          <p><strong>Depth in metres:</strong> \(25 \text{ mm} = 0.025\) m.</p>
+          \[V = 96 \times 0.025 = 2.4 \text{ m}^{3}\]
+          <p><strong>In litres:</strong> \(2.4 \times 1000 = 2\,400\) L.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; a large area</p>
+          <p>A farm covers 45 hectares. How many litres fall during 18 mm of rain?</p>
+          <p><strong>Area in m²:</strong> \(45 \times 10\,000 = 450\,000\) m².</p>
+          <p><strong>Depth:</strong> \(18 \text{ mm} = 0.018\) m.</p>
+          \[V = 450\,000 \times 0.018 = 8\,100 \text{ m}^{3}\]
+          <p><strong>In litres:</strong> \(8\,100 \times 1000 = 8\,100\,000\) L, or 8.1 megalitres.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; working backwards</p>
+          <p>A 5,000 L tank collects runoff from a 60 m² roof. How much rain is needed to fill it,
+            assuming no losses?</p>
+          <p>Convert the volume: \(5\,000\) L \(= 5\) m³.</p>
+          \[5 = 60 \times h \quad\Rightarrow\quad h = \frac{5}{60} = 0.0833 \text{ m}\]
+          <p>That is about 83 mm of rain.</p>
+          <p><strong>Note the assumption:</strong> in reality some water is lost to splash,
+            evaporation and gutter overflow, so more rain would be needed.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Rainfall calculator</h3>
+          <p class="exercise-intro">Set a catchment area and a rainfall depth to see the volume
+            collected in several units.</p>
+          <div id="rainSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Depth in metres</div>
+              <div class="readout-value" id="roDepthM">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Volume</div>
+              <div class="readout-value" id="roVolM3">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">In litres</div>
+              <div class="readout-value" id="roVolL">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Tanks filled</div>
+              <div class="readout-value" id="roTanks">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="rainNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A shed roof is 15 m by 9 m. How many litres fall on it during 42 mm of rain?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(V = 135 \times 0.042 = 5.67\) m³ \(= 5\,670\) L.</p>
+              </div></details></li>
+            <li>A 2.5 ha paddock receives 12 mm of rain. Find the volume in kilolitres.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(2.5 \text{ ha} = 25\,000\) m². \(V = 25\,000 \times 0.012 = 300\) m³
+                  \(= 300\) kL.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. TANKS ─────────── -->
+      <div class="content-card" id="tanks">
+        <p class="section-label">Application</p>
+        <h2>Tanks and capacity</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Volume of a prism or cylinder</p>
+          \[V = Ah\]
+          <p class="formula-where">The same formula again — \(A\) is the area of the uniform
+            cross-section and \(h\) is the height or length. For a cylindrical tank,
+            \(A = \pi r^{2}\), so \(V = \pi r^{2} h\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>A cylindrical water tank has a diameter of 2.4 m and a height of 3 m. Find its
+            capacity in litres.</p>
+          <p>Radius \(= 1.2\) m:</p>
+          \[V = \pi (1.2)^{2}(3) = \pi \times 1.44 \times 3 = 13.57 \text{ m}^{3}\]
+          <p>\(13.57 \times 1000 = 13\,572\) litres, or about 13.6 kL.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10 &mdash; a full problem</p>
+          <p>A house has a roof catchment of 180 m². Annual rainfall averages 720 mm. A 22,000 L
+            tank is installed. How many times could the tank be filled in a year, assuming 85% of
+            the rain is captured?</p>
+          <p><strong>Rain falling on the roof:</strong></p>
+          \[V = 180 \times 0.720 = 129.6 \text{ m}^{3} = 129\,600 \text{ L}\]
+          <p><strong>Captured at 85%:</strong> \(129\,600 \times 0.85 = 110\,160\) L.</p>
+          <p><strong>Tank fills:</strong></p>
+          \[\frac{110\,160}{22\,000} = 5.01\]
+          <p>About 5 tank-fills per year. The 15% loss covers splash, first-flush diversion and
+            gutter overflow in heavy downpours.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Tank sizing tool</h3>
+          <p class="exercise-intro">Size a cylindrical tank and compare it against the annual
+            catchment from a roof.</p>
+          <div id="tankSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Tank capacity</div>
+              <div class="readout-value" id="roTankCap">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Annual catchment</div>
+              <div class="readout-value" id="roCatch">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Fills per year</div>
+              <div class="readout-value" id="roFills">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11 &mdash; exam style</p>
+          <p>A school plan at \(1 : 200\) shows a rectangular hall roof measuring 9 cm by 6.5 cm.
+            In the driest month 34 mm of rain falls, and 90% of it can be captured. The school
+            garden uses 4,000 L per month.</p>
+          <p><strong>(a) Find the actual roof area.</strong> [1 mark]</p>
+          <p>1 cm represents 2 m: the roof is 18 m by 13 m \(= 234\) m².</p>
+          <p><strong>(b) Will the roof supply the garden in the driest month?</strong> [2 marks]</p>
+          <p>\(V = 234 \times 0.034 = 7.956\) m³; captured \(7.956 \times 0.9 = 7.1604\) m³
+            \(= 7\,160\) L. This exceeds 4,000 L, so yes, with about 3,160 L to spare.</p>
+          <p><strong>(c) A cylindrical tank 2 m in diameter must hold two months of garden use.
+            How tall must it be?</strong> [2 marks]</p>
+          <p>Two months is 8,000 L \(= 8\) m³. With \(r = 1\):</p>
+          \[8 = \pi (1)^2 h \;\Rightarrow\; h = \frac{8}{\pi} = 2.55 \text{ m}\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find the capacity in litres of a cylindrical tank 1.8 m in diameter and 2.2 m tall.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(V = \pi (0.9)^2 (2.2) = 5.598\) m³ \(\approx 5\,598\) L.</p>
+              </div></details></li>
+            <li>A rectangular tank is 2.5 m by 1.2 m by 1.5 m. How much rain on a 75 m² roof would
+              fill it, assuming no losses?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Tank: \(2.5 \times 1.2 \times 1.5 = 4.5\) m³.
+                  \(\;4.5 = 75h \Rightarrow h = 0.06\) m \(= 60\) mm.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>How good is the trapezoidal rule?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> A pond is 40 m long. Its width,
+          measured every 10 m, is:</p>
+        <table class="coord-table">
+          <tr><th>Distance along (m)</th><td>0</td><td>10</td><td>20</td><td>30</td><td>40</td></tr>
+          <tr><th>Width (m)</th><td>10</td><td>25</td><td>30</td><td>25</td><td>10</td></tr>
+        </table>
+        <p>The pond's true area, found by a detailed survey, is 933 m².</p>
+        <ol>
+          <li>Estimate the area with <strong>one</strong> strip (offsets 10 and 10, \(h = 40\)).</li>
+          <li>Estimate it with <strong>two</strong> strips (offsets 10, 30, 10, \(h = 20\)).</li>
+          <li>Use the <a href="#trapezoidal">trapezoidal rule calculator</a> for <strong>four</strong>
+            strips: set \(h = 10\) and the five offsets above.</li>
+          <li>Find the percentage error of each estimate. What happens to the error as the
+            number of strips doubles?</li>
+          <li>Every estimate is too small. Use the shape of the boundary to explain why.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Strips</th><th>Estimate</th><th>Error</th></tr>
+            <tr><td>1</td><td>\(20(10 + 10) = 400\) m²</td><td>57% under</td></tr>
+            <tr><td>2</td><td>\(10[10 + 10 + 2(30)] = 800\) m²</td><td>14% under</td></tr>
+            <tr><td>4</td><td>\(5[10 + 10 + 2(25 + 30 + 25)] = 900\) m²</td><td>3.6% under</td></tr>
+          </table>
+          <p><strong>4.</strong> Each doubling of the strips cuts the error to roughly a quarter.
+            More, narrower strips follow the curve more closely.</p>
+          <p><strong>5.</strong> The pond's edge bulges outward between offsets. The rule joins
+            the offsets with straight lines, cutting off the bulges, so it underestimates.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 moves from ratios to rates &mdash; speed, fuel and energy.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-5', LESSON_IDX = 1;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ── L-shaped block ───────────────────────────────────────── */
+  (function () {
+    var w1 = 15, h1 = 12, w2 = 15, h2 = 16;
+    var mount = document.getElementById('lDiagram');
+
+    function update() {
+      var a1 = w1 * h1, a2 = w2 * h2;
+      var perim = h1 + w1 + (h2 - h1) + w2 + h2 + (w1 + w2);
+
+      var W = 380, H = 230, PAD = 34;
+      var sc = Math.min((W - 2 * PAD) / (w1 + w2), (H - 2 * PAD) / Math.max(h1, h2));
+      var x0 = PAD, yBase = H - PAD;
+      var xMid = x0 + w1 * sc, xEnd = x0 + (w1 + w2) * sc;
+      var yTop1 = yBase - h1 * sc, yTop2 = yBase - h2 * sc;
+
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      svg.appendChild(svgEl('polygon', { class: 'tri-fill',
+        points: [x0 + ',' + yBase, x0 + ',' + yTop1, xMid + ',' + yTop1,
+                 xMid + ',' + yTop2, xEnd + ',' + yTop2, xEnd + ',' + yBase].join(' ') }));
+      svg.appendChild(svgEl('line', { class: 'edge-line', 'stroke-dasharray': '5 4',
+        x1: xMid, y1: yTop1, x2: xEnd, y2: yTop1 }));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (x0 + xMid) / 2, y: (yBase + yTop1) / 2, 'text-anchor': 'middle' }, w1 + '×' + h1));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (xMid + xEnd) / 2, y: (yBase + yTop2) / 2 + 10, 'text-anchor': 'middle' }, w2 + '×' + h2));
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roLeft').textContent   = a1 + ' m²';
+      document.getElementById('roRight').textContent  = a2 + ' m²';
+      document.getElementById('roLArea').textContent  = (a1 + a2) + ' m²';
+      document.getElementById('roLPerim').textContent = perim + ' m';
+    }
+
+    var host = 'lSliders';
+    IE.slider({ mount: host, label: 'Left width',  min: 5, max: 30, step: 1, value: w1,
+                format: function (v) { return v + ' m'; }, onInput: function (v) { w1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Left height', min: 5, max: 25, step: 1, value: h1,
+                format: function (v) { return v + ' m'; }, onInput: function (v) { h1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Right width', min: 5, max: 30, step: 1, value: w2,
+                format: function (v) { return v + ' m'; }, onInput: function (v) { w2 = v; update(); } });
+    IE.slider({ mount: host, label: 'Right height', min: 6, max: 30, step: 1, value: h2,
+                format: function (v) { return v + ' m'; },
+                onInput: function (v) { h2 = Math.max(v, h1 + 1); update(); } });
+    update();
+  })();
+
+  /* ── Trapezoidal rule ─────────────────────────────────────── */
+  (function () {
+    var offsets = [12, 19, 23, 17, 9];
+    var h = 20;
+    var redraw = IE.plot('plotTrap', {
+      width: 460, height: 240, xMin: 0, xMax: 80, yMin: 0, yMax: 30,
+      xStep: 20, yStep: 10, xLabel: 'distance (m)', yLabel: 'offset (m)', curves: []
+    });
+
+    function update() {
+      var n = offsets.length;
+      var strips = n - 1;
+      var ends = offsets[0] + offsets[n - 1];
+      var mids = offsets.slice(1, n - 1).reduce(function (s, v) { return s + v; }, 0);
+      var area = (h / 2) * (ends + 2 * mids);
+
+      var pts = offsets.map(function (d, i) { return { x: i * h, y: d, label: String(d) }; });
+      redraw({
+        xMax: strips * h,
+        xStep: h,
+        yMax: Math.max.apply(null, offsets) * 1.25,
+        yStep: Math.max(2, Math.round(Math.max.apply(null, offsets) / 4)),
+        curves: [{ fn: function (x) {
+          // Straight-line interpolation between offsets — exactly what the rule assumes
+          var t = x / h, i = Math.floor(t);
+          if (i < 0) return offsets[0];
+          if (i >= strips) return offsets[n - 1];
+          return offsets[i] + (offsets[i + 1] - offsets[i]) * (t - i);
+        } }],
+        shade: [{ from: 0, to: strips * h, fn: function (x) {
+          var t = x / h, i = Math.floor(t);
+          if (i < 0) return offsets[0];
+          if (i >= strips) return offsets[n - 1];
+          return offsets[i] + (offsets[i + 1] - offsets[i]) * (t - i);
+        } }],
+        points: pts
+      });
+
+      document.getElementById('roStrips').textContent    = String(strips);
+      document.getElementById('roEnds').textContent      = offsets[0] + ' + ' + offsets[n - 1] + ' = ' + ends;
+      document.getElementById('roMids').textContent      = '2 × ' + mids + ' = ' + (2 * mids);
+      document.getElementById('roTrapArea').textContent  = area.toFixed(1) + ' m²';
+
+      var note = document.getElementById('trapNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'A ≈ (' + h + '/2)[' + ends + ' + 2(' + mids + ')] = ' +
+        (h / 2) + ' × ' + (ends + 2 * mids) + ' = ' + area.toFixed(1) + ' m². ' +
+        'The end offsets are counted once; the ' + (n - 2) + ' middle offsets are doubled.';
+    }
+
+    var host = 'trapSliders';
+    IE.slider({ mount: host, label: 'Strip width h', min: 5, max: 50, step: 5, value: h,
+                format: function (v) { return v + ' m'; },
+                onInput: function (v) { h = v; update(); } });
+    offsets.forEach(function (d, i) {
+      IE.slider({ mount: host, label: 'Offset d' + (i + 1), min: 0, max: 40, step: 1, value: d,
+                  format: function (v) { return v + ' m'; },
+                  onInput: function (v) { offsets[i] = v; update(); } });
+    });
+    update();
+  })();
+
+  /* ── Rainfall calculator ──────────────────────────────────── */
+  (function () {
+    var area = 180, mm = 25, tank = 5000;
+    function update() {
+      var hM = mm / 1000;
+      var v = area * hM;
+      var litres = v * 1000;
+      document.getElementById('roDepthM').textContent = hM.toFixed(3) + ' m';
+      document.getElementById('roVolM3').textContent  = v.toFixed(2) + ' m³';
+      document.getElementById('roVolL').textContent   = Math.round(litres).toLocaleString('en-AU') + ' L';
+      document.getElementById('roTanks').textContent  = (litres / tank).toFixed(2);
+      var note = document.getElementById('rainNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'V = A × h = ' + area + ' m² × ' + hM.toFixed(3) + ' m = ' +
+        v.toFixed(2) + ' m³. Since 1 m³ = 1000 L, that is ' +
+        Math.round(litres).toLocaleString('en-AU') + ' litres.';
+    }
+    var host = 'rainSliders';
+    IE.slider({ mount: host, label: 'Catchment', min: 20, max: 2000, step: 20, value: area,
+                format: function (v) { return v + ' m²'; },
+                onInput: function (v) { area = v; update(); } });
+    IE.slider({ mount: host, label: 'Rainfall', min: 1, max: 200, step: 1, value: mm,
+                format: function (v) { return v + ' mm'; },
+                onInput: function (v) { mm = v; update(); } });
+    IE.slider({ mount: host, label: 'Tank size', min: 1000, max: 30000, step: 1000, value: tank,
+                format: function (v) { return (v / 1000) + ' kL'; },
+                onInput: function (v) { tank = v; update(); } });
+    update();
+  })();
+
+  /* ── Tank sizing ──────────────────────────────────────────── */
+  (function () {
+    var d = 2.4, ht = 3, roof = 180, annual = 720, capture = 85;
+    function update() {
+      var r = d / 2;
+      var cap = Math.PI * r * r * ht;          // m³
+      var capL = cap * 1000;
+      var catchL = roof * (annual / 1000) * 1000 * (capture / 100);
+      document.getElementById('roTankCap').textContent = cap.toFixed(2) + ' m³ = ' +
+        Math.round(capL).toLocaleString('en-AU') + ' L';
+      document.getElementById('roCatch').textContent  = Math.round(catchL).toLocaleString('en-AU') + ' L/yr';
+      document.getElementById('roFills').textContent  = (catchL / capL).toFixed(2);
+    }
+    var host = 'tankSliders';
+    IE.slider({ mount: host, label: 'Tank diameter', min: 1, max: 6, step: 0.2, value: d,
+                format: function (v) { return v.toFixed(1) + ' m'; },
+                onInput: function (v) { d = v; update(); } });
+    IE.slider({ mount: host, label: 'Tank height', min: 1, max: 6, step: 0.2, value: ht,
+                format: function (v) { return v.toFixed(1) + ' m'; },
+                onInput: function (v) { ht = v; update(); } });
+    IE.slider({ mount: host, label: 'Roof area', min: 50, max: 500, step: 10, value: roof,
+                format: function (v) { return v + ' m²'; },
+                onInput: function (v) { roof = v; update(); } });
+    IE.slider({ mount: host, label: 'Annual rain', min: 200, max: 2000, step: 20, value: annual,
+                format: function (v) { return v + ' mm'; },
+                onInput: function (v) { annual = v; update(); } });
+    IE.slider({ mount: host, label: 'Captured', min: 50, max: 100, step: 5, value: capture,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { capture = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Offsets of 14, 21 and 17 m are measured at 12 m intervals. What does the trapezoidal rule give for the area?',
+      opts: ['A) 624 m²', 'B) 312 m²', 'C) 876 m²', 'D) 438 m²'],
+      correct: 3,
+      explanation: 'D is correct. Three offsets means two strips. Ends counted once: \\(14 + 17 = 31\\). The middle offset is doubled: \\(2 \\times 21 = 42\\). So \\(A \\approx \\dfrac{12}{2}(31 + 42) = 6 \\times 73 = 438\\) m². Option C doubles the end offsets as well.'
+    },
+    {
+      q: 'In the trapezoidal rule, how are the first and last offsets treated?',
+      opts: [
+        'A) They are doubled like all the others',
+        'B) They are counted once',
+        'C) They are ignored',
+        'D) They are halved'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Only the internal offsets are doubled, because each is shared between the strips on either side of it. The two end offsets belong to just one strip each, so they are counted once.'
+    },
+    {
+      q: 'Five offsets are measured across a block 60 m wide. What is the strip width \\(h\\)?',
+      opts: ['A) 12 m', 'B) 15 m', 'C) 10 m', 'D) 5 m'],
+      correct: 1,
+      explanation: 'B is correct. Five offsets create \\(5 - 1 = 4\\) strips, so \\(h = 60 \\div 4 = 15\\) m. Dividing by the number of offsets instead of the number of strips is a common error.'
+    },
+    {
+      q: 'How much water falls on a 250 m² roof during 32 mm of rain?',
+      opts: ['A) 8,000 L', 'B) 8 L', 'C) 800 L', 'D) 80,000 L'],
+      correct: 0,
+      explanation: 'A is correct. \\(32\\) mm \\(= 0.032\\) m, so \\(V = 250 \\times 0.032 = 8\\) m³. Since 1 m³ = 1000 L, that is 8,000 L.'
+    },
+    {
+      q: 'A cylindrical tank has radius 1.5 m and height 2 m. What is its capacity, to the nearest litre?',
+      opts: ['A) 14,137 L', 'B) 9,425 L', 'C) 4,712 L', 'D) 6,000 L'],
+      correct: 0,
+      explanation: 'A is correct. \\(V = \\pi r^{2} h = \\pi (1.5)^{2}(2) = \\pi \\times 2.25 \\times 2 = 14.137\\) m³, which is 14,137 L.'
+    },
+    {
+      q: 'Why does the trapezoidal rule give only an estimate?',
+      opts: [
+        'A) Because the offsets are always measured incorrectly',
+        'B) Because it replaces the curved boundary with straight lines between offsets',
+        'C) Because \\(\\pi\\) is irrational',
+        'D) Because it only works for rectangles'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Each strip is treated as a trapezium with a straight top edge. Where the real boundary curves outward the rule underestimates, and where it curves inward it overestimates. Narrower strips reduce the error.'
+    },
+    {
+      q: 'A block of land covers 3.5 hectares. How many square metres is that?',
+      opts: ['A) 3,500 m²', 'B) 350 m²', 'C) 35,000 m²', 'D) 350,000 m²'],
+      correct: 2,
+      explanation: 'C is correct. One hectare is \\(10\\,000\\) m², so \\(3.5 \\times 10\\,000 = 35\\,000\\) m².'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'An L-shaped block is formed from a 20 m × 14 m rectangle joined to a 12 m × 9 m rectangle. Find the total area.',
+      marks: 3,
+      steps: [
+        'Split into the two rectangles given.',
+        'First: \\(20 \\times 14 = 280\\) m².',
+        'Second: \\(12 \\times 9 = 108\\) m².',
+        'Total: \\(280 + 108\\).'
+      ],
+      answer: '388 m²'
+    },
+    {
+      q: 'A trapezoidal block has parallel sides of 24 m and 38 m, a perpendicular distance of 15 m apart. Find the area.',
+      marks: 2,
+      steps: [
+        '\\(A = \\tfrac12 h(a + b)\\).',
+        '\\(= \\tfrac12 (15)(24 + 38)\\).',
+        '\\(= 7.5 \\times 62\\).'
+      ],
+      answer: '465 m²'
+    },
+    {
+      q: 'Use one application of the trapezoidal rule to estimate the area of a block 40 m wide with end offsets of 22 m and 31 m.',
+      marks: 2,
+      steps: [
+        'One application: \\(A \\approx \\dfrac{h}{2}(d_f + d_l)\\).',
+        '\\(= \\dfrac{40}{2}(22 + 31)\\).',
+        '\\(= 20 \\times 53\\).'
+      ],
+      answer: '1,060 m²'
+    },
+    {
+      q: 'Offsets of 8, 15, 19, 14 and 6 m are measured at 10 m intervals. Estimate the area.',
+      marks: 4,
+      steps: [
+        'Five offsets means four strips, with \\(h = 10\\).',
+        'Ends: \\(8 + 6 = 14\\).',
+        'Middles doubled: \\(2(15 + 19 + 14) = 2 \\times 48 = 96\\).',
+        '\\(A \\approx \\dfrac{10}{2}(14 + 96) = 5 \\times 110\\).'
+      ],
+      answer: '550 m²'
+    },
+    {
+      q: 'A block 72 m wide has seven equally spaced offsets: 11, 18, 24, 27, 22, 16 and 9 m. Estimate the area.',
+      marks: 5,
+      steps: [
+        'Seven offsets means six strips, so \\(h = 72 \\div 6 = 12\\) m.',
+        'Ends: \\(11 + 9 = 20\\).',
+        'Middles: \\(18 + 24 + 27 + 22 + 16 = 107\\), doubled gives 214.',
+        '\\(A \\approx \\dfrac{12}{2}(20 + 214)\\).',
+        '\\(= 6 \\times 234\\).'
+      ],
+      answer: '1,404 m²'
+    },
+    {
+      q: 'On an aerial photograph with scale \\(1 : 5\\,000\\), offsets at 2 cm intervals measure 1.4, 2.6, 3.0 and 1.8 cm. Estimate the real area.',
+      marks: 5,
+      steps: [
+        'At \\(1 : 5\\,000\\), 1 cm represents 5,000 cm = 50 m.',
+        'Strip width: \\(h = 2 \\times 50 = 100\\) m.',
+        'Offsets become 70, 130, 150 and 90 m.',
+        'Four offsets means three strips. Ends: \\(70 + 90 = 160\\). Middles: \\(2(130 + 150) = 560\\).',
+        '\\(A \\approx \\dfrac{100}{2}(160 + 560) = 50 \\times 720\\).'
+      ],
+      answer: '36,000 m², or 3.6 hectares.'
+    },
+    {
+      q: 'Explain why using more, narrower strips improves the accuracy of the trapezoidal rule.',
+      marks: 3,
+      steps: [
+        'The rule replaces the true boundary with a straight line across the top of each strip.',
+        'Over a narrow strip, a curved boundary deviates less from that straight line.',
+        'So the area missed or added in each strip is smaller.',
+        'With many narrow strips these small errors also tend to partly cancel, since some strips over- and some under-estimate.'
+      ],
+      answer: 'Narrower strips mean the straight-line approximation hugs the real curve more closely, so the error in each strip is smaller. The total error therefore shrinks as the number of strips increases.'
+    },
+    {
+      q: 'How many litres of water fall on a 320 m² roof during 45 mm of rain?',
+      marks: 3,
+      steps: [
+        'Convert the depth: \\(45\\) mm \\(= 0.045\\) m.',
+        '\\(V = Ah = 320 \\times 0.045 = 14.4\\) m³.',
+        'Convert: \\(14.4 \\times 1000\\).'
+      ],
+      answer: '14,400 litres.'
+    },
+    {
+      q: 'A farm of 68 hectares receives 24 mm of rain. Find the total volume in megalitres (1 ML = 1,000,000 L).',
+      marks: 4,
+      steps: [
+        'Area in m²: \\(68 \\times 10\\,000 = 680\\,000\\) m².',
+        'Depth: \\(24\\) mm \\(= 0.024\\) m.',
+        '\\(V = 680\\,000 \\times 0.024 = 16\\,320\\) m³.',
+        'In litres: \\(16\\,320\\,000\\) L, so \\(16\\,320\\,000 \\div 1\\,000\\,000\\).'
+      ],
+      answer: '16.32 megalitres.'
+    },
+    {
+      q: 'A 12,000 L tank collects runoff from a 150 m² roof. How much rain is needed to fill it, assuming no losses?',
+      marks: 3,
+      steps: [
+        'Convert: \\(12\\,000\\) L \\(= 12\\) m³.',
+        '\\(12 = 150 \\times h\\).',
+        '\\(h = \\dfrac{12}{150} = 0.08\\) m.',
+        'Convert to millimetres.'
+      ],
+      answer: '80 mm of rain.'
+    },
+    {
+      q: 'A cylindrical tank has a diameter of 3.2 m and a height of 2.5 m. Find its capacity in kilolitres.',
+      marks: 3,
+      steps: [
+        'Radius \\(= 1.6\\) m.',
+        '\\(V = \\pi r^{2} h = \\pi (1.6)^{2}(2.5)\\).',
+        '\\(= \\pi \\times 2.56 \\times 2.5 = 20.11\\) m³.',
+        'Since 1 m³ = 1 kL, the capacity is 20.11 kL.'
+      ],
+      answer: 'About 20.11 kL (20,106 litres).'
+    },
+    {
+      q: 'A house has a 220 m² roof in an area with 850 mm of annual rainfall. If 80% is captured, find the annual yield and the number of times a 15,000 L tank would be filled.',
+      marks: 5,
+      steps: [
+        'Rain falling on the roof: \\(V = 220 \\times 0.850 = 187\\) m³ \\(= 187\\,000\\) L.',
+        'Captured: \\(187\\,000 \\times 0.80 = 149\\,600\\) L.',
+        'Tank fills: \\(149\\,600 \\div 15\\,000\\).',
+        '\\(= 9.97\\).'
+      ],
+      answer: 'About 149,600 L per year, filling the tank roughly 10 times.'
+    },
+    {
+      q: 'A site plan at \\(1 : 250\\) shows a rectangular garden 6.4 cm by 4.8 cm. Topsoil is to be spread 80 mm deep at $62 per cubic metre. Find the cost.',
+      marks: 5,
+      steps: [
+        'Convert lengths: \\(6.4 \\times 250 = 1\\,600\\) cm \\(= 16\\) m; \\(4.8 \\times 250 = 1\\,200\\) cm \\(= 12\\) m.',
+        'Area \\(= 16 \\times 12 = 192\\) m².',
+        'Depth: \\(80\\) mm \\(= 0.08\\) m.',
+        'Volume \\(= 192 \\times 0.08 = 15.36\\) m³.',
+        'Cost \\(= 15.36 \\times 62\\).'
+      ],
+      answer: '$952.32'
+    },
+    {
+      q: 'A council estimates a park\'s area from a map at \\(1 : 10\\,000\\) using offsets at 1.2 cm intervals measuring 2.0, 3.5, 4.2, 3.8 and 2.4 cm. Find the area in hectares, and state one limitation of the estimate.',
+      marks: 6,
+      steps: [
+        'At \\(1 : 10\\,000\\), 1 cm represents 10,000 cm = 100 m.',
+        'Strip width: \\(h = 1.2 \\times 100 = 120\\) m. Offsets become 200, 350, 420, 380 and 240 m.',
+        'Ends: \\(200 + 240 = 440\\). Middles: \\(2(350 + 420 + 380) = 2 \\times 1150 = 2300\\).',
+        '\\(A \\approx \\dfrac{120}{2}(440 + 2300) = 60 \\times 2740 = 164\\,400\\) m².',
+        'In hectares: \\(164\\,400 \\div 10\\,000 = 16.44\\) ha.',
+        'Limitation: the boundary between offsets is assumed straight, and measuring to the nearest millimetre on the map introduces an error of \\(\\pm 10\\) m on the ground.'
+      ],
+      answer: 'About 16.44 hectares. The estimate assumes straight boundaries between offsets, and small measuring errors on the map are magnified 10,000 times on the ground.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

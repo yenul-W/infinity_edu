@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Algebraic Relationships</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 1 &mdash; Algebraic Relationships</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Algebraic Relationships</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Work them on paper, then
+        reveal each worked solution and mark yourself. Allow about two hours.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-01</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Simultaneous equations &amp; break-even (10)</li>
+        <li>Part B &mdash; Exponential relationships (10)</li>
+        <li>Part C &mdash; Quadratic &amp; reciprocal (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Simultaneous</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Exponential</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Quadratic &amp; reciprocal</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card">
+        <p class="section-label">How to use this set</p>
+        <h2>Before you start</h2>
+        <p>Do not reveal a solution until you have made a genuine attempt on paper. When you do
+          reveal it, compare your <em>method</em> as well as your answer &mdash; most marks in
+          the HSC are for working, not the final number.</p>
+        <p>Mark yourself honestly with the ✓ / ✗ buttons. The tally at the top of each part shows
+          how you are tracking, and the summary at the end of each part tells you whether to move
+          on or go back to the theory.</p>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Simultaneous equations &amp; break-even</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exponential relationships</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Quadratic &amp; reciprocal relationships</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Once you have worked through all three parts, the revision lesson pulls the whole topic
+          together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ══════════ PART A — Simultaneous & break-even ══════════ */
+  var QS_A = [
+    {
+      q: 'Solve \\(y = 3x - 2\\) and \\(y = x + 6\\).',
+      marks: 2,
+      steps: [
+        'Both give \\(y\\), so set them equal: \\(3x - 2 = x + 6\\).',
+        'Collect terms: \\(2x = 8\\), so \\(x = 4\\).',
+        'Substitute: \\(y = 4 + 6 = 10\\).'
+      ],
+      answer: '\\((4, 10)\\)'
+    },
+    {
+      q: 'Solve \\(4x + y = 19\\) and \\(x - y = 1\\).',
+      marks: 2,
+      steps: [
+        'The \\(y\\) coefficients are \\(+1\\) and \\(-1\\), so add the equations.',
+        '\\(5x = 20\\), giving \\(x = 4\\).',
+        'Substitute into the second: \\(4 - y = 1\\), so \\(y = 3\\).'
+      ],
+      answer: '\\((4, 3)\\)'
+    },
+    {
+      q: 'Solve \\(2x + 3y = 21\\) and \\(5x - 2y = 5\\).',
+      marks: 3,
+      steps: [
+        'Multiply the first by 2 and the second by 3 to match the \\(y\\) terms.',
+        '\\(4x + 6y = 42\\) &nbsp;(3) &nbsp;and&nbsp; \\(15x - 6y = 15\\) &nbsp;(4).',
+        'Add (3) and (4): \\(19x = 57\\), so \\(x = 3\\).',
+        'Substitute into the first: \\(6 + 3y = 21\\), so \\(y = 5\\).'
+      ],
+      answer: '\\((3, 5)\\)'
+    },
+    {
+      q: 'Explain, without solving, why \\(y = 4x + 1\\) and \\(y = 4x - 6\\) have no simultaneous solution.',
+      marks: 2,
+      steps: [
+        'Both equations are in gradient–intercept form.',
+        'Each has gradient 4, so the lines are parallel.',
+        'Their \\(y\\)-intercepts differ (1 and \\(-6\\)), so they are not the same line.',
+        'Parallel distinct lines never intersect.'
+      ],
+      answer: 'They have equal gradients (4) but different \\(y\\)-intercepts, so they are parallel distinct lines and never meet — there is no point satisfying both.'
+    },
+    {
+      q: 'A shop sells notebooks at $7 and folders at $4. In one day it sold 95 items for a total of $530. How many of each?',
+      marks: 3,
+      steps: [
+        'Let \\(n\\) = notebooks and \\(f\\) = folders.',
+        'Count: \\(n + f = 95\\). Value: \\(7n + 4f = 530\\).',
+        'From the first, \\(f = 95 - n\\). Substitute: \\(7n + 4(95 - n) = 530\\).',
+        '\\(7n + 380 - 4n = 530 \\Rightarrow 3n = 150 \\Rightarrow n = 50\\).',
+        'So \\(f = 95 - 50 = 45\\). Check: \\(7(50) + 4(45) = 350 + 180 = 530\\) ✓'
+      ],
+      answer: '50 notebooks and 45 folders.'
+    },
+    {
+      q: 'A print shop charges a $45 setup fee plus $2.50 per poster. A rival charges no setup fee but $4 per poster. Find the number of posters at which the costs are equal.',
+      marks: 3,
+      steps: [
+        'Let \\(n\\) = number of posters, \\(C\\) = cost.',
+        'Shop 1: \\(C = 45 + 2.5n\\). Shop 2: \\(C = 4n\\).',
+        'Set equal: \\(45 + 2.5n = 4n\\).',
+        '\\(45 = 1.5n\\), so \\(n = 30\\).',
+        'Interpretation: below 30 posters the rival is cheaper; above 30 the first shop is.'
+      ],
+      answer: '30 posters, at a cost of $120 from either shop.'
+    },
+    {
+      q: 'A bakery has fixed costs of $540 per week and each loaf costs $1.80 to make. Loaves sell for $6.30. Find the break-even number of loaves per week.',
+      marks: 3,
+      steps: [
+        'Cost: \\(C = 540 + 1.8n\\). Revenue: \\(R = 6.3n\\).',
+        'Break-even where \\(C = R\\): \\(540 + 1.8n = 6.3n\\).',
+        '\\(540 = 4.5n\\).',
+        '\\(n = \\dfrac{540}{4.5} = 120\\).',
+        'Check using the shortcut: \\(540 \\div (6.30 - 1.80) = 540 \\div 4.50 = 120\\) ✓'
+      ],
+      answer: '120 loaves per week.'
+    },
+    {
+      q: 'For the bakery above, find the profit or loss on (a) 90 loaves and (b) 200 loaves.',
+      marks: 3,
+      steps: [
+        '(a) \\(R = 6.3(90) = \\$567\\); \\(C = 540 + 1.8(90) = 540 + 162 = \\$702\\).',
+        '\\(P = 567 - 702 = -\\$135\\) — a loss, as 90 is below break-even.',
+        '(b) \\(R = 6.3(200) = \\$1260\\); \\(C = 540 + 1.8(200) = 540 + 360 = \\$900\\).',
+        '\\(P = 1260 - 900 = \\$360\\) — a profit.'
+      ],
+      answer: '(a) A loss of $135. (b) A profit of $360.'
+    },
+    {
+      q: 'A business breaks even at 180 units. Its selling price is $45 and its variable cost is $27 per unit. Find its fixed costs.',
+      marks: 2,
+      steps: [
+        'Contribution per unit \\(= 45 - 27 = \\$18\\).',
+        'At break-even, total contribution exactly covers the fixed costs.',
+        'Fixed costs \\(= 180 \\times 18\\).'
+      ],
+      answer: '$3,240.'
+    },
+    {
+      q: 'A spreadsheet models a business with fixed costs in B1, variable cost per item in B2 and price in B3, with item numbers running down column A from A6. Write the formula for B6 (total cost) that can be filled down, and explain why absolute references are needed.',
+      marks: 3,
+      steps: [
+        'Total cost = fixed costs + variable cost × number of items.',
+        'In spreadsheet terms that is the parameter cells combined with the row\'s item count.',
+        'B1 and B2 must not move as the formula is filled down, so they are made absolute with $ signs.',
+        'A6 must move with each row, so it stays relative.'
+      ],
+      answer: '<code>=$B$1+$B$2*A6</code>. Without the $ signs, filling down would shift B1 to B2, B3… and the formula would read the wrong parameter cells.'
+    }
+  ];
+
+  /* ══════════ PART B — Exponential ══════════ */
+  var QS_B = [
+    {
+      q: 'State whether each is linear or exponential and give its equation. (a) 7, 14, 28, 56 &nbsp; (b) 7, 14, 21, 28',
+      marks: 4,
+      steps: [
+        '(a) Ratios: \\(14 \\div 7 = 2\\), \\(28 \\div 14 = 2\\), \\(56 \\div 28 = 2\\) — constant, so exponential.',
+        'The value at \\(x = 0\\) is 7, so \\(y = 7 \\times 2^{x}\\).',
+        '(b) Differences: 7, 7, 7 — constant, so linear.',
+        'Starting at 7 with gradient 7, \\(y = 7 + 7x\\).'
+      ],
+      answer: '(a) Exponential, \\(y = 7 \\times 2^{x}\\). (b) Linear, \\(y = 7 + 7x\\).'
+    },
+    {
+      q: 'Write the growth or decay factor \\(a\\) for each. (a) an increase of 6.5% per year (b) a decrease of 30% per year (c) tripling each hour (d) losing a quarter of its value each year',
+      marks: 4,
+      steps: [
+        '(a) Growth: \\(a = 1 + 0.065 = 1.065\\).',
+        '(b) Decay: \\(a = 1 - 0.30 = 0.70\\).',
+        '(c) Tripling means multiplying by 3, so \\(a = 3\\).',
+        '(d) Losing a quarter leaves three quarters, so \\(a = 0.75\\).'
+      ],
+      answer: '(a) 1.065 &nbsp; (b) 0.70 &nbsp; (c) 3 &nbsp; (d) 0.75'
+    },
+    {
+      q: 'An exponential relationship passes through \\((0, 40)\\) and \\((2, 250)\\). Find its equation to two decimal places.',
+      marks: 3,
+      steps: [
+        'The point \\((0, 40)\\) gives \\(k = 40\\).',
+        'Substitute: \\(40 \\times a^{2} = 250\\), so \\(a^{2} = 6.25\\).',
+        'Take the square root: \\(a = 2.5\\).'
+      ],
+      answer: '\\(y = 40 \\times 2.5^{x}\\)'
+    },
+    {
+      q: 'The population of a suburb is \\(P = 14\\,000 \\times 1.025^{t}\\), \\(t\\) years from now. Find the population after 12 years, to the nearest person.',
+      marks: 2,
+      steps: [
+        '\\(1.025^{12} = 1.34489…\\)',
+        '\\(P = 14000 \\times 1.34489 = 18\\,828.4…\\)',
+        'Round to a whole number of people.'
+      ],
+      answer: 'About 18,828 people.'
+    },
+    {
+      q: 'For the suburb above, use a table of values to find the first whole year in which the population exceeds 20,000.',
+      marks: 3,
+      steps: [
+        '\\(t = 14\\): \\(14000 \\times 1.025^{14} = 14000 \\times 1.41297 = 19\\,782\\).',
+        '\\(t = 15\\): \\(14000 \\times 1.44830 = 20\\,276\\).',
+        'The population passes 20,000 between year 14 and year 15.'
+      ],
+      answer: 'Year 15.'
+    },
+    {
+      q: 'A laptop bought for $2,400 depreciates at 25% per year. Write a model and find its value after 3 years.',
+      marks: 3,
+      steps: [
+        '\\(k = 2400\\); losing 25% leaves 75%, so \\(a = 0.75\\).',
+        'Model: \\(V = 2400 \\times 0.75^{t}\\).',
+        '\\(0.75^{3} = 0.421875\\).',
+        '\\(V = 2400 \\times 0.421875 = 1012.50\\).'
+      ],
+      answer: '\\(V = 2400 \\times 0.75^{t}\\); after 3 years it is worth $1,012.50.'
+    },
+    {
+      q: 'A medicine leaves the bloodstream so that 40% remains after each hour. A patient is given 300 mg. How much remains after 5 hours?',
+      marks: 3,
+      steps: [
+        '40% remaining means \\(a = 0.4\\) — careful: this is the proportion remaining, not the proportion lost.',
+        'Model: \\(M = 300 \\times 0.4^{t}\\).',
+        '\\(0.4^{5} = 0.01024\\).',
+        '\\(M = 300 \\times 0.01024 = 3.072\\) mg.'
+      ],
+      answer: 'About 3.07 mg.'
+    },
+    {
+      q: 'A substance has a half-life of 4 hours. Starting with 640 g, find the mass after 20 hours.',
+      marks: 3,
+      steps: [
+        'Number of half-lives: \\(20 \\div 4 = 5\\).',
+        'Model: \\(M = 640 \\times 0.5^{n}\\).',
+        '\\(M = 640 \\times 0.5^{5} = 640 \\times 0.03125\\).'
+      ],
+      answer: '20 g.'
+    },
+    {
+      q: 'An investment of $8,000 grows to $12,000 in 6 years. Assuming exponential growth, find the annual growth rate to one decimal place.',
+      marks: 4,
+      steps: [
+        'Model: \\(V = 8000 \\times a^{t}\\), with \\(V = 12000\\) at \\(t = 6\\).',
+        '\\(a^{6} = \\dfrac{12000}{8000} = 1.5\\).',
+        'Take the sixth root: \\(a = 1.5^{1/6} = 1.06991…\\)',
+        'Since \\(a = 1 + r\\), the rate is about 0.0699.'
+      ],
+      answer: 'About 7.0% per year.'
+    },
+    {
+      q: 'A social media account is modelled by \\(F = 500 \\times 1.4^{m}\\) followers after \\(m\\) months. Calculate the prediction for \\(m = 36\\) and use it to explain a limitation of the model.',
+      marks: 3,
+      steps: [
+        '\\(1.4^{36}\\) is very large: about \\(1.71 \\times 10^{5}\\).',
+        '\\(F \\approx 500 \\times 171\\,000 = 85\\,500\\,000\\) followers.',
+        'That exceeds the plausible audience for almost any account.',
+        'The model assumes 40% monthly growth continues forever, but audiences saturate — growth slows as the pool of potential new followers shrinks.'
+      ],
+      answer: 'It predicts roughly 85 million followers after 3 years. The model assumes a constant 40% monthly growth with no ceiling, but real follower growth slows as the account approaches the limit of its potential audience.'
+    }
+  ];
+
+  /* ══════════ PART C — Quadratic & reciprocal ══════════ */
+  var QS_C = [
+    {
+      q: 'State the \\(y\\)-intercept and the direction of opening for each. (a) \\(y = 3x^{2} - 7x + 2\\) &nbsp; (b) \\(y = -x^{2} + 4x - 9\\)',
+      marks: 2,
+      steps: [
+        '(a) \\(c = 2\\), so the \\(y\\)-intercept is \\((0, 2)\\). Since \\(a = 3 > 0\\), it opens upwards.',
+        '(b) \\(c = -9\\), so the \\(y\\)-intercept is \\((0, -9)\\). Since \\(a = -1 < 0\\), it opens downwards.'
+      ],
+      answer: '(a) \\(y\\)-intercept 2, opens upwards (minimum). (b) \\(y\\)-intercept \\(-9\\), opens downwards (maximum).'
+    },
+    {
+      q: 'A parabola crosses the \\(x\\)-axis at \\(x = -5\\) and \\(x = 3\\). Find its axis of symmetry.',
+      marks: 2,
+      steps: [
+        'The axis of symmetry is the midpoint of the two \\(x\\)-intercepts.',
+        '\\(x = \\dfrac{-5 + 3}{2} = \\dfrac{-2}{2}\\).'
+      ],
+      answer: '\\(x = -1\\)'
+    },
+    {
+      q: 'The parabola \\(y = x^{2} - 2x - 15\\) has \\(x\\)-intercepts at \\(x = -3\\) and \\(x = 5\\). Find the vertex.',
+      marks: 3,
+      steps: [
+        'Axis of symmetry: \\(x = \\dfrac{-3 + 5}{2} = 1\\).',
+        'Substitute \\(x = 1\\): \\(y = 1 - 2 - 15 = -16\\).',
+        'Since \\(a = 1 > 0\\), this is a minimum.'
+      ],
+      answer: 'Vertex \\((1, -16)\\), a minimum.'
+    },
+    {
+      q: 'Use second differences to determine whether this table is quadratic. <br>\\(x\\): 1, 2, 3, 4, 5 &nbsp;&nbsp; \\(y\\): 2, 9, 20, 35, 54',
+      marks: 3,
+      steps: [
+        'First differences: 7, 11, 15, 19 — not constant, so not linear.',
+        'Second differences: 4, 4, 4 — constant.',
+        'Constant second differences confirm a quadratic relationship.'
+      ],
+      answer: 'Yes — the second differences are constant at 4, so the relationship is quadratic.'
+    },
+    {
+      q: 'A firework is launched and its height is \\(h = -5t^{2} + 40t\\) metres after \\(t\\) seconds. Find when it lands, when it peaks, and its maximum height.',
+      marks: 4,
+      steps: [
+        'Landing: \\(-5t^2 + 40t = 0\\), so \\(-5t(t - 8) = 0\\), giving \\(t = 0\\) or \\(t = 8\\).',
+        'It lands after 8 seconds.',
+        'Axis of symmetry: \\(t = \\dfrac{0 + 8}{2} = 4\\) seconds.',
+        'Maximum height: \\(h = -5(16) + 40(4) = -80 + 160 = 80\\) m.'
+      ],
+      answer: 'Lands at \\(t = 8\\) s; peaks at \\(t = 4\\) s with a maximum height of 80 m.'
+    },
+    {
+      q: 'State the valid domain and range for the firework model above, with reasons.',
+      marks: 3,
+      steps: [
+        'The firework exists from launch to landing, so \\(t\\) runs from 0 to 8.',
+        'Outside this range the model gives negative heights, which is impossible.',
+        'The height starts at 0, rises to the vertex value of 80, and returns to 0.'
+      ],
+      answer: 'Domain \\(0 \\le t \\le 8\\) seconds; range \\(0 \\le h \\le 80\\) metres. The model is only meaningful between launch and landing.'
+    },
+    {
+      q: 'A rectangular enclosure is built against a river using 90 m of fencing on the three non-river sides. Find the dimensions and maximum area.',
+      marks: 4,
+      steps: [
+        'Let the two sides perpendicular to the river be \\(x\\) each; the parallel side is \\(90 - 2x\\).',
+        'Area: \\(A = x(90 - 2x) = 90x - 2x^{2}\\).',
+        'The \\(x\\)-intercepts are \\(x = 0\\) and \\(x = 45\\).',
+        'Axis of symmetry: \\(x = \\dfrac{0 + 45}{2} = 22.5\\).',
+        'The other side is \\(90 - 45 = 45\\) m, and \\(A = 22.5 \\times 45 = 1012.5\\) m².'
+      ],
+      answer: '22.5 m × 45 m, giving a maximum area of 1,012.5 m². Valid domain \\(0 < x < 45\\).'
+    },
+    {
+      q: '\\(y\\) varies inversely with \\(x\\). When \\(x = 15\\), \\(y = 8\\). (a) Find \\(k\\). (b) Find \\(y\\) when \\(x = 6\\). (c) Find \\(x\\) when \\(y = 30\\).',
+      marks: 4,
+      steps: [
+        '(a) \\(k = xy = 15 \\times 8 = 120\\).',
+        '(b) \\(y = \\dfrac{120}{6} = 20\\).',
+        '(c) \\(30 = \\dfrac{120}{x}\\), so \\(x = \\dfrac{120}{30} = 4\\).'
+      ],
+      answer: '(a) \\(k = 120\\) &nbsp; (b) \\(y = 20\\) &nbsp; (c) \\(x = 4\\)'
+    },
+    {
+      q: 'A tank is emptied by pumps. With 6 pumps it takes 15 hours. Assuming inverse variation, (a) how long with 10 pumps, and (b) how many pumps are needed to empty it in 4 hours?',
+      marks: 4,
+      steps: [
+        'Let \\(t = \\dfrac{k}{n}\\), so \\(k = nt = 6 \\times 15 = 90\\) pump-hours.',
+        '(a) \\(t = \\dfrac{90}{10} = 9\\) hours.',
+        '(b) \\(4 = \\dfrac{90}{n}\\), so \\(n = \\dfrac{90}{4} = 22.5\\).',
+        'Pumps must be whole, so 23 pumps are needed to finish within 4 hours.'
+      ],
+      answer: '(a) 9 hours. (b) 22.5 in theory, so 23 pumps in practice — you cannot use half a pump, and 22 would take slightly over 4 hours.'
+    },
+    {
+      q: 'Classify each as linear, quadratic, exponential or reciprocal, with a brief reason. (a) \\(y = 2^{x} + 5\\) (b) \\(xy = 30\\) (c) \\(y = 4x - 9\\) (d) \\(y = 6 - x^{2}\\)',
+      marks: 4,
+      steps: [
+        '(a) The variable is in the exponent — exponential.',
+        '(b) Rearranges to \\(y = \\dfrac{30}{x}\\), a constant product — reciprocal (inverse variation).',
+        '(c) Highest power of \\(x\\) is 1, constant gradient — linear.',
+        '(d) Contains \\(x^{2}\\) as the highest power — quadratic (opening downwards since the coefficient is \\(-1\\)).'
+      ],
+      answer: '(a) Exponential. (b) Reciprocal. (c) Linear. (d) Quadratic.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

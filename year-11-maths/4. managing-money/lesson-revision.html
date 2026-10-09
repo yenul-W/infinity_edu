@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Managing Money</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
       --color-canvas-white: #ffffff;
@@ -12,8 +12,8 @@
       --color-medium-gray: #818181;
       --color-light-gray: #d6d6d6;
       --color-faded-gray: #9d9d9d;
-      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'Space Mono', monospace;
+      --font-onsite: 'Poppins', sans-serif;
+      --font-mono: 'DM Mono', monospace;
       --text-caption: 11px;
       --leading-caption: 1.38;
       --tracking-caption: 0.88px;
@@ -40,27 +40,26 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--color-canvas-white); color: var(--color-ink-black); font-family: var(--font-onsite); display: flex; min-height: 100vh; }
     .sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--color-light-gray); padding: var(--spacing-40) var(--spacing-16); display: flex; flex-direction: column; gap: var(--spacing-8); }
-    .sidebar-back { font-family: var(--font-mono); font-size: var(--text-caption); color: var(--color-faded-gray); text-decoration: none; display: block; margin-bottom: var(--spacing-24); }
+    .sidebar-back { font-family: var(--font-mono);font-weight:300; font-size: var(--text-caption); color: var(--color-faded-gray); text-decoration: none; display: block; margin-bottom: var(--spacing-24); }
     .sidebar-back:hover { color: var(--color-ink-black); }
-    .sidebar-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); margin-top: var(--spacing-16); }
+    .sidebar-label { font-family: var(--font-mono); font-size: 9px; font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); margin-top: var(--spacing-16); }
     .sidebar-link { font-size: var(--text-caption); color: var(--color-medium-gray); text-decoration: none; line-height: 1.6; display: block; padding: 2px 0; }
     .sidebar-link:hover { color: var(--color-ink-black); }
     .main { flex: 1; padding: var(--spacing-40) 56px; max-width: 780px; }
-    .page-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
-    .page-title { font-size: 40px; font-weight: 600; letter-spacing: 0.6px; line-height: 1; color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
-    .page-intro { font-size: var(--text-body); color: var(--color-medium-gray); line-height: var(--leading-body); letter-spacing: var(--tracking-body); margin-bottom: var(--spacing-40); max-width: 560px; }
+    .page-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .page-title { font-size: 40px; font-weight: 600; letter-spacing: 0.6px; line-height: 1; color: var(--color-ink-black); margin-bottom: var(--spacing-40); }
     .section { margin-bottom: var(--section-gap); }
-    .section-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .section-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
     .section-title { font-size: var(--text-heading); font-weight: 600; letter-spacing: var(--tracking-heading); line-height: var(--leading-heading); color: var(--color-ink-black); margin-bottom: var(--spacing-24); padding-bottom: var(--spacing-12); border-bottom: 1px solid var(--color-light-gray); }
     .question-block { margin-bottom: var(--spacing-24); padding: var(--spacing-16); border: 1px solid var(--color-light-gray); }
     .question-meta { display: flex; align-items: center; gap: var(--spacing-8); margin-bottom: var(--spacing-12); }
-    .q-num { font-family: var(--font-onsite); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); }
+    .q-num { font-family: var(--font-onsite); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.02em; color: var(--color-faded-gray); }
     .q-source { font-family: var(--font-onsite); font-size: var(--text-caption); color: var(--color-faded-gray); letter-spacing: var(--tracking-caption); }
     a.q-source-link { text-decoration: none; border-bottom: 1px solid var(--color-light-gray); color: var(--color-faded-gray); }
     a.q-source-link:hover { color: var(--color-ink-black); border-bottom-color: var(--color-ink-black); }
     .q-marks { margin-left: auto; font-family: var(--font-onsite); font-size: var(--text-caption); color: var(--color-faded-gray); }
     .q-text { font-size: var(--text-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
-    .q-formula { font-family: var(--font-mono); font-size: 13px; background: var(--color-light-gray); color: var(--color-ink-black); padding: var(--spacing-8) var(--spacing-12); margin: var(--spacing-8) 0 var(--spacing-12); display: block; line-height: 1.8; }
+    .q-formula { font-family: var(--font-mono);font-weight:300; font-size: 13px; background: var(--color-light-gray); color: var(--color-ink-black); padding: var(--spacing-8) var(--spacing-12); margin: var(--spacing-8) 0 var(--spacing-12); display: block; line-height: 1.8; }
     .q-options { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--spacing-12); }
     .q-options li { font-size: var(--text-body); color: var(--color-ink-black); display: flex; gap: var(--spacing-8); }
     .opt-label { font-weight: 600; color: var(--color-faded-gray); min-width: 18px; }
@@ -68,27 +67,25 @@
     .q-table th, .q-table td { border: 1px solid var(--color-light-gray); padding: 6px 10px; text-align: left; }
     .q-table th { background: var(--color-light-gray); font-weight: 600; }
     details.solution { border-top: 1px solid var(--color-light-gray); margin-top: var(--spacing-12); padding-top: var(--spacing-8); }
-    details.solution summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); list-style: none; user-select: none; }
+    details.solution summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); list-style: none; user-select: none; }
     details.solution summary::-webkit-details-marker { display: none; }
     details.solution summary::after { content: '  ↓'; }
     details.solution[open] summary::after { content: '  ↑'; }
     details.solution[open] summary { margin-bottom: var(--spacing-12); }
     .solution-body { font-size: var(--text-body); line-height: var(--leading-body); letter-spacing: var(--tracking-body); color: var(--color-ink-black); }
     .solution-body p + p { margin-top: var(--spacing-8); }
-    .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
-    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
+    .solution-step { font-family: var(--font-mono);font-weight:300; font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
+    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 300; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
     @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
     .q-options li { cursor: pointer; padding: 6px 8px; }
     .q-options li:hover:not(.opt-locked) { background: var(--color-light-gray); }
-    .q-options li.opt-correct { background: #d4edda; color: #155724; }
-    .q-options li.opt-correct .opt-label { color: #155724; }
-    .q-options li.opt-wrong { background: #f8d7da; color: #721c24; }
-    .q-options li.opt-wrong .opt-label { color: #721c24; }
+    .q-options li.opt-correct { box-shadow: inset 2px 0 0 #00a050; background: rgba(0,160,80,0.08); }
+    .q-options li.opt-correct .opt-label { color: #00a050; }
+    .q-options li.opt-wrong { box-shadow: inset 2px 0 0 #c00000; background: rgba(200,0,0,0.08); }
+    .q-options li.opt-wrong .opt-label { color: #c00000; }
     .q-options li.opt-locked { cursor: default; pointer-events: none; }
-    html.dark-mode .q-options li.opt-correct { background: #1a3a25; color: #8fd4a0; }
-    html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
-    html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
-    html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
+    html.dark-mode .q-options li.opt-correct { background: rgba(0,160,80,0.14); }
+    html.dark-mode .q-options li.opt-wrong { background: rgba(200,0,0,0.14); }
   </style>
 </head>
 <body>
@@ -107,8 +104,6 @@
   <main class="main">
     <p class="page-label">Managing Money — Revision</p>
     <h1 class="page-title">HSC Practice Questions</h1>
-    <p class="page-intro">Questions drawn from past NSW HSC examinations. Attempt each question before opening the solution.</p>
-
     <!-- ── Section 1: GST & Discounts ── -->
     <section class="section" id="gst">
       <p class="section-label">Section 1</p>
@@ -226,7 +221,7 @@
           <a class="q-source q-source-link" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/mathematics-standard/2023" target="_blank" rel="noreferrer noopener">2023 HSC ↗</a>
           <span class="q-marks">3 marks</span>
         </div>
-        <p class="q-text">A receipt from a supermarket shows a total of $124.87. The GST shown on the receipt is $3.86. GST, at a rate of 10%, is only charged on some items. What was the value of the items which did NOT have GST charged?</p>
+        <p class="q-text">A receipt from a supermarket shows a total of $124.87. The GST shown on the receipt is $3.86. GST, at a rate of 10%, is only charged on some items. What was the value of the items which did <strong>not</strong> have GST charged?</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
@@ -329,7 +324,7 @@
             <span class="solution-step">    Annual expenses = (30 × 52) + (12 × 52) + (48 × 12)</span>
             <span class="solution-step">                    = $1560 + $624 + $576 = $2760</span>
             <span class="solution-step">    Annual savings = $4880 − $2760 = $2120</span>
-            <span class="solution-step">(ii) $2120 ≥ $2100, so YES, Reece will have just enough for the deposit.</span>
+            <span class="solution-step">(ii) $2120 ≥ $2100, so <strong>yes</strong>, Reece will have just enough for the deposit.</span>
             <span class="solution-answer">He will save $2120 during the year, which exceeds the $2100 deposit.</span>
           </div>
         </details>
@@ -484,7 +479,7 @@
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
-            <span class="solution-step">$13,380 ÷ $100 = 133.8 → round UP to 134 (because of "or part thereof")</span>
+            <span class="solution-step">$13,380 ÷ $100 = 133.8 → round <strong>up</strong> to 134 (because of "or part thereof")</span>
             <span class="solution-step">Stamp duty = 134 × $3</span>
             <span class="solution-answer">= $402</span>
           </div>

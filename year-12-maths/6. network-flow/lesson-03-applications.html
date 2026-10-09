@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Flow Problems &amp; Capacity Decisions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 6 &mdash; Network Flow</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Flow Problems &amp; Capacity Decisions</h1>
+      <p class="subtitle">The theorem tells you the answer. This lesson is about what to do with
+        it: which edge to upgrade, how much it gains, and how to argue clearly that a network can
+        or cannot meet demand.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-06</span>
+        <span class="pill">Upgrading edges</span>
+        <span class="pill">Meeting demand</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Solving a full flow problem</li>
+        <li>Constructing the actual flow</li>
+        <li>Increasing an edge's capacity</li>
+        <li>Reducing capacity &mdash; failures</li>
+        <li>More than one source or sink</li>
+        <li>Does capacity meet demand?</li>
+        <li>Writing the justification</li>
+        <li>Class activity: which failure hurts most?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#solving">1 &nbsp;A full flow problem</a></li>
+        <li class="toc-item"><a class="toc-link" href="#constructing">2 &nbsp;Constructing the flow</a></li>
+        <li class="toc-item"><a class="toc-link" href="#increasing">3 &nbsp;Increasing capacity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#reducing">4 &nbsp;Reducing capacity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#several">5 &nbsp;Several sources or sinks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#demand">6 &nbsp;Meeting demand</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. SOLVING ─────────── -->
+      <div class="content-card" id="solving">
+        <p class="section-label">Method</p>
+        <h2>Solving a full flow problem</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The exam routine</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Draw the network</strong> from the table, with arrows and capacities.</li>
+            <li><strong>Note the bounds</strong> — capacity out of \(S\) and into \(T\).</li>
+            <li><strong>List the cuts</strong> systematically, applying the direction rule.</li>
+            <li><strong>Identify the minimum</strong> — that is the maximum flow.</li>
+            <li><strong>Name the bottleneck edges</strong> and answer in context, with units.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1 &mdash; a complete question</p>
+          <p>A courier moves parcels from a depot (S) to a hub (T) through sorting centres A, B and
+            C. Capacities are in hundreds of parcels per day: S→A 9, S→B 12, A→C 7, B→A 4, B→C 8,
+            C→T 13.</p>
+          <p><strong>Bounds:</strong> out of S is \(9 + 12 = 21\); into T is 13. So the flow is at
+            most 13.</p>
+          <p><strong>Cuts:</strong></p>
+          <table class="coord-table">
+            <tr><th>Source side</th><th>Forward edges</th><th>Capacity</th></tr>
+            <tr><td>\(\{S\}\)</td><td>S→A 9, S→B 12</td><td>21</td></tr>
+            <tr><td>\(\{S, A\}\)</td><td>S→B 12, A→C 7</td><td>19</td></tr>
+            <tr><td>\(\{S, B\}\)</td><td>S→A 9, B→A 4, B→C 8</td><td>21</td></tr>
+            <tr><td>\(\{S, A, B\}\)</td><td>A→C 7, B→C 8</td><td><strong>15</strong></td></tr>
+            <tr><td>\(\{S, A, B, C\}\)</td><td>C→T 13</td><td><strong>13</strong></td></tr>
+          </table>
+          <p>Note the cut \(\{S, B\}\): the edge B→A crosses <em>forward</em> (B is on the source
+            side, A is not), so it counts.</p>
+          <p><strong>Minimum = 13.</strong> The maximum flow is 1,300 parcels per day, limited by
+            the single edge C→T.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A network has S→A 7, S→B 10, A→B 2, A→T 6, B→T 8. State the bounds, list the four
+              cuts and find the maximum flow.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Bounds: out of S 17, into T 14.</p>
+                <table class="coord-table">
+                  <tr><th>Source side</th><th>Forward edges</th><th>Capacity</th></tr>
+                  <tr><td>\(\{S\}\)</td><td>S→A 7, S→B 10</td><td>17</td></tr>
+                  <tr><td>\(\{S, A\}\)</td><td>S→B 10, A→B 2, A→T 6</td><td>18</td></tr>
+                  <tr><td>\(\{S, B\}\)</td><td>S→A 7, B→T 8</td><td>15</td></tr>
+                  <tr><td>\(\{S, A, B\}\)</td><td>A→T 6, B→T 8</td><td><strong>14</strong></td></tr>
+                </table>
+                <p>Maximum flow 14, limited by the edges into T.</p>
+              </div></details></li>
+            <li>Which edges are in the minimum cut, and what does that mean for the network's
+              operator?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A→T and B→T. Only upgrades to those edges can increase the flow.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. CONSTRUCTING ─────────── -->
+      <div class="content-card" id="constructing">
+        <p class="section-label">Method</p>
+        <h2>Constructing the actual flow</h2>
+
+        <p>Knowing the maximum is 13 is one thing; showing <em>how</em> 13 units actually travel is
+          another, and questions often ask for it.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The method</p>
+          <ol style="margin-bottom:0;">
+            <li>Find a path from \(S\) to \(T\) with spare capacity on every edge.</li>
+            <li>Push as much as the narrowest edge on that path allows.</li>
+            <li>Reduce the remaining capacity on each edge used.</li>
+            <li>Repeat until no path with spare capacity remains.</li>
+            <li>Check the total equals the minimum cut — if so, you are done.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>Construct a flow of 13 for the courier network above.</p>
+          <p><strong>Path 1:</strong> S→B→C→T. Narrowest is \(\min(12, 8, 13) = 8\). Push 8.</p>
+          <p>Remaining: S→B 4, B→C 0, C→T 5.</p>
+          <p><strong>Path 2:</strong> S→A→C→T. Narrowest is \(\min(9, 7, 5) = 5\). Push 5.</p>
+          <p>Remaining: S→A 4, A→C 2, C→T 0.</p>
+          <p><strong>No more paths:</strong> C→T is full, and every route must use it.</p>
+          <p><strong>Total flow:</strong> \(8 + 5 = 13\) ✓ matching the minimum cut, so this is
+            maximal.</p>
+          <p><strong>Verify conservation:</strong> at C, in \(= 8 + 5 = 13\), out \(= 13\) ✓</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Flow builder</h3>
+          <p class="exercise-intro">Push flow along each path and watch the remaining capacities
+            and the running total.</p>
+          <div id="buildControls"></div>
+          <div class="diagram-wrap"><div id="buildDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Flow so far</div>
+              <div class="readout-value" id="roFlow">0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Maximum possible</div>
+              <div class="readout-value" id="roMaxF">13</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="buildNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Construct a flow of 14 for the network S→A 7, S→B 10, A→B 2, A→T 6, B→T 8.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>S→A→T: push \(\min(7, 6) = 6\). S→B→T: push \(\min(10, 8) = 8\).</p>
+                <p>Total \(6 + 8 = 14\) ✓ &mdash; both edges into T are full.</p>
+              </div></details></li>
+            <li>In your flow, which edges have spare capacity, and how much?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>S→A carries 6 of 7 (1 spare); S→B carries 8 of 10 (2 spare); A→B carries 0 of
+                  2 (2 spare). A→T and B→T are full.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. INCREASING ─────────── -->
+      <div class="content-card" id="increasing">
+        <p class="section-label">Application</p>
+        <h2>Increasing the capacity of an edge</h2>
+
+        <p>The syllabus asks you to <em>examine the impact of increasing or reducing the flow
+          capacity of an edge</em>. The answer is rarely what students first expect.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The three outcomes</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>The edge is not in any minimum cut</strong> → the maximum flow does
+              <strong>not change at all</strong>. The upgrade is wasted.</li>
+            <li><strong>The edge is in the only minimum cut</strong> → the flow increases, but only
+              until the <em>next</em> smallest cut becomes binding.</li>
+            <li><strong>There are several minimum cuts</strong> → upgrading one edge changes
+              nothing unless every minimum cut is upgraded together.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>In the courier network, the minimum cut is C→T alone, at 13. The next-smallest cut is
+            \(\{A\to C = 7,\ B\to C = 8\}\) at 15. What happens if C→T is widened to 20?</p>
+          <p>The cut \(\{S,A,B,C\}\) becomes 20, so it is no longer the minimum. Now the smallest
+            cut is \(\{S, A, B\}\) at <strong>15</strong>.</p>
+          <p><strong>The flow rises from 13 to 15, a gain of 2</strong> — even though C→T gained 7
+            units of capacity. Five of those units can never be used.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; a wasted upgrade</p>
+          <p>What if S→B were widened from 12 to 20 instead?</p>
+          <p>S→B appears in the cuts \(\{S\}\) (21 → 29) and \(\{S, A\}\) (19 → 27). Neither was
+            the minimum. The cuts \(\{S,A,B\}\) = 15 and \(\{S,A,B,C\}\) = 13 do not involve S→B at
+            all, so they are unchanged.</p>
+          <p><strong>The maximum flow stays at 13.</strong> The upgrade delivers nothing, because
+            the bottleneck is further downstream.</p>
+          <p><strong>This is the single most important idea in the topic:</strong> upgrading a
+            non-bottleneck edge is money wasted.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Upgrade simulator</h3>
+          <p class="exercise-intro">Choose an edge to widen and see exactly how much the maximum
+            flow improves — often much less than the capacity added.</p>
+          <div id="upSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Original max flow</div>
+              <div class="readout-value" id="roOrig">13</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">New max flow</div>
+              <div class="readout-value" id="roNew">13</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Capacity added</div>
+              <div class="readout-value" id="roAdded">0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Flow gained</div>
+              <div class="readout-value" id="roGained">0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="upNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the courier network, A→C is widened from 7 to 12. What is the new maximum
+              flow?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A→C is not in the minimum cut (C→T, 13). The flow stays at 13 &mdash; a wasted
+                  upgrade.</p>
+              </div></details></li>
+            <li>C→T is widened from 13 to 14 instead. What is the new maximum flow?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The cut \(\{S, A, B, C\}\) becomes 14; the next cut is 15. New maximum flow: 14,
+                  a full gain of 1, because the next cut has not been reached.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. REDUCING ─────────── -->
+      <div class="content-card" id="reducing">
+        <p class="section-label">Application</p>
+        <h2>Reducing capacity &mdash; roadworks and failures</h2>
+
+        <p>The reverse question is just as common: a pipe bursts, a lane closes, a server fails.
+          What happens to the maximum flow?</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The two outcomes</p>
+          <ul style="margin-bottom:0;">
+            <li>If the edge had <strong>spare capacity</strong> in the maximum flow, a small
+              reduction may change nothing.</li>
+            <li>If the edge was <strong>running at capacity</strong> in every maximum flow, the
+              maximum flow falls.</li>
+          </ul>
+          <p class="formula-where" style="margin-top:10px;">Recalculate the cuts with the new
+            capacity — that always gives the correct answer.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>In the courier network, roadworks cut B→C from 8 to 3. Find the new maximum flow.</p>
+          <p>Recalculate the affected cuts:</p>
+          <ul>
+            <li>\(\{S, A, B\}\): \(7 + 3 = 10\) (was 15)</li>
+            <li>\(\{S, B\}\): \(9 + 4 + 3 = 16\) (was 21)</li>
+            <li>\(\{S, A, B, C\}\): 13 (unchanged)</li>
+          </ul>
+          <p>The new minimum is <strong>10</strong>, down from 13 &mdash; a loss of 300 parcels per
+            day. B→C has become the bottleneck.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; a reduction with no effect</p>
+          <p>What if S→B were reduced from 12 to 10 instead?</p>
+          <p>\(\{S\}\) becomes 19 and \(\{S, A\}\) becomes 17. Both still exceed the minimum of 13,
+            and the cuts \(\{S,A,B\}\) = 15 and \(\{S,A,B,C\}\) = 13 are unaffected.</p>
+          <p><strong>The maximum flow stays at 13.</strong> S→B had spare capacity, so losing some
+            of it costs nothing.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the courier network, a breakdown reduces A→C from 7 to 3. Find the new maximum
+              flow.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\{S, A, B\}\): \(3 + 8 = 11\). \(\{S, A\}\): \(12 + 3 = 15\). Others are 13 or
+                  more.</p>
+                <p>New maximum flow: 11 &mdash; 200 parcels a day lost.</p>
+              </div></details></li>
+            <li>Instead, S→A is reduced from 9 to 6. What happens?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\{S\}\) becomes 18 and \(\{S, B\}\) becomes 18 &mdash; both still above 13.
+                  The maximum flow stays at 13.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. SEVERAL SOURCES ─────────── -->
+      <div class="content-card" id="several">
+        <p class="section-label">Method</p>
+        <h2>More than one source or sink</h2>
+
+        <p>Real networks often have two reservoirs, or two towns to supply. The trick is to turn
+          the problem back into a single source and a single sink:</p>
+        <ul>
+          <li><strong>Several sources:</strong> add a <strong>super-source</strong> S with an edge
+            to each real source. Give each new edge the most that source can supply.</li>
+          <li><strong>Several sinks:</strong> add a <strong>super-sink</strong> T with an edge from
+            each real sink. Give each new edge that sink's demand.</li>
+        </ul>
+        <p>Then find the minimum cut as usual.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>Reservoirs R (can supply 10 ML/day) and Q (12 ML/day) feed a town T through junctions
+            A and B: R→A 8, Q→A 5, Q→B 9, A→T 10, B→T 7. Find the maximum supply to the town.</p>
+          <p>Add S→R 10 and S→Q 12. Checking the cuts, the smallest is the one into the town:
+            A→T and B→T, \(10 + 7 = 17\). The next smallest is 19.</p>
+          <p><strong>Maximum supply: 17 ML/day</strong>, although the reservoirs could provide 22.
+            The pipes into the town are the bottleneck.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A depot S supplies towns X (demand 9) and Y (demand 12): S→A 15, S→B 10, A→X 9,
+              A→Y 7, B→Y 8. Add a super-sink and decide whether both demands can be met.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Add X→T 9 and Y→T 12. The minimum cut is 21 (for example X→T and Y→T together),
+                  which equals the total demand \(9 + 12 = 21\). Both towns can be supplied in
+                  full.</p>
+              </div></details></li>
+            <li>Why are the super-source edges given the reservoirs' supply limits, rather than
+              left unlimited?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A reservoir cannot release more than it holds. Capping each super-source edge
+                  makes the model respect that limit &mdash; otherwise the cuts could report a
+                  flow the reservoirs cannot actually supply.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. DEMAND ─────────── -->
+      <div class="content-card" id="demand">
+        <p class="section-label">Evaluation</p>
+        <h2>Does capacity meet demand?</h2>
+
+        <p>The final dot-point asks you to <em>explain why the flow capacity of a network is or is
+          not sufficient to meet demand</em>. This is a written answer, and it needs structure.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The four-part answer</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>State the maximum flow</strong> and how you found it (the minimum cut).</li>
+            <li><strong>Compare it with demand</strong>, giving the surplus or shortfall
+              numerically.</li>
+            <li><strong>Name the bottleneck edges</strong> — the minimum cut.</li>
+            <li><strong>Recommend</strong> which edge to upgrade and by how much, noting the next
+              constraint.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; a model answer</p>
+          <p>The courier network has a maximum flow of 13 (hundred parcels/day). Demand is 1,600
+            parcels per day. Advise the company.</p>
+          <p style="border-left:2px solid var(--ink); padding-left:14px;">
+            "The minimum cut is the single edge C→T with capacity 13, so the network can carry at
+            most 1,300 parcels per day. Demand is 1,600 parcels per day, so the network is
+            <strong>insufficient</strong>, falling 300 parcels per day short.<br><br>
+            The bottleneck is C→T, the only route into the hub. Widening it would raise the flow,
+            but only to 15 (1,500 parcels/day), because the cut \(\{A\to C,\ B\to C\}\) at 15 then
+            becomes binding. To reach 1,600 the company must widen C→T to at least 16
+            <em>and</em> increase A→C or B→C by a further 1, since both cuts must exceed 16."
+          </p>
+          <p>Notice it states the number, compares it, names the bottleneck, and looks ahead to the
+            next constraint.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Demand analyser</h3>
+          <p class="exercise-intro">Set capacities and a demand level. The analyser reports
+            sufficiency, the shortfall, and what to upgrade.</p>
+          <div id="demSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Maximum flow</div>
+              <div class="readout-value" id="roDemMax">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Demand</div>
+              <div class="readout-value" id="roDemand">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Surplus / shortfall</div>
+              <div class="readout-value" id="roGap">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="demNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; exam style</p>
+          <p>A water network (ML/day) has S→A 45, S→B 35, A→B 10, A→C 30, B→C 15, B→D 25,
+            C→T 40, D→T 30. A city needs 72 ML/day.</p>
+          <p><strong>(a) Find the maximum flow.</strong> [2 marks]</p>
+          <p>The minimum cut has source side \(\{S, A, B, C\}\): C→T 40 + B→D 25 = 65. (Next are
+            70 and 70.) Maximum flow: 65 ML/day.</p>
+          <p><strong>(b) Can widening a single pipe meet demand?</strong> [2 marks]</p>
+          <p>No. Widening C→T leaves the cut \(\{S, A, B\}\) (A→C 30 + B→C 15 + B→D 25 = 70)
+            binding; widening B→D leaves the sink cut (C→T 40 + D→T 30 = 70) binding. The best
+            single upgrade reaches 70.</p>
+          <p><strong>(c) Find the smallest total widening that meets demand.</strong> [2 marks]</p>
+          <p>Three cuts must all reach 72: B→D needs at least 27 (+2), C→T at least 42 (+2), and
+            \(\text{C→T} + \text{B→D} \ge 72\). For example B→D +2 and C→T +5: 7 ML/day of extra
+            capacity in total.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Which failure hurts most?</h2>
+        <p><strong>About 10 minutes &middot; groups of three.</strong> Use the
+          <a href="#demand">demand analyser</a> with the courier network (S→A 9, S→B 12, A→C 7,
+          B→A 4, B→C 8, C→T 13) and demand 13. Roadworks will reduce <strong>one</strong> edge by
+          4 units (to no less than 1).</p>
+        <ol>
+          <li>Share the six edges around the group. For each, reduce it by 4, record the new
+            maximum flow, then reset.</li>
+          <li>Rank the six failures from most to least damaging.</li>
+          <li>Some failures cause no loss at all. Explain why, using the idea of spare
+            capacity.</li>
+          <li>The company can protect one edge with a backup route. Which should it protect, and
+            why?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Edge reduced</th><td>S→A 9→5</td><td>S→B 12→8</td><td>A→C 7→3</td><td>B→A 4→1</td><td>B→C 8→4</td><td>C→T 13→9</td></tr>
+            <tr><th>New max flow</th><td>13</td><td>13</td><td>11</td><td>13</td><td>11</td><td>9</td></tr>
+          </table>
+          <p><strong>2.</strong> C→T (loses 4), then A→C and B→C (lose 2 each), then S→A, S→B
+            and B→A (no loss).</p>
+          <p><strong>3.</strong> S→A, S→B and B→A cause no loss. Those edges had spare capacity in
+            the maximum flow, and every cut through them stays at 13 or more after the
+            reduction.</p>
+          <p><strong>4.</strong> C→T: it is the minimum cut on its own, every parcel must use it,
+            and any loss there comes straight off the maximum flow.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">For written questions, follow the four-part structure: state,
+          compare, identify, recommend.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-6', LESSON_IDX = 2;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* Courier network: S→A 9, S→B 12, A→C 7, B→A 4, B→C 8, C→T 13 */
+  var BASE = [
+    { f: 'S', t: 'A', c: 9 },  { f: 'S', t: 'B', c: 12 },
+    { f: 'A', t: 'C', c: 7 },  { f: 'B', t: 'A', c: 4 },
+    { f: 'B', t: 'C', c: 8 },  { f: 'C', t: 'T', c: 13 }
+  ];
+  var LABELS = ['S→A', 'S→B', 'A→C', 'B→A', 'B→C', 'C→T'];
+  var POS = { S: [48, 118], A: [168, 58], B: [168, 180], C: [292, 118], T: [386, 118] };
+  var MID = ['A', 'B', 'C'];
+
+  function minCut(edges) {
+    var best = Infinity, bestSide = null, bestFwd = null;
+    for (var mask = 0; mask < 8; mask++) {
+      var side = ['S'];
+      MID.forEach(function (v, i) { if (mask & (1 << i)) side.push(v); });
+      var cap = 0, fwd = [];
+      edges.forEach(function (e) {
+        var fIn = side.indexOf(e.f) !== -1, tIn = side.indexOf(e.t) !== -1;
+        if (fIn && !tIn) { cap += e.c; fwd.push(e.f + '→' + e.t); }
+      });
+      if (cap < best) { best = cap; bestSide = side; bestFwd = fwd; }
+    }
+    return { cap: best, side: bestSide, fwd: bestFwd };
+  }
+
+  /* ── Flow builder ─────────────────────────────────────────── */
+  (function () {
+    var PATHS = [
+      { name: 'S→B→C→T', edges: [1, 4, 5] },
+      { name: 'S→A→C→T', edges: [0, 2, 5] },
+      { name: 'S→B→A→C→T', edges: [1, 3, 2, 5] }
+    ];
+    var remaining = BASE.map(function (e) { return e.c; });
+    var total = 0;
+    var mount = document.getElementById('buildDiagram');
+    var controls = document.getElementById('buildControls');
+
+    PATHS.forEach(function (p, i) {
+      var b = document.createElement('button');
+      b.className = 'exercise-check-btn';
+      b.style.marginRight = '8px';
+      b.textContent = 'Push along ' + p.name;
+      b.addEventListener('click', function () {
+        var push = Math.min.apply(null, p.edges.map(function (ei) { return remaining[ei]; }));
+        if (push <= 0) { note('No spare capacity left on ' + p.name + ' — every path must be saturated somewhere.', false); return; }
+        p.edges.forEach(function (ei) { remaining[ei] -= push; });
+        total += push;
+        note('Pushed ' + push + ' units along ' + p.name + '. Running total: ' + total + '.', true);
+        update();
+      });
+      controls.appendChild(b);
+    });
+    var reset = document.createElement('button');
+    reset.className = 'practice-btn';
+    reset.style.marginLeft = '4px';
+    reset.textContent = 'Reset';
+    reset.addEventListener('click', function () {
+      remaining = BASE.map(function (e) { return e.c; });
+      total = 0; note('Reset. Try pushing along each path in turn.', null); update();
+    });
+    controls.appendChild(reset);
+
+    function note(msg, good) {
+      var n = document.getElementById('buildNote');
+      n.className = 'exercise-feedback' + (good === true ? ' correct' : good === false ? ' wrong' : '');
+      n.textContent = msg;
+    }
+
+    function update() {
+      var W = 440, H = 240;
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      var defs = svgEl('defs');
+      var mk = svgEl('marker', { id: 'ahb', markerWidth: 9, markerHeight: 7, refX: 8, refY: 3.5, orient: 'auto' });
+      mk.appendChild(svgEl('polygon', { points: '0 0, 9 3.5, 0 7', class: 'arrowhead-fill' }));
+      defs.appendChild(mk); svg.appendChild(defs);
+
+      BASE.forEach(function (e, i) {
+        var p = POS[e.f], q = POS[e.t];
+        var dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
+        var ux = dx / L, uy = dy / L;
+        var full = remaining[i] === 0;
+        svg.appendChild(svgEl('line', {
+          class: 'edge-line',
+          x1: p[0] + ux * 21, y1: p[1] + uy * 21,
+          x2: q[0] - ux * 23, y2: q[1] - uy * 23,
+          'stroke-width': full ? 3.4 : 1.6, 'marker-end': 'url(#ahb)'
+        }));
+        svg.appendChild(svgEl('text', { class: 'edge-weight-label',
+          x: (p[0] + q[0]) / 2 + 4, y: (p[1] + q[1]) / 2 - 6 },
+          (e.c - remaining[i]) + '/' + e.c));
+      });
+      Object.keys(POS).forEach(function (v) {
+        svg.appendChild(svgEl('circle', { class: 'node-circle', cx: POS[v][0], cy: POS[v][1], r: 20 }));
+        svg.appendChild(svgEl('text', { class: 'node-label', x: POS[v][0] - 6, y: POS[v][1] + 6 }, v));
+      });
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roFlow').textContent = String(total);
+      document.getElementById('roMaxF').textContent = String(minCut(BASE).cap);
+    }
+    note('Push flow along each path in turn. Edge labels show used/capacity; saturated edges are bold.', null);
+    update();
+  })();
+
+  /* ── Upgrade simulator ────────────────────────────────────── */
+  (function () {
+    var which = 5, newCap = 13;
+    var orig = minCut(BASE).cap;
+
+    function update() {
+      var edges = BASE.map(function (e, i) { return { f: e.f, t: e.t, c: i === which ? newCap : e.c }; });
+      var mc = minCut(edges);
+      var added = newCap - BASE[which].c;
+      var gained = mc.cap - orig;
+
+      document.getElementById('roOrig').textContent   = orig + ' units';
+      document.getElementById('roNew').textContent    = mc.cap + ' units';
+      document.getElementById('roAdded').textContent  = (added >= 0 ? '+' : '') + added;
+      document.getElementById('roGained').textContent = (gained >= 0 ? '+' : '') + gained;
+
+      var note = document.getElementById('upNote');
+      if (added === 0) {
+        note.className = 'exercise-feedback';
+        note.textContent = 'No change made. Move the capacity slider to simulate an upgrade or a reduction.';
+      } else if (gained === 0 && added > 0) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Wasted upgrade: ' + LABELS[which] + ' gained ' + added +
+          ' units of capacity but the maximum flow is unchanged at ' + mc.cap +
+          '. That edge is not in the minimum cut (' + mc.fwd.join(', ') + ').';
+      } else if (gained > 0) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Adding ' + added + ' to ' + LABELS[which] + ' raises the flow by only ' +
+          gained + ', to ' + mc.cap + '. The minimum cut is now ' + mc.fwd.join(', ') +
+          ' — the constraint has moved.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Reducing ' + LABELS[which] + ' by ' + Math.abs(added) +
+          ' drops the maximum flow to ' + mc.cap + ' (a loss of ' + Math.abs(gained) +
+          '). The new bottleneck is ' + mc.fwd.join(', ') + '.';
+      }
+    }
+
+    var host = 'upSliders';
+    var sel = document.createElement('div');
+    sel.className = 'slider-row';
+    sel.innerHTML = '<label for="edgeSel">Edge</label>' +
+      '<select id="edgeSel" class="exercise-input" style="width:100%">' +
+      LABELS.map(function (l, i) { return '<option value="' + i + '"' + (i === 5 ? ' selected' : '') + '>' + l + '</option>'; }).join('') +
+      '</select><output></output>';
+    document.getElementById(host).appendChild(sel);
+    var capSlider = IE.slider({ mount: host, label: 'New capacity', min: 1, max: 30, step: 1, value: newCap,
+                onInput: function (v) { newCap = v; update(); } });
+    sel.querySelector('select').addEventListener('change', function (e) {
+      which = +e.target.value;
+      newCap = BASE[which].c;
+      capSlider.set(newCap);
+      update();
+    });
+    update();
+  })();
+
+  /* ── Demand analyser ──────────────────────────────────────── */
+  (function () {
+    var caps = BASE.map(function (e) { return e.c; });
+    var demand = 16;
+
+    function update() {
+      var edges = BASE.map(function (e, i) { return { f: e.f, t: e.t, c: caps[i] }; });
+      var mc = minCut(edges);
+      var gap = mc.cap - demand;
+
+      document.getElementById('roDemMax').textContent = mc.cap + ' units';
+      document.getElementById('roDemand').textContent = demand + ' units';
+      document.getElementById('roGap').textContent    = (gap >= 0 ? '+' : '') + gap + ' units';
+
+      var note = document.getElementById('demNote');
+      if (gap >= 0) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Sufficient. The minimum cut (' + mc.fwd.join(', ') + ') gives a maximum flow of ' +
+          mc.cap + ', meeting demand of ' + demand + ' with ' + gap + ' units to spare.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Insufficient. The minimum cut (' + mc.fwd.join(', ') + ') limits the flow to ' +
+          mc.cap + ', which is ' + (-gap) + ' units short of the ' + demand +
+          ' required. Capacity must be added to those edges — then re-check the next cut.';
+      }
+    }
+
+    var host = 'demSliders';
+    LABELS.forEach(function (lab, i) {
+      IE.slider({ mount: host, label: lab, min: 1, max: 25, step: 1, value: caps[i],
+                  onInput: function (v) { caps[i] = v; update(); } });
+    });
+    IE.slider({ mount: host, label: 'Demand', min: 1, max: 30, step: 1, value: demand,
+                onInput: function (v) { demand = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'An engineer doubles the capacity of an edge that is not part of any minimum cut. What happens to the maximum flow?',
+      opts: [
+        'A) It doubles',
+        'B) It increases slightly',
+        'C) It does not change',
+        'D) It decreases'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Only edges in a minimum cut constrain the flow. Widening an edge that already has spare capacity changes no minimum cut, so the maximum flow is unaffected — the money is wasted.'
+    },
+    {
+      q: 'A network has a minimum cut of 18 and a next-smallest cut of 23. An edge in the minimum cut is widened by 10. What is the new maximum flow?',
+      opts: ['A) 28', 'B) 23', 'C) 18', 'D) 41'],
+      correct: 1,
+      explanation: 'B is correct. The old minimum cut rises to 28, so it is no longer the smallest. The cut of 23 now binds, giving a maximum flow of 23 — a gain of 5, not the 10 added.'
+    },
+    {
+      q: 'When constructing an actual maximum flow, how much can you push along a chosen path?',
+      opts: [
+        'A) The sum of the capacities on the path',
+        'B) The average capacity on the path',
+        'C) The smallest remaining capacity on the path',
+        'D) The largest capacity on the path'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Edges in series are limited by the narrowest remaining capacity — you cannot push more through a chain than its tightest link allows.'
+    },
+    {
+      q: 'A network\'s maximum flow is 24 kL/h and a town needs 30 kL/h. What is the correct conclusion?',
+      opts: [
+        'A) Capacity is sufficient with 6 kL/h to spare',
+        'B) Capacity is insufficient, falling 6 kL/h short',
+        'C) Capacity is exactly sufficient',
+        'D) The town should reduce its demand to 24 kL/h'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The network can deliver at most 24 kL/h against a requirement of 30 kL/h, a shortfall of 6 kL/h. A full answer would then name the minimum-cut edges as the ones to upgrade.'
+    },
+    {
+      q: 'Roadworks reduce an edge that had spare capacity in the maximum flow. What is the likely effect?',
+      opts: [
+        'A) The maximum flow always falls by the same amount',
+        'B) The maximum flow may be unchanged if the edge is still not in a minimum cut',
+        'C) The network becomes disconnected',
+        'D) The maximum flow increases'
+      ],
+      correct: 1,
+      explanation: 'B is correct. An edge with spare capacity is not constraining the flow, so a small reduction may leave every minimum cut unchanged. Recalculating the cuts with the new capacity gives the definitive answer.'
+    },
+    {
+      q: 'A network has two distinct minimum cuts, both of capacity 20. An edge in just one of them is widened. What happens?',
+      opts: [
+        'A) The maximum flow increases',
+        'B) The maximum flow stays at 20, because the other minimum cut still binds',
+        'C) The maximum flow doubles',
+        'D) The network now has no minimum cut'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The flow is limited by the smallest cut, and the untouched cut is still 20. Both minimum cuts must be upgraded together before any gain is possible.'
+    },
+    {
+      q: 'Which of these is the strongest justification that a network cannot meet demand?',
+      opts: [
+        'A) "The network is too small."',
+        'B) "Some edges have low capacity."',
+        'C) "The minimum cut is C→T at 13, so the maximum flow is 1300 parcels/day, 300 short of the 1600 required."',
+        'D) "The maximum flow looks insufficient."'
+      ],
+      correct: 2,
+      explanation: 'C is correct. A full-mark answer states the minimum cut, gives the maximum flow with units, compares it numerically against demand, and quantifies the shortfall. The others assert without evidence.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'A network has S→A 11, S→B 7, A→T 8, B→T 10. Find the maximum flow and construct a flow achieving it.',
+      marks: 5,
+      steps: [
+        'Cuts: \\(\\{S\\}\\) = 18; \\(\\{S,A\\}\\) = \\(7 + 8 = 15\\); \\(\\{S,B\\}\\) = \\(11 + 10 = 21\\); \\(\\{S,A,B\\}\\) = \\(8 + 10 = 18\\).',
+        'Minimum is 15.',
+        'Construct: push along S→A→T, limited by \\(\\min(11, 8) = 8\\).',
+        'Push along S→B→T, limited by \\(\\min(7, 10) = 7\\).',
+        'Total \\(= 8 + 7 = 15\\) ✓ matching the minimum cut.'
+      ],
+      answer: 'Maximum flow 15: 8 units via S→A→T and 7 via S→B→T. The bottleneck cut is \\(\\{S, A\\}\\), edges S→B (7) and A→T (8).'
+    },
+    {
+      q: 'For the network above, an engineer widens S→A from 11 to 16. Evaluate the effect.',
+      marks: 4,
+      steps: [
+        'S→A appears in the cuts \\(\\{S\\}\\) (18 → 23) and \\(\\{S,B\\}\\) (21 → 26).',
+        'Neither of those was the minimum.',
+        'The minimum cut \\(\\{S,A\\}\\) at 15 does not involve S→A, so it is unchanged.',
+        'The maximum flow stays at 15.'
+      ],
+      answer: 'No effect — the maximum flow remains 15. S→A already had spare capacity (only 8 of its 11 units were used), so widening it is wasted expenditure.'
+    },
+    {
+      q: 'For the same network, which single edge should be widened, and by how much, to reach a flow of 18?',
+      marks: 5,
+      steps: [
+        'The minimum cut is \\(\\{S,A\\}\\) = S→B 7 + A→T 8 = 15.',
+        'To reach 18, this cut must be at least 18, so 3 units must be added to S→B or A→T.',
+        'Widening A→T from 8 to 11 gives that cut \\(7 + 11 = 18\\).',
+        'Check the other cuts: \\(\\{S\\}\\) = 18, \\(\\{S,A,B\\}\\) = \\(11 + 10 = 21\\), \\(\\{S,B\\}\\) = 21.',
+        'The minimum becomes 18 ✓'
+      ],
+      answer: 'Widen A→T from 8 to 11 (an increase of 3). The maximum flow then rises to 18, limited jointly by that cut and the source cut, both at 18.'
+    },
+    {
+      q: 'A pipeline network is S→A 14, S→B 9, A→B 6, A→C 10, B→C 12, C→T 16 (kL/h). Find the maximum flow.',
+      marks: 6,
+      steps: [
+        '\\(\\{S\\}\\): \\(14 + 9 = 23\\).',
+        '\\(\\{S,A\\}\\): S→B 9 + A→B 6 + A→C 10 = 25.',
+        '\\(\\{S,B\\}\\): S→A 14 + B→C 12 = 26.',
+        '\\(\\{S,A,B\\}\\): A→C 10 + B→C 12 = 22.',
+        '\\(\\{S,A,B,C\\}\\): C→T 16.',
+        'The minimum is 16.'
+      ],
+      answer: '16 kL/h, limited by the single edge C→T.'
+    },
+    {
+      q: 'For the pipeline above, the town needs 20 kL/h. Write a full justification of whether the network is sufficient, and what should be done.',
+      marks: 6,
+      steps: [
+        'State: the minimum cut is C→T at 16, so the maximum flow is 16 kL/h.',
+        'Compare: demand is 20 kL/h, so there is a shortfall of 4 kL/h.',
+        'Identify: the bottleneck is C→T, the only pipeline into the town.',
+        'Recommend: widen C→T to at least 20.',
+        'Look ahead: the next-smallest cut is \\(\\{S,A,B\\}\\) at 22, so widening C→T to 20 does achieve the target.',
+        'Beyond 22 kL/h, A→C or B→C would also need upgrading.'
+      ],
+      answer: 'Insufficient — the minimum cut C→T limits the flow to 16 kL/h against demand of 20 kL/h, a shortfall of 4 kL/h. Widening C→T to 20 kL/h would meet demand exactly, since the next cut (A→C + B→C = 22) still exceeds 20. Any future demand above 22 kL/h would require upgrading A→C or B→C as well.'
+    },
+    {
+      q: 'In the pipeline network, a burst reduces B→C from 12 to 4. Find the new maximum flow.',
+      marks: 5,
+      steps: [
+        'Recalculate the affected cuts.',
+        '\\(\\{S,A,B\\}\\): \\(10 + 4 = 14\\) (was 22).',
+        '\\(\\{S,B\\}\\): \\(14 + 4 = 18\\) (was 26).',
+        '\\(\\{S,A,B,C\\}\\): 16, unchanged.',
+        'The new minimum is 14.'
+      ],
+      answer: 'The maximum flow falls from 16 to 14 kL/h. The bottleneck moves from C→T to the pair A→C and B→C.'
+    },
+    {
+      q: 'Explain why widening a bottleneck edge usually increases the maximum flow by less than the capacity added.',
+      marks: 3,
+      steps: [
+        'The maximum flow equals the smallest cut capacity.',
+        'Widening an edge raises only the cuts that edge crosses.',
+        'Once that cut exceeds the next-smallest cut, the next cut becomes the binding constraint.',
+        'So the gain stops at the next cut\'s capacity, however much is added.'
+      ],
+      answer: 'Because the flow is limited by the <em>smallest</em> cut. Widening one cut only helps until another cut becomes the smallest, at which point further capacity is unusable — so the gain is capped by the next-smallest cut, not by the amount added.'
+    },
+    {
+      q: 'A traffic network into a CBD has S→A 900, S→B 700, A→C 600, B→C 500, B→D 400, C→T 800, D→T 350 (vehicles/hour). Find the maximum flow.',
+      marks: 6,
+      steps: [
+        '\\(\\{S\\}\\): \\(900 + 700 = 1600\\).',
+        '\\(\\{S,A\\}\\): \\(700 + 600 = 1300\\).',
+        '\\(\\{S,A,B\\}\\): A→C 600 + B→C 500 + B→D 400 = 1500.',
+        '\\(\\{S,A,B,C\\}\\): C→T 800 + B→D 400 = 1200.',
+        '\\(\\{S,A,B,C,D\\}\\): C→T 800 + D→T 350 = 1150.',
+        'The minimum is 1150.'
+      ],
+      answer: '1,150 vehicles per hour, limited by the two roads into the CBD: C→T (800) and D→T (350).'
+    },
+    {
+      q: 'For the traffic network above, peak demand is 1,400 vehicles/hour. Advise the council on the cheapest way to meet it.',
+      marks: 6,
+      steps: [
+        'Current maximum is 1,150, so the shortfall is 250 vehicles/hour.',
+        'The minimum cut is \\(\\{C\\to T = 800,\\ D\\to T = 350\\}\\); that cut must reach 1,400.',
+        'Adding 250 to either road gives that cut 1,400.',
+        'Check the next cut, \\(\\{S,A,B,C\\}\\) = C→T + B→D. If C→T rises to 1050, this becomes \\(1050 + 400 = 1450 \\ge 1400\\) ✓',
+        'If instead D→T rises to 600, that cut stays at \\(800 + 400 = 1200 < 1400\\) ✗',
+        'So the upgrade must be on C→T.'
+      ],
+      answer: 'Widen C→T from 800 to 1,050 vehicles/hour. Upgrading D→T instead would fail, because the cut C→T + B→D would then cap the flow at 1,200. Only the C→T upgrade lifts every binding cut above 1,400.'
+    },
+    {
+      q: 'Explain the practical meaning of an edge that has spare capacity in the maximum flow.',
+      marks: 3,
+      steps: [
+        'Spare capacity means the edge carries less flow than it could.',
+        'It is not constraining the network — something upstream or downstream limits it first.',
+        'Upgrading it would deliver no benefit.',
+        'It does, however, provide resilience: a partial failure there may not reduce the maximum flow.'
+      ],
+      answer: 'It means that edge is not a bottleneck — something else limits the flow before it does. Upgrading it is wasted money, though the spare capacity gives the network resilience if that edge is partially disrupted.'
+    },
+    {
+      q: 'A network has maximum flow 30. An edge carrying 30 units in every maximum flow is reduced to 22. What is the new maximum flow, and why?',
+      marks: 3,
+      steps: [
+        'If an edge carries the entire flow of 30, every route must pass through it.',
+        'That means the edge alone forms a cut of capacity 30.',
+        'Reducing it to 22 reduces that cut to 22.',
+        'No cut can be smaller than the flow, so the maximum flow falls to at most 22.'
+      ],
+      answer: 'The maximum flow falls to 22. An edge carrying the entire flow forms a cut by itself, so reducing its capacity directly reduces the minimum cut and hence the maximum flow.'
+    },
+    {
+      q: 'A courier network has S→A 20, S→B 18, A→C 15, B→C 10, B→D 14, C→T 22, D→T 12. Find the maximum flow and construct a flow achieving it.',
+      marks: 7,
+      steps: [
+        'Cuts: \\(\\{S\\}\\) = 38; \\(\\{S,A\\}\\) = \\(18 + 15 = 33\\); \\(\\{S,A,B\\}\\) = \\(15 + 10 + 14 = 39\\).',
+        '\\(\\{S,A,B,C\\}\\) = C→T 22 + B→D 14 = 36; \\(\\{S,A,B,C,D\\}\\) = \\(22 + 12 = 34\\).',
+        '\\(\\{S,A,B,D\\}\\) = A→C 15 + B→C 10 + D→T 12 = 37.',
+        'The minimum is 33.',
+        'Construct: S→A→C→T carries \\(\\min(20, 15, 22) = 15\\).',
+        'S→B→D→T carries \\(\\min(18, 14, 12) = 12\\); S→B→C→T carries \\(\\min(6, 10, 7) = 6\\).',
+        'Total \\(= 15 + 12 + 6 = 33\\) ✓'
+      ],
+      answer: 'Maximum flow 33, at the cut \\(\\{S, A\\}\\) (edges S→B 18 and A→C 15). A valid flow: 15 via S→A→C→T, 12 via S→B→D→T and 6 via S→B→C→T.'
+    },
+    {
+      q: 'Explain why it is important to re-check all the cuts after upgrading an edge, rather than assuming the flow rises by the amount added.',
+      marks: 3,
+      steps: [
+        'The maximum flow is the minimum over <em>all</em> cuts, not a property of one edge.',
+        'Upgrading an edge raises only the cuts it crosses.',
+        'A different cut, previously not binding, may now be the smallest.',
+        'Only a full recalculation reveals the new maximum and the new bottleneck.'
+      ],
+      answer: 'Because the maximum flow is the minimum across every cut. An upgrade raises only some cuts, and a previously non-binding cut can become the new constraint — so the gain must be found by recalculating all cuts, not by adding the capacity to the old flow.'
+    },
+    {
+      q: 'A hospital supply network delivers oxygen through S→A 40, S→B 30, A→B 12, A→T 35, B→T 28 (units/hour). Demand is 70 units/hour. Analyse fully and recommend action.',
+      marks: 7,
+      steps: [
+        '\\(\\{S\\}\\): \\(40 + 30 = 70\\).',
+        '\\(\\{S,A\\}\\): S→B 30 + A→B 12 + A→T 35 = 77.',
+        '\\(\\{S,B\\}\\): S→A 40 + B→T 28 = 68.',
+        '\\(\\{S,A,B\\}\\): A→T 35 + B→T 28 = 63.',
+        'The minimum is 63, so the maximum flow is 63 units/hour.',
+        'Demand is 70, a shortfall of 7 units/hour. The bottleneck is the pair A→T and B→T.',
+        'Raising B→T from 28 to 35 makes that cut 70; check \\(\\{S,B\\}\\) becomes \\(40 + 35 = 75\\) and \\(\\{S\\}\\) is 70 — so the flow reaches 70 ✓'
+      ],
+      answer: 'Insufficient: the minimum cut \\(\\{A\\to T,\\ B\\to T\\}\\) limits supply to 63 units/hour against demand of 70 — a shortfall of 7. Raising B→T from 28 to 35 lifts that cut to 70 and meets demand exactly, with the source cut also at 70. Any further growth would require increasing S→A or S→B as well.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

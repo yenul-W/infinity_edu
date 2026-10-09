@@ -1,0 +1,492 @@
+/* ═══════════════════════════════════════════════════════════════
+   INFINITY EDU — YEAR 12 LESSON KIT
+   Shared stylesheet for every year-12-maths lesson page.
+   Loaded from inside the lesson iframe: <link href="../lesson-kit.css">
+
+   The token block, topbar/hero/layout/TOC/content-card/KC rules are
+   carried over verbatim from the Year 11 lessons so the two years
+   render identically. Everything below the "YEAR 12 ADDITIONS"
+   banner is new and supports IE.buildPractice / IE.plot.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --ink: #000;
+  --canvas: #fff;
+  --gray-med: #818181;
+  --gray-light: #d6d6d6;
+  --gray-faint: #f2f2f2;
+  --font-display: 'Poppins', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+html.dark-mode {
+  --ink: #f0f0f0;
+  --canvas: #0a0a0a;
+  --gray-med: #888;
+  --gray-light: #333;
+  --gray-faint: #1a1a1a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: 0.35px;
+  color: var(--ink);
+  background: var(--canvas);
+  margin: 0;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--gray-med);
+}
+.topbar-left { display: flex; gap: 16px; }
+.topbar-topic { color: var(--ink); font-weight: 700; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 40px;
+}
+.eyebrow { font-family: var(--font-mono);font-weight:300; font-size: 11px; letter-spacing: 0.02em; color: var(--gray-med); margin: 0 0 12px; }
+.hero-main h1 { font-size: 40px; line-height: 1; letter-spacing: 0.6px; margin: 0 0 16px; }
+.subtitle { font-size: 15px; color: var(--gray-med); max-width: 52ch; margin: 0 0 20px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-family: var(--font-mono);font-weight:300; font-size: 11px; letter-spacing: 0.05em; border: 1px solid var(--gray-light); padding: 5px 10px; color: var(--gray-med); }
+.hero-side { border-left: 1px solid var(--gray-light); padding-left: 24px; }
+.side-label { font-family: var(--font-mono);font-weight:300; font-size: 10px; letter-spacing: 0.02em; color: var(--gray-med); margin: 0 0 12px; }
+.side-list { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.side-list li { padding: 8px 0; border-bottom: 1px solid var(--gray-light); }
+.side-list li:last-child { border-bottom: none; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: start; }
+.toc { position: sticky; top: 24px; }
+.toc-heading { font-size: 10px; letter-spacing: 0.02em; color: var(--gray-med); margin-bottom: 12px; font-family: var(--font-mono);font-weight:300; }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-link { display: block; font-size: 12px; color: var(--gray-med); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--gray-light); transition: color 0.15s, border-color 0.15s; }
+.toc-link:hover { color: var(--ink); }
+.toc-link.toc-active { color: var(--ink); border-left: 2px solid var(--ink); padding-left: 10px; }
+
+/* Content cards */
+.content-card { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.section-label { font-family: var(--font-mono);font-weight:300; font-size: 11px; letter-spacing: 0.02em; color: var(--gray-med); margin: 0 0 8px; }
+h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; border-bottom: 1px solid var(--gray-light); padding-bottom: 16px; margin: 0 0 24px; }
+h3 { font-size: 16px; margin: 28px 0 10px; }
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 16px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 600; }
+
+.example-block { border-left: 2px solid var(--ink); padding: 14px 18px; margin: 18px 0; background: var(--gray-faint); }
+.example-block .example-label { font-family: var(--font-mono);font-weight:300; font-size: 10px; letter-spacing: 0.02em; color: var(--gray-med); margin-bottom: 8px; }
+
+/* Your turn — student attempts in class; outline only, so it reads apart from the filled example */
+.your-turn { border: 1px solid var(--gray-light); padding: 14px 18px; margin: 18px 0; }
+.your-turn .example-label { font-family: var(--font-mono);font-weight:300; font-size: 10px; letter-spacing: 0.02em; color: var(--gray-med); margin-bottom: 8px; }
+.your-turn > ol { margin-bottom: 0; }
+.your-turn > ol > li { margin-bottom: 12px; }
+.your-turn > ol > li:last-child { margin-bottom: 0; }
+.yt-answer { margin-top: 8px; }
+.yt-answer > summary { display: inline-block; list-style: none; cursor: pointer; font-family: var(--font-mono); font-weight: 300; font-size: 11px; letter-spacing: 0.02em; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+.yt-answer > summary::-webkit-details-marker { display: none; }
+.yt-answer > summary:hover { color: var(--gray-med); border-bottom-color: var(--gray-med); }
+.yt-answer[open] > summary { margin-bottom: 10px; }
+.yt-body { border-left: 1px solid var(--gray-light); padding-left: 14px; }
+.yt-body > :last-child { margin-bottom: 0; }
+
+table.coord-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+table.coord-table th, table.coord-table td { border: 1px solid var(--gray-light); padding: 8px 12px; text-align: left; }
+table.coord-table th { font-family: var(--font-mono);font-weight:300; font-size: 11px; letter-spacing: 0.02em; color: var(--gray-med); }
+
+/* Diagrams */
+.diagram-wrap { display: flex; justify-content: center; margin: 20px 0; }
+.diagram-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.diagram-col { text-align: center; }
+svg.network-diagram { max-width: 100%; height: auto; }
+.node-circle { fill: var(--canvas); stroke: var(--ink); stroke-width: 2; }
+.node-label { fill: var(--ink); font-family: var(--font-mono); font-size: 14px; font-weight: 300; }
+.edge-line { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.edge-weight-label { fill: var(--gray-med); font-family: var(--font-mono);font-weight:300; font-size: 12px; }
+.diagram-caption { text-align: center; font-size: 12px; color: var(--gray-med); margin-top: 4px; }
+.arrowhead-fill { fill: var(--ink); }
+
+/* Interactive exercises */
+.interactive-block { border: 1px solid var(--ink); padding: 24px 28px; margin: 20px 0; }
+.interactive-block h3 { margin-top: 0; margin-bottom: 6px; }
+.interactive-block .exercise-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 16px; }
+.exercise-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.exercise-row label { font-size: 13px; }
+.exercise-input { border: 1px solid var(--gray-light); padding: 8px 12px; font-family: var(--font-mono);font-weight:300; font-size: 13px; background: var(--canvas); color: var(--ink); width: 130px; }
+.exercise-input:focus { outline: 1px solid var(--ink); }
+.exercise-check-btn { border: 1px solid var(--ink); padding: 8px 20px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.02em; cursor: pointer; background: transparent; color: var(--ink); transition: background 0.15s, color 0.15s; }
+.exercise-check-btn:hover { background: var(--ink); color: var(--canvas); }
+.exercise-feedback { font-size: 13px; margin-top: 6px; min-height: 18px; color: var(--gray-med); }
+.exercise-feedback.correct { color: #00a050; font-weight: 600; }
+.exercise-feedback.wrong { color: #c00000; }
+
+/* Knowledge Check */
+.kc-block { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.kc-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 24px; }
+.kc-q-wrap { margin-bottom: 24px; }
+.kc-q { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.kc-options { display: flex; flex-direction: column; gap: 6px; }
+.kc-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 14px; border: 1px solid var(--gray-light);
+  cursor: pointer; font-size: 13px; transition: background 0.12s;
+  user-select: none; background: transparent; color: var(--ink);
+  text-align: left; width: 100%; font-family: var(--font-display);
+}
+.kc-opt:hover:not([disabled]) { background: var(--gray-faint); }
+.kc-opt.kc-correct { border-color: #00a050; background: rgba(0,160,80,0.08); }
+.kc-opt.kc-wrong   { border-color: #c00000; background: rgba(200,0,0,0.08); }
+html.dark-mode .kc-opt.kc-correct { background: rgba(0,160,80,0.14); }
+html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
+.kc-feedback { font-size: 12px; color: var(--gray-med); margin-top: 8px; min-height: 18px; }
+.kc-feedback.correct { color: #00a050; }
+.kc-feedback.wrong   { color: #c00000; }
+.kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
+.kc-score.show { display: block; }
+.kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.02em; padding: 2px 0; cursor: pointer; font-family: var(--font-display); }
+.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 300; min-width: 16px; padding-top: 1px; }
+
+.lesson-link-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: var(--ink);
+}
+.lesson-link-btn:hover { background: var(--gray-faint); }
+
+.lesson-badge {
+  display: inline-block;
+  border: 1px solid var(--gray-light);
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--gray-med);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   YEAR 12 ADDITIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Formula callout ───────────────────────────────────────── */
+.formula-box {
+  border: 1px solid var(--ink);
+  border-left-width: 3px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  background: var(--gray-faint);
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--gray-med);
+  margin-bottom: 10px;
+}
+.formula-box .formula-where { font-size: 12px; color: var(--gray-med); margin: 10px 0 0; }
+
+/* ─── Slider widget (IE.slider) ─────────────────────────────── */
+.slider-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 74px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.slider-row label { font-size: 13px; }
+.slider-row output {
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 13px;
+  text-align: right;
+  color: var(--ink);
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  background: var(--gray-med);
+  outline: none;
+  margin: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 0;
+  background: var(--ink);
+  cursor: pointer;
+  border: none;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 0;
+  background: var(--ink);
+  cursor: pointer;
+  border: none;
+}
+
+/* Live numeric readout panel beside a widget */
+.readout {
+  border-top: 1px solid var(--gray-light);
+  margin-top: 16px;
+  padding-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+.readout-item .readout-label {
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--gray-med);
+  margin-bottom: 4px;
+}
+.readout-item .readout-value {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+/* ─── Plot (IE.plot) ────────────────────────────────────────── */
+.plot-wrap { margin: 18px 0; overflow-x: auto; }
+svg.ie-plot { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.ie-plot .plot-grid    { stroke: var(--gray-light); stroke-width: 1; }
+.ie-plot .plot-axis    { stroke: var(--ink); stroke-width: 1.5; }
+.ie-plot .plot-tick    { fill: var(--gray-med); font-family: var(--font-mono);font-weight:300; font-size: 10px; }
+.ie-plot .plot-axis-label { fill: var(--gray-med); font-family: var(--font-mono);font-weight:300; font-size: 11px; }
+.ie-plot .plot-curve   { fill: none; stroke: var(--ink); stroke-width: 2; }
+.ie-plot .plot-curve-2 { fill: none; stroke: var(--gray-med); stroke-width: 2; stroke-dasharray: 6 4; }
+.ie-plot .plot-point   { fill: var(--ink); }
+.ie-plot .plot-point-hollow { fill: var(--canvas); stroke: var(--ink); stroke-width: 2; }
+.ie-plot .plot-marker-line { stroke: var(--gray-med); stroke-width: 1; stroke-dasharray: 3 3; }
+.ie-plot .plot-label   { fill: var(--ink); font-family: var(--font-mono);font-weight:300; font-size: 11px; }
+
+/* Shaded regions under a curve (normal-distribution areas, capacity bands) */
+.ie-plot .plot-shade   { fill: var(--ink); fill-opacity: 0.16; stroke: none; }
+.ie-plot .plot-shade-2 { fill: var(--ink); fill-opacity: 0.08; stroke: none; }
+html.dark-mode .ie-plot .plot-shade   { fill-opacity: 0.28; }
+html.dark-mode .ie-plot .plot-shade-2 { fill-opacity: 0.14; }
+
+/* Histogram bars */
+.ie-plot .plot-bar {
+  fill: var(--canvas);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.ie-plot .plot-bar-filled { fill: var(--ink); fill-opacity: 0.18; stroke: var(--ink); stroke-width: 1.2; }
+
+/* ─── Geometry diagrams (trigonometry, bearings) ────────────── */
+.dim-line {
+  stroke: var(--gray-med);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+.angle-arc {
+  fill: none;
+  stroke: var(--gray-med);
+  stroke-width: 1.2;
+}
+.right-angle {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.side-label-text {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 12px;
+}
+.angle-label-text {
+  fill: var(--gray-med);
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 11px;
+}
+.tri-fill { fill: var(--gray-faint); stroke: var(--ink); stroke-width: 1.6; }
+
+/* ─── Extended Practice (IE.buildPractice) ──────────────────── */
+.practice-block { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
+.practice-intro { font-size: 13px; color: var(--gray-med); margin-bottom: 8px; }
+
+.practice-tally {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-top: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--gray-light);
+  padding: 12px 0;
+  margin-bottom: 24px;
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--gray-med);
+}
+.practice-tally strong { font-size: 16px; color: var(--ink); }
+
+.practice-q { border-bottom: 1px solid var(--gray-light); padding: 20px 0; }
+.practice-q:last-of-type { border-bottom: none; }
+
+.practice-q-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+.practice-q-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gray-med);
+  min-width: 26px;
+}
+.practice-q-text { font-size: 14px; flex: 1; }
+.practice-marks {
+  font-family: var(--font-mono);
+  font-weight:300;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--gray-med);
+  white-space: nowrap;
+}
+
+.practice-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; padding-left: 38px; }
+.practice-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gray-med);
+  color: var(--gray-med);
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  padding: 3px 0;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.practice-btn:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.practice-working {
+  display: none;
+  margin: 14px 0 0 38px;
+  border-left: 2px solid var(--ink);
+  padding: 14px 18px;
+  background: var(--gray-faint);
+  font-size: 13px;
+}
+.practice-working.show { display: block; }
+.practice-working ol { padding-left: 20px; margin: 0; }
+.practice-working li { margin-bottom: 10px; }
+.practice-working li:last-child { margin-bottom: 0; }
+.practice-answer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-light);
+  font-weight: 600;
+}
+
+.practice-mark-row {
+  display: none;
+  gap: 10px;
+  align-items: center;
+  margin: 12px 0 0 38px;
+  font-size: 12px;
+  color: var(--gray-med);
+}
+.practice-mark-row.show { display: flex; }
+.practice-mark-btn {
+  background: transparent;
+  border: 1px solid var(--gray-light);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 12px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.practice-mark-btn:hover { background: var(--gray-faint); }
+.practice-mark-btn.picked-right { border-color: #00a050; color: #00a050; background: rgba(0,160,80,0.08); }
+.practice-mark-btn.picked-wrong  { border-color: #c00000; color: #c00000; background: rgba(200,0,0,0.08); }
+
+.practice-summary {
+  display: none;
+  border-top: 1px solid var(--ink);
+  margin-top: 24px;
+  padding-top: 20px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.practice-summary.show { display: block; }
+.practice-summary .practice-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+
+/* ─── Completion banner ─────────────────────────────────────── */
+.complete-banner {
+  border: 1px solid var(--ink);
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.complete-banner p { margin: 0; font-size: 13px; color: var(--gray-med); }
+.complete-banner .complete-banner-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.lesson-complete-btn {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 10px 20px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.lesson-complete-btn:hover { background: var(--gray-faint); }
+.lesson-complete-btn.done { background: var(--ink); color: var(--canvas); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-side { border-left: none; padding-left: 0; border-top: 1px solid var(--gray-light); padding-top: 20px; }
+  .layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+  .page { padding: 0 18px 60px; }
+  .content-card, .kc-block, .practice-block { padding: 24px 20px; }
+  .practice-actions, .practice-working, .practice-mark-row { margin-left: 0; padding-left: 0; }
+  .slider-row { grid-template-columns: 76px 1fr 64px; gap: 10px; }
+}

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Sample Space, Probability &amp; Complements</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 &mdash; Relative Frequency &amp; Probability</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Sample Space, Probability &amp; Complements</h1>
+      <p class="subtitle">Every probability question begins the same way: list what could happen,
+        count what you want, divide. Get the sample space right and the rest follows.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-09</span>
+        <span class="pill">Sample space</span>
+        <span class="pill">Complementary events</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>The probability scale</li>
+        <li>Sample space and outcomes</li>
+        <li>Counting outcomes</li>
+        <li>Equally likely outcomes</li>
+        <li>The complement</li>
+        <li>"At least" problems</li>
+        <li>Is the game fair?</li>
+        <li>Class activity: how many tries?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#scale">1 &nbsp;The probability scale</a></li>
+        <li class="toc-item"><a class="toc-link" href="#samplespace">2 &nbsp;Sample space</a></li>
+        <li class="toc-item"><a class="toc-link" href="#counting">3 &nbsp;Counting outcomes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#calculating">4 &nbsp;Calculating probability</a></li>
+        <li class="toc-item"><a class="toc-link" href="#complement">5 &nbsp;The complement</a></li>
+        <li class="toc-item"><a class="toc-link" href="#fair">6 &nbsp;Is the game fair?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. SCALE ─────────── -->
+      <div class="content-card" id="scale">
+        <p class="section-label">Theory</p>
+        <h2>The probability scale</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The range</p>
+          \[0 \le P(\text{event}) \le 1\]
+          <p class="formula-where">\(P = 0\) means <strong>impossible</strong>; \(P = 1\) means
+            <strong>certain</strong>. Probabilities can be written as fractions, decimals or
+            percentages — all three are acceptable.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 440 130" width="440">
+            <line class="edge-line" x1="40" y1="60" x2="400" y2="60" stroke-width="2"/>
+            <line class="edge-line" x1="40"  y1="50" x2="40"  y2="70"/>
+            <line class="edge-line" x1="130" y1="52" x2="130" y2="68"/>
+            <line class="edge-line" x1="220" y1="50" x2="220" y2="70"/>
+            <line class="edge-line" x1="310" y1="52" x2="310" y2="68"/>
+            <line class="edge-line" x1="400" y1="50" x2="400" y2="70"/>
+            <text class="angle-label-text" x="40"  y="88" text-anchor="middle">0</text>
+            <text class="angle-label-text" x="130" y="88" text-anchor="middle">0.25</text>
+            <text class="angle-label-text" x="220" y="88" text-anchor="middle">0.5</text>
+            <text class="angle-label-text" x="310" y="88" text-anchor="middle">0.75</text>
+            <text class="angle-label-text" x="400" y="88" text-anchor="middle">1</text>
+            <text class="side-label-text" x="40"  y="38" text-anchor="middle">impossible</text>
+            <text class="side-label-text" x="220" y="38" text-anchor="middle">even chance</text>
+            <text class="side-label-text" x="400" y="38" text-anchor="middle">certain</text>
+            <text class="angle-label-text" x="130" y="108" text-anchor="middle">unlikely</text>
+            <text class="angle-label-text" x="310" y="108" text-anchor="middle">likely</text>
+          </svg>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>Fraction</th><th>Decimal</th><th>Percentage</th><th>Description</th></tr>
+          <tr><td>0</td><td>0</td><td>0%</td><td>Impossible</td></tr>
+          <tr><td>\(\frac{1}{4}\)</td><td>0.25</td><td>25%</td><td>Unlikely</td></tr>
+          <tr><td>\(\frac{1}{2}\)</td><td>0.5</td><td>50%</td><td>Even chance</td></tr>
+          <tr><td>\(\frac{3}{4}\)</td><td>0.75</td><td>75%</td><td>Likely</td></tr>
+          <tr><td>1</td><td>1</td><td>100%</td><td>Certain</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">A check worth doing</p>
+          <p style="margin-bottom:0;">If an answer comes out above 1 or below 0, it is
+            <strong>definitely wrong</strong>. The most common causes are adding probabilities that
+            should have been multiplied, or dividing by the wrong total.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. SAMPLE SPACE ─────────── -->
+      <div class="content-card" id="samplespace">
+        <p class="section-label">Theory</p>
+        <h2>Sample space and outcomes</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Definitions</p>
+          <ul style="margin-bottom:0;">
+            <li>An <strong>experiment</strong> is a process with an uncertain result — rolling a
+              die, drawing a card.</li>
+            <li>An <strong>outcome</strong> is a single possible result.</li>
+            <li>The <strong>sample space</strong> is the set of <em>all</em> possible outcomes.</li>
+            <li>An <strong>event</strong> is a set of outcomes you are interested in.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>A standard die is rolled.</p>
+          <p><strong>Sample space:</strong> \(\{1, 2, 3, 4, 5, 6\}\) — six outcomes.</p>
+          <p><strong>The event "even number":</strong> \(\{2, 4, 6\}\) — three outcomes.</p>
+          <p><strong>The event "greater than 4":</strong> \(\{5, 6\}\) — two outcomes.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; two coins</p>
+          <p>Two coins are tossed. Write the sample space.</p>
+          <p>\(\{HH,\ HT,\ TH,\ TT\}\) — <strong>four</strong> outcomes.</p>
+          <p><strong>A common error:</strong> writing three outcomes (two heads, one of each, two
+            tails). That is wrong because \(HT\) and \(TH\) are <em>different</em> outcomes — the
+            first coin differs from the second. Treating them as one makes "one of each" appear
+            equally likely to "two heads", which it is not.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Listing the sample space</p>
+          <p style="margin-bottom:0;">Be <strong>systematic</strong>. For two dice, list all
+            outcomes starting with 1, then all starting with 2, and so on. A table or tree diagram
+            guarantees nothing is missed.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A spinner showing A, B or C is spun and a coin is tossed. List the sample space.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\{AH, AT, BH, BT, CH, CT\}\) &mdash; six outcomes.</p>
+              </div></details></li>
+            <li>For that experiment, list the outcomes in the event "a vowel and a head".
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Only A is a vowel, so the event is \(\{AH\}\): one outcome.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. COUNTING ─────────── -->
+      <div class="content-card" id="counting">
+        <p class="section-label">Method</p>
+        <h2>Counting the number of outcomes</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The multiplication principle</p>
+          <p style="margin-bottom:0;">If one stage has \(m\) outcomes and the next has \(n\), then
+            together they have \(m \times n\) outcomes. This extends to any number of stages.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>How many outcomes are there when rolling two dice?</p>
+          \[6 \times 6 = 36 \text{ outcomes}\]
+          <p>Three coins tossed: \(2 \times 2 \times 2 = 8\) outcomes. A die and a coin:
+            \(6 \times 2 = 12\) outcomes.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; a two-dice table</p>
+          <p>The 36 outcomes for two dice, shown as sums:</p>
+          <table class="coord-table" id="diceTable"></table>
+          <p>The table makes it easy to count: a sum of 7 appears 6 times, so
+            \(P(7) = \dfrac{6}{36} = \dfrac{1}{6}\), the most likely sum.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Outcome counter</h3>
+          <p class="exercise-intro">Choose the number of stages and options at each to see the
+            total number of outcomes.</p>
+          <div id="countSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Calculation</div>
+              <div class="readout-value" id="roCalc">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total outcomes</div>
+              <div class="readout-value" id="roTotal">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(one outcome)</div>
+              <div class="readout-value" id="roEach">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A café offers 3 entrées, 5 mains and 2 desserts. How many different three-course
+              meals are possible?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(3 \times 5 \times 2 = 30\) meals.</p>
+              </div></details></li>
+            <li>A PIN has 4 digits, each 0&ndash;9. How many PINs are possible, and what is the
+              probability of guessing one in a single try?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(10 \times 10 \times 10 \times 10 = 10\,000\) PINs, so
+                  \(P = \frac{1}{10\,000} = 0.0001\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CALCULATING ─────────── -->
+      <div class="content-card" id="calculating">
+        <p class="section-label">Method</p>
+        <h2>Calculating probability</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Theoretical probability</p>
+          \[P(\text{event}) = \frac{\text{number of favourable outcomes}}{\text{total number of outcomes}}\]
+          <p class="formula-where">This formula applies <strong>only when all outcomes are equally
+            likely</strong>, and when there is a <strong>finite</strong> number of them.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Equally likely outcomes</p>
+          <p style="margin-bottom:0;">A fair die, a fair coin and a well-shuffled deck all give
+            equally likely outcomes. A biased die, a spinner with unequal sectors, or the weather
+            do <strong>not</strong> — for those you need relative frequency, covered in Lesson 3.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A bag holds 5 red, 3 blue and 4 green marbles. One is drawn at random.</p>
+          <p>Total outcomes: \(5 + 3 + 4 = 12\).</p>
+          \[P(\text{red}) = \frac{5}{12} \qquad P(\text{blue}) = \frac{3}{12} = \frac{1}{4}\]
+          \[P(\text{red or green}) = \frac{5 + 4}{12} = \frac{9}{12} = \frac{3}{4}\]
+          <p><strong>Check:</strong> the three probabilities \(\frac{5}{12} + \frac{3}{12} +
+            \frac{4}{12} = 1\) ✓ — the probabilities of all possible outcomes always sum to 1.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; two dice</p>
+          <p>Two dice are rolled. Find the probability the sum is greater than 9.</p>
+          <p>From the table, sums above 9 are 10, 11 and 12. Counting: 10 appears 3 times, 11
+            appears 2 times, 12 appears once.</p>
+          \[P(\text{sum} > 9) = \frac{3 + 2 + 1}{36} = \frac{6}{36} = \frac{1}{6}\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Marble bag calculator</h3>
+          <p class="exercise-intro">Set the contents of the bag and see every probability.</p>
+          <div id="bagSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Total marbles</div>
+              <div class="readout-value" id="roBagN">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(red)</div>
+              <div class="readout-value" id="roPR">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(blue)</div>
+              <div class="readout-value" id="roPB">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(green)</div>
+              <div class="readout-value" id="roPG">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(not red)</div>
+              <div class="readout-value" id="roPNR">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="bagNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A card is drawn from a standard 52-card deck. Find \(P(\text{king})\),
+              \(P(\text{heart})\) and \(P(\text{red king})\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\frac{4}{52} = \frac{1}{13}\), \(\frac{13}{52} = \frac14\), and
+                  \(\frac{2}{52} = \frac{1}{26}\).</p>
+              </div></details></li>
+            <li>Two dice are rolled. Find the probability of a double.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Six doubles (1&ndash;1 to 6&ndash;6) out of 36: \(\frac{6}{36} = \frac16\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. COMPLEMENT ─────────── -->
+      <div class="content-card" id="complement">
+        <p class="section-label">Theory</p>
+        <h2>The complement</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Complementary events</p>
+          \[P(\text{an event does not occur}) = 1 - P(\text{the event does occur})\]
+          <p class="formula-where">The <strong>complement</strong> of an event is everything in the
+            sample space that is <em>not</em> that event. The two probabilities always sum to 1.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>The probability of rain tomorrow is 0.35. Find the probability of no rain.</p>
+          \[P(\text{no rain}) = 1 - 0.35 = 0.65\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">When the complement saves enormous work</p>
+          <p style="margin-bottom:0;">Whenever a question asks for "<strong>at least
+            one</strong>", the complement is "<strong>none</strong>" — and counting "none" is
+            almost always far quicker.</p>
+          \[P(\text{at least one}) = 1 - P(\text{none})\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; the "at least one" trick</p>
+          <p>Three coins are tossed. Find the probability of at least one head.</p>
+          <p><strong>The long way:</strong> count outcomes with one, two or three heads — that is
+            \(3 + 3 + 1 = 7\) of the 8 outcomes.</p>
+          <p><strong>The short way:</strong> the complement of "at least one head" is "no heads",
+            which is only \(TTT\):</p>
+          \[P(\text{no heads}) = \frac{1}{8}\]
+          \[P(\text{at least one head}) = 1 - \frac{1}{8} = \frac{7}{8}\]
+          <p>With ten coins the saving is dramatic: counting the 1,023 favourable outcomes is
+            hopeless, but the complement is still a single outcome.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>A die is rolled twice. Find the probability of getting at least one six.</p>
+          <p>Complement: no sixes on either roll. Each roll has 5 non-six outcomes out of 6:</p>
+          \[P(\text{no six}) = \frac{5}{6} \times \frac{5}{6} = \frac{25}{36}\]
+          \[P(\text{at least one six}) = 1 - \frac{25}{36} = \frac{11}{36}\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10 &mdash; exam style</p>
+          <p>A building has smoke alarms that work independently. Each one fails, when needed,
+            with probability 0.05.</p>
+          <p><strong>(a) With 3 alarms, find the probability that at least one works.</strong>
+            [2 marks]</p>
+          <p>The complement is "all three fail": \(0.05^3 = 0.000125\).</p>
+          \[P(\text{at least one works}) = 1 - 0.000125 = 0.999875\]
+          <p><strong>(b) Safety rules require this probability to exceed 0.9999. What is the
+            smallest number of alarms needed?</strong> [2 marks]</p>
+          <p>We need \(0.05^n &lt; 0.0001\). With \(n = 3\): 0.000125 (too large). With \(n = 4\):
+            0.00000625 ✓. At least <strong>4 alarms</strong>.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>"At least one" calculator</h3>
+          <p class="exercise-intro">See how quickly "at least one" becomes near-certain as the
+            number of trials grows.</p>
+          <div id="alSliders"></div>
+          <div class="plot-wrap" id="plotAtLeast"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">P(none)</div>
+              <div class="readout-value" id="roNone">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(at least one)</div>
+              <div class="readout-value" id="roAtLeast">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="alNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise</h3>
+          <p class="exercise-intro">Give answers as decimals to 4 places where needed.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(P(A) = 0.28\). Find \(P(\text{not } A)\).</label>
+            <input class="exercise-input" id="cpA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-cp="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCpA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Four coins tossed. \(P(\text{at least one head})\)?</label>
+            <input class="exercise-input" id="cpB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-cp="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCpB"></p>
+
+          <div class="exercise-row">
+            <label>(c) A die rolled 3 times. \(P(\text{at least one six})\)?</label>
+            <input class="exercise-input" id="cpC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-cp="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCpC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Six coins are tossed. Find the probability of at least one head.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(P(\text{no heads}) = \left(\frac12\right)^6 = \frac{1}{64}\), so
+                  \(P(\text{at least one head}) = 1 - \frac{1}{64} = \frac{63}{64}\).</p>
+              </div></details></li>
+            <li>Each day for the next three days, the chance of no rain is 0.7 (independently).
+              Find the probability it rains on at least one of the days.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(P(\text{no rain on all three}) = 0.7^3 = 0.343\), so the answer is
+                  \(1 - 0.343 = 0.657\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. FAIR GAMES ─────────── -->
+      <div class="content-card" id="fair">
+        <p class="section-label">Application</p>
+        <h2>Is the game fair?</h2>
+
+        <p>A game between two players is <strong>fair</strong> when each player has the same
+          probability of winning. To decide, list the sample space, count each player's winning
+          outcomes, and compare.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11</p>
+          <p>Two dice are rolled and multiplied. Player A wins if the product is even; player B
+            wins if it is odd. Is the game fair?</p>
+          <p>A product is odd only when <em>both</em> dice are odd: \(3 \times 3 = 9\) of the 36
+            outcomes.</p>
+          \[P(\text{B wins}) = \frac{9}{36} = \frac14 \qquad P(\text{A wins}) = 1 - \frac14 = \frac34\]
+          <p><strong>Not fair</strong> &mdash; A is three times as likely to win. The rule sounds
+            even ("even versus odd"), but the outcomes are not split evenly.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Two dice are rolled. Player A wins if the sum is 6, 7 or 8; otherwise player B
+              wins. Is the game fair?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Sums of 6, 7 and 8 occur \(5 + 6 + 5 = 16\) times, so
+                  \(P(\text{A}) = \frac{16}{36}\) and \(P(\text{B}) = \frac{20}{36}\).</p>
+                <p>Not fair: B is favoured.</p>
+              </div></details></li>
+            <li>Using one die and one coin, design a rule that makes a two-player game fair.
+              Justify it.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>For example: A wins on (even, head) or (odd, tail); B wins on (even, tail) or
+                  (odd, head). Each player has 6 of the 12 equally likely outcomes, so
+                  \(P = \frac12\) each.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>How many tries until it is likely?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#complement">"at least one" calculator</a>. Each trial has the same probability
+          of success, independently.</p>
+        <ol>
+          <li>For \(P(\text{success}) = 0.3\), find the smallest number of trials that gives a
+            better than 50% chance of at least one success. Then better than 90%.</li>
+          <li>Repeat for \(P(\text{success}) = 0.2\).</li>
+          <li>For \(P(\text{success}) = 0.1\), find the number of trials for better than 50%.
+            Predict whether 20 trials gives better than 90%, then check.</li>
+          <li>Someone says: "Each go has a 10% chance, so after 10 goes I'm certain to win."
+            Explain what is wrong, using your results.</li>
+          <li>After 9 failed goes, is the 10th go more likely to succeed? Explain.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>P(success)</th><th>Trials for &gt; 50%</th><th>Trials for &gt; 90%</th></tr>
+            <tr><td>0.3</td><td>2 (0.51)</td><td>7 (0.918)</td></tr>
+            <tr><td>0.2</td><td>4 (0.590)</td><td>11 (0.914)</td></tr>
+            <tr><td>0.1</td><td>7 (0.522)</td><td>22 (0.902) &mdash; 20 is not enough (0.878)</td></tr>
+          </table>
+          <p><strong>4.</strong> Probabilities do not add like that: after 10 goes,
+            \(P(\text{at least one win}) = 1 - 0.9^{10} \approx 0.65\), nowhere near certain.</p>
+          <p><strong>5.</strong> No. The trials are independent, so the 10th go still has a 10%
+            chance. Believing otherwise is the <strong>gambler's fallacy</strong>.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Whenever you see "at least", reach for the complement first.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 handles events with several stages using tree diagrams and arrays.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-9', LESSON_IDX = 0;
+
+  function gcd(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
+  function frac(n, d) {
+    if (!d) return '—';
+    var g = gcd(n, d) || 1;
+    return (n / g) + '/' + (d / g);
+  }
+
+  /* ── Two-dice sum table ───────────────────────────────────── */
+  (function () {
+    var html = '<tr><th>+</th>';
+    for (var c = 1; c <= 6; c++) html += '<th>' + c + '</th>';
+    html += '</tr>';
+    for (var r = 1; r <= 6; r++) {
+      html += '<tr><th>' + r + '</th>';
+      for (var c2 = 1; c2 <= 6; c2++) html += '<td>' + (r + c2) + '</td>';
+      html += '</tr>';
+    }
+    document.getElementById('diceTable').innerHTML = html;
+  })();
+
+  /* ── Outcome counter ──────────────────────────────────────── */
+  (function () {
+    var stages = 3, opts = 6;
+    function update() {
+      var total = Math.pow(opts, stages);
+      document.getElementById('roCalc').textContent  =
+        Array(stages).fill(opts).join(' × ') + ' = ' + total.toLocaleString('en-AU');
+      document.getElementById('roTotal').textContent = total.toLocaleString('en-AU');
+      document.getElementById('roEach').textContent  = '1/' + total.toLocaleString('en-AU');
+    }
+    var host = 'countSliders';
+    IE.slider({ mount: host, label: 'Stages', min: 1, max: 6, step: 1, value: stages,
+                onInput: function (v) { stages = v; update(); } });
+    IE.slider({ mount: host, label: 'Options each', min: 2, max: 10, step: 1, value: opts,
+                onInput: function (v) { opts = v; update(); } });
+    update();
+  })();
+
+  /* ── Marble bag ───────────────────────────────────────────── */
+  (function () {
+    var r = 5, b = 3, g = 4;
+    function update() {
+      var n = r + b + g;
+      document.getElementById('roBagN').textContent = String(n);
+      document.getElementById('roPR').textContent   = frac(r, n) + ' = ' + (r / n).toFixed(4);
+      document.getElementById('roPB').textContent   = frac(b, n) + ' = ' + (b / n).toFixed(4);
+      document.getElementById('roPG').textContent   = frac(g, n) + ' = ' + (g / n).toFixed(4);
+      document.getElementById('roPNR').textContent  = frac(n - r, n) + ' = ' + ((n - r) / n).toFixed(4);
+      var note = document.getElementById('bagNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'Check: ' + (r / n).toFixed(4) + ' + ' + (b / n).toFixed(4) + ' + ' +
+        (g / n).toFixed(4) + ' = ' + ((r + b + g) / n).toFixed(4) +
+        ' — the probabilities of all outcomes always sum to 1. Also P(red) + P(not red) = 1.';
+    }
+    var host = 'bagSliders';
+    IE.slider({ mount: host, label: 'Red',   min: 0, max: 20, step: 1, value: r, onInput: function (v) { r = v; update(); } });
+    IE.slider({ mount: host, label: 'Blue',  min: 0, max: 20, step: 1, value: b, onInput: function (v) { b = v; update(); } });
+    IE.slider({ mount: host, label: 'Green', min: 0, max: 20, step: 1, value: g, onInput: function (v) { g = v; update(); } });
+    update();
+  })();
+
+  /* ── At least one ─────────────────────────────────────────── */
+  (function () {
+    var p = 1 / 6, n = 3;
+    var redraw = IE.plot('plotAtLeast', {
+      width: 460, height: 250, xMin: 0, xMax: 20, yMin: 0, yMax: 1.05,
+      xStep: 4, yStep: 0.25, xLabel: 'number of trials', yLabel: 'P(at least one)',
+      curves: []
+    });
+    function update() {
+      var none = Math.pow(1 - p, n);
+      redraw({
+        curves: [{ fn: function (k) { return 1 - Math.pow(1 - p, k); } }],
+        points: [{ x: n, y: 1 - none, label: (1 - none).toFixed(3) }],
+        markers: [{ x: n, y: 1 - none }]
+      });
+      document.getElementById('roNone').textContent    = none.toFixed(4);
+      document.getElementById('roAtLeast').textContent = (1 - none).toFixed(4);
+      var note = document.getElementById('alNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'P(none) = (1 − ' + p.toFixed(3) + ')^' + n + ' = ' + none.toFixed(4) +
+        ', so P(at least one) = 1 − ' + none.toFixed(4) + ' = ' + (1 - none).toFixed(4) +
+        '. Counting "none" is always far quicker than counting every favourable case.';
+    }
+    var host = 'alSliders';
+    IE.slider({ mount: host, label: 'P(success)', min: 0.02, max: 0.9, step: 0.01, value: p,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { p = v; update(); } });
+    IE.slider({ mount: host, label: 'Trials', min: 1, max: 20, step: 1, value: n,
+                onInput: function (v) { n = v; update(); } });
+    update();
+  })();
+
+  /* ── Complement exercises ─────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [0.72,   'P(not A) = 1 − 0.28 = 0.72.'],
+      B: [15 / 16, 'P(no heads) = (1/2)⁴ = 1/16, so P(at least one head) = 1 − 1/16 = 15/16 = 0.9375.'],
+      C: [1 - Math.pow(5 / 6, 3), 'P(no six) = (5/6)³ = 125/216, so P(at least one six) = 1 − 125/216 = 91/216 ≈ 0.4213.']
+    };
+    document.querySelectorAll('[data-cp]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.cp, fb = document.getElementById('fbCp' + k);
+        var raw = (document.getElementById('cp' + k).value || '').trim();
+        var g;
+        if (raw.indexOf('/') !== -1) {
+          var parts = raw.split('/');
+          g = parseFloat(parts[0]) / parseFloat(parts[1]);
+        } else {
+          g = parseFloat(raw.replace(/[^\d.\-]/g, ''));
+        }
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number or a fraction.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(4) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'What is the sample space when two coins are tossed?',
+      opts: [
+        'A) \\(\\{HH,\\ HT,\\ TT\\}\\)',
+        'B) \\(\\{HH,\\ HT,\\ TH,\\ TT\\}\\)',
+        'C) \\(\\{H,\\ T\\}\\)',
+        'D) \\(\\{0,\\ 1,\\ 2\\}\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. There are four outcomes, because \\(HT\\) and \\(TH\\) are different — the first coin is distinguishable from the second. Option A wrongly merges them, which would make "one of each" appear as likely as "two heads".'
+    },
+    {
+      q: 'A bag has 4 red, 6 blue and 5 yellow marbles. What is \\(P(\\text{blue})\\)?',
+      opts: ['A) \\(\\dfrac{2}{5}\\)', 'B) \\(\\dfrac{6}{9}\\)', 'C) \\(\\dfrac{1}{3}\\)', 'D) \\(\\dfrac{6}{11}\\)'],
+      correct: 0,
+      explanation: 'A is correct. The total is \\(4 + 6 + 5 = 15\\), so \\(P(\\text{blue}) = \\dfrac{6}{15} = \\dfrac{2}{5}\\). Option B divides by the non-blue marbles and option D by the red-and-blue total — both use the wrong denominator.'
+    },
+    {
+      q: 'How many outcomes are there when three dice are rolled?',
+      opts: ['A) 18', 'B) 36', 'C) 216', 'D) 729'],
+      correct: 2,
+      explanation: 'C is correct. By the multiplication principle, \\(6 \\times 6 \\times 6 = 216\\). Option A adds instead of multiplying; option D uses \\(9^3\\).'
+    },
+    {
+      q: 'If \\(P(\\text{event}) = 0.42\\), what is the probability the event does not occur?',
+      opts: ['A) 0.42', 'B) 0.58', 'C) \\(-0.42\\)', 'D) 1.42'],
+      correct: 1,
+      explanation: 'B is correct. Complementary probabilities sum to 1, so \\(P(\\text{not}) = 1 - 0.42 = 0.58\\).'
+    },
+    {
+      q: 'Three coins are tossed. What is \\(P(\\text{at least one head})\\)?',
+      opts: ['A) \\(\\dfrac{1}{8}\\)', 'B) \\(\\dfrac{3}{8}\\)', 'C) \\(\\dfrac{7}{8}\\)', 'D) \\(\\dfrac{1}{2}\\)'],
+      correct: 2,
+      explanation: 'C is correct. Use the complement: \\(P(\\text{no heads}) = P(TTT) = \\dfrac{1}{8}\\), so \\(P(\\text{at least one head}) = 1 - \\dfrac{1}{8} = \\dfrac{7}{8}\\).'
+    },
+    {
+      q: 'Which situation does not have equally likely outcomes?',
+      opts: [
+        'A) Rolling a fair six-sided die',
+        'B) Tossing a fair coin',
+        'C) Whether it rains tomorrow',
+        'D) Drawing one card from a well-shuffled deck'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Rain and no rain are not equally likely — the probability depends on the season, location and conditions. It must be estimated from relative frequency rather than counted.'
+    },
+    {
+      q: 'Two dice are rolled. What is \\(P(\\text{sum} = 7)\\)?',
+      opts: ['A) \\(\\dfrac{1}{12}\\)', 'B) \\(\\dfrac{1}{6}\\)', 'C) \\(\\dfrac{7}{36}\\)', 'D) \\(\\dfrac{1}{36}\\)'],
+      correct: 1,
+      explanation: 'B is correct. Six of the 36 outcomes give a sum of 7 — (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) — so \\(P = \\dfrac{6}{36} = \\dfrac{1}{6}\\). This is the most likely sum with two dice.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Define sample space, outcome and event, using the roll of a die as an example.',
+      marks: 3,
+      steps: [
+        'An outcome is a single possible result — for example rolling a 4.',
+        'The sample space is the set of all possible outcomes: \\(\\{1,2,3,4,5,6\\}\\).',
+        'An event is a set of outcomes of interest — for example "even", which is \\(\\{2,4,6\\}\\).'
+      ],
+      answer: 'Outcome: one result (e.g. a 4). Sample space: all possible outcomes, \\(\\{1,2,3,4,5,6\\}\\). Event: a set of outcomes of interest, e.g. "even" = \\(\\{2,4,6\\}\\).'
+    },
+    {
+      q: 'Write the sample space for tossing three coins, and state how many outcomes there are.',
+      marks: 3,
+      steps: [
+        'Work systematically, listing all outcomes starting with H, then with T.',
+        '\\(\\{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\\}\\).',
+        'By the multiplication principle: \\(2 \\times 2 \\times 2 = 8\\).'
+      ],
+      answer: '\\(\\{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\\}\\) — 8 outcomes.'
+    },
+    {
+      q: 'A bag holds 7 red, 5 blue and 8 green marbles. Find \\(P(\\text{red})\\), \\(P(\\text{not blue})\\) and verify the probabilities sum to 1.',
+      marks: 4,
+      steps: [
+        'Total \\(= 7 + 5 + 8 = 20\\).',
+        '\\(P(\\text{red}) = \\dfrac{7}{20} = 0.35\\).',
+        '\\(P(\\text{not blue}) = 1 - \\dfrac{5}{20} = \\dfrac{15}{20} = 0.75\\).',
+        'Check: \\(\\dfrac{7}{20} + \\dfrac{5}{20} + \\dfrac{8}{20} = \\dfrac{20}{20} = 1\\) ✓'
+      ],
+      answer: '\\(P(\\text{red}) = 0.35\\); \\(P(\\text{not blue}) = 0.75\\); the three probabilities sum to 1.'
+    },
+    {
+      q: 'How many outcomes are possible when a coin is tossed and two dice are rolled?',
+      marks: 2,
+      steps: [
+        'Apply the multiplication principle across the three stages.',
+        '\\(2 \\times 6 \\times 6\\).'
+      ],
+      answer: '72 outcomes.'
+    },
+    {
+      q: 'Two dice are rolled. Find \\(P(\\text{sum} = 5)\\) and \\(P(\\text{sum} \\ge 10)\\).',
+      marks: 4,
+      steps: [
+        'Sum 5: (1,4), (2,3), (3,2), (4,1) — four outcomes, so \\(\\dfrac{4}{36} = \\dfrac{1}{9}\\).',
+        'Sum 10: (4,6), (5,5), (6,4) — three outcomes.',
+        'Sum 11: (5,6), (6,5) — two. Sum 12: (6,6) — one.',
+        '\\(P(\\text{sum} \\ge 10) = \\dfrac{3+2+1}{36} = \\dfrac{6}{36} = \\dfrac{1}{6}\\).'
+      ],
+      answer: '\\(P(\\text{sum} = 5) = \\dfrac{1}{9}\\); \\(P(\\text{sum} \\ge 10) = \\dfrac{1}{6}\\).'
+    },
+    {
+      q: 'Explain why the sample space for two coins has four outcomes, not three.',
+      marks: 3,
+      steps: [
+        'The two coins are distinguishable — there is a first coin and a second.',
+        'So HT (head then tail) and TH (tail then head) are different outcomes.',
+        'Merging them into "one of each" would give three outcomes.',
+        'But those three would not be equally likely, since "one of each" occurs twice as often as "two heads".'
+      ],
+      answer: 'Because HT and TH are distinct outcomes — the coins are distinguishable. Merging them gives three outcomes that are <em>not</em> equally likely, since "one of each" happens twice as often as "two heads", so the counting formula would no longer apply.'
+    },
+    {
+      q: 'The probability a train is late is 0.18. Find the probability it is on time, and explain the relationship.',
+      marks: 2,
+      steps: [
+        '"On time" is the complement of "late".',
+        '\\(P(\\text{on time}) = 1 - 0.18 = 0.82\\).',
+        'Complementary events cover the whole sample space and cannot both occur.'
+      ],
+      answer: '0.82. The two events are complementary — together they cover all possibilities, so their probabilities sum to 1.'
+    },
+    {
+      q: 'Five coins are tossed. Find the probability of at least one tail.',
+      marks: 4,
+      steps: [
+        'The complement of "at least one tail" is "no tails", i.e. all heads.',
+        '\\(P(\\text{all heads}) = \\left(\\dfrac{1}{2}\\right)^{5} = \\dfrac{1}{32}\\).',
+        '\\(P(\\text{at least one tail}) = 1 - \\dfrac{1}{32}\\).',
+        '\\(= \\dfrac{31}{32} = 0.96875\\).'
+      ],
+      answer: '\\(\\dfrac{31}{32} \\approx 0.9688\\)'
+    },
+    {
+      q: 'A die is rolled four times. Find the probability of at least one six.',
+      marks: 4,
+      steps: [
+        'Complement: no six on any of the four rolls.',
+        'Each roll avoids a six with probability \\(\\dfrac{5}{6}\\).',
+        '\\(P(\\text{no six}) = \\left(\\dfrac{5}{6}\\right)^{4} = \\dfrac{625}{1296} = 0.4823\\).',
+        '\\(P(\\text{at least one six}) = 1 - 0.4823\\).'
+      ],
+      answer: 'About 0.5177, or \\(\\dfrac{671}{1296}\\).'
+    },
+    {
+      q: 'Explain why the complement is usually the better method for "at least one" problems.',
+      marks: 3,
+      steps: [
+        '"At least one" covers many separate cases — exactly one, exactly two, and so on.',
+        'Each would have to be counted and added.',
+        'The complement, "none", is a single case.',
+        'Calculating one probability and subtracting from 1 is far quicker and less error-prone.'
+      ],
+      answer: 'Because "at least one" includes many cases that must each be counted and summed, while its complement "none" is a single case. Computing that one probability and subtracting from 1 is both faster and far less prone to error.'
+    },
+    {
+      q: 'A spinner has 8 equal sectors numbered 1 to 8. Find \\(P(\\text{prime})\\), \\(P(\\text{greater than 5})\\) and \\(P(\\text{not a multiple of 3})\\).',
+      marks: 4,
+      steps: [
+        'Primes from 1 to 8: 2, 3, 5, 7 — four outcomes, so \\(\\dfrac{4}{8} = \\dfrac{1}{2}\\).',
+        'Greater than 5: 6, 7, 8 — three outcomes, so \\(\\dfrac{3}{8}\\).',
+        'Multiples of 3: 3, 6 — two outcomes, so \\(P = \\dfrac{2}{8} = \\dfrac{1}{4}\\).',
+        '\\(P(\\text{not a multiple of 3}) = 1 - \\dfrac{1}{4} = \\dfrac{3}{4}\\).'
+      ],
+      answer: '\\(P(\\text{prime}) = \\dfrac{1}{2}\\); \\(P(> 5) = \\dfrac{3}{8}\\); \\(P(\\text{not multiple of 3}) = \\dfrac{3}{4}\\).'
+    },
+    {
+      q: 'A student calculates a probability of 1.4. Explain what must have gone wrong.',
+      marks: 3,
+      steps: [
+        'Probabilities must lie between 0 and 1 inclusive.',
+        'A value above 1 is impossible.',
+        'The likely cause is adding probabilities that should have been multiplied.',
+        'Or dividing by too small a total — for example using the favourable count instead of the sample space size.'
+      ],
+      answer: 'A probability cannot exceed 1. The most likely errors are adding probabilities that should have been multiplied, or dividing by the wrong total (too small a denominator).'
+    },
+    {
+      q: 'A class of 30 has 18 students studying Maths, and the rest not. One student is chosen at random. Find \\(P(\\text{Maths})\\), \\(P(\\text{not Maths})\\), and the number who would be expected to study Maths if 5 students were chosen.',
+      marks: 4,
+      steps: [
+        '\\(P(\\text{Maths}) = \\dfrac{18}{30} = 0.6\\).',
+        '\\(P(\\text{not Maths}) = 1 - 0.6 = 0.4\\).',
+        'Expected number in 5 choices \\(= 5 \\times 0.6\\).',
+        '\\(= 3\\) students.'
+      ],
+      answer: '\\(P(\\text{Maths}) = 0.6\\); \\(P(\\text{not Maths}) = 0.4\\); about 3 of the 5 would be expected to study Maths.'
+    },
+    {
+      q: 'A quality inspector tests items with a 4% defect rate. Find the probability that at least one of 10 items is defective, and comment on what this means for the inspector.',
+      marks: 5,
+      steps: [
+        'Complement: all 10 items are acceptable.',
+        'Each item is acceptable with probability \\(1 - 0.04 = 0.96\\).',
+        '\\(P(\\text{none defective}) = 0.96^{10} = 0.6648\\).',
+        '\\(P(\\text{at least one}) = 1 - 0.6648 = 0.3352\\).',
+        'So about one batch of 10 in three contains a defect.'
+      ],
+      answer: 'About 0.3352 — roughly a one-in-three chance. Even with a low 4% defect rate, batches of 10 will contain a defective item about a third of the time, so batch testing will frequently flag problems.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

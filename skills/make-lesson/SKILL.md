@@ -3,15 +3,29 @@ name: make-lesson
 description: Create a new lesson page for this infinity_edu project. Use when the user asks to add a new lesson, build a lesson HTML file, or scaffold a topic lesson. Produces a fully wired lesson page consistent with the existing Linear Relationships lessons.
 ---
 
-This skill generates new lesson HTML files for the infinity_edu educational platform. Every lesson is a self-contained HTML file loaded in an iframe by `pdf-viewer.js`. Follow all patterns exactly — the platform has no build tools, no framework.
+This skill generates new lesson HTML files for the infinity_edu educational platform. Every lesson is an HTML file loaded in an iframe by `pdf-viewer.js`. Follow all patterns exactly — the platform has no build tools, no framework.
+
+## Which system? Read this first
+
+There are **two** lesson systems. Pick by year.
+
+| | Year 11 (`year-11-maths/`) | Year 12 (`year-12-maths/`) |
+|---|---|---|
+| CSS | Inlined in every file | `<link href="../lesson-kit.css">` |
+| JS | `buildKC` IIFE copied per file | `<script src="../lesson-kit.js">` → `window.IE` |
+| Topic ID | Number (`6`) | String (`'y12-6'`) |
+| Lessons per topic | Varies | Always 5: 3 lessons + homework + revision |
+| Content target | ~45 min | **2–3 hours** |
+
+**For new Year 12 lessons, use the shared kit** (§ "Year 12 lesson kit" below) — do not inline the CSS or copy `buildKC`. The rest of this document describes the Year 11 pattern, which the kit reproduces exactly; read it for the markup structure, which is identical in both.
 
 ## Design system
 
-All UI follows the **Sociotype** design system (`skills/style.md`). Key rules:
+All UI follows the **Sociotype** design system — see [`DESIGN.md`](../../DESIGN.md) for the site's rules (fonts, sentence case, colours) and `skills/style/SKILL.md` for the original reference. Key rules:
 - No border-radius anywhere
 - Achromatic palette only — `--ink` / `--canvas` / gray variables
 - Poppins (`--font-display`) for all UI text (headings, labels, TOC, pills)
-- Space Mono (`--font-mono`) for math display elements and the `.opt-letter` badge only
+- DM Mono (`--font-mono`) for math display elements and the `.opt-letter` badge only
 - Ghost buttons — text + 1px border, no fill, no shadow
 
 ## `<head>` boilerplate
@@ -22,7 +36,7 @@ All UI follows the **Sociotype** design system (`skills/style.md`). Key rules:
 <title>Lesson N — Title</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -51,12 +65,12 @@ All UI follows the **Sociotype** design system (`skills/style.md`). Key rules:
   --gray-light: #d6d6d6;
   --gray-faint: #f2f2f2;
   --font-display: 'Poppins', sans-serif;
-  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font-mono: 'DM Mono', monospace;
 }
 
 html.dark-mode {
   --ink: #f0f0f0;
-  --canvas: #111;
+  --canvas: #0a0a0a;
   --gray-med: #888;
   --gray-light: #333;
   --gray-faint: #1a1a1a;
@@ -128,7 +142,7 @@ Key layout CSS:
 ```css
 .layout { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: start; }
 .toc { position: sticky; top: 24px; }
-.toc-heading { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 12px; }
+.toc-heading { font-size: 10px; letter-spacing: 0.02em; color: var(--gray-med); margin-bottom: 12px; }
 .toc-link { display: block; font-size: 12px; color: var(--gray-med); text-decoration: none; padding: 5px 0 5px 12px; border-left: 1px solid var(--gray-light); transition: color 0.15s, border-color 0.15s; }
 .toc-link:hover { color: var(--ink); }
 .toc-link.toc-active { color: var(--ink); border-left: 2px solid var(--ink); padding-left: 10px; }
@@ -149,7 +163,7 @@ Every major section is a `.content-card` div with a scroll anchor `id`:
 CSS:
 ```css
 .content-card { border: 1px solid var(--ink); padding: 32px 36px; margin-bottom: 32px; }
-.section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-med); margin-bottom: 8px; }
+.section-label { font-size: 11px; letter-spacing: 0.02em; color: var(--gray-med); margin-bottom: 8px; }
 h2 { font-size: 26px; letter-spacing: 0.26px; line-height: 1.13; border-bottom: 1px solid var(--gray-light); padding-bottom: 16px; margin-bottom: 24px; }
 ```
 
@@ -181,6 +195,8 @@ const KC_QS = [
 - In JS strings: escape backslashes — `\\(...\\)` and `\\[...\\]`
 - Inline: `\(x^2 + 1\)` — Display: `\[\frac{a}{b}\]`
 - Use `\dfrac` (not `\frac`) for fractions that need to be legible at inline size
+- TeX escapes only work inside delimiters. In prose write `$7,500`, never `\$7\,500` — outside
+  `\(...\)` the backslashes render literally. Inside math, `\(\$7\,500\)` is correct.
 
 ### buildKC IIFE
 
@@ -205,7 +221,7 @@ const KC_QS = [
     qData.opts.forEach((opt, oi) => {
       const btn = document.createElement('button');
       btn.className = 'kc-opt';
-      // Split letter (Space Mono) from content (Poppins)
+      // Split letter (DM Mono) from content (Poppins)
       const letterMatch = opt.match(/^([A-D])\)\s*([\s\S]*)$/);
       const letter  = letterMatch ? letterMatch[1] : String.fromCharCode(65 + oi);
       const content = letterMatch ? letterMatch[2] : opt;
@@ -314,9 +330,9 @@ html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
 .kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
 .kc-score.show { display: block; }
 .kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
-.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 0; cursor: pointer; }
-/* opt-letter: Space Mono badge for A/B/C/D */
-.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 700; min-width: 16px; padding-top: 1px; }
+.kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.02em; padding: 2px 0; cursor: pointer; }
+/* opt-letter: DM Mono badge for A/B/C/D */
+.opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 300; min-width: 16px; padding-top: 1px; }
 ```
 
 ## Homework section
@@ -341,8 +357,7 @@ html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
   padding: 10px 20px;
   font-family: var(--font-display);
   font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   cursor: pointer;
   color: var(--ink);
 }
@@ -353,8 +368,7 @@ html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
   border: 1px solid var(--gray-light);
   padding: 2px 8px;
   font-size: 10px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--gray-med);
   margin-left: 8px;
   vertical-align: middle;
@@ -407,10 +421,151 @@ initPdfViewer({
 });
 ```
 
-In `index.html` (landing page), add the new lesson index to the `COMPLETABLE` map:
+In `year-11.html` (the Year 11 landing page), add the new lesson index to the `COMPLETABLE` map:
 
 ```javascript
 const COMPLETABLE = {
   6: [0, 1, 2, 3],  // add the new lesson index here
 };
 ```
+
+---
+
+# Year 12 lesson kit
+
+Year 12 lessons share `year-12-maths/lesson-kit.css` and `year-12-maths/lesson-kit.js` instead of
+inlining everything. The rendered result is identical to Year 11; only the plumbing differs.
+
+## `<head>` for a Year 12 lesson
+
+```html
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson N — Title</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="../lesson-kit.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+```
+
+At the end of `<body>`: `<script src="../lesson-kit.js"></script>` then one inline
+`<script>` whose contents sit inside `document.addEventListener('DOMContentLoaded', …)`.
+
+The kit handles dark mode and TOC scroll-spy automatically. Do **not** add the `ie-theme-request`
+postMessage — `pdf-viewer.js` never answers it; the kit reads `localStorage.theme` directly.
+
+## `window.IE` API
+
+| Call | Purpose |
+|---|---|
+| `IE.tex(el)` | Re-render KaTeX inside `el`. Call once with `document.body` at start. |
+| `IE.buildKC(QS, {topicId, lessonIdx})` | 7-question knowledge check. **Marks the lesson complete** when finished. |
+| `IE.buildPractice(QS, opts)` | Extended practice with step-by-step reveal and self-marking. |
+| `IE.plot(mountId, opts)` | Achromatic inline-SVG plotter. Returns `redraw(newOpts)`. |
+| `IE.slider({mount, label, min, max, step, value, format, onInput})` | Labelled range input with live readout. |
+| `IE.completeBanner({mount, topicId, lessonIdx, label, doneLabel})` | Manual complete toggle — revision pages only. |
+| `IE.openLesson(i)` | Navigate the parent viewer to lesson index `i`. |
+| `IE.markComplete(topicId, idx)` / `IE.isComplete(...)` | Direct completion access. |
+
+`KC_QS` has the same shape as Year 11. `PRACTICE_QS` entries are:
+
+```javascript
+{ q: 'Question text with \\(math\\)',
+  marks: 3,
+  steps: ['Step one…', 'Step two…'],   // shown in an <ol> when revealed
+  answer: 'The final answer.' }
+```
+
+Mount points expected by the defaults: `#kcQuestions` / `#kcScore` for the KC, and
+`#practiceQuestions` / `#practiceTally` / `#practiceSummary` for practice. Pass
+`{mount, tally, summary}` to run several practice blocks on one page (the homework pages do).
+
+## Required content per Year 12 lesson (the 2–3 hour target)
+
+The taught part of each lesson (everything above the Knowledge Check) is sized for a
+**60-minute class**.
+
+1. Topbar + hero (eyebrow, title, subtitle, outcome pills, "In this lesson" list)
+2. Sticky TOC — the kit wires scroll-spy automatically
+3. **5–8 `.content-card` sections**, each with a worked example. The section count includes one
+   that goes beyond the minimum: a syllabus dot point the core sections only touch on.
+4. **A Your turn block after the main worked example of at least five sections** — two questions,
+   each with a hidden worked answer (markup below)
+5. **At least one exam-style worked example**, labelled `Worked example N &mdash; exam style`, with
+   lettered parts and mark allocations
+6. **≥3 `.interactive-block` widgets** that compute live (sliders + readouts + plots), not just check-answer boxes
+7. **A class activity card** (`id="activity"`, section label "Class activity") just before the
+   Knowledge Check: about 10 minutes, built on one of the lesson's own widgets, with numbered steps
+   and a `details.yt-answer` holding "Discussion points" for the teacher. Every answer in it must
+   match what the widget actually displays — compute it from the widget's own code.
+8. **7-question Knowledge Check** via `IE.buildKC` — this is what completes the lesson
+9. **12–15 question Extended Practice** via `IE.buildPractice`
+10. Homework/next-lesson link card using `IE.openLesson(i)`
+
+Every new card needs a matching TOC entry and hero `side-list` item. Worked examples are numbered
+in page order.
+
+Your turn markup (CSS only; `IE.tex(document.body)` renders the maths inside it):
+
+```html
+<div class="your-turn">
+  <p class="example-label">Your turn</p>
+  <ol>
+    <li>Question with \(math\).
+      <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+        <p>Working…</p>
+      </div></details></li>
+  </ol>
+</div>
+```
+
+Homework pages carry ~30 questions in three `IE.buildPractice` blocks and **no** completion call.
+Revision pages carry a formula sheet, a syllabus checklist, a common-mistakes table, a 15-question
+paper, and `IE.completeBanner`.
+
+## Extra kit-only CSS classes
+
+`.formula-box` (+ `.formula-label`, `.formula-where`), `.slider-row`, `.readout` (+ `.readout-item`,
+`.readout-label`, `.readout-value`), `.plot-wrap`, `.practice-*`, `.complete-banner`,
+`.lesson-complete-btn`, `.your-turn`, `.yt-answer` (+ `.yt-body`).
+
+## Wiring a Year 12 lesson in
+
+The topic's `index.html` uses a **string** topic ID and always five lessons:
+
+```javascript
+const TOPIC_ID = 'y12-3';
+const lessons = [
+  { num: 1, title: '…', slides: 'lesson-01-….html', kind: 'html', syllabus: [ … ] },   // idx 0
+  { num: 2, title: '…', slides: 'lesson-02-….html', kind: 'html', syllabus: [ … ] },   // idx 1
+  { num: 3, title: '…', slides: 'lesson-03-….html', kind: 'html', syllabus: [ … ] },   // idx 2
+  { num: 4, homework: true, slides: 'lesson-04-homework.html', kind: 'html', syllabus: [] },  // idx 3
+  { num: 5, title: 'Revision', revision: true, slides: 'lesson-05-revision.html', kind: 'html', syllabus: [ … ] }  // idx 4
+];
+```
+
+Then in `year-12.html`: add `'y12-N': [0, 1, 2, 4]` to `COMPLETABLE` (homework is excluded) and
+remove `topic-card--pending` plus the `.pending-badge` span from that topic's card.
+
+> **`lessonIdx` must equal the true array index.** Year 11 topics 5, 8 and 9 have hand-tuned
+> constants that are off by one; do not copy that. Lesson 1 → 0, Lesson 2 → 1, Lesson 3 → 2,
+> revision → 4.
+
+## Syllabus dot points
+
+Take them verbatim from the NSW page for the focus area, at
+`https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/<id>`:
+
+| Focus area | id | | Focus area | id |
+|---|---|---|---|---|
+| Algebraic relationships | `faf5e47f4a` | | Critical path analysis | `fa9c92c4c6` |
+| Investment and loans | `fac80cab35` | | Bivariate data analysis | `fadb5e412c` |
+| Annuities | `faa14f8aa3` | | Relative frequency and probability | `fae778ced4` |
+| Trigonometry | `fa6dd765ae` | | The normal distribution | `fa92309f60` |
+| Ratios and rates | `fa96edbda5` | | Network flow | `fafe0a915b` |
+
+The pages are JS-rendered; `curl` the URL and strip tags rather than relying on a summarising
+fetch, which returns the Life Skills content instead.

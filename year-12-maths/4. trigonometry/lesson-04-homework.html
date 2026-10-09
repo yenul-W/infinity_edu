@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Trigonometry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 4 &mdash; Trigonometry</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Trigonometry</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Draw and label a diagram
+        for every one &mdash; it is worth marks in itself and prevents most errors.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-04</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Right-angled trigonometry (10)</li>
+        <li>Part B &mdash; Sine &amp; cosine rules (10)</li>
+        <li>Part C &mdash; Area &amp; bearings (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#ref">Formula sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Right-angled</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Sine &amp; cosine</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Area &amp; bearings</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="ref">
+        <p class="section-label">Reference</p>
+        <h2>Formula sheet</h2>
+        <div class="formula-box">
+          \[\sin \theta = \frac{\text{opp}}{\text{hyp}} \qquad
+            \cos \theta = \frac{\text{adj}}{\text{hyp}} \qquad
+            \tan \theta = \frac{\text{opp}}{\text{adj}}\]
+          \[\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} \qquad
+            \frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c}\]
+          \[c^{2} = a^{2} + b^{2} - 2ab\cos C \qquad
+            \cos C = \frac{a^{2} + b^{2} - c^{2}}{2ab}\]
+          \[A = \frac{1}{2}ab\sin C \qquad 1° = 60'\]
+        </div>
+        <p><strong>Check your calculator is in degree mode before you start.</strong> Remember that
+          \(\sin\theta = \sin(180° - \theta)\), so inverse sine returns only the acute solution.</p>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Right-angled trigonometry</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Sine &amp; cosine rules</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Area &amp; bearings</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The revision lesson pulls the whole topic together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ══════════ PART A — Right-angled ══════════ */
+  var QS_A = [
+    {
+      q: 'A right-angled triangle has a hypotenuse of 24 cm and an angle of 33°. Find the side opposite that angle.',
+      marks: 2,
+      steps: [
+        'Opposite and hypotenuse means sine.',
+        '\\(\\sin 33° = \\dfrac{x}{24}\\).',
+        '\\(x = 24 \\times \\sin 33° = 24 \\times 0.54464\\).'
+      ],
+      answer: '13.07 cm'
+    },
+    {
+      q: 'A right-angled triangle has an adjacent side of 15 m and an angle of 48°. Find the opposite side.',
+      marks: 2,
+      steps: [
+        'Opposite and adjacent means tangent.',
+        '\\(\\tan 48° = \\dfrac{x}{15}\\).',
+        '\\(x = 15 \\times \\tan 48° = 15 \\times 1.11061\\).'
+      ],
+      answer: '16.66 m'
+    },
+    {
+      q: 'A ramp rises 1.8 m at an angle of 11° to the horizontal. Find the length of the ramp.',
+      marks: 3,
+      steps: [
+        'The rise is opposite; the ramp is the hypotenuse — use sine.',
+        '\\(\\sin 11° = \\dfrac{1.8}{L}\\).',
+        'The unknown is underneath, so divide: \\(L = \\dfrac{1.8}{\\sin 11°} = \\dfrac{1.8}{0.19081}\\).'
+      ],
+      answer: '9.43 m'
+    },
+    {
+      q: 'A triangle has an opposite side of 13 and a hypotenuse of 21. Find the angle, to the nearest minute.',
+      marks: 3,
+      steps: [
+        '\\(\\sin\\theta = \\dfrac{13}{21} = 0.61905\\).',
+        '\\(\\theta = \\sin^{-1}(0.61905) = 38.2454°\\).',
+        '\\(0.2454 \\times 60 = 14.7\\), so about \\(38°15\'\\).'
+      ],
+      answer: "About 38°15'"
+    },
+    {
+      q: 'A triangle has an adjacent side of 7.5 m and an opposite side of 4.2 m. Find the angle in degrees to 2 dp.',
+      marks: 2,
+      steps: [
+        'Opposite and adjacent means tangent.',
+        '\\(\\tan\\theta = \\dfrac{4.2}{7.5} = 0.56\\).',
+        '\\(\\theta = \\tan^{-1}(0.56)\\).'
+      ],
+      answer: '29.25°'
+    },
+    {
+      q: 'Convert. (a) 71.35° to degrees and minutes. (b) 39°24\' to a decimal.',
+      marks: 2,
+      steps: [
+        '(a) \\(0.35 \\times 60 = 21\\), so \\(71.35° = 71°21\'\\).',
+        '(b) \\(24 \\div 60 = 0.4\\), so \\(39°24\' = 39.4°\\).'
+      ],
+      answer: "(a) 71°21' &nbsp; (b) 39.4°"
+    },
+    {
+      q: 'From 95 m from the base of a tower, the angle of elevation to the top is 29°. Find the tower\'s height.',
+      marks: 3,
+      steps: [
+        'Height is opposite, 95 m is adjacent — tangent.',
+        '\\(\\tan 29° = \\dfrac{h}{95}\\).',
+        '\\(h = 95 \\times \\tan 29° = 95 \\times 0.55431\\).'
+      ],
+      answer: '52.66 m'
+    },
+    {
+      q: 'From a cliff 140 m high, the angle of depression to a boat is 31°. How far is the boat from the base?',
+      marks: 4,
+      steps: [
+        'The angle of depression from the cliff equals the angle of elevation from the boat.',
+        'So the 31° angle sits at the boat, with 140 m opposite and \\(d\\) adjacent.',
+        '\\(\\tan 31° = \\dfrac{140}{d}\\).',
+        '\\(d = \\dfrac{140}{0.60086}\\).'
+      ],
+      answer: '233.00 m'
+    },
+    {
+      q: 'An observer with eye height 1.65 m stands 48 m from a building. The angle of elevation to the top is 47°. Find the building\'s height.',
+      marks: 4,
+      steps: [
+        'The triangle is measured from eye level.',
+        '\\(h = 48 \\times \\tan 47° = 48 \\times 1.07237 = 51.47\\) m above eye level.',
+        'Add the eye height: \\(51.47 + 1.65\\).',
+        'Forgetting this addition is the most common error in these questions.'
+      ],
+      answer: '53.12 m'
+    },
+    {
+      q: 'From the top of a 55 m building, the angles of depression to two cars directly in line are 41° and 24°. Find the distance between the cars.',
+      marks: 5,
+      steps: [
+        'Both depression angles become elevation angles at the cars.',
+        'Nearer car: \\(d_1 = \\dfrac{55}{\\tan 41°} = \\dfrac{55}{0.86929} = 63.27\\) m.',
+        'Further car: \\(d_2 = \\dfrac{55}{\\tan 24°} = \\dfrac{55}{0.44523} = 123.53\\) m.',
+        'The smaller angle gives the greater distance — a useful check.',
+        'Distance apart: \\(123.53 - 63.27\\).'
+      ],
+      answer: 'About 60.26 m apart.'
+    }
+  ];
+
+  /* ══════════ PART B — Sine & cosine rules ══════════ */
+  var QS_B = [
+    {
+      q: 'In triangle \\(ABC\\), \\(A = 61°\\), \\(B = 49°\\) and \\(a = 26\\) m. Find side \\(b\\).',
+      marks: 3,
+      steps: [
+        'Matching pair \\(a\\) and \\(A\\) — sine rule.',
+        '\\(\\dfrac{b}{\\sin 49°} = \\dfrac{26}{\\sin 61°}\\).',
+        '\\(b = \\dfrac{26 \\times 0.75471}{0.87462}\\).',
+        'Check: \\(B < A\\), so \\(b < a\\) ✓'
+      ],
+      answer: 'About 22.44 m'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(B = 38°\\), \\(C = 72°\\) and \\(b = 14\\) cm. Find side \\(a\\).',
+      marks: 4,
+      steps: [
+        'First find the third angle: \\(A = 180 - 38 - 72 = 70°\\).',
+        'Matching pair \\(b\\) and \\(B\\) — sine rule.',
+        '\\(a = \\dfrac{14 \\times \\sin 70°}{\\sin 38°}\\).',
+        '\\(= \\dfrac{14 \\times 0.93969}{0.61566}\\).'
+      ],
+      answer: 'About 21.37 cm'
+    },
+    {
+      q: 'A triangle has \\(a = 13\\), \\(b = 18\\) and included angle \\(C = 44°\\). Find \\(c\\).',
+      marks: 3,
+      steps: [
+        'Two sides and the included angle — cosine rule.',
+        '\\(c^{2} = 169 + 324 - 2(13)(18)\\cos 44°\\).',
+        '\\(= 493 - 468 \\times 0.71934 = 493 - 336.65 = 156.35\\).',
+        '\\(c = \\sqrt{156.35}\\).'
+      ],
+      answer: 'About 12.50'
+    },
+    {
+      q: 'A triangle has \\(a = 16\\) m, \\(b = 11\\) m and \\(C = 127°\\). Find \\(c\\).',
+      marks: 3,
+      steps: [
+        '\\(\\cos 127° = -0.60182\\), which is negative.',
+        '\\(c^{2} = 256 + 121 - 2(16)(11)(-0.60182)\\).',
+        '\\(= 377 + 211.84 = 588.84\\).',
+        '\\(c = \\sqrt{588.84}\\). Subtracting a negative adds, so \\(c > \\sqrt{377} = 19.42\\) ✓'
+      ],
+      answer: 'About 24.27 m'
+    },
+    {
+      q: 'A triangle has sides 11, 14 and 19 cm. Find the largest angle.',
+      marks: 4,
+      steps: [
+        'The largest angle faces the longest side, so set \\(c = 19\\), \\(a = 11\\), \\(b = 14\\).',
+        '\\(\\cos C = \\dfrac{121 + 196 - 361}{2(11)(14)} = \\dfrac{-44}{308}\\).',
+        '\\(= -0.142857\\).',
+        '\\(C = \\cos^{-1}(-0.142857)\\). The negative cosine correctly gives an obtuse angle.'
+      ],
+      answer: 'About 98.21°, or 98°13\''
+    },
+    {
+      q: 'Find the smallest angle in a triangle with sides 7, 12 and 16 m.',
+      marks: 4,
+      steps: [
+        'The smallest angle faces the shortest side, so set \\(c = 7\\), \\(a = 12\\), \\(b = 16\\).',
+        '\\(\\cos C = \\dfrac{144 + 256 - 49}{2(12)(16)} = \\dfrac{351}{384}\\).',
+        '\\(= 0.914063\\).',
+        '\\(C = \\cos^{-1}(0.914063)\\).'
+      ],
+      answer: 'About 23.94°, or 23°56\''
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(a = 21\\), \\(b = 15\\) and \\(A = 68°\\). Find angle \\(B\\), to the nearest minute.',
+      marks: 4,
+      steps: [
+        'Matching pair — sine rule in angle form.',
+        '\\(\\sin B = \\dfrac{15 \\times \\sin 68°}{21} = \\dfrac{15 \\times 0.92718}{21} = 0.66227\\).',
+        '\\(B = \\sin^{-1}(0.66227) = 41.47°\\).',
+        '\\(0.47 \\times 60 = 28\\), so about \\(41°28\'\\). Check: \\(b < a\\) so \\(B < A\\) ✓'
+      ],
+      answer: "About 41°28'"
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(a = 9\\) cm, \\(b = 15\\) cm and \\(A = 31°\\). Angle \\(B\\) is obtuse. Find \\(B\\) and \\(C\\).',
+      marks: 5,
+      steps: [
+        '\\(\\sin B = \\dfrac{15 \\times \\sin 31°}{9} = \\dfrac{15 \\times 0.51504}{9} = 0.85840\\).',
+        'The calculator gives \\(\\sin^{-1}(0.85840) = 59.11°\\), which is acute.',
+        'Since \\(B\\) is obtuse: \\(B = 180° - 59.11° = 120.89°\\).',
+        '\\(C = 180 - 31 - 120.89 = 28.11°\\).',
+        'Positive third angle confirms a valid triangle ✓'
+      ],
+      answer: '\\(B \\approx 120.89°\\) and \\(C \\approx 28.11°\\).'
+    },
+    {
+      q: 'Explain how you decide between the sine rule and the cosine rule.',
+      marks: 3,
+      steps: [
+        'Ask one question: do you have a matching pair — a side and the angle directly opposite it?',
+        'If yes, the sine rule can start, because one complete fraction is known.',
+        'If no (SAS or SSS), every sine-rule fraction would contain two unknowns, so use the cosine rule.',
+        'If the triangle has a right angle, SOH CAH TOA is simpler than either.'
+      ],
+      answer: 'Look for a matching side–angle pair. With one, use the sine rule; without one (two sides and the included angle, or three sides), use the cosine rule. A right angle means using the basic ratios instead.'
+    },
+    {
+      q: 'In triangle \\(ABC\\), \\(A = 42°\\), \\(b = 19\\) m and \\(c = 26\\) m. Find side \\(a\\), then angle \\(C\\).',
+      marks: 5,
+      steps: [
+        'The 42° angle lies between \\(b\\) and \\(c\\) — SAS, so start with the cosine rule.',
+        '\\(a^{2} = 361 + 676 - 2(19)(26)\\cos 42° = 1037 - 988 \\times 0.74314 = 1037 - 734.22 = 302.78\\).',
+        '\\(a = 17.40\\) m.',
+        'Now use the sine rule: \\(\\sin C = \\dfrac{26 \\times \\sin 42°}{17.40} = \\dfrac{26 \\times 0.66913}{17.40} = 0.99978\\).',
+        '\\(C = 88.79°\\). Check: \\(c\\) is the longest side and \\(C\\) the largest angle ✓'
+      ],
+      answer: '\\(a \\approx 17.40\\) m and \\(C \\approx 88.79°\\).'
+    }
+  ];
+
+  /* ══════════ PART C — Area & bearings ══════════ */
+  var QS_C = [
+    {
+      q: 'Find the area of a triangle with sides 18 cm and 25 cm and an included angle of 54°.',
+      marks: 2,
+      steps: [
+        '\\(A = \\tfrac12(18)(25)\\sin 54°\\).',
+        '\\(= 225 \\times 0.80902\\).'
+      ],
+      answer: 'About 182.03 cm²'
+    },
+    {
+      q: 'Find the area of a triangle with sides 11 m and 16 m and an included angle of 138°.',
+      marks: 3,
+      steps: [
+        '\\(\\sin 138° = 0.66913\\) — positive, even for an obtuse angle.',
+        '\\(A = \\tfrac12(11)(16)\\sin 138°\\).',
+        '\\(= 88 \\times 0.66913\\).'
+      ],
+      answer: 'About 58.88 m²'
+    },
+    {
+      q: 'A triangle with sides 12 m and 20 m has an area of 96 m². Find the two possible included angles.',
+      marks: 4,
+      steps: [
+        '\\(96 = \\tfrac12(12)(20)\\sin C = 120\\sin C\\).',
+        '\\(\\sin C = \\dfrac{96}{120} = 0.8\\).',
+        '\\(C = \\sin^{-1}(0.8) = 53.13°\\).',
+        'The supplement gives the same sine: \\(180 - 53.13 = 126.87°\\).'
+      ],
+      answer: 'Either 53.13° or 126.87°.'
+    },
+    {
+      q: 'Find the area of a triangle with sides 9, 13 and 17 cm.',
+      marks: 5,
+      steps: [
+        'No angle is given, so use the cosine rule first.',
+        'Angle between the 9 and 13 sides (opposite 17): \\(\\cos C = \\dfrac{81 + 169 - 289}{2(9)(13)} = \\dfrac{-39}{234} = -0.16667\\).',
+        '\\(C = 99.59°\\).',
+        'Area \\(= \\tfrac12(9)(13)\\sin 99.59° = 58.5 \\times 0.98601\\).'
+      ],
+      answer: 'About 57.68 cm²'
+    },
+    {
+      q: 'Convert. (a) \\(S24°W\\) to a true bearing. (b) \\(067°\\) to a compass bearing. (c) The back bearing of \\(291°\\).',
+      marks: 3,
+      steps: [
+        '(a) South-west quadrant: \\(180° + 24° = 204°\\).',
+        '(b) \\(067°\\) is in the north-east quadrant, so it is \\(N67°E\\).',
+        '(c) \\(291° \\ge 180°\\), so subtract: \\(291° - 180° = 111°\\).'
+      ],
+      answer: '(a) \\(204°\\) &nbsp; (b) \\(N67°E\\) &nbsp; (c) \\(111°\\)'
+    },
+    {
+      q: 'A ship sails 52 km on a bearing of \\(038°\\), then 44 km on a bearing of \\(119°\\). Find its distance from the start.',
+      marks: 5,
+      steps: [
+        'Back bearing of leg 1: \\(038° + 180° = 218°\\).',
+        'Interior angle: \\(218° - 119° = 99°\\).',
+        '\\(d^{2} = 52^{2} + 44^{2} - 2(52)(44)\\cos 99°\\).',
+        '\\(\\cos 99° = -0.15643\\), so \\(d^{2} = 2704 + 1936 + 715.83 = 5355.83\\).',
+        '\\(d = \\sqrt{5355.83}\\).'
+      ],
+      answer: 'About 73.18 km'
+    },
+    {
+      q: 'For the ship above, find the bearing of the finishing point from the start.',
+      marks: 4,
+      steps: [
+        'Sine rule for the angle at the start: \\(\\sin\\theta = \\dfrac{44 \\times \\sin 99°}{73.18}\\).',
+        '\\(= \\dfrac{44 \\times 0.98769}{73.18} = 0.59385\\).',
+        '\\(\\theta = 36.44°\\).',
+        'Measured from the first leg\'s bearing: \\(038° + 36.44° = 74.44°\\).'
+      ],
+      answer: 'About \\(074°\\)'
+    },
+    {
+      q: 'A hiker walks 7 km on a bearing of \\(295°\\), then 11 km on a bearing of \\(010°\\). Find the distance back to the start.',
+      marks: 5,
+      steps: [
+        'Back bearing of leg 1: \\(295° - 180° = 115°\\).',
+        'Interior angle: \\(115° - 010° = 105°\\).',
+        '\\(d^{2} = 49 + 121 - 2(7)(11)\\cos 105°\\).',
+        '\\(\\cos 105° = -0.25882\\), so \\(d^{2} = 170 + 39.86 = 209.86\\).',
+        '\\(d = \\sqrt{209.86}\\).'
+      ],
+      answer: 'About 14.49 km'
+    },
+    {
+      q: 'Two lookouts A and B are 800 m apart, with B due east of A. A fire is at bearing \\(048°\\) from A and \\(328°\\) from B. Find the distance from A to the fire.',
+      marks: 6,
+      steps: [
+        'B is due east of A, so the bearing of B from A is \\(090°\\).',
+        'Angle at A between AB and the fire: \\(90° - 48° = 42°\\).',
+        'The bearing of A from B is \\(270°\\). Angle at B: \\(328° - 270° = 58°\\).',
+        'Third angle, at the fire: \\(180 - 42 - 58 = 80°\\).',
+        'Sine rule: \\(\\dfrac{AF}{\\sin 58°} = \\dfrac{800}{\\sin 80°}\\).',
+        '\\(AF = \\dfrac{800 \\times 0.84805}{0.98481}\\).'
+      ],
+      answer: 'About 688.94 m from A to the fire.'
+    },
+    {
+      q: 'A triangular block has sides 55 m and 72 m with an included angle of 83°. Find the third side, the area, and the total fencing required.',
+      marks: 6,
+      steps: [
+        'Third side by the cosine rule: \\(c^{2} = 3025 + 5184 - 2(55)(72)\\cos 83°\\).',
+        '\\(= 8209 - 7920 \\times 0.12187 = 8209 - 965.21 = 7243.79\\), so \\(c = 85.11\\) m.',
+        'Area \\(= \\tfrac12(55)(72)\\sin 83° = 1980 \\times 0.99255 = 1\\,965.25\\) m².',
+        'Perimeter \\(= 55 + 72 + 85.11\\).'
+      ],
+      answer: 'Third side about 85.11 m; area about 1,965.25 m²; fencing about 212.11 m.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

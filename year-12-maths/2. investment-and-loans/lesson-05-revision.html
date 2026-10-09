@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Investment &amp; Loans</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 2 &mdash; Investment &amp; Loans</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>Investment &amp; Loans</h1>
+      <p class="subtitle">Every dot-point of MST-12-S2-02 in one place: the formula sheet, a
+        decision guide for choosing the right one, the mistakes that cost marks, and a mixed
+        exam-style paper with full solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-02</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Formula sheet</li>
+        <li>Which formula do I use?</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#formulas">1 &nbsp;Formula sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#decide">2 &nbsp;Which formula?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">3 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">4 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. FORMULAS ─────────── -->
+      <div class="content-card" id="formulas">
+        <p class="section-label">Reference</p>
+        <h2>Formula sheet</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Simple interest</p>
+          \[I = Prn \qquad A = P + I = P(1 + rn)\]
+          <p class="formula-where">Linear growth: the same dollar amount is added each period.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Compound interest</p>
+          \[FV = PV(1+r)^{n} \qquad PV = \frac{FV}{(1+r)^{n}} \qquad r = \left(\frac{FV}{PV}\right)^{1/n} - 1\]
+          <p class="formula-where">Exponential growth. \(r\) is the rate <strong>per compounding
+            period</strong> and \(n\) is the <strong>number of periods</strong> — convert both.
+            Interest earned is \(FV - PV\).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Straight-line depreciation</p>
+          \[S = V_0 - Dn\]
+          <p class="formula-where">Linear decay. \(D\) is a fixed dollar amount per period.
+            Reaches zero at \(n = V_0/D\).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Declining balance depreciation</p>
+          \[S = V_0(1 - r)^{n}\]
+          <p class="formula-where">Exponential decay. \(r\) is a percentage of the
+            <strong>current</strong> value. Never reaches zero.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Shares</p>
+          \[\text{Dividend} = (\text{dividend per share}) \times (\text{shares held})\]
+          \[\text{Dividend yield} = \frac{\text{dividend per share}}{\text{market price}} \times 100\%\]
+          <p class="formula-where">Total return also includes the capital gain,
+            \((\text{sell} - \text{buy}) \times \text{shares}\).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Inflation</p>
+          \[\text{Future price} = \text{Current price} \times (1+i)^{n} \qquad
+            \text{Purchasing power} = \frac{\text{amount}}{(1+i)^{n}}\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Reducing-balance loans</p>
+          \[\text{Interest} = \text{Opening balance} \times r\]
+          \[\text{Closing balance} = \text{Opening} + \text{Interest} - \text{Repayment}\]
+          <p class="formula-where">\(r\) is the rate per repayment period. If the repayment does
+            not exceed the interest, the balance grows and the loan is never repaid.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Credit cards</p>
+          \[I = \text{balance} \times \frac{\text{annual rate}}{365} \times \text{days}\]
+        </div>
+      </div>
+
+      <!-- ─────────── 2. DECIDE ─────────── -->
+      <div class="content-card" id="decide">
+        <p class="section-label">Method</p>
+        <h2>Which formula do I use?</h2>
+
+        <p>Most lost marks in this topic come from picking the wrong model, not from arithmetic.
+          These phrases in a question tell you which one:</p>
+
+        <table class="coord-table">
+          <tr><th>The question says…</th><th>Use</th></tr>
+          <tr><td>"simple interest"</td><td>\(I = Prn\) — linear</td></tr>
+          <tr><td>"compound interest", "compounded annually/monthly"</td><td>\(FV = PV(1+r)^{n}\)</td></tr>
+          <tr><td>"depreciates by $X per year"</td><td>Straight-line, \(S = V_0 - Dn\)</td></tr>
+          <tr><td>"depreciates by X% <em>of its original value</em>"</td><td>Straight-line, with \(D = X\% \times V_0\)</td></tr>
+          <tr><td>"depreciates by X% per year" / "declining balance" / "diminishing value"</td><td>\(S = V_0(1-r)^{n}\)</td></tr>
+          <tr><td>"appreciates", "inflation", "prices rise by"</td><td>\((1+i)^{n}\) — same as compound interest</td></tr>
+          <tr><td>"in today's dollars", "purchasing power"</td><td>Divide by \((1+i)^{n}\)</td></tr>
+          <tr><td>"how much must be invested now"</td><td>Present value — divide</td></tr>
+          <tr><td>"monthly repayments", "balance owing"</td><td>Reducing-balance table</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The single most useful distinction</p>
+          <p style="margin-bottom:0;">Is the percentage applied to the <strong>original</strong>
+            amount every period (linear — simple interest, straight-line depreciation), or to the
+            <strong>current</strong> amount (exponential — compound interest, declining balance,
+            inflation)? Everything else follows from that.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Choose the model</h3>
+          <p class="exercise-intro">Type <code>simple</code>, <code>compound</code>,
+            <code>straight-line</code> or <code>declining</code> for each scenario.</p>
+
+          <div class="exercise-row">
+            <label>(a) "A van loses 18% of its value each year." &rarr;</label>
+            <input class="exercise-input" id="mdA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdA"></p>
+
+          <div class="exercise-row">
+            <label>(b) "A machine depreciates by $3 000 each year." &rarr;</label>
+            <input class="exercise-input" id="mdB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdB"></p>
+
+          <div class="exercise-row">
+            <label>(c) "Interest of 5% p.a. is paid on the original deposit only." &rarr;</label>
+            <input class="exercise-input" id="mdC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdC"></p>
+
+          <div class="exercise-row">
+            <label>(d) "An investment earns 6% p.a. compounded quarterly." &rarr;</label>
+            <input class="exercise-input" id="mdD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdD"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Growth and decay at a glance</h3>
+          <p class="exercise-intro">The same $20,000 and the same 8% rate, applied four
+            different ways over 15 years.</p>
+          <div class="plot-wrap" id="plotAll"></div>
+          <p class="diagram-caption">Upper pair: compound (solid) and simple (dashed) interest.
+            Lower pair: declining balance (solid) and straight-line (dashed) depreciation.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. CHECKLIST ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 4. MISTAKES ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Using \(r = 6\) instead of \(r = 0.06\)</td>
+            <td>Always convert the percentage to a decimal before substituting.</td>
+          </tr>
+          <tr>
+            <td>Converting the rate for monthly compounding but not the periods</td>
+            <td>Both change together: \(r \div 12\) <em>and</em> \(n \times 12\).</td>
+          </tr>
+          <tr>
+            <td>Mixing an annual rate with a time in months</td>
+            <td>Convert one to match the other before using \(I = Prn\).</td>
+          </tr>
+          <tr>
+            <td>Treating "18% per year depreciation" as straight-line</td>
+            <td>A percentage without "of the original value" means declining balance.</td>
+          </tr>
+          <tr>
+            <td>Giving \(FV\) when the question asked for the interest</td>
+            <td>Interest is \(FV - PV\). Re-read what was asked.</td>
+          </tr>
+          <tr>
+            <td>Multiplying by \((1+i)^n\) to find purchasing power</td>
+            <td>Purchasing power <em>divides</em> — prices went up, so your money is worth less.</td>
+          </tr>
+          <tr>
+            <td>Forgetting to add the interest in a loan table</td>
+            <td>Closing = opening <strong>+ interest</strong> − repayment.</td>
+          </tr>
+          <tr>
+            <td>Using the original balance for every row of a loan table</td>
+            <td>Each opening balance is the previous closing balance.</td>
+          </tr>
+          <tr>
+            <td>Calculating dividend yield on the dividend total rather than per share</td>
+            <td>Yield uses dividend per share ÷ price per share. (Total ÷ total cost also works.)</td>
+          </tr>
+          <tr>
+            <td>Rounding to the nearest dollar part-way through</td>
+            <td>Keep full precision in the calculator; round only the final answer.</td>
+          </tr>
+          <tr>
+            <td>Answering a "compare strategies" question with one sentence</td>
+            <td>Name the return, the risk, the access to funds, and tie them to the person's time frame.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes, calculator
+          allowed &mdash; then mark yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident
+            with every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-2', LESSON_IDX = 4;
+
+  /* ── Choose the model ─────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['declining', 'A percentage of the value each year, with no mention of "of the original", means declining balance: \\(S = V_0(1-r)^{n}\\).'],
+      B: ['straight-line', 'A fixed dollar amount each year is straight-line: \\(S = V_0 - Dn\\).'],
+      C: ['simple', 'Interest paid on the original deposit only is simple interest: \\(I = Prn\\).'],
+      D: ['compound', 'Compounded quarterly means \\(FV = PV(1+r)^{n}\\) with \\(r\\) divided by 4 and \\(n\\) multiplied by 4.']
+    };
+    document.querySelectorAll('[data-md]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.md;
+        var fb = document.getElementById('fbMd' + k);
+        var v  = (document.getElementById('md' + k).value || '').trim().toLowerCase().replace(/\s+/g, '-');
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type one of the four models.'; return; }
+        var ok = v === ANS[k][0];
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.innerHTML = (ok ? '✓ Correct. ' : '✗ It is ' + ANS[k][0] + '. ') + ANS[k][1];
+        IE.tex(fb);
+      });
+    });
+  })();
+
+  /* ── Four models on one chart ─────────────────────────────── */
+  IE.plot('plotAll', {
+    width: 520, height: 340,
+    xMin: 0, xMax: 15, yMin: 0, yMax: 70000, xStep: 3, yStep: 10000,
+    xLabel: 'years', yLabel: '$',
+    curves: [
+      { fn: function (n) { return 20000 * Math.pow(1.08, n); } },
+      { fn: function (n) { return 20000 * (1 + 0.08 * n); }, className: 'plot-curve-2' },
+      { fn: function (n) { return 20000 * Math.pow(0.92, n); } },
+      { fn: function (n) { return Math.max(0, 20000 - 1600 * n); }, className: 'plot-curve-2' }
+    ],
+    points: [{ x: 0, y: 20000, hollow: true }]
+  });
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Calculate simple interest using I = Prn for different rates and time periods',
+      'Solve problems involving simple interest in a variety of contexts',
+      'Calculate the future value, present value or interest rate using FV = PV(1 + r)^n',
+      'Solve compound interest problems in a variety of contexts',
+      'Examine the effect of varying the interest rate, term or compounding period',
+      'Compare the growth of simple and compound interest numerically and graphically',
+      'Recognise that simple interest graphs are linear and compound interest graphs are exponential',
+      'Use a spreadsheet to model investments using simple and compound interest',
+      'Apply straight-line depreciation using S = V0 - Dn',
+      'Apply the declining balance method using S = V0(1 - r)^n',
+      'Compare straight-line and declining balance depreciation numerically and graphically',
+      'Use a spreadsheet to model depreciation by both methods',
+      'Interpret and analyse tables and graphs about the value of shares',
+      'Graph and interpret the value of a share over time',
+      'Calculate the dividend paid and the dividend yield on shares',
+      'Solve problems involving the costs of purchasing shares',
+      'Compare savings accounts, term deposits, shares and property as investment strategies',
+      'Compare and analyse the costs of short term and long term loans',
+      'Model a reducing balance loan in tabular form for up to four time periods',
+      'Use a spreadsheet to model and solve reducing balance loan problems',
+      'Examine the effect of repayment frequency, extra repayments or a lump sum',
+      'Solve problems involving total amount paid, repayments, amount owing and time to repay',
+      'Explain how credit cards are an example of a reducing balance loan',
+      'Compare credit card interest rates with other loan types',
+      'Identify the fees and charges associated with credit card usage'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none';
+    ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0';
+      li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+
+    var tally = document.createElement('p');
+    tally.style.marginTop = '16px';
+    tally.style.fontFamily = 'var(--font-mono)';
+    tally.style.fontSize = '12px';
+    tally.style.color = 'var(--gray-med)';
+    mount.appendChild(tally);
+
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Find the simple interest on $12,400 invested at 4.75% per annum for 6 years.',
+      marks: 2,
+      steps: [
+        '\\(I = Prn = 12400 \\times 0.0475 \\times 6\\).',
+        '\\(12400 \\times 0.0475 = 589\\).',
+        '\\(589 \\times 6 = 3534\\).'
+      ],
+      answer: '$3,534'
+    },
+    {
+      q: 'Find the future value of $16,500 invested at 6.25% per annum compounded annually for 11 years.',
+      marks: 3,
+      steps: [
+        '\\(FV = 16500 \\times 1.0625^{11}\\).',
+        '\\(1.0625^{11} = 1.94430…\\)',
+        '\\(FV = 16500 \\times 1.94430\\).'
+      ],
+      answer: 'About $32,081.02'
+    },
+    {
+      q: 'A van bought for $58,000 depreciates at 19% per annum by the declining balance method. Find its value after 6 years.',
+      marks: 3,
+      steps: [
+        '\\(S = 58000(1 - 0.19)^{6} = 58000 \\times 0.81^{6}\\).',
+        '\\(0.81^{6} = 0.28243…\\)',
+        '\\(S = 58000 \\times 0.28243\\).'
+      ],
+      answer: 'About $16,381.16'
+    },
+    {
+      q: 'Shares are bought at $27.50 each and pay a dividend of $1.65 per share. Calculate the dividend yield.',
+      marks: 2,
+      steps: [
+        'Yield \\(= \\dfrac{\\text{dividend per share}}{\\text{price per share}} \\times 100\\%\\).',
+        '\\(= \\dfrac{1.65}{27.50} \\times 100\\%\\).'
+      ],
+      answer: '6%'
+    },
+    {
+      q: '$30,000 is invested at 7.2% per annum compounded monthly for 8 years. Find the future value and the interest earned.',
+      marks: 4,
+      steps: [
+        'Monthly: \\(r = \\dfrac{0.072}{12} = 0.006\\), \\(n = 8 \\times 12 = 96\\).',
+        '\\(1.006^{96} = 1.77584…\\)',
+        '\\(FV = 30000 \\times 1.77584 = \\$53\\,275.20\\).',
+        'Interest \\(= 53275.20 - 30000\\).'
+      ],
+      answer: 'Future value about $53,275.20; interest about $23,275.20.'
+    },
+    {
+      q: 'A loan of $28,000 at 10.8% per annum calculated monthly is repaid at $750 per month. Build a repayment table for the first three months.',
+      marks: 5,
+      steps: [
+        'Monthly rate: \\(\\dfrac{0.108}{12} = 0.009\\).',
+        'Month 1: interest \\(= 28000 \\times 0.009 = \\$252.00\\); closing \\(= 28000 + 252 - 750 = \\$27\\,502.00\\).',
+        'Month 2: interest \\(= 27502 \\times 0.009 = \\$247.52\\); closing \\(= 27502 + 247.52 - 750 = \\$26\\,999.52\\).',
+        'Month 3: interest \\(= 26999.52 \\times 0.009 = \\$243.00\\); closing \\(= 26999.52 + 243 - 750 = \\$26\\,492.52\\).'
+      ],
+      answer: 'Closing balances $27,502.00, $26,999.52, $26,492.52. Over three months $2,250 was repaid but the debt fell by only $1,507.48 — $742.52 went to interest.'
+    },
+    {
+      q: 'Compare the interest earned on $25,000 over 15 years at 6% per annum under simple and compound (annual) interest, and explain the difference with reference to the shape of each graph.',
+      marks: 5,
+      steps: [
+        'Simple: \\(I = 25000 \\times 0.06 \\times 15 = \\$22\\,500\\).',
+        'Compound: \\(FV = 25000 \\times 1.06^{15}\\).',
+        '\\(1.06^{15} = 2.39656…\\), so \\(FV = \\$59\\,914.00\\).',
+        'Compound interest: \\(59914 - 25000 = \\$34\\,914\\).',
+        'Difference: \\(34914 - 22500 = \\$12\\,414\\).',
+        'Simple adds a constant $1,500 per year (a straight line); compound multiplies by 1.06 each year (an exponential curve that steepens).'
+      ],
+      answer: 'Simple earns $22,500; compound earns $34,914 — $12,414 more. Simple interest graphs as a straight line because the same amount is added each year, while compound interest graphs as an exponential curve because interest is earned on previously accumulated interest.'
+    },
+    {
+      q: 'How much must be invested now at 6.8% per annum compounded annually to have $150,000 in 18 years?',
+      marks: 3,
+      steps: [
+        '\\(PV = \\dfrac{FV}{(1+r)^{n}}\\).',
+        '\\(1.068^{18} = 3.27849…\\)',
+        '\\(PV = \\dfrac{150000}{3.27849}\\).'
+      ],
+      answer: 'About $45,753.66'
+    },
+    {
+      q: 'A $32,000 asset is depreciated at 15% per annum. Compare its value after 6 years by straight-line (15% of the original each year) and declining balance, and explain which is more realistic for a car.',
+      marks: 5,
+      steps: [
+        'Straight-line: \\(D = 0.15 \\times 32000 = \\$4\\,800\\) per year; \\(S = 32000 - 4800 \\times 6 = \\$3\\,200\\).',
+        'Declining balance: \\(S = 32000 \\times 0.85^{6}\\).',
+        '\\(0.85^{6} = 0.37715…\\), so \\(S = \\$12\\,068.80\\).',
+        'Declining balance loses more in the early years and less later.',
+        'A car loses a large proportion of its value in the first year or two, then depreciates more slowly.'
+      ],
+      answer: 'Straight-line gives $3,200; declining balance gives $12,068.80. Declining balance is more realistic for a car, because it models the steep loss in the first years followed by slower decline, and it never reaches zero — matching the fact that an old car still has some resale value.'
+    },
+    {
+      q: 'An investor buys 2,800 shares at $21.50. A year later the price is $19.80 and a dividend of $1.29 per share has been paid. Calculate the total return as a percentage and comment.',
+      marks: 5,
+      steps: [
+        'Cost: \\(2800 \\times 21.50 = \\$60\\,200\\).',
+        'Dividends: \\(2800 \\times 1.29 = \\$3\\,612\\).',
+        'Capital loss: \\(2800 \\times (19.80 - 21.50) = 2800 \\times (-1.70) = -\\$4\\,760\\).',
+        'Net return: \\(3612 - 4760 = -\\$1\\,148\\).',
+        'Percentage: \\(\\dfrac{-1148}{60200} \\times 100\\% = -1.91\\%\\).'
+      ],
+      answer: 'A return of about \\(-1.9\\%\\) — an overall loss of $1,148. The 6% dividend yield was outweighed by the 7.9% fall in the share price, showing that dividends alone do not determine whether a share investment succeeds.'
+    },
+    {
+      q: '$60,000 is kept in a zero-interest account for 14 years while inflation averages 3.3% per annum. Find its purchasing power in today\'s dollars and state the real loss.',
+      marks: 4,
+      steps: [
+        'Prices multiply by \\(1.033^{14}\\).',
+        '\\(1.033^{14} = 1.57499…\\)',
+        'Purchasing power \\(= \\dfrac{60000}{1.57499} = \\$38\\,095.48\\).',
+        'Real loss \\(= 60000 - 38095.48\\).'
+      ],
+      answer: 'About $38,095 in today\'s dollars — a real loss of roughly $21,905 in purchasing power, despite the balance never falling.'
+    },
+    {
+      q: 'A credit card charges 21.9% per annum. A balance of $5,200 is carried for 30 days, and the minimum repayment is 2% of the balance. Find the interest for the period, the monthly interest, the minimum repayment and the amount by which the debt actually falls.',
+      marks: 5,
+      steps: [
+        'Daily rate: \\(\\dfrac{0.219}{365} = 0.0006\\).',
+        'Interest for 30 days: \\(5200 \\times 0.0006 \\times 30 = \\$93.60\\).',
+        'Monthly interest: \\(5200 \\times \\dfrac{0.219}{12} = 5200 \\times 0.01825 = \\$94.90\\).',
+        'Minimum repayment: \\(0.02 \\times 5200 = \\$104\\).',
+        'Debt reduction: \\(104 - 94.90 = \\$9.10\\).'
+      ],
+      answer: 'Interest $93.60 over 30 days ($94.90 for a full month), minimum repayment $104, of which only $9.10 reduces the debt — under 9% of the payment.'
+    },
+    {
+      q: 'Compare a $40,000 loan at 8% per annum over 5 years (repayments $811.06/month) with the same loan over 10 years (repayments $485.31/month). Find the total cost of each and explain the trade-off.',
+      marks: 5,
+      steps: [
+        '5-year total: \\(811.06 \\times 60 = \\$48\\,663.60\\); interest \\(= \\$8\\,663.60\\).',
+        '10-year total: \\(485.31 \\times 120 = \\$58\\,237.20\\); interest \\(= \\$18\\,237.20\\).',
+        'Extra interest: \\(18237.20 - 8663.60 = \\$9\\,573.60\\).',
+        'Monthly saving on the longer term: \\(811.06 - 485.31 = \\$325.75\\).',
+        'The longer loan keeps the balance high for twice as long, so far more interest accrues.'
+      ],
+      answer: '5 years costs $48,663.60 (interest $8,663.60); 10 years costs $58,237.20 (interest $18,237.20). The longer term more than doubles the interest — $9,573.60 extra — in exchange for repayments $325.75 lower each month. The choice depends on whether the borrower can afford the higher repayment.'
+    },
+    {
+      q: 'An investment returns 7.4% per annum while inflation is 3.1% per annum. Calculate the real return on $25,000 after one year as a percentage to one decimal place, and explain why it is not simply \\(7.4 - 3.1 = 4.3\\%\\).',
+      marks: 5,
+      steps: [
+        'Nominal value: \\(25000 \\times 1.074 = \\$26\\,850\\).',
+        'Deflate by inflation: \\(\\dfrac{26850}{1.031} = \\$26\\,042.68\\).',
+        'Real gain: \\(26042.68 - 25000 = \\$1\\,042.68\\).',
+        'Real return: \\(\\dfrac{1042.68}{25000} \\times 100\\% = 4.171\\%\\).',
+        'The subtraction ignores that inflation also erodes the interest earned, not just the principal.'
+      ],
+      answer: 'About 4.2%. Simple subtraction gives 4.3%, but the correct calculation divides the grown amount by \\((1+i)\\), which also deflates the interest earned — so the true real return is slightly lower.'
+    },
+    {
+      q: 'Maya, aged 30, has $80,000 to invest for retirement at 65. Compare a savings account at 3% p.a., shares averaging 8% p.a., and property averaging 6% p.a. Calculate the value of each after 35 years and recommend a strategy, addressing risk.',
+      marks: 6,
+      steps: [
+        'Savings: \\(80000 \\times 1.03^{35} = 80000 \\times 2.81386 = \\$225\\,108.80\\).',
+        'Shares: \\(80000 \\times 1.08^{35} = 80000 \\times 14.78534 = \\$1\\,182\\,827.20\\).',
+        'Property: \\(80000 \\times 1.06^{35} = 80000 \\times 7.68609 = \\$614\\,887.20\\).',
+        'Shares give by far the most, but returns vary year to year and can fall sharply.',
+        'With 35 years available there is ample time to recover from downturns, which changes the risk calculus entirely.',
+        'A savings account at 3% barely stays ahead of typical inflation, so it risks losing real value.'
+      ],
+      answer: 'Savings $225,109; property $614,887; shares $1,182,827. Shares are the strongest recommendation here: the 35-year horizon is long enough to absorb short-term volatility, and the 8% average return compounds to more than five times the savings account. The savings account is the riskiest in real terms, since 3% may not outpace inflation. Property is a reasonable middle option but needs far more capital and carries ongoing costs.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  /* ── Manual completion ────────────────────────────────────── */
+  IE.completeBanner({
+    mount: 'completeBtn',
+    topicId: TOPIC_ID,
+    lessonIdx: LESSON_IDX,
+    label: 'Mark as complete',
+    doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Calculating z-scores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 10 &mdash; The Normal Distribution</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Calculating <em>z</em>-scores</h1>
+      <p class="subtitle">How do you compare 78 in Maths with 64 in Music, when the two tests have
+        nothing in common? You stop counting marks and start counting standard deviations. That
+        count is the \(z\)-score, and it is the single most useful idea in this topic.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-10</span>
+        <span class="pill">\(z = \frac{x - \mu}{\sigma}\)</span>
+        <span class="pill">Comparing datasets</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What a \(z\)-score measures</li>
+        <li>The formula</li>
+        <li>Sign and size</li>
+        <li>Standardised scores</li>
+        <li>Comparing across datasets</li>
+        <li>Working backwards to \(x\)</li>
+        <li>Setting cut-offs</li>
+        <li>Class activity: same distance, different meaning</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#idea">1 &nbsp;The idea</a></li>
+        <li class="toc-item"><a class="toc-link" href="#formula">2 &nbsp;The formula</a></li>
+        <li class="toc-item"><a class="toc-link" href="#standard">3 &nbsp;The standard normal</a></li>
+        <li class="toc-item"><a class="toc-link" href="#compare">4 &nbsp;Comparing datasets</a></li>
+        <li class="toc-item"><a class="toc-link" href="#backwards">5 &nbsp;Working backwards</a></li>
+        <li class="toc-item"><a class="toc-link" href="#cutoffs">6 &nbsp;Setting cut-offs</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended Practice</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1 ─────────── -->
+      <div class="content-card" id="idea">
+        <p class="section-label">Theory</p>
+        <h2>The idea behind the <em>z</em>-score</h2>
+
+        <p>Suppose you scored 78 on a Maths test where the class averaged 70, and 64 on a Music test
+          where the class averaged 55. On Maths you were 8 marks above average; on Music, 9 marks
+          above. Does that make Music your stronger result?</p>
+
+        <p>Not necessarily. Everything depends on how spread out each set of marks was. If Maths
+          marks were tightly bunched (\(\sigma = 4\)) then being 8 above average is a long way ahead
+          of the pack. If Music marks were widely scattered (\(\sigma = 18\)) then 9 above average
+          is barely distinguishable from the middle.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The fix</p>
+          <p style="margin-bottom:0;">Stop measuring in marks, centimetres or seconds. Measure
+            <strong>in standard deviations</strong>. The number of standard deviations a value lies
+            above or below the mean is called its <strong>\(z\)-score</strong>, or
+            <strong>standardised score</strong>.</p>
+        </div>
+
+        <p>In the example above, Maths gives \(z = 8 \div 4 = 2\) and Music gives
+          \(z = 9 \div 18 = 0.5\). The Maths result is four times as far from average, measured in
+          the only unit that lets the two be compared. Maths was clearly the better performance.</p>
+
+        <div class="interactive-block">
+          <h3>See the standardisation</h3>
+          <p class="exercise-intro">Move the value and watch both the raw distance from the mean
+            and the \(z\)-score. The shaded band is one standard deviation either side of the
+            mean.</p>
+          <div id="zSliders"></div>
+          <div id="zPlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="zNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Without a calculator: which is more impressive, 70 in Science (class mean 60,
+              \(\sigma = 20\)) or 66 in English (class mean 60, \(\sigma = 3\))?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>English. 6 marks above the mean is 2 standard deviations there, while 10 marks
+                  above in Science is only half a standard deviation.</p>
+              </div></details></li>
+            <li>Explain why "10 marks above the mean" can be either impressive or ordinary.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>It depends on the spread. If \(\sigma = 4\), 10 marks is 2.5 standard deviations
+                  &mdash; exceptional. If \(\sigma = 20\), it is only 0.5 &mdash; quite
+                  ordinary.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2 ─────────── -->
+      <div class="content-card" id="formula">
+        <p class="section-label">Method</p>
+        <h2>The formula</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Standardised score</p>
+          \[z = \frac{x - \mu}{\sigma}\]
+          <p class="formula-where">where \(x\) is the specific value, \(\mu\) is the mean of the
+            dataset and \(\sigma\) is its standard deviation.</p>
+        </div>
+
+        <p>Read the formula in two steps. The numerator \(x - \mu\) is how far the value is from the
+          mean, in the original units. Dividing by \(\sigma\) converts that distance into a number
+          of standard deviations.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Reading the answer</p>
+          <table class="coord-table" style="margin:10px 0 0;">
+            <tr><th>\(z\)</th><th>Meaning</th></tr>
+            <tr><td>\(z = 0\)</td><td>The value is exactly the mean</td></tr>
+            <tr><td>\(z &gt; 0\)</td><td>Above the mean</td></tr>
+            <tr><td>\(z &lt; 0\)</td><td>Below the mean</td></tr>
+            <tr><td>\(|z| &lt; 1\)</td><td>Ordinary &mdash; within one standard deviation</td></tr>
+            <tr><td>\(|z| \approx 2\)</td><td>Unusual &mdash; only about 5% of values are this far out</td></tr>
+            <tr><td>\(|z| \ge 3\)</td><td>Extreme &mdash; about 3 values in 1000</td></tr>
+          </table>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>A test has \(\mu = 62\) and \(\sigma = 8\). Find the \(z\)-score for a mark of 74.</p>
+          <p>\[z = \frac{74 - 62}{8} = \frac{12}{8} = 1.5\]</p>
+          <p>The mark is 1.5 standard deviations above the mean &mdash; a good result, better than
+            average but not exceptional.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>The same test. Find the \(z\)-score for a mark of 50.</p>
+          <p>\[z = \frac{50 - 62}{8} = \frac{-12}{8} = -1.5\]</p>
+          <p>The negative sign means <strong>below</strong> the mean &mdash; by 1.5 standard deviations.
+            Never drop the sign: it carries half the information.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Babies' birth weights are normal with \(\mu = 3.4\) kg and \(\sigma = 0.5\) kg. Find
+            the \(z\)-score of a 2.1 kg baby and interpret it.</p>
+          <p>\[z = \frac{2.1 - 3.4}{0.5} = \frac{-1.3}{0.5} = -2.6\]</p>
+          <p>The baby is 2.6 standard deviations below the mean birth weight &mdash; well into the lower
+            tail, and low enough that a paediatrician would monitor the baby closely.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Calculate the <em>z</em>-score</h3>
+          <p class="exercise-intro">Give answers to two decimal places.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(\mu = 50\), \(\sigma = 10\), \(x = 68\) &rarr; \(z =\)</label>
+            <input class="exercise-input" id="zcA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-zc="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbZcA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(\mu = 172\), \(\sigma = 6\), \(x = 163\) &rarr; \(z =\)</label>
+            <input class="exercise-input" id="zcB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-zc="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbZcB"></p>
+
+          <div class="exercise-row">
+            <label>(c) \(\mu = 4.5\), \(\sigma = 0.8\), \(x = 4.5\) &rarr; \(z =\)</label>
+            <input class="exercise-input" id="zcC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-zc="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbZcC"></p>
+
+          <div class="exercise-row">
+            <label>(d) \(\mu = 1250\), \(\sigma = 140\), \(x = 1600\) &rarr; \(z =\)</label>
+            <input class="exercise-input" id="zcD" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-zc="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbZcD"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3><em>z</em>-score calculator</h3>
+          <p class="exercise-intro">Check your own working with any values.</p>
+          <div class="exercise-row">
+            <label>Mean \(\mu\)</label>
+            <input class="exercise-input" id="calMu" type="text" inputmode="decimal" value="70">
+            <label>SD \(\sigma\)</label>
+            <input class="exercise-input" id="calSd" type="text" inputmode="decimal" value="12">
+            <label>Value \(x\)</label>
+            <input class="exercise-input" id="calX" type="text" inputmode="decimal" value="88">
+            <button class="exercise-check-btn" id="calBtn">Calculate</button>
+          </div>
+          <p class="exercise-feedback" id="calOut" style="margin-top:12px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3 ─────────── -->
+      <div class="content-card" id="standard">
+        <p class="section-label">Theory</p>
+        <h2>The standard normal distribution</h2>
+
+        <p>Something neat happens when you convert an entire dataset to \(z\)-scores.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Key property</p>
+          <p style="margin-bottom:0;">The set of \(z\)-scores for data arising from a normally
+            distributed random variable always has
+            <strong>mean 0</strong> and <strong>standard deviation 1</strong>.</p>
+        </div>
+
+        <p>The reason is straightforward. Subtracting \(\mu\) from every value shifts the whole
+          distribution so its centre sits at 0. Dividing every value by \(\sigma\) then rescales the
+          spread so that one standard deviation becomes exactly one unit.</p>
+
+        <p>Whatever you started with &mdash; kilograms, marks, milliseconds, dollars &mdash; you end up with
+          the same distribution: the <strong>standard normal distribution</strong>, centred on 0
+          with a standard deviation of 1. That is what makes \(z\)-scores from different datasets
+          directly comparable, and it is why one table of areas works for every normal
+          distribution.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Five students score 54, 62, 70, 78 and 86 on a test with \(\mu = 70\) and
+            \(\sigma = 8\). Convert to \(z\)-scores and verify the property.</p>
+          <table class="coord-table">
+            <tr><th>\(x\)</th><td>54</td><td>62</td><td>70</td><td>78</td><td>86</td></tr>
+            <tr><th>\(x - \mu\)</th><td>&minus;16</td><td>&minus;8</td><td>0</td><td>8</td><td>16</td></tr>
+            <tr><th>\(z\)</th><td>&minus;2</td><td>&minus;1</td><td>0</td><td>1</td><td>2</td></tr>
+          </table>
+          <p>The \(z\)-scores sum to 0, so their mean is 0 &mdash; exactly as expected. Their spread is
+            now measured in standard deviations rather than marks.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Standardise a dataset</h3>
+          <p class="exercise-intro">Enter values and the tool converts them all to \(z\)-scores
+            using the dataset's own mean and standard deviation.</p>
+          <div class="exercise-row">
+            <label>Data &rarr;</label>
+            <input class="exercise-input" id="stdIn" type="text" style="min-width:230px;"
+                   value="12, 15, 18, 21, 24">
+            <button class="exercise-check-btn" id="stdBtn">Standardise</button>
+          </div>
+          <div id="stdOut" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Convert 30, 35, 40, 45 and 50 to \(z\)-scores using \(\mu = 40\), \(\sigma = 5\).
+              What is the mean of the \(z\)-scores?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(-2, -1, 0, 1, 2\). They sum to 0, so their mean is 0.</p>
+              </div></details></li>
+            <li>IQ scores are normal with \(\mu = 100\) and \(\sigma = 15\). What are the mean and
+              standard deviation of the IQ \(z\)-scores?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Mean 0, standard deviation 1 &mdash; true for any normal dataset once it is
+                  standardised.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4 ─────────── -->
+      <div class="content-card" id="compare">
+        <p class="section-label">Application</p>
+        <h2>Comparing scores from different datasets</h2>
+
+        <p>This is the single most examined use of the \(z\)-score, and it always follows the same
+          four steps.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The method</p>
+          <ol style="margin-bottom:0;">
+            <li>Calculate the \(z\)-score for each result separately, using that dataset's own
+              \(\mu\) and \(\sigma\).</li>
+            <li>Compare the \(z\)-scores, keeping their signs.</li>
+            <li>The <strong>higher</strong> \(z\)-score is the better <em>relative</em>
+              performance.</li>
+            <li><strong>Write a conclusion in the context of the question</strong> &mdash; this mark is
+              awarded separately, and it is the one most often lost.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>Mia scored 78 in Maths (\(\mu = 70\), \(\sigma = 4\)) and 64 in Music
+            (\(\mu = 55\), \(\sigma = 18\)). In which subject did she perform better relative to
+            her class?</p>
+          <p><strong>Maths:</strong> \(z = \dfrac{78 - 70}{4} = 2.0\)</p>
+          <p><strong>Music:</strong> \(z = \dfrac{64 - 55}{18} = 0.5\)</p>
+          <p><strong>Conclusion.</strong> Mia's Maths \(z\)-score of 2.0 is much higher than her
+            Music \(z\)-score of 0.5. Although her raw Music mark was 9 above average and her Maths
+            mark only 8 above, Maths marks were far more tightly clustered, so 78 placed her much
+            further ahead of her classmates. Mia performed better in Maths.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; when lower is better</p>
+          <p>In a 100 m sprint the squad averages 12.40 s with \(\sigma = 0.50\) s. In a 200 m
+            sprint the squad averages 25.60 s with \(\sigma = 1.20\) s. Jo runs 11.80 s and
+            24.40 s. Which is the better run?</p>
+          <p><strong>100 m:</strong> \(z = \dfrac{11.80 - 12.40}{0.50} = -1.2\)</p>
+          <p><strong>200 m:</strong> \(z = \dfrac{24.40 - 25.60}{1.20} = -1.0\)</p>
+          <p><strong>Conclusion.</strong> For times, a <em>lower</em> value is better, so the
+            <em>more negative</em> \(z\)-score is the stronger run. Jo's 100 m \(z\)-score of
+            &minus;1.2 beats the 200 m score of &minus;1.0, so the 100 m was the better performance
+            relative to the squad.</p>
+          <p style="font-size:12px; color:var(--gray-med);">Always check the direction of the
+            variable before concluding. Times, golf scores, error rates and waiting times are all
+            "lower is better".</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Comparison tool</h3>
+          <p class="exercise-intro">Enter two results and see which is stronger relative to its own
+            dataset.</p>
+          <div class="exercise-row">
+            <label>A: \(x\)</label>
+            <input class="exercise-input" id="cA_x" type="text" inputmode="decimal" value="78">
+            <label>\(\mu\)</label>
+            <input class="exercise-input" id="cA_m" type="text" inputmode="decimal" value="70">
+            <label>\(\sigma\)</label>
+            <input class="exercise-input" id="cA_s" type="text" inputmode="decimal" value="4">
+          </div>
+          <div class="exercise-row">
+            <label>B: \(x\)</label>
+            <input class="exercise-input" id="cB_x" type="text" inputmode="decimal" value="64">
+            <label>\(\mu\)</label>
+            <input class="exercise-input" id="cB_m" type="text" inputmode="decimal" value="55">
+            <label>\(\sigma\)</label>
+            <input class="exercise-input" id="cB_s" type="text" inputmode="decimal" value="18">
+          </div>
+          <div class="exercise-row">
+            <label>Higher is better?</label>
+            <select class="exercise-input" id="cDir" style="width:auto; min-width:180px;">
+              <option value="hi">Higher is better</option>
+              <option value="lo">Lower is better</option>
+            </select>
+            <button class="exercise-check-btn" id="cBtn">Compare</button>
+          </div>
+          <p class="exercise-feedback" id="cOut" style="margin-top:12px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; exam style</p>
+          <p>Three students from different schools apply for one scholarship. Each sat their own
+            school's exam.</p>
+          <table class="coord-table">
+            <tr><th>Applicant</th><th>Mark</th><th>School mean</th><th>School \(\sigma\)</th></tr>
+            <tr><td>Ari</td><td>82</td><td>70</td><td>8</td></tr>
+            <tr><td>Bree</td><td>91</td><td>84</td><td>4</td></tr>
+            <tr><td>Cal</td><td>68</td><td>52</td><td>12</td></tr>
+          </table>
+          <p><strong>(a) Who should get the scholarship? Justify.</strong> [3 marks]</p>
+          <p>\(z_{\text{Ari}} = \frac{82 - 70}{8} = 1.5\), \(z_{\text{Bree}} = \frac{91 - 84}{4} =
+            1.75\), \(z_{\text{Cal}} = \frac{68 - 52}{12} = 1.33\).</p>
+          <p>Bree has the highest \(z\)-score, so she performed best relative to her school
+            &mdash; even though Cal beat his school's mean by the most marks.</p>
+          <p><strong>(b) What mark would Cal have needed to match Bree?</strong> [1 mark]</p>
+          <p>\(x = 52 + 1.75 \times 12 = 73\).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>An athlete long jumps 5.6 m (squad mean 5.0 m, \(\sigma = 0.4\) m) and high jumps
+              1.62 m (squad mean 1.50 m, \(\sigma = 0.10\) m). Which is the better result?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Long jump \(z = 1.5\); high jump \(z = 1.2\). The long jump was the better
+                  performance relative to the squad.</p>
+              </div></details></li>
+            <li>In golf, lower is better. Round A: 72 (field mean 76, \(\sigma = 3\)). Round B: 68
+              (field mean 71, \(\sigma = 2\)). Which round was better?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(z_A = -1.33\), \(z_B = -1.5\). Lower is better, so the more negative score
+                  wins: round B.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5 ─────────── -->
+      <div class="content-card" id="backwards">
+        <p class="section-label">Method</p>
+        <h2>Working backwards to the original value</h2>
+
+        <p>Exam questions often run the other way: you are told the \(z\)-score and asked for the
+          raw value, or told the value and \(z\)-score and asked for \(\mu\) or \(\sigma\).
+          Rearrange the formula.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Rearrangements</p>
+          \[x = \mu + z\sigma \qquad \mu = x - z\sigma \qquad \sigma = \frac{x - \mu}{z}\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>A test has \(\mu = 64\) and \(\sigma = 11\). What mark has a \(z\)-score of
+            \(-1.4\)?</p>
+          <p>\[x = \mu + z\sigma = 64 + (-1.4)(11) = 64 - 15.4 = 48.6\]</p>
+          <p>A mark of 48.6 sits 1.4 standard deviations below the mean.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>A value of 92 has a \(z\)-score of 2.5 in a dataset with mean 67. Find the standard
+            deviation.</p>
+          <p>\[\sigma = \frac{x - \mu}{z} = \frac{92 - 67}{2.5} = \frac{25}{2.5} = 10\]</p>
+          <p>Check: \(z = (92 - 67) \div 10 = 2.5\) ✓</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Work backwards</h3>
+
+          <div class="exercise-row">
+            <label>(a) \(\mu = 80\), \(\sigma = 6\), \(z = 1.5\) &rarr; \(x =\)</label>
+            <input class="exercise-input" id="bwA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-bw="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbBwA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(\mu = 45\), \(\sigma = 8\), \(z = -2.25\) &rarr; \(x =\)</label>
+            <input class="exercise-input" id="bwB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-bw="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbBwB"></p>
+
+          <div class="exercise-row">
+            <label>(c) \(x = 88\), \(\mu = 70\), \(z = 2\) &rarr; \(\sigma =\)</label>
+            <input class="exercise-input" id="bwC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-bw="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbBwC"></p>
+
+          <div class="exercise-row">
+            <label>(d) \(x = 32\), \(\sigma = 5\), \(z = -1.6\) &rarr; \(\mu =\)</label>
+            <input class="exercise-input" id="bwD" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-bw="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbBwD"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A dataset has \(\mu = 150\) and \(\sigma = 20\). Find the value with
+              \(z = -0.75\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(x = 150 + (-0.75)(20) = 135\).</p>
+              </div></details></li>
+            <li>A value of 46 has \(z = -1\) in a dataset with \(\sigma = 8\). Find the mean.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\mu = x - z\sigma = 46 - (-1)(8) = 54\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Summary</p>
+          <p style="margin-bottom:0;">\(z = \dfrac{x - \mu}{\sigma}\) counts standard deviations
+            from the mean. The sign says which side, the size says how unusual. Standardising a
+            normal dataset always gives mean 0 and standard deviation 1, which is what makes
+            different datasets comparable. Lesson 3 turns \(z\)-scores into probabilities.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 6 · CUT-OFFS ─────────── -->
+      <div class="content-card" id="cutoffs">
+        <p class="section-label">Application</p>
+        <h2>Setting cut-offs with <em>z</em>-scores</h2>
+
+        <p>Organisations often write rules in \(z\)-scores &mdash; "reject anything more than 2
+          standard deviations from the target", "invite the top students, \(z \ge 1.5\)". To apply
+          a rule you convert it back to raw values with \(x = \mu + z\sigma\).</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Rules of thumb for "unusual"</p>
+          <p style="margin-bottom:0;">\(|z| &gt; 2\): unusual &mdash; worth a second look.
+            \(|z| &gt; 3\): extreme &mdash; check for a recording error or a fault.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10</p>
+          <p><strong>(a)</strong> A bakery's loaves have \(\mu = 800\) g and \(\sigma = 12\) g.
+            Loaves with \(|z| &gt; 2\) are withdrawn. Which masses are kept?</p>
+          <p>\(800 - 2(12) = 776\) and \(800 + 2(12) = 824\). Loaves from 776 g to 824 g are
+            kept.</p>
+          <p><strong>(b)</strong> A maths enrichment program invites students with \(z \ge 1.5\)
+            on a test with \(\mu = 62\), \(\sigma = 9\). What mark is needed?</p>
+          <p>\(62 + 1.5 \times 9 = 75.5\), so 76 or more (if marks are whole numbers).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Cereal boxes have \(\mu = 500\) g and \(\sigma = 6\) g. Boxes with
+              \(z &lt; -2.5\) are underweight and rejected. Below what mass is a box rejected?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(500 - 2.5 \times 6 = 485\) g.</p>
+              </div></details></li>
+            <li>In a dataset with \(\mu = 80\) and \(\sigma = 6\), a value of 98 is recorded. Is it
+              unusual? What should be done?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(z = \frac{98 - 80}{6} = 3\): extreme. Check whether it was recorded
+                  correctly before using it.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Same distance, different meaning</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use
+          <a href="#idea">See the standardisation</a>. The mean is fixed at 70. Set the value to
+          82, so it is always 12 marks above the mean.</p>
+        <ol>
+          <li>Record the \(z\)-score for standard deviations of 4, 6, 8, 12 and 24.</li>
+          <li>For which standard deviations would a mark of 82 count as "unusual"
+            (\(z \ge 2\))?</li>
+          <li>Now fix \(\sigma = 8\). Find the marks with \(z = -1, 1, 2\) and \(2.5\), then check
+            them in the widget.</li>
+          <li>Two teachers both say "my top student was 12 marks above average". Explain why that
+            sentence alone does not tell you whose student did better.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>\(\sigma\)</th><td>4</td><td>6</td><td>8</td><td>12</td><td>24</td></tr>
+            <tr><th>\(z\) for 82</th><td>3</td><td>2</td><td>1.5</td><td>1</td><td>0.5</td></tr>
+          </table>
+          <p><strong>2.</strong> \(\sigma \le 6\). As \(\sigma\) grows, the same 12 marks become
+            less remarkable.</p>
+          <p><strong>3.</strong> \(70 + z \times 8\): 62, 78, 86 and 90.</p>
+          <p><strong>4.</strong> The spread of each class matters. 12 marks is far more impressive
+            in a tightly bunched class than in a widely spread one; only the \(z\)-score allows a
+            fair comparison.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Show the substitution into \(z = \dfrac{x - \mu}{\sigma}\) every
+          time, keep the sign, and finish comparison questions with a sentence in context.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── NEXT ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 uses the empirical rule to turn \(z\)-scores into percentages and
+          probabilities.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-10', LESSON_IDX = 1;
+
+  function normal(mu, sd) {
+    return function (x) {
+      var z = (x - mu) / sd;
+      return Math.exp(-0.5 * z * z) / (sd * Math.sqrt(2 * Math.PI));
+    };
+  }
+  function num(id) {
+    return parseFloat((document.getElementById(id).value || '').replace(/[^\d.\-]/g, ''));
+  }
+
+  /* ── See the standardisation ──────────────────────────────── */
+  (function () {
+    var x = 82, sd = 12, mu = 70;
+    var redraw = null;
+    function update() {
+      var f = normal(mu, sd);
+      var opts = {
+        xMin: 20, xMax: 120, yMin: 0, yMax: 0.07, width: 460, height: 300,
+        xStep: 20, yStep: 0.02, xLabel: 'mark',
+        curves: [{ fn: f }],
+        shade: [{ from: mu - sd, to: mu + sd, fn: f }],
+        points: [{ x: x, y: f(x), label: 'x = ' + x }],
+        markers: [{ x: x, y: f(x) }]
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('zPlot', opts);
+      var z = (x - mu) / sd;
+      var n = document.getElementById('zNote');
+      n.className = 'exercise-feedback';
+      n.textContent = 'x = ' + x + ', μ = ' + mu + ', σ = ' + sd + '. ' +
+        'Distance from the mean = ' + (x - mu).toFixed(0) + ' marks. ' +
+        'z = ' + (x - mu).toFixed(0) + ' ÷ ' + sd + ' = ' + z.toFixed(2) + '. ' +
+        (Math.abs(z) < 1 ? 'That is inside the shaded band — an ordinary value.'
+         : Math.abs(z) < 2 ? 'That is outside the shaded band — above average but not remarkable.'
+         : 'That is more than two standard deviations out — genuinely unusual.');
+    }
+    var host = 'zSliders';
+    IE.slider({ mount: host, label: 'Value (x)', min: 30, max: 110, step: 1, value: x,
+                onInput: function (v) { x = v; update(); } });
+    IE.slider({ mount: host, label: 'Standard deviation (σ)', min: 4, max: 24, step: 1, value: sd,
+                onInput: function (v) { sd = v; update(); } });
+    update();
+  })();
+
+  /* ── Calculate the z-score ────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [1.80,  'z = (68 − 50) ÷ 10 = 18 ÷ 10 = 1.80.'],
+      B: [-1.50, 'z = (163 − 172) ÷ 6 = −9 ÷ 6 = −1.50. The negative sign means below the mean.'],
+      C: [0,     'z = (4.5 − 4.5) ÷ 0.8 = 0. A value equal to the mean always has z = 0.'],
+      D: [2.50,  'z = (1600 − 1250) ÷ 140 = 350 ÷ 140 = 2.50.']
+    };
+    document.querySelectorAll('[data-zc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.zc, fb = document.getElementById('fbZc' + k);
+        var g = num('zc' + k);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.005;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(2) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── z-score calculator ───────────────────────────────────── */
+  (function () {
+    document.getElementById('calBtn').addEventListener('click', function () {
+      var mu = num('calMu'), sd = num('calSd'), x = num('calX');
+      var out = document.getElementById('calOut');
+      if (isNaN(mu) || isNaN(sd) || isNaN(x)) { out.className = 'exercise-feedback'; out.textContent = 'Fill in all three boxes.'; return; }
+      if (sd <= 0) { out.className = 'exercise-feedback wrong'; out.textContent = 'The standard deviation must be positive.'; return; }
+      var z = (x - mu) / sd;
+      var desc = Math.abs(z) < 1 ? 'within one standard deviation of the mean — an ordinary value'
+               : Math.abs(z) < 2 ? 'between one and two standard deviations out — somewhat unusual'
+               : Math.abs(z) < 3 ? 'between two and three standard deviations out — clearly unusual'
+               : 'more than three standard deviations out — extreme';
+      out.className = 'exercise-feedback correct';
+      out.textContent = 'z = (' + x + ' − ' + mu + ') ÷ ' + sd + ' = ' + z.toFixed(3) +
+        '. The value lies ' + Math.abs(z).toFixed(3) + ' standard deviations ' +
+        (z >= 0 ? 'above' : 'below') + ' the mean — ' + desc + '.';
+    });
+  })();
+
+  /* ── Standardise a dataset ────────────────────────────────── */
+  (function () {
+    function run() {
+      var raw = document.getElementById('stdIn').value || '';
+      var xs = raw.split(/[,\s]+/).map(parseFloat).filter(function (v) { return isFinite(v); });
+      var out = document.getElementById('stdOut');
+      if (xs.length < 2) { out.innerHTML = '<p class="exercise-feedback">Enter at least two numbers.</p>'; return; }
+      var n = xs.length;
+      var mu = xs.reduce(function (a, b) { return a + b; }, 0) / n;
+      var sd = Math.sqrt(xs.reduce(function (a, b) { return a + (b - mu) * (b - mu); }, 0) / n);
+      if (sd === 0) { out.innerHTML = '<p class="exercise-feedback wrong">All the values are identical, so σ = 0 and no z-score is defined.</p>'; return; }
+      var zs = xs.map(function (v) { return (v - mu) / sd; });
+      var rows = '<tr><th>x</th>' + xs.map(function (v) { return '<td>' + v + '</td>'; }).join('') + '</tr>' +
+                 '<tr><th>z</th>' + zs.map(function (v) { return '<td>' + v.toFixed(2) + '</td>'; }).join('') + '</tr>';
+      var zMean = zs.reduce(function (a, b) { return a + b; }, 0) / n;
+      var zSd = Math.sqrt(zs.reduce(function (a, b) { return a + (b - zMean) * (b - zMean); }, 0) / n);
+      out.innerHTML = '<table class="coord-table">' + rows + '</table>' +
+        '<p class="exercise-feedback correct" style="margin-top:12px;">μ = ' + mu.toFixed(3) +
+        ', σ = ' + sd.toFixed(3) + '. The z-scores have mean ' + zMean.toFixed(3) +
+        ' and standard deviation ' + zSd.toFixed(3) +
+        ' — 0 and 1, as standardising always produces.</p>';
+    }
+    document.getElementById('stdBtn').addEventListener('click', run);
+    run();
+  })();
+
+  /* ── Comparison tool ──────────────────────────────────────── */
+  (function () {
+    document.getElementById('cBtn').addEventListener('click', function () {
+      var out = document.getElementById('cOut');
+      var ax = num('cA_x'), am = num('cA_m'), as = num('cA_s');
+      var bx = num('cB_x'), bm = num('cB_m'), bs = num('cB_s');
+      if ([ax, am, as, bx, bm, bs].some(isNaN)) { out.className = 'exercise-feedback'; out.textContent = 'Fill in all six boxes.'; return; }
+      if (as <= 0 || bs <= 0) { out.className = 'exercise-feedback wrong'; out.textContent = 'Both standard deviations must be positive.'; return; }
+      var za = (ax - am) / as, zb = (bx - bm) / bs;
+      var hi = document.getElementById('cDir').value === 'hi';
+      var better = za === zb ? null : (hi ? (za > zb ? 'A' : 'B') : (za < zb ? 'A' : 'B'));
+      out.className = 'exercise-feedback correct';
+      out.textContent = 'A: z = ' + za.toFixed(3) + '.  B: z = ' + zb.toFixed(3) + '.  ' +
+        (better === null
+          ? 'The two z-scores are equal, so the results are equally strong relative to their own datasets.'
+          : 'Result ' + better + ' is the better performance relative to its own dataset, because ' +
+            (hi ? 'higher values are better, so the larger z-score wins.'
+                : 'lower values are better, so the more negative z-score wins.'));
+    });
+  })();
+
+  /* ── Work backwards ───────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [89,  'x = μ + zσ = 80 + 1.5 × 6 = 80 + 9 = 89.'],
+      B: [27,  'x = 45 + (−2.25)(8) = 45 − 18 = 27.'],
+      C: [9,   'σ = (x − μ) ÷ z = (88 − 70) ÷ 2 = 18 ÷ 2 = 9.'],
+      D: [40,  'μ = x − zσ = 32 − (−1.6)(5) = 32 + 8 = 40.']
+    };
+    document.querySelectorAll('[data-bw]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.bw, fb = document.getElementById('fbBw' + k);
+        var g = num('bw' + k);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.01;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'A \\(z\\)-score measures:',
+      opts: [
+        'A) The raw difference between a value and the mean',
+        'B) The number of standard deviations a value lies above or below the mean',
+        'C) The probability of a value occurring',
+        'D) The mean of a dataset'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The z-score counts standard deviations from the mean. The raw difference \\(x - \\mu\\) is only the numerator; dividing by \\(\\sigma\\) is what turns it into a standardised count.'
+    },
+    {
+      q: 'A test has \\(\\mu = 64\\) and \\(\\sigma = 9\\). What is the \\(z\\)-score for a mark of 46?',
+      opts: [
+        'A) \\(-18\\)',
+        'B) \\(-2\\)',
+        'C) \\(2\\)',
+        'D) \\(-0.5\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(z = (46 - 64) \\div 9 = -18 \\div 9 = -2\\). The negative sign is essential — it says the mark is below the mean.'
+    },
+    {
+      q: 'After standardising a normally distributed dataset, the set of \\(z\\)-scores has:',
+      opts: [
+        'A) Mean 0 and standard deviation 1',
+        'B) The same mean and standard deviation as the original data',
+        'C) Mean 1 and standard deviation 0',
+        'D) Mean 0 and standard deviation equal to the original \\(\\sigma\\)'
+      ],
+      correct: 0,
+      explanation: 'A is correct. Subtracting \\(\\mu\\) recentres the data on 0 and dividing by \\(\\sigma\\) rescales the spread to 1. This is the standard normal distribution.'
+    },
+    {
+      q: 'Sam scored 72 in History (\\(\\mu = 65\\), \\(\\sigma = 5\\)) and 81 in Geography (\\(\\mu = 74\\), \\(\\sigma = 10\\)). In which subject did Sam do better relative to the class?',
+      opts: [
+        'A) Geography, because the raw mark was higher',
+        'B) History, because \\(z = 1.4\\) beats \\(z = 0.7\\)',
+        'C) Geography, because \\(z = 0.7\\) beats \\(z = 1.4\\)',
+        'D) They are equal'
+      ],
+      correct: 1,
+      explanation: 'B is correct. History gives \\(z = 7 \\div 5 = 1.4\\) and Geography gives \\(z = 7 \\div 10 = 0.7\\). The same raw advantage of 7 marks counts for more in History because its marks were less spread out.'
+    },
+    {
+      q: 'A dataset has \\(\\mu = 120\\) and \\(\\sigma = 15\\). Which value has a \\(z\\)-score of \\(-1.8\\)?',
+      opts: [
+        'A) 147',
+        'B) 93',
+        'C) 102',
+        'D) 138'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(x = \\mu + z\\sigma = 120 + (-1.8)(15) = 120 - 27 = 93\\).'
+    },
+    {
+      q: 'In a race, lower times are better. Two runners have \\(z\\)-scores of \\(-1.8\\) and \\(-0.4\\) within their own squads. Which ran better relative to their squad?',
+      opts: [
+        'A) The one with \\(z = -0.4\\), because it is closer to zero',
+        'B) The one with \\(z = -1.8\\), because for times the more negative \\(z\\)-score is further below the mean',
+        'C) Neither — negative \\(z\\)-scores are invalid',
+        'D) They performed identically'
+      ],
+      correct: 1,
+      explanation: 'B is correct. A lower time is better, so being further below the mean is better. \\(z = -1.8\\) is 1.8 standard deviations below the squad mean, a stronger relative run than 0.4 below.'
+    },
+    {
+      q: 'A value of 58 has a \\(z\\)-score of 1.5 in a dataset with \\(\\sigma = 6\\). What is the mean?',
+      opts: [
+        'A) 67',
+        'B) 49',
+        'C) 52',
+        'D) 64'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(\\mu = x - z\\sigma = 58 - 1.5 \\times 6 = 58 - 9 = 49\\). A check confirms it: \\((58 - 49) \\div 6 = 1.5\\).'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'A dataset has \\(\\mu = 40\\) and \\(\\sigma = 5\\). Find the \\(z\\)-scores for \\(x = 52\\) and \\(x = 33\\).',
+      marks: 3,
+      steps: [
+        '\\(z = (52 - 40) \\div 5 = 12 \\div 5 = 2.4\\).',
+        '\\(z = (33 - 40) \\div 5 = -7 \\div 5 = -1.4\\).'
+      ],
+      answer: '\\(z = 2.4\\) and \\(z = -1.4\\).'
+    },
+    {
+      q: 'Explain in words what a \\(z\\)-score of \\(-0.8\\) tells you about a value.',
+      marks: 2,
+      steps: [
+        'The negative sign places the value below the mean.',
+        'The size 0.8 says it is 0.8 standard deviations away.'
+      ],
+      answer: 'The value lies 0.8 standard deviations below the mean — below average, but well within the ordinary range.'
+    },
+    {
+      q: 'Birth weights are normal with \\(\\mu = 3.4\\) kg and \\(\\sigma = 0.55\\) kg. Find the \\(z\\)-score of a 4.5 kg baby, to two decimal places, and interpret it.',
+      marks: 4,
+      steps: [
+        '\\(x - \\mu = 4.5 - 3.4 = 1.1\\) kg.',
+        '\\(z = 1.1 \\div 0.55 = 2.00\\).',
+        'The baby is two standard deviations above the mean weight.',
+        'That places it in the top few per cent of birth weights.'
+      ],
+      answer: '\\(z = 2.00\\). The baby is two standard deviations heavier than average, which is unusually large — only about 2.5% of babies are heavier.'
+    },
+    {
+      q: 'A test has \\(\\mu = 58\\) and \\(\\sigma = 12\\). What mark corresponds to \\(z = 1.75\\)?',
+      marks: 3,
+      steps: [
+        '\\(x = \\mu + z\\sigma\\).',
+        '\\(x = 58 + 1.75 \\times 12\\).',
+        '\\(x = 58 + 21 = 79\\).'
+      ],
+      answer: 'A mark of 79.'
+    },
+    {
+      q: 'Lea scored 68 in Biology (\\(\\mu = 60\\), \\(\\sigma = 8\\)) and 55 in Chemistry (\\(\\mu = 48\\), \\(\\sigma = 5\\)). Compare her performances.',
+      marks: 5,
+      steps: [
+        'Biology: \\(z = (68 - 60) \\div 8 = 1.0\\).',
+        'Chemistry: \\(z = (55 - 48) \\div 5 = 1.4\\).',
+        'Chemistry has the higher z-score.',
+        'Although her Biology mark was 13 higher in raw terms, Chemistry marks were more tightly bunched.',
+        'So 55 placed her further ahead of her Chemistry class than 68 did in Biology.'
+      ],
+      answer: 'Biology \\(z = 1.0\\), Chemistry \\(z = 1.4\\). Lea performed better in Chemistry relative to her class, because the tighter spread of Chemistry marks means her 7-mark advantage there counted for more than the 8-mark advantage in Biology.'
+    },
+    {
+      q: 'A value of 128 has a \\(z\\)-score of \\(-1.6\\) in a dataset with mean 160. Find the standard deviation.',
+      marks: 3,
+      steps: [
+        '\\(\\sigma = (x - \\mu) \\div z\\).',
+        '\\(\\sigma = (128 - 160) \\div (-1.6) = -32 \\div -1.6\\).',
+        '\\(\\sigma = 20\\).'
+      ],
+      answer: '\\(\\sigma = 20\\).'
+    },
+    {
+      q: 'Explain why comparing raw marks from two different tests can be misleading, and how \\(z\\)-scores fix the problem.',
+      marks: 4,
+      steps: [
+        'Different tests have different means, so the same raw mark can be above average on one and below on the other.',
+        'They also have different spreads, so the same distance above the mean means different things.',
+        'A z-score expresses each result in standard deviations from its own mean.',
+        'That puts both on the same scale, so they can be compared directly.'
+      ],
+      answer: 'Raw marks depend on both the difficulty (the mean) and the spread of each test, so they are not on a common scale. Standardising expresses every result as a number of standard deviations from its own mean, which puts all results on the same scale and makes them directly comparable.'
+    },
+    {
+      q: 'Four students have \\(z\\)-scores \\(1.2\\), \\(-0.3\\), \\(2.7\\) and \\(-1.9\\). Rank them from strongest to weakest, and identify any that are unusual.',
+      marks: 4,
+      steps: [
+        'Higher z means better, so the order is 2.7, 1.2, −0.3, −1.9.',
+        '\\(z = 2.7\\) is more than 2.5 standard deviations above the mean — an outstanding result.',
+        '\\(z = -1.9\\) is nearly two standard deviations below — a notably weak result.',
+        'The middle two are within the ordinary range.'
+      ],
+      answer: 'Order: 2.7, 1.2, −0.3, −1.9. The 2.7 is exceptional (top ~0.4% of results) and the −1.9 is unusually low. The 1.2 and −0.3 are both within the normal range of performance.'
+    },
+    {
+      q: 'In a 400 m race a squad averages 58.0 s with \\(\\sigma = 2.5\\) s. In a 800 m race the squad averages 2:12.0 (132.0 s) with \\(\\sigma = 6.0\\) s. Ari runs 54.0 s and 123.0 s. Which is the stronger run?',
+      marks: 5,
+      steps: [
+        '400 m: \\(z = (54.0 - 58.0) \\div 2.5 = -1.6\\).',
+        '800 m: \\(z = (123.0 - 132.0) \\div 6.0 = -1.5\\).',
+        'For times, lower is better, so the more negative z-score is stronger.',
+        '\\(-1.6\\) is more negative than \\(-1.5\\).',
+        'The 400 m run is marginally the stronger performance.'
+      ],
+      answer: '400 m \\(z = -1.6\\), 800 m \\(z = -1.5\\). Since lower times are better, the more negative z-score wins, so the 400 m was marginally the stronger run — though the two are very close.'
+    },
+    {
+      q: 'A company reports employee satisfaction as a standardised score. An employee has \\(z = 0\\). What does this mean, and why might the company prefer to report \\(z\\)-scores rather than raw scores?',
+      marks: 4,
+      steps: [
+        '\\(z = 0\\) means the score is exactly equal to the mean.',
+        'The employee is precisely average in satisfaction.',
+        'z-scores let results from different surveys, scales or years be compared directly.',
+        'They also hide the raw scale, which can make results look less alarming or more comparable across departments.'
+      ],
+      answer: '\\(z = 0\\) means exactly average. The company can compare across surveys with different scales and across departments of different sizes — though standardising also obscures the raw level of satisfaction, which a reader should ask for.'
+    },
+    {
+      q: 'The masses of eggs are normal with \\(\\mu = 58\\) g and \\(\\sigma = 4\\) g. Eggs with \\(|z| > 2\\) are rejected. Find the acceptable range of masses.',
+      marks: 4,
+      steps: [
+        'Lower limit: \\(x = 58 + (-2)(4) = 50\\) g.',
+        'Upper limit: \\(x = 58 + (2)(4) = 66\\) g.',
+        'Eggs are accepted when their mass lies strictly between these values.',
+        'So the acceptable range is 50 g to 66 g.'
+      ],
+      answer: 'Between 50 g and 66 g.'
+    },
+    {
+      q: 'Two datasets have the same mean. Dataset P has \\(\\sigma = 3\\), dataset Q has \\(\\sigma = 12\\). The same value \\(x\\) lies 6 units above the mean in each. Compare the \\(z\\)-scores and explain the difference.',
+      marks: 4,
+      steps: [
+        'P: \\(z = 6 \\div 3 = 2\\).',
+        'Q: \\(z = 6 \\div 12 = 0.5\\).',
+        'The same raw distance produces very different z-scores.',
+        'In P values cluster tightly, so 6 units out is remarkable; in Q values are widely spread, so 6 units out is unremarkable.'
+      ],
+      answer: 'P gives \\(z = 2\\), Q gives \\(z = 0.5\\). The identical raw gap of 6 units is far more unusual in the tightly clustered dataset P than in the widely spread dataset Q — which is exactly why standardising is necessary.'
+    },
+    {
+      q: 'A student argues that a \\(z\\)-score of 4 must be an error, because "\\(z\\)-scores only go from \\(-3\\) to \\(3\\)". Evaluate this claim.',
+      marks: 3,
+      steps: [
+        'z-scores have no fixed upper or lower limit.',
+        'The −3 to 3 range covers about 99.7% of normally distributed data, not all of it.',
+        'A z-score of 4 is possible; it is just extremely rare, about 3 in 100 000.'
+      ],
+      answer: 'The claim is wrong. z-scores are unbounded — the −3 to 3 range merely captures about 99.7% of the data. A z-score of 4 is legitimate and simply indicates an extremely rare value (or possibly an outlier worth investigating).'
+    },
+    {
+      q: 'The mean IQ is 100 with \\(\\sigma = 15\\). Kim scores 132. A second test has \\(\\mu = 500\\) and \\(\\sigma = 100\\); Kim scores 720. On which test did Kim do better relative to the population?',
+      marks: 5,
+      steps: [
+        'IQ: \\(z = (132 - 100) \\div 15 = 32 \\div 15 = 2.13\\).',
+        'Second test: \\(z = (720 - 500) \\div 100 = 220 \\div 100 = 2.20\\).',
+        'Both are over two standard deviations above the mean.',
+        '2.20 is slightly larger than 2.13.',
+        'The second test is marginally the stronger relative result.'
+      ],
+      answer: 'IQ \\(z = 2.13\\), second test \\(z = 2.20\\). The second test is marginally better relative to the population, though both results are outstanding and the difference between them is small enough to be within measurement error.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

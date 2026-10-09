@@ -6,7 +6,7 @@
   <title>Lesson 4 — Spreadsheet Modelling</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -30,25 +30,25 @@
       --ink: #000; --canvas: #fff;
       --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
       --font-display: 'Poppins', sans-serif;
-      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-mono: 'DM Mono', monospace;
     }
-    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#0a0a0a; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
     html { scroll-behavior: smooth; }
     body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
     a { color: inherit; }
     .page { max-width:1400px; margin:0 auto; padding:24px 24px 120px; }
 
-    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.02em; color:var(--gray-med); }
     .topbar-left { display:flex; flex-direction:column; gap:2px; }
     .topbar-topic { color:var(--ink); font-weight:700; }
 
     .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
     .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
-    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-label { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:14px; }
     .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
     .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
     .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
-    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .eyebrow { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:12px; }
     h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
     .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
     .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
@@ -56,7 +56,7 @@
 
     .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
     .toc { position:sticky; top:24px; }
-    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-heading { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:12px; }
     .toc-list { list-style:none; }
     .toc-item { margin-bottom:2px; }
     .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
@@ -64,17 +64,17 @@
     .toc-link.toc-active { color:var(--ink); border-left:2px solid var(--ink); padding-left:10px; }
 
     .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
-    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .section-label { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
     h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
     p { margin-bottom:14px; }
     ul, ol { padding-left:20px; margin-bottom:14px; line-height:1.9; }
 
     .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
-    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
     .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
-    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .example-block p:last-child { margin-bottom:0; }
     .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
     .note-block p:last-child { margin-bottom:0; }
@@ -96,7 +96,7 @@
     .mcq-option.wrong-ans { border-color:#c00000; background:rgba(200,0,0,0.08); }
     html.dark-mode .mcq-option.correct-ans { background:rgba(0,160,80,0.12); }
     html.dark-mode .mcq-option.wrong-ans   { background:rgba(200,0,0,0.12); }
-    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:300; min-width:16px; padding-top:1px; }
     .mcq-explanation { border-top:1px solid var(--gray-light); padding-top:14px; font-size:13px; color:var(--gray-med); display:none; }
     .mcq-explanation.show { display:block; }
 
@@ -118,16 +118,16 @@
     .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
     .kc-score.show { display:block; }
     .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
-    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; padding:2px 0; cursor:pointer; }
 
     /* ── Complete button ── */
     .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
-    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; padding:4px 0; cursor:pointer; }
     .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
 
     /* ── Scenario tabs ── */
     .scenario-tabs { display:flex; flex-wrap:wrap; gap:0; margin-bottom:0; border-bottom:1px solid var(--ink); }
-    .scenario-tab { border:1px solid var(--gray-light); border-bottom:none; padding:9px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; cursor:pointer; background:var(--canvas); color:var(--gray-med); transition:background 0.15s,color 0.15s; }
+    .scenario-tab { border:1px solid var(--gray-light); border-bottom:none; padding:9px 18px; font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; cursor:pointer; background:var(--canvas); color:var(--gray-med); transition:background 0.15s,color 0.15s; }
     .scenario-tab:hover { color:var(--ink); border-color:var(--ink); }
     .scenario-tab.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
 
@@ -138,13 +138,13 @@
     /* ── Spreadsheet explorer ── */
     .ss-explorer { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start; }
     .ss-slider-wrap { margin-bottom:18px; }
-    .ss-slider-label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; color:var(--gray-med); }
-    .ss-slider-val { font-family:var(--font-mono); font-size:20px; font-weight:700; color:var(--ink); }
-    .ss-eq-live { font-family:var(--font-mono); font-size:13px; font-weight:700; margin-top:12px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); color:var(--ink); }
+    .ss-slider-label { font-family:var(--font-mono);font-weight:300; font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; color:var(--gray-med); }
+    .ss-slider-val { font-family:var(--font-mono); font-size:20px; font-weight:300; color:var(--ink); }
+    .ss-eq-live { font-family:var(--font-mono); font-size:13px; font-weight:300; margin-top:12px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); color:var(--ink); }
 
-    .ss-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; margin-top:4px; }
+    .ss-table { width:100%; border-collapse:collapse; font-family:var(--font-mono);font-weight:300; font-size:12px; margin-top:4px; }
     .ss-table th, .ss-table td { border:1px solid var(--gray-light); padding:7px 10px; text-align:center; }
-    .ss-table th { background:var(--gray-faint); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    .ss-table th { background:var(--gray-faint); font-weight:700; font-size:11px; letter-spacing:0.02em; }
     .ss-table td.computed { color:var(--ink); }
 
     .ss-graph-wrap { border:1px solid var(--gray-light); display:inline-block; }
@@ -154,13 +154,13 @@
     .analysis-block h4 { font-size:14px; font-weight:600; margin-bottom:16px; }
 
     /* ── Formula bar ── */
-    .ss-formula-bar { display:flex; align-items:center; border:1px solid var(--ink); border-bottom:none; font-family:var(--font-mono); font-size:12px; height:28px; margin-top:16px; }
+    .ss-formula-bar { display:flex; align-items:center; border:1px solid var(--ink); border-bottom:none; font-family:var(--font-mono);font-weight:300; font-size:12px; height:28px; margin-top:16px; }
     .ss-formula-bar-fx { padding:0 10px; border-right:1px solid var(--gray-light); color:var(--gray-med); font-style:italic; font-size:11px; height:100%; display:flex; align-items:center; min-width:28px; justify-content:center; }
     .ss-formula-bar-ref { padding:0 8px; border-right:1px solid var(--gray-light); font-weight:700; font-size:11px; color:var(--ink); height:100%; display:flex; align-items:center; min-width:36px; white-space:nowrap; }
     .ss-formula-bar-expr { padding:0 10px; color:var(--ink); flex:1; height:100%; display:flex; align-items:center; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
 
     /* ── Excel-style grid ── */
-    .ss-excel-grid { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; }
+    .ss-excel-grid { width:100%; border-collapse:collapse; font-family:var(--font-mono);font-weight:300; font-size:12px; }
     .ss-excel-grid .col-header { background:var(--gray-faint); border:1px solid var(--gray-light); padding:4px 8px; text-align:center; font-size:11px; font-weight:700; letter-spacing:0.06em; color:var(--gray-med); user-select:none; }
     .ss-excel-grid .row-num { background:var(--gray-faint); border:1px solid var(--gray-light); padding:5px 7px; text-align:center; font-size:10px; color:var(--gray-med); min-width:28px; user-select:none; }
     .ss-excel-grid .param-cell { border:1px solid var(--gray-light); padding:5px 10px; text-align:center; font-weight:700; color:var(--ink); background:var(--gray-faint); cursor:pointer; }
@@ -176,27 +176,27 @@
     html.dark-mode .ss-excel-grid .param-cell { background:var(--gray-faint); }
 
     /* ── What-If predictor ── */
-    .ss-whatif { margin-top:12px; border:1px solid var(--gray-light); padding:14px 16px; font-family:var(--font-mono); font-size:12px; }
-    .ss-whatif-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .ss-whatif { margin-top:12px; border:1px solid var(--gray-light); padding:14px 16px; font-family:var(--font-mono);font-weight:300; font-size:12px; }
+    .ss-whatif-label { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .ss-whatif-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
     .ss-whatif-row span { color:var(--gray-med); font-size:12px; }
-    .ss-whatif-input { width:72px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono); font-size:12px; color:var(--ink); padding:2px 4px; text-align:center; outline:none; }
+    .ss-whatif-input { width:72px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono);font-weight:300; font-size:12px; color:var(--ink); padding:2px 4px; text-align:center; outline:none; }
     .ss-whatif-input:focus { background:var(--gray-faint); }
     .ss-whatif-result { font-weight:700; color:var(--ink); min-width:50px; display:inline-block; }
 
     /* ── Goal Seek ── */
-    .ss-goalseek { margin-top:8px; border:1px solid var(--gray-light); padding:14px 16px; font-family:var(--font-mono); font-size:12px; }
-    .ss-goalseek-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .ss-goalseek { margin-top:8px; border:1px solid var(--gray-light); padding:14px 16px; font-family:var(--font-mono);font-weight:300; font-size:12px; }
+    .ss-goalseek-label { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .ss-goalseek-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
     .ss-goalseek-row span { color:var(--gray-med); font-size:12px; }
-    .ss-goalseek-input { width:72px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono); font-size:12px; color:var(--ink); padding:2px 4px; text-align:center; outline:none; }
+    .ss-goalseek-input { width:72px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono);font-weight:300; font-size:12px; color:var(--ink); padding:2px 4px; text-align:center; outline:none; }
     .ss-goalseek-input:focus { background:var(--gray-faint); }
     .ss-goalseek-result { font-weight:700; color:var(--ink); min-width:50px; display:inline-block; }
-    .ss-goalseek-working { font-size:11px; color:var(--gray-med); padding:6px 10px; border-left:2px solid var(--gray-light); min-height:18px; font-family:var(--font-mono); letter-spacing:0.02em; line-height:1.6; }
+    .ss-goalseek-working { font-size:11px; color:var(--gray-med); padding:6px 10px; border-left:2px solid var(--gray-light); min-height:18px; font-family:var(--font-mono);font-weight:300; letter-spacing:0.02em; line-height:1.6; }
 
     /* ── Formula Skills section ── */
     .fs-grid-wrap { margin:20px 0; overflow-x:auto; }
-    .fs-grid { border-collapse:collapse; font-family:var(--font-mono); font-size:12px; min-width:200px; }
+    .fs-grid { border-collapse:collapse; font-family:var(--font-mono);font-weight:300; font-size:12px; min-width:200px; }
     .fs-grid .col-header, .fs-grid .row-num { background:var(--gray-faint); border:1px solid var(--gray-light); padding:4px 8px; text-align:center; font-size:11px; font-weight:700; letter-spacing:0.06em; color:var(--gray-med); user-select:none; }
     .fs-grid td { border:1px solid var(--gray-light); padding:5px 14px; text-align:center; min-width:80px; }
     .fs-cell-value { color:var(--ink); }
@@ -205,20 +205,20 @@
     .fs-cell-target { background:var(--ink); color:var(--canvas); cursor:pointer; font-size:13px; }
     .fs-cell-highlight { outline:2px solid var(--ink); outline-offset:-2px; }
     .fs-step { margin-bottom:16px; padding:16px 20px; border:1px solid var(--gray-light); }
-    .fs-step-num { font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .fs-step-num { font-family:var(--font-mono);font-weight:300; font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .fs-step p { font-size:13px; margin-bottom:10px; }
     .fs-step p:last-child { margin-bottom:0; }
-    .fs-formula-input { width:220px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono); font-size:13px; color:var(--ink); padding:4px 6px; outline:none; }
+    .fs-formula-input { width:220px; border:none; border-bottom:1px solid var(--ink); background:transparent; font-family:var(--font-mono);font-weight:300; font-size:13px; color:var(--ink); padding:4px 6px; outline:none; }
     .fs-formula-input:focus { background:var(--gray-faint); }
-    .fs-formula-feedback { margin-top:8px; font-family:var(--font-mono); font-size:12px; min-height:18px; }
+    .fs-formula-feedback { margin-top:8px; font-family:var(--font-mono);font-weight:300; font-size:12px; min-height:18px; }
     .fs-formula-feedback.correct { color:#00a050; }
     .fs-formula-feedback.wrong   { color:#c00000; }
-    .fs-fill-btn { border:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:7px 16px; cursor:pointer; transition:background 0.1s,color 0.1s; margin-top:10px; }
+    .fs-fill-btn { border:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; padding:7px 16px; cursor:pointer; transition:background 0.1s,color 0.1s; margin-top:10px; }
     .fs-fill-btn:hover { background:var(--ink); color:var(--canvas); }
     .fs-fill-btn:disabled { opacity:0.4; cursor:default; }
-    .fs-done-msg { display:none; margin-top:14px; padding:12px 16px; border:1px solid var(--ink); font-family:var(--font-mono); font-size:12px; background:var(--gray-faint); letter-spacing:0.02em; }
+    .fs-done-msg { display:none; margin-top:14px; padding:12px 16px; border:1px solid var(--ink); font-family:var(--font-mono);font-weight:300; font-size:12px; background:var(--gray-faint); letter-spacing:0.02em; }
     .fs-done-msg.show { display:block; }
-    .fs-next-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:4px 0; cursor:pointer; margin-top:10px; }
+    .fs-next-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; padding:4px 0; cursor:pointer; margin-top:10px; }
     .fs-next-btn:hover { color:var(--gray-med); border-bottom-color:var(--gray-med); }
 
     /* ── Sociotype typography ── */
@@ -380,7 +380,7 @@
                 </div>
               </div>
               <div>
-                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <p style="font-size:11px; font-family:var(--font-mono);font-weight:300; color:var(--gray-med); letter-spacing:0.02em; margin-bottom:8px;">Live Graph</p>
                 <div class="ss-graph-wrap"><svg id="svg-distTime"></svg></div>
               </div>
             </div>
@@ -477,7 +477,7 @@
                 </div>
               </div>
               <div>
-                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <p style="font-size:11px; font-family:var(--font-mono);font-weight:300; color:var(--gray-med); letter-spacing:0.02em; margin-bottom:8px;">Live Graph</p>
                 <div class="ss-graph-wrap"><svg id="svg-sports"></svg></div>
               </div>
             </div>
@@ -512,7 +512,7 @@
               </div>
             </div>
             <div class="mcq-block" id="sp-q3">
-              <p class="mcq-q">3. Why does this relationship NOT show direct variation?</p>
+              <p class="mcq-q">3. Why does this relationship <strong>not</strong> show direct variation?</p>
               <div class="mcq-options">
                 <div class="mcq-option" data-q="sp3" data-val="A"><span class="opt-letter">A</span> Because the rate changes at each step</div>
                 <div class="mcq-option" data-q="sp3" data-val="B"><span class="opt-letter">B</span> Because the graph is not a straight line</div>
@@ -574,7 +574,7 @@
                 </div>
               </div>
               <div>
-                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <p style="font-size:11px; font-family:var(--font-mono);font-weight:300; color:var(--gray-med); letter-spacing:0.02em; margin-bottom:8px;">Live Graph</p>
                 <div class="ss-graph-wrap"><svg id="svg-art"></svg></div>
               </div>
             </div>
@@ -671,7 +671,7 @@
                 </div>
               </div>
               <div>
-                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <p style="font-size:11px; font-family:var(--font-mono);font-weight:300; color:var(--gray-med); letter-spacing:0.02em; margin-bottom:8px;">Live Graph</p>
                 <div class="ss-graph-wrap"><svg id="svg-energy"></svg></div>
               </div>
             </div>
@@ -768,7 +768,7 @@
                 </div>
               </div>
               <div>
-                <p style="font-size:11px; font-family:var(--font-mono); color:var(--gray-med); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Live Graph</p>
+                <p style="font-size:11px; font-family:var(--font-mono);font-weight:300; color:var(--gray-med); letter-spacing:0.02em; margin-bottom:8px;">Live Graph</p>
                 <div class="ss-graph-wrap"><svg id="svg-gdp"></svg></div>
               </div>
             </div>
@@ -863,23 +863,23 @@
         <div class="fs-step" id="fs-step1">
           <p class="fs-step-num">Step 1 of 3</p>
           <p>The <strong>speed parameter</strong> (60 km/h) is stored in cell <strong>B1</strong>. Click on cell B1 in the grid above to select it.</p>
-          <p style="font-size:12px; color:var(--gray-med); font-family:var(--font-mono);">In Excel you type the parameter value directly into cell B1 and press Enter.</p>
+          <p style="font-size:12px; color:var(--gray-med); font-family:var(--font-mono);font-weight:300;">In Excel you type the parameter value directly into cell B1 and press Enter.</p>
           <button class="fs-next-btn" onclick="fsNextStep(2)">Got it — move to Step 2</button>
         </div>
 
         <!-- Step 2 -->
         <div class="fs-step" id="fs-step2" style="display:none;">
           <p class="fs-step-num">Step 2 of 3</p>
-          <p>Cell <strong>B2</strong> should calculate the distance when time = 0. Type the Excel formula for B2 below. Use <code style="font-family:var(--font-mono);">$B$1</code> so the reference to speed stays fixed when you fill down.</p>
+          <p>Cell <strong>B2</strong> should calculate the distance when time = 0. Type the Excel formula for B2 below. Use <code style="font-family:var(--font-mono);font-weight:300;">$B$1</code> so the reference to speed stays fixed when you fill down.</p>
           <input type="text" class="fs-formula-input" id="fs-formula-input" placeholder="=$B$1*A2" autocomplete="off" spellcheck="false">
           <p class="fs-formula-feedback" id="fs-formula-feedback"></p>
-          <p style="font-size:12px; color:var(--gray-med); margin-top:10px; font-family:var(--font-mono);">Accepted: =$B$1*A2 &nbsp;|&nbsp; =B1*A2 &nbsp;|&nbsp; =$B$1×A2</p>
+          <p style="font-size:12px; color:var(--gray-med); margin-top:10px; font-family:var(--font-mono);font-weight:300;">Accepted: =$B$1*A2 &nbsp;|&nbsp; =B1*A2 &nbsp;|&nbsp; =$B$1×A2</p>
         </div>
 
         <!-- Step 3 -->
         <div class="fs-step" id="fs-step3" style="display:none;">
           <p class="fs-step-num">Step 3 of 3</p>
-          <p>Your formula in B2 is correct. Now click <strong>Fill Down</strong> to populate B3:B7 — in Excel you select B2:B7 and press <kbd style="font-family:var(--font-mono); border:1px solid var(--gray-light); padding:1px 5px; font-size:11px;">Ctrl+D</kbd>.</p>
+          <p>Your formula in B2 is correct. Now click <strong>Fill Down</strong> to populate B3:B7 — in Excel you select B2:B7 and press <kbd style="font-family:var(--font-mono);font-weight:300; border:1px solid var(--gray-light); padding:1px 5px; font-size:11px;">Ctrl+D</kbd>.</p>
           <button class="fs-fill-btn" id="fs-fill-btn" onclick="fsFillDown()">Fill Down B3:B7</button>
         </div>
 
@@ -944,7 +944,7 @@
     const t = document.createElementNS(NS, 'text');
     t.setAttribute('x', x); t.setAttribute('y', y);
     t.setAttribute('fill', fill); t.setAttribute('font-size', fontSize);
-    t.setAttribute('font-family', 'Space Mono, monospace');
+    t.setAttribute('font-family', 'DM Mono, monospace');
     t.setAttribute('text-anchor', anchor || 'middle');
     t.textContent = text;
     svg.appendChild(t);
@@ -1024,7 +1024,7 @@
     yLabelEl.setAttribute('transform', 'rotate(-90)');
     yLabelEl.setAttribute('text-anchor', 'middle');
     yLabelEl.setAttribute('font-size', '7.5');
-    yLabelEl.setAttribute('font-family', 'Space Mono, monospace');
+    yLabelEl.setAttribute('font-family', 'DM Mono, monospace');
     yLabelEl.setAttribute('fill', grayMed);
     yLabelEl.textContent = yLabel;
     svg.appendChild(yLabelEl);

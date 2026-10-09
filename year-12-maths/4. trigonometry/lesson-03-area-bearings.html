@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Area of a Triangle &amp; Bearings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 4 &mdash; Trigonometry</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Area of a Triangle &amp; Bearings</h1>
+      <p class="subtitle">One more formula finds the area of any triangle without knowing its
+        height. Then bearings turn all of this into navigation &mdash; the questions that carry
+        the most marks in this topic.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-04</span>
+        <span class="pill">\(A = \tfrac12 ab\sin C\)</span>
+        <span class="pill">True &amp; compass bearings</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Area without the height</li>
+        <li>Area of irregular blocks</li>
+        <li>True bearings</li>
+        <li>Compass bearings</li>
+        <li>Converting between them</li>
+        <li>Navigation problems</li>
+        <li>Putting it all together</li>
+        <li>Class activity: plan the second leg</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#area">1 &nbsp;Area of a triangle</a></li>
+        <li class="toc-item"><a class="toc-link" href="#irregular">2 &nbsp;Irregular blocks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#true">3 &nbsp;True bearings</a></li>
+        <li class="toc-item"><a class="toc-link" href="#compass">4 &nbsp;Compass bearings</a></li>
+        <li class="toc-item"><a class="toc-link" href="#converting">5 &nbsp;Converting</a></li>
+        <li class="toc-item"><a class="toc-link" href="#navigation">6 &nbsp;Navigation problems</a></li>
+        <li class="toc-item"><a class="toc-link" href="#together">7 &nbsp;Putting it together</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. AREA ─────────── -->
+      <div class="content-card" id="area">
+        <p class="section-label">Theory</p>
+        <h2>Area of a triangle without the height</h2>
+
+        <p>The familiar \(A = \tfrac12 \times \text{base} \times \text{height}\) needs a
+          perpendicular height, which real triangles rarely give you. This formula needs only two
+          sides and the angle between them.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Area formula</p>
+          \[A = \frac{1}{2}ab\sin C\]
+          <p class="formula-where">\(a\) and \(b\) are two sides and \(C\) is the
+            <strong>included angle</strong> — the angle <em>between</em> them. The angle must sit
+            between the two sides you use, or the formula does not apply.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 300 200" width="300">
+            <polygon class="tri-fill" points="50,160 260,160 120,40"/>
+            <text class="node-label" x="38" y="176">C</text>
+            <text class="node-label" x="266" y="176">B</text>
+            <text class="node-label" x="114" y="30">A</text>
+            <text class="side-label-text" x="80" y="100">b</text>
+            <text class="side-label-text" x="150" y="180" text-anchor="middle">a</text>
+            <path class="angle-arc" d="M 80 160 A 30 30 0 0 0 69 138"/>
+            <text class="angle-label-text" x="76" y="152">C</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The included angle \(C\) sits between sides \(a\) and \(b\).</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>A triangle has sides 12 cm and 17 cm with an angle of 43° between them. Find its area.</p>
+          \[A = \frac{1}{2}(12)(17)\sin 43°\]
+          \[= 102 \times 0.68200 = 69.56 \text{ cm}^{2}\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; obtuse included angle</p>
+          <p>A triangular garden bed has sides 8 m and 14 m with an included angle of 125°. Find
+            its area.</p>
+          \[A = \frac{1}{2}(8)(14)\sin 125° = 56 \times 0.81915 = 45.87 \text{ m}^{2}\]
+          <p>Note that \(\sin 125°\) is <strong>positive</strong> (0.819), unlike \(\cos 125°\).
+            Sine is positive for every angle in a triangle, so areas are always positive.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; working backwards to an angle</p>
+          <p>A triangle with sides 9 m and 11 m has an area of 38 m². Find the included angle.</p>
+          \[38 = \frac{1}{2}(9)(11)\sin C = 49.5 \sin C\]
+          \[\sin C = \frac{38}{49.5} = 0.76768\]
+          \[C = \sin^{-1}(0.76768) = 50.15°\]
+          <p>There is also an obtuse solution, \(180° - 50.15° = 129.85°\), which gives exactly the
+            same area. Without more information both triangles are valid &mdash; mention this if
+            the question does not specify.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; when you must find the angle first</p>
+          <p>Find the area of a triangle with sides 6, 9 and 13 m.</p>
+          <p>No angle is given, so use the cosine rule first. Take the angle between the 6 and 9
+            sides (opposite the 13):</p>
+          \[\cos C = \frac{36 + 81 - 169}{2(6)(9)} = \frac{-52}{108} = -0.48148\]
+          \[C = 118.78°\]
+          <p>Now apply the area formula:</p>
+          \[A = \frac{1}{2}(6)(9)\sin 118.78° = 27 \times 0.87639 = 23.66 \text{ m}^{2}\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Area explorer</h3>
+          <p class="exercise-intro">Fix two sides and swing the included angle. Notice the area is
+            greatest at exactly 90°, and that 60° and 120° give the same area.</p>
+          <div id="areaSliders"></div>
+          <div class="diagram-wrap"><div id="areaDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">sin C</div>
+              <div class="readout-value" id="roSinC">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Area</div>
+              <div class="readout-value" id="roArea">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Maximum possible</div>
+              <div class="readout-value" id="roMaxArea">—</div>
+            </div>
+          </div>
+          <div class="plot-wrap" id="plotArea"></div>
+          <p class="diagram-caption">Area against the included angle &mdash; symmetric about 90°.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find the area of a triangle with sides 18 m and 24 m and an included angle of 38°.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[A = \tfrac12(18)(24)\sin 38° = 216 \times 0.61566 = 132.98 \text{ m}^2\]
+              </div></details></li>
+            <li>Find the area of a triangle with sides 5 cm, 7 cm and 9 cm.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Angle between the 5 and 7 sides (opposite 9):
+                  \(\cos C = \dfrac{25 + 49 - 81}{70} = -0.1\), so \(C = 95.74°\).</p>
+                <p>\(A = \tfrac12(5)(7)\sin 95.74° = 17.41\) cm².</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. IRREGULAR BLOCKS ─────────── -->
+      <div class="content-card" id="irregular">
+        <p class="section-label">Application</p>
+        <h2>Area of irregular blocks of land</h2>
+
+        <p>Surveyors find the area of an irregular block by splitting it into triangles, then
+          applying \(A = \tfrac12 ab\sin C\) to each. Two common layouts:</p>
+        <ul>
+          <li><strong>Diagonal split</strong> &mdash; a four-sided block is cut along a diagonal
+            into two triangles.</li>
+          <li><strong>Radial survey</strong> &mdash; from a point inside the block, measure the
+            distance and bearing to each corner. Neighbouring corners and the centre form
+            triangles; the angle at the centre is the difference between the two bearings.</li>
+        </ul>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; a radial survey</p>
+          <p>From a point O inside a paddock, the corners are:</p>
+          <table class="coord-table">
+            <tr><th>Corner</th><td>A</td><td>B</td><td>C</td><td>D</td></tr>
+            <tr><th>Distance from O</th><td>40 m</td><td>55 m</td><td>48 m</td><td>36 m</td></tr>
+            <tr><th>Bearing from O</th><td>020°</td><td>110°</td><td>205°</td><td>290°</td></tr>
+          </table>
+          <p>Angles at O: \(\angle AOB = 110° - 20° = 90°\), \(\angle BOC = 95°\),
+            \(\angle COD = 85°\), \(\angle DOA = 360° - 290° + 20° = 90°\). (Check: they sum to
+            360°.)</p>
+          \[\begin{aligned}
+            \triangle AOB &amp;= \tfrac12(40)(55)\sin 90° = 1100.00 \\
+            \triangle BOC &amp;= \tfrac12(55)(48)\sin 95° = 1314.98 \\
+            \triangle COD &amp;= \tfrac12(48)(36)\sin 85° = 860.71 \\
+            \triangle DOA &amp;= \tfrac12(36)(40)\sin 90° = 720.00
+          \end{aligned}\]
+          <p>Total area \(\approx 3996\) m², or about 0.40 ha.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Block \(ABCD\) is split by diagonal \(BD\). In triangle \(ABD\), \(AB = 30\) m,
+              \(AD = 42\) m and \(A = 75°\). In triangle \(CBD\), \(CB = 35\) m, \(CD = 28\) m and
+              \(C = 100°\). Find the area of the block.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\tfrac12(30)(42)\sin 75° = 608.53\) m² and
+                  \(\tfrac12(35)(28)\sin 100° = 482.56\) m².</p>
+                <p><strong>Total:</strong> 1091.09 m².</p>
+              </div></details></li>
+            <li>A triangular block is surveyed from an inside point O: \(OA = 25\) m at 030°,
+              \(OB = 32\) m at 150°, \(OC = 28\) m at 270°. Find its area.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Each angle at O is 120°.</p>
+                \[A = \tfrac12 \sin 120° \,(25 \times 32 + 32 \times 28 + 28 \times 25) = 1037.50 \text{ m}^2\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. TRUE BEARINGS ─────────── -->
+      <div class="content-card" id="true">
+        <p class="section-label">Theory</p>
+        <h2>True bearings</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">True bearings</p>
+          <p style="margin-bottom:0;">Measured <strong>clockwise from north</strong>, always
+            written with <strong>three digits</strong> and a ° symbol: \(000°\), \(045°\),
+            \(135°\), \(270°\). North is \(000°\) (or \(360°\)).</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 280 280" width="280">
+            <circle cx="140" cy="140" r="100" fill="none" class="edge-line" stroke-dasharray="4 4"/>
+            <line class="edge-line" x1="140" y1="30" x2="140" y2="250"/>
+            <line class="edge-line" x1="30" y1="140" x2="250" y2="140"/>
+            <text class="node-label" x="133" y="22">N</text>
+            <text class="node-label" x="133" y="270">S</text>
+            <text class="node-label" x="258" y="146">E</text>
+            <text class="node-label" x="14" y="146">W</text>
+            <text class="angle-label-text" x="146" y="40">000°</text>
+            <text class="angle-label-text" x="214" y="136">090°</text>
+            <text class="angle-label-text" x="146" y="262">180°</text>
+            <text class="angle-label-text" x="38" y="136">270°</text>
+            <line class="edge-line" x1="140" y1="140" x2="218" y2="62" stroke-width="2.4"/>
+            <path class="angle-arc" d="M 140 90 A 50 50 0 0 1 175 105"/>
+            <text class="angle-label-text" x="156" y="88">045°</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">True bearings run clockwise from north through a full 360°.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Back bearings</p>
+          <p style="margin-bottom:0;">To reverse a direction, add or subtract 180°:<br>
+            If the bearing is <strong>less than 180°</strong>, <strong>add</strong> 180°.<br>
+            If it is <strong>180° or more</strong>, <strong>subtract</strong> 180°.<br>
+            So the bearing of A from B is the back bearing of B from A.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; back bearings</p>
+          <p>The bearing of B from A is \(072°\). Find the bearing of A from B.</p>
+          <p>Since \(072° < 180°\), add:</p>
+          \[072° + 180° = 252°\]
+          <p>And if the bearing of Q from P were \(215°\), the reverse would be
+            \(215° - 180° = 035°\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Bearing explorer</h3>
+          <p class="exercise-intro">Drag the bearing and read the compass direction and back
+            bearing.</p>
+          <div id="bearSliders"></div>
+          <div class="diagram-wrap"><div id="bearDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">True bearing</div>
+              <div class="readout-value" id="roTrue">045°</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Compass bearing</div>
+              <div class="readout-value" id="roCompass">N45°E</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Back bearing</div>
+              <div class="readout-value" id="roBack">225°</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find the back bearing of (a) \(036°\) (b) \(290°\) (c) \(180°\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) \(036° + 180° = 216°\) &nbsp; (b) \(290° - 180° = 110°\) &nbsp;
+                  (c) \(180° - 180° = 000°\)</p>
+              </div></details></li>
+            <li>From a lighthouse, ship A bears \(050°\) and ship B bears \(140°\). What is the angle
+              between the two lines of sight?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Both are measured from the same north line: \(140° - 50° = 90°\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. COMPASS ─────────── -->
+      <div class="content-card" id="compass">
+        <p class="section-label">Theory</p>
+        <h2>Compass bearings</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Compass bearings</p>
+          <p style="margin-bottom:0;">Written as <strong>N or S</strong>, then an acute angle, then
+            <strong>E or W</strong> — for example \(N35°E\), \(S62°W\). Read it as: start facing
+            north (or south), then turn that many degrees toward east (or west).</p>
+        </div>
+
+        <p>The angle in a compass bearing is always between 0° and 90°, measured from the
+          north–south line, never from east or west.</p>
+
+        <table class="coord-table">
+          <tr><th>Quadrant</th><th>Compass form</th><th>True bearing</th></tr>
+          <tr><td>North-east</td><td>\(N\theta E\)</td><td>\(\theta\)</td></tr>
+          <tr><td>South-east</td><td>\(S\theta E\)</td><td>\(180° - \theta\)</td></tr>
+          <tr><td>South-west</td><td>\(S\theta W\)</td><td>\(180° + \theta\)</td></tr>
+          <tr><td>North-west</td><td>\(N\theta W\)</td><td>\(360° - \theta\)</td></tr>
+        </table>
+      </div>
+
+      <!-- ─────────── 5. CONVERTING ─────────── -->
+      <div class="content-card" id="converting">
+        <p class="section-label">Method</p>
+        <h2>Converting between the two systems</h2>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; compass to true</p>
+          <p>Convert \(S28°W\) to a true bearing.</p>
+          <p>South-west quadrant, so use \(180° + \theta\):</p>
+          \[180° + 28° = 208°\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; true to compass</p>
+          <p>Convert \(312°\) to a compass bearing.</p>
+          <p>\(312°\) is between 270° and 360°, so it lies in the north-west quadrant. Measure back
+            from north:</p>
+          \[360° - 312° = 48°\]
+          <p>So \(312° = N48°W\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; true to compass, south-east</p>
+          <p>Convert \(143°\) to a compass bearing.</p>
+          <p>\(143°\) lies between 90° and 180°, the south-east quadrant. Measure from south:</p>
+          \[180° - 143° = 37°\]
+          <p>So \(143° = S37°E\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise converting</h3>
+          <p class="exercise-intro">Write true bearings with three digits (e.g. <code>065</code>)
+            and compass bearings like <code>N35E</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) Convert \(N52°W\) to a true bearing.</label>
+            <input class="exercise-input" id="cvA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cv="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCvA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Convert \(234°\) to a compass bearing.</label>
+            <input class="exercise-input" id="cvB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cv="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCvB"></p>
+
+          <div class="exercise-row">
+            <label>(c) The bearing of X from Y is \(108°\). Find the bearing of Y from X.</label>
+            <input class="exercise-input" id="cvC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cv="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCvC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Convert to true bearings: (a) \(S15°E\) (b) \(N70°W\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) South-east: \(180° - 15° = 165°\). (b) North-west: \(360° - 70° = 290°\).</p>
+              </div></details></li>
+            <li>Convert to compass bearings: (a) \(200°\) (b) \(095°\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) South-west: \(200° - 180° = 20°\), so \(S20°W\).</p>
+                <p>(b) South-east: \(180° - 95° = 85°\), so \(S85°E\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. NAVIGATION ─────────── -->
+      <div class="content-card" id="navigation">
+        <p class="section-label">Application</p>
+        <h2>Navigation problems</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The method that works every time</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Draw a diagram</strong>, marking north at every turning point.</li>
+            <li><strong>Mark the bearings</strong> clockwise from each north line.</li>
+            <li><strong>Find the angle inside the triangle</strong> — this is the step worth the
+              most marks, and where most errors happen.</li>
+            <li><strong>Choose the rule</strong>: cosine for SAS, sine for a matching pair.</li>
+            <li><strong>Convert back to a bearing</strong> if the question asks for a direction.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10</p>
+          <p>A ship sails 45 km on a bearing of \(062°\), then 38 km on a bearing of \(145°\). How
+            far is it from its starting point?</p>
+          <p><strong>Finding the interior angle.</strong> At the turning point, the new north line
+            is parallel to the original. The incoming leg arrives on a bearing of \(062°\), so its
+            back bearing is \(062° + 180° = 242°\). The next leg leaves on \(145°\). The angle
+            between them is</p>
+          \[242° - 145° = 97°\]
+          <p>Now the two legs and the included angle of 97° form an SAS triangle:</p>
+          \[d^{2} = 45^{2} + 38^{2} - 2(45)(38)\cos 97°\]
+          \[= 2025 + 1444 - 3420 \times (-0.12187)\]
+          \[= 3469 + 416.79 = 3885.79\]
+          \[d = \sqrt{3885.79} = 62.34 \text{ km}\]
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 360 260" width="360">
+            <line class="dim-line" x1="60" y1="215" x2="60" y2="120"/>
+            <text class="angle-label-text" x="52" y="112">N</text>
+            <line class="dim-line" x1="235" y1="130" x2="235" y2="35"/>
+            <text class="angle-label-text" x="227" y="27">N</text>
+            <line class="edge-line" x1="60" y1="215" x2="235" y2="130" stroke-width="2.4"/>
+            <line class="edge-line" x1="235" y1="130" x2="300" y2="220" stroke-width="2.4"/>
+            <line class="edge-line" x1="60" y1="215" x2="300" y2="220" stroke-dasharray="5 4"/>
+            <circle class="node-circle" cx="60" cy="215" r="6"/>
+            <circle class="node-circle" cx="235" cy="130" r="6"/>
+            <circle class="node-circle" cx="300" cy="220" r="6"/>
+            <text class="side-label-text" x="130" y="160">45 km</text>
+            <text class="side-label-text" x="278" y="168">38 km</text>
+            <text class="side-label-text" x="165" y="238">d</text>
+            <path class="angle-arc" d="M 60 185 A 30 30 0 0 1 86 200"/>
+            <text class="angle-label-text" x="68" y="188">062°</text>
+            <path class="angle-arc" d="M 235 92 A 38 38 0 0 1 262 108"/>
+            <text class="angle-label-text" x="243" y="98">145°</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The interior angle at the turning point is 97°, found from the
+          back bearing 242° minus the outgoing bearing 145°.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11 &mdash; finding the return bearing</p>
+          <p>For the ship above, find the bearing it must take to return directly to its start.</p>
+          <p>First find the angle at the starting point using the sine rule:</p>
+          \[\sin\theta = \frac{38 \times \sin 97°}{62.34} = \frac{38 \times 0.99255}{62.34} = 0.60510\]
+          \[\theta = 37.24°\]
+          <p>This angle sits between the first leg (bearing \(062°\)) and the direct line, so the
+            direct line from start to finish has bearing</p>
+          \[062° + 37.24° = 99.24° \approx 099°\]
+          <p>The return bearing is the back bearing:</p>
+          \[099° + 180° = 279°\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two-leg journey planner</h3>
+          <p class="exercise-intro">Set both legs and bearings. The interior angle, direct
+            distance and return bearing are all computed.</p>
+          <div id="navSliders"></div>
+          <div class="diagram-wrap"><div id="navDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Interior angle</div>
+              <div class="readout-value" id="roInterior">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Direct distance</div>
+              <div class="readout-value" id="roDirect">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Bearing of finish</div>
+              <div class="readout-value" id="roBearFin">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Return bearing</div>
+              <div class="readout-value" id="roReturn">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A boat sails 20 km on a bearing of \(040°\), then 30 km on a bearing of \(110°\).
+              Find the interior angle at the turning point and the distance from the start.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Back bearing of leg 1: \(220°\). Interior angle: \(220° - 110° = 110°\).</p>
+                \[d^2 = 400 + 900 - 2(20)(30)\cos 110° = 1710.42 \;\Rightarrow\; d = 41.36 \text{ km}\]
+              </div></details></li>
+            <li>A hiker walks on a bearing of \(300°\), then turns onto \(030°\). Find the interior
+              angle at the turn.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Back bearing of \(300°\) is \(120°\). Interior angle: \(120° - 30° = 90°\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. TOGETHER ─────────── -->
+      <div class="content-card" id="together">
+        <p class="section-label">Method</p>
+        <h2>Putting it all together</h2>
+
+        <p>Full-mark questions chain several techniques. This checklist keeps you on track:</p>
+
+        <table class="coord-table">
+          <tr><th>Situation</th><th>Tool</th></tr>
+          <tr><td>Right angle present</td><td>SOH CAH TOA</td></tr>
+          <tr><td>Matching side–angle pair</td><td>Sine rule</td></tr>
+          <tr><td>Two sides + included angle (SAS)</td><td>Cosine rule</td></tr>
+          <tr><td>Three sides (SSS)</td><td>Cosine rule, angle form</td></tr>
+          <tr><td>Two sides + included angle, want area</td><td>\(A = \tfrac12 ab\sin C\)</td></tr>
+          <tr><td>Three sides, want area</td><td>Cosine rule for an angle, then the area formula</td></tr>
+          <tr><td>Reverse a direction</td><td>Back bearing: \(\pm 180°\)</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 12 &mdash; a full question</p>
+          <p>A walker goes 6 km from A on a bearing of \(035°\) to B, then 9 km on a bearing of
+            \(128°\) to C. Find (a) the distance AC, (b) the bearing of C from A, and (c) the area
+            of triangle ABC.</p>
+          <p><strong>(a)</strong> Back bearing of AB is \(035° + 180° = 215°\). Interior angle at B:</p>
+          \[215° - 128° = 87°\]
+          \[AC^{2} = 36 + 81 - 2(6)(9)\cos 87° = 117 - 108 \times 0.05234 = 111.35\]
+          \[AC = 10.55 \text{ km}\]
+          <p><strong>(b)</strong> Angle at A, by the sine rule:</p>
+          \[\sin A = \frac{9 \times \sin 87°}{10.55} = 0.85180 \quad\Rightarrow\quad A = 58.35°\]
+          <p>Bearing of C from A is \(035° + 58.35° = 93.35° \approx 093°\).</p>
+          <p><strong>(c)</strong> Using the two legs and the included angle at B:</p>
+          \[\text{Area} = \frac{1}{2}(6)(9)\sin 87° = 27 \times 0.99863 = 26.96 \text{ km}^{2}\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 13 &mdash; exam style: bearings and elevation</p>
+          <p>From point P, a radio tower T bears \(040°\). From point Q, 500 m due east of P, the
+            tower bears \(320°\). The angle of elevation of the top of the tower from P is 18°.</p>
+          <p><strong>(a) Find the angles of triangle PQT.</strong> [2 marks]</p>
+          <p>At P: PQ points due east (\(090°\)), so \(\angle QPT = 90° - 40° = 50°\).
+            At Q: QP points due west (\(270°\)), so \(\angle PQT = 320° - 270° = 50°\).
+            Then \(\angle PTQ = 180° - 50° - 50° = 80°\).</p>
+          <p><strong>(b) Find the distance PT.</strong> [2 marks]</p>
+          \[PT = \frac{500 \times \sin 50°}{\sin 80°} = 388.93 \text{ m}\]
+          <p><strong>(c) Find the height of the tower.</strong> [1 mark]</p>
+          \[h = 388.93 \times \tan 18° = 126.4 \text{ m}\]
+          <p>This question uses three tools: bearings for the angles, the sine rule for the
+            horizontal distance, and right-angled trigonometry for the height.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Plan the second leg</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#navigation">two-leg journey planner</a>. Leg 1 is 30 km on a bearing of
+          \(050°\); leg 2 is 40 km.</p>
+        <ol>
+          <li>Find a bearing for leg 2 that makes the interior angle 90°. What is the direct
+            distance, and why is it such a neat number? Is there a second bearing that also
+            works?</li>
+          <li>Which bearing for leg 2 makes the direct distance as large as possible? As small as
+            possible? What are those distances?</li>
+          <li>Set leg 2 to \(100°\), then to \(000°\). Compare the interior angle, the direct
+            distance and the bearing of the finish. Explain what you see.</li>
+          <li>A rescue boat must return to base after the trip with leg 2 on \(140°\). On what
+            bearing should it head?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> \(140°\) gives 90°. The direct distance is 50 km: a 30&ndash;40&ndash;50
+            right-angled triangle, so Pythagoras applies. \(320°\) also gives 90°, with the
+            finish on the other side of leg 1.</p>
+          <p><strong>2.</strong> Largest: continue on \(050°\) (interior angle 180°), giving
+            \(30 + 40 = 70\) km. Smallest: turn back on \(230°\) (interior angle 0°), giving
+            \(40 - 30 = 10\) km.</p>
+          <p><strong>3.</strong> Both give an interior angle of 130° and a direct distance of
+            63.58 km, but the finish bears \(079°\) in one case and \(021°\) in the other. The
+            triangles are mirror images, so a distance alone does not fix a position &mdash; you
+            also need the bearing.</p>
+          <p><strong>4.</strong> The finish bears \(103°\) from base, so the return bearing is
+            \(103° + 180° = 283°\).</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Draw a diagram with north lines at every turning point before
+          you start. Then reveal the worked solution and mark yourself honestly.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-4', LESSON_IDX = 2;
+  var NS = 'http://www.w3.org/2000/svg';
+  var D2R = Math.PI / 180;
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function pad3(v) { return ('00' + Math.round(v)).slice(-3) + '°'; }
+
+  function toCompass(t) {
+    t = ((t % 360) + 360) % 360;
+    if (Math.abs(t) < 0.5 || Math.abs(t - 360) < 0.5) return 'N';
+    if (Math.abs(t - 90) < 0.5)  return 'E';
+    if (Math.abs(t - 180) < 0.5) return 'S';
+    if (Math.abs(t - 270) < 0.5) return 'W';
+    if (t < 90)  return 'N' + Math.round(t) + '°E';
+    if (t < 180) return 'S' + Math.round(180 - t) + '°E';
+    if (t < 270) return 'S' + Math.round(t - 180) + '°W';
+    return 'N' + Math.round(360 - t) + '°W';
+  }
+  function backBearing(t) { return t < 180 ? t + 180 : t - 180; }
+
+  /* ── Area explorer ────────────────────────────────────────── */
+  (function () {
+    var a = 12, b = 17, C = 43;
+    var mount = document.getElementById('areaDiagram');
+    var redraw = IE.plot('plotArea', {
+      width: 440, height: 220, xMin: 0, xMax: 180, yMin: 0, yMax: 120,
+      xStep: 30, yStep: 25, xLabel: 'C°', yLabel: 'area',
+      curves: []
+    });
+
+    function update() {
+      var area = 0.5 * a * b * Math.sin(C * D2R);
+      var maxA = 0.5 * a * b;
+
+      // Triangle drawn with C at the origin
+      var W = 300, H = 200, PAD = 34;
+      var P = [[0, 0], [a, 0], [b * Math.cos(C * D2R), b * Math.sin(C * D2R)]];
+      var xs = P.map(function (p) { return p[0]; }), ys = P.map(function (p) { return p[1]; });
+      var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+      var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+      var sc = Math.min((W - 2 * PAD) / Math.max(maxX - minX, 0.001),
+                        (H - 2 * PAD) / Math.max(maxY - minY, 0.001));
+      function px(p) { return [PAD + (p[0] - minX) * sc, H - PAD - (p[1] - minY) * sc]; }
+      var q = P.map(px);
+
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      svg.appendChild(svgEl('polygon', { class: 'tri-fill',
+        points: q.map(function (p) { return p[0] + ',' + p[1]; }).join(' ') }));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: q[0][0] - 16, y: q[0][1] + 6 }, 'C'));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q[0][0] + q[1][0]) / 2, y: q[0][1] + 18, 'text-anchor': 'middle' }, 'a = ' + a));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q[0][0] + q[2][0]) / 2 - 24, y: (q[0][1] + q[2][1]) / 2 }, 'b = ' + b));
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      redraw({
+        yMax: maxA * 1.15,
+        yStep: Math.max(5, Math.round(maxA / 4 / 5) * 5),
+        curves: [{ fn: function (t) { return 0.5 * a * b * Math.sin(t * D2R); } }],
+        points: [{ x: C, y: area, label: Math.round(area) }],
+        markers: [{ x: C, y: area }]
+      });
+
+      document.getElementById('roSinC').textContent   = Math.sin(C * D2R).toFixed(5);
+      document.getElementById('roArea').textContent   = area.toFixed(2);
+      document.getElementById('roMaxArea').textContent = maxA.toFixed(2) + ' (at 90°)';
+    }
+
+    var host = 'areaSliders';
+    IE.slider({ mount: host, label: 'Side a', min: 3, max: 20, step: 1, value: a,
+                onInput: function (v) { a = v; update(); } });
+    IE.slider({ mount: host, label: 'Side b', min: 3, max: 20, step: 1, value: b,
+                onInput: function (v) { b = v; update(); } });
+    IE.slider({ mount: host, label: 'Angle C', min: 10, max: 170, step: 1, value: C,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { C = v; update(); } });
+    update();
+  })();
+
+  /* ── Bearing explorer ─────────────────────────────────────── */
+  (function () {
+    var t = 45;
+    var mount = document.getElementById('bearDiagram');
+
+    function update() {
+      var W = 260, H = 260, cx = 130, cy = 130, R = 92;
+      var ex = cx + R * Math.sin(t * D2R), ey = cy - R * Math.cos(t * D2R);
+
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      svg.appendChild(svgEl('circle', { cx: cx, cy: cy, r: R, fill: 'none', class: 'edge-line', 'stroke-dasharray': '4 4' }));
+      svg.appendChild(svgEl('line', { class: 'dim-line', x1: cx, y1: cy - R - 12, x2: cx, y2: cy + R + 12 }));
+      svg.appendChild(svgEl('line', { class: 'dim-line', x1: cx - R - 12, y1: cy, x2: cx + R + 12, y2: cy }));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx - 6, y: cy - R - 18 }, 'N'));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx - 5, y: cy + R + 30 }, 'S'));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx + R + 18, y: cy + 6 }, 'E'));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: cx - R - 30, y: cy + 6 }, 'W'));
+      svg.appendChild(svgEl('line', { class: 'edge-line', x1: cx, y1: cy, x2: ex, y2: ey, 'stroke-width': 2.6 }));
+      svg.appendChild(svgEl('circle', { class: 'node-circle', cx: cx, cy: cy, r: 5 }));
+      // Arc from north, clockwise to the bearing line
+      var ar = 42;
+      var large = t > 180 ? 1 : 0;
+      svg.appendChild(svgEl('path', { class: 'angle-arc',
+        d: 'M ' + cx + ' ' + (cy - ar) + ' A ' + ar + ' ' + ar + ' 0 ' + large + ' 1 ' +
+           (cx + ar * Math.sin(t * D2R)) + ' ' + (cy - ar * Math.cos(t * D2R)) }));
+      svg.appendChild(svgEl('text', { class: 'angle-label-text', x: cx + 8, y: cy - ar - 6 }, pad3(t)));
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roTrue').textContent    = pad3(t);
+      document.getElementById('roCompass').textContent = toCompass(t);
+      document.getElementById('roBack').textContent    = pad3(backBearing(t));
+    }
+
+    IE.slider({ mount: 'bearSliders', label: 'Bearing', min: 0, max: 359, step: 1, value: t,
+                format: function (v) { return pad3(v); },
+                onInput: function (v) { t = v; update(); } });
+    update();
+  })();
+
+  /* ── Conversion exercises ─────────────────────────────────── */
+  (function () {
+    document.querySelectorAll('[data-cv]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.cv, fb = document.getElementById('fbCv' + k);
+        var raw = (document.getElementById('cv' + k).value || '').trim().toUpperCase().replace(/[°\s]/g, '');
+        if (!raw) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter an answer.'; return; }
+        var ok, msg;
+        if (k === 'A') {
+          ok = parseFloat(raw.replace(/[^\d.]/g, '')) === 308;
+          msg = 'N52°W is in the north-west quadrant, so the true bearing is 360° − 52° = 308°.';
+        } else if (k === 'B') {
+          ok = /^S54W$/.test(raw.replace(/[^NSEW\d]/g, ''));
+          msg = '234° lies between 180° and 270° — the south-west quadrant. 234° − 180° = 54°, so it is S54°W.';
+        } else {
+          ok = parseFloat(raw.replace(/[^\d.]/g, '')) === 288;
+          msg = '108° is less than 180°, so add: 108° + 180° = 288°.';
+        }
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ Not quite. ') + msg;
+      });
+    });
+  })();
+
+  /* ── Navigation planner ───────────────────────────────────── */
+  (function () {
+    var d1 = 45, b1 = 62, d2 = 38, b2 = 145;
+    var mount = document.getElementById('navDiagram');
+
+    function update() {
+      // Interior angle at the turning point: between the back bearing of leg 1 and leg 2
+      var interior = Math.abs(backBearing(b1) - b2);
+      if (interior > 180) interior = 360 - interior;
+
+      var d = Math.sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * Math.cos(interior * D2R));
+
+      // Positions, with x east and y north
+      var P0 = [0, 0];
+      var P1 = [d1 * Math.sin(b1 * D2R), d1 * Math.cos(b1 * D2R)];
+      var P2 = [P1[0] + d2 * Math.sin(b2 * D2R), P1[1] + d2 * Math.cos(b2 * D2R)];
+      var bearFin = (Math.atan2(P2[0] - P0[0], P2[1] - P0[1]) / D2R + 360) % 360;
+
+      var W = 340, H = 250, PAD = 40;
+      var xs = [P0[0], P1[0], P2[0]], ys = [P0[1], P1[1], P2[1]];
+      var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+      var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+      var sc = Math.min((W - 2 * PAD) / Math.max(maxX - minX, 0.001),
+                        (H - 2 * PAD) / Math.max(maxY - minY, 0.001));
+      function px(p) { return [PAD + (p[0] - minX) * sc, H - PAD - (p[1] - minY) * sc]; }
+      var q0 = px(P0), q1 = px(P1), q2 = px(P2);
+
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      [q0, q1].forEach(function (p) {
+        svg.appendChild(svgEl('line', { class: 'dim-line', x1: p[0], y1: p[1], x2: p[0], y2: p[1] - 40 }));
+        svg.appendChild(svgEl('text', { class: 'angle-label-text', x: p[0] - 5, y: p[1] - 45 }, 'N'));
+      });
+      svg.appendChild(svgEl('line', { class: 'edge-line', x1: q0[0], y1: q0[1], x2: q1[0], y2: q1[1], 'stroke-width': 2.4 }));
+      svg.appendChild(svgEl('line', { class: 'edge-line', x1: q1[0], y1: q1[1], x2: q2[0], y2: q2[1], 'stroke-width': 2.4 }));
+      svg.appendChild(svgEl('line', { class: 'edge-line', x1: q0[0], y1: q0[1], x2: q2[0], y2: q2[1], 'stroke-dasharray': '5 4' }));
+      [q0, q1, q2].forEach(function (p) {
+        svg.appendChild(svgEl('circle', { class: 'node-circle', cx: p[0], cy: p[1], r: 5 }));
+      });
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q0[0] + q1[0]) / 2 - 24, y: (q0[1] + q1[1]) / 2 }, d1 + ' km'));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q1[0] + q2[0]) / 2 + 6, y: (q1[1] + q2[1]) / 2 }, d2 + ' km'));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q0[0] + q2[0]) / 2, y: (q0[1] + q2[1]) / 2 + 16 }, d.toFixed(1) + ' km'));
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roInterior').textContent = interior.toFixed(0) + '°';
+      document.getElementById('roDirect').textContent   = d.toFixed(2) + ' km';
+      document.getElementById('roBearFin').textContent  = pad3(bearFin);
+      document.getElementById('roReturn').textContent   = pad3(backBearing(bearFin));
+    }
+
+    var host = 'navSliders';
+    IE.slider({ mount: host, label: 'Leg 1', min: 10, max: 100, step: 5, value: d1,
+                format: function (v) { return v + ' km'; },
+                onInput: function (v) { d1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Bearing 1', min: 0, max: 359, step: 1, value: b1,
+                format: function (v) { return pad3(v); },
+                onInput: function (v) { b1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Leg 2', min: 10, max: 100, step: 5, value: d2,
+                format: function (v) { return v + ' km'; },
+                onInput: function (v) { d2 = v; update(); } });
+    IE.slider({ mount: host, label: 'Bearing 2', min: 0, max: 359, step: 1, value: b2,
+                format: function (v) { return pad3(v); },
+                onInput: function (v) { b2 = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Find the area of a triangle with sides 10 cm and 14 cm and an included angle of 50°.',
+      opts: ['A) 53.62 cm²', 'B) 70 cm²', 'C) 107.25 cm²', 'D) 45.00 cm²'],
+      correct: 0,
+      explanation: 'A is correct. \\(A = \\tfrac12(10)(14)\\sin 50° = 70 \\times 0.76604 = 53.62\\) cm². Option C forgets the factor of \\(\\tfrac12\\).'
+    },
+    {
+      q: 'To use \\(A = \\tfrac12 ab \\sin C\\), the angle \\(C\\) must be:',
+      opts: [
+        'A) The largest angle in the triangle',
+        'B) The angle between sides \\(a\\) and \\(b\\)',
+        'C) Opposite side \\(a\\)',
+        'D) A right angle'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The formula requires the <em>included</em> angle — the one between the two sides being used. If the given angle is not between them, find a different angle first.'
+    },
+    {
+      q: 'What is \\(N35°W\\) as a true bearing?',
+      opts: ['A) \\(035°\\)', 'B) \\(145°\\)', 'C) \\(215°\\)', 'D) \\(325°\\)'],
+      correct: 3,
+      explanation: 'D is correct. \\(N35°W\\) lies in the north-west quadrant, so the true bearing is \\(360° - 35° = 325°\\). Option A would be \\(N35°E\\).'
+    },
+    {
+      q: 'The bearing of B from A is \\(155°\\). What is the bearing of A from B?',
+      opts: ['A) \\(025°\\)', 'B) \\(335°\\)', 'C) \\(205°\\)', 'D) \\(155°\\)'],
+      correct: 1,
+      explanation: 'B is correct. A back bearing reverses the direction. Since \\(155° < 180°\\), add 180°: \\(155° + 180° = 335°\\). Option C subtracts 180° instead, which is the rule for bearings of 180° or more.'
+    },
+    {
+      q: 'Convert \\(247°\\) to a compass bearing.',
+      opts: ['A) \\(S67°W\\)', 'B) \\(N67°W\\)', 'C) \\(S23°W\\)', 'D) \\(S67°E\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(247°\\) lies between 180° and 270°, the south-west quadrant, and \\(247° - 180° = 67°\\), giving \\(S67°W\\).'
+    },
+    {
+      q: 'A triangle has sides 8, 11 and 15 m. To find its area, what must you do first?',
+      opts: [
+        'A) Use \\(A = \\tfrac12 ab\\sin C\\) directly',
+        'B) Use the cosine rule to find an angle, then the area formula',
+        'C) Use the sine rule to find a side',
+        'D) Use Pythagoras'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The area formula needs an included angle, and none is given. With three sides (SSS) the cosine rule in angle form supplies one, after which the area formula can be applied.'
+    },
+    {
+      q: 'A ship sails on a bearing of \\(070°\\), then turns onto \\(130°\\). What is the interior angle of the triangle at the turning point?',
+      opts: ['A) 60°', 'B) 120°', 'C) 130°', 'D) 250°'],
+      correct: 1,
+      explanation: 'B is correct. The back bearing of the first leg is \\(070° + 180° = 250°\\). The interior angle is \\(250° - 130° = 120°\\). Option A is the difference between the two bearings, which is the angle <em>turned through</em>, not the interior angle.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Find the area of a triangle with sides 15 m and 22 m and an included angle of 67°.',
+      marks: 2,
+      steps: [
+        '\\(A = \\tfrac12 ab \\sin C = \\tfrac12(15)(22)\\sin 67°\\).',
+        '\\(= 165 \\times 0.92050\\).'
+      ],
+      answer: 'About 151.88 m²'
+    },
+    {
+      q: 'A triangular garden has sides 9 m and 13 m with an included angle of 131°. Find its area.',
+      marks: 3,
+      steps: [
+        '\\(\\sin 131° = 0.75471\\) — positive, even though the angle is obtuse.',
+        '\\(A = \\tfrac12(9)(13)\\sin 131°\\).',
+        '\\(= 58.5 \\times 0.75471\\).'
+      ],
+      answer: 'About 44.15 m²'
+    },
+    {
+      q: 'A triangle with sides 14 m and 19 m has an area of 95 m². Find the two possible included angles.',
+      marks: 4,
+      steps: [
+        '\\(95 = \\tfrac12(14)(19)\\sin C = 133\\sin C\\).',
+        '\\(\\sin C = \\dfrac{95}{133} = 0.71429\\).',
+        '\\(C = \\sin^{-1}(0.71429) = 45.58°\\).',
+        'The supplementary angle gives the same sine: \\(180° - 45.58° = 134.42°\\).'
+      ],
+      answer: 'Either \\(45.58°\\) or \\(134.42°\\) — both produce an area of 95 m².'
+    },
+    {
+      q: 'Find the area of a triangle with sides 7, 10 and 12 cm.',
+      marks: 5,
+      steps: [
+        'No angle is given, so find one with the cosine rule first.',
+        'Take the angle between the 7 and 10 sides (opposite the 12): \\(\\cos C = \\dfrac{49 + 100 - 144}{2(7)(10)} = \\dfrac{5}{140} = 0.035714\\).',
+        '\\(C = 87.95°\\).',
+        'Now apply the area formula: \\(A = \\tfrac12(7)(10)\\sin 87.95°\\).',
+        '\\(= 35 \\times 0.99935\\).'
+      ],
+      answer: 'About 34.98 cm²'
+    },
+    {
+      q: 'Convert each. (a) \\(S41°E\\) to a true bearing. (b) \\(298°\\) to a compass bearing. (c) The back bearing of \\(163°\\).',
+      marks: 3,
+      steps: [
+        '(a) South-east quadrant: \\(180° - 41° = 139°\\).',
+        '(b) \\(298°\\) is between 270° and 360°, the north-west quadrant: \\(360° - 298° = 62°\\), so \\(N62°W\\).',
+        '(c) \\(163° < 180°\\), so add: \\(163° + 180° = 343°\\).'
+      ],
+      answer: '(a) \\(139°\\) &nbsp; (b) \\(N62°W\\) &nbsp; (c) \\(343°\\)'
+    },
+    {
+      q: 'A ship sails 32 km on a bearing of \\(048°\\), then 27 km on a bearing of \\(126°\\). Find how far it is from its starting point.',
+      marks: 5,
+      steps: [
+        'Back bearing of the first leg: \\(048° + 180° = 228°\\).',
+        'Interior angle at the turning point: \\(228° - 126° = 102°\\).',
+        'Cosine rule: \\(d^{2} = 32^{2} + 27^{2} - 2(32)(27)\\cos 102°\\).',
+        '\\(\\cos 102° = -0.20791\\), so \\(d^{2} = 1024 + 729 + 359.27 = 2112.27\\).',
+        '\\(d = \\sqrt{2112.27}\\).'
+      ],
+      answer: 'About 45.96 km from the start.'
+    },
+    {
+      q: 'For the ship above, find the bearing of the finishing point from the start.',
+      marks: 4,
+      steps: [
+        'Use the sine rule to find the angle at the starting point.',
+        '\\(\\sin\\theta = \\dfrac{27 \\times \\sin 102°}{45.96} = \\dfrac{27 \\times 0.97815}{45.96} = 0.57463\\).',
+        '\\(\\theta = 35.08°\\).',
+        'This angle is measured from the first leg, which had bearing \\(048°\\), turning toward the second leg.',
+        'So the bearing is \\(048° + 35.08° = 83.08°\\).'
+      ],
+      answer: 'About \\(083°\\).'
+    },
+    {
+      q: 'A hiker walks 5 km from camp on a bearing of \\(310°\\), then 8 km on a bearing of \\(025°\\). Find the distance back to camp.',
+      marks: 5,
+      steps: [
+        'Back bearing of the first leg: \\(310° - 180° = 130°\\).',
+        'Interior angle: \\(130° - 025° = 105°\\).',
+        '\\(d^{2} = 25 + 64 - 2(5)(8)\\cos 105°\\).',
+        '\\(\\cos 105° = -0.25882\\), so \\(d^{2} = 89 + 20.71 = 109.71\\).',
+        '\\(d = \\sqrt{109.71}\\).'
+      ],
+      answer: 'About 10.47 km back to camp.'
+    },
+    {
+      q: 'Explain why the interior angle of a navigation triangle is not simply the difference between the two bearings.',
+      marks: 3,
+      steps: [
+        'Bearings are measured from north at each separate point.',
+        'The interior angle sits between the <em>incoming</em> leg and the <em>outgoing</em> leg.',
+        'The incoming leg must be reversed to a back bearing before comparing.',
+        'The difference between the raw bearings gives the angle turned through, which is the supplement of the interior angle.'
+      ],
+      answer: 'Because the interior angle lies between the reversed incoming leg and the outgoing leg. You must take the back bearing of the first leg first; the raw difference gives the angle turned through, not the triangle\'s interior angle.'
+    },
+    {
+      q: 'Two towers are 400 m apart on level ground. From tower A the bearing of tower B is \\(072°\\). A fire is spotted at bearing \\(110°\\) from A and \\(215°\\) from B. Find the distance from A to the fire.',
+      marks: 6,
+      steps: [
+        'Angle at A, between AB (\\(072°\\)) and the fire (\\(110°\\)): \\(110 - 72 = 38°\\).',
+        'Back bearing of AB from B: \\(072° + 180° = 252°\\).',
+        'Angle at B, between BA (\\(252°\\)) and the fire (\\(215°\\)): \\(252 - 215 = 37°\\).',
+        'Third angle, at the fire: \\(180 - 38 - 37 = 105°\\).',
+        'Sine rule: \\(\\dfrac{AF}{\\sin 37°} = \\dfrac{400}{\\sin 105°}\\).',
+        '\\(AF = \\dfrac{400 \\times 0.60182}{0.96593}\\).'
+      ],
+      answer: 'About 249.24 m from tower A to the fire.'
+    },
+    {
+      q: 'A surveyor measures a triangular block with sides 45 m and 62 m and an included angle of 78°. Find (a) the third side and (b) the area.',
+      marks: 5,
+      steps: [
+        '(a) Cosine rule: \\(c^{2} = 45^{2} + 62^{2} - 2(45)(62)\\cos 78°\\).',
+        '\\(= 2025 + 3844 - 5580 \\times 0.20791 = 5869 - 1160.14 = 4708.86\\).',
+        '\\(c = \\sqrt{4708.86} = 68.62\\) m.',
+        '(b) Area \\(= \\tfrac12(45)(62)\\sin 78°\\).',
+        '\\(= 1395 \\times 0.97815\\).'
+      ],
+      answer: '(a) About 68.62 m. (b) About 1,364.52 m².'
+    },
+    {
+      q: 'A plane flies 250 km on a bearing of \\(155°\\), then changes course and flies 180 km on a bearing of \\(240°\\). Find its distance and bearing from the start.',
+      marks: 6,
+      steps: [
+        'Back bearing of the first leg: \\(155° + 180° = 335°\\).',
+        'Interior angle: \\(335° - 240° = 95°\\).',
+        '\\(d^{2} = 250^{2} + 180^{2} - 2(250)(180)\\cos 95° = 62500 + 32400 + 7845.6 = 102745.6\\).',
+        '\\(d = 320.54\\) km.',
+        'Angle at the start: \\(\\sin\\theta = \\dfrac{180 \\times \\sin 95°}{320.54} = 0.55942\\), so \\(\\theta = 34.02°\\).',
+        'The second leg turns clockwise-to-westward, so the bearing is \\(155° + 34.02° = 189.02°\\).'
+      ],
+      answer: 'About 320.54 km on a bearing of approximately \\(189°\\).'
+    },
+    {
+      q: 'A triangular paddock has vertices A, B and C, with \\(AB = 120\\) m, \\(BC = 95\\) m and angle \\(B = 112°\\). Find the area and the length of fencing needed for all three sides.',
+      marks: 6,
+      steps: [
+        'Area uses the included angle at B: \\(A = \\tfrac12(120)(95)\\sin 112° = 5700 \\times 0.92718 = 5\\,284.93\\) m².',
+        'Third side by the cosine rule: \\(AC^{2} = 120^{2} + 95^{2} - 2(120)(95)\\cos 112°\\).',
+        '\\(\\cos 112° = -0.37461\\), so \\(AC^{2} = 14400 + 9025 + 8541.5 = 31966.5\\).',
+        '\\(AC = 178.79\\) m.',
+        'Perimeter \\(= 120 + 95 + 178.79\\).'
+      ],
+      answer: 'Area about 5,284.93 m²; fencing needed about 393.79 m.'
+    },
+    {
+      q: 'From a yacht, a lighthouse bears \\(035°\\) and is 12 km away. The yacht sails 18 km due east. Find the new bearing and distance of the lighthouse from the yacht.',
+      marks: 6,
+      steps: [
+        'Due east is a bearing of \\(090°\\). The angle at the start between the lighthouse (\\(035°\\)) and the course (\\(090°\\)) is \\(55°\\).',
+        'Cosine rule for the new distance: \\(d^{2} = 12^{2} + 18^{2} - 2(12)(18)\\cos 55°\\).',
+        '\\(= 144 + 324 - 432 \\times 0.57358 = 468 - 247.79 = 220.21\\), so \\(d = 14.84\\) km.',
+        'Angle at the new position, by the sine rule: \\(\\sin\\phi = \\dfrac{12 \\times \\sin 55°}{14.84} = 0.66242\\), so \\(\\phi = 41.49°\\).',
+        'The yacht travelled east, so the lighthouse is now behind and to the left: the bearing is \\(360° - 41.49° = 318.51°\\).',
+        'Check the angles sum: \\(55 + 41.49 + 83.51 = 180\\) ✓'
+      ],
+      answer: 'The lighthouse is about 14.84 km away on a bearing of roughly \\(319°\\).'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

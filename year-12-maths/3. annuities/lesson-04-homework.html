@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Annuities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 3 &mdash; Annuities</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Annuities</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Work them on paper, then
+        reveal each worked solution and mark yourself. Allow about two hours.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-03</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Tabular modelling (10)</li>
+        <li>Part B &mdash; Future value &amp; factors (10)</li>
+        <li>Part C &mdash; Present value &amp; decisions (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#ref">Factor tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Future value</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Present value</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="ref">
+        <p class="section-label">Reference</p>
+        <h2>Interest factor tables</h2>
+        <p>Every factor needed for this homework is in these two tables. Remember: FV factors are
+          always <em>greater</em> than \(n\); PV factors are always <em>less</em> than \(n\).</p>
+
+        <h3>Future value of an annuity of $1 per period</h3>
+        <div style="overflow-x:auto;"><table class="coord-table" id="fvTable"></table></div>
+
+        <h3>Present value of an annuity of $1 per period</h3>
+        <div style="overflow-x:auto;"><table class="coord-table" id="pvTable"></table></div>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Tabular modelling</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Future value &amp; interest factors</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Present value &amp; financial decisions</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The revision lesson pulls the whole topic together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var RATES = [1,2,3,4,5,6,7,8,9,10];
+  var PERIODS = [1,2,3,4,5,6,7,8,9,10,12,15,20,25,30];
+  function fvF(r, n) { return (Math.pow(1 + r, n) - 1) / r; }
+  function pvF(r, n) { return (1 - Math.pow(1 + r, -n)) / r; }
+
+  function buildTable(id, fn) {
+    var html = '<tr><th>n \\ r</th>' + RATES.map(function (r) { return '<th>' + r + '%</th>'; }).join('') + '</tr>';
+    PERIODS.forEach(function (n) {
+      html += '<tr><th>' + n + '</th>' + RATES.map(function (r) {
+        return '<td>' + fn(r / 100, n).toFixed(4) + '</td>';
+      }).join('') + '</tr>';
+    });
+    document.getElementById(id).innerHTML = html;
+  }
+  buildTable('fvTable', fvF);
+  buildTable('pvTable', pvF);
+
+  /* ══════════ PART A — Tabular modelling ══════════ */
+  var QS_A = [
+    {
+      q: 'Define an annuity and give one example of each of its two forms.',
+      marks: 3,
+      steps: [
+        'An annuity involves regular, equal payments at regular intervals with compound interest.',
+        'Form 1 — accumulating: regular contributions build a balance. Example: superannuation or a savings plan.',
+        'Form 2 — drawdown: a single sum funds regular equal withdrawals. Example: a retirement pension, or a reducing-balance loan seen from the lender\'s side.'
+      ],
+      answer: 'An annuity is a series of regular, equal payments at regular intervals with compound interest applied each period. It either accumulates (e.g. superannuation contributions) or draws down (e.g. a retirement income stream or a loan).'
+    },
+    {
+      q: 'Model the first four years of an annuity where $4,500 is contributed at the end of each year at 6% per annum.',
+      marks: 4,
+      steps: [
+        'Year 1: opening $0, interest $0, closing \\(= 0 + 0 + 4500 = \\$4\\,500.00\\).',
+        'Year 2: interest \\(= 4500 \\times 0.06 = \\$270.00\\); closing \\(= 4500 + 270 + 4500 = \\$9\\,270.00\\).',
+        'Year 3: interest \\(= 9270 \\times 0.06 = \\$556.20\\); closing \\(= 9270 + 556.20 + 4500 = \\$14\\,326.20\\).',
+        'Year 4: interest \\(= 14326.20 \\times 0.06 = \\$859.57\\); closing \\(= 14326.20 + 859.57 + 4500 = \\$19\\,685.77\\).'
+      ],
+      answer: 'Closing balances $4,500.00, $9,270.00, $14,326.20, $19,685.77.'
+    },
+    {
+      q: 'For the annuity above, state the total contributed and the interest earned.',
+      marks: 2,
+      steps: [
+        'Total contributed \\(= 4 \\times 4500 = \\$18\\,000\\).',
+        'Final balance \\(= \\$19\\,685.77\\).',
+        'Interest \\(= 19685.77 - 18000\\).'
+      ],
+      answer: 'Contributed $18,000; interest $1,685.77.'
+    },
+    {
+      q: 'Explain why the interest in year 1 of an annuity starting from zero is always $0.',
+      marks: 2,
+      steps: [
+        'The opening balance in year 1 is $0.',
+        'Interest is calculated on the opening balance.',
+        'The contribution arrives at the end of the period, after interest has been applied.'
+      ],
+      answer: 'Because interest is charged on the opening balance, which is $0, and the first contribution does not arrive until the end of the period — so there is nothing in the account to earn interest during year 1.'
+    },
+    {
+      q: 'Hana has $12,000 already invested at 7% per annum and adds $3,000 at the end of each year. Model three years.',
+      marks: 4,
+      steps: [
+        'Year 1: interest \\(= 12000 \\times 0.07 = \\$840\\); closing \\(= 12000 + 840 + 3000 = \\$15\\,840.00\\).',
+        'Year 2: interest \\(= 15840 \\times 0.07 = \\$1\\,108.80\\); closing \\(= 15840 + 1108.80 + 3000 = \\$19\\,948.80\\).',
+        'Year 3: interest \\(= 19948.80 \\times 0.07 = \\$1\\,396.42\\); closing \\(= 19948.80 + 1396.42 + 3000 = \\$24\\,345.22\\).',
+        'Year 1 earns interest here because an opening balance already existed.'
+      ],
+      answer: 'Closing balances $15,840.00, $19,948.80, $24,345.22.'
+    },
+    {
+      q: '$1,500 is contributed at the end of each year for 4 years at 12% per annum. Find the value of each individual contribution at the end of year 4.',
+      marks: 4,
+      steps: [
+        'Year 1 contribution earns interest for 3 years: \\(1500 \\times 1.12^{3} = \\$2\\,107.39\\).',
+        'Year 2 contribution earns interest for 2 years: \\(1500 \\times 1.12^{2} = \\$1\\,881.60\\).',
+        'Year 3 contribution earns interest for 1 year: \\(1500 \\times 1.12 = \\$1\\,680.00\\).',
+        'Year 4 contribution earns nothing: $1,500.00.',
+        'Total: \\(2107.39 + 1881.60 + 1680.00 + 1500.00\\).'
+      ],
+      answer: '$2,107.39, $1,881.60, $1,680.00 and $1,500.00, totalling $7,168.99.'
+    },
+    {
+      q: 'A retiree invests $450,000 at 5% per annum and withdraws $35,000 at the end of each year. Model the first three years.',
+      marks: 4,
+      steps: [
+        'Year 1: interest \\(= 450000 \\times 0.05 = \\$22\\,500\\); closing \\(= 450000 + 22500 - 35000 = \\$437\\,500\\).',
+        'Year 2: interest \\(= 437500 \\times 0.05 = \\$21\\,875\\); closing \\(= 437500 + 21875 - 35000 = \\$424\\,375\\).',
+        'Year 3: interest \\(= 424375 \\times 0.05 = \\$21\\,218.75\\); closing \\(= 424375 + 21218.75 - 35000 = \\$410\\,593.75\\).'
+      ],
+      answer: 'Closing balances $437,500.00, $424,375.00, $410,593.75.'
+    },
+    {
+      q: 'For the retiree above, find the annual withdrawal that would preserve the capital indefinitely.',
+      marks: 2,
+      steps: [
+        'The capital is preserved when the withdrawal equals the interest earned.',
+        'Interest on $450,000 at 5% is \\(450000 \\times 0.05\\).'
+      ],
+      answer: '$22,500 per year. At that level the closing balance equals the opening balance every year.'
+    },
+    {
+      q: 'Write the spreadsheet formulas for C6 (interest), E6 (closing) and B7 (next opening) for an accumulating annuity, with the opening balance in B1, contribution in B2 and rate in B3, starting at row 6.',
+      marks: 3,
+      steps: [
+        'Interest is the row\'s opening balance times the rate; the rate cell must be absolute so it survives fill-down.',
+        'The closing balance adds both interest and contribution to the opening balance.',
+        'The link between rows: each opening balance equals the previous closing balance.'
+      ],
+      answer: 'C6: <code>=B6*$B$3</code> &nbsp; E6: <code>=B6+C6+D6</code> &nbsp; B7: <code>=E6</code>'
+    },
+    {
+      q: 'A spreadsheet annuity model reports a final balance of $62,400, total contributions of $48,000 and total interest of $13,900, with no opening balance. Identify the problem.',
+      marks: 3,
+      steps: [
+        'The reconciliation is: final balance = opening + contributions + interest.',
+        '\\(0 + 48000 + 13900 = \\$61\\,900\\).',
+        'That is $500 short of the reported $62,400.',
+        'A SUM range has probably missed a row, or an opening-balance cell references the wrong row.'
+      ],
+      answer: 'The figures do not reconcile — contributions plus interest give $61,900, not $62,400. The $500 discrepancy points to a SUM range excluding a row or an opening-balance reference error.'
+    }
+  ];
+
+  /* ══════════ PART B — Future value ══════════ */
+  var QS_B = [
+    {
+      q: 'Explain what an interest factor of 12.5779 means and how it is applied.',
+      marks: 2,
+      steps: [
+        'It is the future value of an annuity of $1 contributed at the end of each period.',
+        'Annuities scale proportionally, so the factor is multiplied by the actual contribution.'
+      ],
+      answer: '$1 contributed each period would accumulate to $12.5779. Multiply by the real contribution: \\(FV = \\text{contribution} \\times 12.5779\\).'
+    },
+    {
+      q: '$3,500 is contributed at the end of each year for 10 years at 5% per annum. Use the table to find the future value.',
+      marks: 3,
+      steps: [
+        'From the FV table at \\(n = 10\\), \\(r = 5\\%\\), the factor is 12.5779.',
+        '\\(FV = 3500 \\times 12.5779\\).',
+        'Sense check: 12.5779 > 10 ✓'
+      ],
+      answer: 'About $44,022.65'
+    },
+    {
+      q: '$800 is contributed at the end of each year for 15 years at 8% per annum. Find the future value and the interest earned.',
+      marks: 3,
+      steps: [
+        'From the table at \\(n = 15\\), \\(r = 8\\%\\), the factor is 27.1521.',
+        '\\(FV = 800 \\times 27.1521 = \\$21\\,721.68\\).',
+        'Contributed \\(= 15 \\times 800 = \\$12\\,000\\), so interest \\(= \\$9\\,721.68\\).'
+      ],
+      answer: 'Future value about $21,721.68; interest about $9,721.68.'
+    },
+    {
+      q: 'Ash wants $60,000 in 12 years. His fund earns 6% per annum. Find the required annual contribution.',
+      marks: 3,
+      steps: [
+        'From the FV table at \\(n = 12\\), \\(r = 6\\%\\), the factor is 16.8699.',
+        'Contribution \\(= \\dfrac{60000}{16.8699}\\).',
+        '\\(= \\$3\\,556.63\\).'
+      ],
+      answer: 'About $3,556.63 per year, totalling about $42,680 of contributions.'
+    },
+    {
+      q: 'For Ash\'s goal, find instead the single sum he could invest today at 6% to reach $60,000 in 12 years, and explain why it is smaller than his total contributions.',
+      marks: 4,
+      steps: [
+        'Present value of a lump sum: \\(PV = \\dfrac{60000}{1.06^{12}}\\).',
+        '\\(1.06^{12} = 2.01220\\).',
+        '\\(PV = \\dfrac{60000}{2.01220} = \\$29\\,818.11\\).',
+        'The lump sum compounds for all 12 years; the instalments compound for 11, 10, … 0 years.'
+      ],
+      answer: 'About $29,818 today, against $42,680 of instalments. The lump sum is smaller because every dollar of it earns interest for the full 12 years.'
+    },
+    {
+      q: 'Contributions of $1,100 are made at the end of every quarter for 5 years at 8% per annum compounded quarterly. State \\(n\\) and \\(r\\), then find the future value.',
+      marks: 4,
+      steps: [
+        'Quarterly means 4 periods per year, so \\(n = 5 \\times 4 = 20\\) and \\(r = 8\\% \\div 4 = 2\\%\\).',
+        'From the table at \\(n = 20\\), \\(r = 2\\%\\), the factor is 24.2974.',
+        '\\(FV = 1100 \\times 24.2974\\).'
+      ],
+      answer: '\\(n = 20\\), \\(r = 2\\%\\); future value about $26,727.14.'
+    },
+    {
+      q: 'A student looks up \\(n = 6\\), \\(r = 9\\%\\) for an annuity paid six-monthly over 6 years at 9% per annum. Explain the error and give the correct entries.',
+      marks: 3,
+      steps: [
+        'The table uses periods and the rate per period, not years and the annual rate.',
+        'Six-monthly over 6 years gives \\(n = 12\\) periods.',
+        'The rate per period is \\(9\\% \\div 2 = 4.5\\%\\).',
+        'Using \\(n = 6\\), \\(r = 9\\%\\) would roughly halve the correct answer.'
+      ],
+      answer: 'They did not convert for the compounding frequency. The correct entries are \\(n = 12\\) periods at \\(r = 4.5\\%\\) per period.'
+    },
+    {
+      q: 'Zoe has $18,000 invested and adds $2,500 at the end of each year for 8 years, all at 5% per annum. Given \\(1.05^{8} = 1.47746\\), find the total value after 8 years.',
+      marks: 4,
+      steps: [
+        'Treat the lump sum and the annuity separately.',
+        'Lump sum: \\(18000 \\times 1.47746 = \\$26\\,594.28\\).',
+        'Annuity: from the table at \\(n = 8\\), \\(r = 5\\%\\), the factor is 9.5491, so \\(2500 \\times 9.5491 = \\$23\\,872.75\\).',
+        'Total: \\(26594.28 + 23872.75\\).'
+      ],
+      answer: 'About $50,467.03'
+    },
+    {
+      q: 'Compare the future value of $2,500 per year for 20 years at 4% and at 8%, and explain why the interest earned more than doubles.',
+      marks: 4,
+      steps: [
+        'At 4%: factor 29.7781, so \\(FV = 2500 \\times 29.7781 = \\$74\\,445.25\\).',
+        'At 8%: factor 45.7620, so \\(FV = 2500 \\times 45.7620 = \\$114\\,405.00\\).',
+        'Contributions are $50,000 in both cases.',
+        'Interest rises from $24,445 to $64,405 — more than doubling — because the contributions are a fixed floor and all the extra goes to interest, which itself compounds.'
+      ],
+      answer: '$74,445.25 versus $114,405.00. The $50,000 of contributions is identical, so the entire $39,960 difference is extra interest — the interest component rises from $24,445 to $64,405, well over double.'
+    },
+    {
+      q: 'Test the claim that contributing $3,000 per year for 10 years gives the same result as $1,500 per year for 20 years, both at 6%.',
+      marks: 4,
+      steps: [
+        'Option 1: factor at \\(n = 10\\), \\(r = 6\\%\\) is 13.1808, so \\(FV = 3000 \\times 13.1808 = \\$39\\,542.40\\).',
+        'Option 2: factor at \\(n = 20\\), \\(r = 6\\%\\) is 36.7856, so \\(FV = 1500 \\times 36.7856 = \\$55\\,178.40\\).',
+        'Both contribute $30,000 in total.',
+        'Option 2 gives $15,636 more, because the factor grows faster than linearly with \\(n\\).'
+      ],
+      answer: 'The claim is false. Both contribute $30,000, but 20 years at $1,500 gives $55,178.40 against $39,542.40 for 10 years at $3,000 — $15,636 more. Time matters more than the size of each contribution.'
+    }
+  ];
+
+  /* ══════════ PART C — Present value ══════════ */
+  var QS_C = [
+    {
+      q: 'Explain what the present value of an annuity means, and why it is less than the sum of the payments.',
+      marks: 2,
+      steps: [
+        'It is the single amount needed today to fund all the future payments.',
+        'Each payment is discounted back to today, because money now can be invested and grow.',
+        'So each future dollar is worth less than a dollar today.'
+      ],
+      answer: 'The lump sum needed today to pay out the whole stream. It is less than the simple total because the fund earns interest while it is being drawn down, so not all the money is needed up front.'
+    },
+    {
+      q: 'A fund pays $7,500 per year for 15 years at 5% per annum. Find the present value.',
+      marks: 3,
+      steps: [
+        'From the PV table at \\(n = 15\\), \\(r = 5\\%\\), the factor is 10.3797.',
+        '\\(PV = 7500 \\times 10.3797\\).',
+        'Sense check: 10.3797 < 15 ✓'
+      ],
+      answer: 'About $77,847.75'
+    },
+    {
+      q: 'Derive the present value of $3,000 per year for 3 years at 5% by discounting each payment separately, and check against the table factor of 2.7232.',
+      marks: 4,
+      steps: [
+        'Year 1: \\(3000 \\div 1.05 = \\$2\\,857.14\\).',
+        'Year 2: \\(3000 \\div 1.05^{2} = 3000 \\div 1.1025 = \\$2\\,721.09\\).',
+        'Year 3: \\(3000 \\div 1.05^{3} = 3000 \\div 1.157625 = \\$2\\,591.51\\).',
+        'Sum: $8,169.74. Using the factor: \\(3000 \\times 2.7232 = \\$8\\,169.60\\) — agreeing to rounding.'
+      ],
+      answer: '$8,169.74 by individual discounting, matching \\(3000 \\times 2.7232 = \\$8\\,169.60\\).'
+    },
+    {
+      q: 'A retirement fund must pay $32,000 at the end of each year for 20 years at 6% per annum. Find the lump sum required and the total paid out.',
+      marks: 3,
+      steps: [
+        'From the PV table at \\(n = 20\\), \\(r = 6\\%\\), the factor is 11.4699.',
+        '\\(PV = 32000 \\times 11.4699 = \\$367\\,036.80\\).',
+        'Total paid out \\(= 20 \\times 32000 = \\$640\\,000\\).'
+      ],
+      answer: 'About $367,037 is needed today to pay out $640,000 — interest supplies the other $272,963.'
+    },
+    {
+      q: 'Leo borrows $40,000 over 8 years at 7% per annum, repaid annually. Find the annual repayment and the total interest.',
+      marks: 4,
+      steps: [
+        'From the PV table at \\(n = 8\\), \\(r = 7\\%\\), the factor is 5.9713.',
+        'Repayment \\(= \\dfrac{40000}{5.9713} = \\$6\\,698.71\\).',
+        'Total repaid \\(= 8 \\times 6698.71 = \\$53\\,589.68\\).',
+        'Interest \\(= 53589.68 - 40000\\).'
+      ],
+      answer: 'Annual repayment about $6,698.71; total interest about $13,589.68.'
+    },
+    {
+      q: 'Verify the first two years of Leo\'s loan with a repayment table.',
+      marks: 3,
+      steps: [
+        'Year 1: interest \\(= 40000 \\times 0.07 = \\$2\\,800\\); closing \\(= 40000 + 2800 - 6698.71 = \\$36\\,101.29\\).',
+        'Year 2: interest \\(= 36101.29 \\times 0.07 = \\$2\\,527.09\\); closing \\(= 36101.29 + 2527.09 - 6698.71 = \\$31\\,929.67\\).',
+        'The balance falls and the interest portion shrinks, as expected.'
+      ],
+      answer: 'Closing balances $36,101.29 and $31,929.67, with interest falling from $2,800 to $2,527.09.'
+    },
+    {
+      q: 'Sofia contributes $6,000 per year for 25 years at 6% (FV factor 54.8645), then retires and draws income for 20 years at 6% (PV factor 11.4699). Find her balance at retirement and her annual income.',
+      marks: 5,
+      steps: [
+        'Accumulation: \\(FV = 6000 \\times 54.8645 = \\$329\\,187\\).',
+        'She contributed \\(25 \\times 6000 = \\$150\\,000\\), so interest supplied $179,187.',
+        'Drawdown: income \\(= \\dfrac{329187}{11.4699}\\).',
+        '\\(= \\$28\\,700.68\\) per year.'
+      ],
+      answer: 'Balance at retirement about $329,187; annual income about $28,701 for 20 years.'
+    },
+    {
+      q: 'A prize offers $140,000 now or $14,000 per year for 15 years. At 7% the PV factor is 9.1079. Which is better, and by how much?',
+      marks: 4,
+      steps: [
+        'Present value of instalments: \\(14000 \\times 9.1079 = \\$127\\,510.60\\).',
+        'Compare with $140,000 now.',
+        'Difference: \\(140000 - 127510.60 = \\$12\\,489.40\\).',
+        'The instalments total $210,000, but that ignores the time value of money.'
+      ],
+      answer: 'The lump sum wins by about $12,489 in today\'s money, despite the instalments totalling $210,000.'
+    },
+    {
+      q: 'Repeat that comparison at 2%, where the PV factor for 15 years is 12.8493, and explain the reversal.',
+      marks: 4,
+      steps: [
+        'Present value of instalments: \\(14000 \\times 12.8493 = \\$179\\,890.20\\).',
+        'This now exceeds the $140,000 lump sum by $39,890.',
+        'At 2% a lump sum grows very slowly, so receiving money early is worth little.',
+        'Low rates also discount the distant payments only lightly.'
+      ],
+      answer: 'At 2% the instalments are worth $179,890 — $39,890 more than the lump sum. The decision reverses because the advantage of having money early depends entirely on the rate at which it can be invested.'
+    },
+    {
+      q: 'An adviser claims a $600,000 fund at 4% can pay $24,000 per year forever. Justify this, and state what would happen if $30,000 were withdrawn instead.',
+      marks: 4,
+      steps: [
+        'Interest in year 1: \\(600000 \\times 0.04 = \\$24\\,000\\).',
+        'The withdrawal exactly equals the interest, so the closing balance stays at $600,000.',
+        'The same applies every year, so the income is perpetual.',
+        'At $30,000 the withdrawal exceeds the interest by $6,000, so the capital falls, reducing future interest and accelerating the decline.'
+      ],
+      answer: 'The claim holds: $24,000 exactly matches the interest, so the capital is never touched. Withdrawing $30,000 would erode the capital by $6,000 in year 1, and by progressively more each year as the shrinking balance earns less interest — the fund would eventually be exhausted.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Critical Path Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 7 &mdash; Critical Path Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Critical Path Analysis</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Set out both scans and the
+        float table for every analysis &mdash; the working carries most of the marks.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-07</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Networks &amp; dummies (10)</li>
+        <li>Part B &mdash; Scanning &amp; float (10)</li>
+        <li>Part C &mdash; Gantt &amp; durations (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#ref">Method reminder</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Networks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Scanning</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Gantt &amp; durations</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="ref">
+        <p class="section-label">Reference</p>
+        <h2>Method reminder</h2>
+        <div class="formula-box">
+          \[\text{EST} = \max(\text{previous EST} + \text{duration}) \quad \text{(forward)}\]
+          \[\text{LST} = \min(\text{next LST} - \text{duration}) \quad \text{(backward)}\]
+          \[\text{Float} = \text{LST}_{\text{end}} - \text{EST}_{\text{start}} - \text{duration}\]
+        </div>
+        <p><strong>Checks:</strong> the LST at the start vertex must be 0; the EST at the finish
+          vertex is the minimum completion time; float is never negative.</p>
+        <p><strong>Zero float = critical.</strong> Shortening a non-critical activity changes
+          nothing. Shortening a critical one helps only until the next-longest path takes over.</p>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Networks &amp; dummies</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Scanning &amp; float</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Gantt charts &amp; changing durations</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The revision lesson pulls the whole topic together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ══════════ PART A ══════════ */
+  var QS_A = [
+    {
+      q: 'Explain what the edges and vertices represent in an activity-on-edge network.',
+      marks: 2,
+      steps: [
+        'Edges are activities, labelled with a letter and a duration.',
+        'Vertices are events — moments when activities complete and successors may begin.',
+        'An activity cannot start until every activity arriving at its start vertex is finished.'
+      ],
+      answer: 'Edges are the activities (with durations); vertices are events marking when activities finish and others can begin.'
+    },
+    {
+      q: 'A precedence table lists F with predecessors "C, D, E". Explain exactly what this means for scheduling F.',
+      marks: 2,
+      steps: [
+        'All three listed activities must be complete before F starts.',
+        'F therefore begins when the <em>last</em> of C, D and E finishes.',
+        'It is the maximum of their finish times, not the minimum or the sum.'
+      ],
+      answer: 'F can only start once C, D and E have all finished — that is, at the latest of their three completion times.'
+    },
+    {
+      q: 'For A (6, —), B (4, —), C (3, A), D (5, B), E (2, C, D), describe the network and state whether a dummy is needed.',
+      marks: 4,
+      steps: [
+        'A and B both leave the start vertex, ending at separate vertices.',
+        'C follows A; D follows B.',
+        'C and D both end at a single vertex, from which E runs to the finish.',
+        'C depends only on A and D only on B — no shared predecessors, so no dummy.'
+      ],
+      answer: 'A and B run in parallel; C follows A and D follows B; C and D merge, then E completes the project. No dummy is needed.'
+    },
+    {
+      q: 'For the project above, calculate the length of each path and the minimum completion time.',
+      marks: 3,
+      steps: [
+        'Path A–C–E: \\(6 + 3 + 2 = 11\\).',
+        'Path B–D–E: \\(4 + 5 + 2 = 11\\).',
+        'The project takes as long as the longest path.'
+      ],
+      answer: '11 days, with both paths critical.'
+    },
+    {
+      q: 'State the two situations that require a dummy activity, with an example of each.',
+      marks: 4,
+      steps: [
+        'Overlapping dependencies: C needs A, D needs A and B. Without a dummy, C would gain a false dependency on B.',
+        'The dummy carries A\'s completion to D\'s start vertex.',
+        'Uniqueness: two activities would otherwise share both endpoints, making them indistinguishable.',
+        'A new vertex plus a dummy gives each a distinct endpoint.'
+      ],
+      answer: 'Overlapping dependencies (C needs A; D needs A and B) and uniqueness (two activities between the same pair of vertices). In both cases a dashed zero-duration arrow resolves the problem.'
+    },
+    {
+      q: 'For A (3, —), B (5, —), C (4, A), D (2, A, B), E (6, C), F (3, D), explain where a dummy is needed.',
+      marks: 4,
+      steps: [
+        'C depends on A only; D depends on A and B.',
+        'If A and B ended at the same vertex, C would wrongly depend on B.',
+        'So A ends at one vertex and B at another.',
+        'A dummy runs from A\'s end vertex to B\'s end vertex, so D sees both A and B.'
+      ],
+      answer: 'A dummy runs from the end of A to the vertex where D begins. C then leaves A\'s vertex depending on A alone, while D depends on B directly and A via the dummy.'
+    },
+    {
+      q: 'For the project in the previous question, find the length of every path and the completion time.',
+      marks: 5,
+      steps: [
+        'Path A–C–E: \\(3 + 4 + 6 = 13\\).',
+        'Path A–dummy–D–F: \\(3 + 0 + 2 + 3 = 8\\).',
+        'Path B–D–F: \\(5 + 2 + 3 = 10\\).',
+        'The longest is 13.'
+      ],
+      answer: '13 days, along A–C–E.'
+    },
+    {
+      q: 'Explain why a project network must have exactly one start and one finish vertex.',
+      marks: 3,
+      steps: [
+        'The start vertex is the single moment work begins.',
+        'Every activity with no predecessors leaves from it.',
+        'The finish vertex is the moment the whole project is complete.',
+        'Every activity with no successors arrives there, since the project is not done until all tasks are.'
+      ],
+      answer: 'One start vertex represents the single moment work begins, from which all predecessor-free activities leave; one finish vertex represents completion, where all successor-free activities converge.'
+    },
+    {
+      q: 'A student draws two arrows both running from vertex 4 to vertex 7. Explain the problem and how to fix it.',
+      marks: 3,
+      steps: [
+        'Two activities with identical endpoints cannot be distinguished.',
+        'Any reference to "the activity from 4 to 7" is ambiguous.',
+        'Add a new vertex, say 5, and run one activity from 4 to 5.',
+        'Join 5 to 7 with a dummy, preserving the dependency while giving unique endpoints.'
+      ],
+      answer: 'The two activities are indistinguishable. Introduce a new vertex so one activity ends there, then link it to the original end vertex with a dummy.'
+    },
+    {
+      q: 'A landscaping project has Clear (3, —), Level (4, Clear), Turf (5, Level), Paths (6, Level), Plant (2, Turf, Paths). Describe the network and find the completion time.',
+      marks: 5,
+      steps: [
+        'Clear → Level is a simple chain: 7 days to the end of Level.',
+        'Turf and Paths both leave Level\'s end vertex, running in parallel.',
+        'Both end at a common vertex from which Plant runs to the finish.',
+        'Path via Turf: \\(7 + 5 + 2 = 14\\).',
+        'Path via Paths: \\(7 + 6 + 2 = 15\\).'
+      ],
+      answer: '15 days. The critical path is Clear–Level–Paths–Plant. No dummy is needed, since Turf and Paths share the same single predecessor.'
+    }
+  ];
+
+  /* ══════════ PART B ══════════ */
+  var QS_B = [
+    {
+      q: 'State the forward and backward scan rules.',
+      marks: 2,
+      steps: [
+        'Forward: EST at a vertex = maximum of (previous EST + duration), starting from 0.',
+        'Backward: LST at a vertex = minimum of (next LST − duration), starting from the completion time.'
+      ],
+      answer: 'Forward: add durations moving right, take the maximum at merges. Backward: subtract durations moving left, take the minimum at splits.'
+    },
+    {
+      q: 'An activity runs from a vertex with EST 11 to one with LST 19 and takes 6 days. Find its float and state whether it is critical.',
+      marks: 2,
+      steps: [
+        'Float \\(= 19 - 11 - 6\\).',
+        '\\(= 2\\) days.',
+        'Non-zero float means the activity is not critical.'
+      ],
+      answer: 'Float 2 days; not critical.'
+    },
+    {
+      q: 'For A (4, —), B (7, —), C (6, A), D (2, B), E (3, C, D), carry out the forward scan.',
+      marks: 5,
+      steps: [
+        'Start: EST = 0.',
+        'End of A: 4. End of B: 7.',
+        'End of C: \\(4 + 6 = 10\\). End of D: \\(7 + 2 = 9\\).',
+        'Merge before E: \\(\\max(10, 9) = 10\\).',
+        'Finish: \\(10 + 3 = 13\\).'
+      ],
+      answer: 'ESTs 0, 4, 7, 10, 9, merge at 10, finish at 13 — minimum completion time 13 days.'
+    },
+    {
+      q: 'For the same project, carry out the backward scan and find every float.',
+      marks: 6,
+      steps: [
+        'Finish LST = 13. Before E: \\(13 - 3 = 10\\).',
+        'End of A: \\(10 - 6 = 4\\). End of B: \\(10 - 2 = 8\\).',
+        'Start: \\(\\min(4 - 4,\\ 8 - 7) = \\min(0, 1) = 0\\) ✓',
+        'Float A \\(= 4 - 0 - 4 = 0\\); float B \\(= 8 - 0 - 7 = 1\\).',
+        'Float C \\(= 10 - 4 - 6 = 0\\); float D \\(= 10 - 7 - 2 = 1\\).',
+        'Float E \\(= 13 - 10 - 3 = 0\\).'
+      ],
+      answer: 'Floats: A 0, B 1, C 0, D 1, E 0. Critical path A–C–E.'
+    },
+    {
+      q: 'Verify that the critical path length in the previous question equals the completion time.',
+      marks: 2,
+      steps: [
+        'The zero-float activities are A, C and E.',
+        'They form a continuous chain from start to finish.',
+        'Length \\(= 4 + 6 + 3 = 13\\).'
+      ],
+      answer: '13 days ✓ — matching the forward scan result.'
+    },
+    {
+      q: 'Explain why the LST at the start vertex must be zero, and what a non-zero result means.',
+      marks: 3,
+      steps: [
+        'The project begins at time 0 by definition.',
+        'The backward scan gives the latest each event can occur without delaying the project.',
+        'The start event cannot be delayed, so its LST must be 0.',
+        'Any other value indicates an arithmetic error in one of the scans.'
+      ],
+      answer: 'Because the project starts at time 0, the latest permissible start there is also 0. A non-zero value signals a mistake in the scans — it is a reliable self-check.'
+    },
+    {
+      q: 'For A (5, —), B (3, —), C (4, A, B), D (6, A), E (2, C, D), find the completion time and the critical path.',
+      marks: 6,
+      steps: [
+        'A dummy is needed: D depends on A only, C on A and B.',
+        'Forward: end of A = 5; merge for C \\(= \\max(5 + 0,\\ 0 + 3) = 5\\).',
+        'End of C \\(= 5 + 4 = 9\\); end of D \\(= 5 + 6 = 11\\).',
+        'Merge before E \\(= \\max(9, 11) = 11\\); finish \\(= 11 + 2 = 13\\).',
+        'Backward: before E = 11; end of A \\(= \\min(11 - 6,\\ 5 - 0) = 5\\); start \\(= \\min(5 - 5,\\ 5 - 3) = 0\\) ✓',
+        'Floats: A 0, B 2, C 2, D 0, E 0.'
+      ],
+      answer: 'Completion 13 days; critical path A–D–E. B and C each carry 2 days of float.'
+    },
+    {
+      q: 'Explain the difference between a critical activity and a non-critical one, in terms of delay.',
+      marks: 3,
+      steps: [
+        'A critical activity has zero float.',
+        'Any delay to it pushes every successor back and delays the finish by the same amount.',
+        'A non-critical activity has float — spare time before it affects anything.',
+        'A delay within that float is absorbed with no effect on the completion date.'
+      ],
+      answer: 'A critical activity has no slack, so every day of delay transmits directly to the completion date. A non-critical activity has float, which absorbs delays up to that amount with no effect on the finish.'
+    },
+    {
+      q: 'For A (2, —), B (6, —), C (4, A), D (3, C), E (5, B), F (2, D, E), find all floats and the critical path.',
+      marks: 7,
+      steps: [
+        'Forward: end of A = 2; end of C = 6; end of D = 9; end of B = 6; end of E = 11.',
+        'Merge before F \\(= \\max(9, 11) = 11\\); finish \\(= 13\\).',
+        'Backward: before F = 11; end of C \\(= 11 - 3 = 8\\); end of A \\(= 8 - 4 = 4\\); end of B \\(= 11 - 5 = 6\\).',
+        'Start \\(= \\min(4 - 2,\\ 6 - 6) = 0\\) ✓',
+        'Float A \\(= 4 - 0 - 2 = 2\\); C \\(= 8 - 2 - 4 = 2\\); D \\(= 11 - 6 - 3 = 2\\).',
+        'Float B \\(= 6 - 0 - 6 = 0\\); E \\(= 11 - 6 - 5 = 0\\); F \\(= 13 - 11 - 2 = 0\\).'
+      ],
+      answer: 'Completion 13 days; critical path B–E–F. Activities A, C and D each have 2 days of float.'
+    },
+    {
+      q: 'Explain why a vertex with EST = LST does not by itself prove that an activity leaving it is critical.',
+      marks: 3,
+      steps: [
+        'EST = LST at a vertex means that event cannot be delayed.',
+        'But float is calculated across the activity, using the EST at its start and the LST at its end.',
+        'An activity may leave a zero-slack vertex and arrive at one with slack.',
+        'Its float would then be positive despite the critical start vertex.'
+      ],
+      answer: 'Because float uses the EST at the start vertex <em>and</em> the LST at the end vertex. An activity can leave a critical vertex but arrive at one with slack, giving it positive float — so each activity must be checked individually.'
+    }
+  ];
+
+  /* ══════════ PART C ══════════ */
+  var QS_C = [
+    {
+      q: 'Describe how an activity with EST 8, duration 5 and float 2 appears on a Gantt chart.',
+      marks: 3,
+      steps: [
+        'The solid bar begins at day 8.',
+        'Its length is 5 days, ending at day 13.',
+        'A dashed extension runs a further 2 days to day 15.'
+      ],
+      answer: 'A solid bar from day 8 to day 13, with a dashed float extension from day 13 to day 15.'
+    },
+    {
+      q: 'An activity with 6 days of float is delayed by 4 days. What happens to the completion time?',
+      marks: 2,
+      steps: [
+        'The delay of 4 days is less than the 6 days of float.',
+        'It is absorbed entirely, leaving 2 days of slack.'
+      ],
+      answer: 'No change — the delay is absorbed by the float, which drops from 6 to 2 days.'
+    },
+    {
+      q: 'An activity with 3 days of float is delayed by 7 days. Find the delay to the project.',
+      marks: 3,
+      steps: [
+        'The float absorbs the first 3 days.',
+        'The excess is \\(7 - 3 = 4\\) days.',
+        'That excess transmits to the finish.'
+      ],
+      answer: 'The project is delayed by 4 days, and that activity has now become critical.'
+    },
+    {
+      q: 'A project takes 24 days with critical path Q at 24 and the next-longest path at 19. Find the shortest achievable time by shortening Q alone.',
+      marks: 3,
+      steps: [
+        'Q can be reduced while it remains at least as long as 19.',
+        'Below 19, the other path becomes critical.',
+        'So the floor is 19 days.'
+      ],
+      answer: '19 days — a saving of 5. Further reductions to Q achieve nothing once the 19-day path governs.'
+    },
+    {
+      q: 'Explain why shortening a non-critical activity does not shorten a project.',
+      marks: 3,
+      steps: [
+        'The completion time is the length of the longest path.',
+        'A non-critical activity lies on a shorter path.',
+        'Shortening it makes that path shorter still.',
+        'The longest path is unchanged, so only that activity\'s float grows.'
+      ],
+      answer: 'Because the finish date is set by the critical path. A non-critical activity is on a shorter path, so shortening it merely increases its float.'
+    },
+    {
+      q: 'Write spreadsheet formulas for EFT (column D), float (column F) and the EST of an activity following those in rows 3 and 5. Durations in B, ESTs in C, LSTs in E.',
+      marks: 3,
+      steps: [
+        'EFT = EST + duration: <code>=C2+B2</code>.',
+        'Float = LST − EST: <code>=E2-C2</code>.',
+        'EST of a successor = maximum of its predecessors\' EFTs: <code>=MAX(D3,D5)</code>.'
+      ],
+      answer: 'EFT: <code>=C2+B2</code>; float: <code>=E2-C2</code>; successor EST: <code>=MAX(D3,D5)</code>.'
+    },
+    {
+      q: 'A project of 20 days has activities: P (critical, delayed 3 days) and Q (float 5, delayed 4 days). Find the new completion time.',
+      marks: 3,
+      steps: [
+        'P is critical, so its 3-day delay transmits in full.',
+        'Q\'s 4-day delay is within its 5 days of float, so it is absorbed.',
+        'New completion \\(= 20 + 3\\).'
+      ],
+      answer: '23 days — only the critical delay affects the finish.'
+    },
+    {
+      q: 'For paths A–C–F = 19, B–D–F = 22, B–E = 15, state the critical path and the effect of shortening D by 5 days.',
+      marks: 4,
+      steps: [
+        'The longest path is B–D–F at 22 days, so it is critical.',
+        'Shortening D by 5 makes B–D–F \\(= 17\\).',
+        'But A–C–F is 19 days and now becomes the longest.',
+        'So the completion time falls only to 19, not 17.'
+      ],
+      answer: 'Critical path B–D–F (22 days). Shortening D by 5 brings the project to 19 days, not 17 — A–C–F takes over as critical after a 3-day saving.'
+    },
+    {
+      q: 'Explain the check that critical bars on a Gantt chart tile the timeline with no gaps.',
+      marks: 3,
+      steps: [
+        'Critical activities have zero float.',
+        'Each therefore begins exactly when its predecessor ends.',
+        'The critical bars form an unbroken chain from day 0 to the completion time.',
+        'A gap would imply idle time on the critical path, contradicting zero float.'
+      ],
+      answer: 'Zero float means each critical activity starts the instant the previous one ends, so the bars run end to end from 0 to the finish. A gap indicates an error in the float calculations.'
+    },
+    {
+      q: 'A project has two critical paths of 30 days each. Activity Z lies on both and takes 8 days. Explain the advantage of shortening Z rather than one activity on each path.',
+      marks: 4,
+      steps: [
+        'Shortening one path alone leaves the other at 30, so nothing is gained.',
+        'Z lies on both paths, so each day saved on Z reduces both simultaneously.',
+        'Shortening one activity per path would require two separate reductions for the same effect.',
+        'Z therefore delivers the saving at roughly half the cost.'
+      ],
+      answer: 'Because Z is shared, each day cut from it shortens both critical paths at once. Reducing one activity on each path would need twice as many activity-days for the same result, so shortening Z is far cheaper.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

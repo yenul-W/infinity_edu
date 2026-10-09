@@ -6,7 +6,7 @@
   <title>Lesson 1 — Graphing Linear Functions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -33,12 +33,12 @@
       --gray-light: #d6d6d6;
       --gray-faint: #f2f2f2;
       --font-display: 'Poppins', sans-serif;
-      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-mono: 'DM Mono', monospace;
     }
 
     html.dark-mode {
       --ink: #f0f0f0;
-      --canvas: #111;
+      --canvas: #0a0a0a;
       --gray-med: #888;
       --gray-light: #333;
       --gray-faint: #1a1a1a;
@@ -72,8 +72,7 @@
       margin-bottom: 32px;
       border-bottom: 1px solid var(--ink);
       font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
     }
     .topbar-left { display: flex; flex-direction: column; gap: 2px; }
@@ -94,8 +93,7 @@
     }
     .side-label {
       font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
       margin-bottom: 14px;
     }
@@ -119,8 +117,7 @@
     }
     .eyebrow {
       font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
       margin-bottom: 12px;
     }
@@ -168,8 +165,7 @@
     }
     .toc-heading {
       font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
       margin-bottom: 12px;
     }
@@ -199,8 +195,7 @@
     }
     .section-label {
       font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
       margin-bottom: 8px;
     }
@@ -228,8 +223,7 @@
     }
     .definition-block .def-label {
       font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
       margin-bottom: 8px;
     }
@@ -243,8 +237,7 @@
     }
     .example-block .ex-label {
       font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
       margin-bottom: 8px;
     }
@@ -278,6 +271,7 @@
     .grad-type-card .label {
       font-size: 12px;
       font-family: var(--font-mono);
+      font-weight:300;
       color: var(--gray-med);
     }
 
@@ -304,6 +298,7 @@
       border: 1px solid var(--gray-light);
       background: var(--canvas);
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 12px;
       cursor: pointer;
       display: flex;
@@ -322,8 +317,7 @@
     }
     .stepper-counter {
       font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
     }
     .stepper-panel {
@@ -346,6 +340,7 @@
       border: 1px solid var(--ink);
       padding: 6px 18px;
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 11px;
       letter-spacing: 0.06em;
       background: transparent;
@@ -377,7 +372,7 @@
     .eq-display {
       font-family: var(--font-mono);
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 300;
       margin-bottom: 20px;
       color: var(--ink);
     }
@@ -387,6 +382,7 @@
       border-collapse: collapse;
       margin-bottom: 20px;
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 13px;
     }
     .val-table th, .val-table td {
@@ -405,6 +401,7 @@
       background: transparent;
       text-align: center;
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 13px;
       color: var(--ink);
       outline: none;
@@ -417,9 +414,9 @@
       border: 1px solid var(--ink);
       padding: 8px 22px;
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       cursor: pointer;
       background: transparent;
       color: var(--ink);
@@ -456,8 +453,7 @@
     .grad-field { display: flex; flex-direction: column; gap: 4px; }
     .grad-field label {
       font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--gray-med);
     }
     .grad-field input {
@@ -465,6 +461,7 @@
       border: 1px solid var(--gray-light);
       padding: 8px 10px;
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 13px;
       background: var(--canvas);
       color: var(--ink);
@@ -514,7 +511,7 @@
     .opt-letter {
       font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 300;
       min-width: 16px;
       padding-top: 1px;
     }
@@ -594,9 +591,9 @@
       border-bottom: 1px solid var(--gray-med);
       color: var(--gray-med);
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       padding: 2px 0;
       cursor: pointer;
     }
@@ -634,9 +631,9 @@
       background: transparent;
       color: var(--ink);
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       padding: 4px 0;
       cursor: pointer;
     }
@@ -904,7 +901,7 @@
           <p style="margin-bottom:14px; font-size:13px; color:var(--gray-med);">Hint: substitute \(x = 0\) into the equation, or read off the constant.</p>
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
             <span>\(y\text{-intercept} =\)</span>
-            <input type="number" id="yintInput" style="width:80px; border:1px solid var(--gray-light); padding:8px; font-family:var(--font-mono); background:var(--canvas); color:var(--ink);" placeholder="?">
+            <input type="number" id="yintInput" style="width:80px; border:1px solid var(--gray-light); padding:8px; font-family:var(--font-mono);font-weight:300; background:var(--canvas); color:var(--ink);" placeholder="?">
             <button class="check-btn" id="checkYint">Check</button>
           </div>
           <div class="feedback" id="fbYint"></div>

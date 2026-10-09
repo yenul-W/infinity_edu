@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — What Is an Annuity?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 3 &mdash; Annuities</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>What Is an Annuity?</h1>
+      <p class="subtitle">Compound interest assumes you invest once and wait. An annuity is what
+        happens when you keep adding money &mdash; the same amount, every period. It is how
+        superannuation, savings plans and loan repayments actually work.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-03</span>
+        <span class="pill">Tabular modelling</span>
+        <span class="pill">Spreadsheets</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What an annuity is</li>
+        <li>The two directions: paying in, drawing out</li>
+        <li>Modelling in tabular form</li>
+        <li>Why the first contribution earns nothing</li>
+        <li>Monthly and quarterly annuities</li>
+        <li>Spreadsheet models</li>
+        <li>Class activity: how long will it last?</li>
+        <li>Knowledge check &amp; extended practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#define">1 &nbsp;Defining an annuity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#table">2 &nbsp;Tabular modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#timing">3 &nbsp;Timing of payments</a></li>
+        <li class="toc-item"><a class="toc-link" href="#periods">4 &nbsp;Monthly &amp; quarterly</a></li>
+        <li class="toc-item"><a class="toc-link" href="#drawdown">5 &nbsp;Drawing an income</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spreadsheet">6 &nbsp;Spreadsheet modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. DEFINE ─────────── -->
+      <div class="content-card" id="define">
+        <p class="section-label">Theory</p>
+        <h2>Defining an annuity</h2>
+
+        <p>An <strong>annuity</strong> is a financial arrangement involving <em>regular, equal</em>
+          payments made at <em>regular intervals</em>, with compound interest applied each period.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The two forms an annuity takes</p>
+          <p style="margin-bottom:0;">
+            <strong>1. Paying in (accumulating).</strong> An investment account with regular, equal
+            contributions, where interest compounds at the end of each period. The balance grows.
+            <em>Examples:</em> superannuation, a regular savings plan.<br><br>
+            <strong>2. Drawing out (drawdown).</strong> A single sum invested, from which regular
+            equal withdrawals are made. The balance falls, but the remainder keeps earning interest.
+            <em>Examples:</em> a retirement pension, a structured payout.
+          </p>
+        </div>
+
+        <p>Both are the same mathematics. Each period you do two things: <strong>add the
+          interest</strong>, then <strong>add or subtract the payment</strong>.</p>
+
+        <p>You have already met the drawdown form under another name. A reducing-balance loan is an
+          annuity: the bank invests a lump sum (the loan) and you make regular equal repayments
+          until the balance reaches zero.</p>
+
+        <table class="coord-table">
+          <tr><th></th><th>Compound interest</th><th>Annuity</th></tr>
+          <tr><td>Payments</td><td>One, at the start</td><td>Regular and equal, every period</td></tr>
+          <tr><td>Formula</td><td>\(FV = PV(1+r)^{n}\)</td><td>Built period by period, or from interest-factor tables</td></tr>
+          <tr><td>Each contribution</td><td>&mdash;</td><td>Earns interest for a <em>different</em> length of time</td></tr>
+          <tr><td>Typical use</td><td>A term deposit</td><td>Superannuation, savings plans, loans</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The key insight</p>
+          <p style="margin-bottom:0;">In an annuity, <strong>each contribution earns interest for a
+            different length of time</strong>. The first payment sits in the account longest and
+            earns the most; the final payment earns nothing at all. That is why you cannot simply
+            apply \(FV = PV(1+r)^n\) to the total contributed.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Which are annuities, and of which form? (a) $50 paid into a savings account at the
+              end of every week. (b) $10,000 placed in a term deposit for 3 years. (c) A prize fund
+              that pays the winner $1,000 a month for 20 years. (d) A car loan repaid in equal
+              monthly instalments.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Annuity, paying in. (b) Not an annuity &mdash; one single deposit, so plain
+                  compound interest. (c) Annuity, drawing out. (d) Annuity, drawing out &mdash; a
+                  reducing-balance loan.</p>
+              </div></details></li>
+            <li>Jack says $1,000 contributed at the end of each year for 5 years at 6% is worth
+              \(5000 \times 1.06^5\). Explain his mistake.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>His formula treats all $5,000 as if it were invested at the start and earned
+                  interest for 5 years. In fact the contributions earn interest for 4, 3, 2, 1 and
+                  0 years, so his answer is too large.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. TABLE ─────────── -->
+      <div class="content-card" id="table">
+        <p class="section-label">Method</p>
+        <h2>Modelling an annuity in tabular form</h2>
+
+        <p>The syllabus asks you to <em>model an annuity in tabular form for up to four time
+          periods</em>. This is an exam staple. Use five columns:</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The period-by-period cycle</p>
+          \[\text{Interest} = \text{Opening balance} \times r\]
+          \[\text{Closing balance} = \text{Opening balance} + \text{Interest} + \text{Contribution}\]
+          <p class="formula-where">\(r\) is the interest rate <strong>per period</strong>. Each
+            closing balance becomes the next opening balance.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Leila contributes $2,000 at the end of each year into an account earning 6% per
+            annum, compounded annually. Model the first four years.</p>
+          <table class="coord-table">
+            <tr>
+              <th>Year</th><th>Opening balance</th><th>Interest (6%)</th>
+              <th>Contribution</th><th>Closing balance</th>
+            </tr>
+            <tr><td>1</td><td>0.00</td><td>0.00</td><td>2 000.00</td><td>2 000.00</td></tr>
+            <tr><td>2</td><td>2 000.00</td><td>120.00</td><td>2 000.00</td><td>4 120.00</td></tr>
+            <tr><td>3</td><td>4 120.00</td><td>247.20</td><td>2 000.00</td><td>6 367.20</td></tr>
+            <tr><td>4</td><td>6 367.20</td><td>382.03</td><td>2 000.00</td><td>8 749.23</td></tr>
+          </table>
+          <p><strong>Reading the table:</strong> Leila contributed \(4 \times 2000 = \$8\,000\) and
+            the account is worth $8,749.23, so the interest earned is $749.23.</p>
+          <p>Notice year 1: the opening balance is $0 and the interest is $0. The contribution
+            arrives at the <em>end</em> of the year, so there is nothing in the account to earn
+            interest during that first year.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; starting with a lump sum</p>
+          <p>Marcus already has $5,000 in an account earning 8% per annum and adds $1,000 at
+            the end of each year. Model three years.</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Opening</th><th>Interest (8%)</th><th>Contribution</th><th>Closing</th></tr>
+            <tr><td>1</td><td>5 000.00</td><td>400.00</td><td>1 000.00</td><td>6 400.00</td></tr>
+            <tr><td>2</td><td>6 400.00</td><td>512.00</td><td>1 000.00</td><td>7 912.00</td></tr>
+            <tr><td>3</td><td>7 912.00</td><td>632.96</td><td>1 000.00</td><td>9 544.96</td></tr>
+          </table>
+          <p>Here year 1 <em>does</em> earn interest, because the $5,000 was already there. Read
+            the question carefully to see whether an opening balance exists.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$1,500 is contributed at the end of each year into an account earning 4% per annum.
+              Model four years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Year</th><th>Opening</th><th>Interest (4%)</th><th>Contribution</th><th>Closing</th></tr>
+                  <tr><td>1</td><td>0.00</td><td>0.00</td><td>1 500.00</td><td>1 500.00</td></tr>
+                  <tr><td>2</td><td>1 500.00</td><td>60.00</td><td>1 500.00</td><td>3 060.00</td></tr>
+                  <tr><td>3</td><td>3 060.00</td><td>122.40</td><td>1 500.00</td><td>4 682.40</td></tr>
+                  <tr><td>4</td><td>4 682.40</td><td>187.30</td><td>1 500.00</td><td>6 369.70</td></tr>
+                </table>
+              </div></details></li>
+            <li>An account already holds $3,000, earns 5% per annum, and receives $800 at the end of
+              each year. Find the balance after 3 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Year</th><th>Opening</th><th>Interest (5%)</th><th>Contribution</th><th>Closing</th></tr>
+                  <tr><td>1</td><td>3 000.00</td><td>150.00</td><td>800.00</td><td>3 950.00</td></tr>
+                  <tr><td>2</td><td>3 950.00</td><td>197.50</td><td>800.00</td><td>4 947.50</td></tr>
+                  <tr><td>3</td><td>4 947.50</td><td>247.38</td><td>800.00</td><td>5 994.88</td></tr>
+                </table>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Annuity table builder</h3>
+          <p class="exercise-intro">Set the opening balance, the contribution and the rate. The
+            table is generated period by period and the summary separates what you contributed
+            from what the interest earned.</p>
+          <div id="annSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Total contributed</div>
+              <div class="readout-value" id="roContrib">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Interest earned</div>
+              <div class="readout-value" id="roInterest">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Final balance</div>
+              <div class="readout-value" id="roFinal">$0</div>
+            </div>
+          </div>
+          <div class="plot-wrap" id="plotAnn"></div>
+          <p class="diagram-caption">Solid: the annuity balance. Dashed: total contributed
+            &mdash; the gap between them is the interest.</p>
+          <div id="annTable" style="margin-top:16px;"></div>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. TIMING ─────────── -->
+      <div class="content-card" id="timing">
+        <p class="section-label">Theory</p>
+        <h2>Why the timing of payments matters</h2>
+
+        <p>In this course, contributions are made at the <strong>end</strong> of each period, and
+          interest compounds at the end of each period too. Tracing where each contribution ends up
+          makes the structure clear.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; following each contribution</p>
+          <p>$1,000 is contributed at the end of each year for 4 years at 10% per annum. How much
+            is each individual contribution worth at the end of year 4?</p>
+          <table class="coord-table">
+            <tr><th>Contribution made at end of</th><th>Years it earns interest</th><th>Value at end of year 4</th></tr>
+            <tr><td>Year 1</td><td>3</td><td>\(1000 \times 1.1^{3} = 1331.00\)</td></tr>
+            <tr><td>Year 2</td><td>2</td><td>\(1000 \times 1.1^{2} = 1210.00\)</td></tr>
+            <tr><td>Year 3</td><td>1</td><td>\(1000 \times 1.1^{1} = 1100.00\)</td></tr>
+            <tr><td>Year 4</td><td>0</td><td>\(1000 \times 1.1^{0} = 1000.00\)</td></tr>
+            <tr><td colspan="2"><strong>Total</strong></td><td><strong>$4,641.00</strong></td></tr>
+          </table>
+          <p>The last contribution earns nothing &mdash; it arrives at the very moment the annuity
+            ends. Building the table period by period gives the same $4,641.00.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The pattern to remember</p>
+          <p style="margin-bottom:0;">In an \(n\)-period annuity with contributions at the end of
+            each period, the contributions earn interest for
+            \(n-1,\ n-2,\ \dots,\ 1,\ 0\) periods respectively. The number of contributions is
+            \(n\), but the <em>longest</em> any of them compounds is \(n-1\) periods.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Check your understanding</h3>
+          <p class="exercise-intro">Answers to the nearest cent.</p>
+
+          <div class="exercise-row">
+            <label>(a) $500 contributed at the end of each year for 3 years at 8% p.a. Find the final balance.</label>
+            <input class="exercise-input" id="anA" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-an="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbAnA"></p>
+
+          <div class="exercise-row">
+            <label>(b) For that annuity, how much of the final balance is interest?</label>
+            <input class="exercise-input" id="anB" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-an="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbAnB"></p>
+
+          <div class="exercise-row">
+            <label>(c) In a 6-year annuity, how many years does the <em>first</em> contribution earn interest for?</label>
+            <input class="exercise-input" id="anC" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-an="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbAnC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$800 is contributed at the end of each year for 3 years at 5% per annum. Find the
+              value of each contribution at the end, and the final balance.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Year 1's contribution earns 2 years: \(800 \times 1.05^2 = \$882.00\). Year 2's
+                  earns 1 year: \(\$840.00\). Year 3's earns nothing: \(\$800.00\).</p>
+                <p>Final balance: \(882 + 840 + 800 = \$2\,522.00\).</p>
+              </div></details></li>
+            <li>In a 10-year annuity with end-of-year contributions, for how many years does the
+              <em>fourth</em> contribution earn interest?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>It is made at the end of year 4 and earns interest in years 5 to 10:
+                  \(10 - 4 = 6\) years.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. OTHER PERIODS ─────────── -->
+      <div class="content-card" id="periods">
+        <p class="section-label">Theory</p>
+        <h2>Monthly and quarterly annuities</h2>
+
+        <p>Real annuities rarely run yearly: savings plans, super contributions and loan
+          repayments are usually monthly or fortnightly. The table method is unchanged; only the
+          rate changes, exactly as with compound interest.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Matching the rate to the payment period</p>
+          \[r = \frac{\text{annual rate}}{\text{periods per year}} \qquad
+            n = \text{years} \times \text{periods per year}\]
+          <p class="formula-where">The contribution period, the compounding period and the rate
+            must all match. In this course they always do.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Ella saves $300 at the end of each month in an account paying 4.8% per annum,
+            compounded monthly. Model the first four months.</p>
+          <p>\(r = 0.048 \div 12 = 0.004\), i.e. 0.4% per month.</p>
+          <table class="coord-table">
+            <tr><th>Month</th><th>Opening</th><th>Interest (0.4%)</th><th>Contribution</th><th>Closing</th></tr>
+            <tr><td>1</td><td>0.00</td><td>0.00</td><td>300.00</td><td>300.00</td></tr>
+            <tr><td>2</td><td>300.00</td><td>1.20</td><td>300.00</td><td>601.20</td></tr>
+            <tr><td>3</td><td>601.20</td><td>2.40</td><td>300.00</td><td>903.60</td></tr>
+            <tr><td>4</td><td>903.60</td><td>3.61</td><td>300.00</td><td>1 207.21</td></tr>
+          </table>
+          <p>The interest is tiny at first: over short periods, almost all the growth comes from
+            contributions. Interest becomes significant only over years, as the balance
+            builds.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$150 is saved at the end of each month at 6% per annum, compounded monthly. Model
+              three months.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.005\).</p>
+                <table class="coord-table">
+                  <tr><th>Month</th><th>Opening</th><th>Interest</th><th>Contribution</th><th>Closing</th></tr>
+                  <tr><td>1</td><td>0.00</td><td>0.00</td><td>150.00</td><td>150.00</td></tr>
+                  <tr><td>2</td><td>150.00</td><td>0.75</td><td>150.00</td><td>300.75</td></tr>
+                  <tr><td>3</td><td>300.75</td><td>1.50</td><td>150.00</td><td>452.25</td></tr>
+                </table>
+              </div></details></li>
+            <li>$1,200 is contributed at the end of each quarter at 8% per annum, compounded
+              quarterly. Find the balance after three quarters.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.08 \div 4 = 0.02\). Closing balances: $1,200.00, then
+                  \(1200 + 24 + 1200 = \$2\,424.00\), then \(2424 + 48.48 + 1200 = \$3\,672.48\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. DRAWDOWN ─────────── -->
+      <div class="content-card" id="drawdown">
+        <p class="section-label">Application</p>
+        <h2>The other direction: drawing an income</h2>
+
+        <p>The second form of annuity starts with a single sum and takes regular equal withdrawals
+          from it. The only change to the table is a minus sign.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Drawdown cycle</p>
+          \[\text{Closing balance} = \text{Opening balance} + \text{Interest} - \text{Withdrawal}\]
+          <p class="formula-where">Identical to a reducing-balance loan. If the withdrawal is less
+            than the interest earned, the balance <em>grows</em> and the income lasts forever.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>Nadia retires with $400,000 invested at 5% per annum and withdraws $30,000 at the
+            end of each year. Model four years.</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Opening</th><th>Interest (5%)</th><th>Withdrawal</th><th>Closing</th></tr>
+            <tr><td>1</td><td>400 000.00</td><td>20 000.00</td><td>30 000.00</td><td>390 000.00</td></tr>
+            <tr><td>2</td><td>390 000.00</td><td>19 500.00</td><td>30 000.00</td><td>379 500.00</td></tr>
+            <tr><td>3</td><td>379 500.00</td><td>18 975.00</td><td>30 000.00</td><td>368 475.00</td></tr>
+            <tr><td>4</td><td>368 475.00</td><td>18 423.75</td><td>30 000.00</td><td>356 898.75</td></tr>
+          </table>
+          <p>The balance falls slowly at first: of the $30,000 taken in year 1, $20,000 was
+            interest and only $10,000 came from capital. As the balance shrinks the interest
+            shrinks too, so the fund depletes at an accelerating rate.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; a perpetual income</p>
+          <p>If Nadia instead withdrew $20,000 per year, what would happen?</p>
+          <p>Year 1 interest is \(400000 \times 0.05 = \$20\,000\), exactly matching the
+            withdrawal. The closing balance is</p>
+          \[400000 + 20000 - 20000 = \$400\,000\]
+          <p>The balance never changes &mdash; she could draw $20,000 every year forever. Drawing
+            <em>less</em> than the interest would make the fund grow despite the withdrawals.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; exam style</p>
+          <p>Tom invests a $150,000 inheritance at 6% per annum and withdraws $20,000 at the end of
+            each year.</p>
+          <p><strong>(a) Model the first three years.</strong> [2 marks]</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Opening</th><th>Interest (6%)</th><th>Withdrawal</th><th>Closing</th></tr>
+            <tr><td>1</td><td>150 000.00</td><td>9 000.00</td><td>20 000.00</td><td>139 000.00</td></tr>
+            <tr><td>2</td><td>139 000.00</td><td>8 340.00</td><td>20 000.00</td><td>127 340.00</td></tr>
+            <tr><td>3</td><td>127 340.00</td><td>7 640.40</td><td>20 000.00</td><td>114 980.40</td></tr>
+          </table>
+          <p><strong>(b) Of the $60,000 withdrawn, how much came from interest?</strong> [1 mark]</p>
+          <p>The capital fell by \(150000 - 114980.40 = \$35\,019.60\), so
+            \(60000 - 35019.60 = \$24\,980.40\) came from interest.</p>
+          <p><strong>(c) Tom says the money will run out after \(150000 \div 20000 = 7.5\)
+            years. Explain why he is wrong.</strong> [1 mark]</p>
+          <p>His calculation ignores interest. The remaining balance keeps earning 6%, so the fund
+            lasts longer &mdash; it is exhausted during year 11.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$250,000 is invested at 4% per annum and $18,000 is withdrawn at the end of each
+              year. Find the balance after 3 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Closing balances: \(250000 + 10000 - 18000 = \$242\,000\);
+                  \(242000 + 9680 - 18000 = \$233\,680\);
+                  \(233680 + 9347.20 - 18000 = \$225\,027.20\).</p>
+              </div></details></li>
+            <li>What is the largest annual withdrawal that $320,000 at 4.5% per annum can pay
+              forever?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The withdrawal must not exceed the interest: \(320000 \times 0.045 = \$14\,400\)
+                  per year.</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Drawdown explorer</h3>
+          <p class="exercise-intro">Set the starting sum, the rate and the annual withdrawal. The
+            chart shows how long the fund lasts &mdash; watch what happens as the withdrawal
+            crosses the interest earned in year 1.</p>
+          <div id="drawSliders"></div>
+          <div class="plot-wrap" id="plotDraw"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Year 1 interest</div>
+              <div class="readout-value" id="roDrawInt">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Fund lasts</div>
+              <div class="readout-value" id="roDrawLast">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total withdrawn</div>
+              <div class="readout-value" id="roDrawTotal">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="drawNote" style="margin-top:14px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. SPREADSHEET ─────────── -->
+      <div class="content-card" id="spreadsheet">
+        <p class="section-label">Technology</p>
+        <h2>Modelling an annuity in a spreadsheet</h2>
+
+        <p>The syllabus explicitly requires you to <em>use a spreadsheet to model an annuity</em>.
+          Put the parameters in their own cells so one edit updates everything:</p>
+
+        <table class="coord-table">
+          <tr><th>Cell</th><th>Label</th><th>Value</th></tr>
+          <tr><td>B1</td><td>Opening balance</td><td>0</td></tr>
+          <tr><td>B2</td><td>Contribution per period</td><td>2000</td></tr>
+          <tr><td>B3</td><td>Rate per period</td><td>0.06</td></tr>
+        </table>
+
+        <p>Then the table from row 6, with period numbers in column A:</p>
+        <table class="coord-table">
+          <tr>
+            <th></th><th>A &mdash; Period</th><th>B &mdash; Opening</th>
+            <th>C &mdash; Interest</th><th>D &mdash; Contribution</th><th>E &mdash; Closing</th>
+          </tr>
+          <tr>
+            <td>Row 6</td><td>1</td><td><code>=$B$1</code></td>
+            <td><code>=B6*$B$3</code></td><td><code>=$B$2</code></td><td><code>=B6+C6+D6</code></td>
+          </tr>
+          <tr>
+            <td>Row 7</td><td><code>=A6+1</code></td><td><code>=E6</code></td>
+            <td>fill down</td><td>fill down</td><td>fill down</td>
+          </tr>
+        </table>
+
+        <p>As with loans, the formula that makes it work is <code>B7 =E6</code> &mdash; each
+          period opens with the previous period's closing balance.</p>
+
+        <ul>
+          <li>For a <strong>drawdown</strong> annuity, make the contribution negative or change E to
+            <code>=B6+C6-D6</code>.</li>
+          <li>Total contributed is <code>=SUM(D6:D###)</code>; total interest is
+            <code>=SUM(C6:C###)</code>. They should add to the final balance minus the opening
+            balance.</li>
+          <li>Charting column E against column A shows the balance curving <em>upward</em> &mdash;
+            it accelerates, because each year's interest is calculated on a larger balance.</li>
+          <li>Changing B3 and watching the final row move is the "examine the effect of varying the
+            interest rate" skill the syllabus asks for.</li>
+        </ul>
+
+        <div class="formula-box">
+          <p class="formula-label">A useful check</p>
+          <p style="margin-bottom:0;">Final balance = opening balance + total contributed + total
+            interest. If your three sums do not reconcile, a row has been mis-referenced &mdash;
+            usually an opening balance pointing at the wrong cell.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>How long will a retirement fund last?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Kim retires with $500,000. Use the
+          <a href="#drawdown">drawdown explorer</a>.</p>
+        <ol>
+          <li>Set the rate to 5%. Record how long the fund lasts for withdrawals of $25,000,
+            $30,000, $40,000 and $50,000 per year.</li>
+          <li>The $40,000 withdrawal is 60% bigger than $25,000. Compare the effect on how long
+            the fund lasts.</li>
+          <li>Keep $40,000 per year. How long does the fund last at 3%? At 7%?</li>
+          <li>Kim expects to live 25 more years. Find the largest withdrawal (to the nearest
+            $2,500) that lasts at least that long at 5%.</li>
+          <li>Discuss: what risks could make Kim's plan fail even if her calculation is right?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Withdrawal</th><td>$25,000</td><td>$30,000</td><td>$40,000</td><td>$50,000</td></tr>
+            <tr><th>Fund lasts (5%)</th><td>indefinitely</td><td>37 years</td><td>21 years</td><td>15 years</td></tr>
+          </table>
+          <p><strong>2.</strong> $25,000 equals the first year's interest, so the fund never runs
+            down. Above that, every extra dollar eats into capital, which then earns less interest
+            &mdash; the fund's life shrinks dramatically.</p>
+          <p><strong>3.</strong> 16 years at 3%; 31 years at 7%. The interest rate matters
+            enormously over a long drawdown.</p>
+          <p><strong>4.</strong> $35,000 per year lasts 26 years; $37,500 lasts only 23. So $35,000 is the
+            largest withdrawal that lasts at least 25 years.</p>
+          <p><strong>5.</strong> Interest rates may fall; inflation means $35,000 buys less each
+            year; she may live longer than 25 years; unexpected costs (health, housing) may force
+            larger withdrawals.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 replaces the row-by-row table with interest-factor tables, which handle 20-year
+          annuities in a single multiplication.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-3', LESSON_IDX = 0;
+
+  function money(v) {
+    return '$' + v.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function money0(v) { return '$' + Math.round(v).toLocaleString('en-AU'); }
+
+  /* Build an accumulating annuity schedule. Contributions at END of each period. */
+  function runAnnuity(opening, contrib, r, periods) {
+    var bal = opening, rows = [], totInt = 0, totCon = 0;
+    for (var n = 1; n <= periods; n++) {
+      var interest = bal * r;
+      totInt += interest;
+      totCon += contrib;
+      var close = bal + interest + contrib;
+      rows.push({ n: n, open: bal, interest: interest, contrib: contrib, close: close });
+      bal = close;
+    }
+    return { rows: rows, total: bal, totalInterest: totInt, totalContrib: totCon };
+  }
+
+  /* ── Annuity table builder ────────────────────────────────── */
+  (function () {
+    var opening = 0, contrib = 2000, rate = 6, periods = 10;
+    var redraw = IE.plot('plotAnn', { xMin: 0, xMax: 10, yMin: 0, yMax: 30000, xStep: 2, yStep: 5000, xLabel: 'year', yLabel: '$', curves: [] });
+
+    function update() {
+      var r = rate / 100;
+      var res = runAnnuity(opening, contrib, r, periods);
+
+      // Balance after n periods, and the running total contributed, for the chart
+      function balAt(n) {
+        var i = Math.round(n);
+        if (i <= 0) return opening;
+        if (i > res.rows.length) return res.total;
+        return res.rows[i - 1].close;
+      }
+      function conAt(n) {
+        var i = Math.max(0, Math.round(n));
+        return opening + Math.min(i, periods) * contrib;
+      }
+
+      var top = Math.max(res.total, conAt(periods)) * 1.1;
+      redraw({
+        xMax: periods,
+        xStep: Math.max(1, Math.round(periods / 5)),
+        yMax: top,
+        yStep: Math.max(500, Math.round(top / 5 / 500) * 500),
+        curves: [
+          { fn: balAt },
+          { fn: conAt, className: 'plot-curve-2' }
+        ]
+      });
+
+      document.getElementById('roContrib').textContent  = money0(res.totalContrib);
+      document.getElementById('roInterest').textContent = money0(res.totalInterest);
+      document.getElementById('roFinal').textContent    = money0(res.total);
+
+      var html = '<table class="coord-table"><tr><th>Year</th><th>Opening</th><th>Interest</th><th>Contribution</th><th>Closing</th></tr>';
+      res.rows.slice(0, 8).forEach(function (row) {
+        html += '<tr><td>' + row.n + '</td><td>' + money(row.open) + '</td><td>' + money(row.interest) +
+                '</td><td>' + money(row.contrib) + '</td><td>' + money(row.close) + '</td></tr>';
+      });
+      html += '</table>';
+      if (periods > 8) {
+        html += '<p style="font-size:12px;color:var(--gray-med);margin-top:10px;">First 8 of ' +
+                periods + ' years shown.</p>';
+      }
+      document.getElementById('annTable').innerHTML = html;
+    }
+
+    var host = 'annSliders';
+    IE.slider({ mount: host, label: 'Opening balance', min: 0, max: 20000, step: 1000, value: opening,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { opening = v; update(); } });
+    IE.slider({ mount: host, label: 'Contribution', min: 500, max: 10000, step: 500, value: contrib,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { contrib = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per year', min: 1, max: 15, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 2, max: 30, step: 1, value: periods,
+                onInput: function (v) { periods = v; update(); } });
+    update();
+  })();
+
+  /* ── Exercises ────────────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [1623.20, 'Year 1: 0 + 0 + 500 = 500. Year 2: 500 + 40 + 500 = 1040. Year 3: 1040 + 83.20 + 500 = $1623.20.'],
+      B: [123.20,  'Total contributed is 3 × $500 = $1500, so the interest is 1623.20 − 1500 = $123.20.'],
+      C: [5,       'In a 6-year annuity the first contribution arrives at the end of year 1, so it earns interest for years 2 to 6 — that is 5 years.']
+    };
+    document.querySelectorAll('[data-an]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.an;
+        var fb = document.getElementById('fbAn' + k);
+        var raw = (document.getElementById('an' + k).value || '').replace(/[$,\s]/g, '');
+        var g = parseFloat(raw);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.05;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Drawdown explorer ────────────────────────────────────── */
+  (function () {
+    var start = 400000, rate = 5, draw = 30000;
+    var redraw = IE.plot('plotDraw', { xMin: 0, xMax: 30, yMin: 0, yMax: 450000, xStep: 5, yStep: 100000, xLabel: 'year', yLabel: 'balance $', curves: [] });
+
+    function schedule() {
+      var r = rate / 100, bal = start, out = [start], total = 0;
+      for (var n = 1; n <= 60; n++) {
+        var interest = bal * r;
+        var take = Math.min(draw, bal + interest);
+        total += take;
+        bal = bal + interest - take;
+        out.push(Math.max(0, bal));
+        if (bal <= 0.005) return { bals: out, lasts: n, total: total, forever: false };
+      }
+      return { bals: out, lasts: null, total: total, forever: true };
+    }
+
+    function update() {
+      var r = rate / 100;
+      var firstInt = start * r;
+      var s = schedule();
+      var horizon = s.lasts || 30;
+
+      redraw({
+        xMax: horizon,
+        xStep: Math.max(1, Math.round(horizon / 5)),
+        yMax: start * 1.15,
+        yStep: Math.max(10000, Math.round(start / 5 / 10000) * 10000),
+        curves: [{ fn: function (n) {
+          var i = Math.round(n);
+          if (i < 0) return start;
+          return i < s.bals.length ? s.bals[i] : 0;
+        } }]
+      });
+
+      document.getElementById('roDrawInt').textContent   = money0(firstInt);
+      document.getElementById('roDrawLast').textContent  = s.lasts ? s.lasts + ' years' : 'indefinitely';
+      document.getElementById('roDrawTotal').textContent = money0(s.total);
+
+      var note = document.getElementById('drawNote');
+      if (!s.lasts) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'The withdrawal of ' + money0(draw) + ' does not exceed the first year\'s interest of ' +
+          money0(firstInt) + ', so the fund is never exhausted — this is a perpetual income.';
+      } else {
+        note.className = 'exercise-feedback';
+        note.textContent = 'The fund lasts ' + s.lasts + ' years, paying out ' + money0(s.total) +
+          ' in total from a starting sum of ' + money0(start) + ' — ' +
+          money0(s.total - start) + ' of that came from interest.';
+      }
+    }
+
+    var host = 'drawSliders';
+    IE.slider({ mount: host, label: 'Starting sum', min: 100000, max: 1000000, step: 50000, value: start,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { start = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per year', min: 1, max: 12, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Withdrawal', min: 5000, max: 80000, step: 2500, value: draw,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { draw = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Which of these is an annuity?',
+      opts: [
+        'A) A single deposit of $10,000 left in a term deposit for 5 years',
+        'B) $300 deposited at the end of every month into an account earning compound interest',
+        'C) A one-off share purchase',
+        'D) A savings account with no deposits and no interest'
+      ],
+      correct: 1,
+      explanation: 'B is correct. An annuity requires <em>regular, equal</em> payments at regular intervals with compound interest. Option A is ordinary compound interest — a single payment, not a series.'
+    },
+    {
+      q: 'In an annuity with contributions at the end of each year, what is the interest earned in year 1 if the account starts empty?',
+      opts: [
+        'A) The contribution times the interest rate',
+        'B) Zero, because there is no balance during year 1',
+        'C) The full year\'s interest on the contribution',
+        'D) Half a year\'s interest on the contribution'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The opening balance is $0 and the contribution does not arrive until the end of the year, so there is nothing in the account to earn interest during year 1.'
+    },
+    {
+      q: '$1,000 is contributed at the end of each year for 3 years at 10% per annum. What is the final balance?',
+      opts: ['A) $3,000', 'B) $3,310', 'C) $3,641', 'D) $3,100'],
+      correct: 1,
+      explanation: 'B is correct. Year 1: $1,000. Year 2: \\(1000 + 100 + 1000 = \\$2\\,100\\). Year 3: \\(2100 + 210 + 1000 = \\$3\\,310\\). Option A is the total contributed, with no interest.'
+    },
+    {
+      q: 'In a 5-year annuity with contributions at the end of each year, how many years does the <em>final</em> contribution earn interest for?',
+      opts: ['A) 5', 'B) 4', 'C) 1', 'D) 0'],
+      correct: 3,
+      explanation: 'D is correct. The final contribution is made at the very end of the annuity, so it earns no interest at all. The first contribution earns interest for 4 years.'
+    },
+    {
+      q: 'A retiree has $500,000 invested at 4% per annum and withdraws $20,000 at the end of each year. What happens to the balance?',
+      opts: [
+        'A) It falls steadily and runs out in 25 years',
+        'B) It stays at $500,000 indefinitely',
+        'C) It grows each year',
+        'D) It falls to zero in 4 years'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The interest is \\(500000 \\times 0.04 = \\$20\\,000\\), exactly matching the withdrawal, so the closing balance equals the opening balance every year — a perpetual income.'
+    },
+    {
+      q: 'In a spreadsheet annuity model with closing balances in column E, which formula belongs in B7 (the second period\'s opening balance)?',
+      opts: ['A) <code>=$B$1</code>', 'B) <code>=B6</code>', 'C) <code>=E6</code>', 'D) <code>=E7</code>'],
+      correct: 2,
+      explanation: 'C is correct. Each period opens with the previous period\'s closing balance, which sits in E6. Option A would reset the annuity to its starting balance every row.'
+    },
+    {
+      q: 'Why can you not calculate an annuity\'s future value by applying \\(FV = PV(1+r)^{n}\\) to the total amount contributed?',
+      opts: [
+        'A) Because annuities do not earn compound interest',
+        'B) Because each contribution is invested for a different length of time',
+        'C) Because the interest rate changes every year',
+        'D) Because the formula only works for loans'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The formula assumes a single lump sum invested for the whole term. In an annuity the first contribution compounds for \\(n-1\\) periods, the last for none — so treating the total as though it were all invested at the start would badly overstate the result.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain, in your own words, the difference between a compound interest investment and an annuity.',
+      marks: 2,
+      steps: [
+        'A compound interest investment involves a single payment made at the start.',
+        'An annuity involves regular, equal payments made at regular intervals.',
+        'In an annuity each payment is invested for a different length of time, so the growth cannot be found with one application of \\(FV = PV(1+r)^n\\).'
+      ],
+      answer: 'A compound interest investment is one lump sum left to grow. An annuity is a series of regular equal payments, each of which compounds for a different number of periods — the first for the longest, the last not at all.'
+    },
+    {
+      q: 'Model the first four years of an annuity where $3,000 is contributed at the end of each year into an account earning 5% per annum.',
+      marks: 4,
+      steps: [
+        'Year 1: opening $0, interest $0, contribution $3,000, closing $3,000.',
+        'Year 2: interest \\(= 3000 \\times 0.05 = \\$150\\); closing \\(= 3000 + 150 + 3000 = \\$6\\,150\\).',
+        'Year 3: interest \\(= 6150 \\times 0.05 = \\$307.50\\); closing \\(= 6150 + 307.50 + 3000 = \\$9\\,457.50\\).',
+        'Year 4: interest \\(= 9457.50 \\times 0.05 = \\$472.88\\); closing \\(= 9457.50 + 472.88 + 3000 = \\$12\\,930.38\\).'
+      ],
+      answer: 'Closing balances $3,000.00, $6,150.00, $9,457.50, $12,930.38.'
+    },
+    {
+      q: 'For the annuity in the previous question, state the total contributed and the total interest earned over the four years.',
+      marks: 2,
+      steps: [
+        'Total contributed: \\(4 \\times 3000 = \\$12\\,000\\).',
+        'Final balance: $12,930.38.',
+        'Interest \\(= 12930.38 - 12000\\).'
+      ],
+      answer: 'Contributed $12,000; interest $930.38.'
+    },
+    {
+      q: 'Priya already has $8,000 in an account earning 7% per annum and adds $2,500 at the end of each year. Model three years.',
+      marks: 4,
+      steps: [
+        'Year 1: interest \\(= 8000 \\times 0.07 = \\$560\\); closing \\(= 8000 + 560 + 2500 = \\$11\\,060\\).',
+        'Year 2: interest \\(= 11060 \\times 0.07 = \\$774.20\\); closing \\(= 11060 + 774.20 + 2500 = \\$14\\,334.20\\).',
+        'Year 3: interest \\(= 14334.20 \\times 0.07 = \\$1\\,003.39\\); closing \\(= 14334.20 + 1003.39 + 2500 = \\$17\\,837.59\\).',
+        'Note year 1 does earn interest here, because an opening balance already existed.'
+      ],
+      answer: 'Closing balances $11,060.00, $14,334.20, $17,837.59.'
+    },
+    {
+      q: '$2,000 is contributed at the end of each year for 4 years at 8% per annum. Find the value of each individual contribution at the end of year 4, and hence the total.',
+      marks: 4,
+      steps: [
+        'The year 1 contribution earns interest for 3 years: \\(2000 \\times 1.08^{3} = \\$2\\,519.42\\).',
+        'The year 2 contribution earns interest for 2 years: \\(2000 \\times 1.08^{2} = \\$2\\,332.80\\).',
+        'The year 3 contribution earns interest for 1 year: \\(2000 \\times 1.08 = \\$2\\,160.00\\).',
+        'The year 4 contribution earns nothing: $2,000.00.',
+        'Total: \\(2519.42 + 2332.80 + 2160.00 + 2000.00\\).'
+      ],
+      answer: '$9,012.22 — which matches building the table row by row.'
+    },
+    {
+      q: 'A retiree invests $600,000 at 6% per annum and withdraws $45,000 at the end of each year. Model the first three years.',
+      marks: 4,
+      steps: [
+        'Year 1: interest \\(= 600000 \\times 0.06 = \\$36\\,000\\); closing \\(= 600000 + 36000 - 45000 = \\$591\\,000\\).',
+        'Year 2: interest \\(= 591000 \\times 0.06 = \\$35\\,460\\); closing \\(= 591000 + 35460 - 45000 = \\$581\\,460\\).',
+        'Year 3: interest \\(= 581460 \\times 0.06 = \\$34\\,887.60\\); closing \\(= 581460 + 34887.60 - 45000 = \\$571\\,347.60\\).'
+      ],
+      answer: 'Closing balances $591,000.00, $581,460.00, $571,347.60. The fund falls by only $9,000 in year 1 because $36,000 of the withdrawal came from interest.'
+    },
+    {
+      q: 'For the retiree above, what annual withdrawal would allow the fund to last indefinitely?',
+      marks: 2,
+      steps: [
+        'The fund is preserved when the withdrawal exactly equals the interest earned.',
+        'Interest on $600,000 at 6% is \\(600000 \\times 0.06\\).',
+        'Any withdrawal at or below this leaves the balance unchanged or growing.'
+      ],
+      answer: '$36,000 per year. At that level the closing balance equals the opening balance every year, so the income continues forever.'
+    },
+    {
+      q: 'Write the spreadsheet formulas for C6 (interest), E6 (closing balance) and B7 (next opening balance) in an annuity model with the opening balance in B1, the contribution in B2 and the rate in B3, table starting at row 6.',
+      marks: 3,
+      steps: [
+        'Interest is the row\'s opening balance times the rate, with the rate cell absolute.',
+        'The closing balance adds both the interest and the contribution to the opening balance.',
+        'The next opening balance is this row\'s closing balance — the link between rows.'
+      ],
+      answer: 'C6: <code>=B6*$B$3</code> &nbsp; E6: <code>=B6+C6+D6</code> &nbsp; B7: <code>=E6</code>'
+    },
+    {
+      q: 'An annuity of $1,500 per year at 9% per annum runs for 5 years. Build the table and state the final balance and total interest.',
+      marks: 5,
+      steps: [
+        'Year 1: \\(0 + 0 + 1500 = \\$1\\,500.00\\).',
+        'Year 2: \\(1500 + 135.00 + 1500 = \\$3\\,135.00\\).',
+        'Year 3: \\(3135 + 282.15 + 1500 = \\$4\\,917.15\\).',
+        'Year 4: \\(4917.15 + 442.54 + 1500 = \\$6\\,859.69\\).',
+        'Year 5: \\(6859.69 + 617.37 + 1500 = \\$8\\,977.06\\).',
+        'Total contributed \\(= 5 \\times 1500 = \\$7\\,500\\).'
+      ],
+      answer: 'Final balance $8,977.06; total interest $1,477.06.'
+    },
+    {
+      q: 'Two savers each put aside $200 per month at 6% per annum compounded monthly. Alex starts at age 25 and stops at 35 (10 years of contributions, then leaves it untouched to 65). Sam starts at 35 and contributes until 65 (30 years). Without full calculation, explain who is likely to have more at 65 and why.',
+      marks: 4,
+      steps: [
+        'Alex contributes \\(120 \\times 200 = \\$24\\,000\\); Sam contributes \\(360 \\times 200 = \\$72\\,000\\) — three times as much.',
+        'But Alex\'s balance then compounds untouched for a further 30 years.',
+        'Sam\'s later contributions have very little time to compound — the last one earns nothing.',
+        'Time in the market matters more than the amount contributed when the horizon is long.'
+      ],
+      answer: 'Alex is likely to end up with a comparable or larger balance despite contributing only a third as much, because the $24,000 accumulated by age 35 then compounds for another 30 years. Sam\'s contributions, though larger in total, spend far less time earning interest.'
+    },
+    {
+      q: 'Explain why the balance of an accumulating annuity curves upward rather than rising in a straight line.',
+      marks: 3,
+      steps: [
+        'If there were no interest, the balance would rise by the same contribution each period — a straight line.',
+        'Each period the interest is calculated on a larger balance than the period before.',
+        'So the amount added each period grows: the contribution stays fixed but the interest component increases.',
+        'The result is an accelerating, upward-curving graph.'
+      ],
+      answer: 'The contribution is constant, but the interest is charged on an ever-larger balance, so the total added each period grows. The gap between the balance line and the "total contributed" line widens, giving an upward curve rather than a straight line.'
+    },
+    {
+      q: 'A fund of $250,000 earns 5% per annum and $40,000 is withdrawn at the end of each year. Show that the fund is exhausted during the eighth year.',
+      marks: 5,
+      steps: [
+        'Year 1: \\(250000 + 12500 - 40000 = \\$222\\,500\\).',
+        'Year 2: \\(222500 + 11125 - 40000 = \\$193\\,625\\).',
+        'Year 3: \\(193625 + 9681.25 - 40000 = \\$163\\,306.25\\).',
+        'Continuing: year 4 \\(\\$131\\,471.56\\), year 5 \\(\\$98\\,045.14\\), year 6 \\(\\$62\\,947.40\\), year 7 \\(\\$26\\,094.77\\).',
+        'Year 8 opening $26,094.77 plus interest $1,304.74 gives $27,399.51 — less than the $40,000 withdrawal.'
+      ],
+      answer: 'At the start of year 8 only $26,094.77 remains; with interest it reaches $27,399.51, which is less than the $40,000 required. The fund runs out partway through year 8, with a final payment of $27,399.51.'
+    },
+    {
+      q: 'A superannuation account receives $6,000 at the end of each year and earns 7.5% per annum. Model four years, then state what fraction of the balance is interest.',
+      marks: 5,
+      steps: [
+        'Year 1: \\(0 + 0 + 6000 = \\$6\\,000.00\\).',
+        'Year 2: \\(6000 + 450.00 + 6000 = \\$12\\,450.00\\).',
+        'Year 3: \\(12450 + 933.75 + 6000 = \\$19\\,383.75\\).',
+        'Year 4: \\(19383.75 + 1453.78 + 6000 = \\$26\\,837.53\\).',
+        'Contributed \\(= 4 \\times 6000 = \\$24\\,000\\); interest \\(= \\$2\\,837.53\\).',
+        'Fraction: \\(\\dfrac{2837.53}{26837.53} \\approx 0.106\\).'
+      ],
+      answer: 'Final balance $26,837.53, of which $2,837.53 (about 10.6%) is interest. Over a full working life that fraction becomes the majority of the balance.'
+    },
+    {
+      q: 'A spreadsheet annuity model shows a final balance of $45,200, total contributions of $36,000 and total interest of $8,700, with an opening balance of $0. Explain what must be wrong.',
+      marks: 3,
+      steps: [
+        'The reconciliation check is: final balance = opening balance + total contributed + total interest.',
+        'Here that gives \\(0 + 36000 + 8700 = \\$44\\,700\\), not $45,200.',
+        'There is a discrepancy of $500.',
+        'This usually means a row\'s opening balance points at the wrong cell, or a sum range misses or double-counts a row.'
+      ],
+      answer: 'The three figures do not reconcile: \\(36000 + 8700 = 44700\\), which is $500 short of $45,200. Most likely a <code>SUM</code> range excludes a row, or an opening-balance reference is wrong, so part of the growth is unaccounted for.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

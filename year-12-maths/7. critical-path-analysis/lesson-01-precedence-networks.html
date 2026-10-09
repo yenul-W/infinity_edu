@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Precedence Tables &amp; Network Diagrams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 7 &mdash; Critical Path Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Precedence Tables &amp; Network Diagrams</h1>
+      <p class="subtitle">Every project is a set of tasks, some of which must wait for others. A
+        precedence table records those dependencies; a network diagram turns them into a picture
+        you can actually analyse.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-07</span>
+        <span class="pill">Precedence tables</span>
+        <span class="pill">Dummy activities</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What a project network is</li>
+        <li>Reading a precedence table</li>
+        <li>Drawing the network</li>
+        <li>Why dummy activities exist</li>
+        <li>Drawing dummies correctly</li>
+        <li>Common structures</li>
+        <li>From a description to a network</li>
+        <li>Class activity: make each path the longest</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#basics">1 &nbsp;Project networks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tables">2 &nbsp;Precedence tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#drawing">3 &nbsp;Drawing the network</a></li>
+        <li class="toc-item"><a class="toc-link" href="#dummies">4 &nbsp;Dummy activities</a></li>
+        <li class="toc-item"><a class="toc-link" href="#structures">5 &nbsp;Common structures</a></li>
+        <li class="toc-item"><a class="toc-link" href="#description">6 &nbsp;From a description</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. BASICS ─────────── -->
+      <div class="content-card" id="basics">
+        <p class="section-label">Theory</p>
+        <h2>Project networks</h2>
+
+        <p><strong>Critical path analysis</strong> is a method for scheduling projects. It answers
+          two questions: <em>how quickly can this project finish?</em> and <em>which tasks must
+          not be delayed?</em></p>
+
+        <div class="formula-box">
+          <p class="formula-label">Activity-on-edge convention</p>
+          <p style="margin-bottom:0;">In this course, <strong>activities are the edges</strong>
+            (arrows) and <strong>vertices are events</strong> — moments in time when activities
+            finish and others may begin. Each edge is labelled with the activity's letter and its
+            duration.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 160" width="400">
+            <defs>
+              <marker id="cp1" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 9 3.5, 0 7" class="arrowhead-fill"/>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="72"  y1="80" x2="166" y2="80" marker-end="url(#cp1)"/>
+            <line class="edge-line" x1="212" y1="80" x2="306" y2="80" marker-end="url(#cp1)"/>
+            <circle class="node-circle" cx="50"  cy="80" r="22"/>
+            <circle class="node-circle" cx="190" cy="80" r="22"/>
+            <circle class="node-circle" cx="330" cy="80" r="22"/>
+            <text class="node-label" x="44"  y="86">1</text>
+            <text class="node-label" x="184" y="86">2</text>
+            <text class="node-label" x="324" y="86">3</text>
+            <text class="edge-weight-label" x="104" y="68">A, 5</text>
+            <text class="edge-weight-label" x="244" y="68">B, 3</text>
+            <text class="angle-label-text" x="14" y="126">start</text>
+            <text class="angle-label-text" x="308" y="126">finish</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">Activity A takes 5 units and must finish before B (3 units) can
+          start. The whole project takes 8 units.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The rules</p>
+          <ul style="margin-bottom:0;">
+            <li>An activity can only start once <strong>every</strong> activity arriving at its
+              starting vertex has finished.</li>
+            <li>The network has <strong>one start vertex</strong> (nothing arrives) and
+              <strong>one finish vertex</strong> (nothing leaves).</li>
+            <li>Arrows point in the direction of time — the network never loops back.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. TABLES ─────────── -->
+      <div class="content-card" id="tables">
+        <p class="section-label">Method</p>
+        <h2>Reading a precedence table</h2>
+
+        <p>A <strong>precedence table</strong> (also called an activity table) lists each activity,
+          how long it takes, and which activities must be completed immediately before it.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>Duration (days)</th><th>Immediate predecessors</th></tr>
+            <tr><td>A</td><td>4</td><td>—</td></tr>
+            <tr><td>B</td><td>6</td><td>—</td></tr>
+            <tr><td>C</td><td>3</td><td>A</td></tr>
+            <tr><td>D</td><td>5</td><td>A, B</td></tr>
+            <tr><td>E</td><td>2</td><td>C, D</td></tr>
+          </table>
+          <p><strong>How to read it:</strong></p>
+          <ul>
+            <li>A and B have no predecessors, so both start immediately.</li>
+            <li>C waits for A alone.</li>
+            <li>D waits for <em>both</em> A and B — it cannot start until the later of the two
+              finishes.</li>
+            <li>E waits for both C and D, and is the final activity.</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">"Immediate" predecessors</p>
+          <p style="margin-bottom:0;">Only the activities <em>directly</em> before are listed. In
+            the table above, E also depends on A (through C), but A is not listed for E because
+            the dependency is indirect. Never draw an arrow for an indirect dependency.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Reading the table</h3>
+          <p class="exercise-intro">Using the table in Worked example 1.</p>
+
+          <div class="exercise-row">
+            <label>(a) How many activities can start at time 0?</label>
+            <input class="exercise-input" id="pcA" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-pc="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcA"></p>
+
+          <div class="exercise-row">
+            <label>(b) At the earliest, when can D start (in days)?</label>
+            <input class="exercise-input" id="pcB" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-pc="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcB"></p>
+
+          <div class="exercise-row">
+            <label>(c) At the earliest, when can E start?</label>
+            <input class="exercise-input" id="pcC" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-pc="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A project has A (3, —), B (5, —), C (2, A), D (4, B), E (6, C, D), shown as
+              (duration, predecessors). When can E start at the earliest, and when does the project
+              finish?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>C finishes at \(3 + 2 = 5\); D finishes at \(5 + 4 = 9\). E waits for both:
+                  starts at day 9 and finishes at \(9 + 6 = 15\).</p>
+              </div></details></li>
+            <li>F depends on E, and E depends on C and D. What are F's <em>immediate</em>
+              predecessors?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Only E. C and D are indirect predecessors of F, so they are not listed.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. DRAWING ─────────── -->
+      <div class="content-card" id="drawing">
+        <p class="section-label">Method</p>
+        <h2>Drawing the network</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The procedure</p>
+          <ol style="margin-bottom:0;">
+            <li>Draw the <strong>start vertex</strong> and every activity with no predecessors
+              leaving it.</li>
+            <li>Work down the table. Each activity starts at the vertex where <em>all</em> its
+              predecessors end.</li>
+            <li>Join every activity with no successors to a single <strong>finish
+              vertex</strong>.</li>
+            <li>Number the vertices so every arrow points from a lower to a higher number.</li>
+          </ol>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 460 210" width="460">
+            <defs>
+              <marker id="cp2" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 9 3.5, 0 7" class="arrowhead-fill"/>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="64"  y1="92"  x2="150" y2="52"  marker-end="url(#cp2)"/>
+            <line class="edge-line" x1="64"  y1="118" x2="150" y2="158" marker-end="url(#cp2)"/>
+            <line class="edge-line" x1="194" y1="52"  x2="288" y2="52"  marker-end="url(#cp2)"/>
+            <line class="edge-line" x1="176" y1="70"  x2="176" y2="138" marker-end="url(#cp2)" stroke-dasharray="6 4"/>
+            <line class="edge-line" x1="194" y1="158" x2="288" y2="120" marker-end="url(#cp2)"/>
+            <line class="edge-line" x1="330" y1="66"  x2="386" y2="94"  marker-end="url(#cp2)"/>
+            <line class="edge-line" x1="330" y1="120" x2="386" y2="102" marker-end="url(#cp2)"/>
+            <circle class="node-circle" cx="42"  cy="105" r="20"/>
+            <circle class="node-circle" cx="172" cy="52"  r="20"/>
+            <circle class="node-circle" cx="172" cy="158" r="20"/>
+            <circle class="node-circle" cx="310" cy="52"  r="20"/>
+            <circle class="node-circle" cx="310" cy="134" r="20"/>
+            <circle class="node-circle" cx="408" cy="100" r="20"/>
+            <text class="node-label" x="36"  y="111">1</text>
+            <text class="node-label" x="166" y="58">2</text>
+            <text class="node-label" x="166" y="164">3</text>
+            <text class="node-label" x="304" y="58">4</text>
+            <text class="node-label" x="304" y="140">5</text>
+            <text class="node-label" x="402" y="106">6</text>
+            <text class="edge-weight-label" x="88"  y="60">A, 4</text>
+            <text class="edge-weight-label" x="88"  y="152">B, 6</text>
+            <text class="edge-weight-label" x="230" y="42">C, 3</text>
+            <text class="edge-weight-label" x="182" y="108">dummy</text>
+            <text class="edge-weight-label" x="232" y="152">D, 5</text>
+            <text class="edge-weight-label" x="354" y="66">E, 2</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The network for Worked example 1. The dashed arrow is a dummy
+          activity, carrying A's completion across to where D starts.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; why the dummy is needed here</p>
+          <p>C depends on A only. D depends on A <em>and</em> B.</p>
+          <p>If A and B both ended at the same vertex, then C would appear to depend on B as well
+            &mdash; which is wrong. If they ended at different vertices, D could not see both.</p>
+          <p><strong>The solution:</strong> A ends at vertex 2 and B ends at vertex 3. A
+            <strong>dummy activity</strong> of zero duration runs from vertex 2 to vertex 3,
+            carrying the information that A has finished. Now C leaves vertex 2 (depending on A
+            alone), while D leaves vertex 3 (depending on B and, via the dummy, on A).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A project has A (2, —), B (4, A), C (3, A), D (5, B, C). A student draws B and C
+              both from vertex 2 to vertex 3. What is wrong, and how is it fixed?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Two activities would join the same pair of vertices, so they cannot be told
+                  apart. Let C end at a new vertex 4 and add a dummy from 4 to 3. D leaves vertex
+                  3, so it still waits for both B and C.</p>
+              </div></details></li>
+            <li>How many vertices does the corrected network have, and what is the project's
+              length?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Five vertices: start, end of A, the merge vertex, the extra vertex for C, and
+                  the finish. Length: \(2 + \max(4, 3) + 5 = 11\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. DUMMIES ─────────── -->
+      <div class="content-card" id="dummies">
+        <p class="section-label">Theory</p>
+        <h2>Dummy activities</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">What a dummy is</p>
+          <p style="margin-bottom:0;">A <strong>dummy activity</strong> is a
+            <strong>dashed arrow of zero duration</strong>. It consumes no time and no resources.
+            Its only job is to show a dependency that cannot otherwise be drawn correctly.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The two reasons for a dummy</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Overlapping dependencies.</strong> Two activities share <em>some</em> but
+              not <em>all</em> predecessors — as with C and D above.</li>
+            <li><strong>Uniqueness.</strong> Two activities would otherwise run between the same
+              pair of vertices, making them impossible to tell apart.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; the uniqueness case</p>
+          <p>Activities P and Q both start after R and both finish before S. Drawn naively, P and Q
+            would run between the same two vertices.</p>
+          <p><strong>Fix:</strong> let P run from vertex 2 to vertex 3, and Q from vertex 2 to a new
+            vertex 4. A dummy then runs from vertex 4 to vertex 3. P and Q now have distinct
+            endpoints, and S still waits for both.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Rules for dummies</p>
+          <ul style="margin-bottom:0;">
+            <li>Always drawn <strong>dashed</strong>, always <strong>duration 0</strong>.</li>
+            <li>Still has a direction — dependencies flow one way only.</li>
+            <li>A dummy <em>can</em> lie on the critical path, contributing zero time.</li>
+            <li>Use the <strong>fewest dummies</strong> that correctly capture the dependencies.</li>
+          </ul>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Is a dummy needed?</h3>
+          <p class="exercise-intro">Type <code>yes</code> or <code>no</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) C depends on A; D depends on A and B. &rarr;</label>
+            <input class="exercise-input" id="dmA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-dm="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbDmA"></p>
+
+          <div class="exercise-row">
+            <label>(b) C and D both depend on A and B (exactly the same). &rarr;</label>
+            <input class="exercise-input" id="dmB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-dm="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbDmB"></p>
+
+          <div class="exercise-row">
+            <label>(c) E depends on C; F depends on C and D. &rarr;</label>
+            <input class="exercise-input" id="dmC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-dm="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbDmC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>G depends on E; H depends on E and F. Is a dummy needed? Where would it go?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Yes &mdash; G and H share some but not all predecessors. E and F end at
+                  different vertices; G leaves E's vertex; a dummy runs from E's vertex to F's
+                  vertex, and H leaves F's vertex.</p>
+              </div></details></li>
+            <li>P (3 days) and Q (5 days) both depend on M, and N depends on both P and Q. Why is
+              a dummy needed?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Uniqueness: P and Q would both run from M's end vertex to N's start vertex.
+                  End one of them at a new vertex and join it to N's start with a dummy.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. STRUCTURES ─────────── -->
+      <div class="content-card" id="structures">
+        <p class="section-label">Reference</p>
+        <h2>Common structures</h2>
+
+        <table class="coord-table">
+          <tr><th>Table says</th><th>Means</th><th>Draw</th></tr>
+          <tr>
+            <td>B depends on A</td>
+            <td>Sequential</td>
+            <td>A then B, end to end</td>
+          </tr>
+          <tr>
+            <td>B and C both depend on A</td>
+            <td>Split</td>
+            <td>A ends at a vertex; B and C both leave it</td>
+          </tr>
+          <tr>
+            <td>D depends on B and C</td>
+            <td>Merge</td>
+            <td>B and C both end at a vertex; D leaves it</td>
+          </tr>
+          <tr>
+            <td>A and B have no predecessors</td>
+            <td>Parallel start</td>
+            <td>Both leave the start vertex</td>
+          </tr>
+          <tr>
+            <td>C depends on A; D depends on A and B</td>
+            <td>Overlap</td>
+            <td>Needs a <strong>dummy</strong></td>
+          </tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; a full build</p>
+          <p>Draw the network for this table.</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>Duration</th><th>Predecessors</th></tr>
+            <tr><td>A</td><td>3</td><td>—</td></tr>
+            <tr><td>B</td><td>5</td><td>—</td></tr>
+            <tr><td>C</td><td>4</td><td>A</td></tr>
+            <tr><td>D</td><td>2</td><td>B</td></tr>
+            <tr><td>E</td><td>6</td><td>C, D</td></tr>
+          </table>
+          <p><strong>Method:</strong> A and B both leave the start vertex, ending at different
+            vertices. C leaves A's vertex; D leaves B's vertex. Both C and D end at the same
+            vertex, and E leaves it for the finish.</p>
+          <p><strong>No dummy is needed</strong> — C depends only on A, D only on B, and they merge
+            cleanly at a single vertex before E.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; exam style</p>
+          <p>A backyard pergola project:</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>Description</th><th>Days</th><th>Predecessors</th></tr>
+            <tr><td>A</td><td>Order timber</td><td>3</td><td>—</td></tr>
+            <tr><td>B</td><td>Clear site</td><td>2</td><td>—</td></tr>
+            <tr><td>C</td><td>Dig footings</td><td>2</td><td>B</td></tr>
+            <tr><td>D</td><td>Pour concrete</td><td>1</td><td>C</td></tr>
+            <tr><td>E</td><td>Cut timber</td><td>2</td><td>A</td></tr>
+            <tr><td>F</td><td>Erect frame</td><td>3</td><td>D, E</td></tr>
+            <tr><td>G</td><td>Install roof</td><td>2</td><td>F</td></tr>
+            <tr><td>H</td><td>Paint offcuts</td><td>2</td><td>E</td></tr>
+          </table>
+          <p><strong>(a) Explain why a dummy is needed.</strong> [1 mark]</p>
+          <p>H depends on E alone, but F depends on E and D. They share some predecessors, so E
+            ends at its own vertex (where H starts) and a dummy carries E's completion to the
+            vertex where D ends and F starts.</p>
+          <p><strong>(b) List every path and find the minimum completion time.</strong>
+            [2 marks]</p>
+          <table class="coord-table">
+            <tr><th>Path</th><th>Length</th></tr>
+            <tr><td>A–E–dummy–F–G</td><td>\(3 + 2 + 0 + 3 + 2 = 10\)</td></tr>
+            <tr><td>B–C–D–F–G</td><td>\(2 + 2 + 1 + 3 + 2 = 10\)</td></tr>
+            <tr><td>A–E–H</td><td>\(3 + 2 + 2 = 7\)</td></tr>
+          </table>
+          <p>Minimum completion time: 10 days. Two paths tie, so both are critical &mdash; a delay
+            on either one delays the whole project.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A project has A (4, —), B (3, —), C (5, A), D (2, A), E (6, B, C), F (3, D, E).
+              Is a dummy needed? Find the minimum completion time.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No dummy: B and C end at the same vertex (they start at different vertices),
+                  E leaves it; D and E end at the same vertex, F leaves it.</p>
+                <p>Paths: A–C–E–F \(= 18\), B–E–F \(= 12\), A–D–F \(= 9\). Minimum completion
+                  time: 18.</p>
+              </div></details></li>
+            <li>In that project, which activity could take 6 extra days without delaying
+              completion?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>B: its path B–E–F is 12, six less than 18. (D could take up to 9 extra days.)</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Network builder</h3>
+          <p class="exercise-intro">Adjust the durations of the Worked example 1 project. The
+            network redraws and the longest path is highlighted &mdash; a preview of Lesson 2.</p>
+          <div id="netSliders"></div>
+          <div class="diagram-wrap"><div id="netDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Path A–C–E</div>
+              <div class="readout-value" id="roPath1">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Path B–D–E</div>
+              <div class="readout-value" id="roPath2">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Path A–dummy–D–E</div>
+              <div class="readout-value" id="roPath3">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Project duration</div>
+              <div class="readout-value" id="roDur">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="netNote" style="margin-top:14px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. FROM A DESCRIPTION ─────────── -->
+      <div class="content-card" id="description">
+        <p class="section-label">Application</p>
+        <h2>From a description to a network</h2>
+
+        <p>The syllabus says networks are built from "a precedence table <em>or
+          equivalent</em>". Often the equivalent is a written description. Turn it into a table
+          first, then draw.</p>
+        <ol>
+          <li>List every task, give it a letter, and note its duration.</li>
+          <li>For each task ask: <em>what must be finished immediately before this can
+            start?</em> Record only the direct predecessors.</li>
+          <li>Check: at least one task has no predecessors, and at least one is not a
+            predecessor of anything.</li>
+          <li>Draw the network from the table.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>"To run a fundraiser barbecue, we first book the venue (2 days). Once it is booked we
+            can order the food (3 days) and print flyers (1 day). Flyers are distributed (2 days)
+            after printing. Set-up (1 day) happens once the food has arrived and the flyers are
+            out."</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>Task</th><th>Days</th><th>Predecessors</th></tr>
+            <tr><td>A</td><td>Book venue</td><td>2</td><td>—</td></tr>
+            <tr><td>B</td><td>Order food</td><td>3</td><td>A</td></tr>
+            <tr><td>C</td><td>Print flyers</td><td>1</td><td>A</td></tr>
+            <tr><td>D</td><td>Distribute flyers</td><td>2</td><td>C</td></tr>
+            <tr><td>E</td><td>Set up</td><td>1</td><td>B, D</td></tr>
+          </table>
+          <p>The network splits after A, then merges before E. Both paths, A–B–E and A–C–D–E,
+            take 6 days, so the barbecue can be ready in 6 days.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Write a precedence table: "To repaint a room, buy paint (1 day) and move the
+              furniture (1 day) &mdash; these can happen at the same time. Prepare the walls
+              (2 days) once the furniture is moved. Paint (3 days) once the walls are prepared and
+              the paint is bought. Clean up (1 day) after painting."
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Activity</th><th>Task</th><th>Days</th><th>Predecessors</th></tr>
+                  <tr><td>A</td><td>Buy paint</td><td>1</td><td>—</td></tr>
+                  <tr><td>B</td><td>Move furniture</td><td>1</td><td>—</td></tr>
+                  <tr><td>C</td><td>Prepare walls</td><td>2</td><td>B</td></tr>
+                  <tr><td>D</td><td>Paint</td><td>3</td><td>A, C</td></tr>
+                  <tr><td>E</td><td>Clean up</td><td>1</td><td>D</td></tr>
+                </table>
+              </div></details></li>
+            <li>Does your network need a dummy? What is the minimum completion time?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No dummy: A and C end at the same vertex, where D starts.</p>
+                <p>Longest path B–C–D–E \(= 1 + 2 + 3 + 1 = 7\) days.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Make each path the longest</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#structures">network builder</a>. It has three paths: A–C–E, B–D–E and
+          A–dummy–D–E.</p>
+        <ol>
+          <li>With the starting durations (A 4, B 6, C 3, D 5, E 2), record each path's length.
+            Which is longest?</li>
+          <li>Change only A so that the path through the <strong>dummy</strong> is the longest.
+            What is the smallest value of A that does it?</li>
+          <li>Reset. Find durations that make A–C–E the longest path. Write the condition, in
+            terms of the durations, for this to happen.</li>
+          <li>Find a set of durations where all three paths are equally long. What would that mean
+            for a project manager?</li>
+          <li>E is on every path. Explain why changing E never changes which path is longest.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> A–C–E 9, B–D–E 13, A–dummy–D–E 11. B–D–E is longest.</p>
+          <p><strong>2.</strong> A–dummy–D–E beats B–D–E when \(A &gt; B = 6\), so the smallest
+            whole value is A = 7, giving lengths 12, 13 and 14.</p>
+          <p><strong>3.</strong> For example A 4, B 3, C 7, D 2: lengths 13, 7 and 8. The
+            condition is \(C &gt; D\) <em>and</em> \(A + C &gt; B + D\).</p>
+          <p><strong>4.</strong> For example A 6, B 6, C 5, D 5, E 2: all three are 13. Every
+            activity is then critical &mdash; any delay anywhere delays the project.</p>
+          <p><strong>5.</strong> Adding to E adds the same amount to every path, so their order
+            never changes.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Draw every network carefully &mdash; a correct diagram is worth
+          marks and makes the rest of the analysis straightforward.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 adds the forward and backward scans that reveal the critical path.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-7', LESSON_IDX = 0;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ── Precedence reading ───────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [2, 'A and B both have no predecessors, so both can start at time 0.'],
+      B: [6, 'D waits for both A (4 days) and B (6 days). It cannot start until the later finishes, so at day 6.'],
+      C: [11, 'E waits for C and D. C finishes at 4 + 3 = 7; D finishes at 6 + 5 = 11. E starts at the later, day 11.']
+    };
+    document.querySelectorAll('[data-pc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.pc, fb = document.getElementById('fbPc' + k);
+        var g = parseFloat((document.getElementById('pc' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Dummy exercises ──────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['yes', 'C and D share A but D also needs B — overlapping dependencies, so a dummy is required.'],
+      B: ['no',  'C and D have identical predecessors, so both simply leave the vertex where A and B merge. No dummy needed.'],
+      C: ['yes', 'E depends on C only, while F needs C and D — the same overlapping pattern, so a dummy is required.']
+    };
+    document.querySelectorAll('[data-dm]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.dm, fb = document.getElementById('fbDm' + k);
+        var v = (document.getElementById('dm' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type yes or no.'; return; }
+        var ok = v.charAt(0) === ANS[k][0].charAt(0);
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Network builder ──────────────────────────────────────── */
+  (function () {
+    var d = { A: 4, B: 6, C: 3, D: 5, E: 2 };
+    var mount = document.getElementById('netDiagram');
+
+    function update() {
+      var p1 = d.A + d.C + d.E;          // A → C → E
+      var p2 = d.B + d.D + d.E;          // B → D → E
+      var p3 = d.A + 0 + d.D + d.E;      // A → dummy → D → E
+      var dur = Math.max(p1, p2, p3);
+      var crit = p1 === dur ? 'A–C–E' : (p2 === dur ? 'B–D–E' : 'A–dummy–D–E');
+
+      var W = 460, H = 210;
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      var defs = svgEl('defs');
+      var mk = svgEl('marker', { id: 'cpn', markerWidth: 9, markerHeight: 7, refX: 8, refY: 3.5, orient: 'auto' });
+      mk.appendChild(svgEl('polygon', { points: '0 0, 9 3.5, 0 7', class: 'arrowhead-fill' }));
+      defs.appendChild(mk); svg.appendChild(defs);
+
+      var P = { 1: [42, 105], 2: [172, 52], 3: [172, 158], 4: [310, 52], 5: [310, 134], 6: [408, 100] };
+      function edge(a, b, label, dash, bold) {
+        var p = P[a], q = P[b];
+        var dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
+        var ux = dx / L, uy = dy / L;
+        svg.appendChild(svgEl('line', {
+          class: 'edge-line', x1: p[0] + ux * 21, y1: p[1] + uy * 21,
+          x2: q[0] - ux * 23, y2: q[1] - uy * 23,
+          'stroke-width': bold ? 3.4 : 1.6,
+          'stroke-dasharray': dash ? '6 4' : '',
+          'marker-end': 'url(#cpn)'
+        }));
+        svg.appendChild(svgEl('text', { class: 'edge-weight-label',
+          x: (p[0] + q[0]) / 2, y: (p[1] + q[1]) / 2 - 8, 'text-anchor': 'middle' }, label));
+      }
+      var onA = crit.indexOf('A') === 0, onB = crit.charAt(0) === 'B';
+      edge(1, 2, 'A, ' + d.A, false, onA);
+      edge(1, 3, 'B, ' + d.B, false, onB);
+      edge(2, 4, 'C, ' + d.C, false, crit === 'A–C–E');
+      edge(2, 3, 'dummy', true, crit === 'A–dummy–D–E');
+      edge(3, 5, 'D, ' + d.D, false, crit !== 'A–C–E');
+      edge(4, 6, 'E, ' + d.E, false, crit === 'A–C–E');
+      edge(5, 6, '', false, crit !== 'A–C–E');
+      Object.keys(P).forEach(function (v) {
+        svg.appendChild(svgEl('circle', { class: 'node-circle', cx: P[v][0], cy: P[v][1], r: 20 }));
+        svg.appendChild(svgEl('text', { class: 'node-label', x: P[v][0] - 5, y: P[v][1] + 6 }, v));
+      });
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roPath1').textContent = p1 + ' days';
+      document.getElementById('roPath2').textContent = p2 + ' days';
+      document.getElementById('roPath3').textContent = p3 + ' days';
+      document.getElementById('roDur').textContent   = dur + ' days';
+
+      var note = document.getElementById('netNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'The project takes as long as its longest path: ' + crit + ' at ' + dur +
+        ' days (shown bold). Shortening an activity not on that path would not finish the project any sooner.';
+    }
+
+    var host = 'netSliders';
+    ['A', 'B', 'C', 'D', 'E'].forEach(function (k) {
+      IE.slider({ mount: host, label: 'Activity ' + k, min: 1, max: 12, step: 1, value: d[k],
+                  format: function (v) { return v + ' d'; },
+                  onInput: function (v) { d[k] = v; update(); } });
+    });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'In an activity-on-edge network, what do the edges represent?',
+      opts: [
+        'A) Events — moments in time',
+        'B) Activities and their durations',
+        'C) The people doing the work',
+        'D) The cost of each task'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Edges are activities, labelled with a letter and a duration. The vertices are events — the moments when activities finish and others may begin.'
+    },
+    {
+      q: 'A precedence table lists activity D with predecessors "B, C". What does this mean?',
+      opts: [
+        'A) D can start as soon as either B or C finishes',
+        'B) D can start only when both B and C have finished',
+        'C) D must be done at the same time as B and C',
+        'D) D must finish before B and C start'
+      ],
+      correct: 1,
+      explanation: 'B is correct. All listed predecessors must be complete before the activity can begin, so D waits for the <em>later</em> of B and C to finish.'
+    },
+    {
+      q: 'What is a dummy activity?',
+      opts: [
+        'A) An activity with an unknown duration',
+        'B) The longest activity in the project',
+        'C) A dashed arrow of zero duration showing a dependency',
+        'D) An activity that can be skipped'
+      ],
+      correct: 2,
+      explanation: 'C is correct. A dummy consumes no time and no resources. It exists purely to express a dependency that could not otherwise be drawn correctly.'
+    },
+    {
+      q: 'C depends on A alone; D depends on both A and B. Why is a dummy needed?',
+      opts: [
+        'A) Because A and B have different durations',
+        'B) Because C and D share some but not all predecessors',
+        'C) Because there are more than three activities',
+        'D) Because D takes longer than C'
+      ],
+      correct: 1,
+      explanation: 'B is correct. This is the overlapping-dependency case. Without a dummy, either C would wrongly appear to depend on B, or D would not see A — the dummy carries A\'s completion across without adding time.'
+    },
+    {
+      q: 'Activities A (4 days) and B (7 days) both have no predecessors, and C depends on both. At the earliest, when can C start?',
+      opts: ['A) Day 4', 'B) Day 7', 'C) Day 11', 'D) Day 0'],
+      correct: 1,
+      explanation: 'B is correct. C must wait for both, so it starts when the <em>later</em> one finishes — day 7. Option C wrongly adds the durations, but A and B run in parallel.'
+    },
+    {
+      q: 'A project has paths of length 14, 17 and 12 days. What is the minimum completion time?',
+      opts: ['A) 12 days', 'B) 14 days', 'C) 17 days', 'D) 43 days'],
+      correct: 2,
+      explanation: 'C is correct. The project cannot finish until every path is complete, so it takes as long as the <em>longest</em> path — 17 days. That path is the critical path.'
+    },
+    {
+      q: 'A precedence table lists E with predecessors "C, D", and C itself depends on A. Should an arrow be drawn from A directly to E?',
+      opts: [
+        'A) Yes, because E ultimately depends on A',
+        'B) No, because only immediate predecessors are drawn',
+        'C) Yes, but it should be dashed',
+        'D) Only if A and C have the same duration'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The dependency of E on A is indirect — it is already captured through C. Drawing an extra arrow would add a dependency the table does not specify and could distort the analysis.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain the activity-on-edge convention, and what the vertices represent.',
+      marks: 2,
+      steps: [
+        'Each activity is drawn as a directed edge, labelled with its letter and duration.',
+        'Vertices are events — moments in time when activities finish and others may start.',
+        'An activity leaving a vertex cannot begin until every activity arriving there is complete.'
+      ],
+      answer: 'Activities are the arrows (labelled with letter and duration); vertices are events marking the moments when activities complete and successors may begin.'
+    },
+    {
+      q: 'A table lists: A (5, —), B (3, —), C (4, A), D (6, B), E (2, C, D). Describe how to draw this network and state whether a dummy is needed.',
+      marks: 4,
+      steps: [
+        'A and B both leave the start vertex, ending at separate vertices.',
+        'C leaves A\'s end vertex; D leaves B\'s end vertex.',
+        'C and D both end at a common vertex, and E leaves it for the finish.',
+        'C depends only on A and D only on B, with no overlap, so no dummy is required.'
+      ],
+      answer: 'A and B run in parallel from the start; C follows A, D follows B; C and D merge at one vertex from which E runs to the finish. No dummy is needed, because C and D have no shared predecessors.'
+    },
+    {
+      q: 'For the network in the previous question, calculate the length of each path and hence the minimum completion time.',
+      marks: 4,
+      steps: [
+        'Path A–C–E: \\(5 + 4 + 2 = 11\\).',
+        'Path B–D–E: \\(3 + 6 + 2 = 11\\).',
+        'The project takes as long as the longest path.',
+        'Both paths are 11, so both are critical.'
+      ],
+      answer: '11 days. Both A–C–E and B–D–E are 11 days, so the project has two critical paths.'
+    },
+    {
+      q: 'Explain the two circumstances that require a dummy activity.',
+      marks: 4,
+      steps: [
+        'First: overlapping dependencies — two activities share some but not all predecessors.',
+        'Without a dummy, one would gain a dependency it should not have.',
+        'Second: uniqueness — two activities would otherwise run between the same pair of vertices.',
+        'A dummy gives them distinct endpoints so they can be told apart.'
+      ],
+      answer: 'Overlapping dependencies (e.g. C needs A, D needs A and B), and uniqueness (two activities sharing both endpoints). In both cases the dummy adds the needed structure without consuming time.'
+    },
+    {
+      q: 'A table lists: A (4, —), B (2, —), C (5, A), D (3, A, B), E (6, C), F (4, D). Explain where a dummy is needed and why.',
+      marks: 4,
+      steps: [
+        'C depends on A alone, while D depends on both A and B.',
+        'If A and B ended at the same vertex, C would wrongly depend on B too.',
+        'So A ends at one vertex and B at another.',
+        'A dummy runs from A\'s vertex to B\'s vertex, so D (leaving B\'s vertex) also sees A.'
+      ],
+      answer: 'A dummy is needed from the end of A to the vertex where D begins. C then leaves A\'s vertex (depending on A only), while D leaves the merge vertex, depending on B directly and on A through the dummy.'
+    },
+    {
+      q: 'For the project in the previous question, find the length of every path and the minimum completion time.',
+      marks: 5,
+      steps: [
+        'Path A–C–E: \\(4 + 5 + 6 = 15\\).',
+        'Path A–dummy–D–F: \\(4 + 0 + 3 + 4 = 11\\).',
+        'Path B–D–F: \\(2 + 3 + 4 = 9\\).',
+        'The longest is 15.'
+      ],
+      answer: '15 days, along the path A–C–E.'
+    },
+    {
+      q: 'Explain why an activity\'s indirect predecessors are not listed in a precedence table.',
+      marks: 3,
+      steps: [
+        'Only <em>immediate</em> predecessors are listed.',
+        'An indirect dependency is already captured through the chain of activities.',
+        'Listing it again would add a redundant arrow to the network.',
+        'That extra arrow could create false constraints or an incorrect critical path.'
+      ],
+      answer: 'Because the dependency is already implied by the chain. If E follows C and C follows A, then E automatically waits for A. Drawing an extra A→E arrow would be redundant and risks distorting the analysis.'
+    },
+    {
+      q: 'A project has activities A (6, —), B (4, —), C (3, —), D (5, A, B), E (2, B, C), F (4, D, E). Describe the network structure.',
+      marks: 5,
+      steps: [
+        'A, B and C all leave the start vertex.',
+        'D depends on A and B; E depends on B and C. B is shared, A and C are not.',
+        'This is an overlapping-dependency case requiring dummies.',
+        'B ends at its own vertex, with dummies carrying B\'s completion to where D starts and to where E starts.',
+        'D and E then merge at one vertex, from which F runs to the finish.'
+      ],
+      answer: 'A, B and C start in parallel. Because D needs A and B while E needs B and C, B\'s completion must be carried by dummies to both merge points. D and E then converge, and F completes the project.'
+    },
+    {
+      q: 'For the project above, calculate the minimum completion time.',
+      marks: 5,
+      steps: [
+        'Path A–D–F: \\(6 + 5 + 4 = 15\\).',
+        'Path B–D–F (via dummy): \\(4 + 0 + 5 + 4 = 13\\).',
+        'Path B–E–F (via dummy): \\(4 + 0 + 2 + 4 = 10\\).',
+        'Path C–E–F: \\(3 + 2 + 4 = 9\\).',
+        'The longest is 15.'
+      ],
+      answer: '15 days, along A–D–F.'
+    },
+    {
+      q: 'A student draws a network in which two arrows both run from vertex 3 to vertex 5. Explain the problem and the fix.',
+      marks: 3,
+      steps: [
+        'Two activities sharing both endpoints cannot be distinguished.',
+        'References to "the activity from 3 to 5" become ambiguous.',
+        'Introduce a new vertex, say 4, and run one activity from 3 to 4.',
+        'Then a dummy from 4 to 5 preserves the dependency while giving each activity unique endpoints.'
+      ],
+      answer: 'Two activities between the same pair of vertices are indistinguishable. Add a new vertex so one activity ends there, then join it to the original end vertex with a dummy — preserving the logic while making each activity uniquely identifiable.'
+    },
+    {
+      q: 'A building project has: Excavate (5, —), Foundations (4, Excavate), Frame (8, Foundations), Roof (3, Frame), Wiring (6, Frame), Plaster (5, Roof, Wiring). Draw the structure and find the completion time.',
+      marks: 6,
+      steps: [
+        'Excavate → Foundations → Frame is a simple chain: \\(5 + 4 + 8 = 17\\) days to the end of Frame.',
+        'Roof and Wiring both leave Frame\'s end vertex, running in parallel.',
+        'Both end at the same vertex, from which Plaster runs to the finish.',
+        'Path via Roof: \\(17 + 3 + 5 = 25\\).',
+        'Path via Wiring: \\(17 + 6 + 5 = 28\\).',
+        'The longer path governs.'
+      ],
+      answer: '28 days. The critical path is Excavate–Foundations–Frame–Wiring–Plaster; no dummy is needed since Roof and Wiring share the same single predecessor.'
+    },
+    {
+      q: 'For the building project above, explain why speeding up the Roof activity would not shorten the project.',
+      marks: 3,
+      steps: [
+        'The critical path runs through Wiring (6 days), not Roof (3 days).',
+        'Plaster waits for the later of Roof and Wiring, which is Wiring.',
+        'Roof already finishes 3 days before Wiring does.',
+        'Reducing Roof only increases that idle gap; Plaster still waits for Wiring.'
+      ],
+      answer: 'Because Roof is not on the critical path — it already finishes 3 days before Wiring, and Plaster waits for Wiring regardless. Shortening Roof simply increases its slack without changing the completion time.'
+    },
+    {
+      q: 'Explain why a project network must have exactly one start vertex and one finish vertex.',
+      marks: 3,
+      steps: [
+        'The start vertex represents the single moment the project begins.',
+        'All activities with no predecessors must leave from it.',
+        'The finish vertex represents the moment the whole project is complete.',
+        'All activities with no successors must arrive at it, since the project is not finished until every task is done.'
+      ],
+      answer: 'One start vertex represents the single moment work begins, from which all predecessor-free activities leave. One finish vertex represents completion, where all successor-free activities converge — the project is only finished when every task is done.'
+    },
+    {
+      q: 'A catering project has: Plan menu (2, —), Order stock (3, Plan menu), Hire staff (4, Plan menu), Prepare food (6, Order stock, Hire staff), Set up venue (3, Hire staff), Serve (2, Prepare food, Set up venue). Find the minimum completion time and identify the longest path.',
+      marks: 6,
+      steps: [
+        'Plan menu takes 2 days, then Order stock and Hire staff run in parallel.',
+        'Prepare food needs both Order stock and Hire staff; Set up venue needs Hire staff only.',
+        'This is an overlap, so a dummy carries Hire staff\'s completion to Prepare food\'s start.',
+        'Path Plan–Order–Prepare–Serve: \\(2 + 3 + 6 + 2 = 13\\).',
+        'Path Plan–Hire–(dummy)–Prepare–Serve: \\(2 + 4 + 0 + 6 + 2 = 14\\).',
+        'Path Plan–Hire–Setup–Serve: \\(2 + 4 + 3 + 2 = 11\\).'
+      ],
+      answer: '14 days, along Plan menu–Hire staff–(dummy)–Prepare food–Serve. A dummy is required because Prepare food needs both Order stock and Hire staff, while Set up venue needs only Hire staff.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

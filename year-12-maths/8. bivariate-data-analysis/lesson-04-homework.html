@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Bivariate Data Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 &mdash; Bivariate Data Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Bivariate Data Analysis</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Describe every association
+        with form, direction and strength, and label every prediction as interpolation or
+        extrapolation.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-08</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Variables &amp; causation (10)</li>
+        <li>Part B &mdash; Scatter plots &amp; \(r\) (10)</li>
+        <li>Part C &mdash; Regression &amp; prediction (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#ref">Reference</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Variables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Correlation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Regression</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="ref">
+        <p class="section-label">Reference</p>
+        <h2>Quick reference</h2>
+        <table class="coord-table">
+          <tr><th>\(|r|\)</th><th>Strength</th></tr>
+          <tr><td>0.9 – 1.0</td><td>Very strong</td></tr>
+          <tr><td>0.7 – 0.9</td><td>Strong</td></tr>
+          <tr><td>0.5 – 0.7</td><td>Moderate</td></tr>
+          <tr><td>0.3 – 0.5</td><td>Weak</td></tr>
+          <tr><td>0 – 0.3</td><td>Very weak or none</td></tr>
+        </table>
+        <p><strong>Every description needs:</strong> form (linear / non-linear), direction
+          (positive / negative), strength — all stated in context.</p>
+        <p><strong>Every prediction needs:</strong> the substitution, and a statement of whether it
+          is interpolation (reliable) or extrapolation (unreliable).</p>
+        <p><strong>\(R^2 \to r\):</strong> take the square root, then read the sign from the
+          gradient.</p>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Variables &amp; causation</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Scatter plots &amp; correlation</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Regression &amp; prediction</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The revision lesson pulls the whole topic together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ══════════ PART A ══════════ */
+  var QS_A = [
+    {
+      q: 'Explain the difference between univariate and bivariate data, with an example of each.',
+      marks: 3,
+      steps: [
+        'Univariate records one measurement per individual, describing that variable alone.',
+        'Bivariate records two measurements per individual, examining their relationship.',
+        'Univariate example: the heights of 50 students.',
+        'Bivariate example: the height and arm span of those 50 students.'
+      ],
+      answer: 'Univariate analyses a single variable\'s centre and spread; bivariate analyses the relationship between two. Heights alone is univariate; height <em>and</em> arm span is bivariate.'
+    },
+    {
+      q: 'For each, identify the independent and dependent variables. (a) Predicting crop yield from fertiliser. (b) Predicting a runner\'s finishing time from training hours. (c) Predicting electricity bill from household size.',
+      marks: 3,
+      steps: [
+        'The independent variable is the predictor and goes on the \\(x\\)-axis.',
+        '(a) Fertiliser → yield.',
+        '(b) Training hours → finishing time.',
+        '(c) Household size → electricity bill.'
+      ],
+      answer: '(a) Independent fertiliser, dependent yield. (b) Independent training hours, dependent time. (c) Independent household size, dependent bill.'
+    },
+    {
+      q: 'Explain why placing the wrong variable on the horizontal axis invalidates the analysis.',
+      marks: 3,
+      steps: [
+        'The regression line is computed to predict \\(y\\) from \\(x\\).',
+        'The roles are not symmetric, so swapping the axes gives a different line.',
+        'All predictions and the gradient interpretation would change.',
+        'The gradient\'s units are \\(y\\) per unit of \\(x\\), which reverses too.'
+      ],
+      answer: 'Because the regression predicts \\(y\\) from \\(x\\) and is not symmetric — swapping axes gives a different gradient, different predictions and a different interpretation.'
+    },
+    {
+      q: 'State the four possible explanations for an association between variables A and B.',
+      marks: 4,
+      steps: [
+        'A causes B.',
+        'B causes A (reverse causation).',
+        'A confounding third variable influences both.',
+        'Coincidence, especially likely in small samples.'
+      ],
+      answer: 'A causes B; B causes A; a confounding variable drives both; or coincidence.'
+    },
+    {
+      q: 'A study finds students with larger vocabularies have larger shoe sizes. Explain.',
+      marks: 4,
+      steps: [
+        'Vocabulary does not cause foot growth, nor the reverse.',
+        'Age is the confounding variable.',
+        'Older children have had more time to learn words.',
+        'Older children also have larger feet. Comparing children of the same age would remove the association.'
+      ],
+      answer: 'Age is the confounder: older children have both bigger vocabularies and bigger feet. Within a single age group the association would disappear.'
+    },
+    {
+      q: 'Explain why a controlled experiment gives stronger evidence of causation than an observational study.',
+      marks: 4,
+      steps: [
+        'In an experiment the researcher sets the independent variable deliberately.',
+        'Other factors are held constant or randomised between groups.',
+        'This eliminates confounding variables as an explanation.',
+        'Observational studies merely record what happens, so unmeasured factors may be responsible.'
+      ],
+      answer: 'Because the researcher controls the independent variable and randomises or fixes everything else, ruling out confounders. Observational data cannot exclude unmeasured third variables.'
+    },
+    {
+      q: 'A council notes that suburbs with more streetlights have more reported crimes, and concludes streetlights cause crime. Critique this.',
+      marks: 4,
+      steps: [
+        'The conclusion infers causation from association.',
+        'Population density is a likely confounder: busier suburbs have more streetlights and more crime.',
+        'Reverse causation is also plausible — lights may be installed <em>because</em> of crime.',
+        'Reporting rates may also differ between well-lit and poorly-lit areas.'
+      ],
+      answer: 'The conclusion is unjustified. Population density confounds the relationship, and reverse causation is likely — councils install lights in response to crime. Better-lit areas may also simply have higher reporting rates.'
+    },
+    {
+      q: 'What evidence would be needed to support the claim that a new fertiliser increases crop yield?',
+      marks: 4,
+      steps: [
+        'A controlled experiment with treatment and control plots.',
+        'Plots randomly assigned, with soil, water and sunlight held constant.',
+        'A plausible biological mechanism for how the fertiliser works.',
+        'Replication across multiple sites and seasons showing consistent results.'
+      ],
+      answer: 'A randomised controlled trial with treated and untreated plots under identical conditions, a plausible biological mechanism, and consistent results replicated across sites and seasons.'
+    },
+    {
+      q: 'Explain why a strong correlation from a sample of 5 should be treated cautiously.',
+      marks: 3,
+      steps: [
+        'Small samples readily produce strong correlations by chance.',
+        'Two points always lie exactly on a line; five are easily close to one.',
+        'A single unusual observation dominates the result.',
+        'The sample may not represent the wider population.'
+      ],
+      answer: 'Chance alone often produces strong correlations in tiny samples, one outlier dominates, and five individuals are unlikely to represent the population. A much larger sample is needed.'
+    },
+    {
+      q: 'Write a full evaluation of: "People who take vitamin supplements live longer, so supplements extend life."',
+      marks: 5,
+      steps: [
+        'Identify the error: causation inferred from an observational association.',
+        'Name a confounder: health consciousness — supplement takers also exercise more, eat better and see doctors regularly.',
+        'These behaviours independently extend life.',
+        'Income is a further confounder, since supplements cost money and wealth correlates with longevity.',
+        'A randomised controlled trial would be required to establish any causal effect.'
+      ],
+      answer: 'The claim infers causation from association. Health consciousness is a strong confounder — people who take supplements also tend to exercise, eat well and seek medical care, all of which extend life independently. Income confounds too. Only a randomised controlled trial could isolate any effect of the supplements themselves.'
+    }
+  ];
+
+  /* ══════════ PART B ══════════ */
+  var QS_B = [
+    {
+      q: 'State the three features every description of a scatter plot must include, and write a description for \\(r = 0.76\\) relating study hours to exam marks.',
+      marks: 4,
+      steps: [
+        'Form, direction and strength.',
+        'Form: linear, since the points lie in a straight band.',
+        'Direction: positive, since \\(r > 0\\).',
+        'Strength: \\(|r| = 0.76\\) is strong.'
+      ],
+      answer: 'Form, direction and strength. "There is a strong positive linear association between hours studied and exam mark — students who study more tend to score higher."'
+    },
+    {
+      q: 'Classify each: (a) \\(r = -0.96\\) (b) \\(r = 0.52\\) (c) \\(r = -0.22\\) (d) \\(r = 0.81\\)',
+      marks: 4,
+      steps: [
+        '(a) \\(|r| = 0.96\\) → very strong negative.',
+        '(b) \\(|r| = 0.52\\) → moderate positive.',
+        '(c) \\(|r| = 0.22\\) → very weak negative, or essentially none.',
+        '(d) \\(|r| = 0.81\\) → strong positive.'
+      ],
+      answer: '(a) Very strong negative. (b) Moderate positive. (c) Very weak negative. (d) Strong positive.'
+    },
+    {
+      q: 'A line of best fit passes through \\((2, 54)\\) and \\((10, 22)\\). Find its equation.',
+      marks: 3,
+      steps: [
+        'Gradient \\(= \\dfrac{22 - 54}{10 - 2} = \\dfrac{-32}{8} = -4\\).',
+        'Substitute \\((2, 54)\\): \\(54 = -4(2) + c\\).',
+        '\\(c = 54 + 8 = 62\\).'
+      ],
+      answer: '\\(y = -4x + 62\\)'
+    },
+    {
+      q: 'For \\(C = 0.38d + 45\\), where \\(C\\) is monthly phone cost ($) and \\(d\\) is data used (GB), interpret both coefficients.',
+      marks: 4,
+      steps: [
+        'Gradient: each extra gigabyte adds $0.38 to the bill.',
+        'Intercept: at 0 GB the cost is $45.',
+        'That represents a fixed monthly plan fee.',
+        'Here \\(d = 0\\) is meaningful, so the intercept has a real interpretation.'
+      ],
+      answer: 'Gradient: $0.38 per additional gigabyte. Intercept: a $45 fixed monthly charge applying even with no data use — meaningful, since zero usage is possible.'
+    },
+    {
+      q: 'Explain why \\(r\\) close to 0 does not always mean the variables are unrelated.',
+      marks: 3,
+      steps: [
+        '\\(r\\) measures only <em>linear</em> association.',
+        'A strong curved relationship can produce \\(r\\) near 0.',
+        'For example, a perfect parabola gives \\(r \\approx 0\\) despite a perfect relationship.',
+        'The scatter plot must always be inspected.'
+      ],
+      answer: 'Because \\(r\\) only detects straight-line patterns. A perfectly curved relationship can give \\(r \\approx 0\\) while the variables are completely determined by each other — so the plot must always be examined.'
+    },
+    {
+      q: 'Describe how to draw a line of best fit by eye, and state two things it need not do.',
+      marks: 4,
+      steps: [
+        'Follow the general trend of the points.',
+        'Balance roughly equal numbers of points above and below.',
+        'Minimise the overall distance from the points.',
+        'It need not pass through the origin, nor through any actual data point.'
+      ],
+      answer: 'Follow the trend, balancing points either side and keeping them close to the line. It need not pass through the origin or through any data point; it should pass near \\((\\bar{x}, \\bar{y})\\).'
+    },
+    {
+      q: 'Twelve points give \\(r = 0.93\\). Adding one distant outlier reduces \\(r\\) to 0.41. What should the analyst do?',
+      marks: 4,
+      steps: [
+        'Investigate the outlier — is it a recording error or a genuine unusual case?',
+        'If it is an error, correct or remove it and document the decision.',
+        'If genuine, report \\(r\\) both with and without it.',
+        'Never delete data silently.'
+      ],
+      answer: 'Investigate the outlier\'s origin. Report \\(r\\) both with (0.41) and without (0.93) it, explaining the difference. Remove it only if it is demonstrably an error, and always document the decision.'
+    },
+    {
+      q: 'Explain why \\(r = 0.6\\) does not mean "the variables are 60% related".',
+      marks: 3,
+      steps: [
+        '\\(r\\) is a correlation coefficient on its own scale, not a percentage.',
+        'The scale is not linear in any intuitive sense.',
+        '\\(r = 0.6\\) is conventionally described as a moderate association.',
+        'No "percentage related" interpretation is meaningful at this level.'
+      ],
+      answer: 'Because \\(r\\) is a coefficient measured on its own \\(-1\\) to \\(+1\\) scale, not a proportion. \\(r = 0.6\\) simply indicates a moderate linear association.'
+    },
+    {
+      q: 'Two studies report \\(r = 0.75\\) and \\(r = -0.75\\). Compare them.',
+      marks: 3,
+      steps: [
+        'Both have \\(|r| = 0.75\\), so both associations are equally strong.',
+        'The first is positive: the variables increase together.',
+        'The second is negative: one increases as the other decreases.',
+        'The sign conveys direction only, never strength.'
+      ],
+      answer: 'Equally strong (both \\(|r| = 0.75\\)), differing only in direction — the first positive, the second negative. A negative \\(r\\) is not weaker.'
+    },
+    {
+      q: 'Data on daily temperature and electricity use shows points falling steeply, flattening, then rising again. Explain why quoting \\(r\\) would be misleading.',
+      marks: 5,
+      steps: [
+        'The described pattern is U-shaped, hence non-linear.',
+        'Heating is used on cold days and cooling on hot days, with a minimum in between.',
+        '\\(r\\) measures only linear association, so it would be near 0.',
+        'That would falsely suggest temperature does not affect electricity use.',
+        'The form should be described as non-linear, and a linear model should not be fitted.'
+      ],
+      answer: 'The relationship is U-shaped — electricity use is high in both cold and hot weather and low in between. Pearson\'s \\(r\\) would be near zero, wrongly implying no relationship, when in fact temperature strongly determines usage in a non-linear way.'
+    }
+  ];
+
+  /* ══════════ PART C ══════════ */
+  var QS_C = [
+    {
+      q: 'Explain what the least-squares regression line minimises.',
+      marks: 2,
+      steps: [
+        'The residual is the vertical distance from each point to the line.',
+        'The line minimises the sum of the squared residuals.',
+        'Squaring prevents positive and negative residuals cancelling.'
+      ],
+      answer: 'The sum of the squared vertical distances (residuals) from the data points to the line.'
+    },
+    {
+      q: 'A calculator gives \\(A = 61.5\\), \\(B = -2.4\\) for \\(y = A + Bx\\). Write the equation and state the gradient.',
+      marks: 2,
+      steps: [
+        'In \\(y = A + Bx\\), \\(A\\) is the intercept and \\(B\\) the gradient.',
+        'So the equation is \\(y = -2.4x + 61.5\\) with gradient \\(-2.4\\).'
+      ],
+      answer: '\\(y = -2.4x + 61.5\\); gradient \\(-2.4\\).'
+    },
+    {
+      q: 'Using \\(y = 3.6x + 18\\), predict \\(y\\) when \\(x = 12\\), and find \\(x\\) when \\(y = 90\\).',
+      marks: 4,
+      steps: [
+        'At \\(x = 12\\): \\(y = 3.6(12) + 18 = 43.2 + 18 = 61.2\\).',
+        'For \\(y = 90\\): \\(90 = 3.6x + 18\\).',
+        '\\(3.6x = 72\\).',
+        '\\(x = 20\\).'
+      ],
+      answer: '\\(y = 61.2\\) at \\(x = 12\\); \\(x = 20\\) gives \\(y = 90\\).'
+    },
+    {
+      q: 'Explain the difference between interpolation and extrapolation and their reliability.',
+      marks: 4,
+      steps: [
+        'Interpolation predicts within the range of the observed data.',
+        'It is generally reliable, since the relationship was observed there.',
+        'Extrapolation predicts outside the range.',
+        'It is unreliable, because nothing guarantees the pattern continues.'
+      ],
+      answer: 'Interpolation predicts inside the data range and is reliable; extrapolation predicts outside it and is unreliable, since the relationship may change beyond the observed values.'
+    },
+    {
+      q: 'A model \\(v = 45.8 - 3.6a\\) comes from cars aged 1–11 years. Predict the value at 7 and at 16 years, commenting on each.',
+      marks: 5,
+      steps: [
+        'At \\(a = 7\\): \\(v = 45.8 - 25.2 = 20.6\\), about $20,600.',
+        '7 is within 1–11, so this is interpolation — reliable.',
+        'At \\(a = 16\\): \\(v = 45.8 - 57.6 = -11.8\\).',
+        'A negative value is impossible.',
+        '16 is well outside the range, so this is extrapolation and the model has broken down.'
+      ],
+      answer: 'At 7 years: about $20,600 — interpolation, reliable. At 16 years: \\(-\\$11\\,800\\) — extrapolation giving an impossible negative value; in reality depreciation slows and cars keep a residual value.'
+    },
+    {
+      q: 'A spreadsheet trendline reads \\(y = 1.45x + 8.2\\) with \\(R^2 = 0.5776\\). Find \\(r\\) and describe the association.',
+      marks: 4,
+      steps: [
+        '\\(r = \\pm\\sqrt{0.5776} = \\pm 0.76\\).',
+        'The gradient is positive, so \\(r = +0.76\\).',
+        '\\(|r| = 0.76\\) falls in the strong band.'
+      ],
+      answer: '\\(r = 0.76\\): a strong positive linear association. The sign comes from the positive gradient.'
+    },
+    {
+      q: 'List the spreadsheet functions for gradient, intercept, correlation and prediction, noting the argument-order trap.',
+      marks: 4,
+      steps: [
+        'Gradient: <code>=SLOPE(y-range, x-range)</code>.',
+        'Intercept: <code>=INTERCEPT(y-range, x-range)</code>.',
+        'Correlation: <code>=CORREL(range1, range2)</code>.',
+        'Prediction: <code>=FORECAST(x, y-range, x-range)</code>.',
+        'SLOPE and INTERCEPT take the \\(y\\) range <em>first</em>.'
+      ],
+      answer: '<code>=SLOPE(B:B,A:A)</code>, <code>=INTERCEPT(B:B,A:A)</code>, <code>=CORREL(A:A,B:B)</code>, <code>=FORECAST(x,B:B,A:A)</code>. The trap: SLOPE and INTERCEPT need the \\(y\\) values first.'
+    },
+    {
+      q: 'Explain why the least-squares line always passes through \\((\\bar{x}, \\bar{y})\\) and how to use this as a check.',
+      marks: 3,
+      steps: [
+        'The residuals sum to zero under the least-squares criterion.',
+        'The line therefore balances the data at the mean of \\(x\\).',
+        'So substituting \\(\\bar{x}\\) gives \\(\\bar{y}\\).',
+        'Compute both means and verify against your equation.'
+      ],
+      answer: 'Because the residuals sum to zero, the line passes through the mean point. Check by computing \\(\\bar{x}\\) and \\(\\bar{y}\\) and confirming the equation returns \\(\\bar{y}\\) at \\(\\bar{x}\\).'
+    },
+    {
+      q: 'A study of 35 employees gives \\(S = 2.4Y + 48\\), where \\(S\\) is salary ($000) and \\(Y\\) is years of experience (range 1–22), with \\(r = 0.81\\). Predict the salary at 10 years and state three limitations.',
+      marks: 6,
+      steps: [
+        '\\(S = 2.4(10) + 48 = 24 + 48 = 72\\), so about $72,000.',
+        '10 years lies within 1–22, so this is interpolation.',
+        'Limitation 1: the prediction is an average; individuals vary with role, performance and industry.',
+        'Limitation 2: \\(r = 0.81\\) is strong but leaves real unexplained scatter.',
+        'Limitation 3: association is not causation — qualifications may drive both experience and salary.',
+        'The model also assumes salary continues to grow linearly.'
+      ],
+      answer: 'About $72,000 — interpolation, so reasonably reliable. Limitations: it is an average rather than an individual prediction; \\(r = 0.81\\) leaves substantial scatter; and experience may not <em>cause</em> higher pay, since qualifications and role could drive both.'
+    },
+    {
+      q: 'A researcher fits a straight line to clearly curved data, reports \\(r = 0.38\\), and predicts from it. Critique fully.',
+      marks: 6,
+      steps: [
+        'The form is non-linear, so a linear model is inappropriate.',
+        '\\(r\\) measures linear association only, so 0.38 understates the relationship.',
+        'The line will systematically over- and under-predict in different regions.',
+        'The residuals would show a clear pattern rather than random scatter.',
+        'The scatter plot should have been inspected before fitting.',
+        'A non-linear model or a data transformation is needed.'
+      ],
+      answer: 'The analysis is invalid: the relationship is non-linear, so \\(r = 0.38\\) badly understates its strength and the line biases predictions systematically. The scatter plot should have been examined first, and a non-linear model used instead.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

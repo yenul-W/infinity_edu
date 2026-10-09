@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Ratios &amp; Rates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 5 &mdash; Ratios &amp; Rates</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Ratios &amp; Rates</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Watch your units at every
+        step &mdash; that is where almost all the marks are lost in this topic.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-05</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Ratios, scale &amp; plans (10)</li>
+        <li>Part B &mdash; Area &amp; rainfall (10)</li>
+        <li>Part C &mdash; Rates, fuel &amp; energy (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#ref">Formula sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Ratios &amp; scale</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Area &amp; rainfall</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Rates</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="ref">
+        <p class="section-label">Reference</p>
+        <h2>Formula sheet</h2>
+        <div class="formula-box">
+          \[A_{\text{trapezium}} = \tfrac12 h(a+b) \qquad A_{\text{circle}} = \pi r^{2}\]
+          \[A \approx \frac{h}{2}\Big[d_f + d_l + 2(d_2 + \dots + d_{n-1})\Big] \quad \text{(trapezoidal rule)}\]
+          \[V = Ah \qquad S = \frac{D}{T} \qquad \text{Fuel} = \frac{\text{L}}{\text{km}} \times 100\]
+          \[E \text{ (kWh)} = P \text{ (kW)} \times t \text{ (h)} \qquad 1000\text{ W} = 1\text{ kW}\]
+        </div>
+        <p><strong>Conversions:</strong> \(1\) m³ \(= 1000\) L \(= 1\) kL; \(1\) ha \(= 10\,000\) m²;
+          \(1\) mm \(= 0.001\) m; \(100\,000\) cm \(= 1\) km. To convert km/h to m/s, divide by 3.6.</p>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Ratios, scale &amp; plans</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Area, trapezoidal rule &amp; rainfall</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Rates, fuel &amp; energy</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The revision lesson pulls the whole topic together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ══════════ PART A ══════════ */
+  var QS_A = [
+    {
+      q: 'Simplify. (a) \\(63 : 81\\) &nbsp; (b) \\(3.5 : 2.1\\) &nbsp; (c) \\(250\\) mL \\(: 2\\) L',
+      marks: 3,
+      steps: [
+        '(a) Both divide by 9: \\(7 : 9\\).',
+        '(b) Multiply by 10: \\(35 : 21\\), then divide by 7: \\(5 : 3\\).',
+        '(c) Convert: 2 L = 2000 mL, so \\(250 : 2000\\), then divide by 250.'
+      ],
+      answer: '(a) \\(7 : 9\\) &nbsp; (b) \\(5 : 3\\) &nbsp; (c) \\(1 : 8\\)'
+    },
+    {
+      q: 'A mortar mix uses cement, lime and sand in the ratio \\(1 : 1 : 6\\). How much sand is in 560 kg of mortar?',
+      marks: 3,
+      steps: [
+        'Total parts \\(= 1 + 1 + 6 = 8\\).',
+        'One part \\(= 560 \\div 8 = 70\\) kg.',
+        'Sand \\(= 6 \\times 70\\).'
+      ],
+      answer: '420 kg of sand.'
+    },
+    {
+      q: '$12,600 is shared in the ratio \\(2 : 3 : 7\\). Find each share.',
+      marks: 3,
+      steps: [
+        'Total parts \\(= 12\\).',
+        'One part \\(= 12600 \\div 12 = \\$1\\,050\\).',
+        'Shares: \\(2\\,100\\), \\(3\\,150\\) and \\(7\\,350\\).',
+        'Check: \\(2100 + 3150 + 7350 = \\$12\\,600\\) ✓'
+      ],
+      answer: '$2,100, $3,150 and $7,350.'
+    },
+    {
+      q: 'Two people share costs in the ratio \\(4 : 7\\). The second pays $480 more. Find the total cost.',
+      marks: 4,
+      steps: [
+        'Difference \\(= 7 - 4 = 3\\) parts \\(= \\$480\\).',
+        'One part \\(= \\$160\\).',
+        'Total parts \\(= 11\\).',
+        'Total \\(= 11 \\times 160 = \\$1\\,760\\). Check: $640 and $1,120 differ by $480 ✓'
+      ],
+      answer: '$1,760'
+    },
+    {
+      q: 'If 15 identical bricks weigh 41.25 kg, what do 68 bricks weigh?',
+      marks: 3,
+      steps: [
+        'One brick: \\(41.25 \\div 15 = 2.75\\) kg.',
+        '68 bricks: \\(68 \\times 2.75\\).'
+      ],
+      answer: '187 kg'
+    },
+    {
+      q: 'A map has scale \\(1 : 75\\,000\\). Two towns are 9.2 cm apart on the map. Find the real distance in kilometres.',
+      marks: 3,
+      steps: [
+        '\\(9.2 \\times 75\\,000 = 690\\,000\\) cm.',
+        'To metres: \\(690\\,000 \\div 100 = 6\\,900\\) m.',
+        'To kilometres: \\(6\\,900 \\div 1000\\).'
+      ],
+      answer: '6.9 km'
+    },
+    {
+      q: 'On a plan with scale \\(1 : 250\\), how long should a 45 m boundary be drawn?',
+      marks: 3,
+      steps: [
+        'Convert to centimetres: \\(45\\) m \\(= 4\\,500\\) cm.',
+        'Divide by the scale factor: \\(4\\,500 \\div 250\\).'
+      ],
+      answer: '18 cm'
+    },
+    {
+      q: 'A 28 m building is drawn 14 cm long. Find the scale in the form \\(1 : n\\).',
+      marks: 3,
+      steps: [
+        'Same units: \\(28\\) m \\(= 2\\,800\\) cm.',
+        'Scale \\(= 14 : 2800\\).',
+        'Divide both by 14.'
+      ],
+      answer: '\\(1 : 200\\)'
+    },
+    {
+      q: 'On a \\(1 : 100\\) plan, a room measures 5.6 cm by 4.2 cm. Carpet costs $74/m². Find the cost.',
+      marks: 4,
+      steps: [
+        'At \\(1 : 100\\), 1 cm represents 1 m, so the room is 5.6 m by 4.2 m.',
+        'Area \\(= 5.6 \\times 4.2 = 23.52\\) m².',
+        'Cost \\(= 23.52 \\times 74\\).'
+      ],
+      answer: '$1,740.48'
+    },
+    {
+      q: 'Explain why 1 cm² on a \\(1 : 500\\) plan does not represent 500 cm², and state what it does represent.',
+      marks: 3,
+      steps: [
+        'Area involves two dimensions, and each is multiplied by 500.',
+        'So areas scale by \\(500^{2} = 250\\,000\\).',
+        '1 cm² therefore represents \\(250\\,000\\) cm².',
+        'Converting: \\(250\\,000\\) cm² \\(= 25\\) m² (since 1 m² = 10,000 cm²).'
+      ],
+      answer: 'Because area scales by the square of the length factor. 1 cm² represents \\(500^{2} = 250\\,000\\) cm², which is 25 m².'
+    }
+  ];
+
+  /* ══════════ PART B ══════════ */
+  var QS_B = [
+    {
+      q: 'An L-shaped block is made from a 22 m × 16 m rectangle and a 14 m × 11 m rectangle. Find the total area.',
+      marks: 3,
+      steps: [
+        'First rectangle: \\(22 \\times 16 = 352\\) m².',
+        'Second: \\(14 \\times 11 = 154\\) m².',
+        'Total: \\(352 + 154\\).'
+      ],
+      answer: '506 m²'
+    },
+    {
+      q: 'A trapezoidal garden has parallel sides of 18 m and 26 m, 12 m apart. Find the area.',
+      marks: 2,
+      steps: [
+        '\\(A = \\tfrac12 h(a + b) = \\tfrac12 (12)(18 + 26)\\).',
+        '\\(= 6 \\times 44\\).'
+      ],
+      answer: '264 m²'
+    },
+    {
+      q: 'Use one application of the trapezoidal rule for a block 36 m wide with end offsets of 19 m and 27 m.',
+      marks: 2,
+      steps: [
+        '\\(A \\approx \\dfrac{36}{2}(19 + 27)\\).',
+        '\\(= 18 \\times 46\\).'
+      ],
+      answer: '828 m²'
+    },
+    {
+      q: 'Offsets of 6, 13, 18, 15 and 7 m are measured at 8 m intervals. Estimate the area.',
+      marks: 4,
+      steps: [
+        'Five offsets means four strips, \\(h = 8\\).',
+        'Ends: \\(6 + 7 = 13\\).',
+        'Middles doubled: \\(2(13 + 18 + 15) = 2 \\times 46 = 92\\).',
+        '\\(A \\approx \\dfrac{8}{2}(13 + 92) = 4 \\times 105\\).'
+      ],
+      answer: '420 m²'
+    },
+    {
+      q: 'A block 90 m wide has seven equally spaced offsets: 14, 22, 29, 31, 26, 18 and 10 m. Estimate the area.',
+      marks: 5,
+      steps: [
+        'Seven offsets means six strips, so \\(h = 90 \\div 6 = 15\\) m.',
+        'Ends: \\(14 + 10 = 24\\).',
+        'Middles: \\(22 + 29 + 31 + 26 + 18 = 126\\), doubled gives 252.',
+        '\\(A \\approx \\dfrac{15}{2}(24 + 252)\\).',
+        '\\(= 7.5 \\times 276\\).'
+      ],
+      answer: '2,070 m²'
+    },
+    {
+      q: 'On an aerial photo at \\(1 : 4\\,000\\), offsets at 1.8 cm intervals measure 1.5, 2.8, 3.2 and 2.0 cm. Estimate the real area.',
+      marks: 5,
+      steps: [
+        'At \\(1 : 4\\,000\\), 1 cm represents 4,000 cm = 40 m.',
+        '\\(h = 1.8 \\times 40 = 72\\) m. Offsets become 60, 112, 128 and 80 m.',
+        'Four offsets means three strips. Ends: \\(60 + 80 = 140\\).',
+        'Middles: \\(2(112 + 128) = 480\\).',
+        '\\(A \\approx \\dfrac{72}{2}(140 + 480) = 36 \\times 620\\).'
+      ],
+      answer: '22,320 m², or about 2.23 hectares.'
+    },
+    {
+      q: 'How many litres fall on a 410 m² roof during 38 mm of rain?',
+      marks: 3,
+      steps: [
+        'Depth: \\(38\\) mm \\(= 0.038\\) m.',
+        '\\(V = 410 \\times 0.038 = 15.58\\) m³.',
+        'In litres: \\(15.58 \\times 1000\\).'
+      ],
+      answer: '15,580 litres.'
+    },
+    {
+      q: 'A property of 52 hectares receives 31 mm of rain. Find the volume in megalitres.',
+      marks: 4,
+      steps: [
+        'Area: \\(52 \\times 10\\,000 = 520\\,000\\) m².',
+        'Depth: \\(0.031\\) m.',
+        '\\(V = 520\\,000 \\times 0.031 = 16\\,120\\) m³ \\(= 16\\,120\\,000\\) L.',
+        'In megalitres: \\(16\\,120\\,000 \\div 1\\,000\\,000\\).'
+      ],
+      answer: '16.12 megalitres.'
+    },
+    {
+      q: 'A cylindrical tank has diameter 2.8 m and height 2.2 m. Find its capacity in litres.',
+      marks: 3,
+      steps: [
+        'Radius \\(= 1.4\\) m.',
+        '\\(V = \\pi (1.4)^{2}(2.2) = \\pi \\times 1.96 \\times 2.2\\).',
+        '\\(= 13.54\\) m³, so \\(13\\,540\\) L.'
+      ],
+      answer: 'About 13,546 litres (13.55 kL).'
+    },
+    {
+      q: 'A 240 m² roof is in an area with 680 mm annual rainfall. If 82% is captured, find the annual yield and how many times an 18,000 L tank is filled.',
+      marks: 5,
+      steps: [
+        'Rain on the roof: \\(240 \\times 0.680 = 163.2\\) m³ \\(= 163\\,200\\) L.',
+        'Captured: \\(163\\,200 \\times 0.82 = 133\\,824\\) L.',
+        'Tank fills: \\(133\\,824 \\div 18\\,000\\).',
+        '\\(= 7.43\\).'
+      ],
+      answer: 'About 133,824 L per year, filling the tank roughly 7.4 times.'
+    }
+  ];
+
+  /* ══════════ PART C ══════════ */
+  var QS_C = [
+    {
+      q: 'A 3.2 kg pack costs $27.20. Find the price per kilogram.',
+      marks: 2,
+      steps: [
+        '\\(27.20 \\div 3.2\\).'
+      ],
+      answer: '$8.50 per kilogram.'
+    },
+    {
+      q: 'Which is better value: 480 g for $4.32, or 1.1 kg for $9.46?',
+      marks: 3,
+      steps: [
+        'First: \\(4.32 \\div 0.480 = \\$9.00\\)/kg.',
+        'Second: \\(9.46 \\div 1.1 = \\$8.60\\)/kg.',
+        'Lower price per kilogram is better.'
+      ],
+      answer: 'The 1.1 kg pack, at $8.60/kg versus $9.00/kg.'
+    },
+    {
+      q: 'Convert. (a) 126 km/h to m/s. (b) 22 m/s to km/h.',
+      marks: 2,
+      steps: [
+        '(a) \\(126 \\div 3.6 = 35\\) m/s.',
+        '(b) \\(22 \\times 3.6 = 79.2\\) km/h.'
+      ],
+      answer: '(a) 35 m/s &nbsp; (b) 79.2 km/h'
+    },
+    {
+      q: 'A train covers 468 km in 5 hours 12 minutes. Find its average speed.',
+      marks: 3,
+      steps: [
+        'Convert the time: \\(5 + \\dfrac{12}{60} = 5.2\\) hours.',
+        '\\(S = \\dfrac{468}{5.2}\\).'
+      ],
+      answer: '90 km/h'
+    },
+    {
+      q: 'A car drives 150 km at 75 km/h, then 200 km at 100 km/h. Find the average speed for the journey.',
+      marks: 4,
+      steps: [
+        'Times: \\(150 \\div 75 = 2\\) h and \\(200 \\div 100 = 2\\) h.',
+        'Total: 350 km in 4 hours.',
+        '\\(S = 350 \\div 4 = 87.5\\) km/h.',
+        'Here the mean of the speeds (87.5) happens to match, because equal time was spent at each.'
+      ],
+      answer: '87.5 km/h'
+    },
+    {
+      q: 'A car uses 74 litres to travel 860 km. Find its fuel consumption in L/100 km.',
+      marks: 3,
+      steps: [
+        '\\(\\dfrac{74}{860} \\times 100\\).',
+        '\\(= 0.08605 \\times 100\\).'
+      ],
+      answer: 'About 8.60 L/100 km'
+    },
+    {
+      q: 'A car with 12.4 L/100 km makes a 540 km trip with fuel at $1.96/L. Find the fuel cost.',
+      marks: 4,
+      steps: [
+        'Fuel \\(= \\dfrac{540}{100} \\times 12.4 = 5.4 \\times 12.4 = 66.96\\) L.',
+        'Cost \\(= 66.96 \\times 1.96\\).'
+      ],
+      answer: '$131.24'
+    },
+    {
+      q: 'A 2,800 W dryer runs 1.5 hours a day. Find the cost over 90 days at 35c/kWh.',
+      marks: 4,
+      steps: [
+        'Convert: \\(2\\,800\\) W \\(= 2.8\\) kW.',
+        'Per day: \\(2.8 \\times 1.5 = 4.2\\) kWh.',
+        'Over 90 days: \\(4.2 \\times 90 = 378\\) kWh.',
+        'Cost \\(= 378 \\times 0.35\\).'
+      ],
+      answer: '$132.30'
+    },
+    {
+      q: 'A pump fills a 7,200 L tank in 1 hour 20 minutes. Find the flow rate in L/min and kL/h.',
+      marks: 4,
+      steps: [
+        'Time in minutes: \\(80\\) min.',
+        'Flow \\(= 7\\,200 \\div 80 = 90\\) L/min.',
+        'Per hour: \\(90 \\times 60 = 5\\,400\\) L/h.',
+        'In kilolitres: 5.4 kL/h.'
+      ],
+      answer: '90 L/min, or 5.4 kL/h.'
+    },
+    {
+      q: 'A household replaces 12 incandescent globes (60 W each, 5 hours a day) with LEDs (9 W each) costing $4 per globe. At 32c/kWh, find the annual saving and payback period.',
+      marks: 5,
+      steps: [
+        'Old power: \\(12 \\times 60 = 720\\) W \\(= 0.72\\) kW. New: \\(12 \\times 9 = 108\\) W \\(= 0.108\\) kW.',
+        'Saving per day: \\((0.72 - 0.108) \\times 5 = 0.612 \\times 5 = 3.06\\) kWh.',
+        'Annual saving: \\(3.06 \\times 365 = 1\\,116.9\\) kWh, worth \\(1116.9 \\times 0.32 = \\$357.41\\).',
+        'Cost of globes: \\(12 \\times 4 = \\$48\\).',
+        'Payback: \\(48 \\div 357.41 = 0.134\\) years, about 7 weeks.'
+      ],
+      answer: 'A saving of about $357.41 a year, paying back the $48 outlay in roughly 7 weeks — clearly worthwhile.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

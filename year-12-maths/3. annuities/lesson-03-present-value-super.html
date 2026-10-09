@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Present Value, Superannuation &amp; Loans</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 3 &mdash; Annuities</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Present Value, Superannuation &amp; Loans</h1>
+      <p class="subtitle">What is a stream of future payments worth today? Answering that turns
+        annuities into a decision-making tool &mdash; for retirement income, for loan repayments,
+        and for choosing between a lump sum and instalments.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-03</span>
+        <span class="pill">Present value</span>
+        <span class="pill">Superannuation</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What present value means</li>
+        <li>Present value factor tables</li>
+        <li>Loan repayments as an annuity</li>
+        <li>Superannuation and retirement</li>
+        <li>Savings accounts: save now, spend later</li>
+        <li>Lump sum or instalments?</li>
+        <li>Class activity: starting super late</li>
+        <li>Knowledge check &amp; extended practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#pv">1 &nbsp;What is present value?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#pvtable">2 &nbsp;Present value tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#loans">3 &nbsp;Loans as annuities</a></li>
+        <li class="toc-item"><a class="toc-link" href="#super">4 &nbsp;Superannuation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#savings">5 &nbsp;Savings accounts</a></li>
+        <li class="toc-item"><a class="toc-link" href="#decide">6 &nbsp;Making the decision</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. PV ─────────── -->
+      <div class="content-card" id="pv">
+        <p class="section-label">Theory</p>
+        <h2>What is present value?</h2>
+
+        <p>The <strong>present value</strong> of an annuity is the single amount you would need to
+          invest <em>today</em> to fund all of its future payments.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The idea</p>
+          <p style="margin-bottom:0;">Money available now is worth more than the same amount later,
+            because it can be invested in the meantime. So a promise of $10,000 per year for
+            20 years is <strong>not</strong> worth $200,000 today &mdash; it is worth
+            considerably less.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1 &mdash; building the intuition</p>
+          <p>How much must be invested today at 8% per annum to pay out $1,000 at the end of each
+            year for 3 years?</p>
+          <p>Discount each payment back to today using \(PV = \dfrac{FV}{(1+r)^{n}}\):</p>
+          <table class="coord-table">
+            <tr><th>Payment at end of</th><th>Discounted by</th><th>Worth today</th></tr>
+            <tr><td>Year 1</td><td>\(1.08^{1}\)</td><td>\(1000 \div 1.08 = 925.93\)</td></tr>
+            <tr><td>Year 2</td><td>\(1.08^{2}\)</td><td>\(1000 \div 1.1664 = 857.34\)</td></tr>
+            <tr><td>Year 3</td><td>\(1.08^{3}\)</td><td>\(1000 \div 1.259712 = 793.83\)</td></tr>
+            <tr><td colspan="2"><strong>Present value</strong></td><td><strong>$2,577.10</strong></td></tr>
+          </table>
+          <p><strong>Check it works.</strong> Invest $2,577.10 at 8% and draw $1,000 per year:</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Opening</th><th>Interest</th><th>Withdrawal</th><th>Closing</th></tr>
+            <tr><td>1</td><td>2 577.10</td><td>206.17</td><td>1 000.00</td><td>1 783.27</td></tr>
+            <tr><td>2</td><td>1 783.27</td><td>142.66</td><td>1 000.00</td><td>925.93</td></tr>
+            <tr><td>3</td><td>925.93</td><td>74.07</td><td>1 000.00</td><td>0.00</td></tr>
+          </table>
+          <p>The fund lands exactly on zero. That is what present value means.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>By discounting each payment, find the present value of $500 at the end of each year
+              for 2 years at 10% per annum.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(500 \div 1.1 = \$454.55\) and \(500 \div 1.1^2 = 500 \div 1.21 = \$413.22\).</p>
+                <p><strong>Present value:</strong> $867.77.</p>
+              </div></details></li>
+            <li>A friend says $5,000 a year for 10 years is "worth $50,000". In what sense is this
+              wrong?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>$50,000 is the total paid out, not its value today. Each payment arrives later,
+                  and money received later is worth less than money now because it misses out on
+                  interest. At any positive interest rate, the present value is less than
+                  $50,000.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. PV TABLE ─────────── -->
+      <div class="content-card" id="pvtable">
+        <p class="section-label">Method</p>
+        <h2>Present value interest factor tables</h2>
+
+        <p>As with future value, a table saves you discounting each payment separately.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Using a present value table</p>
+          \[PV = (\text{payment per period}) \times (\text{present value factor})\]
+          <p class="formula-where">Each factor is the present value of $1 received at the end of
+            each period for \(n\) periods. Read at the row for \(n\) and the column for the rate
+            <strong>per period</strong>.</p>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table class="coord-table" id="pvTable"></table>
+        </div>
+        <p class="diagram-caption">Present value of an annuity of $1 per period for \(n\) periods.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Sense check &mdash; the mirror of last lesson</p>
+          <p style="margin-bottom:0;">A present value factor is always <strong>less than
+            \(n\)</strong>, because each payment is discounted. (A future value factor is always
+            <em>more</em> than \(n\).) If your PV factor exceeds \(n\), you have read the wrong
+            table.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>A retirement fund must pay $25,000 at the end of each year for 20 years. The fund
+            earns 6% per annum. How much is needed today?</p>
+          <p>At \(n = 20\), \(r = 6\%\), the present value factor is 11.4699.</p>
+          \[PV = 25000 \times 11.4699 = \$286\,747.50\]
+          <p>Note the total paid out is \(20 \times 25000 = \$500\,000\), but only about
+            $286,748 is needed today &mdash; interest earned along the way supplies the rest.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Present value explorer</h3>
+          <p class="exercise-intro">Set the payment, rate and term. Compare the lump sum needed
+            today against the total that will actually be paid out.</p>
+          <div id="pvSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">PV factor</div>
+              <div class="readout-value" id="roPvFactor">11.4699</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Needed today</div>
+              <div class="readout-value" id="roPvNeed">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total paid out</div>
+              <div class="readout-value" id="roPvOut">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Supplied by interest</div>
+              <div class="readout-value" id="roPvInt">$0</div>
+            </div>
+          </div>
+          <div class="plot-wrap" id="plotPv"></div>
+          <p class="diagram-caption">The fund balance drawing down to exactly zero at the end of
+            the term.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise present value</h3>
+          <p class="exercise-intro">Use the factor table above. Answers to the nearest cent.</p>
+
+          <div class="exercise-row">
+            <label>(a) $8,000 per year for 10 years at 5% p.a. Find \(PV\).</label>
+            <input class="exercise-input" id="pvA" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-pv="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPvA"></p>
+
+          <div class="exercise-row">
+            <label>(b) $1,500 per year for 8 years at 7% p.a. Find \(PV\).</label>
+            <input class="exercise-input" id="pvB" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-pv="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPvB"></p>
+
+          <div class="exercise-row">
+            <label>(c) A fund of $60,000 at 6% pays out over 12 years (factor 8.3838). Find the annual payment.</label>
+            <input class="exercise-input" id="pvC" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-pv="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPvC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>An annuity pays $12,000 at the end of each year for 15 years. Money earns 4% per
+              annum. Find its present value.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Factor at \(n = 15\), \(r = 4\%\): 11.1184.
+                  \(\;PV = 12000 \times 11.1184 = \$133\,420.80\).</p>
+              </div></details></li>
+            <li>A fund of $90,000 earning 5% per annum pays out equal amounts at the end of each
+              year for 20 years. Find the annual payment.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Factor at \(n = 20\), \(r = 5\%\): 12.4622.
+                  \(\;90000 \div 12.4622 = \$7\,221.84\) per year.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. LOANS ─────────── -->
+      <div class="content-card" id="loans">
+        <p class="section-label">Application</p>
+        <h2>Loan repayments as an annuity</h2>
+
+        <p>A reducing-balance loan is a present-value annuity seen from the lender's side. The bank
+          hands over a lump sum today; you make regular equal repayments that exactly exhaust it.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The loan relationship</p>
+          \[\text{Loan amount} = \text{Repayment} \times (\text{present value factor})\]
+          \[\text{Repayment} = \frac{\text{Loan amount}}{\text{present value factor}}\]
+          <p class="formula-where">Exactly the same table as a retirement drawdown &mdash; only the
+            story differs.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Kiran borrows $35,000 over 5 years at 9% per annum, repaid annually. The present
+            value factor at \(n = 5\), \(r = 9\%\) is 3.8897. Find the annual repayment.</p>
+          \[\text{Repayment} = \frac{35000}{3.8897} = \$8\,998.12\]
+          <p><strong>Total repaid:</strong> \(5 \times 8998.12 = \$44\,990.60\), so the interest
+            cost is $9,990.60.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; verifying with a table</p>
+          <p>Check that $8,998.12 per year really does clear a $35,000 loan at 9%.</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Opening</th><th>Interest (9%)</th><th>Repayment</th><th>Closing</th></tr>
+            <tr><td>1</td><td>35 000.00</td><td>3 150.00</td><td>8 998.12</td><td>29 151.88</td></tr>
+            <tr><td>2</td><td>29 151.88</td><td>2 623.67</td><td>8 998.12</td><td>22 777.43</td></tr>
+            <tr><td>3</td><td>22 777.43</td><td>2 049.97</td><td>8 998.12</td><td>15 829.28</td></tr>
+            <tr><td>4</td><td>15 829.28</td><td>1 424.64</td><td>8 998.12</td><td>8 255.80</td></tr>
+            <tr><td>5</td><td>8 255.80</td><td>743.02</td><td>8 998.12</td><td>0.70</td></tr>
+          </table>
+          <p>The final balance is 70 cents &mdash; rounding in the factor, not an error. This is
+            exactly the reducing-balance table from Topic 2, now produced in one step.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Ruby borrows $22,000 over 4 years at 8% per annum, repaid annually. Find the annual
+              repayment and the total interest.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Factor at \(n = 4\), \(r = 8\%\): 3.3121.
+                  \(\;22000 \div 3.3121 = \$6\,642.31\) per year.</p>
+                <p>Total repaid \(4 \times 6642.31 = \$26\,569.24\); interest $4,569.24.</p>
+              </div></details></li>
+            <li>Ollie can afford $6,000 a year for 6 years. At 7% per annum, what is the largest
+              loan he can take?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Loan = repayment \(\times\) factor. Factor at \(n = 6\), \(r = 7\%\): 4.7665.</p>
+                <p>\(6000 \times 4.7665 = \$28\,599\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. SUPER ─────────── -->
+      <div class="content-card" id="super">
+        <p class="section-label">Application</p>
+        <h2>Superannuation</h2>
+
+        <p>Superannuation is the most important annuity most people will ever have, and it runs in
+          two phases.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The two phases</p>
+          <p style="margin-bottom:0;">
+            <strong>Accumulation</strong> (working life) &mdash; a future-value annuity.
+            Contributions go in every pay period and compound for decades.<br><br>
+            <strong>Drawdown</strong> (retirement) &mdash; a present-value annuity. The accumulated
+            balance funds regular withdrawals until it is exhausted.
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; both phases</p>
+          <p>Ravi contributes $7,000 per year for 35 years at 7% per annum. He then retires and
+            draws an income for 25 years from the accumulated balance, still at 7%.</p>
+          <p><strong>Phase 1 &mdash; accumulation.</strong> The future value factor at \(n = 35\),
+            \(r = 7\%\) is 138.2369.</p>
+          \[FV = 7000 \times 138.2369 = \$967\,658.30\]
+          <p>He contributed \(35 \times 7000 = \$245\,000\); interest supplied the other
+            $722,658.</p>
+          <p><strong>Phase 2 &mdash; drawdown.</strong> The present value factor at \(n = 25\),
+            \(r = 7\%\) is 11.6536.</p>
+          \[\text{Annual income} = \frac{967658.30}{11.6536} = \$83\,034.06\]
+          <p>So a $7,000 annual contribution supports an income of about $83,000 per year for
+            25 years &mdash; roughly twelve times what he put in each year. That leverage is
+            entirely the work of compound interest over 35 years.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Superannuation projector</h3>
+          <p class="exercise-intro">Set your contribution, the rate, the years of work and the
+            years of retirement. The projector runs both phases.</p>
+          <div id="superSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Balance at retirement</div>
+              <div class="readout-value" id="roSupBal">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">You contributed</div>
+              <div class="readout-value" id="roSupCon">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Interest earned</div>
+              <div class="readout-value" id="roSupInt">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Retirement income</div>
+              <div class="readout-value" id="roSupInc">$0 / yr</div>
+            </div>
+          </div>
+          <div class="plot-wrap" id="plotSuper"></div>
+          <p class="diagram-caption">Accumulation then drawdown &mdash; the balance rises through
+            working life, peaks at retirement, then falls to zero.</p>
+          <p class="exercise-feedback" id="superNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Grace contributes $9,000 a year for 40 years at 6% (FV factor 154.7620), then draws
+              an income for 20 years at 6% (PV factor 11.4699). Find her balance at retirement and
+              her annual income.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Balance: \(9000 \times 154.7620 = \$1\,392\,858\).</p>
+                <p>Income: \(1392858 \div 11.4699 = \$121\,435.93\) per year.</p>
+              </div></details></li>
+            <li>What annual contribution for 35 years at 7% (FV factor 138.2369) gives a
+              $1,000,000 balance at retirement?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(1000000 \div 138.2369 = \$7\,233.96\) per year.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. SAVINGS ─────────── -->
+      <div class="content-card" id="savings">
+        <p class="section-label">Application</p>
+        <h2>Savings accounts: save now, spend later</h2>
+
+        <p>The syllabus asks you to <em>solve annuity problems involving savings accounts</em>. A
+          common structure is two annuities joined together: save regularly until a date, then
+          draw the savings down in regular amounts. Work <strong>backwards from the
+          spending</strong>:</p>
+        <ol>
+          <li>Use a <strong>present value</strong> factor to find the balance needed when the
+            spending starts.</li>
+          <li>Use a <strong>future value</strong> factor to find the regular saving that builds
+            that balance.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>Priya's parents want her to withdraw $10,000 at the end of each year for the 4 years
+            of university. Uni starts in 6 years. Their savings account pays 5% per annum
+            throughout.</p>
+          <p><strong>Step 1 &mdash; balance needed when uni starts.</strong> PV factor at
+            \(n = 4\), \(r = 5\%\): 3.5460.</p>
+          \[10000 \times 3.5460 = \$35\,460\]
+          <p><strong>Step 2 &mdash; annual saving for 6 years.</strong> FV factor at \(n = 6\),
+            \(r = 5\%\): 6.8019.</p>
+          \[35460 \div 6.8019 = \$5\,213.25 \text{ per year}\]
+          <p>They save \(6 \times 5213.25 = \$31\,279.50\) and Priya receives $40,000 &mdash;
+            interest supplies the difference over the 10 years.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Jai wants to withdraw $15,000 at the end of each year for 3 years, starting after
+              5 years of saving. The account pays 4% per annum. PV factor (\(n = 3\), 4%): 2.7751;
+              FV factor (\(n = 5\), 4%): 5.4163. Find his annual saving.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Needed: \(15000 \times 2.7751 = \$41\,626.50\).</p>
+                <p>Saving: \(41626.50 \div 5.4163 = \$7\,685.41\) per year.</p>
+              </div></details></li>
+            <li>Mei saves $4,000 a year for 8 years at 6% (FV factor 9.8975), then spends the money
+              in equal amounts over 5 years at 6% (PV factor 4.2124). How much can she withdraw
+              each year?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Balance after 8 years: \(4000 \times 9.8975 = \$39\,590\).</p>
+                <p>Withdrawal: \(39590 \div 4.2124 = \$9\,398.44\) per year.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. DECIDE ─────────── -->
+      <div class="content-card" id="decide">
+        <p class="section-label">Evaluation</p>
+        <h2>Making the decision: lump sum or instalments?</h2>
+
+        <p>The syllabus asks you to <em>solve annuity problems involving financial decisions</em>.
+          The recurring question: take a lump sum now, or a stream of payments?</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The method</p>
+          <p style="margin-bottom:0;">Convert both options to the <strong>same point in time</strong>
+            &mdash; usually today &mdash; then compare. Find the present value of the payment
+            stream and compare it with the lump sum on offer.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>A competition winner may take $120,000 today, or $12,000 per year for 15 years.
+            Money can be invested at 7% per annum. Which is better?</p>
+          <p>The present value factor at \(n = 15\), \(r = 7\%\) is 9.1079.</p>
+          \[PV_{\text{instalments}} = 12000 \times 9.1079 = \$109\,294.80\]
+          <p>The instalments total $180,000, but they are worth only $109,295 in today's money
+            &mdash; less than the $120,000 lump sum.</p>
+          <p><strong>Conclusion:</strong> take the lump sum. Invested at 7% it would fund payments
+            of \(\dfrac{120000}{9.1079} = \$13\,175\) per year, more than the $12,000 offered.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; when the rate flips the answer</p>
+          <p>Same choice, but money can only be invested at 3% per annum. The factor at \(n = 15\),
+            \(r = 3\%\) is 11.9379.</p>
+          \[PV_{\text{instalments}} = 12000 \times 11.9379 = \$143\,254.80\]
+          <p>Now the instalments are worth more than the $120,000 lump sum, so the instalments
+            win.</p>
+          <p><strong>Why the reversal:</strong> at a low interest rate a lump sum grows slowly, so
+            the advantage of having money early is small. <strong>The decision always depends on
+            the available interest rate</strong> &mdash; state that in your answer.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; exam style</p>
+          <p>Lena is offered a redundancy payment of $85,000 now, or $9,500 at the end of each year
+            for 12 years.</p>
+          <p><strong>(a) If she can invest at 5% per annum, which option is better?</strong>
+            [2 marks]</p>
+          <p>PV factor at \(n = 12\), \(r = 5\%\): 8.8633.
+            \(\;9500 \times 8.8633 = \$84\,201.35\), less than $85,000, so take the lump sum.</p>
+          <p><strong>(b) Repeat at 3% (factor 9.9540).</strong> [1 mark]</p>
+          <p>\(9500 \times 9.9540 = \$94\,563\), more than $85,000, so take the instalments.</p>
+          <p><strong>(c) Between which two whole-number rates do the options become equal?</strong>
+            [2 marks]</p>
+          <p>They are equal when the factor is \(85000 \div 9500 = 8.9474\). Along \(n = 12\):
+            4% gives 9.3851 and 5% gives 8.8633, so the break-even rate is between 4% and 5%.
+            Below it the instalments win; above it the lump sum wins.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Choose between $60,000 now and $8,000 a year for 10 years, if money earns 6% per
+              annum (factor 7.3601).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(8000 \times 7.3601 = \$58\,880.80\), less than $60,000: take the lump sum.</p>
+              </div></details></li>
+            <li>Repeat at 4% per annum (factor 8.1109). Explain the change.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(8000 \times 8.1109 = \$64\,887.20\), more than $60,000: take the instalments.
+                  At the lower rate the lump sum grows more slowly, so receiving money early is
+                  worth less.</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Lump sum vs instalments</h3>
+          <p class="exercise-intro">Adjust the offer and the available interest rate to find the
+            rate at which the two become equal.</p>
+          <div id="decideSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Lump sum offered</div>
+              <div class="readout-value" id="roDLump">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Instalments worth today</div>
+              <div class="readout-value" id="roDPv">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total instalments</div>
+              <div class="readout-value" id="roDTotal">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="decideNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Factors beyond the mathematics</p>
+          <p style="margin-bottom:0;">A full-mark answer also weighs the non-numerical: instalments
+            provide budgeting discipline and protection from overspending; a lump sum offers
+            flexibility and the chance to clear high-interest debt. Mention both, but lead with the
+            present-value comparison.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>The cost of starting super late</h2>
+        <p><strong>About 10 minutes &middot; groups of three.</strong> Three people will all retire
+          at 67 and expect 25 years of retirement. Each contributes $6,000 a year at 7%. Person A
+          starts at 22, B at 32, C at 42. Use the <a href="#super">superannuation
+          projector</a>.</p>
+        <ol>
+          <li>Set years working to 45, 35 and 25 in turn. Record each person's balance at
+            retirement, total contributed and retirement income.</li>
+          <li>A contributes $60,000 more than B. How much more does A have at retirement?</li>
+          <li>Can C match A's retirement income by contributing more? Try the maximum
+            contribution in the projector.</li>
+          <li>Using the FV factor for 25 years at 7% (63.2490), calculate the contribution C would
+            actually need.</li>
+          <li>Write one sentence of advice to a Year 12 student about super.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Person</th><th>Years</th><th>Balance at 67</th><th>Contributed</th><th>Income per year</th></tr>
+            <tr><td>A</td><td>45</td><td>$1,714,496</td><td>$270,000</td><td>$147,122</td></tr>
+            <tr><td>B</td><td>35</td><td>$829,421</td><td>$210,000</td><td>$71,173</td></tr>
+            <tr><td>C</td><td>25</td><td>$379,494</td><td>$150,000</td><td>$32,565</td></tr>
+          </table>
+          <p><strong>2.</strong> About $885,000 more &mdash; the 10 extra years of contributions
+            are the ones that compound longest.</p>
+          <p><strong>3.</strong> No. Even $20,000 a year for 25 years gives about $1,264,980,
+            still well short of A's $1,714,496.</p>
+          <p><strong>4.</strong> \(1714496 \div 63.2490 = \$27\,107\) a year &mdash; more than
+            four times A's contribution.</p>
+          <p><strong>5.</strong> For example: "Small contributions started early beat large ones
+            started late, because time does most of the work."</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-3', LESSON_IDX = 2;
+
+  var RATES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  var PERIODS = [1,2,3,4,5,6,7,8,9,10,12,15,20,25,30];
+
+  function pvFactor(r, n) { return (1 - Math.pow(1 + r, -n)) / r; }
+  function fvFactor(r, n) { return (Math.pow(1 + r, n) - 1) / r; }
+
+  function money(v) {
+    return '$' + v.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function money0(v) { return '$' + Math.round(v).toLocaleString('en-AU'); }
+
+  /* ── Render the PV factor table ───────────────────────────── */
+  (function () {
+    var t = document.getElementById('pvTable');
+    var html = '<tr><th>n \\ r</th>' + RATES.map(function (r) { return '<th>' + r + '%</th>'; }).join('') + '</tr>';
+    PERIODS.forEach(function (n) {
+      html += '<tr><th>' + n + '</th>' + RATES.map(function (r) {
+        return '<td data-n="' + n + '" data-r="' + r + '">' + pvFactor(r / 100, n).toFixed(4) + '</td>';
+      }).join('') + '</tr>';
+    });
+    t.innerHTML = html;
+  })();
+
+  function highlight(n, r) {
+    document.querySelectorAll('#pvTable td').forEach(function (td) {
+      var on = (+td.dataset.n === n && +td.dataset.r === r);
+      td.style.background = on ? 'var(--gray-faint)' : '';
+      td.style.fontWeight = on ? '700' : '';
+      td.style.outline    = on ? '2px solid var(--ink)' : '';
+    });
+  }
+
+  /* ── Present value explorer ───────────────────────────────── */
+  (function () {
+    var pay = 25000, rate = 6, years = 20;
+    var redraw = IE.plot('plotPv', { xMin: 0, xMax: 20, yMin: 0, yMax: 300000, xStep: 5, yStep: 50000, xLabel: 'year', yLabel: 'fund $', curves: [] });
+
+    function update() {
+      var r = rate / 100;
+      var f = pvFactor(r, years);
+      var need = pay * f;
+      var out = pay * years;
+
+      // Remaining balance after k payments
+      function balAt(k) {
+        var i = Math.max(0, Math.round(k));
+        if (i >= years) return 0;
+        return pay * pvFactor(r, years - i);
+      }
+
+      redraw({
+        xMax: years,
+        xStep: Math.max(1, Math.round(years / 5)),
+        yMax: need * 1.12,
+        yStep: Math.max(1000, Math.round(need / 5 / 1000) * 1000),
+        curves: [{ fn: balAt }]
+      });
+
+      if (RATES.indexOf(rate) !== -1 && PERIODS.indexOf(years) !== -1) highlight(years, rate);
+      document.getElementById('roPvFactor').textContent = f.toFixed(4);
+      document.getElementById('roPvNeed').textContent   = money0(need);
+      document.getElementById('roPvOut').textContent    = money0(out);
+      document.getElementById('roPvInt').textContent    = money0(out - need);
+    }
+
+    var host = 'pvSliders';
+    IE.slider({ mount: host, label: 'Payment / yr', min: 5000, max: 80000, step: 2500, value: pay,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { pay = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per year', min: 1, max: 10, step: 1, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 5, max: 30, step: 1, value: years,
+                onInput: function (v) { years = v; update(); } });
+    update();
+  })();
+
+  /* ── PV exercises ─────────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [8000 * pvFactor(0.05, 10), 'At n = 10, r = 5% the PV factor is ' + pvFactor(0.05,10).toFixed(4) + '. PV = 8000 × ' + pvFactor(0.05,10).toFixed(4) + '.'],
+      B: [1500 * pvFactor(0.07, 8),  'At n = 8, r = 7% the PV factor is ' + pvFactor(0.07,8).toFixed(4) + '. PV = 1500 × ' + pvFactor(0.07,8).toFixed(4) + '.'],
+      C: [60000 / 8.3838,            'Rearranging PV = payment × factor gives payment = 60000 ÷ 8.3838.']
+    };
+    document.querySelectorAll('[data-pv]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.pv;
+        var fb = document.getElementById('fbPv' + k);
+        var raw = (document.getElementById('pv' + k).value || '').replace(/[$,\s]/g, '');
+        var g = parseFloat(raw);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter an amount.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 1;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + money(ANS[k][0]) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Superannuation projector ─────────────────────────────── */
+  (function () {
+    var contrib = 7000, rate = 7, working = 35, retired = 25;
+    var redraw = IE.plot('plotSuper', { xMin: 0, xMax: 60, yMin: 0, yMax: 1100000, xStep: 10, yStep: 200000, xLabel: 'year', yLabel: 'balance $', curves: [] });
+
+    function update() {
+      var r = rate / 100;
+      var bal = contrib * fvFactor(r, working);
+      var contributed = contrib * working;
+      var income = bal / pvFactor(r, retired);
+
+      function curve(t) {
+        var i = Math.max(0, Math.round(t));
+        if (i <= working) return contrib * fvFactor(r, i);
+        var k = i - working;
+        if (k >= retired) return 0;
+        return income * pvFactor(r, retired - k);
+      }
+
+      redraw({
+        xMax: working + retired,
+        xStep: Math.max(2, Math.round((working + retired) / 6)),
+        yMax: bal * 1.12,
+        yStep: Math.max(10000, Math.round(bal / 5 / 10000) * 10000),
+        curves: [{ fn: curve }],
+        points: [{ x: working, y: bal, label: 'retire' }],
+        markers: [{ x: working, y: bal }]
+      });
+
+      document.getElementById('roSupBal').textContent = money0(bal);
+      document.getElementById('roSupCon').textContent = money0(contributed);
+      document.getElementById('roSupInt').textContent = money0(bal - contributed);
+      document.getElementById('roSupInc').textContent = money0(income) + ' / yr';
+
+      var note = document.getElementById('superNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Contributing ' + money0(contrib) + ' a year for ' + working +
+        ' years supports an income of ' + money0(income) + ' a year for ' + retired +
+        ' years — about ' + (Math.round(income / contrib * 10) / 10) +
+        '× the annual contribution. Interest supplied ' +
+        (Math.round((bal - contributed) / bal * 100)) + '% of the retirement balance.';
+    }
+
+    var host = 'superSliders';
+    IE.slider({ mount: host, label: 'Contribution', min: 1000, max: 20000, step: 500, value: contrib,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { contrib = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per year', min: 2, max: 12, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years working', min: 10, max: 45, step: 1, value: working,
+                onInput: function (v) { working = v; update(); } });
+    IE.slider({ mount: host, label: 'Years retired', min: 10, max: 35, step: 1, value: retired,
+                onInput: function (v) { retired = v; update(); } });
+    update();
+  })();
+
+  /* ── Lump sum vs instalments ──────────────────────────────── */
+  (function () {
+    var lump = 120000, pay = 12000, years = 15, rate = 7;
+
+    function update() {
+      var r = rate / 100;
+      var pv = pay * pvFactor(r, years);
+      document.getElementById('roDLump').textContent  = money0(lump);
+      document.getElementById('roDPv').textContent    = money0(pv);
+      document.getElementById('roDTotal').textContent = money0(pay * years);
+
+      var note = document.getElementById('decideNote');
+      var diff = Math.abs(pv - lump);
+      if (pv > lump) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Take the instalments — they are worth ' + money0(diff) +
+          ' more in today\'s money. At only ' + rate + '% a lump sum grows too slowly to catch up.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Take the lump sum — it beats the instalments by ' + money0(diff) +
+          ' in today\'s money. Invested at ' + rate + '% it would fund payments of ' +
+          money0(lump / pvFactor(r, years)) + ' a year, more than the ' + money0(pay) + ' offered.';
+      }
+    }
+
+    var host = 'decideSliders';
+    IE.slider({ mount: host, label: 'Lump sum', min: 50000, max: 300000, step: 10000, value: lump,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { lump = v; update(); } });
+    IE.slider({ mount: host, label: 'Per year', min: 2000, max: 30000, step: 1000, value: pay,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { pay = v; update(); } });
+    IE.slider({ mount: host, label: 'For how long', min: 5, max: 30, step: 1, value: years,
+                format: function (v) { return v + ' yrs'; },
+                onInput: function (v) { years = v; update(); } });
+    IE.slider({ mount: host, label: 'Interest rate', min: 1, max: 12, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'What does the present value of an annuity represent?',
+      opts: [
+        'A) The total of all the future payments added together',
+        'B) The single amount needed today to fund all the future payments',
+        'C) The interest earned over the life of the annuity',
+        'D) The value of the final payment'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Present value discounts each future payment back to today, giving the lump sum that would exactly fund the whole stream. It is always less than the simple total of the payments.'
+    },
+    {
+      q: 'A fund pays $9,000 per year for 12 years. The present value factor is 8.3838. How much is needed today?',
+      opts: ['A) $108,000', 'B) $75,454.20', 'C) $1,073.44', 'D) $9,000'],
+      correct: 1,
+      explanation: 'B is correct. \\(PV = 9000 \\times 8.3838 = \\$75\\,454.20\\). Option A is the undiscounted total of the payments, which ignores the interest the fund earns along the way.'
+    },
+    {
+      q: 'Which statement about present value factors is true?',
+      opts: [
+        'A) They are always greater than \\(n\\)',
+        'B) They are always less than \\(n\\)',
+        'C) They always equal \\(n\\)',
+        'D) They are always greater than 100'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Every payment is discounted back to today, so each contributes less than $1 to the total — the factor must be below \\(n\\). Future value factors are the mirror image, always above \\(n\\).'
+    },
+    {
+      q: 'Kiara borrows $48,000 over 10 years at 8% per annum. The present value factor is 6.7101. What is her annual repayment?',
+      opts: ['A) $4,800', 'B) $322,084.80', 'C) $7,153.40', 'D) $6,710.10'],
+      correct: 2,
+      explanation: 'C is correct. Repayment \\(= \\dfrac{\\text{loan}}{\\text{factor}} = \\dfrac{48000}{6.7101} = \\$7\\,153.40\\). Option A divides by the number of years and ignores interest completely.'
+    },
+    {
+      q: 'In superannuation, which phase is modelled as a future value annuity?',
+      opts: [
+        'A) Retirement, when income is withdrawn',
+        'B) Accumulation, when contributions are made during working life',
+        'C) Both phases equally',
+        'D) Neither — superannuation is simple interest'
+      ],
+      correct: 1,
+      explanation: 'B is correct. During accumulation, regular contributions build up with compound interest — a future value annuity. Drawdown in retirement is a present value annuity, where a lump sum funds regular withdrawals.'
+    },
+    {
+      q: 'A prize offers $150,000 today or $15,000 per year for 14 years. At 6% the present value factor is 9.2950. Which should be taken?',
+      opts: [
+        'A) The instalments, worth $210,000',
+        'B) The lump sum, since the instalments are worth about $139,425 today',
+        'C) The instalments, worth about $139,425 today',
+        'D) They are exactly equal'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(15000 \\times 9.2950 = \\$139\\,425\\), which is less than $150,000. The instalments total $210,000 but that figure ignores the time value of money — option A makes exactly that mistake.'
+    },
+    {
+      q: 'Why can a lump sum beat instalments at a high interest rate but lose at a low one?',
+      opts: [
+        'A) Because instalments become larger when rates fall',
+        'B) Because the discounting is stronger at high rates, shrinking the present value of the instalments',
+        'C) Because lump sums are always better',
+        'D) Because low rates make the total payments smaller'
+      ],
+      correct: 1,
+      explanation: 'B is correct. A high rate discounts distant payments heavily, so the instalment stream is worth less today; it also means a lump sum can be invested to grow quickly. At a low rate there is little advantage to having money early, so the larger nominal total of the instalments wins.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain the difference between the future value and the present value of an annuity.',
+      marks: 2,
+      steps: [
+        'Future value looks forward: it is what a series of regular contributions will be worth at the end of the term.',
+        'Present value looks backward: it is the single amount needed today to fund a series of future payments.',
+        'FV factors exceed \\(n\\) because interest is added; PV factors are below \\(n\\) because payments are discounted.'
+      ],
+      answer: 'Future value is what regular contributions accumulate to by the end of the term. Present value is the lump sum needed today to pay out that same stream. FV factors are greater than \\(n\\); PV factors are less than \\(n\\).'
+    },
+    {
+      q: 'Find the present value of an annuity paying $6,000 per year for 15 years at 5% per annum, given a factor of 10.3797.',
+      marks: 2,
+      steps: [
+        '\\(PV = \\text{payment} \\times \\text{factor} = 6000 \\times 10.3797\\).',
+        'Sense check: the factor 10.3797 is less than \\(n = 15\\) ✓'
+      ],
+      answer: '$62,278.20'
+    },
+    {
+      q: 'A retirement fund must pay $40,000 at the end of each year for 22 years, earning 6% per annum. The present value factor is 12.0416. Find the lump sum required, and the total that will be paid out.',
+      marks: 3,
+      steps: [
+        '\\(PV = 40000 \\times 12.0416 = \\$481\\,664\\).',
+        'Total paid out \\(= 22 \\times 40000 = \\$880\\,000\\).',
+        'The difference, $398,336, is interest earned by the fund while it is being drawn down.'
+      ],
+      answer: 'About $481,664 is needed today to pay out $880,000 over 22 years — interest supplies the other $398,336.'
+    },
+    {
+      q: 'Derive the present value of $2,000 per year for 3 years at 10% by discounting each payment separately, and verify with the factor 2.4869.',
+      marks: 4,
+      steps: [
+        'Year 1 payment: \\(2000 \\div 1.10 = \\$1\\,818.18\\).',
+        'Year 2 payment: \\(2000 \\div 1.10^{2} = 2000 \\div 1.21 = \\$1\\,652.89\\).',
+        'Year 3 payment: \\(2000 \\div 1.10^{3} = 2000 \\div 1.331 = \\$1\\,502.63\\).',
+        'Sum: \\(1818.18 + 1652.89 + 1502.63 = \\$4\\,973.70\\).',
+        'Using the factor: \\(2000 \\times 2.4869 = \\$4\\,973.80\\) — agreeing to rounding.'
+      ],
+      answer: '$4,973.70 by discounting individually, matching \\(2000 \\times 2.4869 = \\$4\\,973.80\\) from the table.'
+    },
+    {
+      q: 'Dan borrows $26,000 over 6 years at 7% per annum, repaid annually. The present value factor is 4.7665. Find the annual repayment and the total interest paid.',
+      marks: 4,
+      steps: [
+        'Repayment \\(= \\dfrac{26000}{4.7665} = \\$5\\,454.74\\).',
+        'Total repaid \\(= 6 \\times 5454.74 = \\$32\\,728.44\\).',
+        'Interest \\(= 32728.44 - 26000\\).'
+      ],
+      answer: 'Annual repayment about $5,454.74; total interest about $6,728.44.'
+    },
+    {
+      q: 'Verify the first two years of Dan\'s loan above with a repayment table, showing the balance is reducing as expected.',
+      marks: 4,
+      steps: [
+        'Year 1: interest \\(= 26000 \\times 0.07 = \\$1\\,820\\).',
+        'Closing \\(= 26000 + 1820 - 5454.74 = \\$22\\,365.26\\).',
+        'Year 2: interest \\(= 22365.26 \\times 0.07 = \\$1\\,565.57\\).',
+        'Closing \\(= 22365.26 + 1565.57 - 5454.74 = \\$18\\,476.09\\).',
+        'The balance is falling and the interest portion is shrinking, as expected for a reducing-balance loan.'
+      ],
+      answer: 'Closing balances $22,365.26 and $18,476.09. The interest falls from $1,820 to $1,565.57 as the balance reduces.'
+    },
+    {
+      q: 'Mia contributes $5,500 per year for 30 years at 6% (FV factor 79.0582), then retires and draws an income for 20 years at 6% (PV factor 11.4699). Find her retirement balance and annual income.',
+      marks: 5,
+      steps: [
+        'Accumulation: \\(FV = 5500 \\times 79.0582 = \\$434\\,820.10\\).',
+        'She contributed \\(30 \\times 5500 = \\$165\\,000\\), so interest supplied $269,820.',
+        'Drawdown: income \\(= \\dfrac{434820.10}{11.4699}\\).',
+        '\\(= \\$37\\,909.83\\) per year.'
+      ],
+      answer: 'Retirement balance about $434,820; annual income about $37,910 for 20 years.'
+    },
+    {
+      q: 'For Mia above, comment on the relationship between what she contributed and the income she receives.',
+      marks: 3,
+      steps: [
+        'She contributed $165,000 in total over 30 years.',
+        'She will receive \\(20 \\times 37909.83 = \\$758\\,196.60\\) in retirement.',
+        'That is roughly 4.6 times what she put in.',
+        'The difference comes from compound interest during both accumulation and drawdown.'
+      ],
+      answer: 'She contributes $165,000 but receives about $758,197 — roughly 4.6 times as much. Interest does the majority of the work, both while the balance builds and while it is being drawn down.'
+    },
+    {
+      q: 'A lottery offers $200,000 now or $18,000 per year for 18 years. At 8% the present value factor is 9.3719. Which is better, and by how much?',
+      marks: 4,
+      steps: [
+        'Present value of instalments: \\(18000 \\times 9.3719 = \\$168\\,694.20\\).',
+        'Compare with the $200,000 lump sum.',
+        'Difference: \\(200000 - 168694.20 = \\$31\\,305.80\\).',
+        'Note the instalments total $324,000, but that ignores the time value of money.'
+      ],
+      answer: 'The lump sum is better by about $31,306 in today\'s money, even though the instalments total $324,000. At 8% the lump sum can be invested to generate more than $18,000 a year.'
+    },
+    {
+      q: 'Repeat the previous comparison at an interest rate of 2%, where the present value factor for 18 years is 14.9920. Explain why the answer changes.',
+      marks: 4,
+      steps: [
+        'Present value of instalments: \\(18000 \\times 14.9920 = \\$269\\,856\\).',
+        'This now exceeds the $200,000 lump sum by $69,856.',
+        'At 2% a lump sum grows very slowly, so having the money early is worth little.',
+        'Low rates also discount the future payments only lightly, so they retain most of their nominal value.'
+      ],
+      answer: 'At 2% the instalments are worth $269,856 today, beating the lump sum by $69,856. The decision reverses because at a low interest rate the advantage of receiving money early is small, and distant payments are barely discounted.'
+    },
+    {
+      q: 'Explain why the same interest factor table can be used for a retirement drawdown and for calculating a loan repayment.',
+      marks: 3,
+      steps: [
+        'In both cases a lump sum exists at the start and is exhausted by regular equal payments.',
+        'In a drawdown, the retiree holds the sum and pays themselves.',
+        'In a loan, the bank hands over the sum and the borrower pays it back.',
+        'The mathematics — a present value annuity — is identical; only the direction of the money differs.'
+      ],
+      answer: 'Both are present-value annuities: a lump sum today that is exactly consumed by a series of regular equal payments earning compound interest. Whether the payer is a retiree drawing income or a borrower repaying a bank does not change the calculation.'
+    },
+    {
+      q: 'A fund of $350,000 earns 5% per annum. Using PV factors of 12.4622 (n = 18) and 14.0939 (n = 22), determine the annual income for each term and comment on the trade-off.',
+      marks: 4,
+      steps: [
+        'Over 18 years: \\(\\dfrac{350000}{12.4622} = \\$28\\,084.70\\) per year.',
+        'Over 22 years: \\(\\dfrac{350000}{14.0939} = \\$24\\,833.40\\) per year.',
+        'Total paid: \\(18 \\times 28084.70 = \\$505\\,524.60\\) versus \\(22 \\times 24833.40 = \\$546\\,334.80\\).',
+        'A longer term means less each year but more overall, since the balance earns interest for longer.'
+      ],
+      answer: '$28,084.70 a year over 18 years, or $24,833.40 a year over 22 years. Stretching the fund reduces the annual income by about $3,251 but increases the total received by about $40,810, because the remaining balance keeps earning interest.'
+    },
+    {
+      q: 'A financial adviser says a $500,000 retirement fund at 5% can safely pay $25,000 per year forever. Justify this claim mathematically.',
+      marks: 3,
+      steps: [
+        'Interest earned in year 1: \\(500000 \\times 0.05 = \\$25\\,000\\).',
+        'The withdrawal exactly equals the interest.',
+        'Closing balance \\(= 500000 + 25000 - 25000 = \\$500\\,000\\) — unchanged.',
+        'Since the balance never falls, the same interest is earned every year indefinitely.'
+      ],
+      answer: 'The claim is valid. The interest of $25,000 exactly matches the withdrawal, so the balance stays at $500,000 every year and the income continues indefinitely. Any withdrawal above $25,000 would erode the capital.'
+    },
+    {
+      q: 'A company offers an employee either a $90,000 bonus now or $10,000 per year for 12 years. Money can be invested at 6% (PV factor 8.3838). Give a full recommendation including non-financial considerations.',
+      marks: 5,
+      steps: [
+        'Present value of instalments: \\(10000 \\times 8.3838 = \\$83\\,838\\).',
+        'Compare with $90,000 now — the lump sum is worth $6,162 more in today\'s money.',
+        'Mathematically the lump sum wins at this interest rate.',
+        'Non-financial: a lump sum allows high-interest debt to be cleared or a deposit to be paid, but risks being spent quickly.',
+        'Instalments give budgeting discipline and a predictable income, and are not exposed to poor investment decisions.'
+      ],
+      answer: 'Take the lump sum: at 6% the instalments are worth only $83,838 today, $6,162 less than $90,000. The instalments total $120,000 but that ignores the time value of money. The recommendation could change if the employee had no capacity to invest or feared overspending, since instalments enforce discipline — and it would reverse entirely at a low enough interest rate.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>
