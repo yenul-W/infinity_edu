@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Gantt Charts &amp; Changing Durations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 7 &mdash; Critical Path Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Gantt Charts &amp; Changing Durations</h1>
+      <p class="subtitle">A Gantt chart turns the network into a timeline anyone can read. Then the
+        real management question: what actually happens to the finish date when a task speeds up
+        or slips?</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-07</span>
+        <span class="pill">Gantt charts</span>
+        <span class="pill">Spreadsheets</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Reading a Gantt chart</li>
+        <li>Drawing one from a network</li>
+        <li>Showing float on the chart</li>
+        <li>Reducing an activity's duration</li>
+        <li>When the critical path shifts</li>
+        <li>Spreadsheet modelling</li>
+        <li>Shortening a project at least cost</li>
+        <li>Class activity: beat the deadline</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#gantt">1 &nbsp;Gantt charts</a></li>
+        <li class="toc-item"><a class="toc-link" href="#drawing">2 &nbsp;Drawing a Gantt chart</a></li>
+        <li class="toc-item"><a class="toc-link" href="#reducing">3 &nbsp;Reducing a duration</a></li>
+        <li class="toc-item"><a class="toc-link" href="#shifting">4 &nbsp;When the path shifts</a></li>
+        <li class="toc-item"><a class="toc-link" href="#increasing">5 &nbsp;Delays &amp; overruns</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spreadsheet">6 &nbsp;Spreadsheet modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#crashing">7 &nbsp;Shortening at least cost</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. GANTT ─────────── -->
+      <div class="content-card" id="gantt">
+        <p class="section-label">Theory</p>
+        <h2>Gantt charts</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">What a Gantt chart shows</p>
+          <p style="margin-bottom:0;">A <strong>Gantt chart</strong> lists the activities down the
+            left and time across the top. Each activity is a horizontal bar starting at its
+            earliest start time, with length equal to its duration. Float is usually shown as a
+            lighter extension of the bar.</p>
+        </div>
+
+        <p>The network diagram shows <em>dependencies</em>; the Gantt chart shows
+          <em>timing</em>. Together they are how projects are actually managed.</p>
+
+        <div class="interactive-block">
+          <h3>Gantt chart for the sample project</h3>
+          <p class="exercise-intro">Project: A (4, —), B (6, —), C (3, A), D (5, A and B),
+            E (2, C and D). Bold bars are critical; the lighter extensions show float.</p>
+          <div id="ganttMount"></div>
+          <p class="exercise-feedback" id="ganttNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Reading it</p>
+          <ul style="margin-bottom:0;">
+            <li>Bars that <strong>overlap in time</strong> are activities running in parallel.</li>
+            <li>A bar with <strong>no lighter extension</strong> has zero float — it is critical.</li>
+            <li>The chart's <strong>total width</strong> is the minimum completion time.</li>
+            <li>An unbroken run of critical bars from left to right is the
+              <strong>critical path</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. DRAWING ─────────── -->
+      <div class="content-card" id="drawing">
+        <p class="section-label">Method</p>
+        <h2>Drawing a Gantt chart from a network</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The procedure</p>
+          <ol style="margin-bottom:0;">
+            <li>Complete the forward and backward scans, and calculate every float.</li>
+            <li>List the activities down the left, roughly in order of earliest start.</li>
+            <li>Draw each bar from its <strong>EST</strong>, with length equal to its
+              <strong>duration</strong>.</li>
+            <li>Extend the bar by its <strong>float</strong> using a lighter shade or dashed
+              outline.</li>
+            <li>Mark the critical path — usually by drawing those bars solid or bold.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Using the analysis from Lesson 2 (completion 13 days; floats A = 2, B = 0, C = 4,
+            D = 0, E = 0):</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>EST</th><th>Duration</th><th>Bar spans</th><th>Float</th></tr>
+            <tr><td>A</td><td>0</td><td>4</td><td>day 0 to 4</td><td>2</td></tr>
+            <tr><td>B</td><td>0</td><td>6</td><td>day 0 to 6</td><td>0</td></tr>
+            <tr><td>C</td><td>4</td><td>3</td><td>day 4 to 7</td><td>4</td></tr>
+            <tr><td>D</td><td>6</td><td>5</td><td>day 6 to 11</td><td>0</td></tr>
+            <tr><td>E</td><td>11</td><td>2</td><td>day 11 to 13</td><td>0</td></tr>
+          </table>
+          <p>The critical bars B, D and E tile the timeline end to end with no gaps: 0–6, 6–11,
+            11–13. That continuous run <em>is</em> the critical path.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">A useful check</p>
+          <p style="margin-bottom:0;">The critical bars must join up with <strong>no gaps and no
+            overlaps</strong>, covering the whole timeline from 0 to the completion time. If they
+            do not, either the float calculations or the critical path is wrong.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Project A (2, —), B (5, —), C (4, A), D (3, B), E (6, C and D) has ESTs A 0, B 0,
+              C 2, D 5, E 8 and floats A 2, B 0, C 2, D 0, E 0. Describe each bar of its Gantt
+              chart.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Activity</th><th>Solid bar</th><th>Float extension</th></tr>
+                  <tr><td>A</td><td>0 to 2</td><td>2 to 4</td></tr>
+                  <tr><td>B</td><td>0 to 5</td><td>none (critical)</td></tr>
+                  <tr><td>C</td><td>2 to 6</td><td>6 to 8</td></tr>
+                  <tr><td>D</td><td>5 to 8</td><td>none (critical)</td></tr>
+                  <tr><td>E</td><td>8 to 14</td><td>none (critical)</td></tr>
+                </table>
+              </div></details></li>
+            <li>Check that the critical bars tile the timeline.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>B 0–5, D 5–8, E 8–14: end to end with no gaps or overlaps, from 0 to the
+                  completion time of 14 ✓</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. REDUCING ─────────── -->
+      <div class="content-card" id="reducing">
+        <p class="section-label">Application</p>
+        <h2>Reducing an activity's duration</h2>
+
+        <p>The syllabus asks you to <em>examine the impact of increasing or reducing the duration
+          of an activity on the completion time</em>. The answer depends entirely on whether the
+          activity is critical.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The rule</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>Non-critical activity</strong> → no change to the completion time. Its
+              float simply increases.</li>
+            <li><strong>Critical activity</strong> → the project shortens, but only until another
+              path becomes critical.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; shortening a non-critical activity</p>
+          <p>Activity C (3 days, float 4) is reduced to 1 day. What happens?</p>
+          <p>C was never governing the finish date. Its float increases from 4 to 6 days, and the
+            project still takes 13 days. <strong>No benefit at all.</strong></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; shortening a critical activity</p>
+          <p>Activity D (5 days, critical) is reduced to 3 days. What happens?</p>
+          <p><strong>New path lengths:</strong></p>
+          <ul>
+            <li>B–D–E: \(6 + 3 + 2 = 11\)</li>
+            <li>A–dummy–D–E: \(4 + 0 + 3 + 2 = 9\)</li>
+            <li>A–C–E: \(4 + 3 + 2 = 9\)</li>
+          </ul>
+          <p>The longest is now 11, so the project finishes in <strong>11 days</strong>, saving 2.
+            B–D–E remains critical.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Duration change simulator</h3>
+          <p class="exercise-intro">Change any duration and watch the completion time, the
+            critical path and the Gantt chart all respond.</p>
+          <div id="simSliders"></div>
+          <div id="simGantt" style="margin-top:16px;"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Completion time</div>
+              <div class="readout-value" id="roComp">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Critical path</div>
+              <div class="readout-value" id="roCrit">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="simNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the sample project (13 days), E is reduced from 2 days to 1. Find the new
+              completion time.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>E is on every path, so every path shortens by 1. New completion time: 12
+                  days.</p>
+              </div></details></li>
+            <li>Instead, A is reduced from 4 days to 2. What happens?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A is not critical (float 2). The project still takes 13 days; A's float rises
+                  to 4.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. SHIFTING ─────────── -->
+      <div class="content-card" id="shifting">
+        <p class="section-label">Theory</p>
+        <h2>When the critical path shifts</h2>
+
+        <p>Shortening a critical activity does not help indefinitely. Once the critical path drops
+          to the length of the next-longest path, that path takes over.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Reduce D from 5 days as far as possible. How much can the project be shortened?</p>
+          <p>The two non-D paths are A–C–E at \(4 + 3 + 2 = 9\) days and, once D shrinks, B–D–E at
+            \(6 + D + 2\).</p>
+          <p>B–D–E stays critical while \(8 + D \ge 9\), that is while \(D \ge 1\).</p>
+          <table class="coord-table">
+            <tr><th>D duration</th><th>B–D–E</th><th>A–C–E</th><th>Completion</th><th>Critical path</th></tr>
+            <tr><td>5</td><td>13</td><td>9</td><td>13</td><td>B–D–E</td></tr>
+            <tr><td>3</td><td>11</td><td>9</td><td>11</td><td>B–D–E</td></tr>
+            <tr><td>1</td><td>9</td><td>9</td><td>9</td><td><strong>both</strong></td></tr>
+            <tr><td>0</td><td>8</td><td>9</td><td>9</td><td>A–C–E</td></tr>
+          </table>
+          <p><strong>The floor is 9 days.</strong> Reducing D below 1 day achieves nothing, because
+            A–C–E then governs. The useful saving is 4 days, not 5.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The general principle</p>
+          <p style="margin-bottom:0;">A project can only be shortened to the length of its
+            <strong>next-longest path</strong>. Beyond that, a different path becomes critical and
+            further effort on the original activity is wasted. To go further, you must shorten
+            activities on <em>every</em> critical path.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; exam style</p>
+          <p>A project has A (5, —), B (8, —), C (6, A), D (4, B), E (3, C and D), F (5, B).</p>
+          <p><strong>(a) Find the critical path and completion time.</strong> [2 marks]</p>
+          <p>Paths: A–C–E \(= 14\), B–D–E \(= 15\), B–F \(= 13\). Critical path B–D–E,
+            15 days.</p>
+          <p><strong>(b) D is reduced by 3 days. Find the new completion time.</strong> [1 mark]</p>
+          <p>B–D–E becomes 12, but A–C–E is 14. New completion time 14 days &mdash; a saving of
+            only 1.</p>
+          <p><strong>(c) Which single activity, reduced by 2 days, gives a completion time of
+            13?</strong> [2 marks]</p>
+          <p>E, because it lies on both of the two longest paths: A–C–E becomes 12, B–D–E becomes
+            13, and B–F stays 13. (Reducing B by 2 leaves A–C–E at 14.)</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the sample project, B is reduced. How far can B usefully be reduced, and what is
+              the shortest completion time this achieves?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>B–D–E \(= B + 7\). A–dummy–D–E \(= 11\) does not use B. Reducing B from 6 to 4
+                  brings B–D–E to 11; below that, A–dummy–D–E governs.</p>
+                <p>B can usefully drop by 2 days, giving 11 days.</p>
+              </div></details></li>
+            <li>A project's three longest paths are 30, 27 and 24 days. An activity only on the
+              30-day path is cut by 5 days. Find the new completion time.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>That path drops to 25, but the 27-day path now governs: 27 days, saving only
+                  3.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. INCREASING ─────────── -->
+      <div class="content-card" id="increasing">
+        <p class="section-label">Application</p>
+        <h2>Delays and overruns</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The rule for delays</p>
+          <ul style="margin-bottom:0;">
+            <li>A delay <strong>within an activity's float</strong> → no effect on the finish date;
+              the float is simply consumed.</li>
+            <li>A delay <strong>exceeding the float</strong> → the project is delayed by
+              \((\text{delay} - \text{float})\).</li>
+            <li>A delay to a <strong>critical activity</strong> (float 0) → the project is delayed
+              by the full amount.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>Activity A has 2 days of float. It overruns by 5 days. Find the delay to the project.</p>
+          \[\text{Project delay} = 5 - 2 = 3 \text{ days}\]
+          <p>The completion time rises from 13 to 16 days. A has now become critical &mdash; it has
+            consumed all its slack and more.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; in context</p>
+          <p>A construction project is due in 13 weeks. Wet weather delays activity C (float 4
+            weeks) by 3 weeks, and activity D (critical) by 1 week. Find the new completion time.</p>
+          <p><strong>C:</strong> 3 weeks of delay against 4 weeks of float → absorbed, no effect.</p>
+          <p><strong>D:</strong> critical, so the full 1 week transmits to the finish.</p>
+          <p><strong>New completion: 14 weeks.</strong> Only the critical delay matters.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Delay impact calculator</h3>
+          <p class="exercise-intro">Enter an activity's float and the length of the delay.</p>
+          <div id="delaySliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Float available</div>
+              <div class="readout-value" id="roAvail">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Delay</div>
+              <div class="readout-value" id="roDelay">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Project delayed by</div>
+              <div class="readout-value" id="roImpact">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="delayNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>An activity with 3 days of float overruns by 5 days. A project was due in 20 days.
+              When will it now finish?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(5 - 3 = 2\) days late: day 22.</p>
+              </div></details></li>
+            <li>In the sample project (13 days), C overruns by 3 days and E overruns by 1 day. Find
+              the new completion time.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>C has 4 days of float, so its 3-day delay is absorbed. E is critical, so its
+                  1-day delay passes straight on. New completion time: 14 days.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. SPREADSHEET ─────────── -->
+      <div class="content-card" id="spreadsheet">
+        <p class="section-label">Technology</p>
+        <h2>Modelling a project in a spreadsheet</h2>
+
+        <p>The syllabus requires you to <em>use a spreadsheet to model a project involving
+          precedence tables and solve related problems</em>.</p>
+
+        <table class="coord-table">
+          <tr>
+            <th></th><th>A &mdash; Activity</th><th>B &mdash; Duration</th>
+            <th>C &mdash; EST</th><th>D &mdash; EFT</th><th>E &mdash; LST</th><th>F &mdash; Float</th>
+          </tr>
+          <tr><td>Row 2</td><td>A</td><td>4</td><td>0</td><td><code>=C2+B2</code></td><td>2</td><td><code>=E2-C2</code></td></tr>
+          <tr><td>Row 3</td><td>B</td><td>6</td><td>0</td><td><code>=C3+B3</code></td><td>0</td><td><code>=E3-C3</code></td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The key formulas</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>EFT</strong> (earliest finish time) \(=\) EST \(+\) duration:
+              <code>=C2+B2</code></li>
+            <li><strong>EST</strong> of an activity \(=\) the <code>MAX</code> of its predecessors'
+              EFTs. For an activity following both A and B:
+              <code>=MAX(D2,D3)</code></li>
+            <li><strong>Float</strong> \(=\) LST \(-\) EST: <code>=E2-C2</code></li>
+            <li><strong>Completion time</strong> \(=\) <code>=MAX(D2:D6)</code> — the largest EFT
+              in the project.</li>
+          </ul>
+        </div>
+
+        <p>Reading and using the model:</p>
+        <ul>
+          <li>Rows where the float column reads 0 are the <strong>critical activities</strong>.</li>
+          <li>Changing a duration in column B updates every dependent EST, the floats and the
+            completion time automatically.</li>
+          <li>Conditional formatting on the float column highlights the critical path visually.</li>
+          <li>Testing "what if activity D took 2 days longer?" becomes a single cell edit &mdash;
+            exactly the sensitivity analysis the syllabus asks for.</li>
+        </ul>
+
+        <div class="formula-box">
+          <p class="formula-label">Why <code>MAX</code> is the heart of it</p>
+          <p style="margin-bottom:0;">An activity cannot start until <em>every</em> predecessor has
+            finished, so its EST is the maximum of their earliest finish times. That single
+            function reproduces the entire forward scan.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. CRASHING ─────────── -->
+      <div class="content-card" id="crashing">
+        <p class="section-label">Application</p>
+        <h2>Shortening a project at the least cost</h2>
+
+        <p>Shortening an activity usually costs money: overtime, extra workers, hired machinery.
+          Shortening a project as cheaply as possible is called <strong>crashing</strong>. Each
+          activity has a cost per day saved and a limit on how far it can be cut.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The method, one day at a time</p>
+          <ol style="margin-bottom:0;">
+            <li>Find the critical path(s).</li>
+            <li>Choose the <strong>cheapest way to shorten every critical path by one
+              day</strong>. With one critical path, that is its cheapest activity. With several,
+              you may need one activity on each &mdash; or a single activity they share.</li>
+            <li>Recalculate the path lengths and repeat.</li>
+          </ol>
+          <p class="formula-where" style="margin-top:10px;">Never pay to shorten a non-critical
+            activity unless it lies on a path that has just become critical.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Project A (2, —), B (5, —), C (4, A), D (3, B), E (6, C and D) takes 14 days.
+            Crashing costs (maximum cut):</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
+            <tr><th>Cost per day</th><td>$150</td><td>$400</td><td>$150</td><td>$250</td><td>$600</td></tr>
+            <tr><th>Max days cut</th><td>1</td><td>2</td><td>2</td><td>1</td><td>2</td></tr>
+          </table>
+          <p>Paths: B–D–E \(= 14\) (critical), A–C–E \(= 12\).</p>
+          <p><strong>To 13 days:</strong> cheapest on B–D–E is D at $250. D is now at its
+            limit.</p>
+          <p><strong>To 12 days:</strong> next cheapest on B–D–E is B at $400. Total $650. Now
+            <em>both</em> paths are 12.</p>
+          <p><strong>To 11 days:</strong> both paths must shorten. Options: E (shared) at $600,
+            or B + C at \(\$400 + \$150 = \$550\). Choose B + C. Total \(\$1\,200\).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Activities on the only critical path cost $300, $180 and $450 per day to shorten.
+              What is the cheapest way to save one day?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Shorten the $180 activity, assuming it can still be cut. Only critical
+                  activities matter.</p>
+              </div></details></li>
+            <li>Two critical paths share activity K ($700/day). The cheapest activity on each path
+              alone costs $300 and $350. What is the cheapest way to save one day?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Both paths must shorten. Cutting the two separate activities costs
+                  \(\$300 + \$350 = \$650\), less than $700 for K. Choose the two separate
+                  activities.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Beat the deadline on a budget</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> The sample project (A 4, B 6, C 3,
+          D 5, E 2) takes 13 days. The client wants it sooner. Crashing costs:</p>
+        <table class="coord-table">
+          <tr><th>Activity</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
+          <tr><th>Cost per day</th><td>$200</td><td>$500</td><td>$100</td><td>$300</td><td>$800</td></tr>
+          <tr><th>Max days cut</th><td>2</td><td>2</td><td>2</td><td>3</td><td>1</td></tr>
+        </table>
+        <ol>
+          <li>Find the cheapest way to finish in 11 days. Check it in the
+            <a href="#reducing">duration change simulator</a>.</li>
+          <li>The budget is $1,000. What is the earliest completion you can buy?</li>
+          <li>Find the minimum cost to finish in 9 days, then in 8 days.</li>
+          <li>Plot (or list) cost against days saved. Why does each extra day cost more than the
+            last?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Finish in</th><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td></tr>
+            <tr><th>Cheapest plan</th><td>D &minus;1</td><td>D &minus;2</td><td>D &minus;3</td><td>D &minus;3, B &minus;1</td><td>D &minus;3, B &minus;2, C &minus;1</td></tr>
+            <tr><th>Cost</th><td>$300</td><td>$600</td><td>$900</td><td>$1,400</td><td>$2,000</td></tr>
+          </table>
+          <p><strong>2.</strong> 10 days, for $900. The next day needs B at $500, over budget.</p>
+          <p><strong>3.</strong> From 9 days to 8 there is a trap: cutting E ($800) looks natural
+            because E is on every path, but one more day off B plus one off C ($500 + $100) does
+            the same job for $600. Total $2,000, not $2,200.</p>
+          <p><strong>4.</strong> The cheap activities run out first, and as more paths become
+            critical, each day needs cuts on several paths at once.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">For "what if" questions, always recalculate every path — the
+          critical path may well have moved.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-7', LESSON_IDX = 2;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* Project network: vertices 1..6 */
+  function analyse(d) {
+    var A = [
+      { id: 'A', f: 1, t: 2, d: d.A },
+      { id: 'B', f: 1, t: 3, d: d.B },
+      { id: '·', f: 2, t: 3, d: 0, dummy: true },
+      { id: 'C', f: 2, t: 4, d: d.C },
+      { id: 'D', f: 3, t: 5, d: d.D },
+      { id: 'E', f: 5, t: 6, d: d.E },
+      { id: '·', f: 4, t: 6, d: 0, dummy: true }
+    ];
+    var est = { 1: 0 };
+    [2, 3, 4, 5, 6].forEach(function (v) {
+      est[v] = Math.max.apply(null, A.filter(function (a) { return a.t === v; })
+        .map(function (a) { return est[a.f] + a.d; }));
+    });
+    var T = est[6];
+    var lst = { 6: T };
+    [5, 4, 3, 2, 1].forEach(function (v) {
+      lst[v] = Math.min.apply(null, A.filter(function (a) { return a.f === v; })
+        .map(function (a) { return lst[a.t] - a.d; }));
+    });
+    var rows = A.filter(function (a) { return !a.dummy; }).map(function (a) {
+      return { id: a.id, d: a.d, est: est[a.f], float: lst[a.t] - est[a.f] - a.d };
+    });
+    return { rows: rows, T: T };
+  }
+
+  /* Render a Gantt chart */
+  function gantt(mount, res) {
+    var T = res.T;
+    var W = 460, rowH = 26, PAD_L = 46, PAD_T = 26;
+    var H = PAD_T + res.rows.length * rowH + 26;
+    var sc = (W - PAD_L - 20) / Math.max(T, 1);
+
+    var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+    // Time axis
+    for (var t = 0; t <= T; t += Math.max(1, Math.ceil(T / 12))) {
+      var x = PAD_L + t * sc;
+      svg.appendChild(svgEl('line', { class: 'plot-grid', x1: x, y1: PAD_T - 8, x2: x, y2: H - 22, stroke: '#d6d6d6' }));
+      svg.appendChild(svgEl('text', { class: 'plot-tick', x: x, y: PAD_T - 12, 'text-anchor': 'middle' }, String(t)));
+    }
+    res.rows.forEach(function (r, i) {
+      var y = PAD_T + i * rowH;
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: 8, y: y + 14 }, r.id));
+      // Float extension
+      if (r.float > 0) {
+        svg.appendChild(svgEl('rect', {
+          x: PAD_L + (r.est + r.d) * sc, y: y + 4, width: r.float * sc, height: 14,
+          fill: 'none', stroke: '#818181', 'stroke-width': 1, 'stroke-dasharray': '4 3'
+        }));
+      }
+      // Main bar
+      svg.appendChild(svgEl('rect', {
+        x: PAD_L + r.est * sc, y: y + 4, width: Math.max(r.d * sc, 1), height: 14,
+        class: r.float === 0 ? 'plot-bar-filled' : 'plot-bar'
+      }));
+    });
+    svg.appendChild(svgEl('text', { class: 'plot-axis-label', x: W - 20, y: H - 6, 'text-anchor': 'end' },
+      'days (project length ' + T + ')'));
+    mount.innerHTML = '';
+    mount.appendChild(svg);
+  }
+
+  /* ── Static Gantt ─────────────────────────────────────────── */
+  (function () {
+    var res = analyse({ A: 4, B: 6, C: 3, D: 5, E: 2 });
+    gantt(document.getElementById('ganttMount'), res);
+    var crit = res.rows.filter(function (r) { return r.float === 0; }).map(function (r) { return r.id; });
+    var note = document.getElementById('ganttNote');
+    note.className = 'exercise-feedback correct';
+    note.textContent = 'Shaded bars are critical (' + crit.join('–') +
+      '); dashed extensions show float. Notice the critical bars tile the timeline from 0 to ' +
+      res.T + ' with no gaps — that is the critical path.';
+  })();
+
+  /* ── Duration simulator ───────────────────────────────────── */
+  (function () {
+    var d = { A: 4, B: 6, C: 3, D: 5, E: 2 };
+    var base = analyse({ A: 4, B: 6, C: 3, D: 5, E: 2 }).T;
+
+    function update() {
+      var res = analyse(d);
+      gantt(document.getElementById('simGantt'), res);
+      var crit = res.rows.filter(function (r) { return r.float === 0; }).map(function (r) { return r.id; });
+      document.getElementById('roComp').textContent = res.T + ' days';
+      document.getElementById('roCrit').textContent = crit.join('–');
+
+      var note = document.getElementById('simNote');
+      var diff = base - res.T;
+      note.className = 'exercise-feedback' + (diff > 0 ? ' correct' : diff < 0 ? ' wrong' : '');
+      if (diff === 0) {
+        note.textContent = 'Completion time unchanged at ' + res.T +
+          ' days. Critical activities: ' + crit.join(', ') +
+          '. Changing a non-critical activity only alters its float.';
+      } else if (diff > 0) {
+        note.textContent = 'Project shortened by ' + diff + ' days, to ' + res.T +
+          '. Critical path is now ' + crit.join('–') + '.';
+      } else {
+        note.textContent = 'Project delayed by ' + (-diff) + ' days, to ' + res.T +
+          '. Critical path is now ' + crit.join('–') + '.';
+      }
+    }
+
+    var host = 'simSliders';
+    ['A', 'B', 'C', 'D', 'E'].forEach(function (k) {
+      IE.slider({ mount: host, label: 'Activity ' + k, min: 0, max: 14, step: 1, value: d[k],
+                  format: function (v) { return v + ' d'; },
+                  onInput: function (v) { d[k] = v; update(); } });
+    });
+    update();
+  })();
+
+  /* ── Delay calculator ─────────────────────────────────────── */
+  (function () {
+    var fl = 2, delay = 5;
+    function update() {
+      var impact = Math.max(0, delay - fl);
+      document.getElementById('roAvail').textContent  = fl + ' days';
+      document.getElementById('roDelay').textContent  = delay + ' days';
+      document.getElementById('roImpact').textContent = impact + ' days';
+      var note = document.getElementById('delayNote');
+      if (impact === 0) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'The delay of ' + delay + ' days is absorbed by the ' + fl +
+          ' days of float. The completion date is unaffected, and ' + (fl - delay) +
+          ' days of float remain.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'The delay of ' + delay + ' days exceeds the ' + fl +
+          ' days of float, so the project is delayed by ' + delay + ' − ' + fl + ' = ' + impact +
+          ' days. This activity has now become critical.';
+      }
+    }
+    var host = 'delaySliders';
+    IE.slider({ mount: host, label: 'Float', min: 0, max: 15, step: 1, value: fl, onInput: function (v) { fl = v; update(); } });
+    IE.slider({ mount: host, label: 'Delay', min: 0, max: 20, step: 1, value: delay, onInput: function (v) { delay = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'On a Gantt chart, what does the length of an activity\'s solid bar represent?',
+      opts: [
+        'A) Its float time',
+        'B) Its duration',
+        'C) Its latest start time',
+        'D) The number of workers assigned'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The bar begins at the activity\'s earliest start time and its length is the duration. Float is shown separately as a lighter or dashed extension.'
+    },
+    {
+      q: 'An activity has 3 days of float and is delayed by 2 days. What happens to the completion time?',
+      opts: [
+        'A) It increases by 2 days',
+        'B) It increases by 5 days',
+        'C) It does not change',
+        'D) It decreases by 1 day'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The 2-day delay is entirely absorbed by the 3 days of float, leaving 1 day of slack. Only delays exceeding the float affect the finish date.'
+    },
+    {
+      q: 'A critical activity is delayed by 4 days. What happens to the project?',
+      opts: [
+        'A) Nothing — critical activities have float',
+        'B) It is delayed by 4 days',
+        'C) It is delayed by less than 4 days',
+        'D) It finishes 4 days early'
+      ],
+      correct: 1,
+      explanation: 'B is correct. A critical activity has zero float, so there is no slack to absorb any part of the delay — the full 4 days transmits to the completion date.'
+    },
+    {
+      q: 'A project takes 20 days with critical path P. The next-longest path is 16 days. What is the shortest the project could become by shortening activities on P alone?',
+      opts: ['A) 0 days', 'B) 4 days', 'C) 16 days', 'D) 20 days'],
+      correct: 2,
+      explanation: 'C is correct. Once P is reduced to 16 days, the other path becomes critical and further reductions to P achieve nothing. The floor is 16 days — a saving of 4.'
+    },
+    {
+      q: 'In a spreadsheet model, which function calculates an activity\'s earliest start time from its predecessors?',
+      opts: [
+        'A) <code>SUM</code> of the predecessors\' durations',
+        'B) <code>MIN</code> of the predecessors\' earliest finish times',
+        'C) <code>MAX</code> of the predecessors\' earliest finish times',
+        'D) <code>AVERAGE</code> of the predecessors\' durations'
+      ],
+      correct: 2,
+      explanation: 'C is correct. An activity waits for <em>every</em> predecessor, so it starts when the last of them finishes — the maximum of their earliest finish times. This single function reproduces the forward scan.'
+    },
+    {
+      q: 'On a Gantt chart, what indicates that an activity is critical?',
+      opts: [
+        'A) It is the longest bar',
+        'B) It has no float extension',
+        'C) It starts at day 0',
+        'D) It is the last bar listed'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Zero float means no lighter extension beyond the solid bar. The critical bars also join end to end across the whole timeline with no gaps.'
+    },
+    {
+      q: 'A manager reduces a non-critical activity from 8 days to 3 days. What is the effect?',
+      opts: [
+        'A) The project finishes 5 days earlier',
+        'B) The completion time is unchanged and that activity\'s float increases by 5 days',
+        'C) The activity becomes critical',
+        'D) Another activity becomes non-critical'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Only critical activities determine the completion time. Shortening a non-critical one adds 5 days to its slack and changes nothing else — often a waste of resources.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain what a Gantt chart shows and how it differs from a network diagram.',
+      marks: 3,
+      steps: [
+        'A Gantt chart lists activities down the side and time across the top, with each activity drawn as a bar from its EST.',
+        'The bar length is the duration, and float is shown as a lighter extension.',
+        'A network diagram shows the logical dependencies between activities.',
+        'The Gantt chart shows when each activity actually happens on the calendar.'
+      ],
+      answer: 'A Gantt chart is a timeline: bars start at each activity\'s EST with length equal to its duration, plus a float extension. A network diagram shows dependencies — which activities must precede which. One shows timing, the other logic.'
+    },
+    {
+      q: 'An activity has EST 6, duration 4 and float 3. Describe its bar on a Gantt chart.',
+      marks: 3,
+      steps: [
+        'The solid bar begins at day 6.',
+        'Its length is 4 days, so it ends at day 10.',
+        'A dashed or lighter extension runs a further 3 days, to day 13.',
+        'This shows the activity could finish as late as day 13 without delaying the project.'
+      ],
+      answer: 'A solid bar from day 6 to day 10, with a dashed extension from day 10 to day 13 representing the 3 days of float.'
+    },
+    {
+      q: 'A project has completion time 18 days. Activity R has 5 days of float and overruns by 8 days. Find the new completion time.',
+      marks: 3,
+      steps: [
+        'The float absorbs the first 5 days of the overrun.',
+        'The excess is \\(8 - 5 = 3\\) days.',
+        'That excess transmits to the finish.',
+        'New completion \\(= 18 + 3\\).'
+      ],
+      answer: '21 days. R has now become critical, having exhausted all its float.'
+    },
+    {
+      q: 'For a project with paths A–C–E = 14, B–D–E = 17 and B–F = 12 days, state the critical path and the effect of reducing D by 2 days.',
+      marks: 4,
+      steps: [
+        'The longest path is B–D–E at 17 days, so that is critical.',
+        'Reducing D by 2 makes B–D–E \\(= 15\\) days.',
+        'The other paths are 14 and 12, both still shorter.',
+        'So the completion time becomes 15 days, a saving of 2.'
+      ],
+      answer: 'Critical path B–D–E (17 days). Reducing D by 2 days brings the project to 15 days; B–D–E remains critical since 15 > 14.'
+    },
+    {
+      q: 'For the same project, how much could D be reduced before the critical path changes, and what is the shortest achievable completion time by changing D alone?',
+      marks: 4,
+      steps: [
+        'B–D–E is 17 and the next-longest path is A–C–E at 14.',
+        'B–D–E stays critical while its length is at least 14.',
+        'So D can be reduced by up to \\(17 - 14 = 3\\) days.',
+        'Beyond that, A–C–E at 14 governs.'
+      ],
+      answer: 'D can be reduced by 3 days, bringing the project to 14 days. Further reductions to D achieve nothing, since A–C–E then becomes critical at 14 days.'
+    },
+    {
+      q: 'Explain why shortening a non-critical activity does not shorten a project.',
+      marks: 3,
+      steps: [
+        'The completion time is the length of the longest path.',
+        'A non-critical activity lies on a shorter path, with float.',
+        'Shortening it makes that path shorter still.',
+        'The longest path is unchanged, so the completion date is unchanged — only the activity\'s float grows.'
+      ],
+      answer: 'Because the completion time is set by the longest (critical) path. A non-critical activity is on a shorter path, so shortening it merely increases its float; the critical path and the finish date are unaffected.'
+    },
+    {
+      q: 'Write the spreadsheet formulas for EFT, float, and the EST of an activity following both A (row 2) and B (row 3). Durations are in column B, ESTs in C, EFTs in D, LSTs in E.',
+      marks: 4,
+      steps: [
+        'EFT = EST + duration, so for row 2: <code>=C2+B2</code>.',
+        'Float = LST − EST, so for row 2: <code>=E2-C2</code>.',
+        'An activity waits for every predecessor, so its EST is the maximum of their EFTs.',
+        'For an activity following A and B: <code>=MAX(D2,D3)</code>.'
+      ],
+      answer: 'EFT: <code>=C2+B2</code>. Float: <code>=E2-C2</code>. EST of the successor: <code>=MAX(D2,D3)</code>.'
+    },
+    {
+      q: 'A project has activities A (5, float 0), B (7, float 0), C (4, float 3), D (6, float 0), completion 18 days. Bad weather delays A by 2 days and C by 2 days. Find the new completion time.',
+      marks: 4,
+      steps: [
+        'A is critical (float 0), so its 2-day delay transmits fully.',
+        'C has 3 days of float, so its 2-day delay is absorbed entirely.',
+        'Only A\'s delay affects the finish.',
+        'New completion \\(= 18 + 2 = 20\\) days.'
+      ],
+      answer: '20 days. A\'s 2-day delay is critical and adds directly; C\'s delay is absorbed by its 3 days of float.'
+    },
+    {
+      q: 'Explain the check that critical bars on a Gantt chart must tile the timeline with no gaps.',
+      marks: 3,
+      steps: [
+        'The critical path is a continuous chain from start to finish.',
+        'Each critical activity begins exactly when its predecessor ends, since none has slack.',
+        'So the critical bars run end to end across the whole chart.',
+        'A gap would mean idle time on the critical path, which contradicts zero float.'
+      ],
+      answer: 'Critical activities have zero float, so each starts the moment the previous one finishes, forming an unbroken chain from day 0 to the completion time. A gap would imply slack on the critical path — a sign of an error in the float calculations.'
+    },
+    {
+      q: 'A project has two critical paths, each 24 days. Explain what must be done to reduce the completion time to 22 days.',
+      marks: 4,
+      steps: [
+        'Both paths currently govern at 24 days.',
+        'Reducing only one leaves the other at 24, so the project does not shorten.',
+        'Either shorten an activity lying on both paths by 2 days,',
+        'or shorten one activity on each path by 2 days.',
+        'Then re-check that no third path exceeds 22.'
+      ],
+      answer: 'Either shorten by 2 days an activity that lies on both critical paths, or shorten one activity on each path by 2 days. Reducing only one path is useless because the other still governs — and afterwards all other paths must be checked against the new 22-day target.'
+    },
+    {
+      q: 'A software project has A (4, —), B (6, —), C (5, A), D (3, B), E (4, C, D), F (2, E). Find the completion time, then the effect of reducing C to 2 days.',
+      marks: 6,
+      steps: [
+        'Path A–C–E–F: \\(4 + 5 + 4 + 2 = 15\\).',
+        'Path B–D–E–F: \\(6 + 3 + 4 + 2 = 15\\).',
+        'Both are 15, so the project takes 15 days with two critical paths.',
+        'Reducing C to 2 makes A–C–E–F \\(= 4 + 2 + 4 + 2 = 12\\).',
+        'B–D–E–F is still 15 and now the sole critical path.',
+        'Completion time is unchanged at 15 days.'
+      ],
+      answer: 'Completion 15 days with two critical paths. Reducing C to 2 days shortens only one of them, so the project still takes 15 days — B–D–E–F now governs alone, and C gains 3 days of float.'
+    },
+    {
+      q: 'For the software project above, determine the cheapest way to reach 13 days if any activity can be shortened at $800 per day.',
+      marks: 6,
+      steps: [
+        'Both A–C–E–F and B–D–E–F are 15 days and must each drop to 13.',
+        'E (4 days) and F (2 days) lie on <em>both</em> paths.',
+        'Shortening E by 2 days reduces both paths simultaneously, to 13 each.',
+        'Cost \\(= 2 \\times 800 = \\$1\\,600\\).',
+        'The alternative — shortening one activity on each path — needs 4 activity-days.',
+        'That would cost \\(4 \\times 800 = \\$3\\,200\\), twice as much.'
+      ],
+      answer: 'Shorten activity E by 2 days, at a cost of $1,600. Because E lies on both critical paths, each day saved reduces both — half the cost of shortening one activity on each path separately.'
+    },
+    {
+      q: 'Explain how a spreadsheet model makes "what if" analysis easier than redrawing the network by hand.',
+      marks: 3,
+      steps: [
+        'The EST formulas use <code>MAX</code> over the predecessors\' EFTs, so the forward scan is automatic.',
+        'Changing one duration cell recalculates every dependent EST, EFT and float instantly.',
+        'The completion time updates as <code>=MAX</code> of the EFT column.',
+        'By hand, each change would require a fresh forward and backward scan.'
+      ],
+      answer: 'The dependency formulas recalculate automatically, so changing a single duration cell updates every EST, float and the completion time instantly. By hand each scenario needs a complete redrawing and re-scanning of the network.'
+    },
+    {
+      q: 'A construction project is 26 weeks long. Analysis shows activity G (critical, 5 weeks) could be shortened to 3 weeks for $40,000, while non-critical activity H (float 4 weeks) could be shortened by 3 weeks for $12,000. The client offers a $25,000 bonus for each week saved. Advise.',
+      marks: 6,
+      steps: [
+        'H is non-critical with 4 weeks of float, so shortening it saves no time at all.',
+        'Spending $12,000 on H would earn nothing — reject it.',
+        'G is critical, so shortening it by 2 weeks could save up to 2 weeks.',
+        'Bonus \\(= 2 \\times 25\\,000 = \\$50\\,000\\) against a cost of $40,000.',
+        'Net gain \\(= \\$10\\,000\\), provided no other path becomes critical above 24 weeks.',
+        'The next-longest path must be checked first.'
+      ],
+      answer: 'Shorten G, not H. H is non-critical so the $12,000 would buy nothing. Shortening G by 2 weeks costs $40,000 and earns a $50,000 bonus — a $10,000 net gain, but only if no other path is longer than 24 weeks, which must be verified before committing.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

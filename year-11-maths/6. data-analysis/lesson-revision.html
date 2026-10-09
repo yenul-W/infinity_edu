@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Data Analysis</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
       --color-canvas-white: #ffffff;
@@ -12,8 +12,8 @@
       --color-medium-gray: #818181;
       --color-light-gray: #d6d6d6;
       --color-faded-gray: #9d9d9d;
-      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'Space Mono', monospace;
+      --font-onsite: 'Poppins', sans-serif;
+      --font-mono: 'DM Mono', monospace;
       --text-caption: 11px;
       --text-body: 14px;
       --leading-body: 1.6;
@@ -36,23 +36,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--color-canvas-white); color: var(--color-ink-black); font-family: var(--font-onsite); display: flex; min-height: 100vh; }
     .sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; border-right: 1px solid var(--color-light-gray); padding: var(--spacing-40) var(--spacing-16); display: flex; flex-direction: column; gap: var(--spacing-8); }
-    .sidebar-back { font-family: var(--font-mono); font-size: var(--text-caption); color: var(--color-faded-gray); text-decoration: none; display: block; margin-bottom: var(--spacing-24); }
+    .sidebar-back { font-family: var(--font-mono);font-weight:300; font-size: var(--text-caption); color: var(--color-faded-gray); text-decoration: none; display: block; margin-bottom: var(--spacing-24); }
     .sidebar-back:hover { color: var(--color-ink-black); }
-    .sidebar-label { font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); margin-top: var(--spacing-16); }
+    .sidebar-label { font-family: var(--font-mono); font-size: 9px; font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); margin-top: var(--spacing-16); }
     .sidebar-link { font-size: var(--text-caption); color: var(--color-medium-gray); text-decoration: none; line-height: 1.6; display: block; padding: 2px 0; }
     .sidebar-link:hover { color: var(--color-ink-black); }
     .main { flex: 1; padding: var(--spacing-40) 56px; max-width: 780px; }
-    .page-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
-    .page-title { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
-    .page-intro { font-size: var(--text-body); color: var(--color-medium-gray); line-height: var(--leading-body); margin-bottom: var(--spacing-40); max-width: 560px; }
+    .page-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .page-title { font-size: 32px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; color: var(--color-ink-black); margin-bottom: var(--spacing-40); }
     .section { margin-bottom: var(--section-gap); }
-    .section-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
+    .section-label { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); margin-bottom: var(--spacing-8); }
     .section-title { font-size: var(--text-heading); font-weight: 600; letter-spacing: -0.01em; line-height: var(--leading-heading); color: var(--color-ink-black); margin-bottom: var(--spacing-24); padding-bottom: var(--spacing-12); border-bottom: 1px solid var(--color-light-gray); }
     .question-block { margin-bottom: var(--spacing-24); padding: var(--spacing-16); border: 1px solid var(--color-light-gray); }
     .question-meta { display: flex; align-items: center; gap: var(--spacing-8); margin-bottom: var(--spacing-12); }
-    .q-num { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); }
+    .q-num { font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); }
     .q-source { font-size: var(--text-caption); color: var(--color-faded-gray); }
-    .q-marks { margin-left: auto; font-family: var(--font-mono); font-size: var(--text-caption); color: var(--color-faded-gray); }
+    .q-marks { margin-left: auto; font-family: var(--font-mono);font-weight:300; font-size: var(--text-caption); color: var(--color-faded-gray); }
     .q-text { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-ink-black); margin-bottom: var(--spacing-12); }
     .q-options { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--spacing-12); }
     .q-options li { font-size: var(--text-body); color: var(--color-ink-black); display: flex; gap: var(--spacing-8); }
@@ -61,29 +60,27 @@
     .q-table th, .q-table td { border: 1px solid var(--color-light-gray); padding: 6px 10px; text-align: left; }
     .q-table th { background: var(--color-light-gray); font-weight: 600; }
     details.solution { border-top: 1px solid var(--color-light-gray); margin-top: var(--spacing-12); padding-top: var(--spacing-8); }
-    details.solution summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--color-faded-gray); list-style: none; user-select: none; }
+    details.solution summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--text-caption); font-weight: 300; letter-spacing: 0.02em; color: var(--color-faded-gray); list-style: none; user-select: none; }
     details.solution summary::-webkit-details-marker { display: none; }
     details.solution summary::after { content: '  ↓'; }
     details.solution[open] summary::after { content: '  ↑'; }
     details.solution[open] summary { margin-bottom: var(--spacing-12); }
     .solution-body { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-ink-black); }
     .solution-body p + p { margin-top: var(--spacing-8); }
-    .solution-step { font-family: var(--font-mono); font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
-    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
+    .solution-step { font-family: var(--font-mono);font-weight:300; font-size: 13px; color: var(--color-ink-black); padding: 2px 0; display: block; }
+    .solution-answer { font-family: var(--font-mono); font-size: 13px; font-weight: 300; color: var(--color-ink-black); margin-top: var(--spacing-8); display: block; }
     @media (max-width: 700px) { .sidebar { display: none; } .main { padding: var(--spacing-24) var(--spacing-16); } }
     .q-options li { cursor: pointer; padding: 6px 8px; }
     .q-options li:hover:not(.opt-locked) { background: var(--color-light-gray); }
-    .q-options li.opt-correct { background: #d4edda; color: #155724; }
-    .q-options li.opt-correct .opt-label { color: #155724; }
-    .q-options li.opt-wrong { background: #f8d7da; color: #721c24; }
-    .q-options li.opt-wrong .opt-label { color: #721c24; }
+    .q-options li.opt-correct { box-shadow: inset 2px 0 0 #00a050; background: rgba(0,160,80,0.08); }
+    .q-options li.opt-correct .opt-label { color: #00a050; }
+    .q-options li.opt-wrong { box-shadow: inset 2px 0 0 #c00000; background: rgba(200,0,0,0.08); }
+    .q-options li.opt-wrong .opt-label { color: #c00000; }
     .q-options li.opt-locked { cursor: default; pointer-events: none; }
-    html.dark-mode .q-options li.opt-correct { background: #1a3a25; color: #8fd4a0; }
-    html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
-    html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
-    html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
+    html.dark-mode .q-options li.opt-correct { background: rgba(0,160,80,0.14); }
+    html.dark-mode .q-options li.opt-wrong { background: rgba(200,0,0,0.14); }
     .q-image { max-width: 100%; display: block; margin: var(--spacing-12) 0; border: 1px solid var(--color-light-gray); }
-    .q-draw-note { font-size: var(--text-caption); font-family: var(--font-mono); color: var(--color-faded-gray); margin: var(--spacing-8) 0; padding: var(--spacing-8); border-left: 2px solid var(--color-light-gray); }
+    .q-draw-note { font-size: var(--text-caption); font-family: var(--font-mono);font-weight:300; color: var(--color-faded-gray); margin: var(--spacing-8) 0; padding: var(--spacing-8); border-left: 2px solid var(--color-light-gray); }
   </style>
 </head>
 <body>
@@ -101,8 +98,6 @@
   <main class="main">
     <p class="page-label">Data Analysis — Revision</p>
     <h1 class="page-title">HSC Practice Questions</h1>
-    <p class="page-intro">Questions drawn from past NSW HSC examinations. Attempt each question before opening the solution.</p>
-
     <!-- ── Section 1: Data Classification ── -->
     <section class="section" id="classification">
       <p class="section-label">Section 1</p>
@@ -384,7 +379,7 @@
           <span class="q-source">2012 HSC</span>
           <span class="q-marks">3 marks</span>
         </div>
-        <p class="q-text">Greg needs to conduct a statistical inquiry into how much time people aged 18–25 years have spent accessing social media websites in the last two weeks. The steps of statistical inquiry (NOT in order) are:</p>
+        <p class="q-text">Greg needs to conduct a statistical inquiry into how much time people aged 18–25 years have spent accessing social media websites in the last two weeks. The steps of statistical inquiry (<strong>not</strong> in order) are:</p>
         <table class="q-table">
           <tr><th>Letter</th><th>Step</th></tr>
           <tr><td>A</td><td>Collect data</td></tr>
@@ -395,14 +390,14 @@
           <tr><td>F</td><td>Identify population</td></tr>
         </table>
         <p class="q-text"><strong>(i)</strong> Using the letters A–F, list the steps in the most appropriate order for Greg to conduct his statistical inquiry. [2 marks]</p>
-        <p class="q-text"><strong>(ii)</strong> A survey question reads: "Do you agree that social media is addictive?" Give TWO reasons why this survey question may be considered to be poorly designed. [2 marks]</p>
+        <p class="q-text"><strong>(ii)</strong> A survey question reads: "Do you agree that social media is addictive?" Give <strong>two</strong> reasons why this survey question may be considered to be poorly designed. [2 marks]</p>
         <details class="solution">
           <summary>Show solution</summary>
           <div class="solution-body">
             <span class="solution-step">(i) C → F → A → B → E → D</span>
             <span class="solution-step">    (Formulate question → Identify population → Collect data</span>
             <span class="solution-step">     → Organise and display → Analyse → Conclude)</span>
-            <span class="solution-step">(ii) Any TWO of:</span>
+            <span class="solution-step">(ii) Any <strong>two</strong> of:</span>
             <span class="solution-step">  • The question is leading — it assumes social media is addictive</span>
             <span class="solution-step">  • The question uses the word "agree" which pressures respondents to agree</span>
             <span class="solution-answer">  • The term "addictive" is subjective / ambiguous</span>
@@ -739,7 +734,7 @@
           <span class="q-source">SM-Bank</span>
           <span class="q-marks">1 mark</span>
         </div>
-        <p class="q-text">Which is NOT true of the following set of scores?</p>
+        <p class="q-text">Which is <strong>not</strong> true of the following set of scores?</p>
         <table class="q-table">
           <tr><th>Score</th><th>Frequency</th></tr>
           <tr><td>12</td><td>3</td></tr>
@@ -759,10 +754,10 @@
           <summary>Show solution</summary>
           <div class="solution-body">
             <span class="solution-step">Mean = (36+117+70+75+48)/25 = 346/25 = 13.84 ✓ (A is true)</span>
-            <span class="solution-step">Median: 25 values → 13th score. Freq(12)=3, Freq(13)=9 → scores 4–12 are 13, score 13 = 14 (NOT 13)</span>
+            <span class="solution-step">Median: 25 values → 13th score. Freq(12)=3, Freq(13)=9 → scores 4–12 are 13, score 13 = 14 (<strong>not</strong> 13)</span>
             <span class="solution-step">Mode = 13 (highest frequency = 9) ✓ (C is true)</span>
             <span class="solution-step">Range = 16 − 12 = 4 ✓ (D is true)</span>
-            <span class="solution-answer">B is NOT true (median = 14, not 13) → Answer: B</span>
+            <span class="solution-answer">B is <strong>not</strong> true (median = 14, not 13) → Answer: B</span>
           </div>
         </details>
       </div>
@@ -1045,7 +1040,7 @@
           <span class="q-marks">3 marks</span>
         </div>
         <p class="q-text">The heights, in centimetres, of 10 players on a basketball team are shown below:</p>
-        <p class="q-text" style="font-family:var(--font-mono);font-size:13px;">170, 180, 185, 188, 192, 193, 193, 194, 196, 202</p>
+        <p class="q-text" style="font-family:var(--font-mono);font-weight:300;font-size:13px;">170, 180, 185, 188, 192, 193, 193, 194, 196, 202</p>
         <p class="q-text">Is the height of the shortest player on the team considered an outlier? Justify your answer with calculations.</p>
         <details class="solution">
           <summary>Show solution</summary>
@@ -1056,7 +1051,7 @@
             <span class="solution-step">Lower fence = Q1 − 1.5 × IQR = 185 − 13.5 = 171.5</span>
             <span class="solution-step">Shortest player = 170 cm</span>
             <span class="solution-step">170 &lt; 171.5</span>
-            <span class="solution-answer">Yes, 170 cm IS an outlier (it is below the lower fence of 171.5).</span>
+            <span class="solution-answer">Yes, 170 cm <strong>is</strong> an outlier (it is below the lower fence of 171.5).</span>
           </div>
         </details>
       </div>
@@ -1074,7 +1069,7 @@
             <span class="solution-step">IQR = Q3 − Q1 = 10 − 4 = 6</span>
             <span class="solution-step">Upper fence = Q3 + 1.5 × IQR = 10 + 9 = 19</span>
             <span class="solution-step">Highest score = 20 > 19</span>
-            <span class="solution-answer">Yes, 20 IS an outlier (it exceeds the upper fence of 19).</span>
+            <span class="solution-answer">Yes, 20 <strong>is</strong> an outlier (it exceeds the upper fence of 19).</span>
           </div>
         </details>
       </div>
@@ -1105,7 +1100,7 @@
           <span class="q-marks">2 marks</span>
         </div>
         <p class="q-text">Jamal surveyed eight households in his street and asked how many kilolitres (kL) of water they used in the last year. The results were:</p>
-        <p class="q-text" style="font-family:var(--font-mono);font-size:13px;">175, 210, 184, 195, 201, 188, 170, 197</p>
+        <p class="q-text" style="font-family:var(--font-mono);font-weight:300;font-size:13px;">175, 210, 184, 195, 201, 188, 170, 197</p>
         <p class="q-text"><strong>(i)</strong> Calculate the mean of this set of data. [1 mark]</p>
         <p class="q-text"><strong>(ii)</strong> What is the standard deviation of this set of data, correct to one decimal place? [1 mark]</p>
         <details class="solution">
@@ -1277,7 +1272,7 @@
           <span class="q-marks">5 marks</span>
         </div>
         <p class="q-text">An administrator has information about the heights of players in a basketball league. The cumulative frequency histogram below shows their heights.</p>
-        <svg class="q-image" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" style="background:none;font-family:monospace;font-size:12px;">
+        <svg class="q-image" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" style="background:none;font-family:var(--font-mono);font-weight:300;font-size:12px;">
           <!-- Y-axis grid lines -->
           <line x1="60" y1="20" x2="60" y2="270" stroke="currentColor" stroke-width="1"/>
           <line x1="60" y1="270" x2="480" y2="270" stroke="currentColor" stroke-width="1"/>
@@ -1316,7 +1311,7 @@
           <!-- Axis labels -->
           <text x="270" y="310" text-anchor="middle" fill="currentColor" font-size="11">Height (metres)</text>
           <text x="15" y="150" text-anchor="middle" fill="currentColor" font-size="11" transform="rotate(-90,15,150)">Cumulative Frequency</text>
-          <text x="270" y="14" text-anchor="middle" fill="currentColor" font-size="11" font-weight="bold">HEIGHTS OF BASKETBALLERS</text>
+          <text x="270" y="14" text-anchor="middle" fill="currentColor" font-size="11" font-weight="bold">Heights of basketballers</text>
         </svg>
         <p class="q-text"><strong>(a)</strong> How many players have a height between 2.0 and 2.199 m? [1 mark]</p>
         <p class="q-text"><strong>(b)</strong> Complete a Cumulative Frequency Polygon on the diagram above (draw on paper or in the PDF). [2 marks]</p>

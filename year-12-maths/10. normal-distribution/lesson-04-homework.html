@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — The Normal Distribution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 10 &mdash; The Normal Distribution</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>The Normal Distribution</h1>
+      <p class="subtitle">Thirty questions across the whole topic, in three parts. Work through a
+        part at a time, reveal the solutions only after you have committed to an answer, and
+        sketch a bell curve for every empirical-rule question.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-10</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">Solutions included</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Parts</p>
+      <ul class="side-list">
+        <li>A &mdash; Normal datasets (10)</li>
+        <li>B &mdash; \(z\)-scores (10)</li>
+        <li>C &mdash; Empirical rule (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &nbsp;Normal datasets</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &nbsp;\(z\)-scores</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &nbsp;Empirical rule</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card">
+        <p class="section-label">Reference</p>
+        <h2>Everything you need</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Formulas</p>
+          \[z = \frac{x - \mu}{\sigma} \qquad x = \mu + z\sigma \qquad
+            \sigma = \frac{x - \mu}{z} \qquad \text{expected number} = n \times P\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The eight segments</p>
+          <p style="margin-bottom:0;">0.15 &nbsp;|&nbsp; 2.35 &nbsp;|&nbsp; 13.5 &nbsp;|&nbsp; 34
+            &nbsp;||&nbsp; 34 &nbsp;|&nbsp; 13.5 &nbsp;|&nbsp; 2.35 &nbsp;|&nbsp; 0.15 &nbsp;(%)<br>
+            reading from \(z &lt; -3\) across to \(z &gt; 3\), with the mean at the double bar.
+            They total 100%.</p>
+        </div>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Normal datasets</h2>
+        <p class="practice-intro">Shape, centre and spread. Ten questions.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;"><em>z</em>-scores</h2>
+        <p class="practice-intro">Calculating, interpreting, reversing and comparing. Ten
+          questions.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">The empirical rule</h2>
+        <p class="practice-intro">Percentages, probabilities, expected counts and judgements. Ten
+          questions.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Navigate</p>
+        <h2>Next</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Once you have worked through all three parts, move on to the revision lesson for the
+          full method sheet, the syllabus checklist and a mixed exam paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ─────────── PART A ─────────── */
+  var QS_A = [
+    {
+      q: 'Name three features common to all normal distributions.',
+      marks: 3,
+      steps: [
+        'Symmetric about the mean.',
+        'A single peak, located at the mean.',
+        'Total area under the curve equal to 1.'
+      ],
+      answer: 'Symmetry about the mean, a single central peak, and a total area of 1. (Tails that approach but never touch the axis is a fourth.)'
+    },
+    {
+      q: 'A dataset has mean 44.2, median 44 and mode 44. What does this suggest about its shape?',
+      marks: 2,
+      steps: [
+        'All three measures of centre agree to within 0.2.',
+        'That indicates symmetry, consistent with a normal distribution.'
+      ],
+      answer: 'The distribution is approximately symmetric and consistent with a normal model.'
+    },
+    {
+      q: 'A dataset has mean 91, median 78 and mode 71. Describe the shape and explain what causes it.',
+      marks: 3,
+      steps: [
+        'Mean > median > mode, so the distribution is positively skewed.',
+        'The peak is near 71 with a long tail stretching to the right.',
+        'A small number of very large values drag the mean upwards.'
+      ],
+      answer: 'Positively skewed: a peak near 71 with a long right tail. A few unusually large values pull the mean well above the median.'
+    },
+    {
+      q: 'Explain why the mean, median and mode coincide for a normal distribution.',
+      marks: 3,
+      steps: [
+        'The curve is highest at the centre, so the most common value — the mode — is there.',
+        'Symmetry puts half the area each side of the centre, so the median is there.',
+        'A symmetric shape balances at its line of symmetry, so the mean is there too.'
+      ],
+      answer: 'All three fall at the centre: the peak gives the mode, the equal split of area gives the median, and symmetry gives the balance point that is the mean.'
+    },
+    {
+      q: 'Two normal curves have the same mean. Curve M has \\(\\sigma = 2\\) and curve N has \\(\\sigma = 9\\). Describe how they differ in appearance.',
+      marks: 3,
+      steps: [
+        'Both peak at the same place.',
+        'M is much taller and narrower, since its values cluster tightly.',
+        'N is lower and wider, because both curves must enclose an area of 1.'
+      ],
+      answer: 'They peak at the same point, but M is tall and narrow while N is low and wide. Both enclose an area of 1, so a wider curve must be flatter.'
+    },
+    {
+      q: 'Which of these is unlikely to be normally distributed, and why: (i) the heights of 3000 women, (ii) the wealth of 3000 households, (iii) the diameters of 3000 bearings?',
+      marks: 3,
+      steps: [
+        'Heights and bearing diameters both arise from many small independent influences and are symmetric.',
+        'Wealth is strongly positively skewed.',
+        'A small number of very wealthy households create a long right tail.'
+      ],
+      answer: '(ii) household wealth. It is strongly positively skewed because a few very wealthy households form a long right tail, unlike heights and machined diameters, which are symmetric.'
+    },
+    {
+      q: 'The values 21, 24, 25, 26, 26, 27, 28, 31 are recorded. Find the mean, median and mode, and comment on the shape.',
+      marks: 5,
+      steps: [
+        'Sum \\(= 208\\), \\(n = 8\\), so mean \\(= 26\\).',
+        'The data is ordered; the middle two values are 26 and 26.',
+        'Median \\(= 26\\).',
+        'The only repeated value is 26, so the mode is 26.',
+        'All three agree exactly, so the data is symmetric.'
+      ],
+      answer: 'Mean 26, median 26, mode 26. Perfect agreement, so the distribution is symmetric and consistent with a normal model.'
+    },
+    {
+      q: 'Explain why measurements that result from many small independent influences tend to be normally distributed.',
+      marks: 3,
+      steps: [
+        'Each influence pushes the value slightly up or down.',
+        'With many influences and no dominant one, the pushes tend to cancel out.',
+        'Values therefore cluster symmetrically around a central value, producing a bell shape.'
+      ],
+      answer: 'Because many small random pushes in both directions tend to cancel, values cluster symmetrically about a centre. Extremes require most influences to align in the same direction, which is rare — giving the bell shape.'
+    },
+    {
+      q: 'A histogram of waiting times at a bus stop has a tall bar at 0–2 minutes and progressively shorter bars out to 30 minutes. Name the shape and state which measure of centre best summarises it.',
+      marks: 3,
+      steps: [
+        'The long tail points to the right, so the distribution is positively skewed.',
+        'The mean is pulled up by the long waits.',
+        'The median is the more representative summary.'
+      ],
+      answer: 'Positively skewed. The median is the better summary, because the long tail of occasional very long waits inflates the mean above a typical experience.'
+    },
+    {
+      q: 'Two archers both average 6 cm from the bullseye. Archer P has \\(\\sigma = 1.2\\) cm, archer Q has \\(\\sigma = 4.5\\) cm. Who would you select for a team, and why?',
+      marks: 4,
+      steps: [
+        'Both are equally accurate on average.',
+        'P is far more consistent — a much smaller standard deviation.',
+        'Q produces both excellent and poor shots.',
+        'Consistency is more valuable and more coachable, so P is the better selection.'
+      ],
+      answer: 'Archer P. Both have the same mean, but P\'s much smaller standard deviation means far more reliable shots, whereas Q is erratic. Consistency is the more valuable and more coachable quality.'
+    }
+  ];
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+
+  /* ─────────── PART B ─────────── */
+  var QS_B = [
+    {
+      q: 'A dataset has \\(\\mu = 60\\), \\(\\sigma = 12\\). Find the \\(z\\)-scores for \\(x = 84\\), \\(x = 60\\) and \\(x = 39\\).',
+      marks: 4,
+      steps: [
+        '\\(z = (84 - 60) \\div 12 = 2\\).',
+        '\\(z = (60 - 60) \\div 12 = 0\\).',
+        '\\(z = (39 - 60) \\div 12 = -21 \\div 12 = -1.75\\).'
+      ],
+      answer: '\\(z = 2\\), \\(z = 0\\) and \\(z = -1.75\\).'
+    },
+    {
+      q: 'Interpret a \\(z\\)-score of \\(-2.4\\) in plain language.',
+      marks: 2,
+      steps: [
+        'The sign places the value below the mean.',
+        'The size says it is 2.4 standard deviations away — well outside the usual range.'
+      ],
+      answer: 'The value lies 2.4 standard deviations below the mean — unusually low, since fewer than 1% of values fall this far below.'
+    },
+    {
+      q: 'A test has \\(\\mu = 55\\), \\(\\sigma = 14\\). Find the mark with a \\(z\\)-score of \\(1.25\\).',
+      marks: 3,
+      steps: [
+        '\\(x = \\mu + z\\sigma\\).',
+        '\\(x = 55 + 1.25 \\times 14 = 55 + 17.5\\).',
+        '\\(x = 72.5\\).'
+      ],
+      answer: 'A mark of 72.5.'
+    },
+    {
+      q: 'A value of 138 has \\(z = -1.5\\) in a dataset with \\(\\sigma = 16\\). Find the mean.',
+      marks: 3,
+      steps: [
+        '\\(\\mu = x - z\\sigma\\).',
+        '\\(\\mu = 138 - (-1.5)(16) = 138 + 24\\).',
+        '\\(\\mu = 162\\).'
+      ],
+      answer: '\\(\\mu = 162\\).'
+    },
+    {
+      q: 'A value of 47 has \\(z = 2.5\\) in a dataset with mean 32. Find the standard deviation.',
+      marks: 3,
+      steps: [
+        '\\(\\sigma = (x - \\mu) \\div z\\).',
+        '\\(\\sigma = (47 - 32) \\div 2.5 = 15 \\div 2.5\\).',
+        '\\(\\sigma = 6\\).'
+      ],
+      answer: '\\(\\sigma = 6\\).'
+    },
+    {
+      q: 'Explain why standardising a normally distributed dataset always produces \\(z\\)-scores with mean 0 and standard deviation 1.',
+      marks: 4,
+      steps: [
+        'Subtracting \\(\\mu\\) from every value shifts the distribution so its centre sits at 0.',
+        'So the mean of the shifted values is 0.',
+        'Dividing every value by \\(\\sigma\\) rescales the spread.',
+        'One original standard deviation becomes exactly one unit, so the new standard deviation is 1.'
+      ],
+      answer: 'Subtracting \\(\\mu\\) recentres the data on zero, and dividing by \\(\\sigma\\) rescales the spread so that one standard deviation equals one unit. The result is always the standard normal distribution.'
+    },
+    {
+      q: 'Ana scored 84 in English (\\(\\mu = 72\\), \\(\\sigma = 15\\)) and 69 in Physics (\\(\\mu = 60\\), \\(\\sigma = 6\\)). Compare her performances.',
+      marks: 5,
+      steps: [
+        'English: \\(z = (84 - 72) \\div 15 = 0.8\\).',
+        'Physics: \\(z = (69 - 60) \\div 6 = 1.5\\).',
+        'The Physics z-score is higher.',
+        'Her raw English mark was higher, but English marks were far more spread out.',
+        'Relative to her class, Physics was the stronger result.'
+      ],
+      answer: 'English \\(z = 0.8\\), Physics \\(z = 1.5\\). Despite the lower raw mark, Physics was the better performance relative to the class, because Physics marks were much more tightly clustered.'
+    },
+    {
+      q: 'Two swimmers race. In the 50 m freestyle the field averages 26.4 s with \\(\\sigma = 1.5\\) s; in the 100 m it averages 58.0 s with \\(\\sigma = 3.0\\) s. Ali swims 23.7 s and 52.9 s. Which was the better swim?',
+      marks: 5,
+      steps: [
+        '50 m: \\(z = (23.7 - 26.4) \\div 1.5 = -2.7 \\div 1.5 = -1.8\\).',
+        '100 m: \\(z = (52.9 - 58.0) \\div 3.0 = -5.1 \\div 3.0 = -1.7\\).',
+        'For times, lower is better, so the more negative z-score is the better swim.',
+        '\\(-1.8 < -1.7\\).',
+        'The 50 m swim was marginally the stronger performance.'
+      ],
+      answer: '50 m \\(z = -1.8\\), 100 m \\(z = -1.7\\). Since lower times are better, the 50 m was the marginally stronger swim relative to the field.'
+    },
+    {
+      q: 'A quality standard accepts items with \\(|z| \\le 1.5\\). For a process with \\(\\mu = 200\\) mL and \\(\\sigma = 4\\) mL, find the acceptable range.',
+      marks: 4,
+      steps: [
+        'Lower: \\(x = 200 + (-1.5)(4) = 200 - 6 = 194\\) mL.',
+        'Upper: \\(x = 200 + (1.5)(4) = 200 + 6 = 206\\) mL.',
+        'Items are accepted when the volume lies between these values inclusive.'
+      ],
+      answer: 'From 194 mL to 206 mL.'
+    },
+    {
+      q: 'A student claims that "a higher raw mark always means a better performance". Refute this with a worked counterexample.',
+      marks: 4,
+      steps: [
+        'Take test 1 with \\(\\mu = 50\\), \\(\\sigma = 20\\) and a mark of 70: \\(z = 1\\).',
+        'Take test 2 with \\(\\mu = 60\\), \\(\\sigma = 4\\) and a mark of 68: \\(z = 2\\).',
+        'The lower raw mark of 68 has the higher z-score.',
+        'So it is the better performance relative to the cohort.'
+      ],
+      answer: 'A mark of 70 on a test with \\(\\mu = 50\\), \\(\\sigma = 20\\) gives \\(z = 1\\), while a mark of 68 on a test with \\(\\mu = 60\\), \\(\\sigma = 4\\) gives \\(z = 2\\). The lower raw mark is the stronger relative result, so raw marks alone cannot rank performances across different tests.'
+    }
+  ];
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+
+  /* ─────────── PART C ─────────── */
+  var QS_C = [
+    {
+      q: 'State the three percentages of the empirical rule and the \\(z\\)-ranges they apply to.',
+      marks: 3,
+      steps: [
+        '68% for \\(-1 \\le z \\le 1\\).',
+        '95% for \\(-2 \\le z \\le 2\\).',
+        '99.7% for \\(-3 \\le z \\le 3\\).'
+      ],
+      answer: '68% within one standard deviation, 95% within two, 99.7% within three.'
+    },
+    {
+      q: 'A dataset is normal with \\(\\mu = 150\\), \\(\\sigma = 12\\). Find the interval containing the middle 95%.',
+      marks: 3,
+      steps: [
+        '95% corresponds to \\(-2 \\le z \\le 2\\).',
+        'Lower: \\(150 - 24 = 126\\).',
+        'Upper: \\(150 + 24 = 174\\).'
+      ],
+      answer: 'From 126 to 174.'
+    },
+    {
+      q: 'For the same dataset, find the percentage of values between 138 and 174.',
+      marks: 4,
+      steps: [
+        '\\(z = (138 - 150) \\div 12 = -1\\).',
+        '\\(z = (174 - 150) \\div 12 = 2\\).',
+        'Segments from \\(z = -1\\) to \\(z = 2\\): \\(34 + 34 + 13.5\\).',
+        'Total \\(= 81.5\\%\\).'
+      ],
+      answer: '81.5%.'
+    },
+    {
+      q: 'For the same dataset, find \\(P(x < 126)\\).',
+      marks: 3,
+      steps: [
+        '\\(z = (126 - 150) \\div 12 = -2\\).',
+        'Area left of \\(z = -2\\) is \\(2.35 + 0.15 = 2.5\\%\\).',
+        '\\(P = 0.025\\).'
+      ],
+      answer: '\\(P = 0.025\\), or 2.5%.'
+    },
+    {
+      q: 'For the same dataset, find \\(P(x > 162)\\).',
+      marks: 3,
+      steps: [
+        '\\(z = (162 - 150) \\div 12 = 1\\).',
+        'Area right of \\(z = 1\\) is \\(13.5 + 2.35 + 0.15 = 16\\%\\).',
+        '\\(P = 0.16\\).'
+      ],
+      answer: '\\(P = 0.16\\), or 16%.'
+    },
+    {
+      q: 'Show how the 13.5% and 2.35% segments are derived from the three empirical-rule percentages.',
+      marks: 4,
+      steps: [
+        'Between \\(z = -2\\) and \\(z = 2\\) is 95%; between \\(z = -1\\) and \\(z = 1\\) is 68%.',
+        'The difference, 27%, is split between the two regions either side: \\(27 \\div 2 = 13.5\\%\\).',
+        'Between \\(z = -3\\) and \\(z = 3\\) is 99.7%, which exceeds 95% by 4.7%.',
+        'Split between the two outer regions: \\(4.7 \\div 2 = 2.35\\%\\).'
+      ],
+      answer: '\\((95 - 68) \\div 2 = 13.5\\%\\) and \\((99.7 - 95) \\div 2 = 2.35\\%\\), using the symmetry of the curve to split each difference evenly.'
+    },
+    {
+      q: 'A school of 900 students has test marks normal with \\(\\mu = 64\\), \\(\\sigma = 11\\). How many scored above 86?',
+      marks: 4,
+      steps: [
+        '\\(z = (86 - 64) \\div 11 = 22 \\div 11 = 2\\).',
+        '\\(P(z > 2) = 2.5\\% = 0.025\\).',
+        '\\(900 \\times 0.025 = 22.5\\).',
+        'About 22 or 23 students.'
+      ],
+      answer: 'About 22 or 23 students (an expected value of 22.5).'
+    },
+    {
+      q: 'A dairy fills 2 L cartons with \\(\\mu = 2.02\\) L, \\(\\sigma = 0.01\\) L. Cartons below 2.00 L breach labelling law. In a run of 50,000, how many breach it?',
+      marks: 5,
+      steps: [
+        '\\(z = (2.00 - 2.02) \\div 0.01 = -2\\).',
+        '\\(P(z < -2) = 2.5\\% = 0.025\\).',
+        '\\(50\\,000 \\times 0.025 = 1250\\).',
+        'About 1250 cartons are underfilled.',
+        'To reduce this the dairy would raise the target fill or reduce the variability.'
+      ],
+      answer: 'About 1250 cartons. The dairy could reduce this by raising the mean fill or, better, by reducing \\(\\sigma\\) through better machine maintenance.'
+    },
+    {
+      q: 'A manufacturer claims its tyres last \\(\\mu = 60\\,000\\) km with \\(\\sigma = 4\\,000\\) km, normally distributed. A tyre fails at 45,000 km. Assess the claim.',
+      marks: 5,
+      steps: [
+        '\\(z = (45\\,000 - 60\\,000) \\div 4\\,000 = -15\\,000 \\div 4\\,000 = -3.75\\).',
+        'That is beyond three standard deviations below the mean.',
+        '\\(P(z < -3)\\) is already only 0.15%.',
+        'A failure this early is extremely improbable if the claim is accurate.',
+        'It suggests either a defective tyre or overstated figures — a larger sample is needed to distinguish the two.'
+      ],
+      answer: '\\(z = -3.75\\), far beyond the 0.15% cut-off. The result is strong evidence against the claim as stated, but one tyre cannot distinguish a single defect from a misleading advertisement; more tyres should be tested.'
+    },
+    {
+      q: 'Explain why "a result three standard deviations above the mean essentially never happens" is a misleading statement when applied to a large population.',
+      marks: 4,
+      steps: [
+        '\\(P(z > 3) \\approx 0.0015\\), which is rare for one individual.',
+        'But expected frequency is \\(n \\times P\\).',
+        'In a population of 1 million that is \\(1\\,000\\,000 \\times 0.0015 = 1500\\) people.',
+        'So the event is rare individually yet common across the population.'
+      ],
+      answer: 'The probability for an individual is only about 0.0015, but across 1 million people roughly 1500 would be expected to exceed it. Rare events are routine in large populations, so "essentially never" is wrong at scale.'
+    }
+  ];
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

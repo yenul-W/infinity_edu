@@ -235,7 +235,7 @@
         let inner = `
           <div class="lesson-group-header">
             <span class="lesson-group-num">${lesson.homework ? 'Homework' : lesson.revision ? 'Revision' : 'Lesson ' + lesson.num}</span>
-            <span class="lesson-kind-badge">${lesson.kind === 'html' ? 'INTERACTIVE' : lesson.kind === 'file' ? 'SPREADSHEET' : (lesson.kind || 'pdf').toUpperCase()}</span>
+            <span class="lesson-kind-badge">${lesson.kind === 'html' ? 'Interactive' : lesson.kind === 'file' ? 'Spreadsheet' : 'PDF'}</span>
           </div>`;
 
         if (!lesson.homework && !lesson.revision) {

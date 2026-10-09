@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Relative Frequency &amp; Probability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 &mdash; Relative Frequency &amp; Probability</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Homework</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Homework</p>
+      <h1>Relative Frequency &amp; Probability</h1>
+      <p class="subtitle">Thirty questions spanning all three lessons. Draw a tree for every
+        multistage question, and always check whether items are replaced.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-09</span>
+        <span class="pill">30 questions</span>
+        <span class="pill">~2 hours</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">Sections</p>
+      <ul class="side-list">
+        <li>Part A &mdash; Sample space &amp; complements (10)</li>
+        <li>Part B &mdash; Multistage events (10)</li>
+        <li>Part C &mdash; Relative frequency &amp; tables (10)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#ref">Formula reminder</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partA">Part A &mdash; Basics</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partB">Part B &mdash; Multistage</a></li>
+        <li class="toc-item"><a class="toc-link" href="#partC">Part C &mdash; Frequency</a></li>
+        <li class="toc-item"><a class="toc-link" href="#next">Next</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <div class="content-card" id="ref">
+        <p class="section-label">Reference</p>
+        <h2>Formula reminder</h2>
+        <div class="formula-box">
+          \[P(E) = \frac{\text{favourable outcomes}}{\text{total outcomes}} \qquad
+            P(\text{not } E) = 1 - P(E)\]
+          \[P(A \text{ and } B) = P(A) \times P(B) \quad \text{(independent)}\]
+          \[\text{Relative frequency} = \frac{\text{occurrences}}{\text{trials}} \qquad
+            \text{Expected frequency} = np\]
+        </div>
+        <p><strong>Trees:</strong> multiply along a path ("and"), add between paths ("or"). All
+          path probabilities must sum to 1.</p>
+        <p><strong>Without replacement:</strong> <em>both</em> the favourable count and the total
+          drop by one.</p>
+        <p><strong>"At least one":</strong> use the complement — \(1 - P(\text{none})\).</p>
+      </div>
+
+      <div class="practice-block" id="partA">
+        <p class="section-label">Part A &mdash; Lesson 1</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Sample space &amp; complements</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyA"></div>
+        <div id="qsA"></div>
+        <div class="practice-summary" id="sumA"></div>
+      </div>
+
+      <div class="practice-block" id="partB">
+        <p class="section-label">Part B &mdash; Lesson 2</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Multistage events</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyB"></div>
+        <div id="qsB"></div>
+        <div class="practice-summary" id="sumB"></div>
+      </div>
+
+      <div class="practice-block" id="partC">
+        <p class="section-label">Part C &mdash; Lesson 3</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Relative frequency &amp; two-way tables</h2>
+        <p class="practice-intro">Ten questions. Allow about 40 minutes.</p>
+        <div class="practice-tally" id="tallyC"></div>
+        <div id="qsC"></div>
+        <div class="practice-summary" id="sumC"></div>
+      </div>
+
+      <div class="content-card" id="next">
+        <p class="section-label">Next</p>
+        <h2>After the homework</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The revision lesson pulls the whole topic together with a mixed exam-style paper.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Back to Lesson 1</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  /* ══════════ PART A ══════════ */
+  var QS_A = [
+    {
+      q: 'Write the sample space for rolling a four-sided die and tossing a coin, and state how many outcomes there are.',
+      marks: 3,
+      steps: [
+        'List systematically: each die value paired with H, then with T.',
+        '\\(\\{H1, H2, H3, H4, T1, T2, T3, T4\\}\\).',
+        'By the multiplication principle: \\(4 \\times 2 = 8\\).'
+      ],
+      answer: '\\(\\{H1, H2, H3, H4, T1, T2, T3, T4\\}\\) — 8 outcomes.'
+    },
+    {
+      q: 'A bag has 8 red, 5 green and 7 blue marbles. Find \\(P(\\text{green})\\) and \\(P(\\text{not green})\\).',
+      marks: 3,
+      steps: [
+        'Total \\(= 8 + 5 + 7 = 20\\).',
+        '\\(P(\\text{green}) = \\dfrac{5}{20} = 0.25\\).',
+        '\\(P(\\text{not green}) = 1 - 0.25 = 0.75\\).'
+      ],
+      answer: '\\(P(\\text{green}) = 0.25\\); \\(P(\\text{not green}) = 0.75\\).'
+    },
+    {
+      q: 'How many outcomes are possible when four coins are tossed?',
+      marks: 2,
+      steps: [
+        'Each coin has 2 outcomes and there are four stages.',
+        '\\(2 \\times 2 \\times 2 \\times 2 = 2^4\\).'
+      ],
+      answer: '16 outcomes.'
+    },
+    {
+      q: 'Two dice are rolled. Find \\(P(\\text{sum} = 6)\\) and \\(P(\\text{sum} \\le 4)\\).',
+      marks: 4,
+      steps: [
+        'Sum 6: (1,5), (2,4), (3,3), (4,2), (5,1) — five outcomes, so \\(\\dfrac{5}{36}\\).',
+        'Sum 2: (1,1) — one. Sum 3: (1,2), (2,1) — two. Sum 4: (1,3), (2,2), (3,1) — three.',
+        'Total for \\(\\le 4\\): \\(1 + 2 + 3 = 6\\).',
+        '\\(P(\\text{sum} \\le 4) = \\dfrac{6}{36} = \\dfrac{1}{6}\\).'
+      ],
+      answer: '\\(P(\\text{sum} = 6) = \\dfrac{5}{36}\\); \\(P(\\text{sum} \\le 4) = \\dfrac{1}{6}\\).'
+    },
+    {
+      q: 'Explain why the sample space for two coins has four outcomes rather than three.',
+      marks: 3,
+      steps: [
+        'The coins are distinguishable — there is a first and a second.',
+        'HT and TH are therefore different outcomes.',
+        'Merging them gives three outcomes that are not equally likely.',
+        '"One of each" occurs twice as often as "two heads".'
+      ],
+      answer: 'Because HT and TH are distinct. Merging them gives three outcomes that are not equally likely, so the counting formula would no longer apply.'
+    },
+    {
+      q: 'The probability a bus is on time is 0.83. Find the probability it is late, and explain the relationship between the events.',
+      marks: 2,
+      steps: [
+        '"Late" is the complement of "on time".',
+        '\\(P(\\text{late}) = 1 - 0.83 = 0.17\\).',
+        'The two events cover all possibilities and cannot both occur.'
+      ],
+      answer: '0.17. They are complementary events, covering the whole sample space, so their probabilities sum to 1.'
+    },
+    {
+      q: 'Six coins are tossed. Find the probability of at least one head.',
+      marks: 4,
+      steps: [
+        'Complement: no heads, i.e. all six tails.',
+        '\\(P(\\text{all tails}) = \\left(\\dfrac{1}{2}\\right)^{6} = \\dfrac{1}{64}\\).',
+        '\\(P(\\text{at least one head}) = 1 - \\dfrac{1}{64}\\).',
+        '\\(= \\dfrac{63}{64} \\approx 0.9844\\).'
+      ],
+      answer: '\\(\\dfrac{63}{64} \\approx 0.9844\\)'
+    },
+    {
+      q: 'A die is rolled five times. Find the probability of at least one six.',
+      marks: 4,
+      steps: [
+        'Complement: no six on any roll.',
+        '\\(P(\\text{no six}) = \\left(\\dfrac{5}{6}\\right)^{5} = \\dfrac{3125}{7776} = 0.4019\\).',
+        '\\(P(\\text{at least one six}) = 1 - 0.4019\\).'
+      ],
+      answer: 'About 0.5981.'
+    },
+    {
+      q: 'Explain why the complement method is preferred for "at least one" problems.',
+      marks: 3,
+      steps: [
+        '"At least one" covers many separate cases — exactly one, exactly two, and so on.',
+        'Each would need to be counted and summed.',
+        'The complement, "none", is a single case.',
+        'One calculation and a subtraction replaces many.'
+      ],
+      answer: 'Because "at least one" spans many cases that must each be counted, while "none" is a single case — one calculation plus a subtraction replaces a long enumeration, with far less risk of error.'
+    },
+    {
+      q: 'A spinner has 10 equal sectors numbered 1 to 10. Find \\(P(\\text{even})\\), \\(P(\\text{prime})\\) and \\(P(\\text{not a multiple of 5})\\).',
+      marks: 4,
+      steps: [
+        'Evens: 2, 4, 6, 8, 10 — five, so \\(\\dfrac{1}{2}\\).',
+        'Primes: 2, 3, 5, 7 — four, so \\(\\dfrac{2}{5}\\).',
+        'Multiples of 5: 5, 10 — two, so \\(P = \\dfrac{1}{5}\\).',
+        '\\(P(\\text{not a multiple of 5}) = 1 - \\dfrac{1}{5} = \\dfrac{4}{5}\\).'
+      ],
+      answer: '\\(P(\\text{even}) = 0.5\\); \\(P(\\text{prime}) = 0.4\\); \\(P(\\text{not multiple of 5}) = 0.8\\).'
+    }
+  ];
+
+  /* ══════════ PART B ══════════ */
+  var QS_B = [
+    {
+      q: 'Explain the difference between drawing with and without replacement.',
+      marks: 3,
+      steps: [
+        'With replacement the item is returned, so the bag is unchanged and the draws are independent.',
+        'Without replacement the item is kept out.',
+        'Both the favourable count and the total decrease by one, so the second probability depends on the first.'
+      ],
+      answer: 'With replacement the composition is restored and the draws are independent. Without replacement both the favourable count and the total drop by one, making the second draw dependent on the first.'
+    },
+    {
+      q: 'A coin is tossed and a die rolled. Find \\(P(\\text{head and an odd number})\\).',
+      marks: 3,
+      steps: [
+        'Independent events, so multiply.',
+        '\\(P(\\text{head}) = \\dfrac{1}{2}\\); \\(P(\\text{odd}) = \\dfrac{3}{6} = \\dfrac{1}{2}\\).',
+        '\\(P = \\dfrac{1}{2} \\times \\dfrac{1}{2}\\).'
+      ],
+      answer: '\\(\\dfrac{1}{4}\\)'
+    },
+    {
+      q: 'A bag has 7 white and 3 black balls. Two are drawn with replacement. Find \\(P(\\text{both white})\\) and \\(P(\\text{one of each})\\).',
+      marks: 4,
+      steps: [
+        'With replacement: \\(P(W) = 0.7\\), \\(P(B) = 0.3\\) each draw.',
+        '\\(P(\\text{both white}) = 0.7 \\times 0.7 = 0.49\\).',
+        '\\(P(WB) = 0.21\\) and \\(P(BW) = 0.21\\).',
+        '\\(P(\\text{one of each}) = 0.42\\).'
+      ],
+      answer: '\\(P(\\text{both white}) = 0.49\\); \\(P(\\text{one of each}) = 0.42\\).'
+    },
+    {
+      q: 'The same bag, drawn without replacement. Find \\(P(\\text{both white})\\) and \\(P(\\text{one of each})\\).',
+      marks: 5,
+      steps: [
+        '\\(P(\\text{both white}) = \\dfrac{7}{10} \\times \\dfrac{6}{9} = \\dfrac{42}{90} = \\dfrac{7}{15}\\).',
+        '\\(P(WB) = \\dfrac{7}{10} \\times \\dfrac{3}{9} = \\dfrac{21}{90}\\).',
+        '\\(P(BW) = \\dfrac{3}{10} \\times \\dfrac{7}{9} = \\dfrac{21}{90}\\).',
+        '\\(P(\\text{one of each}) = \\dfrac{42}{90} = \\dfrac{7}{15}\\).',
+        'Check with \\(P(BB) = \\dfrac{3}{10} \\times \\dfrac{2}{9} = \\dfrac{6}{90}\\): total 1 ✓'
+      ],
+      answer: 'Both \\(\\dfrac{7}{15} \\approx 0.4667\\) — coincidentally equal here.'
+    },
+    {
+      q: 'A biased coin has \\(P(H) = 0.4\\), tossed twice. Draw the tree and find all four path probabilities.',
+      marks: 4,
+      steps: [
+        '\\(P(HH) = 0.4 \\times 0.4 = 0.16\\).',
+        '\\(P(HT) = 0.4 \\times 0.6 = 0.24\\).',
+        '\\(P(TH) = 0.6 \\times 0.4 = 0.24\\).',
+        '\\(P(TT) = 0.6 \\times 0.6 = 0.36\\). Total \\(= 1.00\\) ✓'
+      ],
+      answer: '\\(HH = 0.16\\), \\(HT = 0.24\\), \\(TH = 0.24\\), \\(TT = 0.36\\), summing to 1.'
+    },
+    {
+      q: 'For the biased coin above, find \\(P(\\text{exactly one head})\\) and \\(P(\\text{at least one head})\\).',
+      marks: 4,
+      steps: [
+        'Exactly one head: \\(HT + TH = 0.24 + 0.24 = 0.48\\).',
+        'At least one head: use the complement of \\(TT\\).',
+        '\\(1 - 0.36 = 0.64\\).'
+      ],
+      answer: '\\(P(\\text{exactly one head}) = 0.48\\); \\(P(\\text{at least one head}) = 0.64\\).'
+    },
+    {
+      q: 'A box has 6 working and 4 faulty batteries. Two are taken without replacement. Find \\(P(\\text{exactly one faulty})\\).',
+      marks: 5,
+      steps: [
+        'Two paths: working then faulty, or faulty then working.',
+        '\\(P(WF) = \\dfrac{6}{10} \\times \\dfrac{4}{9} = \\dfrac{24}{90}\\).',
+        '\\(P(FW) = \\dfrac{4}{10} \\times \\dfrac{6}{9} = \\dfrac{24}{90}\\).',
+        'Add: \\(\\dfrac{48}{90} = \\dfrac{8}{15}\\).',
+        '\\(\\approx 0.5333\\).'
+      ],
+      answer: '\\(\\dfrac{8}{15} \\approx 0.5333\\)'
+    },
+    {
+      q: 'Explain why "multiply along, add between" is the correct rule on a tree diagram.',
+      marks: 3,
+      steps: [
+        'Along a path, every stage must occur — the events are joined by "and", which means multiply.',
+        'Different paths are alternative ways to reach the result — joined by "or".',
+        'Since the paths are mutually exclusive, their probabilities add.'
+      ],
+      answer: 'Along a path all stages must happen ("and" → multiply). Different paths are mutually exclusive alternatives ("or" → add).'
+    },
+    {
+      q: 'A bag has 5 red, 4 blue and 3 green counters. Two are drawn without replacement. Find \\(P(\\text{both the same colour})\\).',
+      marks: 6,
+      steps: [
+        'Total 12, so 11 remain after the first draw.',
+        '\\(P(RR) = \\dfrac{5}{12} \\times \\dfrac{4}{11} = \\dfrac{20}{132}\\).',
+        '\\(P(BB) = \\dfrac{4}{12} \\times \\dfrac{3}{11} = \\dfrac{12}{132}\\).',
+        '\\(P(GG) = \\dfrac{3}{12} \\times \\dfrac{2}{11} = \\dfrac{6}{132}\\).',
+        'Add: \\(\\dfrac{38}{132} = \\dfrac{19}{66}\\).',
+        '\\(\\approx 0.2879\\).'
+      ],
+      answer: '\\(\\dfrac{19}{66} \\approx 0.2879\\)'
+    },
+    {
+      q: 'A student passes each of three independent tests with probability 0.85. Find \\(P(\\text{passes all three})\\) and \\(P(\\text{fails at least one})\\).',
+      marks: 4,
+      steps: [
+        '\\(P(\\text{all three}) = 0.85^{3} = 0.614125\\).',
+        '"Fails at least one" is the complement of "passes all three".',
+        '\\(P = 1 - 0.614125\\).'
+      ],
+      answer: '\\(P(\\text{all three}) \\approx 0.6141\\); \\(P(\\text{fails at least one}) \\approx 0.3859\\).'
+    }
+  ];
+
+  /* ══════════ PART C ══════════ */
+  var QS_C = [
+    {
+      q: 'Explain when relative frequency must be used instead of theoretical probability.',
+      marks: 3,
+      steps: [
+        'Theoretical probability requires equally likely outcomes that can be counted.',
+        'When outcomes are not equally likely — a drawing pin, the weather, a biased die — no such count exists.',
+        'Relative frequency estimates the probability from observed trials instead.'
+      ],
+      answer: 'Whenever outcomes are not equally likely or cannot be enumerated — a drawing pin, weather, or a biased die. There is no theoretical calculation available, so the probability must be estimated from data.'
+    },
+    {
+      q: 'A spinner is spun 320 times and lands on blue 104 times. Estimate \\(P(\\text{blue})\\), and predict blues in 1,000 spins.',
+      marks: 4,
+      steps: [
+        'Relative frequency \\(= \\dfrac{104}{320} = 0.325\\).',
+        'Expected in 1,000 spins \\(= np = 1000 \\times 0.325\\).',
+        '\\(= 325\\).'
+      ],
+      answer: '\\(P(\\text{blue}) \\approx 0.325\\); about 325 blues in 1,000 spins.'
+    },
+    {
+      q: 'A die is rolled 720 times and shows a three 156 times. Comment on whether it is fair.',
+      marks: 5,
+      steps: [
+        'Relative frequency \\(= \\dfrac{156}{720} = 0.2167\\).',
+        'A fair die gives \\(\\dfrac{1}{6} = 0.1667\\).',
+        'Expected threes \\(= 720 \\times \\dfrac{1}{6} = 120\\).',
+        'Observed 156 is 36 above expectation.',
+        'Over 720 rolls this is a substantial excess, suggesting bias towards three.'
+      ],
+      answer: 'Probably biased. The relative frequency 0.2167 clearly exceeds 0.1667, and 156 threes against an expected 120 is a large discrepancy over 720 rolls.'
+    },
+    {
+      q: 'Explain why more trials give a better estimate of probability.',
+      marks: 3,
+      steps: [
+        'In short runs, individual unusual results heavily skew the proportion.',
+        'As trials accumulate, each result has proportionally less influence.',
+        'Random variation averages out.',
+        'So the relative frequency converges towards the true probability.'
+      ],
+      answer: 'Because random fluctuations average out as trials accumulate — each individual result has proportionally less influence, so the relative frequency settles closer to the true probability.'
+    },
+    {
+      q: 'A production line has a 2.4% defect rate. Find the expected defects in 3,500 items and the expected acceptable items.',
+      marks: 3,
+      steps: [
+        'Defects: \\(np = 3500 \\times 0.024 = 84\\).',
+        'Acceptable: \\(3500 - 84 = 3416\\).',
+        'Check: \\(3500 \\times 0.976 = 3416\\) ✓'
+      ],
+      answer: '84 defects and 3,416 acceptable items.'
+    },
+    {
+      q: 'Explain why an expected frequency of 63.7 is meaningful, even though counts must be whole numbers.',
+      marks: 3,
+      steps: [
+        'Expected frequency is a long-run average over many repetitions.',
+        'Averages of whole numbers need not themselves be whole.',
+        'Any single set of trials gives 63 or 64.',
+        'Over many sets, the mean would be about 63.7.'
+      ],
+      answer: 'Because it is an average across many repetitions, not a prediction for one run. Individual runs give whole numbers near 64, but the long-run mean is 63.7.'
+    },
+    {
+      q: 'In a survey of 250 people, 88 own a car and cycle, 62 own a car but do not cycle, 54 cycle but own no car. Complete the table and find \\(P(\\text{neither})\\).',
+      marks: 5,
+      steps: [
+        'Car owners: \\(88 + 62 = 150\\).',
+        'Non-car-owners: \\(250 - 150 = 100\\).',
+        'Of those, 54 cycle, so neither \\(= 100 - 54 = 46\\).',
+        '\\(P(\\text{neither}) = \\dfrac{46}{250}\\).',
+        '\\(= 0.184\\).'
+      ],
+      answer: 'The "neither" cell is 46, giving \\(P(\\text{neither}) = 0.184\\).'
+    },
+    {
+      q: 'Using that table, find \\(P(\\text{cycles})\\) and \\(P(\\text{car or cycles})\\).',
+      marks: 4,
+      steps: [
+        'Cyclists \\(= 88 + 54 = 142\\), so \\(P = \\dfrac{142}{250} = 0.568\\).',
+        '"Car or cycles" is everyone except the 46 in neither.',
+        '\\(P = \\dfrac{204}{250} = 0.816\\).'
+      ],
+      answer: '\\(P(\\text{cycles}) = 0.568\\); \\(P(\\text{car or cycles}) = 0.816\\).'
+    },
+    {
+      q: 'A media report claims a supplement "halves your risk" of a condition affecting 12 in 100,000 people. Evaluate.',
+      marks: 5,
+      steps: [
+        'Halving takes the risk from 12 to 6 per 100,000.',
+        'In percentage terms, from 0.012% to 0.006%.',
+        'The absolute reduction is only 0.006 percentage points.',
+        'The relative figure (50%) sounds dramatic but the practical benefit is tiny.',
+        'The reader should also ask about sample size and whether the study was controlled.'
+      ],
+      answer: 'The risk falls from 12 to 6 per 100,000 — an absolute reduction of 0.006 percentage points. The "halves your risk" framing is technically accurate but misleading without the absolute numbers, since the baseline risk was already negligible.'
+    },
+    {
+      q: 'A carnival game costs $4. There is a 20% chance of winning $15 and otherwise nothing. Find the expected result per game and advise a player.',
+      marks: 5,
+      steps: [
+        'Expected winnings \\(= 0.20 \\times 15 = \\$3\\).',
+        'Cost \\(= \\$4\\).',
+        'Expected net \\(= 3 - 4 = -\\$1\\) per game.',
+        'The player loses $1 on average each time.',
+        'Over many games the loss accumulates predictably.'
+      ],
+      answer: 'Expected result \\(-\\$1\\) per game. The player loses $1 on average every play, so over many games a loss is effectively certain — the game is built with a house edge.'
+    }
+  ];
+
+  IE.buildPractice(QS_A, { mount: 'qsA', tally: 'tallyA', summary: 'sumA' });
+  IE.buildPractice(QS_B, { mount: 'qsB', tally: 'tallyB', summary: 'sumB' });
+  IE.buildPractice(QS_C, { mount: 'qsC', tally: 'tallyC', summary: 'sumC' });
+});
+</script>
+</body>
+</html>

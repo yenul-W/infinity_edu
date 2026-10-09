@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — The Empirical Rule &amp; Probability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 10 &mdash; The Normal Distribution</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>The Empirical Rule &amp; Probability</h1>
+      <p class="subtitle">68, 95, 99.7. Three numbers that turn any \(z\)-score into a percentage,
+        any percentage into a prediction, and any normal curve into a probability machine.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-10</span>
+        <span class="pill">68 &middot; 95 &middot; 99.7</span>
+        <span class="pill">Areas as probabilities</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>The empirical rule</li>
+        <li>The eight-segment curve</li>
+        <li>Shading the region</li>
+        <li>Tails and "more extreme"</li>
+        <li>Expected numbers</li>
+        <li>Making judgements</li>
+        <li>Working backwards from a percentage</li>
+        <li>Class activity: region race</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#rule">1 &nbsp;The empirical rule</a></li>
+        <li class="toc-item"><a class="toc-link" href="#segments">2 &nbsp;The eight segments</a></li>
+        <li class="toc-item"><a class="toc-link" href="#shading">3 &nbsp;Shading the region</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tails">4 &nbsp;Tails &amp; extremes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#counts">5 &nbsp;Expected numbers</a></li>
+        <li class="toc-item"><a class="toc-link" href="#judge">6 &nbsp;Making judgements</a></li>
+        <li class="toc-item"><a class="toc-link" href="#backwards">7 &nbsp;Working backwards</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended Practice</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1 ─────────── -->
+      <div class="content-card" id="rule">
+        <p class="section-label">Theory</p>
+        <h2>The empirical rule</h2>
+
+        <p>The area under a normal curve between any two values is the proportion of the data that
+          falls between them &mdash; and therefore the probability that a randomly chosen value lands
+          there. The empirical rule gives you three of those areas, and everything else in this
+          lesson is built from them.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The 68 &middot; 95 &middot; 99.7 rule</p>
+          <p style="margin-bottom:0;">For data arising from a normally distributed random
+            variable:</p>
+          \[\begin{aligned}
+            \text{about } 68\% &\ \text{have } -1 \le z \le 1 \\
+            \text{about } 95\% &\ \text{have } -2 \le z \le 2 \\
+            \text{about } 99.7\% &\ \text{have } -3 \le z \le 3
+          \end{aligned}\]
+          <p class="formula-where">Equivalently, in original units: 68% lie between
+            \(\mu - \sigma\) and \(\mu + \sigma\), 95% between \(\mu - 2\sigma\) and
+            \(\mu + 2\sigma\), and 99.7% between \(\mu - 3\sigma\) and \(\mu + 3\sigma\).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>The three bands</h3>
+          <p class="exercise-intro">Choose how many standard deviations to shade, and set the
+            distribution.</p>
+          <div id="ruleSliders"></div>
+          <div id="rulePlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="ruleNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Adult male heights are normal with \(\mu = 175\) cm, \(\sigma = 7\) cm. Between what
+            heights do the middle 95% of men lie?</p>
+          <p>95% corresponds to \(-2 \le z \le 2\), so the limits are</p>
+          <p>\[\mu - 2\sigma = 175 - 14 = 161 \text{ cm} \qquad
+             \mu + 2\sigma = 175 + 14 = 189 \text{ cm}\]</p>
+          <p>About 95% of adult men are between 161 cm and 189 cm tall.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Fish lengths are normal with \(\mu = 30\) cm and \(\sigma = 4\) cm. Find the
+              intervals containing the middle 68% and the middle 99.7% of fish.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>68%: \(30 \pm 4\), so 26 to 34 cm. 99.7%: \(30 \pm 12\), so 18 to 42 cm.</p>
+              </div></details></li>
+            <li>The middle 95% of battery lifetimes lie between 380 and 460 hours. Find \(\mu\) and
+              \(\sigma\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The mean is the midpoint: \(\mu = 420\) hours. The interval is
+                  \(\mu \pm 2\sigma\), so \(4\sigma = 80\) and \(\sigma = 20\) hours.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2 ─────────── -->
+      <div class="content-card" id="segments">
+        <p class="section-label">Method</p>
+        <h2>The eight segments</h2>
+
+        <p>The three bands and the curve's symmetry break the distribution into eight pieces. Learn
+          these eight percentages and you can answer almost any empirical-rule question by adding
+          them up.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Where the percentages come from</p>
+          <p style="margin-bottom:0;">
+            Between \(z = -1\) and \(z = 1\): 68%. Symmetry splits it into
+            <strong>34% each side</strong> of the mean.<br><br>
+            Between \(z = 1\) and \(z = 2\): \((95 - 68) \div 2 = \mathbf{13.5\%}\), and the same
+            between \(z = -2\) and \(z = -1\).<br><br>
+            Between \(z = 2\) and \(z = 3\): \((99.7 - 95) \div 2 = \mathbf{2.35\%}\), and the same
+            on the left.<br><br>
+            Beyond \(z = 3\): \((100 - 99.7) \div 2 = \mathbf{0.15\%}\) in each tail.</p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>Region</th><th>Percentage</th></tr>
+          <tr><td>\(z &lt; -3\)</td><td>0.15%</td></tr>
+          <tr><td>\(-3 &lt; z &lt; -2\)</td><td>2.35%</td></tr>
+          <tr><td>\(-2 &lt; z &lt; -1\)</td><td>13.5%</td></tr>
+          <tr><td>\(-1 &lt; z &lt; 0\)</td><td>34%</td></tr>
+          <tr><td>\(0 &lt; z &lt; 1\)</td><td>34%</td></tr>
+          <tr><td>\(1 &lt; z &lt; 2\)</td><td>13.5%</td></tr>
+          <tr><td>\(2 &lt; z &lt; 3\)</td><td>2.35%</td></tr>
+          <tr><td>\(z &gt; 3\)</td><td>0.15%</td></tr>
+          <tr><th>Total</th><th>100%</th></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">Three facts worth memorising</p>
+          <ul style="margin-bottom:0;">
+            <li>\(P(z &lt; 0) = 50\%\) &mdash; symmetry.</li>
+            <li>\(P(z &gt; 1) = 34 + 13.5 + 2.35 + 0.15 = 16\%\), and likewise \(P(z &lt; -1) = 16\%\).</li>
+            <li>\(P(z &gt; 2) = 2.5\%\) and \(P(z &gt; 3) = 0.15\%\).</li>
+          </ul>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Segment adder</h3>
+          <p class="exercise-intro">Pick two \(z\)-values and the tool adds the segments between
+            them.</p>
+          <div id="segSliders"></div>
+          <div id="segPlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="segNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find \(P(-1 &lt; z &lt; 3)\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(34 + 34 + 13.5 + 2.35 = 83.85\%\).</p>
+              </div></details></li>
+            <li>Find \(P(z &gt; -2)\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Everything except the left tail below \(-2\): \(100 - 2.5 = 97.5\%\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3 ─────────── -->
+      <div class="content-card" id="shading">
+        <p class="section-label">Method</p>
+        <h2>Shading the region</h2>
+
+        <p>Every empirical-rule question is solved the same way. Sketch, convert, shade, add.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The four steps</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Sketch</strong> a bell curve and mark \(\mu\) and the values at
+              \(\pm 1, \pm 2, \pm 3\) standard deviations.</li>
+            <li><strong>Convert</strong> the values in the question to \(z\)-scores.</li>
+            <li><strong>Shade</strong> the region the question asks about.</li>
+            <li><strong>Add</strong> the segment percentages inside the shading.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>A test is normal with \(\mu = 60\), \(\sigma = 10\). Find the percentage of students
+            scoring between 50 and 80.</p>
+          <p><strong>Convert.</strong> \(z = (50 - 60) \div 10 = -1\) and
+            \(z = (80 - 60) \div 10 = 2\).</p>
+          <p><strong>Shade</strong> from \(z = -1\) to \(z = 2\).</p>
+          <p><strong>Add.</strong> \(34 + 34 + 13.5 = 81.5\%\).</p>
+          <p>About 81.5% of students score between 50 and 80.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Same test. Find the percentage scoring above 70.</p>
+          <p><strong>Convert.</strong> \(z = (70 - 60) \div 10 = 1\).</p>
+          <p><strong>Add</strong> everything to the right of \(z = 1\):
+            \(13.5 + 2.35 + 0.15 = 16\%\).</p>
+          <p>Alternatively, \(100 - 50 - 34 = 16\%\). Both routes give 16%.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Same test. Find \(P(\text{score} &lt; 40)\).</p>
+          <p><strong>Convert.</strong> \(z = (40 - 60) \div 10 = -2\).</p>
+          <p><strong>Add</strong> everything left of \(z = -2\): \(2.35 + 0.15 = 2.5\%\).</p>
+          <p>So \(P = 0.025\). Written as a probability, percentages become decimals.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Region calculator</h3>
+          <p class="exercise-intro">Enter the distribution and the range. Leave a limit blank for
+            an open-ended region.</p>
+          <div class="exercise-row">
+            <label>\(\mu\)</label>
+            <input class="exercise-input" id="rgMu" type="text" inputmode="decimal" value="60">
+            <label>\(\sigma\)</label>
+            <input class="exercise-input" id="rgSd" type="text" inputmode="decimal" value="10">
+            <label>from</label>
+            <input class="exercise-input" id="rgLo" type="text" inputmode="decimal" value="50">
+            <label>to</label>
+            <input class="exercise-input" id="rgHi" type="text" inputmode="decimal" value="80">
+            <button class="exercise-check-btn" id="rgBtn">Shade</button>
+          </div>
+          <div id="rgPlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="rgOut" style="margin-top:12px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Find the percentage</h3>
+          <p class="exercise-intro">A dataset is normal with \(\mu = 500\) g and
+            \(\sigma = 25\) g. Give answers as percentages, e.g. <code>13.5</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) Between 475 g and 525 g &rarr;</label>
+            <input class="exercise-input" id="pcA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-pc="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Above 550 g &rarr;</label>
+            <input class="exercise-input" id="pcB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-pc="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Below 425 g &rarr;</label>
+            <input class="exercise-input" id="pcC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-pc="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcC"></p>
+
+          <div class="exercise-row">
+            <label>(d) Between 500 g and 550 g &rarr;</label>
+            <input class="exercise-input" id="pcD" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-pc="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcD"></p>
+
+          <div class="exercise-row">
+            <label>(e) Between 450 g and 475 g &rarr;</label>
+            <input class="exercise-input" id="pcE" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-pc="E">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbPcE"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4 ─────────── -->
+      <div class="content-card" id="tails">
+        <p class="section-label">Application</p>
+        <h2>Tails, and events "more extreme" than a given one</h2>
+
+        <p>The syllabus asks you to use \(z\)-scores to identify the probability of events
+          <em>less or more extreme</em> than a given event. In practice this means reading a tail.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Tail probabilities</p>
+          <table class="coord-table" style="margin:10px 0 0;">
+            <tr><th>Event</th><th>Probability</th></tr>
+            <tr><td>\(z &gt; 1\) or \(z &lt; -1\)</td><td>16% each &mdash; 32% combined</td></tr>
+            <tr><td>\(z &gt; 2\) or \(z &lt; -2\)</td><td>2.5% each &mdash; 5% combined</td></tr>
+            <tr><td>\(z &gt; 3\) or \(z &lt; -3\)</td><td>0.15% each &mdash; 0.3% combined</td></tr>
+          </table>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>Battery lifetimes are normal with \(\mu = 400\) hours, \(\sigma = 30\) hours. A
+            battery lasts 460 hours. What is the probability of a battery lasting at least this
+            long?</p>
+          <p>\(z = (460 - 400) \div 30 = 2\), and \(P(z &gt; 2) = 2.5\%\).</p>
+          <p>So there is a 2.5% chance &mdash; about 1 battery in 40 lasts 460 hours or more.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; "more extreme" in either direction</p>
+          <p>Same batteries. What is the probability that a battery's lifetime is more than two
+            standard deviations from the mean, in <em>either</em> direction?</p>
+          <p>That is \(z &lt; -2\) or \(z &gt; 2\): \(2.5 + 2.5 = 5\%\).</p>
+          <p>Equivalently, \(100 - 95 = 5\%\). Note the difference from Worked example 5 &mdash; read
+            carefully whether the question means one tail or both.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Careful with the wording</p>
+          <p style="margin-bottom:0;">"Longer than 460 hours" is <strong>one</strong> tail.
+            "Differs from the mean by more than 60 hours" is <strong>two</strong> tails. "More
+            extreme" almost always means both tails. Sketching the shading is the reliable way to
+            tell.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Commute times are normal with \(\mu = 35\) minutes and \(\sigma = 5\) minutes. Find
+              the probability that a commute takes longer than 45 minutes.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(z = 2\), one tail: 2.5%, or 0.025.</p>
+              </div></details></li>
+            <li>Find the probability that a commute differs from the mean by more than 10 minutes.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Two tails, \(|z| &gt; 2\): \(2.5 + 2.5 = 5\%\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5 ─────────── -->
+      <div class="content-card" id="counts">
+        <p class="section-label">Application</p>
+        <h2>Expected numbers</h2>
+
+        <p>Once you have a percentage, multiplying by the size of the group converts it into an
+          expected count &mdash; the same \(np\) idea as the probability topic.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Expected frequency</p>
+          \[\text{expected number} = n \times P\]
+          <p class="formula-where">where \(n\) is the number in the group and \(P\) is the
+            probability from the empirical rule, written as a decimal.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>In a school of 1,200 students, IQ scores are normal with \(\mu = 100\),
+            \(\sigma = 15\). How many students would you expect to have an IQ above 130?</p>
+          <p>\(z = (130 - 100) \div 15 = 2\), so \(P(z &gt; 2) = 2.5\% = 0.025\).</p>
+          <p>\[1200 \times 0.025 = 30 \text{ students}\]</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>A factory produces 8,000 bolts a day, with lengths normal at \(\mu = 40\) mm,
+            \(\sigma = 0.5\) mm. Bolts outside 39 mm to 41 mm are rejected. How many are rejected
+            daily?</p>
+          <p>\(39\) mm is \(z = -2\) and \(41\) mm is \(z = 2\), so 95% are accepted and 5% rejected.</p>
+          <p>\[8000 \times 0.05 = 400 \text{ bolts}\]</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Expected-count calculator</h3>
+          <div class="exercise-row">
+            <label>Group size \(n\)</label>
+            <input class="exercise-input" id="ecN" type="text" inputmode="decimal" value="1200">
+            <label>\(\mu\)</label>
+            <input class="exercise-input" id="ecMu" type="text" inputmode="decimal" value="100">
+            <label>\(\sigma\)</label>
+            <input class="exercise-input" id="ecSd" type="text" inputmode="decimal" value="15">
+          </div>
+          <div class="exercise-row">
+            <label>from</label>
+            <input class="exercise-input" id="ecLo" type="text" inputmode="decimal" value="130">
+            <label>to</label>
+            <input class="exercise-input" id="ecHi" type="text" inputmode="decimal" placeholder="blank = no upper limit">
+            <button class="exercise-check-btn" id="ecBtn">Calculate</button>
+          </div>
+          <p class="exercise-feedback" id="ecOut" style="margin-top:12px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A crate holds 600 apples with masses normal at \(\mu = 150\) g, \(\sigma = 20\) g.
+              How many apples are expected to weigh more than 190 g?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(z = 2\), so 2.5%: \(600 \times 0.025 = 15\) apples.</p>
+              </div></details></li>
+            <li>2,400 students sit a test. How many are expected to score between one and two
+              standard deviations above the mean?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>13.5%: \(2400 \times 0.135 = 324\) students.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6 ─────────── -->
+      <div class="content-card" id="judge">
+        <p class="section-label">Application</p>
+        <h2>Making judgements from <em>z</em>-scores</h2>
+
+        <p>The final dot point asks you to use \(z\)-scores to make judgements about outcomes. This
+          is a written-response skill: state the \(z\)-score, state the probability, then state the
+          decision it supports.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">A rough scale for judgement</p>
+          <table class="coord-table" style="margin:10px 0 0;">
+            <tr><th>\(|z|\)</th><th>How common</th><th>Typical judgement</th></tr>
+            <tr><td>Under 1</td><td>About 2 in 3</td><td>Entirely ordinary; no action</td></tr>
+            <tr><td>1 to 2</td><td>About 1 in 3</td><td>Noticeable but not remarkable</td></tr>
+            <tr><td>2 to 3</td><td>About 1 in 20</td><td>Unusual; worth investigating</td></tr>
+            <tr><td>Over 3</td><td>About 3 in 1000</td><td>Extreme; strong evidence something has changed</td></tr>
+          </table>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>A machine fills bags with \(\mu = 1000\) g and \(\sigma = 8\) g. A sample bag weighs
+            975 g. Should the machine be stopped?</p>
+          <p>\(z = (975 - 1000) \div 8 = -3.125\).</p>
+          <p><strong>Judgement.</strong> A \(z\)-score beyond \(-3\) occurs in fewer than 0.15% of
+            bags when the machine is working correctly &mdash; roughly 1 bag in 700. Getting one in a
+            small sample is strong evidence that the machine has drifted out of calibration, so it
+            should be stopped and checked.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10</p>
+          <p>A scholarship is offered to students with a \(z\)-score above 2 on an entrance test.
+            The test is normal with \(\mu = 65\), \(\sigma = 12\), and 1,500 students sit it. What
+            mark is required, and roughly how many will qualify?</p>
+          <p><strong>Mark.</strong> \(x = 65 + 2 \times 12 = 89\).</p>
+          <p><strong>Number.</strong> \(P(z &gt; 2) = 2.5\%\), so
+            \(1500 \times 0.025 = 37.5 \approx 38\) students.</p>
+          <p>The cut-off is 89, and about 37 or 38 students would be expected to qualify.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Judgement practice</h3>
+          <p class="exercise-intro">Type <code>ordinary</code>, <code>unusual</code> or
+            <code>extreme</code>, using the scale above.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(z = 0.6\) &rarr;</label>
+            <input class="exercise-input" id="jgA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-jg="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbJgA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(z = -2.4\) &rarr;</label>
+            <input class="exercise-input" id="jgB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-jg="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbJgB"></p>
+
+          <div class="exercise-row">
+            <label>(c) \(z = 3.8\) &rarr;</label>
+            <input class="exercise-input" id="jgC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-jg="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbJgC"></p>
+
+          <div class="exercise-row">
+            <label>(d) \(z = -0.2\) &rarr;</label>
+            <input class="exercise-input" id="jgD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-jg="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbJgD"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11 &mdash; exam style</p>
+          <p>A café's daily takings over 360 trading days are normal with \(\mu = \$2\,400\) and
+            \(\sigma = \$300\).</p>
+          <p><strong>(a) On how many days would takings be expected to exceed $3,000?</strong>
+            [2 marks]</p>
+          <p>\(z = \frac{3000 - 2400}{300} = 2\), so 2.5%: \(360 \times 0.025 = 9\) days.</p>
+          <p><strong>(b) On how many days would takings be between $2,100 and $3,000?</strong>
+            [2 marks]</p>
+          <p>\(z\) from \(-1\) to 2: \(34 + 34 + 13.5 = 81.5\%\), so
+            \(360 \times 0.815 \approx 293\) days.</p>
+          <p><strong>(c) One day the takings were $1,350. Make a judgement.</strong> [2 marks]</p>
+          <p>\(z = \frac{1350 - 2400}{300} = -3.5\): beyond \(-3\), which happens on fewer than
+            0.15% of days if conditions are normal. Something unusual almost certainly
+            happened &mdash; a storm, a closure for part of the day, or a register error &mdash;
+            and it is worth investigating.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Summary</p>
+          <p style="margin-bottom:0;">Areas under the normal curve are probabilities. The empirical
+            rule gives you 68%, 95% and 99.7%, which symmetry breaks into eight segments:
+            0.15, 2.35, 13.5, 34, 34, 13.5, 2.35, 0.15. Convert values to \(z\)-scores, shade the
+            region, add the segments, and multiply by \(n\) if a count is wanted.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 7 · BACKWARDS ─────────── -->
+      <div class="content-card" id="backwards">
+        <p class="section-label">Method</p>
+        <h2>Working backwards from a percentage</h2>
+
+        <p>Sometimes the percentage is given and the value is wanted: "what mark puts a student in
+          the top 16%?" Reverse the process: percentage &rarr; \(z\)-score &rarr; value, using
+          \(x = \mu + z\sigma\).</p>
+
+        <table class="coord-table">
+          <tr><th>The question says</th><th>\(z\)</th></tr>
+          <tr><td>Top 16% / bottom 16%</td><td>\(z = 1\) / \(z = -1\)</td></tr>
+          <tr><td>Top 2.5% / bottom 2.5%</td><td>\(z = 2\) / \(z = -2\)</td></tr>
+          <tr><td>Top 0.15% / bottom 0.15%</td><td>\(z = 3\) / \(z = -3\)</td></tr>
+          <tr><td>Middle 68%, 95%, 99.7%</td><td>\(z = \pm 1, \pm 2, \pm 3\)</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 12</p>
+          <p><strong>(a)</strong> A test has \(\mu = 64\), \(\sigma = 9\). What mark puts a student
+            in the top 16%?</p>
+          <p>Top 16% means \(z &gt; 1\): \(x = 64 + 1 \times 9 = 73\).</p>
+          <p><strong>(b)</strong> A machine fills bottles with mean 750 mL. Only 2.5% of bottles
+            contain less than 735 mL. Find \(\sigma\).</p>
+          <p>Bottom 2.5% means \(z = -2\) at 735 mL: \(735 = 750 - 2\sigma\), so
+            \(\sigma = 7.5\) mL.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Heights are normal with \(\mu = 168\) cm and \(\sigma = 6\) cm. Below what height is
+              the shortest 0.15%?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(z = -3\): \(168 - 18 = 150\) cm.</p>
+              </div></details></li>
+            <li>16% of eggs weigh more than 66 g, and \(\sigma = 4\) g. Find the mean egg mass.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Top 16% starts at \(z = 1\): \(66 = \mu + 4\), so \(\mu = 62\) g.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Region race</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> For each region, both partners work
+          out the percentage on paper using the eight segments, then check it with the
+          <a href="#segments">segment adder</a>. Score a point for each correct answer before
+          checking.</p>
+        <ol>
+          <li>\(-2 &lt; z &lt; 1\)</li>
+          <li>\(0 &lt; z &lt; 3\)</li>
+          <li>\(1 &lt; z &lt; 3\)</li>
+          <li>\(-3 &lt; z &lt; -1\)</li>
+          <li>\(-1 &lt; z &lt; 2\)</li>
+          <li><strong>Reverse challenge:</strong> find every pair of whole-number \(z\)-values that
+            encloses exactly 47.5%.</li>
+        </ol>
+        <p>Then discuss: why do questions 1 and 5 give the same answer, and so do 3 and 4?</p>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Region</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+            <tr><th>Percentage</th><td>81.5%</td><td>49.85%</td><td>15.85%</td><td>15.85%</td><td>81.5%</td></tr>
+          </table>
+          <p><strong>6.</strong> 0 to 2 and \(-2\) to 0 (each \(34 + 13.5 = 47.5\%\)).</p>
+          <p><strong>Symmetry:</strong> \(-2 &lt; z &lt; 1\) is the mirror image of
+            \(-1 &lt; z &lt; 2\), and \(1 &lt; z &lt; 3\) mirrors \(-3 &lt; z &lt; -1\). A normal
+            curve is symmetric about the mean, so mirrored regions have equal areas.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Sketch the curve for every question. The sketch is worth a mark
+          in many papers and it prevents the most common error of all &mdash; shading the wrong
+          side.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── NEXT ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered the whole topic. Work through the homework set, then the revision
+          lesson.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-10', LESSON_IDX = 2;
+
+  function normal(mu, sd) {
+    return function (x) {
+      var z = (x - mu) / sd;
+      return Math.exp(-0.5 * z * z) / (sd * Math.sqrt(2 * Math.PI));
+    };
+  }
+  function num(id) {
+    var v = (document.getElementById(id).value || '').replace(/[^\d.\-]/g, '');
+    return v === '' ? NaN : parseFloat(v);
+  }
+
+  // Cumulative area to the left of z, from the eight empirical-rule segments.
+  var EDGES = [-3, -2, -1, 0, 1, 2, 3];
+  var CUM   = [0.15, 2.5, 16, 50, 84, 97.5, 99.85];   // percentage below each edge
+  function cumAt(z) {
+    if (z <= -3) return 0.15 * Math.max(0, 1 + (z + 3));   // fades to 0 well out in the tail
+    if (z >= 3)  return 100 - 0.15 * Math.max(0, 1 - (z - 3));
+    for (var i = 0; i < EDGES.length - 1; i++) {
+      if (z <= EDGES[i + 1]) {
+        var t = (z - EDGES[i]) / (EDGES[i + 1] - EDGES[i]);
+        return CUM[i] + t * (CUM[i + 1] - CUM[i]);
+      }
+    }
+    return 50;
+  }
+  // Exact only on the whole-number boundaries the syllabus uses.
+  function isEdge(z) { return Math.abs(z - Math.round(z)) < 1e-6 && Math.abs(z) <= 3; }
+
+  /* ── The three bands ──────────────────────────────────────── */
+  (function () {
+    var mu = 60, sd = 10, k = 1;
+    var redraw = null;
+    var PCT = { 1: '68%', 2: '95%', 3: '99.7%' };
+    function update() {
+      var f = normal(mu, sd);
+      var opts = {
+        xMin: mu - 4 * sd, xMax: mu + 4 * sd, yMin: 0, yMax: 0.45 / sd,
+        width: 460, height: 300, xStep: sd, yStep: 0.1 / sd, xLabel: 'x',
+        curves: [{ fn: f }],
+        shade: [{ from: mu - k * sd, to: mu + k * sd, fn: f }]
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('rulePlot', opts);
+      var n = document.getElementById('ruleNote');
+      n.className = 'exercise-feedback';
+      n.textContent = 'Shaded: −' + k + ' ≤ z ≤ ' + k + ', that is from ' + (mu - k * sd) +
+        ' to ' + (mu + k * sd) + '. About ' + PCT[k] + ' of the data lies in this band, ' +
+        'leaving about ' + (100 - parseFloat(PCT[k])).toFixed(2).replace(/\.?0+$/, '') +
+        '% split evenly between the two tails.';
+    }
+    var host = 'ruleSliders';
+    IE.slider({ mount: host, label: 'Standard deviations shaded', min: 1, max: 3, step: 1, value: k,
+                onInput: function (v) { k = v; update(); } });
+    IE.slider({ mount: host, label: 'Mean (μ)', min: 20, max: 100, step: 5, value: mu,
+                onInput: function (v) { mu = v; update(); } });
+    IE.slider({ mount: host, label: 'Standard deviation (σ)', min: 5, max: 20, step: 5, value: sd,
+                onInput: function (v) { sd = v; update(); } });
+    update();
+  })();
+
+  /* ── Segment adder ────────────────────────────────────────── */
+  (function () {
+    var lo = -1, hi = 2;
+    var redraw = null;
+    var SEG = [
+      [-3, -2, 2.35], [-2, -1, 13.5], [-1, 0, 34], [0, 1, 34],
+      [1, 2, 13.5], [2, 3, 2.35]
+    ];
+    function update() {
+      var a = Math.min(lo, hi), b = Math.max(lo, hi);
+      var f = normal(0, 1);
+      var opts = {
+        xMin: -4, xMax: 4, yMin: 0, yMax: 0.45, width: 460, height: 300,
+        xStep: 1, yStep: 0.1, xLabel: 'z',
+        curves: [{ fn: f }],
+        shade: a < b ? [{ from: a, to: b, fn: f }] : []
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('segPlot', opts);
+      var n = document.getElementById('segNote');
+      if (a === b) {
+        n.className = 'exercise-feedback';
+        n.textContent = 'The two limits are equal, so no region is shaded.';
+        return;
+      }
+      var parts = [], total = 0;
+      if (a <= -3) { parts.push('0.15 (z < −3)'); total += 0.15; }
+      SEG.forEach(function (s) {
+        if (a <= s[0] && b >= s[1]) { parts.push(String(s[2])); total += s[2]; }
+      });
+      if (b >= 3) { parts.push('0.15 (z > 3)'); total += 0.15; }
+      n.className = 'exercise-feedback correct';
+      n.textContent = 'From z = ' + a + ' to z = ' + b + ': ' + parts.join(' + ') + ' = ' +
+        (Math.round(total * 100) / 100) + '%, i.e. a probability of ' +
+        (total / 100).toFixed(4) + '. Every segment fully inside the shading is added.';
+    }
+    var host = 'segSliders';
+    IE.slider({ mount: host, label: 'Lower z', min: -3, max: 3, step: 1, value: lo,
+                onInput: function (v) { lo = v; update(); } });
+    IE.slider({ mount: host, label: 'Upper z', min: -3, max: 3, step: 1, value: hi,
+                onInput: function (v) { hi = v; update(); } });
+    update();
+  })();
+
+  /* ── Region calculator ────────────────────────────────────── */
+  (function () {
+    var redraw = null;
+    function run() {
+      var mu = num('rgMu'), sd = num('rgSd'), lo = num('rgLo'), hi = num('rgHi');
+      var out = document.getElementById('rgOut');
+      if (isNaN(mu) || isNaN(sd) || sd <= 0) {
+        out.className = 'exercise-feedback wrong';
+        out.textContent = 'Enter a mean and a positive standard deviation.';
+        return;
+      }
+      if (isNaN(lo) && isNaN(hi)) {
+        out.className = 'exercise-feedback';
+        out.textContent = 'Enter at least one limit.';
+        return;
+      }
+      var zLo = isNaN(lo) ? -4 : (lo - mu) / sd;
+      var zHi = isNaN(hi) ?  4 : (hi - mu) / sd;
+      if (zHi < zLo) { var t = zLo; zLo = zHi; zHi = t; }
+      var f = normal(mu, sd);
+      var opts = {
+        xMin: mu - 4 * sd, xMax: mu + 4 * sd, yMin: 0, yMax: 0.45 / sd,
+        width: 460, height: 300, xStep: sd, yStep: 0.1 / sd, xLabel: 'x',
+        curves: [{ fn: f }],
+        shade: [{ from: mu + zLo * sd, to: mu + zHi * sd, fn: f }]
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('rgPlot', opts);
+      var pct = cumAt(zHi) - cumAt(zLo);
+      var exact = (isNaN(lo) || isEdge(zLo)) && (isNaN(hi) || isEdge(zHi));
+      out.className = 'exercise-feedback ' + (exact ? 'correct' : '');
+      out.textContent =
+        'z from ' + (isNaN(lo) ? '−∞' : zLo.toFixed(2)) + ' to ' + (isNaN(hi) ? '+∞' : zHi.toFixed(2)) +
+        '. Shaded area ≈ ' + pct.toFixed(2) + '%, a probability of about ' + (pct / 100).toFixed(4) + '. ' +
+        (exact
+          ? 'Both limits fall on whole-number z-values, so this is an exact empirical-rule answer.'
+          : 'One or both limits are not whole-number z-values, so this figure is interpolated — ' +
+            'in an exam you would only be asked for whole-number z-values.');
+    }
+    document.getElementById('rgBtn').addEventListener('click', run);
+    run();
+  })();
+
+  /* ── Find the percentage ──────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [68,   '475 g is z = −1 and 525 g is z = 1, so 34 + 34 = 68%.'],
+      B: [2.5,  '550 g is z = 2. Above it: 2.35 + 0.15 = 2.5%.'],
+      C: [0.15, '425 g is z = −3. Below it lies only the far tail: 0.15%.'],
+      D: [47.5, 'From z = 0 to z = 2: 34 + 13.5 = 47.5%.'],
+      E: [13.5, '450 g is z = −2 and 475 g is z = −1, which is the 13.5% segment.']
+    };
+    document.querySelectorAll('[data-pc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.pc, fb = document.getElementById('fbPc' + k);
+        var g = num('pc' + k);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a percentage.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.01;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '%. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Expected-count calculator ────────────────────────────── */
+  (function () {
+    document.getElementById('ecBtn').addEventListener('click', function () {
+      var n = num('ecN'), mu = num('ecMu'), sd = num('ecSd'), lo = num('ecLo'), hi = num('ecHi');
+      var out = document.getElementById('ecOut');
+      if (isNaN(n) || isNaN(mu) || isNaN(sd) || sd <= 0) {
+        out.className = 'exercise-feedback wrong';
+        out.textContent = 'Enter a group size, a mean and a positive standard deviation.';
+        return;
+      }
+      if (isNaN(lo) && isNaN(hi)) {
+        out.className = 'exercise-feedback';
+        out.textContent = 'Enter at least one limit.';
+        return;
+      }
+      var zLo = isNaN(lo) ? -4 : (lo - mu) / sd;
+      var zHi = isNaN(hi) ?  4 : (hi - mu) / sd;
+      if (zHi < zLo) { var t = zLo; zLo = zHi; zHi = t; }
+      var pct = cumAt(zHi) - cumAt(zLo);
+      var count = n * pct / 100;
+      out.className = 'exercise-feedback correct';
+      out.textContent = 'P ≈ ' + (pct / 100).toFixed(4) + ' (' + pct.toFixed(2) + '%). ' +
+        'Expected number = ' + n + ' × ' + (pct / 100).toFixed(4) + ' ≈ ' +
+        (Math.round(count * 10) / 10) + (Math.abs(count - Math.round(count)) < 0.05 ? '' :
+        ', or about ' + Math.round(count)) + '.';
+    });
+  })();
+
+  /* ── Judgement practice ───────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['ordinary', '|z| < 1 covers about two-thirds of all values — completely unremarkable.'],
+      B: ['unusual',  '|z| between 2 and 3 happens in only about 5% of cases — worth a second look.'],
+      C: ['extreme',  '|z| above 3 occurs in about 3 cases in 1000 — strong evidence something has changed.'],
+      D: ['ordinary', 'Barely off the mean at all.']
+    };
+    document.querySelectorAll('[data-jg]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.jg, fb = document.getElementById('fbJg' + k);
+        var v = (document.getElementById('jg' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type an answer.'; return; }
+        var ok = v.indexOf(ANS[k][0]) === 0;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ It is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'According to the empirical rule, approximately what percentage of normally distributed data has \\(-2 \\le z \\le 2\\)?',
+      opts: ['A) 68%', 'B) 95%', 'C) 99.7%', 'D) 50%'],
+      correct: 1,
+      explanation: 'B is correct. The three bands are 68% within one standard deviation, 95% within two, and 99.7% within three.'
+    },
+    {
+      q: 'What percentage of normally distributed data lies between \\(z = 1\\) and \\(z = 2\\)?',
+      opts: ['A) 34%', 'B) 27%', 'C) 13.5%', 'D) 2.35%'],
+      correct: 2,
+      explanation: 'C is correct. The band from \\(z = -2\\) to \\(z = 2\\) holds 95% and the inner band holds 68%, leaving \\((95 - 68) \\div 2 = 13.5\\%\\) on each side.'
+    },
+    {
+      q: 'A test is normal with \\(\\mu = 70\\) and \\(\\sigma = 8\\). What percentage of students score above 86?',
+      opts: ['A) 16%', 'B) 5%', 'C) 2.5%', 'D) 0.15%'],
+      correct: 2,
+      explanation: 'C is correct. \\(z = (86 - 70) \\div 8 = 2\\), and the area to the right of \\(z = 2\\) is \\(2.35 + 0.15 = 2.5\\%\\).'
+    },
+    {
+      q: 'Masses are normal with \\(\\mu = 500\\) g, \\(\\sigma = 20\\) g. What percentage lies between 480 g and 540 g?',
+      opts: ['A) 68%', 'B) 81.5%', 'C) 95%', 'D) 47.5%'],
+      correct: 1,
+      explanation: 'B is correct. 480 g gives \\(z = -1\\) and 540 g gives \\(z = 2\\), so the area is \\(34 + 34 + 13.5 = 81.5\\%\\).'
+    },
+    {
+      q: 'In a group of 2000 people, heights are normal with \\(\\mu = 170\\) cm, \\(\\sigma = 8\\) cm. About how many are taller than 178 cm?',
+      opts: ['A) 320', 'B) 50', 'C) 680', 'D) 1000'],
+      correct: 0,
+      explanation: 'A is correct. \\(z = (178 - 170) \\div 8 = 1\\), and \\(P(z > 1) = 16\\% = 0.16\\). So \\(2000 \\times 0.16 = 320\\) people.'
+    },
+    {
+      q: 'What is \\(P(z < -1)\\) for normally distributed data?',
+      opts: ['A) 34%', 'B) 32%', 'C) 16%', 'D) 84%'],
+      correct: 2,
+      explanation: 'C is correct. 68% lies between \\(z = -1\\) and \\(z = 1\\), leaving 32% split evenly between the two tails — 16% in each.'
+    },
+    {
+      q: 'A machine fills bags at \\(\\mu = 250\\) g with \\(\\sigma = 3\\) g. A bag weighs 259 g. What is the best judgement?',
+      opts: [
+        'A) Entirely ordinary — no action needed',
+        'B) \\(z = 3\\), which occurs in only about 0.15% of bags, so the machine should be checked',
+        'C) Impossible — a bag cannot be this heavy',
+        'D) \\(z = 9\\), so the machine is broken'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(z = (259 - 250) \\div 3 = 3\\). Only about 0.15% of bags — roughly 1 in 670 — should be this heavy, so the result is extreme enough to justify inspecting the machine.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'State the empirical rule in full.',
+      marks: 3,
+      steps: [
+        'About 68% of data has \\(-1 \\le z \\le 1\\).',
+        'About 95% has \\(-2 \\le z \\le 2\\).',
+        'About 99.7% has \\(-3 \\le z \\le 3\\).'
+      ],
+      answer: 'About 68%, 95% and 99.7% of normally distributed data lies within one, two and three standard deviations of the mean respectively.'
+    },
+    {
+      q: 'A dataset is normal with \\(\\mu = 80\\) and \\(\\sigma = 6\\). Find the interval containing the middle 99.7% of values.',
+      marks: 3,
+      steps: [
+        '99.7% corresponds to \\(-3 \\le z \\le 3\\).',
+        'Lower: \\(80 - 3 \\times 6 = 62\\).',
+        'Upper: \\(80 + 3 \\times 6 = 98\\).'
+      ],
+      answer: 'From 62 to 98.'
+    },
+    {
+      q: 'Show that the region between \\(z = 2\\) and \\(z = 3\\) contains 2.35% of the data.',
+      marks: 3,
+      steps: [
+        'Between \\(z = -3\\) and \\(z = 3\\) lies 99.7%; between \\(z = -2\\) and \\(z = 2\\) lies 95%.',
+        'The difference, 4.7%, is shared by the two regions \\(-3\\) to \\(-2\\) and 2 to 3.',
+        'Symmetry splits it evenly: \\(4.7 \\div 2 = 2.35\\%\\).'
+      ],
+      answer: '\\((99.7 - 95) \\div 2 = 2.35\\%\\), by symmetry of the two outer regions.'
+    },
+    {
+      q: 'Times for a task are normal with \\(\\mu = 45\\) s and \\(\\sigma = 5\\) s. Find the percentage of times between 40 s and 55 s.',
+      marks: 4,
+      steps: [
+        '\\(z = (40 - 45) \\div 5 = -1\\).',
+        '\\(z = (55 - 45) \\div 5 = 2\\).',
+        'Add the segments from \\(z = -1\\) to \\(z = 2\\): \\(34 + 34 + 13.5\\).',
+        'Total \\(= 81.5\\%\\).'
+      ],
+      answer: '81.5%.'
+    },
+    {
+      q: 'For the same task times, find \\(P(\\text{time} > 50\\text{ s})\\).',
+      marks: 3,
+      steps: [
+        '\\(z = (50 - 45) \\div 5 = 1\\).',
+        'Area to the right of \\(z = 1\\) is \\(13.5 + 2.35 + 0.15 = 16\\%\\).',
+        'As a probability, \\(P = 0.16\\).'
+      ],
+      answer: '\\(P = 0.16\\), or 16%.'
+    },
+    {
+      q: 'A factory makes 12,000 components a day. Lengths are normal with \\(\\mu = 25\\) mm and \\(\\sigma = 0.4\\) mm. Components outside 24.2 mm to 25.8 mm are scrapped. How many are scrapped each day?',
+      marks: 5,
+      steps: [
+        '\\(24.2\\) mm gives \\(z = (24.2 - 25) \\div 0.4 = -2\\).',
+        '\\(25.8\\) mm gives \\(z = 2\\).',
+        'Within two standard deviations lies 95%, so 5% is scrapped.',
+        '\\(12\\,000 \\times 0.05 = 600\\).',
+        'About 600 components are scrapped daily.'
+      ],
+      answer: '600 components.'
+    },
+    {
+      q: 'IQ scores are normal with \\(\\mu = 100\\), \\(\\sigma = 15\\). In a city of 400,000 adults, how many would be expected to have an IQ below 70?',
+      marks: 4,
+      steps: [
+        '\\(z = (70 - 100) \\div 15 = -2\\).',
+        '\\(P(z < -2) = 2.35 + 0.15 = 2.5\\% = 0.025\\).',
+        '\\(400\\,000 \\times 0.025 = 10\\,000\\).'
+      ],
+      answer: 'About 10,000 adults.'
+    },
+    {
+      q: 'Explain the difference between "a value more than two standard deviations above the mean" and "a value more than two standard deviations from the mean", giving the probability of each.',
+      marks: 4,
+      steps: [
+        '"Above" refers to one tail only: \\(z > 2\\), which is 2.5%.',
+        '"From the mean" refers to both tails: \\(z < -2\\) or \\(z > 2\\).',
+        'That is \\(2.5 + 2.5 = 5\\%\\).',
+        'The two-tailed probability is double the one-tailed one.'
+      ],
+      answer: '"Above" is one tail, \\(P = 0.025\\). "From the mean" is both tails, \\(P = 0.05\\) — exactly double, because the curve is symmetric.'
+    },
+    {
+      q: 'Rainfall at a station is normal with \\(\\mu = 620\\) mm and \\(\\sigma = 90\\) mm per year. One year records 440 mm. Assess how unusual this is.',
+      marks: 4,
+      steps: [
+        '\\(z = (440 - 620) \\div 90 = -180 \\div 90 = -2\\).',
+        '\\(P(z < -2) = 2.5\\%\\).',
+        'So a year this dry occurs about once in every 40 years.',
+        'It is unusual but not unprecedented — well short of a once-in-a-century drought.'
+      ],
+      answer: '\\(z = -2\\), so only about 2.5% of years are this dry — roughly one year in 40. Unusual and worth planning for, but not extreme.'
+    },
+    {
+      q: 'A scholarship goes to the top 2.5% of a cohort on a test with \\(\\mu = 72\\), \\(\\sigma = 9\\). Find the qualifying mark, and the number qualifying from 800 candidates.',
+      marks: 5,
+      steps: [
+        'The top 2.5% corresponds to \\(z > 2\\).',
+        '\\(x = 72 + 2 \\times 9 = 90\\).',
+        'The qualifying mark is 90.',
+        '\\(800 \\times 0.025 = 20\\).',
+        'About 20 candidates qualify.'
+      ],
+      answer: 'A mark of 90 or above; about 20 candidates from 800.'
+    },
+    {
+      q: 'A supplier claims its batteries last a mean of 500 hours with \\(\\sigma = 25\\) hours, normally distributed. A tested battery lasts 405 hours. Evaluate the claim.',
+      marks: 5,
+      steps: [
+        '\\(z = (405 - 500) \\div 25 = -95 \\div 25 = -3.8\\).',
+        'That is nearly four standard deviations below the mean.',
+        '\\(P(z < -3)\\) is already only 0.15%.',
+        'A result this low is extremely improbable if the claim were true.',
+        'It is strong evidence that the stated mean is too high, the stated \\(\\sigma\\) too small, or the battery is defective.'
+      ],
+      answer: '\\(z = -3.8\\), further out than the 0.15% cut-off. Either the battery is defective or the supplier\'s figures are wrong. A single result cannot prove which, so further testing of a larger sample is needed before rejecting the claim.'
+    },
+    {
+      q: 'Explain why the empirical rule percentages cannot be applied to a positively skewed dataset.',
+      marks: 3,
+      steps: [
+        'The rule is derived from the symmetry of the normal curve.',
+        'A skewed distribution has unequal tails, so the areas either side of the mean are not equal.',
+        'Applying the rule would badly misestimate the proportions, particularly in the long tail.'
+      ],
+      answer: 'The rule depends on symmetry about the mean. A skewed distribution has one long tail and one short one, so the areas are not split 34/34 or 2.5/2.5, and the percentages would be badly wrong — especially for the tail.'
+    },
+    {
+      q: 'Weights of a species of fish are normal with \\(\\mu = 1.8\\) kg, \\(\\sigma = 0.3\\) kg. Find the percentage weighing between 1.5 kg and 2.1 kg, and between 2.1 kg and 2.4 kg.',
+      marks: 5,
+      steps: [
+        '1.5 kg gives \\(z = -1\\); 2.1 kg gives \\(z = 1\\).',
+        'Between them lies 68%.',
+        '2.4 kg gives \\(z = 2\\).',
+        'From \\(z = 1\\) to \\(z = 2\\) lies 13.5%.',
+        'So 68% and 13.5% respectively.'
+      ],
+      answer: '68% between 1.5 kg and 2.1 kg; 13.5% between 2.1 kg and 2.4 kg.'
+    },
+    {
+      q: 'A news report states that "a test result three standard deviations above the mean is essentially impossible". Evaluate this statement in a population of 5 million.',
+      marks: 4,
+      steps: [
+        '\\(P(z > 3) \\approx 0.15\\% = 0.0015\\).',
+        'It is rare but not impossible.',
+        '\\(5\\,000\\,000 \\times 0.0015 = 7500\\).',
+        'So about 7500 people in that population would be expected to exceed it.'
+      ],
+      answer: 'The statement is misleading. \\(P(z > 3) \\approx 0.0015\\), which is rare for an individual but, across 5 million people, corresponds to roughly 7500 of them. Rare events become common in large populations.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

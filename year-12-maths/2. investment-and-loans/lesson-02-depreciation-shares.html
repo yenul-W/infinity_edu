@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Depreciation, Shares &amp; Inflation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 2 &mdash; Investment &amp; Loans</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Depreciation, Shares &amp; Inflation</h1>
+      <p class="subtitle">Assets lose value in two very different patterns. Shares gain value in
+        two different ways at once. And inflation quietly erodes what your money can actually
+        buy.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-02</span>
+        <span class="pill">\(S = V_0 - Dn\)</span>
+        <span class="pill">\(S = V_0(1-r)^n\)</span>
+        <span class="pill">Dividend yield</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Straight-line depreciation</li>
+        <li>Declining balance depreciation</li>
+        <li>Comparing the two methods</li>
+        <li>Shares, dividends and yield</li>
+        <li>Reading a share price graph</li>
+        <li>Inflation and appreciation</li>
+        <li>Comparing investment strategies</li>
+        <li>Class activity: three portfolios</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#straight">1 &nbsp;Straight-line</a></li>
+        <li class="toc-item"><a class="toc-link" href="#declining">2 &nbsp;Declining balance</a></li>
+        <li class="toc-item"><a class="toc-link" href="#compare">3 &nbsp;Comparing methods</a></li>
+        <li class="toc-item"><a class="toc-link" href="#shares">4 &nbsp;Shares &amp; dividends</a></li>
+        <li class="toc-item"><a class="toc-link" href="#share-graph">5 &nbsp;Share price graphs</a></li>
+        <li class="toc-item"><a class="toc-link" href="#inflation">6 &nbsp;Inflation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#strategies">7 &nbsp;Comparing strategies</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. STRAIGHT LINE ─────────── -->
+      <div class="content-card" id="straight">
+        <p class="section-label">Theory</p>
+        <h2>Straight-line depreciation</h2>
+
+        <p><strong>Depreciation</strong> is the loss in value of an asset over time. The
+          <strong>straight-line</strong> method subtracts the same dollar amount every period.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Straight-line (prime cost) depreciation</p>
+          \[S = V_0 - Dn\]
+          <p class="formula-where">
+            \(S\) = salvage value (value after \(n\) periods), &nbsp;
+            \(V_0\) = initial value of the asset,<br>
+            \(D\) = depreciation amount per period (in dollars), &nbsp;
+            \(n\) = number of periods.
+          </p>
+        </div>
+
+        <p>This is a <strong>linear</strong> relationship: \(V_0\) is the \(y\)-intercept and
+          \(-D\) is the gradient. The graph is a straight line sloping down.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>A delivery van costs $62,000 and depreciates by $7,400 per year by the
+            straight-line method.</p>
+          <p><strong>(a) Value after 5 years?</strong></p>
+          \[S = 62000 - 7400 \times 5 = 62000 - 37000 = \$25\,000\]
+          <p><strong>(b) When does it reach a value of $0?</strong> Set \(S = 0\):</p>
+          \[0 = 62000 - 7400n \quad\Rightarrow\quad n = \frac{62000}{7400} = 8.38 \text{ years}\]
+          <p>Under this method an asset <em>does</em> reach zero &mdash; and would go negative
+            after that, which is meaningless. The model is only valid for \(0 \le n \le 8.38\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; given as a percentage of the original</p>
+          <p>Machinery worth $90,000 depreciates by 12% <em>of its original value</em> each
+            year. Find its value after 4 years.</p>
+          <p>"Of its original value" signals straight-line, not declining balance:</p>
+          \[D = 0.12 \times 90000 = \$10\,800 \text{ per year}\]
+          \[S = 90000 - 10800 \times 4 = 90000 - 43200 = \$46\,800\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A café's coffee machine costs $28,500 and depreciates by $3,800 per year
+              (straight-line). Find its value after 4 years, and when it will be worth $5,700.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(S = 28500 - 3800 \times 4 = \$13\,300\).</p>
+                <p>\(5700 = 28500 - 3800n \Rightarrow 3800n = 22800 \Rightarrow n = 6\) years.</p>
+              </div></details></li>
+            <li>Equipment worth $45,000 depreciates by 15% of its original value each year. Find
+              its value after 3 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(D = 0.15 \times 45000 = \$6\,750\) per year.</p>
+                <p>\(S = 45000 - 6750 \times 3 = \$24\,750\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. DECLINING ─────────── -->
+      <div class="content-card" id="declining">
+        <p class="section-label">Theory</p>
+        <h2>Declining balance depreciation</h2>
+
+        <p>The <strong>declining balance</strong> (or diminishing value) method removes the same
+          <em>percentage</em> of the <em>current</em> value each period. This is exponential decay
+          &mdash; compound interest running in reverse.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Declining balance depreciation</p>
+          \[S = V_0(1 - r)^{n}\]
+          <p class="formula-where">
+            \(S\) = salvage value, &nbsp; \(V_0\) = initial value,<br>
+            \(r\) = depreciation <strong>rate</strong> per period as a decimal, &nbsp;
+            \(n\) = number of periods.
+          </p>
+        </div>
+
+        <p>Compare this with \(FV = PV(1+r)^n\). The only difference is the minus sign &mdash;
+          growth becomes decay.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>A tractor bought for $120,000 depreciates at 18% per annum by the declining
+            balance method. Find its value after 6 years.</p>
+          \[S = 120000(1 - 0.18)^{6} = 120000 \times 0.82^{6}\]
+          \[= 120000 \times 0.304006 = \$36\,480.75\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; finding the rate</p>
+          <p>A computer bought for $3,200 is worth $1,100 after 4 years. Find the annual
+            declining-balance rate to one decimal place.</p>
+          \[3200(1-r)^{4} = 1100 \quad\Rightarrow\quad (1-r)^{4} = \frac{1100}{3200} = 0.34375\]
+          \[1 - r = 0.34375^{1/4} = 0.76578\]
+          \[r = 1 - 0.76578 = 0.23422\]
+          <p>The depreciation rate is about 23.4% per annum.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Depreciation calculator</h3>
+          <p class="exercise-intro">Set the initial value and the rate, then compare the two
+            methods year by year. The straight-line rate is applied to the original value; the
+            declining-balance rate to the current value.</p>
+          <div id="depSliders"></div>
+          <div id="depTable" style="margin-top:16px;"></div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A car bought for $36,000 depreciates at 15% per annum (declining balance). Find its
+              value after 4 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[S = 36000 \times 0.85^{4} = 36000 \times 0.522006 = \$18\,792.23\]
+              </div></details></li>
+            <li>A phone bought for $2,400 is worth $1,050 after 3 years. Find the annual
+              declining-balance rate to one decimal place.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[(1 - r)^{3} = \frac{1050}{2400} = 0.4375 \;\Rightarrow\; 1 - r = 0.4375^{1/3} = 0.75915\]
+                <p>\(r = 0.24085\): about 24.1% per annum.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. COMPARE ─────────── -->
+      <div class="content-card" id="compare">
+        <p class="section-label">Application</p>
+        <h2>Comparing the two methods</h2>
+
+        <table class="coord-table">
+          <tr><th></th><th>Straight-line</th><th>Declining balance</th></tr>
+          <tr><td>Formula</td><td>\(S = V_0 - Dn\)</td><td>\(S = V_0(1-r)^{n}\)</td></tr>
+          <tr><td>Each period loses</td><td>The same <strong>dollar amount</strong></td><td>The same <strong>percentage</strong></td></tr>
+          <tr><td>Applied to</td><td>The original value</td><td>The current value</td></tr>
+          <tr><td>Graph</td><td>Straight line</td><td>Exponential decay curve</td></tr>
+          <tr><td>Reaches zero?</td><td><strong>Yes</strong>, at \(n = V_0/D\)</td><td><strong>Never</strong> — \(S = 0\) is an asymptote</td></tr>
+          <tr><td>Early years</td><td>Loses less</td><td>Loses more</td></tr>
+        </table>
+
+        <p><strong>Key insight for exam questions:</strong> declining balance depreciates faster
+          at the start and slower later. That matches how most real assets behave &mdash; a new
+          car loses a large chunk of value the moment it is driven away.</p>
+
+        <div class="interactive-block">
+          <h3>Graphical comparison</h3>
+          <p class="exercise-intro">The solid curve is declining balance; the dashed line is
+            straight-line. Adjust the values and see where the two cross.</p>
+          <div id="depCmpSliders"></div>
+          <div class="plot-wrap" id="plotDep"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Straight-line</div>
+              <div class="readout-value" id="roSL">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Declining balance</div>
+              <div class="readout-value" id="roDB">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Difference</div>
+              <div class="readout-value" id="roDDiff">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="depNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; exam style</p>
+          <p>A machine costs $48,000. Its owner can depreciate it either by $8,000 per year
+            (straight-line) or at 20% per annum (declining balance).</p>
+          <p><strong>(a) Find its value after 3 years under each method.</strong> [2 marks]</p>
+          \[\text{SL: } 48000 - 8000 \times 3 = \$24\,000 \qquad
+            \text{DB: } 48000 \times 0.8^{3} = \$24\,576\]
+          <p><strong>(b) Which method gives the larger depreciation in the first year?</strong>
+            [1 mark]</p>
+          <p>Straight-line loses $8,000; declining balance loses \(0.2 \times 48000 = \$9\,600\).
+            Declining balance is larger in year 1.</p>
+          <p><strong>(c) During which year does the straight-line value first fall below the
+            declining-balance value?</strong> [2 marks]</p>
+          <table class="coord-table">
+            <tr><th>Year</th><td>1</td><td>2</td><td>3</td></tr>
+            <tr><th>Straight-line</th><td>40 000</td><td>32 000</td><td>24 000</td></tr>
+            <tr><th>Declining balance</th><td>38 400</td><td>30 720</td><td>24 576</td></tr>
+          </table>
+          <p>During year 3: the straight-line value is higher at the end of year 2 but lower at the
+            end of year 3.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. SHARES ─────────── -->
+      <div class="content-card" id="shares">
+        <p class="section-label">Theory</p>
+        <h2>Shares, dividends and yield</h2>
+
+        <p>Buying a share makes you part-owner of a company. You can gain in two ways:
+          the <strong>share price rising</strong> (capital growth) and the company
+          <strong>paying dividends</strong> (a share of its profit).</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Share calculations</p>
+          \[\text{Dividend} = (\text{dividend per share}) \times (\text{number of shares})\]
+          \[\text{Dividend yield} = \frac{\text{dividend per share}}{\text{market price per share}} \times 100\%\]
+          <p class="formula-where">The yield expresses the dividend as a percentage of what you
+            paid, so you can compare a share against a bank interest rate. (Franked dividends are
+            excluded from this course.)</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>Priya buys 1,800 shares at $24.50 each. The company pays a dividend of $1.47 per
+            share.</p>
+          <p><strong>(a) Total cost?</strong></p>
+          \[1800 \times 24.50 = \$44\,100\]
+          <p><strong>(b) Total dividend?</strong></p>
+          \[1800 \times 1.47 = \$2\,646\]
+          <p><strong>(c) Dividend yield?</strong></p>
+          \[\frac{1.47}{24.50} \times 100\% = 6\%\]
+          <p>A 6% yield compares favourably with a term deposit &mdash; but unlike a deposit, the
+            share price itself can fall.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; total return</p>
+          <p>A year later Priya's shares are worth $26.95 each. Find her total return.</p>
+          <p><strong>Capital gain:</strong></p>
+          \[1800 \times (26.95 - 24.50) = 1800 \times 2.45 = \$4\,410\]
+          <p><strong>Dividends:</strong> $2,646 (from above).</p>
+          <p><strong>Total return:</strong> \(4410 + 2646 = \$7\,056\), which as a percentage of
+            the $44,100 outlay is</p>
+          \[\frac{7056}{44100} \times 100\% = 16\%\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Share calculator</h3>
+          <p class="exercise-intro">Enter the details and read off the dividend, yield and total
+            return.</p>
+          <div id="shareSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Total cost</div>
+              <div class="readout-value" id="roCost">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Dividend income</div>
+              <div class="readout-value" id="roDiv">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Dividend yield</div>
+              <div class="readout-value" id="roYield">0%</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Capital gain</div>
+              <div class="readout-value" id="roGain">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total return</div>
+              <div class="readout-value" id="roTotal">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Leo buys 750 shares at $38.40. The dividend is $1.92 per share. Find the total
+              cost, the total dividend and the dividend yield.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Cost \(750 \times 38.40 = \$28\,800\); dividend \(750 \times 1.92 = \$1\,440\).</p>
+                <p>Yield \(\dfrac{1.92}{38.40} \times 100\% = 5\%\).</p>
+              </div></details></li>
+            <li>A share pays a dividend of $0.84 and has a dividend yield of 3.5%. What is its
+              market price?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(0.035 = \dfrac{0.84}{\text{price}} \Rightarrow \text{price} = \dfrac{0.84}{0.035}
+                  = \$24.00\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. SHARE PRICE GRAPHS ─────────── -->
+      <div class="content-card" id="share-graph">
+        <p class="section-label">Theory</p>
+        <h2>Reading a share price graph</h2>
+
+        <p>The syllabus asks you to <em>graph and interpret the value of a share over time</em>.
+          Share price graphs are drawn from closing prices, usually daily or monthly, joined by
+          straight segments. When you interpret one, cover four things:</p>
+        <ol>
+          <li><strong>The overall trend</strong> &mdash; compare the first and last prices.</li>
+          <li><strong>The extremes</strong> &mdash; the highest and lowest prices, and when.</li>
+          <li><strong>The size of changes</strong> &mdash; in dollars and as a percentage:
+            \(\dfrac{\text{change}}{\text{starting price}} \times 100\%\).</li>
+          <li><strong>Volatility</strong> &mdash; how sharply and how often the price moves.
+            Large swings mean higher risk.</li>
+        </ol>
+
+        <div class="plot-wrap" id="plotShare"></div>
+        <p class="diagram-caption">Closing share price of a company at the end of each month
+          (month 0 is the start of the year).</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Use the graph. Monthly closing prices: $12.00, $12.60, $13.10, $12.40, $11.20, $10.50,
+            $11.00, $12.20, $13.80, $14.40, $13.90, $14.70, $15.00.</p>
+          <p><strong>(a) Describe the trend.</strong> The price rose for two months, fell to a low
+            of $10.50 at month 5, then recovered strongly to finish the year at its high of
+            $15.00.</p>
+          <p><strong>(b) Percentage change over the year:</strong></p>
+          \[\frac{15.00 - 12.00}{12.00} \times 100\% = 25\%\]
+          <p><strong>(c)</strong> Jo bought 800 shares at month 2 and panicked, selling at month 5.
+            Find her loss.</p>
+          \[800 \times (13.10 - 10.50) = 800 \times 2.60 = \$2\,080 \text{ loss}\]
+          <p>Had she held on to the end of the year, she would have gained
+            \(800 \times (15.00 - 13.10) = \$1\,520\) instead. Selling during a dip turns a
+            temporary fall into a real loss.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Using the graph, find the percentage increase from the lowest closing price to the
+              highest.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[\frac{15.00 - 10.50}{10.50} \times 100\% = 42.9\%\]
+              </div></details></li>
+            <li>Which month had the largest one-month fall, and by how much? What does this tell an
+              investor about the share?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Month 3 to month 4: \(12.40 - 11.20 = \$1.20\), a fall of about 9.7%. A share
+                  that can lose nearly a tenth of its value in a month is volatile &mdash; a
+                  higher-risk investment.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. INFLATION ─────────── -->
+      <div class="content-card" id="inflation">
+        <p class="section-label">Theory</p>
+        <h2>Inflation and appreciation</h2>
+
+        <p><strong>Inflation</strong> is the general rise in prices over time. Because prices
+          rise, the same amount of money buys less &mdash; its <em>purchasing power</em> falls.
+          <strong>Appreciation</strong> is the opposite of depreciation: an asset gaining value.
+          Both use the compound-growth formula.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Inflation and appreciation</p>
+          \[\text{Future price} = \text{Current price} \times (1 + i)^{n}\]
+          <p class="formula-where">\(i\) = inflation (or appreciation) rate per period as a
+            decimal, \(n\) = number of periods. Identical in structure to compound interest.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; rising prices</p>
+          <p>A basket of groceries costs $185 today. If inflation runs at 3.2% per annum, what
+            will it cost in 8 years?</p>
+          \[185 \times 1.032^{8} = 185 \times 1.28779 = \$238.24\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10 &mdash; losing purchasing power</p>
+          <p>Marcus keeps $20,000 in a safe for 10 years. Inflation averages 2.8% per annum.
+            What is that money worth in today's dollars at the end?</p>
+          <p>Prices have multiplied by \(1.028^{10} = 1.31805\), so the purchasing power is</p>
+          \[\frac{20000}{1.31805} = \$15\,174.30\]
+          <p>The $20,000 still says $20,000, but it buys what $15,174 buys today &mdash; a
+            real loss of about $4,826.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11 &mdash; beating inflation</p>
+          <p>An investment earns 5.5% per annum while inflation is 3%. Is the investor better off?</p>
+          <p>Over one year $1,000 becomes $1,055, but prices rise by 3%, so in today's dollars
+            that is</p>
+          \[\frac{1055}{1.03} = \$1\,024.27\]
+          <p>The <strong>real return</strong> is about 2.4% &mdash; positive, so yes, but much
+            less than the headline 5.5%. An investment paying less than the inflation rate loses
+            purchasing power even though the balance grows.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A concert ticket costs $135 today. With inflation at 2.5% per annum, what will an
+              equivalent ticket cost in 6 years?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[135 \times 1.025^{6} = 135 \times 1.15969 = \$156.56\]
+              </div></details></li>
+            <li>A savings account pays 4.1% per annum while inflation is 4.6%. In today's dollars,
+              what is $5,000 worth after one year? Is the saver better off?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The balance becomes \(5000 \times 1.041 = \$5\,205\). In today's dollars:
+                  \(5205 \div 1.046 = \$4\,976.10\).</p>
+                <p>No &mdash; the rate is below inflation, so the saver loses about $24 of
+                  purchasing power even though the balance grew.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. STRATEGIES ─────────── -->
+      <div class="content-card" id="strategies">
+        <p class="section-label">Evaluation</p>
+        <h2>Comparing investment strategies</h2>
+
+        <p>The syllabus asks you to <em>compare and contrast savings accounts, term deposits,
+          shares and property as investment strategies</em>. Exam answers need specific
+          trade-offs, not vague comments.</p>
+
+        <table class="coord-table">
+          <tr><th>Strategy</th><th>Typical return</th><th>Risk</th><th>Access to funds</th><th>Other</th></tr>
+          <tr>
+            <td><strong>Savings account</strong></td>
+            <td>Low</td>
+            <td>Very low — deposits are government guaranteed up to a limit</td>
+            <td>Immediate</td>
+            <td>Return may not beat inflation</td>
+          </tr>
+          <tr>
+            <td><strong>Term deposit</strong></td>
+            <td>Low to moderate, fixed and known in advance</td>
+            <td>Very low</td>
+            <td>Locked for the term; penalties for early withdrawal</td>
+            <td>Rate is certain, so easy to plan with</td>
+          </tr>
+          <tr>
+            <td><strong>Shares</strong></td>
+            <td>Potentially high — capital growth plus dividends</td>
+            <td>High — prices fluctuate and can fall</td>
+            <td>Usually quick to sell</td>
+            <td>Brokerage costs; dividends are not guaranteed</td>
+          </tr>
+          <tr>
+            <td><strong>Property</strong></td>
+            <td>Moderate to high — capital growth plus rent</td>
+            <td>Moderate; values can fall</td>
+            <td>Slow — selling takes weeks or months</td>
+            <td>Large deposit needed; stamp duty, rates, maintenance</td>
+          </tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The trade-off to state</p>
+          <p style="margin-bottom:0;">Higher expected returns come with higher risk and, usually,
+            less ready access to your money. Which is "best" depends on the investor's
+            <strong>time frame</strong>, their <strong>tolerance for risk</strong>, and whether
+            they may need the funds at short notice. Say which of these the question's scenario
+            points to.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 12 &mdash; an exam-style judgement</p>
+          <p>Ana, 24, is saving for a house deposit she expects to need in 18 months. Her friend
+            suggests shares. Comment.</p>
+          <p>Shares are poorly suited here. Over 18 months share prices can easily fall, and if
+            the market drops just before she buys, her deposit shrinks exactly when she needs it.
+            A term deposit gives a known return with effectively no risk over that horizon.
+            Shares suit longer time frames, where there is time to recover from a downturn.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Three portfolios, one winner?</h2>
+        <p><strong>About 10 minutes &middot; groups of three.</strong> Each person in the group
+          invested $10,000 in a different company a year ago. Use the
+          <a href="#shares">share calculator</a> to work out your own results, then compare.</p>
+        <table class="coord-table">
+          <tr><th>Investor</th><th>Shares held</th><th>Buy price</th><th>Dividend/share</th><th>Current price</th></tr>
+          <tr><td>A</td><td>400</td><td>$25.00</td><td>$1.50</td><td>$23.50</td></tr>
+          <tr><td>B</td><td>500</td><td>$20.00</td><td>$0.40</td><td>$23.00</td></tr>
+          <tr><td>C</td><td>1000</td><td>$10.00</td><td>$0.45</td><td>$10.50</td></tr>
+        </table>
+        <ol>
+          <li>Record your dividend income, dividend yield, capital gain and total return.</li>
+          <li>Rank the three investments by dividend yield, then by total return. Are the rankings
+            the same?</li>
+          <li>A term deposit paid 4.5% over the same year. Which investors did better than the
+            term deposit?</li>
+          <li>Investor A says, "My share pays the best dividend, so I made the best choice."
+            Respond to this claim.</li>
+          <li>Would you expect the same ranking next year? Explain.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Investor</th><th>Dividend</th><th>Yield</th><th>Capital gain</th><th>Total return</th></tr>
+            <tr><td>A</td><td>$600</td><td>6%</td><td>&minus;$600</td><td>0%</td></tr>
+            <tr><td>B</td><td>$200</td><td>2%</td><td>$1,500</td><td>17%</td></tr>
+            <tr><td>C</td><td>$450</td><td>4.5%</td><td>$500</td><td>9.5%</td></tr>
+          </table>
+          <p><strong>2.</strong> By yield: A, C, B. By total return: B, C, A &mdash; exactly
+            reversed. Yield ignores what happens to the share price.</p>
+          <p><strong>3.</strong> B (17%) and C (9.5%) beat the term deposit's 4.5%. A's falling
+            share price wiped out its dividends.</p>
+          <p><strong>4.</strong> The claim is wrong: A's 6% yield was cancelled by a $1.50 fall in
+            the share price, for a total return of 0%.</p>
+          <p><strong>5.</strong> No. One year's share price movement does not predict the next.
+            This uncertainty is the risk that comes with the higher potential returns of shares.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 turns compound interest around again, this time as money you owe.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-2', LESSON_IDX = 1;
+
+  function money(v) {
+    return '$' + v.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* ── Depreciation table ───────────────────────────────────── */
+  (function () {
+    var V0 = 50000, rate = 15;
+
+    function update() {
+      var D = (rate / 100) * V0;          // straight-line: % of the ORIGINAL value
+      var html = '<table class="coord-table"><tr><th>Year</th><th>Straight-line</th><th>Declining balance</th><th>Difference</th></tr>';
+      for (var n = 0; n <= 8; n++) {
+        var sl = Math.max(0, V0 - D * n);
+        var db = V0 * Math.pow(1 - rate / 100, n);
+        html += '<tr><td>' + n + '</td><td>' + money(sl) + '</td><td>' + money(db) +
+                '</td><td>' + money(db - sl) + '</td></tr>';
+      }
+      html += '</table><p style="font-size:12px;color:var(--gray-med);margin-top:10px;">' +
+              'Straight-line removes ' + money(D) + ' every year. Declining balance removes ' +
+              rate + '% of whatever is left, so it falls faster at first and slower later.</p>';
+      document.getElementById('depTable').innerHTML = html;
+    }
+
+    var host = 'depSliders';
+    IE.slider({ mount: host, label: 'Initial value', min: 5000, max: 150000, step: 5000, value: V0,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { V0 = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate', min: 5, max: 35, step: 1, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    update();
+  })();
+
+  /* ── Depreciation comparison plot ─────────────────────────── */
+  (function () {
+    var V0 = 50000, rate = 15, years = 8;
+    var redraw = IE.plot('plotDep', { xMin: 0, xMax: 8, yMin: 0, yMax: 55000, xStep: 2, yStep: 10000, xLabel: 'years', yLabel: '$', curves: [] });
+
+    function sl(n) { return Math.max(0, V0 - (rate / 100) * V0 * n); }
+    function db(n) { return V0 * Math.pow(1 - rate / 100, n); }
+
+    function update() {
+      var top = V0 * 1.1;
+      redraw({
+        xMax: years,
+        xStep: Math.max(1, Math.round(years / 5)),
+        yMax: top,
+        yStep: Math.max(1000, Math.round(top / 5 / 1000) * 1000),
+        curves: [
+          { fn: db },
+          { fn: sl, className: 'plot-curve-2' }
+        ],
+        points: [{ x: years, y: db(years), hollow: true }]
+      });
+
+      var a = sl(years), b = db(years);
+      document.getElementById('roSL').textContent    = money(a);
+      document.getElementById('roDB').textContent    = money(b);
+      document.getElementById('roDDiff').textContent = money(Math.abs(b - a));
+
+      var zero = 100 / rate;   // years for straight-line to reach zero
+      var note = document.getElementById('depNote');
+      note.className = 'exercise-feedback';
+      if (b > a) {
+        note.textContent = 'At year ' + years + ' the declining-balance value is higher. ' +
+          'Straight-line reaches $0 at year ' + (Math.round(zero * 10) / 10) +
+          ', while declining balance never quite reaches zero.';
+      } else {
+        note.textContent = 'At year ' + years + ' declining balance is still below straight-line — ' +
+          'it loses value fastest in the early years.';
+      }
+    }
+
+    var host = 'depCmpSliders';
+    IE.slider({ mount: host, label: 'Initial value', min: 5000, max: 150000, step: 5000, value: V0,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { V0 = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate', min: 5, max: 35, step: 1, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 2, max: 20, step: 1, value: years,
+                onInput: function (v) { years = v; update(); } });
+    update();
+  })();
+
+  /* ── Share calculator ─────────────────────────────────────── */
+  (function () {
+    var qty = 1800, buy = 24.50, div = 1.47, now = 26.95;
+
+    function update() {
+      var cost  = qty * buy;
+      var divInc = qty * div;
+      var yield_ = buy > 0 ? (div / buy) * 100 : 0;
+      var gain  = qty * (now - buy);
+      var total = cost > 0 ? ((gain + divInc) / cost) * 100 : 0;
+
+      document.getElementById('roCost').textContent  = money(cost);
+      document.getElementById('roDiv').textContent   = money(divInc);
+      document.getElementById('roYield').textContent = (Math.round(yield_ * 100) / 100) + '%';
+      document.getElementById('roGain').textContent  = money(gain);
+      document.getElementById('roTotal').textContent = (Math.round(total * 100) / 100) + '%';
+    }
+
+    var host = 'shareSliders';
+    IE.slider({ mount: host, label: 'Shares held', min: 100, max: 5000, step: 100, value: qty,
+                onInput: function (v) { qty = v; update(); } });
+    IE.slider({ mount: host, label: 'Buy price', min: 1, max: 60, step: 0.5, value: buy,
+                format: function (v) { return '$' + v.toFixed(2); },
+                onInput: function (v) { buy = v; update(); } });
+    IE.slider({ mount: host, label: 'Dividend/share', min: 0, max: 4, step: 0.01, value: div,
+                format: function (v) { return '$' + v.toFixed(2); },
+                onInput: function (v) { div = v; update(); } });
+    IE.slider({ mount: host, label: 'Current price', min: 1, max: 60, step: 0.5, value: now,
+                format: function (v) { return '$' + v.toFixed(2); },
+                onInput: function (v) { now = v; update(); } });
+    update();
+  })();
+
+  /* ── Share price graph ────────────────────────────────────── */
+  (function () {
+    var PRICES = [12.00, 12.60, 13.10, 12.40, 11.20, 10.50, 11.00, 12.20, 13.80, 14.40, 13.90, 14.70, 15.00];
+    function price(x) {   // straight segments between monthly closes
+      var i = Math.min(PRICES.length - 2, Math.max(0, Math.floor(x)));
+      return PRICES[i] + (PRICES[i + 1] - PRICES[i]) * (x - i);
+    }
+    IE.plot('plotShare', {
+      xMin: 0, xMax: 12, yMin: 8, yMax: 16, xStep: 1, yStep: 1,
+      xLabel: 'month', yLabel: 'price ($)',
+      curves: [{ fn: price }],
+      points: PRICES.map(function (p, i) { return { x: i, y: p }; })
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'A machine worth $48,000 depreciates by $5,200 per year using the straight-line method. What is its value after 7 years?',
+      opts: ['A) $11,600', 'B) $36,400', 'C) $15,024', 'D) $12,800'],
+      correct: 0,
+      explanation: 'A is correct. \\(S = V_0 - Dn = 48000 - 5200 \\times 7 = 48000 - 36400 = \\$11\\,600\\). Option B is the total depreciation, not the remaining value.'
+    },
+    {
+      q: 'A vehicle bought for $40,000 depreciates at 20% per annum by the declining balance method. What is its value after 3 years?',
+      opts: ['A) $16,000', 'B) $20,480', 'C) $24,000', 'D) $32,000'],
+      correct: 1,
+      explanation: 'B is correct. \\(S = 40000(1 - 0.20)^{3} = 40000 \\times 0.8^{3} = 40000 \\times 0.512 = \\$20\\,480\\). Option A wrongly applies 20% of the original each year (that would be straight-line).'
+    },
+    {
+      q: 'Which statement about the two depreciation methods is correct?',
+      opts: [
+        'A) Straight-line depreciates faster in the early years',
+        'B) Declining balance eventually reaches exactly zero',
+        'C) Declining balance depreciates faster in the early years and never reaches zero',
+        'D) Both methods give the same value every year'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Declining balance removes a percentage of a large starting value, so the early losses are bigger; as the value shrinks so do the losses, and multiplying a positive number by \\((1-r)\\) never gives zero — \\(S = 0\\) is an asymptote.'
+    },
+    {
+      q: 'Shares are bought at $18.00 each and pay a dividend of $0.99 per share. What is the dividend yield?',
+      opts: ['A) 0.99%', 'B) 18%', 'C) 5.5%', 'D) 1.82%'],
+      correct: 2,
+      explanation: 'C is correct. Yield \\(= \\dfrac{\\text{dividend per share}}{\\text{price per share}} \\times 100\\% = \\dfrac{0.99}{18.00} \\times 100\\% = 5.5\\%\\).'
+    },
+    {
+      q: 'An investor buys 2,500 shares at $12.40 and receives a dividend of $0.62 per share. What is the total dividend received?',
+      opts: ['A) $1,550', 'B) $31,000', 'C) $620', 'D) $155'],
+      correct: 0,
+      explanation: 'A is correct. Total dividend \\(= 2500 \\times 0.62 = \\$1\\,550\\). Option B is the total purchase cost.'
+    },
+    {
+      q: 'A loaf of bread costs $4.80. With inflation at 3% per annum, what will it cost in 5 years?',
+      opts: ['A) $5.52', 'B) $5.56', 'C) $4.94', 'D) $7.20'],
+      correct: 1,
+      explanation: 'B is correct. \\(4.80 \\times 1.03^{5} = 4.80 \\times 1.159274 = \\$5.56\\). Option A incorrectly uses simple growth of \\(3\\% \\times 5 = 15\\%\\).'
+    },
+    {
+      q: 'Which is the best reason a term deposit may suit someone saving for a car they will buy in one year?',
+      opts: [
+        'A) It gives the highest possible return of any investment',
+        'B) The return is known in advance and the capital cannot fall, so the money will definitely be there',
+        'C) The funds can be withdrawn at any time without penalty',
+        'D) It is guaranteed to beat inflation'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Over a short, fixed horizon, certainty matters more than a higher expected return. Shares could fall right before the purchase. Option C is false — term deposits lock the funds — and options A and D overstate the benefits.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Office equipment costs $36,000 and is depreciated by $4,500 per year using the straight-line method. (a) Find its value after 6 years. (b) Find when it reaches zero.',
+      marks: 4,
+      steps: [
+        '(a) \\(S = V_0 - Dn = 36000 - 4500 \\times 6\\).',
+        '\\(4500 \\times 6 = 27000\\), so \\(S = 36000 - 27000 = \\$9\\,000\\).',
+        '(b) Set \\(S = 0\\): \\(0 = 36000 - 4500n\\).',
+        '\\(n = \\dfrac{36000}{4500} = 8\\) years.'
+      ],
+      answer: '(a) $9,000. (b) After exactly 8 years.'
+    },
+    {
+      q: 'A boat purchased for $85,000 depreciates at 14% per annum using the declining balance method. Find its value after 9 years.',
+      marks: 3,
+      steps: [
+        '\\(S = V_0(1-r)^{n} = 85000(1 - 0.14)^{9} = 85000 \\times 0.86^{9}\\).',
+        '\\(0.86^{9} = 0.25794…\\)',
+        '\\(S = 85000 \\times 0.25794\\).'
+      ],
+      answer: 'About $21,924.90.'
+    },
+    {
+      q: 'A $28,000 asset is depreciated at 16% per annum. Compare its value after 5 years under (a) straight-line, where 16% of the original value is removed each year, and (b) declining balance.',
+      marks: 5,
+      steps: [
+        '(a) \\(D = 0.16 \\times 28000 = \\$4\\,480\\) per year.',
+        '\\(S = 28000 - 4480 \\times 5 = 28000 - 22400 = \\$5\\,600\\).',
+        '(b) \\(S = 28000 \\times 0.84^{5}\\).',
+        '\\(0.84^{5} = 0.41821…\\), so \\(S = 28000 \\times 0.41821 = \\$11\\,709.88\\).',
+        'Declining balance leaves $6,109.88 more after 5 years.'
+      ],
+      answer: '(a) $5,600. (b) About $11,709.88 — declining balance leaves more at this point, because its losses shrink as the value falls while straight-line keeps removing $4,480 regardless.'
+    },
+    {
+      q: 'A laptop bought for $2,800 is worth $950 after 3 years. Find the annual declining-balance depreciation rate to one decimal place.',
+      marks: 4,
+      steps: [
+        '\\(2800(1-r)^{3} = 950\\).',
+        '\\((1-r)^{3} = \\dfrac{950}{2800} = 0.339286\\).',
+        'Take the cube root: \\(1 - r = 0.339286^{1/3} = 0.69742\\).',
+        '\\(r = 1 - 0.69742 = 0.30258\\).'
+      ],
+      answer: 'About 30.3% per annum.'
+    },
+    {
+      q: 'Sam buys 3,200 shares at $9.75 each. The company declares a dividend of $0.4875 per share. Find (a) the total cost, (b) the total dividend, and (c) the dividend yield.',
+      marks: 4,
+      steps: [
+        '(a) Cost \\(= 3200 \\times 9.75 = \\$31\\,200\\).',
+        '(b) Dividend \\(= 3200 \\times 0.4875 = \\$1\\,560\\).',
+        '(c) Yield \\(= \\dfrac{0.4875}{9.75} \\times 100\\%\\).',
+        '\\(= 0.05 \\times 100\\% = 5\\%\\).'
+      ],
+      answer: '(a) $31,200. (b) $1,560. (c) 5%.'
+    },
+    {
+      q: 'A share is bought for $32.00 and sold a year later for $29.60, having paid a dividend of $1.28 per share. Calculate the overall percentage return on one share, and comment.',
+      marks: 4,
+      steps: [
+        'Capital loss: \\(29.60 - 32.00 = -\\$2.40\\) per share.',
+        'Dividend received: \\(+\\$1.28\\) per share.',
+        'Net change: \\(-2.40 + 1.28 = -\\$1.12\\) per share.',
+        'Percentage return: \\(\\dfrac{-1.12}{32.00} \\times 100\\% = -3.5\\%\\).'
+      ],
+      answer: 'A return of \\(-3.5\\%\\) — an overall loss. The 4% dividend yield was not enough to offset the 7.5% fall in the share price, which shows why dividends alone do not tell the whole story.'
+    },
+    {
+      q: 'A house is bought for $740,000 and appreciates at 4.5% per annum. Find its value after 12 years.',
+      marks: 3,
+      steps: [
+        'Appreciation uses the compound growth form: \\(V = 740000 \\times 1.045^{12}\\).',
+        '\\(1.045^{12} = 1.69588…\\)',
+        '\\(V = 740000 \\times 1.69588\\).'
+      ],
+      answer: 'About $1,254,951.'
+    },
+    {
+      q: 'A car costs $45,000 today. If car prices rise with inflation at 2.6% per annum, what will the equivalent car cost in 7 years?',
+      marks: 3,
+      steps: [
+        'Future price \\(= 45000 \\times 1.026^{7}\\).',
+        '\\(1.026^{7} = 1.19702…\\)',
+        '\\(= 45000 \\times 1.19702\\).'
+      ],
+      answer: 'About $53,866.'
+    },
+    {
+      q: '$50,000 is kept in a non-interest-bearing account for 15 years while inflation averages 3.1% per annum. Find its purchasing power in today\'s dollars at the end, and state the real loss.',
+      marks: 4,
+      steps: [
+        'Prices multiply by \\(1.031^{15}\\).',
+        '\\(1.031^{15} = 1.58126…\\)',
+        'Purchasing power \\(= \\dfrac{50000}{1.58126} = \\$31\\,620.20\\).',
+        'Real loss \\(= 50000 - 31620.20\\).'
+      ],
+      answer: 'About $31,620 in today\'s dollars — a real loss of roughly $18,380 in purchasing power, even though the account balance never changed.'
+    },
+    {
+      q: 'An investment returns 6.2% per annum while inflation runs at 3.4% per annum. Calculate the real return on $10,000 after one year, as a percentage to one decimal place.',
+      marks: 4,
+      steps: [
+        'Nominal value after one year: \\(10000 \\times 1.062 = \\$10\\,620\\).',
+        'Deflate by inflation: \\(\\dfrac{10620}{1.034} = \\$10\\,270.79\\).',
+        'Real gain: \\(10270.79 - 10000 = \\$270.79\\).',
+        'Real return: \\(\\dfrac{270.79}{10000} \\times 100\\% = 2.708\\%\\).'
+      ],
+      answer: 'About 2.7% — noticeably less than the headline 6.2%, because inflation absorbs most of the gain.'
+    },
+    {
+      q: 'Explain, with reference to the formulas, why a declining-balance asset never reaches a value of $0 while a straight-line asset does.',
+      marks: 3,
+      steps: [
+        'Straight-line is \\(S = V_0 - Dn\\), a linear relationship. Setting \\(S = 0\\) gives \\(n = V_0/D\\), a finite number of periods.',
+        'Declining balance is \\(S = V_0(1-r)^{n}\\). Since \\(0 < 1-r < 1\\), the factor shrinks the value but stays positive.',
+        'Multiplying a positive number by a positive factor can never produce zero, no matter how many times you do it.',
+        '\\(S = 0\\) is therefore a horizontal asymptote for declining balance.'
+      ],
+      answer: 'Straight-line subtracts a fixed amount, so after \\(V_0/D\\) periods the value is exactly zero. Declining balance repeatedly multiplies by \\((1-r)\\), which is positive and less than 1, so the value shrinks towards zero without ever reaching it — \\(S = 0\\) is an asymptote.'
+    },
+    {
+      q: 'A company\'s share price over five years is: $14.20, $15.90, $13.40, $17.10, $19.80. Describe the trend, and explain why this makes shares a different proposition from a term deposit paying a fixed 4.5%.',
+      marks: 4,
+      steps: [
+        'Overall the price rose from $14.20 to $19.80, a gain of $5.60 or about 39.4% over five years.',
+        'But the path was not steady: the price fell from $15.90 to $13.40 in year 3, below where it started in year 2.',
+        'A term deposit at 4.5% would grow every single year, with the value known in advance.',
+        'An investor forced to sell in year 3 would have made a loss, despite the strong five-year result.'
+      ],
+      answer: 'The price trends upward (about 39.4% over five years) but volatilely, including a fall in year 3. A term deposit gives a smaller but certain return that never falls, so the choice depends on whether the investor can wait out downturns.'
+    },
+    {
+      q: 'Compare a savings account, shares and property as ways to invest $60,000 for a person aged 60 who plans to retire in three years. Recommend one, with justification.',
+      marks: 5,
+      steps: [
+        'Identify the key constraint: a short three-year horizon before the funds are needed.',
+        'Shares: potentially the highest return, but prices can fall sharply and three years may not be long enough to recover from a downturn just before retirement.',
+        'Property: also has growth potential, but $60,000 is unlikely to be enough, it carries stamp duty and maintenance costs, and it is slow to sell if funds are needed quickly.',
+        'Savings account or term deposit: lower return, but the capital is safe and accessible, which matters most when the money is needed on a fixed date.',
+        'Conclude by tying the recommendation to the time frame and risk tolerance.'
+      ],
+      answer: 'A term deposit or high-interest savings account is the best fit. With only three years until the funds are needed, protecting the capital outweighs chasing returns: a share-market fall shortly before retirement could not be recovered, and property is both too expensive to enter at $60,000 and too slow to sell.'
+    },
+    {
+      q: 'An asset is depreciated at 25% per annum on the declining balance. Show that it loses more than half its value in the first three years, and find the percentage of the original value remaining after 6 years.',
+      marks: 4,
+      steps: [
+        'After 3 years the remaining fraction is \\(0.75^{3} = 0.421875\\).',
+        'That is 42.19% remaining, so 57.81% has been lost — more than half. ✓',
+        'After 6 years: \\(0.75^{6} = 0.177979…\\)',
+        'So about 17.8% of the original value remains.'
+      ],
+      answer: 'After 3 years only 42.2% remains, so 57.8% — more than half — has been lost. After 6 years about 17.8% of the original value remains.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

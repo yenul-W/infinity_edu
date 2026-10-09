@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annuities &mdash; Year 12 Maths Standard 2</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+</head>
+<body class="sociotype">
+
+  <header class="topic-header">
+    <div class="header-inner">
+      <div class="header-nav">
+        <a href="../../year-12.html" class="back-link">&larr; All Topics</a>
+        <div class="header-actions">
+          <a class="syllabus-chip-inline" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/faa14f8aa3" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
+          <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode"><span class="toggle-icon">dark</span></button>
+        </div>
+      </div>
+      <h1 class="topic-page-title"><em>Annuities</em></h1>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="pdf-viewer-container">
+      <div class="lessons-sidebar" id="lessonsList"></div>
+      <div class="pdf-viewer-main">
+        <div class="pdf-controls">
+          <div class="control-group" id="fileControls">
+            <button class="pdf-btn" id="downloadBtn">&#8595; Download</button>
+            <a class="pdf-btn" id="openExternalBtn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+            <button class="pdf-btn" id="printSyllabusBtn">&#8942; Print Syllabus</button>
+          </div>
+          <div class="control-group" id="pageControls">
+            <button class="pdf-nav-arrow" id="prevPage" disabled>&#8592;</button>
+            <input class="page-info" id="pageInfo" type="text" inputmode="numeric" placeholder="–" disabled><span class="page-sep" id="pageTotal">/ –</span>
+            <button class="pdf-nav-arrow" id="nextPage" disabled>&#8594;</button>
+          </div>
+          <div class="control-group" id="zoomControls">
+            <div class="zoom-control">
+              <button class="zoom-btn" id="zoomOut">&#8722;</button>
+              <span class="zoom-display" id="zoomDisplay">–</span>
+              <button class="zoom-btn" id="zoomIn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-stage" id="pdfStage">
+          <div class="pdf-loading" id="pdfLoading">
+            <div class="pdf-loading-spinner"></div>
+            <p>Loading</p>
+          </div>
+          <div class="pdf-canvas-wrapper" id="pdfCanvasWrapper" style="display:none"></div>
+          <iframe class="pdf-html-frame" id="pdfHtmlFrame" src="about:blank" title="Lesson"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../pdf-viewer.js"></script>
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = toggle.querySelector('.toggle-icon');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefersDark;
+    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
+    toggle.addEventListener('click', () => {
+      const nowDark = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      toggleIcon.textContent = nowDark ? 'light' : 'dark';
+      const frame = document.getElementById('pdfHtmlFrame');
+      try { if (frame && frame.contentDocument && frame.contentDocument.documentElement) { frame.contentDocument.documentElement.classList.toggle('dark-mode', nowDark); } } catch (e) {}
+      try { if (frame && frame.contentWindow) { frame.contentWindow.postMessage({ type: 'ie-theme', dark: nowDark }, '*'); } } catch (e) {}
+    });
+
+    const TOPIC_ID = 'y12-3';
+
+    const lessons = [
+      {
+        num: 1,
+        title: "What Is an Annuity?",
+        slides: "lesson-01-annuity-basics.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Identify an annuity as an investment account with regular, equal contributions and interest compounding at the end of each period",
+          "Identify an annuity as a single sum investment from which regular equal withdrawals are made",
+          "Model an annuity in tabular form for up to four time periods",
+          "Use a spreadsheet to model an annuity"
+        ]
+      },
+      {
+        num: 2,
+        title: "Future Value & Interest Factor Tables",
+        slides: "lesson-02-future-value-tables.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Using a table of interest factors, calculate the future value of an annuity",
+          "Determine the contribution amount required to achieve a given future value",
+          "Determine the single sum contribution required to produce an equivalent future value",
+          "Examine the effect of varying the amount initially invested, the periodic payment, the interest rate and the duration of the annuity"
+        ]
+      },
+      {
+        num: 3,
+        title: "Present Value, Superannuation & Loans",
+        slides: "lesson-03-present-value-super.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Using a table of interest factors, calculate the present value of an annuity",
+          "Solve annuity problems involving financial decisions regarding superannuation",
+          "Solve annuity problems involving savings accounts",
+          "Solve annuity problems involving loan repayments"
+        ]
+      },
+      {
+        num: 4,
+        homework: true,
+        slides: "lesson-04-homework.html",
+        annotated: null,
+        kind: "html",
+        syllabus: []
+      },
+      {
+        num: 5,
+        title: "Revision",
+        revision: true,
+        slides: "lesson-05-revision.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Review all Annuities dot-points",
+          "Mixed exam-style practice with full worked solutions"
+        ]
+      }
+    ];
+
+    initPdfViewer({ topicId: TOPIC_ID, lessons });
+  </script>
+  <script src="../../question-popup.js"></script>
+</body>
+</html>

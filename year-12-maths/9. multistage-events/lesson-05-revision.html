@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Relative Frequency &amp; Probability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 &mdash; Relative Frequency &amp; Probability</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>Relative Frequency &amp; Probability</h1>
+      <p class="subtitle">Every dot-point of MST-12-S2-09 in one place: the formula sheet, the
+        decision guide, the mistakes that cost marks, and a mixed exam-style paper with full
+        solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-09</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Formula sheet</li>
+        <li>Which method?</li>
+        <li>Interactive tools</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#formulas">1 &nbsp;Formula sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#decide">2 &nbsp;Which method?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tools">3 &nbsp;Interactive tools</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">4 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">5 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. FORMULAS ─────────── -->
+      <div class="content-card" id="formulas">
+        <p class="section-label">Reference</p>
+        <h2>Formula sheet</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Basic probability</p>
+          \[0 \le P(E) \le 1 \qquad
+            P(E) = \frac{\text{favourable outcomes}}{\text{total outcomes}}\]
+          <p class="formula-where">The counting formula requires <strong>equally likely</strong>
+            outcomes. All outcome probabilities sum to 1.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Complement</p>
+          \[P(\text{not } E) = 1 - P(E) \qquad
+            P(\text{at least one}) = 1 - P(\text{none})\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Multistage events</p>
+          \[P(A \text{ and } B) = P(A) \times P(B) \quad \text{(independent)}\]
+          <p class="formula-where">On a tree: <strong>multiply along</strong> a path ("and"),
+            <strong>add between</strong> paths ("or"). All path probabilities sum to 1.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Replacement</p>
+          <p style="margin-bottom:0;">
+            <strong>With</strong> — the bag is restored, probabilities unchanged, events
+            independent.<br>
+            <strong>Without</strong> — the favourable count <em>and</em> the total each fall by
+            one, so the second draw depends on the first.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Frequency</p>
+          \[\text{Relative frequency} = \frac{\text{occurrences}}{\text{trials}} \qquad
+            \text{Expected frequency} = np\]
+          <p class="formula-where">Relative frequency converges on the theoretical probability as
+            trials increase. Expected frequency is a long-run average, not a guarantee.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. DECIDE ─────────── -->
+      <div class="content-card" id="decide">
+        <p class="section-label">Method</p>
+        <h2>Which method do I use?</h2>
+
+        <table class="coord-table">
+          <tr><th>The question says…</th><th>Use</th></tr>
+          <tr><td>"a fair die / fair coin / at random"</td><td>Counting: favourable ÷ total</td></tr>
+          <tr><td>"in an experiment, X occurred \(k\) times"</td><td>Relative frequency</td></tr>
+          <tr><td>"how many would you expect"</td><td>Expected frequency \(np\)</td></tr>
+          <tr><td>"at least one"</td><td>Complement: \(1 - P(\text{none})\)</td></tr>
+          <tr><td>"and" (both happen)</td><td>Multiply</td></tr>
+          <tr><td>"or" (either happens)</td><td>Add the separate paths</td></tr>
+          <tr><td>Two stages, few outcomes</td><td>Array (table)</td></tr>
+          <tr><td>Three or more stages, or without replacement</td><td>Tree diagram</td></tr>
+          <tr><td>Two attributes cross-classified</td><td>Two-way table</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The two questions to ask first</p>
+          <ol style="margin-bottom:0;">
+            <li>Are the outcomes <strong>equally likely</strong>? If not, you need relative
+              frequency.</li>
+            <li>Is the item <strong>replaced</strong>? If not, both numbers change on the second
+              draw.</li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Choose the method</h3>
+          <p class="exercise-intro">Type <code>counting</code>, <code>relative frequency</code>,
+            <code>expected</code> or <code>complement</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) "A pin landed point-up 71 times in 120 drops. Estimate P." &rarr;</label>
+            <input class="exercise-input" id="mdA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdA"></p>
+
+          <div class="exercise-row">
+            <label>(b) "How many sixes would you expect in 600 rolls?" &rarr;</label>
+            <input class="exercise-input" id="mdB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdB"></p>
+
+          <div class="exercise-row">
+            <label>(c) "Find P(at least one head) in 8 tosses." &rarr;</label>
+            <input class="exercise-input" id="mdC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdC"></p>
+
+          <div class="exercise-row">
+            <label>(d) "A card is drawn from a shuffled deck. Find P(a heart)." &rarr;</label>
+            <input class="exercise-input" id="mdD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-md="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbMdD"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. TOOLS ─────────── -->
+      <div class="content-card" id="tools">
+        <p class="section-label">Practice</p>
+        <h2>Interactive tools</h2>
+
+        <div class="interactive-block">
+          <h3>Replacement comparator</h3>
+          <p class="exercise-intro">Set the bag and compare both scenarios.</p>
+          <div id="repSliders"></div>
+          <div id="repTable" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="repNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Quick calculations</h3>
+          <div class="exercise-row">
+            <label>(a) \(P(A) = 0.37\). Find \(P(\text{not } A)\).</label>
+            <input class="exercise-input" id="qcA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-qc="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcA"></p>
+
+          <div class="exercise-row">
+            <label>(b) 450 trials at \(p = 0.16\). Expected frequency?</label>
+            <input class="exercise-input" id="qcB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-qc="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcB"></p>
+
+          <div class="exercise-row">
+            <label>(c) A die rolled 4 times. \(P(\text{at least one six})\) to 4 dp?</label>
+            <input class="exercise-input" id="qcC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-qc="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcC"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CHECKLIST ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 5. MISTAKES ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Listing three outcomes for two coins</td>
+            <td>HT and TH are distinct — there are four equally likely outcomes.</td>
+          </tr>
+          <tr>
+            <td>Adding when you should multiply</td>
+            <td>"And" along a path means multiply. "Or" between paths means add.</td>
+          </tr>
+          <tr>
+            <td>Changing only the numerator without replacement</td>
+            <td><strong>Both</strong> the favourable count and the total drop by one.</td>
+          </tr>
+          <tr>
+            <td>Forgetting the second path for "one of each"</td>
+            <td>RB and BR are both valid — add them.</td>
+          </tr>
+          <tr>
+            <td>Counting every case for "at least one"</td>
+            <td>Use the complement: \(1 - P(\text{none})\).</td>
+          </tr>
+          <tr>
+            <td>Getting a probability above 1</td>
+            <td>Impossible. Usually caused by adding instead of multiplying.</td>
+          </tr>
+          <tr>
+            <td>Using the counting formula on a biased die</td>
+            <td>Outcomes must be equally likely. Otherwise use relative frequency.</td>
+          </tr>
+          <tr>
+            <td>Rounding an expected frequency to a whole number unnecessarily</td>
+            <td>An expected value of 47.5 is a valid long-run average.</td>
+          </tr>
+          <tr>
+            <td>Using the wrong denominator in a two-way table</td>
+            <td>"Of those who…" restricts to a row or column total, not the grand total.</td>
+          </tr>
+          <tr>
+            <td>Quoting only relative risk</td>
+            <td>Always give the absolute figures as well.</td>
+          </tr>
+          <tr>
+            <td>Not checking the tree paths sum to 1</td>
+            <td>A quick check that catches most branch errors.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes &mdash; then
+          mark yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident
+            with every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-9', LESSON_IDX = 4;
+
+  /* ── Choose the method ────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['relative frequency', 'Observed data from trials, with outcomes that are not equally likely — relative frequency.'],
+      B: ['expected',           'A predicted count over many trials uses expected frequency, np.'],
+      C: ['complement',         '"At least one" is fastest via 1 − P(none).'],
+      D: ['counting',           'A shuffled deck gives equally likely outcomes, so count: 13 hearts ÷ 52 cards.']
+    };
+    document.querySelectorAll('[data-md]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.md, fb = document.getElementById('fbMd' + k);
+        var v = (document.getElementById('md' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type a method.'; return; }
+        var ok = v.indexOf(ANS[k][0].split(' ')[0]) !== -1;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ It is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Replacement comparator ───────────────────────────────── */
+  (function () {
+    var red = 5, blue = 7;
+    function update() {
+      var n = red + blue;
+      if (n < 2) return;
+      var w = {
+        rr: (red / n) * (red / n),
+        bb: (blue / n) * (blue / n),
+        mix: 2 * (red / n) * (blue / n)
+      };
+      var o = {
+        rr: (red / n) * ((red - 1) / (n - 1)),
+        bb: (blue / n) * ((blue - 1) / (n - 1)),
+        mix: 2 * (red / n) * (blue / (n - 1))
+      };
+      var html = '<table class="coord-table"><tr><th>Outcome</th><th>With replacement</th><th>Without replacement</th></tr>' +
+        '<tr><td>Both red</td><td>' + w.rr.toFixed(4) + '</td><td>' + o.rr.toFixed(4) + '</td></tr>' +
+        '<tr><td>Both blue</td><td>' + w.bb.toFixed(4) + '</td><td>' + o.bb.toFixed(4) + '</td></tr>' +
+        '<tr><td>One of each</td><td>' + w.mix.toFixed(4) + '</td><td>' + o.mix.toFixed(4) + '</td></tr>' +
+        '<tr><th>Total</th><th>' + (w.rr + w.bb + w.mix).toFixed(4) + '</th><th>' +
+        (o.rr + o.bb + o.mix).toFixed(4) + '</th></tr></table>';
+      document.getElementById('repTable').innerHTML = html;
+      var note = document.getElementById('repNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Without replacement, "both the same" is always less likely and "one of each" more likely, ' +
+        'because removing one item leaves relatively more of the other colour. Both columns must total 1 ✓';
+    }
+    var host = 'repSliders';
+    IE.slider({ mount: host, label: 'Red', min: 1, max: 15, step: 1, value: red, onInput: function (v) { red = v; update(); } });
+    IE.slider({ mount: host, label: 'Blue', min: 1, max: 15, step: 1, value: blue, onInput: function (v) { blue = v; update(); } });
+    update();
+  })();
+
+  /* ── Quick calculations ───────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [0.63, 'P(not A) = 1 − 0.37 = 0.63.'],
+      B: [72,   'Expected frequency = np = 450 × 0.16 = 72.'],
+      C: [1 - Math.pow(5 / 6, 4), 'P(no six) = (5/6)⁴ = 0.4823, so P(at least one) = 1 − 0.4823 ≈ 0.5177.']
+    };
+    document.querySelectorAll('[data-qc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.qc, fb = document.getElementById('fbQc' + k);
+        var g = parseFloat((document.getElementById('qc' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(4) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Recognise that probabilities range from 0 to 1 and can be fractions, decimals or percentages',
+      'Identify and define the sample space as the set of all possible outcomes',
+      'Determine the number of outcomes for an experiment',
+      'Express the probability of an event with equally likely outcomes as favourable ÷ total',
+      'Apply P(event does not occur) = 1 − P(event occurs)',
+      'Construct and use tree diagrams to determine outcomes and probabilities for multistage events',
+      'Construct and use arrays and tables for multistage events',
+      'Determine probabilities for multistage events using P(A and B) = P(A) × P(B)',
+      'Handle problems with and without replacement',
+      'Use relative frequency as an estimate of probability',
+      'Recognise that more trials give relative frequencies closer to the theoretical probability',
+      'Calculate expected frequency using np',
+      'Construct and interpret two-way tables limited to combinations of two attributes',
+      'Use two-way tables to solve problems in a variety of contexts',
+      'Examine the use of statistics and probabilities in decisions made by media, governments and companies'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none'; ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0'; li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+    var tally = document.createElement('p');
+    tally.style.cssText = 'margin-top:16px;font-family:var(--font-mono);font-size:12px;color:var(--gray-med);';
+    mount.appendChild(tally);
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'A bag has 9 red, 6 blue and 5 white marbles. Find \\(P(\\text{blue})\\) and \\(P(\\text{not blue})\\).',
+      marks: 3,
+      steps: [
+        'Total \\(= 9 + 6 + 5 = 20\\).',
+        '\\(P(\\text{blue}) = \\dfrac{6}{20} = 0.3\\).',
+        '\\(P(\\text{not blue}) = 1 - 0.3 = 0.7\\).'
+      ],
+      answer: '\\(P(\\text{blue}) = 0.3\\); \\(P(\\text{not blue}) = 0.7\\).'
+    },
+    {
+      q: 'How many outcomes are possible when two coins are tossed and a die is rolled?',
+      marks: 2,
+      steps: [
+        'Apply the multiplication principle: \\(2 \\times 2 \\times 6\\).'
+      ],
+      answer: '24 outcomes.'
+    },
+    {
+      q: 'Two dice are rolled. Find \\(P(\\text{sum} = 9)\\) and \\(P(\\text{both show the same number})\\).',
+      marks: 4,
+      steps: [
+        'Sum 9: (3,6), (4,5), (5,4), (6,3) — four outcomes, so \\(\\dfrac{4}{36} = \\dfrac{1}{9}\\).',
+        'Doubles: (1,1) to (6,6) — six outcomes.',
+        '\\(P(\\text{doubles}) = \\dfrac{6}{36} = \\dfrac{1}{6}\\).'
+      ],
+      answer: '\\(P(\\text{sum} = 9) = \\dfrac{1}{9}\\); \\(P(\\text{doubles}) = \\dfrac{1}{6}\\).'
+    },
+    {
+      q: 'Seven coins are tossed. Find the probability of at least one head.',
+      marks: 4,
+      steps: [
+        'Complement: all seven are tails.',
+        '\\(P(\\text{all tails}) = \\left(\\dfrac{1}{2}\\right)^{7} = \\dfrac{1}{128}\\).',
+        '\\(P(\\text{at least one head}) = 1 - \\dfrac{1}{128}\\).'
+      ],
+      answer: '\\(\\dfrac{127}{128} \\approx 0.9922\\)'
+    },
+    {
+      q: 'A bag has 6 green and 9 yellow counters. Two are drawn with replacement. Find \\(P(\\text{both green})\\) and \\(P(\\text{one of each})\\).',
+      marks: 4,
+      steps: [
+        '\\(P(G) = \\dfrac{6}{15} = 0.4\\); \\(P(Y) = 0.6\\).',
+        '\\(P(\\text{both green}) = 0.4 \\times 0.4 = 0.16\\).',
+        '\\(P(GY) = 0.24\\) and \\(P(YG) = 0.24\\).',
+        '\\(P(\\text{one of each}) = 0.48\\).'
+      ],
+      answer: '\\(P(\\text{both green}) = 0.16\\); \\(P(\\text{one of each}) = 0.48\\).'
+    },
+    {
+      q: 'The same bag, drawn without replacement. Find \\(P(\\text{both green})\\) and \\(P(\\text{one of each})\\).',
+      marks: 5,
+      steps: [
+        '\\(P(\\text{both green}) = \\dfrac{6}{15} \\times \\dfrac{5}{14} = \\dfrac{30}{210} = \\dfrac{1}{7}\\).',
+        '\\(P(GY) = \\dfrac{6}{15} \\times \\dfrac{9}{14} = \\dfrac{54}{210}\\).',
+        '\\(P(YG) = \\dfrac{9}{15} \\times \\dfrac{6}{14} = \\dfrac{54}{210}\\).',
+        '\\(P(\\text{one of each}) = \\dfrac{108}{210} = \\dfrac{18}{35}\\).',
+        '\\(\\approx 0.5143\\).'
+      ],
+      answer: '\\(P(\\text{both green}) = \\dfrac{1}{7} \\approx 0.1429\\); \\(P(\\text{one of each}) = \\dfrac{18}{35} \\approx 0.5143\\).'
+    },
+    {
+      q: 'Explain the difference between drawing with and without replacement, and its effect on the probabilities.',
+      marks: 3,
+      steps: [
+        'With replacement the item is returned, leaving the bag unchanged and the draws independent.',
+        'Without replacement both the favourable count and the total drop by one.',
+        'So the second probability depends on the first outcome.',
+        'This makes "both the same" less likely and "one of each" more likely.'
+      ],
+      answer: 'With replacement the draws are independent with unchanged probabilities. Without replacement both numbers drop by one, making the draws dependent — and making matching pairs less likely than with replacement.'
+    },
+    {
+      q: 'A drawing pin lands point-up 138 times in 240 drops. Estimate \\(P(\\text{point-up})\\), and explain why relative frequency is necessary here.',
+      marks: 4,
+      steps: [
+        'Relative frequency \\(= \\dfrac{138}{240} = 0.575\\).',
+        'Point-up and point-down are not equally likely.',
+        'The probability depends on the pin\'s shape and mass distribution.',
+        'It cannot be calculated theoretically, so it must be measured.'
+      ],
+      answer: '\\(P \\approx 0.575\\). Relative frequency is necessary because the two outcomes are not equally likely and depend on the pin\'s physical construction, which cannot be computed — only observed.'
+    },
+    {
+      q: 'A factory has a 3.2% defect rate. Find the expected defects in 5,000 items, and the expected number acceptable.',
+      marks: 3,
+      steps: [
+        'Defects: \\(np = 5000 \\times 0.032 = 160\\).',
+        'Acceptable: \\(5000 - 160 = 4840\\).',
+        'Check: \\(5000 \\times 0.968 = 4840\\) ✓'
+      ],
+      answer: '160 defects and 4,840 acceptable items.'
+    },
+    {
+      q: 'A die is rolled 840 times and shows a one 182 times. Comment on whether the die is fair.',
+      marks: 5,
+      steps: [
+        'Relative frequency \\(= \\dfrac{182}{840} = 0.2167\\).',
+        'A fair die gives \\(\\dfrac{1}{6} \\approx 0.1667\\).',
+        'Expected ones \\(= 840 \\times \\dfrac{1}{6} = 140\\).',
+        'Observed 182 is 42 above expectation.',
+        'Over 840 rolls this is a substantial excess, suggesting bias towards one.'
+      ],
+      answer: 'Probably biased towards one. The relative frequency 0.2167 clearly exceeds 0.1667, and 182 against an expected 140 is too large a gap over 840 rolls to attribute to chance.'
+    },
+    {
+      q: 'In a survey of 300 people, 124 own a dog and travel by car, 71 own a dog but do not drive, 63 drive but own no dog. Complete the table and find \\(P(\\text{neither})\\) and \\(P(\\text{dog or car})\\).',
+      marks: 6,
+      steps: [
+        'Dog owners \\(= 124 + 71 = 195\\).',
+        'Non-dog-owners \\(= 300 - 195 = 105\\).',
+        'Neither \\(= 105 - 63 = 42\\).',
+        '\\(P(\\text{neither}) = \\dfrac{42}{300} = 0.14\\).',
+        '"Dog or car" is everyone except those 42.',
+        '\\(P = \\dfrac{258}{300} = 0.86\\).'
+      ],
+      answer: 'The "neither" cell is 42. \\(P(\\text{neither}) = 0.14\\); \\(P(\\text{dog or car}) = 0.86\\).'
+    },
+    {
+      q: 'Using that table, find the probability that a randomly chosen dog owner travels by car.',
+      marks: 3,
+      steps: [
+        'This restricts attention to the 195 dog owners.',
+        'Of those, 124 travel by car.',
+        '\\(P = \\dfrac{124}{195}\\).',
+        'Note the denominator is the row total, not 300.'
+      ],
+      answer: '\\(\\dfrac{124}{195} \\approx 0.6359\\) — using the row total, not the grand total.'
+    },
+    {
+      q: 'A box has 7 working and 5 faulty components. Three are tested without replacement. Find the probability that all three work.',
+      marks: 5,
+      steps: [
+        'First: \\(\\dfrac{7}{12}\\).',
+        'Second: \\(\\dfrac{6}{11}\\).',
+        'Third: \\(\\dfrac{5}{10} = \\dfrac{1}{2}\\).',
+        'Multiply: \\(\\dfrac{7}{12} \\times \\dfrac{6}{11} \\times \\dfrac{5}{10} = \\dfrac{210}{1320}\\).',
+        '\\(= \\dfrac{7}{44} \\approx 0.1591\\).'
+      ],
+      answer: '\\(\\dfrac{7}{44} \\approx 0.1591\\)'
+    },
+    {
+      q: 'An insurer estimates a 1.5% annual chance of a $80,000 claim. Find the expected payout per policy and explain how the premium is determined.',
+      marks: 5,
+      steps: [
+        'Expected payout \\(= 0.015 \\times 80\\,000 = \\$1\\,200\\).',
+        'This is the long-run average cost per policy.',
+        'The premium must exceed $1,200 to cover administration and profit.',
+        'It must also buffer against worse-than-average years.',
+        'A large pool of policies keeps the actual claim rate close to 1.5%.'
+      ],
+      answer: 'Expected payout $1,200 per policy. The premium must exceed this to cover costs, profit and the risk of bad years — and the insurer needs many policies so the observed claim rate stays close to the expected 1.5%.'
+    },
+    {
+      q: 'A headline reads: "Daily coffee quadruples your risk of a condition affecting 5 in 100,000." Evaluate this claim fully.',
+      marks: 6,
+      steps: [
+        'Quadrupling takes the risk from 5 to 20 per 100,000.',
+        'In percentages, from 0.005% to 0.020%.',
+        'The absolute increase is only 0.015 percentage points.',
+        'The relative figure (300% increase) is technically accurate but alarming out of context.',
+        'The reader should ask for the sample size and study design.',
+        'An observational study cannot establish causation — confounders such as smoking or sleep patterns may be responsible.'
+      ],
+      answer: 'The absolute risk rises from 5 to 20 per 100,000 — a change of 0.015 percentage points, still extremely small. Reporting only the relative increase is misleading. The reader should also ask about sample size and design: an observational study cannot establish causation, and lifestyle confounders could explain the association entirely.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  IE.completeBanner({
+    mount: 'completeBtn', topicId: TOPIC_ID, lessonIdx: LESSON_IDX,
+    label: 'Mark as complete', doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

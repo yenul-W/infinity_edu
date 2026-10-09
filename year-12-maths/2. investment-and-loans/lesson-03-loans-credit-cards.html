@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Reducing-Balance Loans &amp; Credit Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 2 &mdash; Investment &amp; Loans</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Reducing-Balance Loans &amp; Credit Cards</h1>
+      <p class="subtitle">A loan is compound interest working against you, with repayments
+        chipping away at the balance. Build the repayment table, see where the money actually
+        goes, and find out why an extra $100 a month can save years.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-02</span>
+        <span class="pill">Repayment tables</span>
+        <span class="pill">Credit cards</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>How a reducing-balance loan works</li>
+        <li>Building a repayment table</li>
+        <li>Spreadsheet modelling</li>
+        <li>Extra repayments &amp; frequency</li>
+        <li>Amount owing, total paid and time to repay</li>
+        <li>Short vs long term loans</li>
+        <li>Credit cards and interest-free periods</li>
+        <li>Class activity: design a repayment plan</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#howitworks">1 &nbsp;How loans work</a></li>
+        <li class="toc-item"><a class="toc-link" href="#table">2 &nbsp;Repayment tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spreadsheet">3 &nbsp;Spreadsheet modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#extra">4 &nbsp;Extra repayments</a></li>
+        <li class="toc-item"><a class="toc-link" href="#loangraph">5 &nbsp;Owing, paid &amp; time</a></li>
+        <li class="toc-item"><a class="toc-link" href="#terms">6 &nbsp;Short vs long terms</a></li>
+        <li class="toc-item"><a class="toc-link" href="#credit">7 &nbsp;Credit cards</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. HOW IT WORKS ─────────── -->
+      <div class="content-card" id="howitworks">
+        <p class="section-label">Theory</p>
+        <h2>How a reducing-balance loan works</h2>
+
+        <p>A <strong>reducing-balance loan</strong> is compound interest applied to money you owe,
+          with a regular repayment subtracted each period. Every period follows the same two
+          steps:</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The monthly cycle</p>
+          \[\text{Interest} = \text{Opening balance} \times r\]
+          \[\text{Closing balance} = \text{Opening balance} + \text{Interest} - \text{Repayment}\]
+          <p class="formula-where">\(r\) is the interest rate <strong>per repayment period</strong>.
+            For a monthly loan at an annual rate, \(r = \dfrac{\text{annual rate}}{12}\).</p>
+        </div>
+
+        <p>Because interest is charged on the <em>current</em> balance, and that balance falls
+          each period, the interest portion of each repayment shrinks while the principal portion
+          grows. This is why loans feel slow at the start.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1 &mdash; one month</p>
+          <p>A loan of $20,000 at 9% per annum is repaid at $450 per month. Find the balance
+            after one month.</p>
+          <p>Monthly rate: \(r = \dfrac{0.09}{12} = 0.0075\).</p>
+          \[\text{Interest} = 20000 \times 0.0075 = \$150\]
+          \[\text{Balance} = 20000 + 150 - 450 = \$19\,700\]
+          <p>Of the $450 repayment, $150 went to interest and only $300 reduced the debt.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">A warning worth remembering</p>
+          <p style="margin-bottom:0;">If the repayment is <em>less than</em> the interest charged,
+            the balance <strong>grows</strong> and the loan is never repaid. In the example above,
+            any repayment below $150 per month would mean the debt increases forever.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A loan of $8,400 at 10.2% per annum is repaid at $300 per month. Find the interest
+              and the balance after one month.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.102 \div 12 = 0.0085\). Interest \(= 8400 \times 0.0085 = \$71.40\).</p>
+                <p>Balance \(= 8400 + 71.40 - 300 = \$8\,171.40\).</p>
+              </div></details></li>
+            <li>A $45,000 loan is charged 7.8% per annum, calculated monthly. What must the monthly
+              repayment be greater than for the loan ever to be repaid?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>First month's interest: \(45000 \times \dfrac{0.078}{12} = \$292.50\). The
+                  repayment must be more than $292.50, or the balance never falls.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. TABLE ─────────── -->
+      <div class="content-card" id="table">
+        <p class="section-label">Method</p>
+        <h2>Building a repayment table</h2>
+
+        <p>The syllabus asks you to <em>model a reducing balance loan in tabular form for up to
+          four time periods</em>. This is a guaranteed exam question type. Use five columns:</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>A loan of $15,000 at 12% per annum is repaid monthly at $500. Complete a table for
+            the first four months.</p>
+          <p>Monthly rate: \(r = \dfrac{0.12}{12} = 0.01\), i.e. 1% per month.</p>
+          <table class="coord-table">
+            <tr>
+              <th>Month</th><th>Opening balance</th><th>Interest (1%)</th>
+              <th>Repayment</th><th>Closing balance</th>
+            </tr>
+            <tr><td>1</td><td>15 000.00</td><td>150.00</td><td>500.00</td><td>14 650.00</td></tr>
+            <tr><td>2</td><td>14 650.00</td><td>146.50</td><td>500.00</td><td>14 296.50</td></tr>
+            <tr><td>3</td><td>14 296.50</td><td>142.97</td><td>500.00</td><td>13 939.47</td></tr>
+            <tr><td>4</td><td>13 939.47</td><td>139.39</td><td>500.00</td><td>13 578.86</td></tr>
+          </table>
+          <p><strong>Reading the table:</strong> each closing balance becomes the next opening
+            balance. The interest falls every month (150.00 &rarr; 139.39) because it is charged
+            on a smaller balance. Over four months $2,000 was repaid but the debt fell by only
+            $1,421.14 &mdash; the remaining $578.86 went to interest.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Complete a table for the first three months of a $6,000 loan at 9.6% per annum,
+              repaid at $350 per month.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.096 \div 12 = 0.008\), i.e. 0.8% per month.</p>
+                <table class="coord-table">
+                  <tr><th>Month</th><th>Opening</th><th>Interest</th><th>Repayment</th><th>Closing</th></tr>
+                  <tr><td>1</td><td>6 000.00</td><td>48.00</td><td>350.00</td><td>5 698.00</td></tr>
+                  <tr><td>2</td><td>5 698.00</td><td>45.58</td><td>350.00</td><td>5 393.58</td></tr>
+                  <tr><td>3</td><td>5 393.58</td><td>43.15</td><td>350.00</td><td>5 086.73</td></tr>
+                </table>
+              </div></details></li>
+            <li>For that loan, how much of the $1,050 repaid in three months was interest?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(48.00 + 45.58 + 43.15 = \$136.73\). Check: the debt fell by
+                  \(6000 - 5086.73 = \$913.27\), and \(913.27 + 136.73 = 1050\) ✓</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Repayment table builder</h3>
+          <p class="exercise-intro">Set the loan, rate and repayment. The table is generated
+            month by month, and the summary tells you how long the loan takes and what it costs
+            in total.</p>
+          <div id="loanSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Monthly rate</div>
+              <div class="readout-value" id="roRate">1%</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">First month's interest</div>
+              <div class="readout-value" id="roFirstInt">$150.00</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Months to repay</div>
+              <div class="readout-value" id="roMonths">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total interest paid</div>
+              <div class="readout-value" id="roTotalInt">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="loanNote" style="margin-top:14px;"></p>
+          <div id="loanTable" style="margin-top:16px;"></div>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. SPREADSHEET ─────────── -->
+      <div class="content-card" id="spreadsheet">
+        <p class="section-label">Technology</p>
+        <h2>Modelling a loan in a spreadsheet</h2>
+
+        <p>The syllabus asks you to <em>use a spreadsheet to model and solve problems involving a
+          reducing balance loan</em>. Lay out the parameters first:</p>
+
+        <table class="coord-table">
+          <tr><th>Cell</th><th>Label</th><th>Value</th></tr>
+          <tr><td>B1</td><td>Loan amount</td><td>15000</td></tr>
+          <tr><td>B2</td><td>Annual rate</td><td>0.12</td></tr>
+          <tr><td>B3</td><td>Monthly rate</td><td><code>=B2/12</code></td></tr>
+          <tr><td>B4</td><td>Monthly repayment</td><td>500</td></tr>
+        </table>
+
+        <p>Then the table from row 7, with month numbers in column A:</p>
+        <table class="coord-table">
+          <tr>
+            <th></th><th>A &mdash; Month</th><th>B &mdash; Opening</th>
+            <th>C &mdash; Interest</th><th>D &mdash; Repayment</th><th>E &mdash; Closing</th>
+          </tr>
+          <tr>
+            <td>Row 7</td><td>1</td><td><code>=$B$1</code></td>
+            <td><code>=B7*$B$3</code></td><td><code>=$B$4</code></td><td><code>=B7+C7-D7</code></td>
+          </tr>
+          <tr>
+            <td>Row 8</td><td><code>=A7+1</code></td><td><code>=E7</code></td>
+            <td>fill down</td><td>fill down</td><td>fill down</td>
+          </tr>
+        </table>
+
+        <p>The one formula that makes it work is <code>B8 =E7</code>: each month's opening balance
+          is the previous month's closing balance. Fill row 8 down and the whole loan appears.</p>
+
+        <ul>
+          <li>The loan is repaid in the first month where column E is zero or negative.</li>
+          <li>Total interest is <code>=SUM(C7:C###)</code> down to that row.</li>
+          <li>Changing B4 (the repayment) and watching the final row move is exactly the
+            "examine the effect of changing the repayment" skill.</li>
+          <li>Charting column E against column A shows the balance curving down &mdash; steeply at
+            the end, shallowly at the start.</li>
+        </ul>
+
+        <div class="formula-box">
+          <p class="formula-label">The last repayment</p>
+          <p style="margin-bottom:0;">The final repayment is almost always smaller than the rest,
+            because the balance left is less than a full repayment. If the second-to-last closing
+            balance is $312.40 and the monthly rate is 1%, the final payment is
+            \(312.40 \times 1.01 = \$315.52\), not the usual $500.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. EXTRA ─────────── -->
+      <div class="content-card" id="extra">
+        <p class="section-label">Application</p>
+        <h2>Extra repayments and repayment frequency</h2>
+
+        <p>The syllabus asks you to <em>examine the effect of changing the repayment frequency,
+          additional repayments or a lump sum on the term and cost of a loan</em>. The effects are
+          much larger than students expect.</p>
+
+        <h3>Why extra repayments work so well</h3>
+        <p>Every extra dollar paid comes straight off the principal, so it never accrues interest
+          again &mdash; and neither does the interest it would have generated in every future
+          month. The saving compounds.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>A $300,000 loan at 6% per annum over 30 years has repayments of about $1,799 per
+            month. Compare with paying $2,000 per month.</p>
+          <table class="coord-table">
+            <tr><th></th><th>$1 799/month</th><th>$2 000/month</th></tr>
+            <tr><td>Time to repay</td><td>30 years</td><td>about 22 years 4 months</td></tr>
+            <tr><td>Total repaid</td><td>about $647 600</td><td>about $536 000</td></tr>
+            <tr><td>Total interest</td><td>about $347 600</td><td>about $236 000</td></tr>
+          </table>
+          <p>An extra $201 per month &mdash; about $24,100 of extra payments in total &mdash;
+            saves roughly $111,600 in interest and nearly eight years.</p>
+        </div>
+
+        <h3>Repayment frequency</h3>
+        <p>Paying fortnightly instead of monthly also helps, for two reasons:</p>
+        <ul>
+          <li><strong>Interest is calculated on a smaller balance sooner</strong>, because money
+            comes off the principal earlier in each month.</li>
+          <li><strong>You make more payments per year.</strong> Paying half the monthly amount
+            every fortnight gives 26 half-payments = 13 monthly equivalents per year, not 12
+            &mdash; a whole extra month's repayment, usually unnoticed.</li>
+        </ul>
+
+        <h3>Lump sums</h3>
+        <p>A lump sum early in the loan is far more valuable than the same amount late, because it
+          removes interest from every remaining period. $10,000 paid in year 1 of a 30-year loan
+          saves much more than $10,000 paid in year 25.</p>
+
+        <div class="interactive-block">
+          <h3>Extra repayment explorer</h3>
+          <p class="exercise-intro">Compare the base repayment against a higher one. The chart
+            shows both balances falling; the readout shows the time and interest saved.</p>
+          <div id="extraSliders"></div>
+          <div class="plot-wrap" id="plotExtra"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Base term</div>
+              <div class="readout-value" id="roBaseTerm">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">With extra</div>
+              <div class="readout-value" id="roNewTerm">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Interest saved</div>
+              <div class="readout-value" id="roSaved">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="extraNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A home loan's monthly repayment is $1,640. The borrower switches to paying $820
+              every fortnight. How much extra is repaid each year?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Fortnightly: \(26 \times 820 = \$21\,320\). Monthly: \(12 \times 1640 = \$19\,680\).</p>
+                <p>An extra $1,640 a year &mdash; one whole monthly repayment.</p>
+              </div></details></li>
+            <li>A borrower owes $250,000 at 6% per annum (monthly) and pays a $10,000 lump sum. How
+              much interest does this save in the very next month? Why is the total saving much
+              larger than this?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Next month: \(10000 \times 0.005 = \$50\) less interest.</p>
+                <p>That $50 is saved again in <em>every</em> remaining month, and the money that
+                  would have gone to interest reduces the principal instead, so the savings
+                  compound over the rest of the loan.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. LOAN GRAPH ─────────── -->
+      <div class="content-card" id="loangraph">
+        <p class="section-label">Theory</p>
+        <h2>Amount owing, total paid and time to repay</h2>
+
+        <p>The syllabus asks you to <em>solve problems involving reducing balance loans, including
+          total amount paid, repayments, amount owing and time to repay</em>. A graph of the
+          balance over the life of the loan answers most of these at a glance.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Three relationships to know</p>
+          \[\text{Total paid} = \text{repayment} \times \text{number of repayments}\]
+          \[\text{Total interest} = \text{total paid} - \text{amount borrowed}\]
+          \[\text{Interest paid so far} = \text{paid so far} - (\text{amount borrowed} - \text{amount owing})\]
+        </div>
+
+        <div class="plot-wrap" id="plotLoanBal"></div>
+        <p class="diagram-caption">Balance of a $300,000 loan at 6% per annum, repaid at $1,799
+          per month over 30 years.</p>
+
+        <p>The curve is shallow at first and steep at the end: early repayments are mostly
+          interest, late repayments are mostly principal.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Use the graph of the $300,000 loan.</p>
+          <p><strong>(a) About how much is owed after 15 years?</strong> Reading the graph:
+            about $213,000. Halfway through the term, only about 29% of the loan has been
+            repaid.</p>
+          <p><strong>(b) When is half the loan repaid?</strong> The balance reaches $150,000
+            after about 21 years.</p>
+          <p><strong>(c) Find the total paid and the total interest.</strong></p>
+          \[1799 \times 360 = \$647\,640 \qquad 647640 - 300000 = \$347\,640\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>From the graph, estimate the amount owing after 20 years and after 25 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>About $162,000 after 20 years and about $93,000 after 25 years. (Exact values:
+                  $161,850 and $92,795.)</p>
+              </div></details></li>
+            <li>After 10 years the balance is $251,000. How much was paid in the first 10 years,
+              and how much of it was interest?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Paid: \(1799 \times 120 = \$215\,880\). The debt fell by
+                  \(300000 - 251000 = \$49\,000\).</p>
+                <p>Interest: \(215880 - 49000 = \$166\,880\) &mdash; over three-quarters of
+                  everything paid so far.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. TERMS ─────────── -->
+      <div class="content-card" id="terms">
+        <p class="section-label">Evaluation</p>
+        <h2>Comparing short and long term loans</h2>
+
+        <table class="coord-table">
+          <tr><th></th><th>Shorter term</th><th>Longer term</th></tr>
+          <tr><td>Monthly repayment</td><td>Higher</td><td>Lower</td></tr>
+          <tr><td>Total interest paid</td><td><strong>Much lower</strong></td><td><strong>Much higher</strong></td></tr>
+          <tr><td>Total repaid</td><td>Lower</td><td>Higher</td></tr>
+          <tr><td>Monthly budget pressure</td><td>Higher</td><td>Lower</td></tr>
+          <tr><td>Risk if income falls</td><td>Higher — less room to cope</td><td>Lower — smaller commitment</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A $25,000 car loan at 8.4% per annum. Compare a 3-year and a 7-year term.</p>
+          <table class="coord-table">
+            <tr><th>Term</th><th>Monthly repayment</th><th>Total repaid</th><th>Total interest</th></tr>
+            <tr><td>3 years (36 months)</td><td>$787.75</td><td>$28 359</td><td>$3 359</td></tr>
+            <tr><td>7 years (84 months)</td><td>$396.71</td><td>$33 324</td><td>$8 324</td></tr>
+          </table>
+          <p>The 7-year loan almost halves the monthly repayment, but costs about $4,965 more in
+            interest &mdash; nearly 2.5 times as much. The longer term is more affordable
+            month-to-month and more expensive overall.</p>
+          <p><strong>Exam answer structure:</strong> state both sides. "The 7-year term is easier
+            to afford monthly ($396.71 vs $787.75), but costs $4,965 more in total interest,
+            so it suits a borrower with limited monthly income who accepts the higher overall
+            cost."</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; exam style</p>
+          <p>Zara borrows $18,000 for a car. Option A: 3 years at 7.8% per annum, repayments
+            $562.40 per month. Option B: 5 years at 6.9% per annum, repayments $355.57 per
+            month.</p>
+          <p><strong>(a) Find the total interest for each option.</strong> [2 marks]</p>
+          \[\text{A: } 562.40 \times 36 - 18000 = \$2\,246.40 \qquad
+            \text{B: } 355.57 \times 60 - 18000 = \$3\,334.20\]
+          <p><strong>(b) Option B has the lower interest rate. Explain why it costs more.</strong>
+            [1 mark]</p>
+          <p>Interest is charged for 60 months instead of 36, and the balance falls more slowly,
+            so the lower rate is applied to a larger balance for longer.</p>
+          <p><strong>(c) Zara can afford $450 per month. Advise her.</strong> [2 marks]</p>
+          <p>Option A ($562.40) is beyond her budget. She should take Option B but pay $450 per
+            month rather than the minimum $355.57: the loan is then cleared in 46 months with about
+            $2,514 interest &mdash; cheaper than Option A and within her budget.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. CREDIT ─────────── -->
+      <div class="content-card" id="credit">
+        <p class="section-label">Application</p>
+        <h2>Credit cards</h2>
+
+        <p>The syllabus asks you to <em>explain how credit cards are an example of a reducing
+          balance loan</em>. They are &mdash; with three differences that make them expensive.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">A credit card as a reducing-balance loan</p>
+          <p style="margin-bottom:0;">Interest is charged on the outstanding balance, repayments
+            reduce that balance, and the next month's interest is charged on what is left. That is
+            exactly the reducing-balance cycle. What differs: the interest rate is far higher, the
+            balance changes constantly as you spend, and the required minimum repayment is very
+            small.</p>
+        </div>
+
+        <h3>The interest-free period</h3>
+        <p>Most cards offer up to 55 interest-free days <strong>on purchases</strong>, but only if
+          you pay the <em>entire</em> closing balance by the due date. Pay even slightly less and
+          interest is typically charged on the full balance from each purchase date &mdash; the
+          interest-free benefit is lost entirely.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Daily interest on credit cards</p>
+          \[\text{Daily rate} = \frac{\text{annual rate}}{365} \qquad
+            I = \text{balance} \times \frac{\text{annual rate}}{365} \times \text{days}\]
+          <p class="formula-where">Cash advances usually attract a higher rate and get
+            <strong>no</strong> interest-free period &mdash; interest starts from the day of
+            withdrawal.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>A card charges 19.99% per annum. A balance of $2,400 is carried for 28 days. Find
+            the interest.</p>
+          \[I = 2400 \times \frac{0.1999}{365} \times 28 = 2400 \times 0.00054767 \times 28\]
+          \[= \$36.80\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; minimum repayments</p>
+          <p>A $5,000 balance at 20% per annum with a minimum repayment of 2% of the balance
+            (at least $25). What happens in month 1?</p>
+          <p>Monthly interest: \(5000 \times \dfrac{0.20}{12} = \$83.33\).</p>
+          <p>Minimum repayment: \(0.02 \times 5000 = \$100\).</p>
+          <p>Only \(100 - 83.33 = \$16.67\) reduces the debt &mdash; less than 17 cents in the
+            dollar. Because the minimum falls as the balance falls, paying only the minimum takes
+            decades and can cost more in interest than the original purchases.</p>
+        </div>
+
+        <h3>Fees to know</h3>
+        <ul>
+          <li><strong>Annual fee</strong> &mdash; charged whether you use the card or not.</li>
+          <li><strong>Late payment fee</strong> &mdash; a flat charge for missing the due date.</li>
+          <li><strong>Cash advance fee</strong> &mdash; a percentage of the withdrawal, on top of
+            interest from day one.</li>
+          <li><strong>Foreign transaction fee</strong> &mdash; typically around 3% of overseas
+            purchases.</li>
+        </ul>
+
+        <p>Credit card rates (often 18&ndash;22% per annum) are far above home loan rates (around
+          6%) and personal loan rates (around 10&ndash;14%), because the debt is unsecured &mdash;
+          there is no asset the lender can claim if you do not repay.</p>
+
+        <div class="interactive-block">
+          <h3>Credit card interest calculator</h3>
+          <p class="exercise-intro">See what carrying a balance actually costs, and how long it
+            takes if you only ever pay the minimum.</p>
+          <div id="cardSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Daily rate</div>
+              <div class="readout-value" id="roDaily">0.0548%</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Interest for the period</div>
+              <div class="readout-value" id="roCardInt">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Monthly interest</div>
+              <div class="readout-value" id="roCardMonth">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Min repayment (2%)</div>
+              <div class="readout-value" id="roCardMin">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="cardNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A card charges 21.49% per annum. A balance of $1,850 is carried for 34 days. Find
+              the interest.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[I = 1850 \times \frac{0.2149}{365} \times 34 = \$37.03\]
+              </div></details></li>
+            <li>Mia takes a $500 cash advance. The card charges a 3% cash advance fee and 23.99% per
+              annum interest from the day of withdrawal. She repays it after 20 days. What did the
+              cash advance cost her?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Fee: \(0.03 \times 500 = \$15.00\). Interest:
+                  \(500 \times \dfrac{0.2399}{365} \times 20 = \$6.57\).</p>
+                <p>Total cost: $21.57 to borrow $500 for under three weeks.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Design a repayment plan</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Sam needs a $20,000 loan at 9% per
+          annum (calculated monthly) for a used car. Use the
+          <a href="#table">repayment table builder</a>.</p>
+        <ol>
+          <li>Find the smallest monthly repayment (to the nearest $50) for which the loan is ever
+            repaid. Why does it have to be more than $150?</li>
+          <li>Record the months to repay and the total interest for repayments of $450, $650 and
+            $850.</li>
+          <li>Which repayment clears the loan in three years or less?</li>
+          <li>Going from $450 to $650 adds $200 per month. How much interest does it save? Is the
+            saving from $650 to $850 bigger or smaller? Explain.</li>
+          <li>Sam earns $3,200 a month after tax and pays $1,400 in rent. Recommend a repayment,
+            justifying it with your numbers.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> $200 per month (186 months, about $17,106 interest). The first
+            month's interest is \(20000 \times 0.0075 = \$150\); a repayment of $150 only covers
+            the interest, so the balance never falls.</p>
+          <table class="coord-table">
+            <tr><th>Repayment</th><th>Months</th><th>Total interest</th></tr>
+            <tr><td>$450</td><td>55 (4y 7m)</td><td>$4,419</td></tr>
+            <tr><td>$650</td><td>36 (3y 0m)</td><td>$2,824</td></tr>
+            <tr><td>$850</td><td>26 (2y 2m)</td><td>$2,087</td></tr>
+          </table>
+          <p><strong>3.</strong> $650 or more ($600 takes 39 months).</p>
+          <p><strong>4.</strong> $450 &rarr; $650 saves about $1,596; $650 &rarr; $850 saves only
+            about $737. Each extra dollar still saves interest, but the loan is already short, so
+            there is less interest left to save.</p>
+          <p><strong>5.</strong> Many answers are reasonable. For example, $650 clears the loan in
+            3 years and saves $1,596 compared with $450, while leaving Sam $1,150 a month after
+            rent and repayments for living costs and savings.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-2', LESSON_IDX = 2;
+
+  function money(v) {
+    return '$' + v.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function money0(v) {
+    return '$' + Math.round(v).toLocaleString('en-AU');
+  }
+
+  /* Run a loan to completion. Returns {months, totalInterest, schedule}
+     or null if the repayment never clears the interest. */
+  function runLoan(principal, monthlyRate, repayment, cap) {
+    cap = cap || 1200;
+    if (repayment <= principal * monthlyRate) return null;
+    var bal = principal, totalInt = 0, sched = [{ m: 0, bal: bal }], m = 0;
+    while (bal > 0 && m < cap) {
+      m++;
+      var interest = bal * monthlyRate;
+      totalInt += interest;
+      var pay = Math.min(repayment, bal + interest);   // final payment is smaller
+      bal = bal + interest - pay;
+      if (bal < 0.005) bal = 0;
+      sched.push({ m: m, bal: bal });
+    }
+    return { months: m, totalInterest: totalInt, schedule: sched };
+  }
+
+  /* ── Repayment table builder ──────────────────────────────── */
+  (function () {
+    var P = 15000, rate = 12, pay = 500;
+
+    function update() {
+      var r = (rate / 100) / 12;
+      var firstInt = P * r;
+
+      document.getElementById('roRate').textContent = (Math.round(r * 1e6) / 1e4) + '%';
+      document.getElementById('roFirstInt').textContent = money(firstInt);
+
+      var note = document.getElementById('loanNote');
+      var result = runLoan(P, r, pay);
+
+      if (!result) {
+        document.getElementById('roMonths').textContent = 'never';
+        document.getElementById('roTotalInt').textContent = '—';
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'The repayment of ' + money(pay) + ' is not greater than the first month\'s interest of ' +
+          money(firstInt) + ', so the balance grows every month and the loan is never repaid.';
+        document.getElementById('loanTable').innerHTML = '';
+        return;
+      }
+
+      document.getElementById('roMonths').textContent =
+        result.months + ' (' + Math.floor(result.months / 12) + 'y ' + (result.months % 12) + 'm)';
+      document.getElementById('roTotalInt').textContent = money0(result.totalInterest);
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'Total repaid: ' + money0(P + result.totalInterest) +
+        ' on a ' + money0(P) + ' loan — ' +
+        (Math.round(result.totalInterest / P * 1000) / 10) + '% of the loan paid again in interest.';
+
+      // First 12 months of the schedule
+      var bal = P;
+      var html = '<table class="coord-table"><tr><th>Month</th><th>Opening</th><th>Interest</th><th>Repayment</th><th>Closing</th></tr>';
+      for (var m = 1; m <= Math.min(12, result.months); m++) {
+        var interest = bal * r;
+        var thisPay = Math.min(pay, bal + interest);
+        var close = bal + interest - thisPay;
+        html += '<tr><td>' + m + '</td><td>' + money(bal) + '</td><td>' + money(interest) +
+                '</td><td>' + money(thisPay) + '</td><td>' + money(Math.max(0, close)) + '</td></tr>';
+        bal = close;
+      }
+      html += '</table>';
+      if (result.months > 12) {
+        html += '<p style="font-size:12px;color:var(--gray-med);margin-top:10px;">First 12 of ' +
+                result.months + ' months shown.</p>';
+      }
+      document.getElementById('loanTable').innerHTML = html;
+    }
+
+    var host = 'loanSliders';
+    IE.slider({ mount: host, label: 'Loan amount', min: 5000, max: 60000, step: 1000, value: P,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { P = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate p.a.', min: 3, max: 24, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Repayment', min: 50, max: 2000, step: 50, value: pay,
+                format: function (v) { return '$' + v; },
+                onInput: function (v) { pay = v; update(); } });
+    update();
+  })();
+
+  /* ── Extra repayment explorer ─────────────────────────────── */
+  (function () {
+    var P = 300000, rate = 6, base = 1800, extra = 200;
+    var redraw = IE.plot('plotExtra', { xMin: 0, xMax: 360, yMin: 0, yMax: 320000, xStep: 60, yStep: 60000, xLabel: 'months', yLabel: 'balance $', curves: [] });
+
+    function update() {
+      var r = (rate / 100) / 12;
+      var a = runLoan(P, r, base);
+      var b = runLoan(P, r, base + extra);
+      var note = document.getElementById('extraNote');
+
+      if (!a || !b) {
+        document.getElementById('roBaseTerm').textContent = a ? '—' : 'never';
+        document.getElementById('roNewTerm').textContent  = b ? '—' : 'never';
+        document.getElementById('roSaved').textContent    = '—';
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'At ' + money0(base) + ' per month the repayment does not cover the interest of ' +
+          money0(P * r) + ', so the balance never falls. Increase the repayment.';
+        redraw({ curves: [] });
+        return;
+      }
+
+      // Step through each schedule to draw the balance over time.
+      function curveFor(sched) {
+        return function (m) {
+          var i = Math.round(m);
+          if (i < 0) return P;
+          if (i >= sched.length) return 0;
+          return sched[i].bal;
+        };
+      }
+
+      redraw({
+        xMax: a.months,
+        xStep: Math.max(6, Math.round(a.months / 5 / 6) * 6),
+        yMax: P * 1.07,
+        yStep: Math.max(5000, Math.round(P / 5 / 5000) * 5000),
+        curves: [
+          { fn: curveFor(b.schedule) },
+          { fn: curveFor(a.schedule), className: 'plot-curve-2' }
+        ]
+      });
+
+      function term(m) { return Math.floor(m / 12) + 'y ' + (m % 12) + 'm'; }
+      document.getElementById('roBaseTerm').textContent = term(a.months);
+      document.getElementById('roNewTerm').textContent  = term(b.months);
+      document.getElementById('roSaved').textContent    = money0(a.totalInterest - b.totalInterest);
+
+      var monthsSaved = a.months - b.months;
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'Paying an extra ' + money0(extra) + ' per month clears the loan ' +
+        term(monthsSaved) + ' sooner and saves ' + money0(a.totalInterest - b.totalInterest) +
+        ' in interest — for ' + money0(extra * b.months) + ' of extra repayments.';
+    }
+
+    var host = 'extraSliders';
+    IE.slider({ mount: host, label: 'Loan', min: 50000, max: 800000, step: 10000, value: P,
+                format: function (v) { return '$' + (v / 1000) + 'k'; },
+                onInput: function (v) { P = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate p.a.', min: 2, max: 12, step: 0.25, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Repayment', min: 200, max: 6000, step: 100, value: base,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { base = v; update(); } });
+    IE.slider({ mount: host, label: 'Extra/month', min: 0, max: 2000, step: 50, value: extra,
+                format: function (v) { return '$' + v; },
+                onInput: function (v) { extra = v; update(); } });
+    update();
+  })();
+
+  /* ── Credit card calculator ───────────────────────────────── */
+  (function () {
+    var bal = 2400, rate = 19.99, days = 28;
+
+    function update() {
+      var daily = (rate / 100) / 365;
+      var interest = bal * daily * days;
+      var monthly = bal * (rate / 100) / 12;
+      var min = Math.max(25, 0.02 * bal);
+
+      document.getElementById('roDaily').textContent     = (Math.round(daily * 1e7) / 1e5) + '%';
+      document.getElementById('roCardInt').textContent   = money(interest);
+      document.getElementById('roCardMonth').textContent = money(monthly);
+      document.getElementById('roCardMin').textContent   = money(min);
+
+      var note = document.getElementById('cardNote');
+      var reduces = min - monthly;
+      if (reduces <= 0) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'The minimum repayment of ' + money(min) +
+          ' is less than the monthly interest of ' + money(monthly) +
+          ' — paying only the minimum means the debt grows.';
+      } else {
+        note.className = 'exercise-feedback';
+        note.textContent = 'Of a ' + money(min) + ' minimum repayment, only ' + money(reduces) +
+          ' (' + (Math.round(reduces / min * 1000) / 10) + '%) actually reduces the debt — the rest is interest.';
+      }
+    }
+
+    var host = 'cardSliders';
+    IE.slider({ mount: host, label: 'Balance', min: 100, max: 15000, step: 100, value: bal,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { bal = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate p.a.', min: 8, max: 26, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Days carried', min: 1, max: 60, step: 1, value: days,
+                onInput: function (v) { days = v; update(); } });
+    update();
+  })();
+
+  /* ── Loan balance graph ───────────────────────────────────── */
+  (function () {
+    var P = 300000, r = 0.005, R = 1799;
+    function balance(years) {
+      var n = years * 12, g = Math.pow(1 + r, n);
+      return Math.max(0, P * g - R * (g - 1) / r);
+    }
+    IE.plot('plotLoanBal', {
+      xMin: 0, xMax: 30, yMin: 0, yMax: 320000, xStep: 5, yStep: 50000,
+      xLabel: 'years', yLabel: 'balance ($)',
+      curves: [{ fn: balance }],
+      points: [{ x: 15, y: balance(15), label: '15 years' }, { x: 21, y: 150000, label: 'half repaid' }],
+      markers: [{ x: 15, y: balance(15) }, { x: 21, y: 150000 }]
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'A loan of $30,000 is charged 9% per annum, calculated monthly. What is the interest for the first month?',
+      opts: ['A) $2,700', 'B) $225', 'C) $270', 'D) $25'],
+      correct: 1,
+      explanation: 'B is correct. The monthly rate is \\(\\dfrac{0.09}{12} = 0.0075\\), so the interest is \\(30000 \\times 0.0075 = \\$225\\). Option A is the annual interest.'
+    },
+    {
+      q: 'A loan has an opening balance of $18,000, monthly interest of $135 and a repayment of $600. What is the closing balance?',
+      opts: ['A) $17,400', 'B) $17,265', 'C) $17,535', 'D) $18,735'],
+      correct: 2,
+      explanation: 'C is correct. Closing = opening + interest − repayment = \\(18000 + 135 - 600 = \\$17\\,535\\). Option A forgets to add the interest.'
+    },
+    {
+      q: 'In a reducing-balance loan with constant repayments, what happens to the interest portion of each repayment over time?',
+      opts: [
+        'A) It increases, because the loan gets older',
+        'B) It stays the same every month',
+        'C) It decreases, because interest is charged on a smaller balance',
+        'D) It decreases only if you make extra repayments'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Interest is charged on the current balance, which falls each month, so the interest portion shrinks and the principal portion grows — even with an unchanged repayment.'
+    },
+    {
+      q: 'A $12,000 loan is charged 1% interest per month and repaid at $100 per month. What happens?',
+      opts: [
+        'A) The loan is repaid in 120 months',
+        'B) The balance stays at exactly $12,000 forever',
+        'C) The balance grows and the loan is never repaid',
+        'D) The loan is repaid in 100 months'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The first month\'s interest is \\(12000 \\times 0.01 = \\$120\\), which is more than the $100 repayment, so the balance rises by $20 to $12,020. A larger balance then attracts more interest, so the shortfall grows every month. Option A assumes none of the repayment is absorbed by interest.'
+    },
+    {
+      q: 'In a spreadsheet loan model with closing balances in column E and opening balances in column B, which formula should be in cell B8 (the second month\'s opening balance)?',
+      opts: ['A) <code>=$B$1</code>', 'B) <code>=E7</code>', 'C) <code>=B7</code>', 'D) <code>=E8</code>'],
+      correct: 1,
+      explanation: 'B is correct. Each month opens with the previous month\'s closing balance, which sits in E7. Option A would reset the loan to its original amount every row.'
+    },
+    {
+      q: 'Which best explains why a credit card is an example of a reducing-balance loan?',
+      opts: [
+        'A) Because it has an annual fee',
+        'B) Because interest is charged on the outstanding balance and repayments reduce that balance, so the next interest charge is on a smaller amount',
+        'C) Because the interest rate is high',
+        'D) Because it has an interest-free period'
+      ],
+      correct: 1,
+      explanation: 'B is correct. That cycle — interest on the current balance, repayment reduces it, interest recalculated on what remains — is precisely the reducing-balance structure. The high rate and fees are features of credit cards, not the reason they fit the model.'
+    },
+    {
+      q: 'Comparing a 5-year and a 10-year loan for the same amount at the same rate, which is true?',
+      opts: [
+        'A) The 10-year loan has lower repayments and lower total interest',
+        'B) The 10-year loan has higher repayments and higher total interest',
+        'C) The 10-year loan has lower repayments but higher total interest',
+        'D) Both loans cost exactly the same in total'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Spreading the principal over more periods lowers each repayment, but the balance stays high for longer, so far more interest accrues overall. This is the central trade-off: affordability now versus total cost.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'A loan of $24,000 is charged 10.8% per annum calculated monthly, with repayments of $700 per month. Find the balance after the first month.',
+      marks: 3,
+      steps: [
+        'Monthly rate: \\(r = \\dfrac{0.108}{12} = 0.009\\).',
+        'Interest: \\(24000 \\times 0.009 = \\$216\\).',
+        'Closing balance: \\(24000 + 216 - 700\\).'
+      ],
+      answer: '$23,516. Of the $700 repayment, $216 was interest and $484 reduced the debt.'
+    },
+    {
+      q: 'Complete a repayment table for the first three months of a $9,000 loan at 12% per annum, repaid at $400 per month.',
+      marks: 4,
+      steps: [
+        'Monthly rate: \\(\\dfrac{0.12}{12} = 0.01\\), i.e. 1%.',
+        'Month 1: interest \\(= 9000 \\times 0.01 = \\$90\\); closing \\(= 9000 + 90 - 400 = \\$8\\,690\\).',
+        'Month 2: interest \\(= 8690 \\times 0.01 = \\$86.90\\); closing \\(= 8690 + 86.90 - 400 = \\$8\\,376.90\\).',
+        'Month 3: interest \\(= 8376.90 \\times 0.01 = \\$83.77\\); closing \\(= 8376.90 + 83.77 - 400 = \\$8\\,060.67\\).'
+      ],
+      answer: 'Closing balances: $8,690.00, $8,376.90, $8,060.67. Note the interest falls each month (90.00, 86.90, 83.77) as the balance shrinks.'
+    },
+    {
+      q: 'For the loan in the previous question, how much of the $1,200 repaid over three months actually reduced the debt, and how much was interest?',
+      marks: 3,
+      steps: [
+        'Total interest charged: \\(90 + 86.90 + 83.77 = \\$260.67\\).',
+        'The debt fell from $9,000 to $8,060.67, a reduction of $939.33.',
+        'Check: \\(939.33 + 260.67 = \\$1\\,200\\) ✓'
+      ],
+      answer: '$939.33 reduced the principal and $260.67 was interest — about 22% of the repayments went to interest.'
+    },
+    {
+      q: 'A borrower can afford $850 per month. A $40,000 loan is offered at 9.6% per annum calculated monthly. Show that this repayment is sufficient for the loan to be repaid.',
+      marks: 3,
+      steps: [
+        'Monthly rate: \\(\\dfrac{0.096}{12} = 0.008\\).',
+        'First month\'s interest: \\(40000 \\times 0.008 = \\$320\\).',
+        'The repayment of $850 exceeds $320, so \\(850 - 320 = \\$530\\) comes off the principal.',
+        'Since the balance falls, next month\'s interest is smaller, so the gap widens every month and the loan must eventually clear.'
+      ],
+      answer: 'Yes. The first month\'s interest is $320, well below the $850 repayment, so $530 reduces the principal. As the balance falls the interest falls too, so the loan is repaid — and progressively faster.'
+    },
+    {
+      q: 'Explain what would happen if the borrower above could only pay $300 per month.',
+      marks: 2,
+      steps: [
+        'First month\'s interest is $320.',
+        'A repayment of $300 does not even cover that.',
+        'The balance rises by \\(320 - 300 = \\$20\\) in month 1.',
+        'A larger balance produces more interest next month, so the shortfall grows each period.'
+      ],
+      answer: 'The debt would grow, not shrink. The repayment is $20 short of the first month\'s interest, and because the balance then rises the shortfall increases every month — the loan would never be repaid.'
+    },
+    {
+      q: 'A spreadsheet models a loan with the loan amount in B1, the monthly rate in B3 and the repayment in B4, with the table starting at row 7. Write the formulas for C7 (interest), E7 (closing balance) and B8 (next opening balance).',
+      marks: 4,
+      steps: [
+        'Interest is the opening balance for the row times the monthly rate: the rate cell must be absolute.',
+        'The closing balance is opening + interest − repayment, all within the row.',
+        'The next opening balance is the previous closing balance — this is the formula that links the rows.',
+        'B1, B3 and B4 are absolute; row references stay relative so they step down.'
+      ],
+      answer: 'C7: <code>=B7*$B$3</code> &nbsp; E7: <code>=B7+C7-D7</code> &nbsp; B8: <code>=E7</code>'
+    },
+    {
+      q: 'A $200,000 loan at 6% per annum over 25 years has repayments of about $1,289 per month, totalling about $386,700. If the borrower pays $1,500 per month instead, the loan clears in about 19 years 2 months, totalling about $345,000. Calculate the interest saved and comment.',
+      marks: 4,
+      steps: [
+        'Interest on the base loan: \\(386700 - 200000 = \\$186\\,700\\).',
+        'Interest with the higher repayment: \\(345000 - 200000 = \\$145\\,000\\).',
+        'Saving: \\(186700 - 145000 = \\$41\\,700\\).',
+        'The extra paid is $211 per month for about 230 months, roughly $48,500 — but it removes $41,700 of interest and almost 6 years of repayments.'
+      ],
+      answer: 'About $41,700 saved, and the loan finishes nearly 6 years earlier. Every extra dollar comes straight off the principal, so it stops generating interest for all the remaining years.'
+    },
+    {
+      q: 'Explain why paying a loan fortnightly (half the monthly repayment every fortnight) repays it faster than paying monthly.',
+      marks: 3,
+      steps: [
+        'There are 26 fortnights in a year but only 12 months.',
+        'Paying half the monthly amount 26 times gives 13 monthly equivalents per year, not 12.',
+        'That is a whole extra month\'s repayment each year, going straight to the principal.',
+        'Money also comes off the balance earlier within each month, so slightly less interest accrues.'
+      ],
+      answer: 'Because 26 half-payments equal 13 monthly repayments a year rather than 12, giving one extra repayment annually. Payments also reduce the balance earlier in the month, so interest is charged on a smaller amount.'
+    },
+    {
+      q: 'A credit card charges 18.25% per annum. A balance of $3,600 is carried for 22 days. Calculate the interest charged.',
+      marks: 3,
+      steps: [
+        'Daily rate: \\(\\dfrac{0.1825}{365} = 0.0005\\).',
+        'Interest \\(= \\text{balance} \\times \\text{daily rate} \\times \\text{days}\\).',
+        '\\(= 3600 \\times 0.0005 \\times 22\\).'
+      ],
+      answer: '$39.60'
+    },
+    {
+      q: 'A card has a 55-day interest-free period on purchases. Explain the condition for actually receiving it, and what happens if the condition is not met.',
+      marks: 3,
+      steps: [
+        'The interest-free period applies only if the entire closing balance is paid by the due date.',
+        'Paying any less than the full amount — even by a few dollars — normally forfeits it.',
+        'Interest is then typically charged on the full balance from the date of each purchase, not from the due date.',
+        'This is why a small unpaid remainder can trigger a surprisingly large interest charge.'
+      ],
+      answer: 'You must pay the full closing balance by the due date. If you pay even slightly less, the interest-free benefit is lost and interest is charged on the whole balance backdated to each purchase date.'
+    },
+    {
+      q: 'A credit card balance is $4,000 at 21% per annum, with a minimum repayment of 2% of the balance. Calculate the first month\'s interest and the minimum repayment, and state how much of that repayment reduces the debt.',
+      marks: 4,
+      steps: [
+        'Monthly interest: \\(4000 \\times \\dfrac{0.21}{12} = 4000 \\times 0.0175 = \\$70\\).',
+        'Minimum repayment: \\(0.02 \\times 4000 = \\$80\\).',
+        'Amount reducing the debt: \\(80 - 70 = \\$10\\).',
+        'That is only 12.5% of the repayment, and the minimum falls as the balance falls.'
+      ],
+      answer: 'Interest $70, minimum repayment $80, of which only $10 reduces the debt. At this rate the balance falls extremely slowly, which is why minimum repayments can take decades.'
+    },
+    {
+      q: 'Compare a $30,000 car loan at 9% per annum over 4 years (repayments $746.55/month) with the same loan over 8 years (repayments $439.79/month). Calculate the total cost of each and advise a borrower.',
+      marks: 5,
+      steps: [
+        '4-year total: \\(746.55 \\times 48 = \\$35\\,834.40\\), so interest is \\(\\$5\\,834.40\\).',
+        '8-year total: \\(439.79 \\times 96 = \\$42\\,219.84\\), so interest is \\(\\$12\\,219.84\\).',
+        'Extra interest on the longer term: \\(12219.84 - 5834.40 = \\$6\\,385.44\\).',
+        'The 8-year loan saves \\(746.55 - 439.79 = \\$306.76\\) per month.',
+        'Advice must weigh monthly affordability against total cost.'
+      ],
+      answer: '4 years costs $35,834.40 (interest $5,834.40); 8 years costs $42,219.84 (interest $12,219.84) — more than double the interest. The shorter term is far cheaper overall and is preferable if the borrower can manage $746.55 per month; the longer term only makes sense if that repayment would strain the budget.'
+    },
+    {
+      q: 'Explain why credit card interest rates (around 20% p.a.) are so much higher than home loan rates (around 6% p.a.).',
+      marks: 3,
+      steps: [
+        'A home loan is secured against the property: if the borrower defaults, the lender can sell it to recover the money.',
+        'Credit card debt is unsecured — there is no asset backing it.',
+        'The lender therefore bears a much higher risk of not being repaid, and prices that risk into the rate.',
+        'Credit cards also cost more to administer, with flexible spending limits and short-term transactions.'
+      ],
+      answer: 'Home loans are secured against the property, so the lender can recover its money by selling the asset if the borrower defaults. Credit card debt is unsecured, carrying far more risk of loss, and that extra risk (plus higher administration costs) is priced into the much higher interest rate.'
+    },
+    {
+      q: 'A borrower takes a $16,000 loan at 7.2% per annum calculated monthly, repaying $500 per month. Build the first four months of the repayment table and state the total interest charged over that period.',
+      marks: 5,
+      steps: [
+        'Monthly rate: \\(\\dfrac{0.072}{12} = 0.006\\).',
+        'Month 1: interest \\(= 16000 \\times 0.006 = \\$96.00\\); closing \\(= 16000 + 96 - 500 = \\$15\\,596.00\\).',
+        'Month 2: interest \\(= 15596 \\times 0.006 = \\$93.58\\); closing \\(= 15596 + 93.58 - 500 = \\$15\\,189.58\\).',
+        'Month 3: interest \\(= 15189.58 \\times 0.006 = \\$91.14\\); closing \\(= 15189.58 + 91.14 - 500 = \\$14\\,780.72\\).',
+        'Month 4: interest \\(= 14780.72 \\times 0.006 = \\$88.68\\); closing \\(= 14780.72 + 88.68 - 500 = \\$14\\,369.40\\).',
+        'Total interest: \\(96.00 + 93.58 + 91.14 + 88.68\\).'
+      ],
+      answer: 'Closing balances $15,596.00, $15,189.58, $14,780.72, $14,369.40. Total interest over four months: $369.40 — so of the $2,000 repaid, $1,630.60 reduced the debt.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

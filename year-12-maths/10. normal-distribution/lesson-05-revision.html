@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — The Normal Distribution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 10 &mdash; The Normal Distribution</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>The Normal Distribution</h1>
+      <p class="subtitle">The last focus area of the course, in one place: the formula sheet, the
+        eight segments, the mistakes that cost marks, and a mixed exam paper with full
+        solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-10</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Formula sheet</li>
+        <li>The eight segments</li>
+        <li>Which method?</li>
+        <li>Interactive tools</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#formulas">1 &nbsp;Formula sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#segments">2 &nbsp;The eight segments</a></li>
+        <li class="toc-item"><a class="toc-link" href="#decide">3 &nbsp;Which method?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tools">4 &nbsp;Interactive tools</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">5 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">6 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1 ─────────── -->
+      <div class="content-card" id="formulas">
+        <p class="section-label">Reference</p>
+        <h2>Formula sheet</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Standardised score</p>
+          \[z = \frac{x - \mu}{\sigma}\]
+          <p class="formula-where">\(x\) the value, \(\mu\) the mean, \(\sigma\) the standard
+            deviation. A positive \(z\) is above the mean, a negative \(z\) below it.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Rearrangements</p>
+          \[x = \mu + z\sigma \qquad \mu = x - z\sigma \qquad \sigma = \frac{x - \mu}{z}\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The empirical rule</p>
+          \[68\% : -1 \le z \le 1 \qquad 95\% : -2 \le z \le 2 \qquad 99.7\% : -3 \le z \le 3\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Expected numbers</p>
+          \[\text{expected number} = n \times P\]
+          <p class="formula-where">\(n\) the size of the group, \(P\) the probability as a
+            decimal.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Properties to quote</p>
+          <ul style="margin-bottom:0;">
+            <li>A normal curve is symmetric, single-peaked and encloses a total area of 1.</li>
+            <li>Mean \(\approx\) median \(\approx\) mode.</li>
+            <li>Standardising gives \(z\)-scores with mean 0 and standard deviation 1.</li>
+            <li>Areas under the curve are proportions, and therefore probabilities.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ─────────── 2 ─────────── -->
+      <div class="content-card" id="segments">
+        <p class="section-label">Reference</p>
+        <h2>The eight segments</h2>
+
+        <table class="coord-table">
+          <tr><th>Region</th><th>%</th><th>Region</th><th>%</th></tr>
+          <tr><td>\(z &lt; -3\)</td><td>0.15</td><td>\(0 &lt; z &lt; 1\)</td><td>34</td></tr>
+          <tr><td>\(-3 &lt; z &lt; -2\)</td><td>2.35</td><td>\(1 &lt; z &lt; 2\)</td><td>13.5</td></tr>
+          <tr><td>\(-2 &lt; z &lt; -1\)</td><td>13.5</td><td>\(2 &lt; z &lt; 3\)</td><td>2.35</td></tr>
+          <tr><td>\(-1 &lt; z &lt; 0\)</td><td>34</td><td>\(z &gt; 3\)</td><td>0.15</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">Running totals worth memorising</p>
+          <table class="coord-table" style="margin:10px 0 0;">
+            <tr><th>Event</th><th>Probability</th></tr>
+            <tr><td>\(z &lt; 0\)</td><td>50%</td></tr>
+            <tr><td>\(z &gt; 1\) &nbsp;or&nbsp; \(z &lt; -1\)</td><td>16% each</td></tr>
+            <tr><td>\(z &gt; 2\) &nbsp;or&nbsp; \(z &lt; -2\)</td><td>2.5% each</td></tr>
+            <tr><td>\(z &gt; 3\) &nbsp;or&nbsp; \(z &lt; -3\)</td><td>0.15% each</td></tr>
+            <tr><td>\(|z| &gt; 1\)</td><td>32%</td></tr>
+            <tr><td>\(|z| &gt; 2\)</td><td>5%</td></tr>
+            <tr><td>\(|z| &gt; 3\)</td><td>0.3%</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- ─────────── 3 ─────────── -->
+      <div class="content-card" id="decide">
+        <p class="section-label">Method</p>
+        <h2>Which method do I use?</h2>
+
+        <table class="coord-table">
+          <tr><th>The question says…</th><th>Do this</th></tr>
+          <tr><td>"Find the \(z\)-score"</td><td>\(z = (x - \mu) \div \sigma\)</td></tr>
+          <tr><td>"What value has \(z = \ldots\)"</td><td>\(x = \mu + z\sigma\)</td></tr>
+          <tr><td>"Which performance was better"</td><td>Both \(z\)-scores, then a sentence in context</td></tr>
+          <tr><td>"What percentage lies between…"</td><td>Convert to \(z\), shade, add segments</td></tr>
+          <tr><td>"Find the probability that…"</td><td>Same, then divide the percentage by 100</td></tr>
+          <tr><td>"How many of the \(n\) would you expect"</td><td>\(n \times P\)</td></tr>
+          <tr><td>"The middle 95% lie between…"</td><td>\(\mu \pm 2\sigma\)</td></tr>
+          <tr><td>"More extreme than…"</td><td>Both tails, unless a direction is stated</td></tr>
+          <tr><td>"Should the machine be stopped?"</td><td>\(z\)-score, then probability, then judgement</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">Always, in every question</p>
+          <p style="margin-bottom:0;">Sketch the curve. Mark \(\mu\) and the \(\pm 1, \pm 2,
+            \pm 3\) values. Shade what is asked for. Three-quarters of lost marks in this topic
+            come from shading the wrong region, and a sketch takes fifteen seconds.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4 ─────────── -->
+      <div class="content-card" id="tools">
+        <p class="section-label">Practice</p>
+        <h2>Interactive tools</h2>
+
+        <div class="interactive-block">
+          <h3>Region shader</h3>
+          <p class="exercise-intro">Set the distribution and the range. Leave a limit blank for an
+            open-ended region.</p>
+          <div class="exercise-row">
+            <label>\(\mu\)</label>
+            <input class="exercise-input" id="rgMu" type="text" inputmode="decimal" value="70">
+            <label>\(\sigma\)</label>
+            <input class="exercise-input" id="rgSd" type="text" inputmode="decimal" value="8">
+            <label>from</label>
+            <input class="exercise-input" id="rgLo" type="text" inputmode="decimal" value="62">
+            <label>to</label>
+            <input class="exercise-input" id="rgHi" type="text" inputmode="decimal" value="86">
+            <button class="exercise-check-btn" id="rgBtn">Shade</button>
+          </div>
+          <div id="rgPlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="rgOut" style="margin-top:12px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Rapid recall</h3>
+          <p class="exercise-intro">Give percentages as numbers, e.g. <code>13.5</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(P(-1 \le z \le 1)\) as a percentage &rarr;</label>
+            <input class="exercise-input" id="rrA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rr="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRrA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(P(z &gt; 1)\) as a percentage &rarr;</label>
+            <input class="exercise-input" id="rrB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rr="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRrB"></p>
+
+          <div class="exercise-row">
+            <label>(c) \(P(|z| &gt; 2)\) as a percentage &rarr;</label>
+            <input class="exercise-input" id="rrC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rr="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRrC"></p>
+
+          <div class="exercise-row">
+            <label>(d) \(\mu = 40\), \(\sigma = 6\), \(x = 52\) &rarr; \(z =\)</label>
+            <input class="exercise-input" id="rrD" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rr="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRrD"></p>
+
+          <div class="exercise-row">
+            <label>(e) \(\mu = 40\), \(\sigma = 6\), \(z = -2.5\) &rarr; \(x =\)</label>
+            <input class="exercise-input" id="rrE" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rr="E">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRrE"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 5 ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 6 ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Dropping the negative sign on a \(z\)-score</td>
+            <td>The sign says which side of the mean the value is on — half the information.</td>
+          </tr>
+          <tr>
+            <td>Dividing by \(\sigma^2\) instead of \(\sigma\)</td>
+            <td>The formula uses the standard deviation, not the variance.</td>
+          </tr>
+          <tr>
+            <td>Using \(x = \mu - z\sigma\)</td>
+            <td>It is \(x = \mu + z\sigma\); the sign of \(z\) handles the direction.</td>
+          </tr>
+          <tr>
+            <td>Comparing raw marks across different tests</td>
+            <td>Standardise first — different means and spreads make raw marks incomparable.</td>
+          </tr>
+          <tr>
+            <td>For times, picking the higher \(z\)-score as better</td>
+            <td>When lower is better, the more negative \(z\)-score wins.</td>
+          </tr>
+          <tr>
+            <td>Giving a \(z\)-score with no interpretation</td>
+            <td>Comparison questions carry a separate mark for the conclusion in context.</td>
+          </tr>
+          <tr>
+            <td>Shading the wrong side of the curve</td>
+            <td>Sketch and label \(\mu \pm \sigma, \pm 2\sigma, \pm 3\sigma\) before shading.</td>
+          </tr>
+          <tr>
+            <td>Using 68% for \(P(z &gt; 1)\)</td>
+            <td>68% is the two-sided band. One tail is 16%.</td>
+          </tr>
+          <tr>
+            <td>Halving 95% to get 47.5% for a tail</td>
+            <td>The tail is \((100 - 95) \div 2 = 2.5\%\), not half of 95%.</td>
+          </tr>
+          <tr>
+            <td>Confusing one tail with two</td>
+            <td>"Above 86" is one tail; "differs from the mean by more than 16" is two.</td>
+          </tr>
+          <tr>
+            <td>Giving a percentage where a probability was asked for</td>
+            <td>Divide by 100 — 2.5% is \(P = 0.025\).</td>
+          </tr>
+          <tr>
+            <td>Applying the empirical rule to skewed data</td>
+            <td>It depends on symmetry. Check the shape first.</td>
+          </tr>
+          <tr>
+            <td>Rounding an expected count to a whole number without saying so</td>
+            <td>22.5 students is a valid expected value; state it, then round if the context needs it.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes &mdash; then mark
+          yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident with
+            every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-10', LESSON_IDX = 4;
+
+  function normal(mu, sd) {
+    return function (x) {
+      var z = (x - mu) / sd;
+      return Math.exp(-0.5 * z * z) / (sd * Math.sqrt(2 * Math.PI));
+    };
+  }
+  function num(id) {
+    var v = (document.getElementById(id).value || '').replace(/[^\d.\-]/g, '');
+    return v === '' ? NaN : parseFloat(v);
+  }
+
+  var EDGES = [-3, -2, -1, 0, 1, 2, 3];
+  var CUM   = [0.15, 2.5, 16, 50, 84, 97.5, 99.85];
+  function cumAt(z) {
+    if (z <= -3) return 0.15 * Math.max(0, 1 + (z + 3));
+    if (z >= 3)  return 100 - 0.15 * Math.max(0, 1 - (z - 3));
+    for (var i = 0; i < EDGES.length - 1; i++) {
+      if (z <= EDGES[i + 1]) {
+        var t = (z - EDGES[i]) / (EDGES[i + 1] - EDGES[i]);
+        return CUM[i] + t * (CUM[i + 1] - CUM[i]);
+      }
+    }
+    return 50;
+  }
+  function isEdge(z) { return Math.abs(z - Math.round(z)) < 1e-6 && Math.abs(z) <= 3; }
+
+  /* ── Region shader ────────────────────────────────────────── */
+  (function () {
+    var redraw = null;
+    function run() {
+      var mu = num('rgMu'), sd = num('rgSd'), lo = num('rgLo'), hi = num('rgHi');
+      var out = document.getElementById('rgOut');
+      if (isNaN(mu) || isNaN(sd) || sd <= 0) {
+        out.className = 'exercise-feedback wrong';
+        out.textContent = 'Enter a mean and a positive standard deviation.';
+        return;
+      }
+      if (isNaN(lo) && isNaN(hi)) {
+        out.className = 'exercise-feedback';
+        out.textContent = 'Enter at least one limit.';
+        return;
+      }
+      var zLo = isNaN(lo) ? -4 : (lo - mu) / sd;
+      var zHi = isNaN(hi) ?  4 : (hi - mu) / sd;
+      if (zHi < zLo) { var t = zLo; zLo = zHi; zHi = t; }
+      var f = normal(mu, sd);
+      var opts = {
+        xMin: mu - 4 * sd, xMax: mu + 4 * sd, yMin: 0, yMax: 0.45 / sd,
+        width: 460, height: 300, xStep: sd, yStep: 0.1 / sd, xLabel: 'x',
+        curves: [{ fn: f }],
+        shade: [{ from: mu + zLo * sd, to: mu + zHi * sd, fn: f }]
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('rgPlot', opts);
+      var pct = cumAt(zHi) - cumAt(zLo);
+      var exact = (isNaN(lo) || isEdge(zLo)) && (isNaN(hi) || isEdge(zHi));
+      out.className = 'exercise-feedback ' + (exact ? 'correct' : '');
+      out.textContent =
+        'z from ' + (isNaN(lo) ? '−∞' : zLo.toFixed(2)) + ' to ' + (isNaN(hi) ? '+∞' : zHi.toFixed(2)) +
+        '. Shaded area ≈ ' + pct.toFixed(2) + '%, a probability of about ' + (pct / 100).toFixed(4) + '. ' +
+        (exact
+          ? 'Both limits fall on whole-number z-values, so this is an exact empirical-rule answer.'
+          : 'A limit is not a whole-number z-value, so this figure is interpolated — exam questions ' +
+            'use whole-number z-values only.');
+    }
+    document.getElementById('rgBtn').addEventListener('click', run);
+    run();
+  })();
+
+  /* ── Rapid recall ─────────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [68,   'The inner band of the empirical rule.'],
+      B: [16,   '100 − 68 = 32% sits outside the inner band, split evenly between the two tails.'],
+      C: [5,    '100 − 95 = 5%, split as 2.5% in each tail.'],
+      D: [2,    'z = (52 − 40) ÷ 6 = 12 ÷ 6 = 2.'],
+      E: [25,   'x = μ + zσ = 40 + (−2.5)(6) = 40 − 15 = 25.']
+    };
+    document.querySelectorAll('[data-rr]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.rr, fb = document.getElementById('fbRr' + k);
+        var g = num('rr' + k);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.01;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Recognise that a random variable that is normally distributed can be represented by a bell-shaped curve',
+      'Explain that the mean, median and mode are approximately equal for normally distributed data',
+      'Describe the z-score as the number of standard deviations a value is above or below the mean',
+      'Recognise that a set of z-scores has mean 0 and standard deviation 1',
+      'Calculate a z-score using z = (x − μ) / σ',
+      'Rearrange the formula to find x, μ or σ',
+      'Use z-scores to compare scores from different datasets and justify conclusions in context',
+      'Model and apply the empirical rule: 68%, 95% and 99.7% within 1, 2 and 3 standard deviations',
+      'Calculate probabilities using z-scores and the empirical rule',
+      'Represent probabilities by shading areas under the normal curve',
+      'Use z-scores to find the probability of events less or more extreme than a given event',
+      'Calculate expected numbers in a group using n × P',
+      'Use z-scores to make judgements about outcomes of an event or sets of data',
+      'Recognise when a dataset is skewed and the empirical rule does not apply'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none'; ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0'; li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+    var tally = document.createElement('p');
+    tally.style.cssText = 'margin-top:16px;font-family:var(--font-mono);font-size:12px;color:var(--gray-med);';
+    mount.appendChild(tally);
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'State three properties of a normal distribution.',
+      marks: 3,
+      steps: [
+        'Symmetric about the mean.',
+        'A single peak at the mean, where the mean, median and mode all sit.',
+        'A total area under the curve of 1.'
+      ],
+      answer: 'Symmetry about the mean; a single central peak with mean ≈ median ≈ mode; a total enclosed area of 1.'
+    },
+    {
+      q: 'A dataset is normal with \\(\\mu = 84\\) and \\(\\sigma = 7\\). Find the \\(z\\)-scores of 98 and 70.',
+      marks: 3,
+      steps: [
+        '\\(z = (98 - 84) \\div 7 = 14 \\div 7 = 2\\).',
+        '\\(z = (70 - 84) \\div 7 = -14 \\div 7 = -2\\).'
+      ],
+      answer: '\\(z = 2\\) and \\(z = -2\\).'
+    },
+    {
+      q: 'For the same dataset, find the value with a \\(z\\)-score of \\(1.5\\), and the value with \\(z = -0.5\\).',
+      marks: 4,
+      steps: [
+        '\\(x = 84 + 1.5 \\times 7 = 84 + 10.5 = 94.5\\).',
+        '\\(x = 84 + (-0.5)(7) = 84 - 3.5 = 80.5\\).'
+      ],
+      answer: '94.5 and 80.5.'
+    },
+    {
+      q: 'Explain what it means for a value to have a \\(z\\)-score of 0, and what proportion of data lies below it.',
+      marks: 3,
+      steps: [
+        '\\(z = 0\\) means \\(x = \\mu\\), so the value equals the mean.',
+        'The curve is symmetric about the mean.',
+        'So exactly half — 50% — of the data lies below it.'
+      ],
+      answer: 'The value equals the mean, and by symmetry exactly 50% of the data lies below it.'
+    },
+    {
+      q: 'Heights are normal with \\(\\mu = 168\\) cm and \\(\\sigma = 6\\) cm. Find the interval containing the middle 68%, and the interval containing the middle 99.7%.',
+      marks: 4,
+      steps: [
+        '68% is \\(\\mu \\pm \\sigma\\): \\(168 \\pm 6\\).',
+        'That is 162 cm to 174 cm.',
+        '99.7% is \\(\\mu \\pm 3\\sigma\\): \\(168 \\pm 18\\).',
+        'That is 150 cm to 186 cm.'
+      ],
+      answer: '162 cm to 174 cm, and 150 cm to 186 cm.'
+    },
+    {
+      q: 'For the same heights, find the percentage of people between 156 cm and 174 cm.',
+      marks: 4,
+      steps: [
+        '\\(z = (156 - 168) \\div 6 = -2\\).',
+        '\\(z = (174 - 168) \\div 6 = 1\\).',
+        'Segments from \\(z = -2\\) to \\(z = 1\\): \\(13.5 + 34 + 34\\).',
+        'Total \\(= 81.5\\%\\).'
+      ],
+      answer: '81.5%.'
+    },
+    {
+      q: 'For the same heights, find \\(P(\\text{height} > 180 \\text{ cm})\\).',
+      marks: 3,
+      steps: [
+        '\\(z = (180 - 168) \\div 6 = 2\\).',
+        'Area right of \\(z = 2\\) is \\(2.35 + 0.15 = 2.5\\%\\).',
+        '\\(P = 0.025\\).'
+      ],
+      answer: '\\(P = 0.025\\), or 2.5%.'
+    },
+    {
+      q: 'A value of 61 has a \\(z\\)-score of \\(-1.25\\) in a dataset with \\(\\sigma = 8\\). Find the mean.',
+      marks: 3,
+      steps: [
+        '\\(\\mu = x - z\\sigma\\).',
+        '\\(\\mu = 61 - (-1.25)(8) = 61 + 10\\).',
+        '\\(\\mu = 71\\).'
+      ],
+      answer: '\\(\\mu = 71\\).'
+    },
+    {
+      q: 'Dev scored 77 in Economics (\\(\\mu = 68\\), \\(\\sigma = 12\\)) and 61 in Legal Studies (\\(\\mu = 55\\), \\(\\sigma = 4\\)). In which subject did Dev perform better relative to the cohort? Justify your answer.',
+      marks: 5,
+      steps: [
+        'Economics: \\(z = (77 - 68) \\div 12 = 0.75\\).',
+        'Legal Studies: \\(z = (61 - 55) \\div 4 = 1.5\\).',
+        'Legal Studies has the higher z-score.',
+        'The raw Economics mark was 16 higher, but Economics marks were three times as spread out.',
+        'So 61 placed Dev much further ahead of the Legal Studies cohort.'
+      ],
+      answer: 'Legal Studies (\\(z = 1.5\\)) was the better performance than Economics (\\(z = 0.75\\)). Although the raw Economics mark was higher, the much tighter spread of Legal Studies marks means a 6-mark advantage there counted for more than a 9-mark advantage in Economics.'
+    },
+    {
+      q: 'In a cohort of 1,600 students, marks are normal with \\(\\mu = 58\\), \\(\\sigma = 14\\). How many scored below 30?',
+      marks: 4,
+      steps: [
+        '\\(z = (30 - 58) \\div 14 = -28 \\div 14 = -2\\).',
+        '\\(P(z < -2) = 2.5\\% = 0.025\\).',
+        '\\(1600 \\times 0.025 = 40\\).'
+      ],
+      answer: '40 students.'
+    },
+    {
+      q: 'A cereal machine fills boxes with \\(\\mu = 505\\) g and \\(\\sigma = 5\\) g. Boxes below 495 g cannot be sold. In a production run of 30,000, how many cannot be sold, and what should the company do?',
+      marks: 6,
+      steps: [
+        '\\(z = (495 - 505) \\div 5 = -2\\).',
+        '\\(P(z < -2) = 2.5\\% = 0.025\\).',
+        '\\(30\\,000 \\times 0.025 = 750\\) boxes.',
+        'Raising the mean fill would reduce the number, but wastes cereal on every box.',
+        'Reducing \\(\\sigma\\) through better machine maintenance reduces underfilling without extra cost per box.',
+        'Reducing \\(\\sigma\\) is therefore the better response.'
+      ],
+      answer: '750 boxes. Reducing the variability \\(\\sigma\\) by servicing the machine is the better fix, since raising the mean fill would give away extra cereal in every one of the 30,000 boxes.'
+    },
+    {
+      q: 'Explain the difference between \\(P(z > 2)\\) and \\(P(|z| > 2)\\), giving both values.',
+      marks: 4,
+      steps: [
+        '\\(P(z > 2)\\) is the upper tail alone: 2.5%.',
+        '\\(P(|z| > 2)\\) includes both tails.',
+        'By symmetry each tail is 2.5%.',
+        'So \\(P(|z| > 2) = 5\\%\\), double the one-tailed value.'
+      ],
+      answer: '\\(P(z > 2) = 0.025\\) is the upper tail only; \\(P(|z| > 2) = 0.05\\) covers both tails. Symmetry makes the two-tailed probability exactly double.'
+    },
+    {
+      q: 'A production line is set to \\(\\mu = 750\\) mL with \\(\\sigma = 4\\) mL. A sampled bottle contains 736 mL. Calculate the \\(z\\)-score and advise the supervisor.',
+      marks: 5,
+      steps: [
+        '\\(z = (736 - 750) \\div 4 = -14 \\div 4 = -3.5\\).',
+        'That is beyond three standard deviations below the mean.',
+        '\\(P(z < -3) = 0.15\\%\\), so fewer than about 1 bottle in 670 should be this low.',
+        'Observing one in a small sample is strong evidence the process has drifted.',
+        'The line should be stopped and the filler recalibrated.'
+      ],
+      answer: '\\(z = -3.5\\). Fewer than 0.15% of bottles should fall this low if the machine is set correctly, so this is strong evidence of a fault. The supervisor should stop the line and recalibrate, then sample again to confirm.'
+    },
+    {
+      q: 'A selective programme admits the top 0.15% of applicants on a test with \\(\\mu = 500\\), \\(\\sigma = 100\\). Find the cut-off score, and the expected number admitted from 20,000 applicants.',
+      marks: 5,
+      steps: [
+        'The top 0.15% corresponds to \\(z > 3\\).',
+        '\\(x = 500 + 3 \\times 100 = 800\\).',
+        'The cut-off is 800.',
+        '\\(20\\,000 \\times 0.0015 = 30\\).',
+        'About 30 applicants would be admitted.'
+      ],
+      answer: 'A cut-off of 800, admitting about 30 of the 20,000 applicants.'
+    },
+    {
+      q: 'A news article reports that "students at School A scored, on average, one standard deviation above the state mean, so they are in the top 16% of the state". Evaluate this claim.',
+      marks: 6,
+      steps: [
+        'For an individual student, \\(z = 1\\) does place them in the top 16%.',
+        'But the claim is about the school\'s mean, not an individual student.',
+        'A mean of z = 1 means the average student at School A sits at the 84th percentile.',
+        'It does not mean every student, or even most students, is in the top 16%.',
+        'School A\'s own spread matters: a school with a large \\(\\sigma\\) will have many students well below the state mean.',
+        'The article should also state the sample size and whether the intake is selective, since a selective school\'s results say more about its intake than its teaching.'
+      ],
+      answer: 'The percentage is right for an individual with \\(z = 1\\), but it is being applied to a school average, which is a different claim. A school mean at \\(z = 1\\) means the typical student sits at the 84th percentile — not that the student body as a whole is in the top 16%. The report also omits School A\'s own spread and whether its intake is selective, both of which are needed before drawing any conclusion about the school.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  IE.completeBanner({
+    mount: 'completeBtn', topicId: TOPIC_ID, lessonIdx: LESSON_IDX,
+    label: 'Mark as complete', doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

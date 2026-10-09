@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Network Flow Terminology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 6 &mdash; Network Flow</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Network Flow Terminology</h1>
+      <p class="subtitle">Water through pipes, data through cables, traffic through roads. A flow
+        network models any system where something moves from a source to a sink through channels
+        of limited capacity.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-06</span>
+        <span class="pill">Source &amp; sink</span>
+        <span class="pill">Flow capacity</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Directed networks</li>
+        <li>Source, sink and capacity</li>
+        <li>Building a diagram from a table</li>
+        <li>What makes a flow valid</li>
+        <li>Inflow equals outflow</li>
+        <li>Finding unknown flows</li>
+        <li>Simple bottlenecks</li>
+        <li>Class activity: upgrade on a budget</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#directed">1 &nbsp;Directed networks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#terms">2 &nbsp;The key terms</a></li>
+        <li class="toc-item"><a class="toc-link" href="#tables">3 &nbsp;Tables to diagrams</a></li>
+        <li class="toc-item"><a class="toc-link" href="#valid">4 &nbsp;Valid flows</a></li>
+        <li class="toc-item"><a class="toc-link" href="#unknown">5 &nbsp;Finding unknown flows</a></li>
+        <li class="toc-item"><a class="toc-link" href="#bottleneck">6 &nbsp;Finding bottlenecks</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. DIRECTED ─────────── -->
+      <div class="content-card" id="directed">
+        <p class="section-label">Theory</p>
+        <h2>Directed networks</h2>
+
+        <p>In Year 11 you met networks of <strong>vertices</strong> joined by
+          <strong>edges</strong>. A flow network adds two things: <strong>direction</strong> and
+          <strong>capacity</strong>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Directed and weighted</p>
+          <p style="margin-bottom:0;">
+            A <strong>directed network</strong> has arrows on its edges — flow can only travel the
+            way the arrow points.<br>
+            A <strong>weighted network</strong> has a number on each edge. In a flow network that
+            number is the <strong>flow capacity</strong>: the maximum that can pass along that edge
+            per unit of time.
+          </p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 440 240" width="440">
+            <defs>
+              <marker id="ah1" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 9 3.5, 0 7" class="arrowhead-fill"/>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="72"  y1="120" x2="168" y2="60"  marker-end="url(#ah1)"/>
+            <line class="edge-line" x1="72"  y1="120" x2="168" y2="180" marker-end="url(#ah1)"/>
+            <line class="edge-line" x1="196" y1="60"  x2="284" y2="60"  marker-end="url(#ah1)"/>
+            <line class="edge-line" x1="196" y1="180" x2="284" y2="180" marker-end="url(#ah1)"/>
+            <line class="edge-line" x1="190" y1="76"  x2="286" y2="164" marker-end="url(#ah1)"/>
+            <line class="edge-line" x1="312" y1="60"  x2="378" y2="112" marker-end="url(#ah1)"/>
+            <line class="edge-line" x1="312" y1="180" x2="378" y2="128" marker-end="url(#ah1)"/>
+            <circle class="node-circle" cx="60"  cy="120" r="22"/>
+            <circle class="node-circle" cx="182" cy="60"  r="20"/>
+            <circle class="node-circle" cx="182" cy="180" r="20"/>
+            <circle class="node-circle" cx="298" cy="60"  r="20"/>
+            <circle class="node-circle" cx="298" cy="180" r="20"/>
+            <circle class="node-circle" cx="392" cy="120" r="22"/>
+            <text class="node-label" x="52"  y="126">S</text>
+            <text class="node-label" x="176" y="66">A</text>
+            <text class="node-label" x="176" y="186">B</text>
+            <text class="node-label" x="292" y="66">C</text>
+            <text class="node-label" x="292" y="186">D</text>
+            <text class="node-label" x="386" y="126">T</text>
+            <text class="edge-weight-label" x="108" y="78">12</text>
+            <text class="edge-weight-label" x="108" y="168">9</text>
+            <text class="edge-weight-label" x="236" y="50">7</text>
+            <text class="edge-weight-label" x="236" y="200">10</text>
+            <text class="edge-weight-label" x="252" y="130">5</text>
+            <text class="edge-weight-label" x="352" y="76">8</text>
+            <text class="edge-weight-label" x="352" y="168">11</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">A flow network. S is the source, T is the sink, and each edge is
+          labelled with its capacity.</p>
+      </div>
+
+      <!-- ─────────── 2. TERMS ─────────── -->
+      <div class="content-card" id="terms">
+        <p class="section-label">Theory</p>
+        <h2>The key terms</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Flow network vocabulary</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>Source</strong> — where the flow originates. It has edges leaving it but
+              none entering. Usually labelled \(S\).</li>
+            <li><strong>Sink</strong> — the destination. It has edges entering but none leaving.
+              Usually labelled \(T\).</li>
+            <li><strong>Flow capacity</strong> — the maximum rate that can pass along an edge,
+              shown as the edge's weight.</li>
+            <li><strong>Flow</strong> — the amount actually travelling along an edge. It can never
+              exceed the capacity.</li>
+            <li><strong>Cut</strong> — a line drawn through the network that separates the source
+              from the sink completely.</li>
+            <li><strong>Capacity of a cut</strong> — the sum of the capacities of the edges the cut
+              crosses, counting only those flowing from the source side to the sink side.</li>
+          </ul>
+        </div>
+
+        <p>Everything in this topic comes back to one question: <strong>what is the greatest rate
+          that can travel from source to sink?</strong> That is the
+          <strong>maximum flow</strong>.</p>
+
+        <table class="coord-table">
+          <tr><th>Context</th><th>Source</th><th>Sink</th><th>Capacity means</th></tr>
+          <tr><td>Water supply</td><td>Reservoir</td><td>Town</td><td>Litres per minute a pipe carries</td></tr>
+          <tr><td>Traffic</td><td>Suburb</td><td>City centre</td><td>Cars per hour a road takes</td></tr>
+          <tr><td>Data</td><td>Server</td><td>User</td><td>Megabits per second on a link</td></tr>
+          <tr><td>Freight</td><td>Factory</td><td>Warehouse</td><td>Tonnes per day on a route</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">An important limit</p>
+          <p style="margin-bottom:0;">The maximum flow can <strong>never exceed the total capacity
+            of the edges leaving the source</strong>, nor the total capacity of the edges entering
+            the sink. Those two numbers give you instant upper bounds — always calculate them as a
+            sanity check.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Identify the parts</h3>
+          <p class="exercise-intro">Using the network at the top of this lesson.</p>
+
+          <div class="exercise-row">
+            <label>(a) What is the total capacity of the edges leaving the source S?</label>
+            <input class="exercise-input" id="tmA" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-tm="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTmA"></p>
+
+          <div class="exercise-row">
+            <label>(b) What is the total capacity of the edges entering the sink T?</label>
+            <input class="exercise-input" id="tmB" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-tm="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTmB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Hence, what is the largest the maximum flow could possibly be?</label>
+            <input class="exercise-input" id="tmC" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-tm="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTmC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A network has edges S→P 25, S→Q 15, P→Q 6, P→T 18 and Q→T 20. Find an upper bound
+              for the maximum flow.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Out of S: \(25 + 15 = 40\). Into T: \(18 + 20 = 38\).</p>
+                <p>The maximum flow is at most the smaller, 38.</p>
+              </div></details></li>
+            <li>An electricity grid carries power from a power station to a suburb. Describe the
+              source, the sink, the edges and the capacities.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Source: the power station. Sink: the suburb. Edges: transmission lines (and the
+                  substations they connect). Capacities: the maximum power each line can carry,
+                  for example in megawatts.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. TABLES ─────────── -->
+      <div class="content-card" id="tables">
+        <p class="section-label">Method</p>
+        <h2>Converting a table to a network diagram</h2>
+
+        <p>The syllabus asks you to <em>convert information presented in a table to a weighted and
+          directed network diagram</em>. Tables come in two forms.</p>
+
+        <h3>Form 1: a list of connections</h3>
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Draw the network described by this table.</p>
+          <table class="coord-table">
+            <tr><th>From</th><th>To</th><th>Capacity</th></tr>
+            <tr><td>S</td><td>A</td><td>10</td></tr>
+            <tr><td>S</td><td>B</td><td>8</td></tr>
+            <tr><td>A</td><td>C</td><td>6</td></tr>
+            <tr><td>A</td><td>B</td><td>4</td></tr>
+            <tr><td>B</td><td>C</td><td>9</td></tr>
+            <tr><td>C</td><td>T</td><td>13</td></tr>
+          </table>
+          <p><strong>Method:</strong> mark each vertex, then draw one arrow per row pointing
+            from → to, labelled with the capacity. The source is the vertex with no arrows in
+            (S), and the sink is the one with no arrows out (T).</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 220" width="400">
+            <defs>
+              <marker id="ah2" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 9 3.5, 0 7" class="arrowhead-fill"/>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="70"  y1="95"  x2="146" y2="55"  marker-end="url(#ah2)"/>
+            <line class="edge-line" x1="70"  y1="125" x2="146" y2="165" marker-end="url(#ah2)"/>
+            <line class="edge-line" x1="168" y1="78"  x2="168" y2="142" marker-end="url(#ah2)"/>
+            <line class="edge-line" x1="192" y1="55"  x2="256" y2="95"  marker-end="url(#ah2)"/>
+            <line class="edge-line" x1="192" y1="165" x2="256" y2="125" marker-end="url(#ah2)"/>
+            <line class="edge-line" x1="300" y1="110" x2="346" y2="110" marker-end="url(#ah2)"/>
+            <circle class="node-circle" cx="52"  cy="110" r="20"/>
+            <circle class="node-circle" cx="168" cy="55"  r="20"/>
+            <circle class="node-circle" cx="168" cy="165" r="20"/>
+            <circle class="node-circle" cx="278" cy="110" r="20"/>
+            <circle class="node-circle" cx="368" cy="110" r="20"/>
+            <text class="node-label" x="46"  y="116">S</text>
+            <text class="node-label" x="162" y="61">A</text>
+            <text class="node-label" x="162" y="171">B</text>
+            <text class="node-label" x="272" y="116">C</text>
+            <text class="node-label" x="362" y="116">T</text>
+            <text class="edge-weight-label" x="96"  y="66">10</text>
+            <text class="edge-weight-label" x="96"  y="160">8</text>
+            <text class="edge-weight-label" x="176" y="114">4</text>
+            <text class="edge-weight-label" x="228" y="66">6</text>
+            <text class="edge-weight-label" x="228" y="160">9</text>
+            <text class="edge-weight-label" x="318" y="100">13</text>
+          </svg>
+        </div>
+
+        <h3>Form 2: a matrix</h3>
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>This matrix shows capacities. Read the row as "from" and the column as "to".</p>
+          <table class="coord-table">
+            <tr><th>from \ to</th><th>S</th><th>A</th><th>B</th><th>T</th></tr>
+            <tr><th>S</th><td>–</td><td>14</td><td>11</td><td>0</td></tr>
+            <tr><th>A</th><td>0</td><td>–</td><td>6</td><td>9</td></tr>
+            <tr><th>B</th><td>0</td><td>0</td><td>–</td><td>12</td></tr>
+            <tr><th>T</th><td>0</td><td>0</td><td>0</td><td>–</td></tr>
+          </table>
+          <p>Non-zero entries become arrows. Here: S→A (14), S→B (11), A→B (6), A→T (9),
+            B→T (12).</p>
+          <p><strong>Spotting source and sink from the matrix:</strong> the source's
+            <em>column</em> is all zeros (nothing flows into it); the sink's <em>row</em> is all
+            zeros (nothing flows out of it).</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Reading a table</h3>
+          <p class="exercise-intro">Using the matrix in Worked example 2.</p>
+
+          <div class="exercise-row">
+            <label>(a) How many directed edges does the network have?</label>
+            <input class="exercise-input" id="tbA" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-tb="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTbA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Total capacity leaving the source?</label>
+            <input class="exercise-input" id="tbB" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-tb="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTbB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Total capacity entering the sink?</label>
+            <input class="exercise-input" id="tbC" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-tb="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTbC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>For this capacity matrix, list the edges and identify the source and sink.
+              <table class="coord-table">
+                <tr><th>from \ to</th><th>S</th><th>A</th><th>B</th><th>T</th></tr>
+                <tr><th>S</th><td>–</td><td>8</td><td>5</td><td>0</td></tr>
+                <tr><th>A</th><td>0</td><td>–</td><td>3</td><td>6</td></tr>
+                <tr><th>B</th><td>0</td><td>0</td><td>–</td><td>9</td></tr>
+                <tr><th>T</th><td>0</td><td>0</td><td>0</td><td>–</td></tr>
+              </table>
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Edges: S→A 8, S→B 5, A→B 3, A→T 6, B→T 9 (five edges).</p>
+                <p>Source S (its column is all zeros); sink T (its row is all zeros).</p>
+              </div></details></li>
+            <li>For that network, find the capacity out of the source and into the sink.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Out of S: \(8 + 5 = 13\). Into T: \(6 + 9 = 15\). The maximum flow is at most
+                  13.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. VALID ─────────── -->
+      <div class="content-card" id="valid">
+        <p class="section-label">Theory</p>
+        <h2>What makes a flow valid</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The two rules every flow must obey</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Capacity rule.</strong> The flow along an edge can never exceed that edge's
+              capacity.</li>
+            <li><strong>Conservation rule.</strong> At every vertex except the source and the sink,
+              <strong>flow in = flow out</strong>. Nothing accumulates and nothing appears from
+              nowhere.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>A vertex has two edges entering it carrying 6 and 5 units, and two edges leaving with
+            capacities 8 and 7. How much must leave, and is it possible?</p>
+          <p><strong>Flow in:</strong> \(6 + 5 = 11\) units, so 11 units must leave.</p>
+          <p><strong>Capacity out:</strong> \(8 + 7 = 15\) units.</p>
+          <p>Since \(11 \le 15\), it is possible. The 11 units could split as 8 and 3, or 7 and 4,
+            or any combination totalling 11 within the limits.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; an impossible situation</p>
+          <p>A vertex receives 14 units but its outgoing edges have capacities 6 and 5. What
+            happens?</p>
+          <p>Only \(6 + 5 = 11\) units can leave, but 14 arrive. Conservation is violated, so the
+            flow of 14 into that vertex is <strong>not achievable</strong>. In practice the
+            incoming flow would be limited to 11 &mdash; this vertex is a
+            <strong>bottleneck</strong>.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Conservation checker</h3>
+          <p class="exercise-intro">Set the flows into a vertex and the capacities out. The
+            checker tells you whether conservation can be satisfied.</p>
+          <div id="consSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Flow in</div>
+              <div class="readout-value" id="roIn">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Capacity out</div>
+              <div class="readout-value" id="roOut">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Spare capacity</div>
+              <div class="readout-value" id="roSpare">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="consNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A vertex receives 8 and 9 units. Its outgoing edges have capacities 10 and 5. Is
+              this achievable? If not, what is the most that can flow into the vertex?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>In: 17. Out: at most \(10 + 5 = 15\). Not achievable &mdash; at most 15 units
+                  can pass through.</p>
+              </div></details></li>
+            <li>Is this flow valid? (flow/capacity) S→A 7/7, S→B 5/6, A→B 1/3, A→T 6/8,
+              B→T 6/6.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Capacities: no flow exceeds its capacity ✓</p>
+                <p>At A: in 7, out \(1 + 6 = 7\) ✓. At B: in \(5 + 1 = 6\), out 6 ✓.</p>
+                <p>Valid, with a total flow of 12.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. UNKNOWN FLOWS ─────────── -->
+      <div class="content-card" id="unknown">
+        <p class="section-label">Method</p>
+        <h2>Using conservation to find unknown flows</h2>
+
+        <p>Exam questions often show a flow with some values missing. Conservation at each
+          intermediate vertex gives an equation &mdash; solve them one vertex at a time, starting
+          where only one value is unknown.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The routine</p>
+          <ol style="margin-bottom:0;">
+            <li>Find a vertex with only one unknown flow touching it.</li>
+            <li>Write flow in = flow out and solve.</li>
+            <li>Move to the next vertex and repeat.</li>
+            <li>Check every flow is within its capacity, and that flow out of S equals flow into
+              T.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A network carries these flows (flow/capacity): S→A 12/15, S→B \(x\)/10,
+            A→B 4/6, A→T \(y\)/9, B→T 13/14. Find \(x\) and \(y\).</p>
+          <p><strong>At A:</strong> in 12, out \(4 + y\). So \(12 = 4 + y\), giving \(y = 8\).
+            (Within capacity 9 ✓)</p>
+          <p><strong>At B:</strong> in \(x + 4\), out 13. So \(x = 9\). (Within capacity 10 ✓)</p>
+          <p><strong>Check:</strong> out of S \(= 12 + 9 = 21\); into T \(= 8 + 13 = 21\) ✓</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Flows: S→A 10, S→B \(x\), A→C 6, A→B \(y\), B→C 7, B→T 5, C→T \(z\). Find \(x\),
+              \(y\) and \(z\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>At A: \(10 = 6 + y \Rightarrow y = 4\).</p>
+                <p>At B: \(x + 4 = 7 + 5 \Rightarrow x = 8\).</p>
+                <p>At C: \(6 + 7 = z \Rightarrow z = 13\).</p>
+                <p>Check: out of S \(= 18\), into T \(= 13 + 5 = 18\) ✓</p>
+              </div></details></li>
+            <li>In the worked example, could the total flow be increased by sending more along
+              S→B? Explain.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>S→B has 1 spare unit (9/10), and B→T has 1 spare (13/14). So 1 more unit can
+                  travel S→B→T, raising the total to 22.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. BOTTLENECK ─────────── -->
+      <div class="content-card" id="bottleneck">
+        <p class="section-label">Application</p>
+        <h2>Finding simple bottlenecks</h2>
+
+        <p>A <strong>bottleneck</strong> is the constraint that limits the whole network. Before
+          learning the formal cut method in Lesson 2, you can find the maximum flow on small
+          networks by reasoning about the paths.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Flow along a single path</p>
+          <p style="margin-bottom:0;">The flow along a path is limited by its
+            <strong>smallest capacity edge</strong> — the narrowest pipe in the chain. A path with
+            capacities 12, 5 and 9 can carry only 5 units.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>Find the maximum flow in a network with two independent paths:
+            S→A→T with capacities 9 and 6, and S→B→T with capacities 4 and 7.</p>
+          <p><strong>Path 1:</strong> limited by the smaller of 9 and 6, so 6 units.</p>
+          <p><strong>Path 2:</strong> limited by the smaller of 4 and 7, so 4 units.</p>
+          <p>The paths do not share any edges, so the flows add:</p>
+          \[\text{Maximum flow} = 6 + 4 = 10 \text{ units}\]
+          <p><strong>Check against the bounds:</strong> capacity out of S is \(9 + 4 = 13\);
+            capacity into T is \(6 + 7 = 13\). Both exceed 10, so 10 is consistent.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; in context</p>
+          <p>A water authority pumps from a reservoir (S) to a town (T) through two pipelines. Route
+            1 has sections of 400 and 350 kL/h; route 2 has sections of 280 and 310 kL/h. The town
+            needs 700 kL/h. Can demand be met?</p>
+          <p><strong>Route 1:</strong> \(\min(400, 350) = 350\) kL/h.</p>
+          <p><strong>Route 2:</strong> \(\min(280, 310) = 280\) kL/h.</p>
+          <p><strong>Total:</strong> \(350 + 280 = 630\) kL/h.</p>
+          <p>Since \(630 < 700\), <strong>demand cannot be met</strong> — the network falls 70 kL/h
+            short. Upgrading the 280 kL/h section to at least 350 kL/h would lift the total to
+            700 kL/h.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two-path flow explorer</h3>
+          <p class="exercise-intro">Set the capacities on two independent paths and a demand
+            level. The explorer identifies each bottleneck and whether demand is met.</p>
+          <div id="pathSliders"></div>
+          <div class="diagram-wrap"><div id="pathDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Path 1 flow</div>
+              <div class="readout-value" id="roP1">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Path 2 flow</div>
+              <div class="readout-value" id="roP2">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Maximum flow</div>
+              <div class="readout-value" id="roMax">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="pathNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; exam style</p>
+          <p>Three independent pipelines carry gas from a gas field (S) to a city (T). Capacities
+            are in terajoules per day (TJ/day):</p>
+          <table class="coord-table">
+            <tr><th>Route</th><th>Section capacities</th></tr>
+            <tr><td>1</td><td>120, 90, 150</td></tr>
+            <tr><td>2</td><td>80, 110</td></tr>
+            <tr><td>3</td><td>100, 70, 95</td></tr>
+          </table>
+          <p><strong>(a) Find the maximum flow.</strong> [1 mark]</p>
+          <p>Bottlenecks: 90, 80 and 70, so the maximum flow is \(90 + 80 + 70 = 240\) TJ/day.</p>
+          <p><strong>(b) The city needs 280 TJ/day. Can a single section upgrade meet
+            demand?</strong> [2 marks]</p>
+          <p>The shortfall is 40. Upgrading a bottleneck helps only until the next-smallest section
+            on that route: route 1 can gain at most 30 (90 → 120), route 2 at most 30
+            (80 → 110), route 3 at most 25 (70 → 95). No single upgrade gives 40, so no.</p>
+          <p><strong>(c) Upgrades cost $2 million per 10 TJ/day. Find the minimum cost to meet
+            demand.</strong> [1 mark]</p>
+          <p>Any combination adding 40 TJ/day, for example route 1 +30 and route 3 +10, costs
+            \(4 \times \$2\text{M} = \$8\) million.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Three independent paths from S to T have capacities (12, 8, 15), (10, 14) and
+              (6, 9, 7). Find the maximum flow.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Bottlenecks 8, 10 and 6: maximum flow \(= 24\).</p>
+              </div></details></li>
+            <li>Demand is 30. Which single edge upgrade gives the biggest increase, and is it
+              enough?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Path 1: 8 → 12 gives +4. Path 2: 10 → 14 gives +4. Path 3: 6 → 7 gives only +1.</p>
+                <p>The best single upgrade adds 4, reaching 28 &mdash; still short of 30.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Upgrade the network on a budget</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> In the
+          <a href="#bottleneck">two-path flow explorer</a>, set S→A 12, A→T 7, S→B 5, B→T 9. Each
+          extra unit of capacity on any edge costs $1,000.</p>
+        <ol>
+          <li>Find the current maximum flow.</li>
+          <li>Demand is 20. Find the cheapest set of upgrades that meets it. What does it
+            cost?</li>
+          <li>Demand rises to 25. Find the cheapest plan now. Why does each extra unit eventually
+            cost more?</li>
+          <li>A rival suggests adding 20 units to S→A for $20,000. Explain why that wastes
+            money.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> Path 1 gives \(\min(12, 7) = 7\); path 2 gives \(\min(5, 9) = 5\);
+            maximum flow 12.</p>
+          <p><strong>2.</strong> 8 more units are needed. Raise A→T from 7 to 12 (+5, $5,000)
+            and S→B from 5 to 8 (+3, $3,000): $8,000 in total. Only bottleneck upgrades help.</p>
+          <p><strong>3.</strong> Raising A→T to 12 and S→B to 9 gives 21 for $9,000. Beyond that,
+            both edges on a path are equal, so each extra unit needs both edges raised &mdash;
+            $2,000 per unit. 4 more units cost $8,000: $17,000 in total.</p>
+          <p><strong>4.</strong> S→A is not the bottleneck on path 1 (A→T is). Adding capacity
+            there changes nothing.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Draw the network for every question before you calculate.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 introduces cuts &mdash; the systematic way to find the maximum flow in any
+          network.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-6', LESSON_IDX = 0;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function numCheck(sel, prefix, ANS) {
+    document.querySelectorAll(sel).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset[prefix.toLowerCase()];
+        var fb = document.getElementById('fb' + prefix + k);
+        var g = parseFloat((document.getElementById(prefix.toLowerCase() + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  }
+
+  /* ── Terminology exercises (top network) ──────────────────── */
+  numCheck('[data-tm]', 'Tm', {
+    A: [21, 'The edges leaving S are S→A (12) and S→B (9), so 12 + 9 = 21.'],
+    B: [19, 'The edges entering T are C→T (8) and D→T (11), so 8 + 11 = 19.'],
+    C: [19, 'The maximum flow cannot exceed either bound, so it is at most the smaller of 21 and 19 — that is 19.']
+  });
+
+  /* ── Matrix exercises ─────────────────────────────────────── */
+  numCheck('[data-tb]', 'Tb', {
+    A: [5,  'The non-zero entries are S→A, S→B, A→B, A→T and B→T — five directed edges.'],
+    B: [25, 'Row S has 14 and 11, so the capacity leaving the source is 25.'],
+    C: [21, 'Column T has 9 (from A) and 12 (from B), so the capacity entering the sink is 21.']
+  });
+
+  /* ── Conservation checker ─────────────────────────────────── */
+  (function () {
+    var in1 = 6, in2 = 5, out1 = 8, out2 = 7;
+    function update() {
+      var tin = in1 + in2, tout = out1 + out2;
+      document.getElementById('roIn').textContent    = tin + ' units';
+      document.getElementById('roOut').textContent   = tout + ' units';
+      document.getElementById('roSpare').textContent = (tout - tin) + ' units';
+      var note = document.getElementById('consNote');
+      if (tin <= tout) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Conservation can be satisfied: ' + tin + ' units arrive and up to ' +
+          tout + ' can leave, so all ' + tin + ' units pass through with ' + (tout - tin) +
+          ' units of spare capacity.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Not possible: ' + tin + ' units arrive but only ' + tout +
+          ' can leave. This vertex is a bottleneck — the inflow would be limited to ' + tout + ' units.';
+      }
+    }
+    var host = 'consSliders';
+    IE.slider({ mount: host, label: 'Flow in 1',  min: 0, max: 20, step: 1, value: in1,  onInput: function (v) { in1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Flow in 2',  min: 0, max: 20, step: 1, value: in2,  onInput: function (v) { in2 = v; update(); } });
+    IE.slider({ mount: host, label: 'Capacity out 1', min: 0, max: 20, step: 1, value: out1, onInput: function (v) { out1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Capacity out 2', min: 0, max: 20, step: 1, value: out2, onInput: function (v) { out2 = v; update(); } });
+    update();
+  })();
+
+  /* ── Two-path explorer ────────────────────────────────────── */
+  (function () {
+    var a1 = 9, a2 = 6, b1 = 4, b2 = 7, demand = 10;
+    var mount = document.getElementById('pathDiagram');
+
+    function update() {
+      var f1 = Math.min(a1, a2), f2 = Math.min(b1, b2), total = f1 + f2;
+
+      var W = 400, H = 210;
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      var defs = svgEl('defs');
+      var mk = svgEl('marker', { id: 'ahp', markerWidth: 9, markerHeight: 7, refX: 8, refY: 3.5, orient: 'auto' });
+      mk.appendChild(svgEl('polygon', { points: '0 0, 9 3.5, 0 7', class: 'arrowhead-fill' }));
+      defs.appendChild(mk); svg.appendChild(defs);
+
+      var pts = { S: [48, 105], A: [190, 50], B: [190, 160], T: [340, 105] };
+      function edge(p, q, cap, isMin) {
+        svg.appendChild(svgEl('line', {
+          class: 'edge-line', x1: pts[p][0] + 20, y1: pts[p][1], x2: pts[q][0] - 22, y2: pts[q][1],
+          'stroke-width': isMin ? 3.2 : 1.6, 'marker-end': 'url(#ahp)'
+        }));
+        svg.appendChild(svgEl('text', { class: 'edge-weight-label',
+          x: (pts[p][0] + pts[q][0]) / 2, y: (pts[p][1] + pts[q][1]) / 2 - 8, 'text-anchor': 'middle' },
+          cap + (isMin ? ' ◄' : '')));
+      }
+      edge('S', 'A', a1, a1 <= a2);
+      edge('A', 'T', a2, a2 < a1);
+      edge('S', 'B', b1, b1 <= b2);
+      edge('B', 'T', b2, b2 < b1);
+      Object.keys(pts).forEach(function (k) {
+        svg.appendChild(svgEl('circle', { class: 'node-circle', cx: pts[k][0], cy: pts[k][1], r: 20 }));
+        svg.appendChild(svgEl('text', { class: 'node-label', x: pts[k][0] - 6, y: pts[k][1] + 6 }, k));
+      });
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roP1').textContent  = f1 + ' units';
+      document.getElementById('roP2').textContent  = f2 + ' units';
+      document.getElementById('roMax').textContent = total + ' units';
+
+      var note = document.getElementById('pathNote');
+      if (total >= demand) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Demand of ' + demand + ' is met — the network carries ' + total +
+          ' units, with ' + (total - demand) + ' to spare. Path 1 is limited by its ' + f1 +
+          '-unit edge and path 2 by its ' + f2 + '-unit edge (marked ◄).';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'Demand of ' + demand + ' cannot be met — the network carries only ' +
+          total + ' units, falling ' + (demand - total) +
+          ' short. Widening a bottleneck edge (marked ◄) is the only way to increase the flow.';
+      }
+    }
+
+    var host = 'pathSliders';
+    IE.slider({ mount: host, label: 'S→A', min: 1, max: 20, step: 1, value: a1, onInput: function (v) { a1 = v; update(); } });
+    IE.slider({ mount: host, label: 'A→T', min: 1, max: 20, step: 1, value: a2, onInput: function (v) { a2 = v; update(); } });
+    IE.slider({ mount: host, label: 'S→B', min: 1, max: 20, step: 1, value: b1, onInput: function (v) { b1 = v; update(); } });
+    IE.slider({ mount: host, label: 'B→T', min: 1, max: 20, step: 1, value: b2, onInput: function (v) { b2 = v; update(); } });
+    IE.slider({ mount: host, label: 'Demand', min: 1, max: 40, step: 1, value: demand, onInput: function (v) { demand = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'In a flow network, what identifies the source?',
+      opts: [
+        'A) The vertex with the most edges',
+        'B) The vertex with edges leaving but none entering',
+        'C) The vertex with the highest capacity edge',
+        'D) The vertex with edges entering but none leaving'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Flow originates at the source, so nothing enters it. Option D describes the sink.'
+    },
+    {
+      q: 'What does the weight on an edge of a flow network represent?',
+      opts: [
+        'A) The distance between the vertices',
+        'B) The time taken to travel the edge',
+        'C) The maximum flow the edge can carry',
+        'D) The cost of using the edge'
+      ],
+      correct: 2,
+      explanation: 'C is correct. In a flow network the weight is the flow capacity — the maximum rate that can pass along that edge. In other kinds of weighted network the weight may indeed be distance or time, so read the context.'
+    },
+    {
+      q: 'A path from S to T passes through edges with capacities 15, 7 and 11. What is the maximum flow along this path?',
+      opts: ['A) 33', 'B) 15', 'C) 11', 'D) 7'],
+      correct: 3,
+      explanation: 'D is correct. A path can carry no more than its narrowest edge, so the 7-capacity edge limits the whole path to 7 units. Option A adds the capacities, which is never valid for edges in series.'
+    },
+    {
+      q: 'At a vertex that is neither the source nor the sink, 9 units flow in. How much must flow out?',
+      opts: ['A) At most 9', 'B) Exactly 9', 'C) At least 9', 'D) It depends on the capacities'],
+      correct: 1,
+      explanation: 'B is correct. The conservation rule requires flow in to equal flow out at every intermediate vertex — nothing accumulates. The outgoing capacities must be at least 9 for this to be possible.'
+    },
+    {
+      q: 'The edges leaving the source have total capacity 24 and those entering the sink total 19. What can you conclude about the maximum flow?',
+      opts: [
+        'A) It is exactly 19',
+        'B) It is exactly 24',
+        'C) It is at most 19',
+        'D) It is at least 19'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The flow cannot exceed either bound, so it is at most the smaller, 19. It may well be less if a bottleneck exists elsewhere in the network — these bounds are upper limits, not the answer.'
+    },
+    {
+      q: 'In a capacity matrix, how do you identify the sink?',
+      opts: [
+        'A) Its row is all zeros',
+        'B) Its column is all zeros',
+        'C) It has the largest entries',
+        'D) It appears first in the table'
+      ],
+      correct: 0,
+      explanation: 'A is correct. The row shows what flows <em>out</em> of a vertex, and nothing leaves the sink, so its row is all zeros. The source is the one whose <em>column</em> is all zeros.'
+    },
+    {
+      q: 'Two independent paths from S to T can carry 8 and 5 units. A town needs 15 units. What should be concluded?',
+      opts: [
+        'A) Demand is met with 2 units to spare',
+        'B) Demand is not met — the network carries 13, falling 2 short',
+        'C) Demand is exactly met',
+        'D) The paths can be combined to carry 40 units'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Independent paths add, giving \\(8 + 5 = 13\\) units, which is 2 short of the 15 required. Increasing capacity on a bottleneck edge would be needed to meet demand.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Define source, sink and flow capacity in a network.',
+      marks: 3,
+      steps: [
+        'The source is where the flow originates — edges leave it but none enter.',
+        'The sink is the destination — edges enter it but none leave.',
+        'The flow capacity of an edge is the maximum amount that can pass along it per unit of time, shown as the edge\'s weight.'
+      ],
+      answer: 'Source: the origin of the flow, with no incoming edges. Sink: the destination, with no outgoing edges. Flow capacity: the maximum rate an edge can carry, written as its weight.'
+    },
+    {
+      q: 'A table lists: S→A 12, S→B 9, A→C 7, B→C 5, B→D 8, C→T 10, D→T 6. Identify the source and sink, and state the number of vertices and edges.',
+      marks: 4,
+      steps: [
+        'S never appears in the "to" column, so S is the source.',
+        'T never appears in the "from" column, so T is the sink.',
+        'Vertices listed: S, A, B, C, D, T — six in total.',
+        'Each row is one directed edge, so there are seven edges.'
+      ],
+      answer: 'Source S, sink T; 6 vertices and 7 directed edges.'
+    },
+    {
+      q: 'For the network in the previous question, find the total capacity leaving the source and entering the sink, and hence an upper bound for the maximum flow.',
+      marks: 3,
+      steps: [
+        'Leaving S: \\(12 + 9 = 21\\).',
+        'Entering T: \\(10 + 6 = 16\\).',
+        'The flow cannot exceed either, so it is at most the smaller of the two.'
+      ],
+      answer: '21 leaving S, 16 entering T; the maximum flow is at most 16.'
+    },
+    {
+      q: 'A path from S to T has edges with capacities 20, 14, 9 and 17. What is the greatest flow along this path, and which edge limits it?',
+      marks: 2,
+      steps: [
+        'Edges in series are limited by the narrowest.',
+        'The smallest capacity is 9.'
+      ],
+      answer: '9 units, limited by the 9-capacity edge — the bottleneck of that path.'
+    },
+    {
+      q: 'Explain the conservation rule and why it applies at intermediate vertices but not at the source or sink.',
+      marks: 3,
+      steps: [
+        'Conservation requires flow in to equal flow out at each intermediate vertex.',
+        'Nothing is created or stored at an intermediate vertex — it is a junction, not a reservoir.',
+        'The source produces flow, so it has outflow but no inflow.',
+        'The sink absorbs flow, so it has inflow but no outflow.'
+      ],
+      answer: 'At intermediate vertices flow in must equal flow out, because they are junctions that neither create nor store material. The source generates the flow and the sink consumes it, so the rule cannot apply to them.'
+    },
+    {
+      q: 'A vertex receives 7 and 6 units along two edges. Its outgoing edges have capacities 5 and 6. Is a flow of 13 into this vertex possible? Explain.',
+      marks: 3,
+      steps: [
+        'Flow in \\(= 7 + 6 = 13\\) units.',
+        'Capacity out \\(= 5 + 6 = 11\\) units.',
+        'Conservation requires 13 out, but only 11 can leave.',
+        'So the inflow must be limited to 11 units.'
+      ],
+      answer: 'No. Only 11 units can leave, so 13 cannot pass through — conservation would be violated. The vertex is a bottleneck limiting the flow to 11 units.'
+    },
+    {
+      q: 'Two independent routes run from a factory to a depot. Route 1 has sections of 30 and 22 tonnes/day; Route 2 has sections of 18, 25 and 15 tonnes/day. Find the maximum daily tonnage.',
+      marks: 4,
+      steps: [
+        'Route 1 is limited by its narrowest section: \\(\\min(30, 22) = 22\\) t/day.',
+        'Route 2: \\(\\min(18, 25, 15) = 15\\) t/day.',
+        'The routes share no edges, so the flows add.',
+        '\\(22 + 15 = 37\\) t/day.'
+      ],
+      answer: '37 tonnes per day.'
+    },
+    {
+      q: 'For the routes above, the depot needs 45 tonnes/day. State whether demand is met and what the cheapest single upgrade would be.',
+      marks: 4,
+      steps: [
+        'Current capacity is 37 t/day against demand of 45 t/day — a shortfall of 8.',
+        'Route 1\'s bottleneck is 22; raising it to 30 would give \\(\\min(30, 30) = 30\\), a gain of 8.',
+        'Route 2\'s bottleneck is 15; raising it to 23 would give 23, also a gain of 8, but the next constraint (18) caps route 2 at 18.',
+        'So upgrading route 2\'s 15-tonne section only gains 3 before the 18-tonne section binds.'
+      ],
+      answer: 'Demand is not met — 37 against 45, a shortfall of 8 t/day. Upgrading Route 1\'s 22-tonne section to 30 would add the full 8 tonnes. Upgrading Route 2\'s 15-tonne section only gains 3 tonnes, because its 18-tonne section then becomes the bottleneck.'
+    },
+    {
+      q: 'A capacity matrix has S\'s column all zeros and T\'s row all zeros. Explain what this tells you.',
+      marks: 2,
+      steps: [
+        'A column shows what flows <em>into</em> that vertex.',
+        'S\'s column being all zeros means nothing flows into S, so S is the source.',
+        'A row shows what flows <em>out of</em> that vertex.',
+        'T\'s row being all zeros means nothing leaves T, so T is the sink.'
+      ],
+      answer: 'S is the source (nothing flows in) and T is the sink (nothing flows out).'
+    },
+    {
+      q: 'A water network has three independent pipelines from a reservoir to a town with bottleneck capacities of 240, 180 and 310 kL/h. The town needs 800 kL/h. Analyse whether demand can be met.',
+      marks: 4,
+      steps: [
+        'Independent pipelines mean the capacities add.',
+        'Total \\(= 240 + 180 + 310 = 730\\) kL/h.',
+        'Demand is 800 kL/h.',
+        'Shortfall \\(= 800 - 730 = 70\\) kL/h.'
+      ],
+      answer: 'Demand cannot be met: the network delivers at most 730 kL/h against a requirement of 800 kL/h, falling 70 kL/h short. At least one pipeline\'s bottleneck must be widened by 70 kL/h.'
+    },
+    {
+      q: 'Draw and describe the network for this matrix (rows = from, columns = to): S→A 16, S→C 13, A→B 12, C→B 9, B→T 20. Identify any vertex that is a potential bottleneck.',
+      marks: 5,
+      steps: [
+        'Five directed edges, with vertices S, A, B, C and T.',
+        'Capacity leaving S: \\(16 + 13 = 29\\).',
+        'Everything must pass through B, since B→T is the only edge into T.',
+        'Flow into B is limited by \\(12 + 9 = 21\\), and B→T has capacity 20.',
+        'So B→T caps the whole network at 20, even though 29 could leave the source.'
+      ],
+      answer: 'All flow funnels through B, and the single edge B→T (capacity 20) limits the whole network to 20 units, despite 29 units of capacity leaving the source. B→T is the bottleneck.'
+    },
+    {
+      q: 'Explain why the maximum flow of a network can be less than both the capacity out of the source and the capacity into the sink.',
+      marks: 3,
+      steps: [
+        'Those two totals are only upper bounds — they describe the two ends of the network.',
+        'A constraint anywhere in the middle can be tighter than either.',
+        'For example, if every route passes through one narrow edge, that edge caps the flow.',
+        'This is why a systematic method (cuts) is needed rather than just checking the ends.'
+      ],
+      answer: 'Because they are upper bounds describing only the ends of the network. A bottleneck in the middle — such as a single narrow edge every route must use — can limit the flow to less than either total. Finding the true maximum requires examining all the cuts.'
+    },
+    {
+      q: 'A data centre (S) links to a client (T) via routers A and B. Capacities in Gb/s: S→A 40, S→B 35, A→B 15, A→T 30, B→T 45. Find the greatest flow, remembering to use every available path.',
+      marks: 5,
+      steps: [
+        'Path S→A→T: limited by \\(\\min(40, 30) = 30\\) Gb/s.',
+        'Path S→B→T: limited by \\(\\min(35, 45) = 35\\) Gb/s.',
+        'Those two alone give 65, but S→A still has \\(40 - 30 = 10\\) Gb/s unused.',
+        'That surplus can travel S→A→B→T, limited by \\(\\min(10,\\ 15,\\ 45 - 35 = 10) = 10\\) Gb/s.',
+        'Total \\(= 30 + 35 + 10 = 75\\) Gb/s, which exactly matches the capacity out of S (\\(40 + 35\\)) and into T (\\(30 + 45\\)) — so it cannot be improved.'
+      ],
+      answer: '75 Gb/s. The two obvious paths carry 65, but the leftover 10 Gb/s on S→A routes via A→B→T. Always check for a third path before concluding — this is exactly why the systematic cut method of Lesson 2 is needed.'
+    },
+    {
+      q: 'A council models traffic from a suburb to the CBD. Explain, in context, what the source, sink, edges and capacities represent, and what the maximum flow would mean.',
+      marks: 4,
+      steps: [
+        'The source is the suburb, where the traffic originates.',
+        'The sink is the CBD, where the traffic is heading.',
+        'The edges are road segments, directed with the flow of traffic.',
+        'The capacities are the maximum vehicles per hour each road segment can carry.',
+        'The maximum flow is the greatest number of vehicles per hour that can travel from suburb to CBD across the whole road network.'
+      ],
+      answer: 'Source = the suburb generating trips; sink = the CBD absorbing them; edges = directed road segments; capacities = vehicles per hour each segment can carry. The maximum flow is the greatest total number of vehicles per hour the road network can move from suburb to CBD — and identifying the bottleneck shows which road to upgrade.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

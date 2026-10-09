@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Simple &amp; Compound Interest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 2 &mdash; Investment &amp; Loans</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Simple &amp; Compound Interest</h1>
+      <p class="subtitle">Simple interest is paid only on what you originally invested. Compound
+        interest is paid on the interest too &mdash; which turns a straight line into an
+        exponential curve, and is the single most important idea in financial mathematics.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-02</span>
+        <span class="pill">\(I = Prn\)</span>
+        <span class="pill">\(FV = PV(1+r)^n\)</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Simple interest</li>
+        <li>Compound interest &amp; future value</li>
+        <li>Present value and finding the rate</li>
+        <li>Compounding periods</li>
+        <li>Comparing offers and reaching a target</li>
+        <li>Comparing the two graphically</li>
+        <li>Spreadsheet modelling</li>
+        <li>Class activity: what grows money fastest?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#simple">1 &nbsp;Simple interest</a></li>
+        <li class="toc-item"><a class="toc-link" href="#compound">2 &nbsp;Compound interest</a></li>
+        <li class="toc-item"><a class="toc-link" href="#periods">3 &nbsp;Compounding periods</a></li>
+        <li class="toc-item"><a class="toc-link" href="#rearrange">4 &nbsp;Present value &amp; rate</a></li>
+        <li class="toc-item"><a class="toc-link" href="#offers">5 &nbsp;Offers &amp; targets</a></li>
+        <li class="toc-item"><a class="toc-link" href="#compare">6 &nbsp;Comparing the two</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spreadsheet">7 &nbsp;Spreadsheet modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. SIMPLE ─────────── -->
+      <div class="content-card" id="simple">
+        <p class="section-label">Theory</p>
+        <h2>Simple interest</h2>
+
+        <p>With <strong>simple interest</strong>, the interest is calculated on the original
+          amount only. The same dollar amount is added every period.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Simple interest</p>
+          \[I = Prn\]
+          <p class="formula-where">
+            \(I\) = interest earned, &nbsp; \(P\) = principal (the amount invested),<br>
+            \(r\) = interest rate per period, <strong>as a decimal</strong>, &nbsp;
+            \(n\) = number of periods.<br>
+            The total value is then \(A = P + I\).
+          </p>
+        </div>
+
+        <p>The two traps: the rate must be a <strong>decimal</strong> (6% &rarr; 0.06), and
+          \(r\) and \(n\) must use the <strong>same time unit</strong>.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>$7,500 is invested at 4.8% per annum simple interest for 6 years. Find the interest
+            earned and the final value.</p>
+          \[I = Prn = 7500 \times 0.048 \times 6 = \$2\,160\]
+          \[A = 7500 + 2160 = \$9\,660\]
+          <p>The investment earns \(7500 \times 0.048 = \$360\) every single year &mdash; a
+            constant amount, which is why simple interest graphs are <strong>linear</strong>.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; matching the units</p>
+          <p>$4,000 is invested at 7.2% per annum simple interest for 30 months. Find \(I\).</p>
+          <p>The rate is per year but the time is in months. Convert the time:</p>
+          \[n = \frac{30}{12} = 2.5 \text{ years}\]
+          \[I = 4000 \times 0.072 \times 2.5 = \$720\]
+          <p>Alternatively convert the rate to a monthly rate of \(0.072 \div 12 = 0.006\) and use
+            \(n = 30\): \(4000 \times 0.006 \times 30 = \$720\) ✓ Either works &mdash; just be
+            consistent.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$3,600 is invested at 3.75% per annum simple interest for 5 years. Find the interest
+              and the final value.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[I = 3600 \times 0.0375 \times 5 = \$675 \qquad A = 3600 + 675 = \$4\,275\]
+              </div></details></li>
+            <li>An investment of $5,200 earned $546 simple interest over 3 years. Find the annual
+              interest rate.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Rearrange \(I = Prn\): \(r = \dfrac{I}{Pn} = \dfrac{546}{5200 \times 3} = 0.035\).</p>
+                <p><strong>Answer:</strong> 3.5% per annum.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. COMPOUND ─────────── -->
+      <div class="content-card" id="compound">
+        <p class="section-label">Theory</p>
+        <h2>Compound interest and future value</h2>
+
+        <p>With <strong>compound interest</strong>, each period's interest is added to the balance
+          and then earns interest itself. The balance is multiplied by \((1 + r)\) every period
+          &mdash; exactly the exponential model \(y = ka^x\) from Topic 1.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Compound interest</p>
+          \[FV = PV(1 + r)^{n}\]
+          <p class="formula-where">
+            \(FV\) = future value of the investment, &nbsp; \(PV\) = present value (what you
+            invest now),<br>
+            \(r\) = interest rate <strong>per compounding period</strong>, as a decimal, &nbsp;
+            \(n\) = <strong>number of compounding periods</strong>.<br>
+            The interest earned is \(I = FV - PV\).
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>$7,500 is invested at 4.8% per annum compounded annually for 6 years. Compare with
+            Worked example 1.</p>
+          \[FV = 7500(1 + 0.048)^{6} = 7500 \times 1.048^{6}\]
+          \[= 7500 \times 1.32493 = \$9\,937.00\]
+          <p>The interest is \(9937.00 - 7500 = \$2\,437.00\), which is $277 more than the
+            $2,160 earned under simple interest &mdash; the interest on the interest.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; year by year</p>
+          <p>Seeing where the extra comes from. $1,000 at 10% per annum:</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Opening</th><th>Interest</th><th>Closing</th></tr>
+            <tr><td>1</td><td>1 000.00</td><td>100.00</td><td>1 100.00</td></tr>
+            <tr><td>2</td><td>1 100.00</td><td>110.00</td><td>1 210.00</td></tr>
+            <tr><td>3</td><td>1 210.00</td><td>121.00</td><td>1 331.00</td></tr>
+            <tr><td>4</td><td>1 331.00</td><td>133.10</td><td>1 464.10</td></tr>
+          </table>
+          <p>Each year's interest is larger than the last. Under simple interest it would be
+            $100 every year, giving $1,400 after 4 years instead of $1,464.10.</p>
+          <p>Check with the formula: \(1000 \times 1.1^{4} = 1000 \times 1.4641 = \$1\,464.10\) ✓</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>$4,500 is invested at 6% per annum compounded annually for 5 years. Find the future
+              value and the interest earned.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[FV = 4500 \times 1.06^{5} = 4500 \times 1.33823 = \$6\,022.02\]
+                <p>Interest: \(6022.02 - 4500 = \$1\,522.02\).</p>
+              </div></details></li>
+            <li>Build a year-by-year table for $2,000 at 5% per annum compounded annually for
+              3 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Year</th><th>Opening</th><th>Interest</th><th>Closing</th></tr>
+                  <tr><td>1</td><td>2 000.00</td><td>100.00</td><td>2 100.00</td></tr>
+                  <tr><td>2</td><td>2 100.00</td><td>105.00</td><td>2 205.00</td></tr>
+                  <tr><td>3</td><td>2 205.00</td><td>110.25</td><td>2 315.25</td></tr>
+                </table>
+                <p>Check: \(2000 \times 1.05^3 = \$2\,315.25\) ✓</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. PERIODS ─────────── -->
+      <div class="content-card" id="periods">
+        <p class="section-label">Theory</p>
+        <h2>Compounding periods</h2>
+
+        <p>Interest is often compounded more often than yearly. When it is, you must convert
+          <strong>both</strong> the rate and the number of periods.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Converting for the compounding period</p>
+          \[r = \frac{\text{annual rate}}{\text{periods per year}} \qquad
+            n = (\text{years}) \times (\text{periods per year})\]
+          <p class="formula-where">Monthly: divide the rate by 12, multiply the years by 12.
+            Quarterly: 4. Six-monthly: 2. Daily: 365.</p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>Compounded</th><th>Periods per year</th><th>8% p.a. becomes</th><th>5 years becomes</th></tr>
+          <tr><td>Annually</td><td>1</td><td>\(r = 0.08\)</td><td>\(n = 5\)</td></tr>
+          <tr><td>Six-monthly</td><td>2</td><td>\(r = 0.04\)</td><td>\(n = 10\)</td></tr>
+          <tr><td>Quarterly</td><td>4</td><td>\(r = 0.02\)</td><td>\(n = 20\)</td></tr>
+          <tr><td>Monthly</td><td>12</td><td>\(r = 0.0066\overline{6}\)</td><td>\(n = 60\)</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>$12,000 is invested at 6% per annum compounded quarterly for 4 years.</p>
+          <p>Quarterly means 4 periods per year:</p>
+          \[r = \frac{0.06}{4} = 0.015 \qquad n = 4 \times 4 = 16\]
+          \[FV = 12000(1.015)^{16} = 12000 \times 1.26899 = \$15\,227.87\]
+          <p>Compare with annual compounding: \(12000 \times 1.06^{4} = \$15\,149.72\). Compounding
+            more often earns more &mdash; here, $78.15 more.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Compounding period comparator</h3>
+          <p class="exercise-intro">Set the principal, annual rate and term, then compare the
+            future value under each compounding frequency. Notice the gains get smaller as the
+            frequency increases.</p>
+          <div id="freqSliders"></div>
+          <div id="freqTable" style="margin-top:16px;"></div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>State \(r\) and \(n\) for (a) 7.2% per annum compounded six-monthly for 4 years and
+              (b) 7.2% per annum compounded quarterly for 30 months.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) \(r = 0.072 \div 2 = 0.036\), \(n = 4 \times 2 = 8\).</p>
+                <p>(b) \(r = 0.072 \div 4 = 0.018\); 30 months is 2.5 years, so
+                  \(n = 2.5 \times 4 = 10\).</p>
+              </div></details></li>
+            <li>$8,000 is invested at 4.8% per annum compounded monthly for 3 years. Find the future
+              value.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[r = \frac{0.048}{12} = 0.004 \qquad n = 36\]
+                \[FV = 8000 \times 1.004^{36} = \$9\,236.42\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. REARRANGE ─────────── -->
+      <div class="content-card" id="rearrange">
+        <p class="section-label">Theory</p>
+        <h2>Finding the present value or the rate</h2>
+
+        <p>The syllabus asks you to calculate the <em>future value, present value or interest
+          rate</em>. Each is the same formula rearranged.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Rearrangements</p>
+          \[PV = \frac{FV}{(1 + r)^{n}} \qquad\qquad r = \left(\frac{FV}{PV}\right)^{1/n} - 1\]
+          <p class="formula-where">Present value answers "how much must I invest now?".
+            The rate formula answers "what rate turned this into that?".</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; present value</p>
+          <p>How much must be invested now at 5.5% per annum compounded annually to have
+            $50,000 in 9 years?</p>
+          \[PV = \frac{50000}{(1.055)^{9}} = \frac{50000}{1.61909} = \$30\,880.04\]
+          <p>So about $30,880 must be invested today.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; finding the rate</p>
+          <p>An investment of $6,000 grew to $9,000 in 7 years, compounded annually. Find the
+            annual rate to one decimal place.</p>
+          \[r = \left(\frac{9000}{6000}\right)^{1/7} - 1 = 1.5^{1/7} - 1\]
+          \[= 1.05957 - 1 = 0.05957\]
+          <p>The rate is about 6.0% per annum.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise the formula</h3>
+          <p class="exercise-intro">Round money to the nearest cent and rates to one decimal
+            place.</p>
+
+          <div class="exercise-row">
+            <label>(a) $9,000 at 5% p.a. compounded annually for 8 years. Find \(FV\).</label>
+            <input class="exercise-input" id="ciA" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-ci="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCiA"></p>
+
+          <div class="exercise-row">
+            <label>(b) $20,000 at 9% p.a. compounded monthly for 3 years. Find \(FV\).</label>
+            <input class="exercise-input" id="ciB" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-ci="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCiB"></p>
+
+          <div class="exercise-row">
+            <label>(c) What \(PV\) gives $30,000 in 5 years at 7% p.a. annually?</label>
+            <input class="exercise-input" id="ciC" type="text" inputmode="decimal" placeholder="$?">
+            <button class="exercise-check-btn" data-ci="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCiC"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; exam style</p>
+          <p>Grandparents want to give their grandchild $25,000 on her 18th birthday. She has just
+            turned 5. They can invest in an account paying 4.2% per annum compounded monthly.</p>
+          <p><strong>(a) How much must they invest today?</strong> [2 marks]</p>
+          <p>The term is \(18 - 5 = 13\) years, so \(n = 13 \times 12 = 156\) and
+            \(r = 0.042 \div 12 = 0.0035\).</p>
+          \[PV = \frac{25000}{1.0035^{156}} = \$14\,495.37\]
+          <p><strong>(b) How much of the gift will be interest?</strong> [1 mark]</p>
+          \[25000 - 14495.37 = \$10\,504.63\]
+          <p><strong>(c) They can only afford $14,000. What annual rate, compounded annually,
+            would still reach $25,000? Give your answer to one decimal place.</strong> [2 marks]</p>
+          \[r = \left(\frac{25000}{14000}\right)^{1/13} - 1 = 0.0456\]
+          <p>About 4.6% per annum, compounded annually.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>How much must be invested now at 6% per annum compounded quarterly to have $12,000
+              in 4 years?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.015\), \(n = 16\).</p>
+                \[PV = \frac{12000}{1.015^{16}} = \$9\,456.37\]
+              </div></details></li>
+            <li>$2,500 grew to $3,200 in 5 years with annual compounding. Find the annual rate to
+              one decimal place.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[r = \left(\frac{3200}{2500}\right)^{1/5} - 1 = 1.28^{0.2} - 1 = 0.0506\]
+                <p><strong>Answer:</strong> about 5.1% per annum.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. OFFERS & TARGETS ─────────── -->
+      <div class="content-card" id="offers">
+        <p class="section-label">Application</p>
+        <h2>Comparing offers and reaching a target</h2>
+
+        <p>Banks advertise rates with different compounding periods, so the headline rate alone
+          does not tell you which account is better. The syllabus asks you to <em>examine the
+          effect of varying the interest rate, term or compounding period</em>; this is where it
+          matters in practice.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Two practical techniques</p>
+          <p><strong>Comparing offers:</strong> find what the same amount (say $1,000) grows to
+            after one year under each offer. The larger value is the better account.</p>
+          <p style="margin-bottom:0;"><strong>Time to reach a target:</strong> build a table of
+            \(FV\) for successive periods and find the first period where \(FV\) passes the
+            target. The answer is a whole number of compounding periods, because interest is
+            only added at the end of each period.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p><strong>(a)</strong> Bank A offers 5.2% per annum compounded annually. Bank B offers
+            5.1% per annum compounded monthly. Which is better?</p>
+          \[\text{A: } 1000 \times 1.052 = \$1\,052.00 \qquad
+            \text{B: } 1000 \times \left(1 + \tfrac{0.051}{12}\right)^{12} = \$1\,052.21\]
+          <p>Bank B is (just) better, despite the lower advertised rate &mdash; monthly compounding
+            more than makes up the 0.1% difference.</p>
+          <p><strong>(b)</strong> $8,000 is invested in Bank A. After how many years does it first
+            exceed $10,000?</p>
+          <table class="coord-table">
+            <tr><th>Years</th><td>3</td><td>4</td><td>5</td></tr>
+            <tr><th>\(8000 \times 1.052^{n}\)</th><td>9 314.02</td><td>9 798.35</td><td>10 307.86</td></tr>
+          </table>
+          <p>It first exceeds $10,000 after 5 years.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Which is better: 6% per annum compounded quarterly, or 6.1% per annum compounded
+              annually?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Quarterly: \(1000 \times 1.015^4 = \$1\,061.36\). Annually:
+                  \(1000 \times 1.061 = \$1\,061.00\).</p>
+                <p>6% compounded quarterly is better, by 36 cents per $1,000 per year.</p>
+              </div></details></li>
+            <li>$15,000 is invested at 4.4% per annum compounded quarterly. After how many quarters
+              does it first exceed $17,000?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.011\). Trial: \(15000 \times 1.011^{11} = \$16\,918.19\) and
+                  \(15000 \times 1.011^{12} = \$17\,104.29\).</p>
+                <p><strong>Answer:</strong> after 12 quarters (3 years).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. COMPARE ─────────── -->
+      <div class="content-card" id="compare">
+        <p class="section-label">Application</p>
+        <h2>Comparing simple and compound growth</h2>
+
+        <p>This is a guaranteed exam skill: <em>recognise that simple interest graphs are linear
+          and compound interest graphs are exponential</em>.</p>
+
+        <table class="coord-table">
+          <tr><th></th><th>Simple interest</th><th>Compound interest</th></tr>
+          <tr><td>Formula</td><td>\(A = P(1 + rn)\)</td><td>\(FV = PV(1+r)^{n}\)</td></tr>
+          <tr><td>Interest each period</td><td>Same dollar amount</td><td>Grows every period</td></tr>
+          <tr><td>Calculated on</td><td>Principal only</td><td>Principal + accumulated interest</td></tr>
+          <tr><td>Graph shape</td><td><strong>Straight line</strong></td><td><strong>Exponential curve</strong></td></tr>
+          <tr><td>Table test</td><td>Constant differences</td><td>Constant ratios</td></tr>
+        </table>
+
+        <p>Over one period the two are identical. The gap widens with time &mdash; slowly at
+          first, then dramatically.</p>
+
+        <div class="interactive-block">
+          <h3>Simple vs compound</h3>
+          <p class="exercise-intro">Adjust the principal, rate and term. The solid line is
+            compound, the dashed line simple. Watch how much longer terms and higher rates
+            magnify the difference.</p>
+          <div id="cmpSliders"></div>
+          <div class="plot-wrap" id="plotCompare"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Simple</div>
+              <div class="readout-value" id="roSimple">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Compound</div>
+              <div class="readout-value" id="roCompound">$0</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Difference</div>
+              <div class="readout-value" id="roDiff">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="cmpNote" style="margin-top:14px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. SPREADSHEET ─────────── -->
+      <div class="content-card" id="spreadsheet">
+        <p class="section-label">Technology</p>
+        <h2>Modelling investments in a spreadsheet</h2>
+
+        <p>The syllabus asks you to <em>use a spreadsheet to numerically and graphically model
+          investments using both simple and compound interest</em>. The structure:</p>
+
+        <table class="coord-table">
+          <tr><th>Cell</th><th>Label</th><th>Value</th></tr>
+          <tr><td>B1</td><td>Principal</td><td>10000</td></tr>
+          <tr><td>B2</td><td>Rate per period</td><td>0.06</td></tr>
+        </table>
+
+        <table class="coord-table">
+          <tr><th></th><th>A &mdash; Year \(n\)</th><th>B &mdash; Simple</th><th>C &mdash; Compound</th></tr>
+          <tr><td>Row 5</td><td>0</td><td><code>=$B$1</code></td><td><code>=$B$1</code></td></tr>
+          <tr><td>Row 6</td><td><code>=A5+1</code></td><td><code>=$B$1*(1+$B$2*A6)</code></td><td><code>=C5*(1+$B$2)</code></td></tr>
+        </table>
+
+        <p>Two approaches to the compound column, both valid:</p>
+        <ul>
+          <li><strong>Recursive</strong> (shown above): <code>=C5*(1+$B$2)</code> &mdash; each row
+            multiplies the previous balance. This mirrors how the money actually behaves and makes
+            it easy to insert extra deposits later.</li>
+          <li><strong>Direct formula</strong>: <code>=$B$1*(1+$B$2)^A6</code> &mdash; computes any
+            row independently from the formula.</li>
+        </ul>
+
+        <p>Charting columns B and C against column A as a line graph shows the straight line and
+          the curve diverging &mdash; exactly the comparison the syllabus asks for. Changing B2
+          and watching both update is the "examine the effect of varying the interest rate" skill.</p>
+
+        <div class="example-block">
+          <p class="example-label">Reading the output</p>
+          <p>$10,000 at 6% per annum:</p>
+          <table class="coord-table">
+            <tr><th>Year</th><th>Simple</th><th>Compound</th><th>Gap</th></tr>
+            <tr><td>0</td><td>10 000</td><td>10 000</td><td>0</td></tr>
+            <tr><td>5</td><td>13 000</td><td>13 382</td><td>382</td></tr>
+            <tr><td>10</td><td>16 000</td><td>17 908</td><td>1 908</td></tr>
+            <tr><td>20</td><td>22 000</td><td>32 071</td><td>10 071</td></tr>
+            <tr><td>30</td><td>28 000</td><td>57 435</td><td>29 435</td></tr>
+          </table>
+          <p>The gap is small at 5 years but larger than the entire simple-interest gain by year
+            30. This is the argument for starting to invest early.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>What grows money fastest: rate, term or compounding?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> The baseline is $10,000 at 6% per
+          annum compounded annually for 20 years. Before touching the widgets, each person writes
+          down a prediction: which single change will add the most money?</p>
+        <ol>
+          <li>In the <a href="#compare">simple vs compound</a> widget, set principal $10,000,
+            rate 6%, 20 years. Record the compound value.</li>
+          <li>Double the <strong>rate</strong> to 12% (keep 20 years). Record the compound value.
+            Did the value double?</li>
+          <li>Return to 6% and double the <strong>term</strong> to 40 years. Record the value.</li>
+          <li>In the <a href="#periods">compounding period comparator</a>, set $10,000, 6%,
+            20 years. How much extra does <strong>monthly</strong> compounding give compared with
+            annual? And daily compared with monthly?</li>
+          <li>Rank the three changes from biggest to smallest effect, and check against your
+            prediction. What advice would you give a 20-year-old about saving?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Change</th><th>Future value</th><th>Gain over baseline</th></tr>
+            <tr><td>Baseline (6%, 20 years, annual)</td><td>$32,071.35</td><td>&mdash;</td></tr>
+            <tr><td>Rate doubled to 12%</td><td>$96,462.93</td><td>$64,391.58</td></tr>
+            <tr><td>Term doubled to 40 years</td><td>$102,857.18</td><td>$70,785.83</td></tr>
+            <tr><td>Monthly compounding</td><td>$33,102.04</td><td>$1,030.69</td></tr>
+          </table>
+          <p>Doubling the rate roughly <strong>triples</strong> the value here, because the rate
+            is inside the power. Doubling the term has the biggest effect: the balance at 20
+            years (about 3.2 times the principal) is multiplied by the same factor again.</p>
+          <p>Compounding more often helps, but by much less, and the gains shrink: daily
+            compounding adds less than $100 more than monthly.</p>
+          <p><strong>Advice:</strong> time in the market matters most &mdash; start early. Next,
+            chase a better rate. The compounding frequency is a tie-breaker.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 applies the same exponential thinking to depreciation and shares.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-2', LESSON_IDX = 0;
+
+  function money(v) {
+    return '$' + v.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* ── Compounding period comparator ────────────────────────── */
+  (function () {
+    var P = 12000, rate = 6, years = 4;
+
+    function update() {
+      var FREQ = [['Annually', 1], ['Six-monthly', 2], ['Quarterly', 4], ['Monthly', 12], ['Daily', 365]];
+      var annual = P * Math.pow(1 + rate / 100, years);
+      var html = '<table class="coord-table"><tr><th>Compounded</th><th>r per period</th><th>n</th><th>Future value</th><th>vs annual</th></tr>';
+      FREQ.forEach(function (f) {
+        var per = f[1];
+        var r = (rate / 100) / per;
+        var n = years * per;
+        var fv = P * Math.pow(1 + r, n);
+        var diff = fv - annual;
+        html += '<tr><td>' + f[0] + '</td><td>' + (Math.round(r * 1e6) / 1e6) + '</td><td>' + n +
+                '</td><td>' + money(fv) + '</td><td>' +
+                (per === 1 ? '—' : '+' + money(diff).slice(1)) + '</td></tr>';
+      });
+      html += '</table>';
+      document.getElementById('freqTable').innerHTML = html;
+    }
+
+    var host = 'freqSliders';
+    IE.slider({ mount: host, label: 'Principal', min: 1000, max: 50000, step: 1000, value: P,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { P = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate p.a.', min: 1, max: 15, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 1, max: 25, step: 1, value: years,
+                onInput: function (v) { years = v; update(); } });
+    update();
+  })();
+
+  /* ── Formula exercises ────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [13296.69, 'FV = 9000 × 1.05⁸ = 9000 × 1.477455 = $13 296.69.'],
+      B: [26191.51, 'Monthly: r = 0.09 ÷ 12 = 0.0075 and n = 3 × 12 = 36. FV = 20000 × 1.0075³⁶ = $26 191.51.'],
+      C: [21389.61, 'PV = 30000 ÷ 1.07⁵ = 30000 ÷ 1.402552 = $21 389.61.']
+    };
+    document.querySelectorAll('[data-ci]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.ci;
+        var fb = document.getElementById('fbCi' + k);
+        var raw = (document.getElementById('ci' + k).value || '').replace(/[$,\s]/g, '');
+        var g = parseFloat(raw);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter an amount.'; return; }
+        // Accept anything within 50c to allow for sensible rounding along the way.
+        var ok = Math.abs(g - ANS[k][0]) < 0.5;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + money(ANS[k][0]) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Simple vs compound ───────────────────────────────────── */
+  (function () {
+    var P = 10000, rate = 6, years = 20;
+    var redraw = IE.plot('plotCompare', { xMin: 0, xMax: 20, yMin: 0, yMax: 40000, xStep: 5, yStep: 10000, xLabel: 'years', yLabel: '$', curves: [] });
+
+    function simple(t)   { return P * (1 + (rate / 100) * t); }
+    function compound(t) { return P * Math.pow(1 + rate / 100, t); }
+
+    function update() {
+      var top = Math.max(compound(years), simple(years)) * 1.08;
+      redraw({
+        xMax: years,
+        xStep: Math.max(1, Math.round(years / 5)),
+        yMax: top,
+        yStep: Math.max(500, Math.round(top / 5 / 500) * 500),
+        curves: [
+          { fn: compound },
+          { fn: simple, className: 'plot-curve-2' }
+        ],
+        points: [{ x: years, y: compound(years), hollow: true }]
+      });
+
+      var s = simple(years), c = compound(years);
+      document.getElementById('roSimple').textContent   = money(s);
+      document.getElementById('roCompound').textContent = money(c);
+      document.getElementById('roDiff').textContent     = money(c - s);
+
+      var note = document.getElementById('cmpNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'After ' + years + ' years compound interest earns ' + money(c - s) +
+        ' more than simple interest — that is ' +
+        (Math.round((c - s) / (s - P) * 1000) / 10) + '% of the total simple interest earned.';
+    }
+
+    var host = 'cmpSliders';
+    IE.slider({ mount: host, label: 'Principal', min: 1000, max: 50000, step: 1000, value: P,
+                format: function (v) { return '$' + v.toLocaleString('en-AU'); },
+                onInput: function (v) { P = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate p.a.', min: 1, max: 15, step: 0.5, value: rate,
+                format: function (v) { return v + '%'; },
+                onInput: function (v) { rate = v; update(); } });
+    IE.slider({ mount: host, label: 'Years', min: 2, max: 40, step: 1, value: years,
+                onInput: function (v) { years = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Find the simple interest on $5,000 invested at 6% per annum for 4 years.',
+      opts: ['A) $1,200', 'B) $300', 'C) $1,310.80', 'D) $120'],
+      correct: 0,
+      explanation: 'A is correct. \\(I = Prn = 5000 \\times 0.06 \\times 4 = \\$1\\,200\\). Option C is the compound interest.'
+    },
+    {
+      q: 'Find the future value of $8,000 invested at 5% per annum compounded annually for 10 years.',
+      opts: ['A) $12,000', 'B) $13,031.16', 'C) $4,000', 'D) $8,400'],
+      correct: 1,
+      explanation: 'B is correct. \\(FV = 8000(1.05)^{10} = 8000 \\times 1.628895 = \\$13\\,031.16\\). Option A is the simple-interest result.'
+    },
+    {
+      q: 'An investment pays 12% per annum compounded quarterly. What values of \\(r\\) and \\(n\\) should be used for a 5-year investment?',
+      opts: [
+        'A) \\(r = 0.12,\\ n = 5\\)',
+        'B) \\(r = 0.03,\\ n = 20\\)',
+        'C) \\(r = 0.01,\\ n = 60\\)',
+        'D) \\(r = 0.03,\\ n = 5\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Quarterly means 4 periods per year: divide the rate (\\(0.12 \\div 4 = 0.03\\)) and multiply the periods (\\(5 \\times 4 = 20\\)). Both must be converted, not just one.'
+    },
+    {
+      q: 'Which statement correctly describes the graphs of simple and compound interest over time?',
+      opts: [
+        'A) Both are straight lines',
+        'B) Simple is exponential, compound is linear',
+        'C) Simple is linear, compound is exponential',
+        'D) Both are exponential curves'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Simple interest adds the same dollar amount each period, giving a constant gradient — a straight line. Compound interest multiplies by \\((1+r)\\) each period, which is the exponential form \\(y = ka^{x}\\).'
+    },
+    {
+      q: 'How much must be invested now at 8% per annum compounded annually to have $20,000 in 6 years?',
+      opts: ['A) $12,000', 'B) $31,731.85', 'C) $18,518.52', 'D) $12,603.17'],
+      correct: 3,
+      explanation: 'D is correct. \\(PV = \\dfrac{FV}{(1+r)^n} = \\dfrac{20000}{1.08^{6}} = \\dfrac{20000}{1.586874} = \\$12\\,603.17\\). Option B multiplies instead of dividing.'
+    },
+    {
+      q: '$3,000 grows to $4,500 in 5 years with annual compounding. What is the annual interest rate, to one decimal place?',
+      opts: ['A) 10.0%', 'B) 8.4%', 'C) 5.0%', 'D) 50.0%'],
+      correct: 1,
+      explanation: 'B is correct. \\(r = \\left(\\dfrac{4500}{3000}\\right)^{1/5} - 1 = 1.5^{0.2} - 1 = 1.08447 - 1 = 0.0845\\), so about 8.4% per annum.'
+    },
+    {
+      q: 'In a spreadsheet, the compound balance for a year sits in C6 and the rate per period is in B2. Which recursive formula correctly gives the next year\'s balance in C7?',
+      opts: [
+        'A) <code>=C6*(1+$B$2)</code>',
+        'B) <code>=C6+$B$2</code>',
+        'C) <code>=C6*(1+B2)</code>',
+        'D) <code>=$C$6*(1+$B$2)</code>'
+      ],
+      correct: 0,
+      explanation: 'A is correct. Each year multiplies the previous balance by \\((1 + r)\\). B2 must be absolute ($B$2) so it does not shift when filled down, while C6 must stay relative so it steps to the row above each time. Option C loses the rate cell on fill-down; option D freezes the balance.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Calculate the simple interest earned on $14,500 at 5.4% per annum for 7 years, and state the final value.',
+      marks: 3,
+      steps: [
+        'Convert the rate to a decimal: \\(5.4\\% = 0.054\\).',
+        '\\(I = Prn = 14500 \\times 0.054 \\times 7\\).',
+        '\\(14500 \\times 0.054 = 783\\), then \\(783 \\times 7 = 5481\\).',
+        'Final value: \\(A = 14500 + 5481\\).'
+      ],
+      answer: 'Interest $5,481; final value $19,981.'
+    },
+    {
+      q: 'Find the simple interest on $6,200 at 4.5% per annum for 42 months.',
+      marks: 3,
+      steps: [
+        'The rate is annual but the time is in months, so convert the time to years.',
+        '\\(n = \\dfrac{42}{12} = 3.5\\) years.',
+        '\\(I = 6200 \\times 0.045 \\times 3.5\\).',
+        '\\(6200 \\times 0.045 = 279\\), then \\(279 \\times 3.5 = 976.50\\).'
+      ],
+      answer: '$976.50'
+    },
+    {
+      q: 'Find the future value of $25,000 invested at 6.4% per annum compounded annually for 12 years.',
+      marks: 3,
+      steps: [
+        '\\(FV = PV(1+r)^{n} = 25000(1.064)^{12}\\).',
+        '\\(1.064^{12} = 2.10375…\\)',
+        '\\(FV = 25000 \\times 2.10375\\).'
+      ],
+      answer: 'About $52,593.75.'
+    },
+    {
+      q: '$18,000 is invested at 7.2% per annum compounded monthly for 6 years. Find the future value and the interest earned.',
+      marks: 4,
+      steps: [
+        'Monthly compounding: \\(r = \\dfrac{0.072}{12} = 0.006\\) and \\(n = 6 \\times 12 = 72\\).',
+        '\\(FV = 18000(1.006)^{72}\\).',
+        '\\(1.006^{72} = 1.53996…\\)',
+        '\\(FV = 18000 \\times 1.53996 = \\$27\\,719.28\\).',
+        'Interest: \\(I = FV - PV = 27719.28 - 18000\\).'
+      ],
+      answer: 'Future value about $27,719.28; interest earned about $9,719.28.'
+    },
+    {
+      q: 'Compare the interest earned on $10,000 over 8 years at 5% per annum under (a) simple interest and (b) compound interest compounded annually.',
+      marks: 4,
+      steps: [
+        '(a) Simple: \\(I = 10000 \\times 0.05 \\times 8 = \\$4\\,000\\).',
+        '(b) Compound: \\(FV = 10000(1.05)^{8} = 10000 \\times 1.477455 = \\$14\\,774.55\\).',
+        'Compound interest: \\(14774.55 - 10000 = \\$4\\,774.55\\).',
+        'Difference: \\(4774.55 - 4000 = \\$774.55\\).'
+      ],
+      answer: '(a) $4,000. (b) $4,774.55 — compound earns $774.55 more, because interest is earned on previously accumulated interest.'
+    },
+    {
+      q: 'An investment of $40,000 is compounded at 8% per annum. Compare the future value after 10 years when compounded (a) annually, (b) quarterly, and (c) monthly.',
+      marks: 5,
+      steps: [
+        '(a) \\(r = 0.08\\), \\(n = 10\\): \\(FV = 40000 \\times 1.08^{10} = 40000 \\times 2.158925 = \\$86\\,357.00\\).',
+        '(b) \\(r = 0.02\\), \\(n = 40\\): \\(FV = 40000 \\times 1.02^{40} = 40000 \\times 2.208040 = \\$88\\,321.60\\).',
+        '(c) \\(r = \\dfrac{0.08}{12} = 0.006\\overline{6}\\), \\(n = 120\\): \\(1.0066667^{120} = 2.219640\\).',
+        '\\(FV = 40000 \\times 2.219640 = \\$88\\,785.60\\).',
+        'More frequent compounding gives more, but with diminishing returns: quarterly beats annual by $1,965, while monthly beats quarterly by only $464.'
+      ],
+      answer: '(a) $86,357.00 (b) $88,321.60 (c) $88,785.60. Each increase in frequency adds less than the one before.'
+    },
+    {
+      q: 'How much must be invested now at 6.5% per annum compounded annually to have $100,000 in 15 years?',
+      marks: 3,
+      steps: [
+        'Use \\(PV = \\dfrac{FV}{(1+r)^{n}}\\).',
+        '\\(1.065^{15} = 2.57184…\\)',
+        '\\(PV = \\dfrac{100000}{2.57184}\\).'
+      ],
+      answer: 'About $38,882.45.'
+    },
+    {
+      q: 'An investment of $15,000 grew to $24,000 over 9 years with annual compounding. Find the annual interest rate to one decimal place.',
+      marks: 4,
+      steps: [
+        'Use \\(r = \\left(\\dfrac{FV}{PV}\\right)^{1/n} - 1\\).',
+        '\\(\\dfrac{24000}{15000} = 1.6\\).',
+        '\\(1.6^{1/9} = 1.6^{0.1111…} = 1.05364…\\)',
+        '\\(r = 1.05364 - 1 = 0.05364\\).'
+      ],
+      answer: 'About 5.4% per annum.'
+    },
+    {
+      q: 'A table shows an investment balance at the end of each year: 5 000, 5 400, 5 832, 6 298.56. Show that this is compound rather than simple interest, and find the annual rate.',
+      marks: 4,
+      steps: [
+        'Test the differences: \\(400, 432, 466.56\\) — not constant, so not simple interest.',
+        'Test the ratios: \\(5400 \\div 5000 = 1.08\\).',
+        '\\(5832 \\div 5400 = 1.08\\) ✓ and \\(6298.56 \\div 5832 = 1.08\\) ✓ — constant.',
+        'A constant ratio of 1.08 means \\(1 + r = 1.08\\).'
+      ],
+      answer: 'The ratios are constant at 1.08 while the differences grow, so it is compound interest at 8% per annum.'
+    },
+    {
+      q: 'Two options for investing $30,000 over 6 years: Option A pays 7% per annum simple interest; Option B pays 6% per annum compounded annually. Which gives more, and by how much?',
+      marks: 4,
+      steps: [
+        'Option A: \\(I = 30000 \\times 0.07 \\times 6 = \\$12\\,600\\), so \\(A = \\$42\\,600\\).',
+        'Option B: \\(FV = 30000 \\times 1.06^{6} = 30000 \\times 1.418519 = \\$42\\,555.57\\).',
+        'Compare: \\(42600 - 42555.57 = \\$44.43\\).',
+        'Option A is slightly ahead at 6 years — but the compound curve is steeper, so B would overtake A over a longer term.'
+      ],
+      answer: 'Option A gives $44.43 more over 6 years. The higher simple rate wins in the short term, but Option B would overtake it if the term were extended.'
+    },
+    {
+      q: 'Explain why compounding monthly gives a larger future value than compounding annually at the same nominal annual rate.',
+      marks: 3,
+      steps: [
+        'With monthly compounding, interest is credited to the balance 12 times a year rather than once.',
+        'Each credited amount then starts earning interest itself for the remainder of the year.',
+        'Annual compounding makes you wait the full year before any interest starts earning interest.',
+        'Concretely, 12% p.a. compounded monthly gives \\(1.01^{12} = 1.1268\\), an effective 12.68% rather than 12%.'
+      ],
+      answer: 'Interest is added to the balance more often, so it begins earning interest sooner. At 12% p.a., monthly compounding gives an effective annual rate of 12.68% rather than 12%.'
+    },
+    {
+      q: 'A spreadsheet has the principal in B1 and the annual rate in B2, with years running down column A from A5 (starting at 0). Write formulas for the simple-interest balance and the compound balance for row 6, both fillable down.',
+      marks: 4,
+      steps: [
+        'Simple interest grows as \\(A = P(1 + rn)\\), where \\(n\\) is the year number in column A.',
+        'That gives <code>=$B$1*(1+$B$2*A6)</code>.',
+        'Compound can be written recursively from the row above, or directly from the formula.',
+        'Recursive: each row is the previous balance times \\((1+r)\\). Direct: \\(P(1+r)^{n}\\).',
+        'B1 and B2 must be absolute so they do not shift on fill-down; A6 and C5 stay relative.'
+      ],
+      answer: 'Simple: <code>=$B$1*(1+$B$2*A6)</code>. Compound: <code>=C5*(1+$B$2)</code> recursively, or <code>=$B$1*(1+$B$2)^A6</code> directly.'
+    },
+    {
+      q: 'Sarah invests $5,000 at age 20 at 7% per annum compounded annually and leaves it untouched. Ben invests $10,000 at age 40 at the same rate. Compare their balances at age 65.',
+      marks: 5,
+      steps: [
+        'Sarah: 45 years of growth. \\(FV = 5000 \\times 1.07^{45}\\).',
+        '\\(1.07^{45} = 21.0025…\\), so \\(FV = \\$105\\,012.50\\).',
+        'Ben: 25 years of growth. \\(FV = 10000 \\times 1.07^{25}\\).',
+        '\\(1.07^{25} = 5.42743…\\), so \\(FV = \\$54\\,274.30\\).',
+        'Sarah ends with roughly twice as much despite investing half as much.'
+      ],
+      answer: 'Sarah has about $105,012 and Ben about $54,274. Sarah invested half the amount but nearly doubles Ben\'s balance, because the extra 20 years of compounding matter more than the larger initial deposit.'
+    },
+    {
+      q: 'An account pays 4.8% per annum compounded six-monthly. Find how long, to the nearest six-month period, it takes $8,000 to exceed $12,000.',
+      marks: 4,
+      steps: [
+        'Six-monthly: \\(r = \\dfrac{0.048}{2} = 0.024\\) per period.',
+        'We need \\(8000 \\times 1.024^{n} > 12000\\), i.e. \\(1.024^{n} > 1.5\\).',
+        'Trial: \\(n = 17\\) gives \\(1.024^{17} = 1.4977\\) — just under.',
+        '\\(n = 18\\) gives \\(1.024^{18} = 1.5336\\), so \\(FV = \\$12\\,269\\) — over.',
+        '18 six-month periods is 9 years.'
+      ],
+      answer: '18 six-month periods, i.e. 9 years, when the balance reaches about $12,269.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

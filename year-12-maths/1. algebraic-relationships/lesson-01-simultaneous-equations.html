@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Simultaneous Equations &amp; Break-Even</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 1 &mdash; Algebraic Relationships</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Simultaneous Equations &amp; Break-Even</h1>
+      <p class="subtitle">Two linear equations, one point that satisfies both. We solve them by
+        graphing, by substitution and by elimination &mdash; then use that point to find where a
+        business stops losing money and starts making it.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-01</span>
+        <span class="pill">Simultaneous linear equations</span>
+        <span class="pill">Break-even analysis</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Point of intersection by graphing</li>
+        <li>Substitution and elimination</li>
+        <li>Modelling a worded problem</li>
+        <li>Cost, revenue, profit and break-even</li>
+        <li>Planning for a target profit</li>
+        <li>Spreadsheet modelling</li>
+        <li>Class activity: pricing levers</li>
+        <li>Knowledge check &amp; extended practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#graphical">1 &nbsp;Graphical solution</a></li>
+        <li class="toc-item"><a class="toc-link" href="#algebraic">2 &nbsp;Algebraic methods</a></li>
+        <li class="toc-item"><a class="toc-link" href="#modelling">3 &nbsp;Modelling from words</a></li>
+        <li class="toc-item"><a class="toc-link" href="#breakeven">4 &nbsp;Break-even analysis</a></li>
+        <li class="toc-item"><a class="toc-link" href="#targets">5 &nbsp;Target profit</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spreadsheet">6 &nbsp;Spreadsheet modelling</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. GRAPHICAL ─────────── -->
+      <div class="content-card" id="graphical">
+        <p class="section-label">Theory</p>
+        <h2>Solving by graphing</h2>
+
+        <p>A pair of <strong>simultaneous linear equations</strong> is two straight-line equations
+          considered together. Solving them means finding the single \(x\) and \(y\) that make
+          <em>both</em> equations true at the same time.</p>
+
+        <p>Graphically, each equation is a line. The solution is the <strong>point of
+          intersection</strong> &mdash; the one point that lies on both lines.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The three possible outcomes</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>One solution</strong> &mdash; the lines cross once (different gradients).</li>
+            <li><strong>No solution</strong> &mdash; the lines are parallel and never meet (same gradient, different \(y\)-intercept).</li>
+            <li><strong>Infinitely many</strong> &mdash; the two equations describe the same line.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Solve graphically: \(y = 2x - 1\) and \(y = -x + 5\).</p>
+          <p>Build a small table of values for each line, plot both, and read off where they cross.</p>
+          <table class="coord-table">
+            <tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+            <tr><th>\(y = 2x - 1\)</th><td>&minus;1</td><td>1</td><td>3</td><td>5</td><td>7</td></tr>
+            <tr><th>\(y = -x + 5\)</th><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+          </table>
+          <p>Both lines pass through \((2, 3)\), so the solution is \(x = 2,\ y = 3\).</p>
+          <p><strong>Always check</strong> by substituting into both equations:
+            \(2(2) - 1 = 3\) ✓ and \(-(2) + 5 = 3\) ✓.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Complete a table of values for \(x = 0, 1, 2, 3\) and solve graphically:
+              \(y = x + 2\) and \(y = -2x + 8\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+                  <tr><th>\(y = x + 2\)</th><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                  <tr><th>\(y = -2x + 8\)</th><td>8</td><td>6</td><td>4</td><td>2</td></tr>
+                </table>
+                <p>Both lines pass through \((2, 4)\). Check: \(2 + 2 = 4\) ✓ and \(-2(2) + 8 = 4\) ✓.</p>
+                <p><strong>Answer:</strong> \(x = 2,\ y = 4\).</p>
+              </div></details></li>
+            <li>Without graphing, state how many solutions each pair has.
+              (a) \(y = 4x - 3\) and \(y = 4x + 1\) &nbsp; (b) \(y = 2x + 6\) and \(2y = 4x + 12\)
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Same gradient (4), different \(y\)-intercepts: parallel lines, so <strong>no
+                  solution</strong>.</p>
+                <p>(b) Dividing the second equation by 2 gives \(y = 2x + 6\) &mdash; the same line,
+                  so <strong>infinitely many solutions</strong>.</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="plot-wrap" id="plotIntersectStatic"></div>
+        <p class="diagram-caption">The lines \(y = 2x - 1\) and \(y = -x + 5\) meet at \((2, 3)\).</p>
+
+        <div class="interactive-block">
+          <h3>Intersection explorer</h3>
+          <p class="exercise-intro">Drag the sliders to change each line's gradient and
+            \(y\)-intercept. The point of intersection is calculated live. Watch what happens to
+            the readout when you make the two gradients equal.</p>
+          <div id="intersectSliders"></div>
+          <div class="plot-wrap" id="plotIntersect"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Line 1</div>
+              <div class="readout-value" id="roLine1">y = 2x − 1</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Line 2</div>
+              <div class="readout-value" id="roLine2">y = −1x + 5</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Intersection</div>
+              <div class="readout-value" id="roPoint">(2, 3)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. ALGEBRAIC ─────────── -->
+      <div class="content-card" id="algebraic">
+        <p class="section-label">Theory</p>
+        <h2>Algebraic methods</h2>
+
+        <p>Graphing is quick but only as accurate as your reading of the grid. When the solution
+          is not a neat whole number, solve algebraically.</p>
+
+        <h3>Substitution</h3>
+        <p>Use this when one equation already has \(x\) or \(y\) on its own.</p>
+        <ol>
+          <li>Rearrange one equation so a variable is by itself (often it already is).</li>
+          <li>Substitute that expression into the <em>other</em> equation.</li>
+          <li>Solve the resulting single-variable equation.</li>
+          <li>Substitute back to find the second variable.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; substitution</p>
+          <p>Solve \(y = 3x + 1\) &nbsp;(1)&nbsp; and \(2x + y = 11\) &nbsp;(2).</p>
+          <p>Equation (1) already gives \(y\). Substitute into (2):</p>
+          \[2x + (3x + 1) = 11\]
+          \[5x + 1 = 11 \quad\Rightarrow\quad 5x = 10 \quad\Rightarrow\quad x = 2\]
+          <p>Substitute \(x = 2\) back into (1): \(y = 3(2) + 1 = 7\).</p>
+          <p>Solution: \((2, 7)\). Check in (2): \(2(2) + 7 = 11\) ✓</p>
+        </div>
+
+        <h3>Elimination</h3>
+        <p>Use this when both equations are in the form \(ax + by = c\).</p>
+        <ol>
+          <li>Multiply one or both equations so that one variable has matching coefficients.</li>
+          <li>Add or subtract the equations to eliminate that variable.</li>
+          <li>Solve for the remaining variable, then substitute back.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; elimination</p>
+          <p>Solve \(3x + 2y = 16\) &nbsp;(1)&nbsp; and \(5x - 2y = 8\) &nbsp;(2).</p>
+          <p>The \(y\) coefficients are \(+2\) and \(-2\) &mdash; adding eliminates \(y\):</p>
+          \[(3x + 2y) + (5x - 2y) = 16 + 8\]
+          \[8x = 24 \quad\Rightarrow\quad x = 3\]
+          <p>Substitute into (1): \(3(3) + 2y = 16 \Rightarrow 2y = 7 \Rightarrow y = 3.5\).</p>
+          <p>Solution: \((3,\ 3.5)\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; elimination needing a multiplier</p>
+          <p>Solve \(2x + 3y = 13\) &nbsp;(1)&nbsp; and \(4x - y = 5\) &nbsp;(2).</p>
+          <p>Multiply (2) by 3 so the \(y\) terms become \(+3y\) and \(-3y\):</p>
+          \[(2)\times 3:\quad 12x - 3y = 15 \quad (3)\]
+          <p>Add (1) and (3):</p>
+          \[14x = 28 \quad\Rightarrow\quad x = 2\]
+          <p>Substitute into (2): \(4(2) - y = 5 \Rightarrow y = 3\). Solution: \((2, 3)\).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Solve by substitution: \(y = 2x - 5\) and \(3x + 2y = 18\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[3x + 2(2x - 5) = 18 \;\Rightarrow\; 7x - 10 = 18 \;\Rightarrow\; x = 4\]
+                <p>\(y = 2(4) - 5 = 3\). Check: \(3(4) + 2(3) = 18\) ✓</p>
+                <p><strong>Answer:</strong> \((4, 3)\).</p>
+              </div></details></li>
+            <li>Solve by elimination: \(3x + 2y = 19\) and \(2x + 5y = 20\). (You will need to
+              multiply <em>both</em> equations.)
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Make the \(x\) coefficients match: multiply the first by 2 and the second by 3.</p>
+                \[6x + 4y = 38 \qquad 6x + 15y = 60\]
+                <p>Subtract: \(11y = 22 \Rightarrow y = 2\). Then \(3x + 4 = 19 \Rightarrow x = 5\).</p>
+                <p><strong>Answer:</strong> \((5, 2)\). Check: \(2(5) + 5(2) = 20\) ✓</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise the algebra</h3>
+          <p class="exercise-intro">Solve each pair and enter the values. Answers are checked to
+            two decimal places.</p>
+
+          <p style="font-size:13px;"><strong>(a)</strong> \(y = 4x - 3\) and \(y = x + 6\)</p>
+          <div class="exercise-row">
+            <label for="exA1">x =</label>
+            <input class="exercise-input" id="exA1" type="text" inputmode="decimal" placeholder="?">
+            <label for="exA2">y =</label>
+            <input class="exercise-input" id="exA2" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-check="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbA"></p>
+
+          <p style="font-size:13px; margin-top:18px;"><strong>(b)</strong> \(5x + 2y = 24\) and \(3x - 2y = 8\)</p>
+          <div class="exercise-row">
+            <label for="exB1">x =</label>
+            <input class="exercise-input" id="exB1" type="text" inputmode="decimal" placeholder="?">
+            <label for="exB2">y =</label>
+            <input class="exercise-input" id="exB2" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-check="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbB"></p>
+
+          <p style="font-size:13px; margin-top:18px;"><strong>(c)</strong> \(x + 4y = 18\) and \(3x + 2y = 14\)</p>
+          <div class="exercise-row">
+            <label for="exC1">x =</label>
+            <input class="exercise-input" id="exC1" type="text" inputmode="decimal" placeholder="?">
+            <label for="exC2">y =</label>
+            <input class="exercise-input" id="exC2" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-check="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbC"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. MODELLING ─────────── -->
+      <div class="content-card" id="modelling">
+        <p class="section-label">Application</p>
+        <h2>Developing equations from a worded situation</h2>
+
+        <p>Exam questions rarely hand you the equations. You build them. The reliable routine:</p>
+        <ol>
+          <li><strong>Define the variables</strong> in words &mdash; "let \(x\) be the number of
+            adult tickets". Write this down; marks are awarded for it.</li>
+          <li><strong>Find the two separate facts</strong> in the question. Each fact becomes one
+            equation. Usually one is a <em>count</em> and the other a <em>total value</em>.</li>
+          <li><strong>Solve</strong> using substitution or elimination.</li>
+          <li><strong>Answer in context</strong> &mdash; with units, in a sentence.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A cinema sells adult tickets at $22 and child tickets at $14. On Saturday it sold
+            180 tickets and took $3,240. How many of each were sold?</p>
+          <p><strong>Define:</strong> let \(a\) = adult tickets, \(c\) = child tickets.</p>
+          <p><strong>Count equation:</strong> \(a + c = 180\) &nbsp;(1)</p>
+          <p><strong>Value equation:</strong> \(22a + 14c = 3240\) &nbsp;(2)</p>
+          <p>From (1), \(c = 180 - a\). Substitute into (2):</p>
+          \[22a + 14(180 - a) = 3240\]
+          \[22a + 2520 - 14a = 3240\]
+          \[8a = 720 \quad\Rightarrow\quad a = 90\]
+          <p>So \(c = 180 - 90 = 90\).</p>
+          <p><strong>In context:</strong> 90 adult tickets and 90 child tickets were sold.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; two plans compared</p>
+          <p>Gym A charges a $60 joining fee plus $12 per visit. Gym B charges no joining fee
+            but $20 per visit. After how many visits do they cost the same?</p>
+          <p>Let \(n\) = number of visits and \(C\) = total cost.</p>
+          \[\text{Gym A: } C = 60 + 12n \qquad \text{Gym B: } C = 20n\]
+          <p>Set them equal:</p>
+          \[60 + 12n = 20n \quad\Rightarrow\quad 60 = 8n \quad\Rightarrow\quad n = 7.5\]
+          <p>Because visits must be whole numbers, the costs are never exactly equal. For
+            7 visits Gym A costs $144 and Gym B $140 &mdash; B is cheaper. From 8 visits on
+            (A: $156, B: $160), Gym A is cheaper.</p>
+          <p><strong>This is a limitation of the model:</strong> the algebra gives a continuous
+            answer, but the context only allows whole numbers.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A café sells small coffees for $4.50 and large coffees for $5.50. One morning it sold
+              140 coffees and took $698. Define variables, write two equations and find how many
+              of each size were sold.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Let \(s\) = small coffees, \(l\) = large coffees.</p>
+                \[s + l = 140 \;\;(1) \qquad 4.5s + 5.5l = 698 \;\;(2)\]
+                <p>From (1), \(s = 140 - l\): \(4.5(140 - l) + 5.5l = 698 \Rightarrow 630 + l = 698
+                  \Rightarrow l = 68\).</p>
+                <p><strong>Answer:</strong> 72 small and 68 large coffees.</p>
+              </div></details></li>
+            <li>Car hire company A charges $55 per day plus $0.25 per km. Company B charges $40 per
+              day plus $0.40 per km. For a one-day hire, at what distance do they cost the same,
+              and which is cheaper for a 180 km trip?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[55 + 0.25k = 40 + 0.40k \;\Rightarrow\; 15 = 0.15k \;\Rightarrow\; k = 100\]
+                <p>At 180 km: A costs \(55 + 0.25(180) = \$100\), B costs \(40 + 0.40(180) = \$112\).</p>
+                <p><strong>Answer:</strong> equal at 100 km; company A is cheaper for 180 km.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. BREAK-EVEN ─────────── -->
+      <div class="content-card" id="breakeven">
+        <p class="section-label">Application</p>
+        <h2>Break-even analysis</h2>
+
+        <p>A business has two linear relationships in the number of items \(n\):</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Cost, revenue and profit</p>
+          \[C = \text{fixed costs} + (\text{variable cost per item}) \times n\]
+          \[R = (\text{selling price per item}) \times n\]
+          \[P = R - C\]
+          <p class="formula-where">Fixed costs are paid whether you sell anything or not (rent,
+            equipment). Variable costs depend on how many you make (materials, packaging).</p>
+        </div>
+
+        <p>The <strong>break-even point</strong> is where \(C = R\) &mdash; the business covers its
+          costs exactly and profit is zero. It is the point of intersection of the cost line and
+          the revenue line.</p>
+
+        <ul>
+          <li>Selling <em>fewer</em> than the break-even quantity &rarr; \(R &lt; C\) &rarr; a <strong>loss</strong>.</li>
+          <li>Selling <em>more</em> than the break-even quantity &rarr; \(R &gt; C\) &rarr; a <strong>profit</strong>.</li>
+        </ul>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>A candle maker pays $450 per month in rent and $4 in materials per candle. Candles
+            sell for $13 each.</p>
+          <p><strong>(a) Write the cost and revenue equations.</strong></p>
+          \[C = 450 + 4n \qquad R = 13n\]
+          <p><strong>(b) Find the break-even point.</strong> Set \(C = R\):</p>
+          \[450 + 4n = 13n \quad\Rightarrow\quad 450 = 9n \quad\Rightarrow\quad n = 50\]
+          <p>At \(n = 50\), \(R = 13 \times 50 = \$650\). Break-even is 50 candles, at $650.</p>
+          <p><strong>(c) Find the profit on 80 candles.</strong></p>
+          \[P = R - C = 13(80) - (450 + 4 \times 80) = 1040 - 770 = \$270\]
+          <p><strong>(d) What happens at 30 candles?</strong></p>
+          \[P = 13(30) - (450 + 120) = 390 - 570 = -\$180\]
+          <p>A loss of $180, because 30 is below the break-even quantity.</p>
+        </div>
+
+        <div class="plot-wrap" id="plotBreakEvenStatic"></div>
+        <p class="diagram-caption">Cost \(C = 450 + 4n\) and revenue \(R = 13n\) cross at
+          \(n = 50\). Left of the crossing is loss; right of it is profit.</p>
+
+        <div class="interactive-block">
+          <h3>Break-even calculator</h3>
+          <p class="exercise-intro">Change the fixed costs, the variable cost per item and the
+            selling price. The break-even quantity, the break-even revenue and the profit at the
+            chosen production level all update live.</p>
+          <div id="beSliders"></div>
+          <div class="plot-wrap" id="plotBreakEven"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Cost equation</div>
+              <div class="readout-value" id="roCost">C = 450 + 4n</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Revenue equation</div>
+              <div class="readout-value" id="roRev">R = 13n</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Break-even</div>
+              <div class="readout-value" id="roBE">50 items</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Profit at n</div>
+              <div class="readout-value" id="roProfit">$0</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="beNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; exam style</p>
+          <p>A potter has fixed costs of $960 per month. Each mug costs $8 to make and sells for
+            $20. At this price she sells about 90 mugs a month. She is considering raising the
+            price to $24, which she expects would cut sales to about 70 mugs a month.</p>
+          <p><strong>(a) Find the break-even quantity at each price.</strong> [2 marks]</p>
+          \[\$20:\; n = \frac{960}{20 - 8} = 80 \text{ mugs} \qquad
+            \$24:\; n = \frac{960}{24 - 8} = 60 \text{ mugs}\]
+          <p><strong>(b) Which price gives the greater monthly profit? Justify with
+            calculations.</strong> [2 marks]</p>
+          \[\$20:\; P = 12(90) - 960 = \$120 \qquad \$24:\; P = 16(70) - 960 = \$160\]
+          <p>The $24 price earns $40 more per month, even though she sells 20 fewer mugs.</p>
+          <p><strong>(c) Give one reason the prediction in (b) may not hold.</strong> [1 mark]</p>
+          <p>The sales figure of 70 at the higher price is only an estimate. If sales fell to
+            67 mugs or fewer (\(16n - 960 = 120\) gives \(n = 67.5\)), the old price would be better.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A screen printer has fixed costs of $1,200 per month, spends $7 per shirt and sells
+              each shirt for $22. Find (a) the break-even point, including the revenue there,
+              (b) the profit on 130 shirts and (c) the result of selling only 50 shirts.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) \(1200 + 7n = 22n \Rightarrow 15n = 1200 \Rightarrow n = 80\) shirts;
+                  revenue \(22 \times 80 = \$1,760\).</p>
+                <p>(b) \(P = 22(130) - (1200 + 7 \times 130) = 2860 - 2110 = \$750\).</p>
+                <p>(c) \(P = 22(50) - (1200 + 350) = -\$450\) &mdash; a loss of $450.</p>
+              </div></details></li>
+            <li>A bakery breaks even at 120 loaves. Each loaf sells for $6.50 and costs $2.50 in
+              ingredients. What are the bakery's fixed costs?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>At break-even, fixed costs = contribution per item \(\times\) break-even quantity.</p>
+                \[F = (6.50 - 2.50) \times 120 = \$480\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. PROFIT TARGETS ─────────── -->
+      <div class="content-card" id="targets">
+        <p class="section-label">Application</p>
+        <h2>Planning for a target profit</h2>
+
+        <p>Breaking even only means the business stops losing money. Owners usually want to know
+          how many items they must sell to make a <strong>particular profit</strong>, or what
+          price they need to charge when they can only make a limited number.</p>
+
+        <p>Write profit directly in terms of \(n\). With selling price \(s\), variable cost \(v\)
+          and fixed costs \(F\):</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Profit equation</p>
+          \[P = (s - v)\,n - F\]
+          <p class="formula-where">To reach a target profit \(T\), set \(P = T\) and solve for the
+            unknown. If you are solving for \(n\) and the answer is not a whole number,
+            <strong>round up</strong> &mdash; rounding down would fall short of the target.</p>
+        </div>
+
+        <p>Break-even is just the special case \(T = 0\). Graphically, the profit line has
+          gradient \(s - v\) (the contribution per item) and \(P\)-intercept \(-F\): it crosses the
+          \(n\)-axis at the break-even point.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>The candle maker from Worked example 7 has \(F = 450\), \(v = 4\) and \(s = 13\).</p>
+          <p><strong>(a) How many candles give a profit of $360 per month?</strong></p>
+          \[9n - 450 = 360 \;\Rightarrow\; 9n = 810 \;\Rightarrow\; n = 90 \text{ candles}\]
+          <p><strong>(b) She can only make 75 candles a month. What price reaches the same
+            $360 profit?</strong></p>
+          \[75(s - 4) - 450 = 360 \;\Rightarrow\; 75(s - 4) = 810 \;\Rightarrow\; s - 4 = 10.8
+            \;\Rightarrow\; s = \$14.80\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>The screen printer above (\(F = 1200\), \(v = 7\), \(s = 22\)) wants a profit of
+              $900 a month. How many shirts must be sold?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[15n - 1200 = 900 \;\Rightarrow\; 15n = 2100 \;\Rightarrow\; n = 140 \text{ shirts}\]
+              </div></details></li>
+            <li>A juice stand pays $300 per weekend for its site, spends $1.50 per cup and can sell
+              at most 160 cups. What price per cup gives a profit of $340?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[160(s - 1.50) - 300 = 340 \;\Rightarrow\; 160(s - 1.50) = 640 \;\Rightarrow\;
+                  s = \$5.50\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. SPREADSHEET ─────────── -->
+      <div class="content-card" id="spreadsheet">
+        <p class="section-label">Technology</p>
+        <h2>Modelling break-even in a spreadsheet</h2>
+
+        <p>The syllabus asks you to identify the break-even point and solve profit and loss
+          problems <em>using a spreadsheet</em>. The structure below is what you would build.</p>
+
+        <p>Put the three parameters in their own cells so one edit updates the whole table:</p>
+        <table class="coord-table">
+          <tr><th>Cell</th><th>Label</th><th>Value</th></tr>
+          <tr><td>B1</td><td>Fixed costs</td><td>450</td></tr>
+          <tr><td>B2</td><td>Variable cost per item</td><td>4</td></tr>
+          <tr><td>B3</td><td>Selling price per item</td><td>13</td></tr>
+        </table>
+
+        <p>Then lay out the table, using <strong>absolute references</strong> (the $ signs) so the
+          formulas can be filled down without the parameter cells shifting:</p>
+        <table class="coord-table">
+          <tr><th></th><th>A &mdash; Items \(n\)</th><th>B &mdash; Cost</th><th>C &mdash; Revenue</th><th>D &mdash; Profit</th></tr>
+          <tr><td>Row 6</td><td>0</td><td><code>=$B$1+$B$2*A6</code></td><td><code>=$B$3*A6</code></td><td><code>=C6-B6</code></td></tr>
+          <tr><td>Row 7</td><td><code>=A6+10</code></td><td>fill down</td><td>fill down</td><td>fill down</td></tr>
+        </table>
+
+        <p>Reading the result:</p>
+        <ul>
+          <li>The break-even point is the row where column D changes from negative to positive
+            (or equals zero).</li>
+          <li>Charting columns B and C against column A as a line graph shows the two lines
+            crossing &mdash; the visual break-even point.</li>
+          <li>Changing B3 (the selling price) and watching the crossing point move is exactly the
+            "examine the effect of varying..." skill the syllabus asks for.</li>
+        </ul>
+
+        <div class="example-block">
+          <p class="example-label">Reading a spreadsheet table</p>
+          <p>A partial output from the model above:</p>
+          <table class="coord-table">
+            <tr><th>\(n\)</th><th>Cost</th><th>Revenue</th><th>Profit</th></tr>
+            <tr><td>30</td><td>570</td><td>390</td><td>&minus;180</td></tr>
+            <tr><td>40</td><td>610</td><td>520</td><td>&minus;90</td></tr>
+            <tr><td>50</td><td>650</td><td>650</td><td>0</td></tr>
+            <tr><td>60</td><td>690</td><td>780</td><td>90</td></tr>
+          </table>
+          <p>Profit is zero at \(n = 50\) &mdash; the break-even point. Each additional 10 candles
+            adds $90 of profit, which is \(10 \times (13 - 4)\): ten times the
+            <strong>contribution per item</strong>.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Shortcut worth knowing</p>
+          \[n_{\text{break-even}} = \frac{\text{fixed costs}}{\text{selling price} - \text{variable cost}}\]
+          <p class="formula-where">The denominator is the contribution per item &mdash; how much
+            each sale puts towards covering the fixed costs. Here \(450 \div (13-4) = 50\) ✓</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Which lever moves break-even most?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Scroll back to the
+          <a href="#breakeven">break-even calculator</a>. Start every step from the candle maker's
+          settings: fixed costs $450, cost per item $4, price per item $13 (break-even 50 items).</p>
+        <ol>
+          <li>Raise the <strong>price</strong> by $2. Record the new break-even quantity.</li>
+          <li>Reset. Instead, lower the <strong>cost per item</strong> by $2. Record the break-even
+            quantity. Why is it the same as in step 1?</li>
+          <li>Reset. <strong>Double the fixed costs</strong>. What happens to the break-even
+            quantity? Explain using \(n = F \div (s - v)\).</li>
+          <li>Set the price equal to the cost per item. What does the calculator report, and why?</li>
+          <li>Discuss: the model assumes every candle made is sold. Which of the three changes is
+            most likely to break that assumption, and why?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1 and 2.</strong> Both give 40.9 items, so 41 candles. Each change raises the
+            contribution per item from $9 to $11, and break-even depends only on that contribution
+            and the fixed costs.</p>
+          <p><strong>3.</strong> Break-even doubles to 100 items. Fixed costs are the numerator, so
+            break-even is directly proportional to them.</p>
+          <p><strong>4.</strong> It never breaks even: each sale contributes $0, so the fixed costs
+            are never covered. The cost and revenue lines are parallel &mdash; no point of
+            intersection.</p>
+          <p><strong>5.</strong> Raising the price: customers may buy fewer candles, so sales could
+            fall below the new break-even. Cutting variable cost (a cheaper supplier) leaves the
+            customer's price unchanged.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          The homework set covers all three lessons in this topic. Move on to Lesson 2 first, or
+          jump to the homework if you have already worked through the other lessons.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-1', LESSON_IDX = 0;
+
+  /* ── Static intersection plot ─────────────────────────────── */
+  IE.plot('plotIntersectStatic', {
+    xMin: -1, xMax: 6, yMin: -3, yMax: 9, xStep: 1, yStep: 2,
+    xLabel: 'x', yLabel: 'y',
+    curves: [
+      { fn: function (x) { return 2 * x - 1; } },
+      { fn: function (x) { return -x + 5; }, className: 'plot-curve-2' }
+    ],
+    points:  [{ x: 2, y: 3, label: '(2, 3)' }],
+    markers: [{ x: 2, y: 3 }]
+  });
+
+  /* ── Intersection explorer ────────────────────────────────── */
+  (function () {
+    var m1 = 2, c1 = -1, m2 = -1, c2 = 5;
+    var redraw = IE.plot('plotIntersect', { xMin: -4, xMax: 8, yMin: -6, yMax: 10, xStep: 2, yStep: 2, xLabel: 'x', yLabel: 'y', curves: [] });
+
+    function eq(m, c) {
+      return 'y = ' + m + 'x ' + (c < 0 ? '− ' + Math.abs(c) : '+ ' + c);
+    }
+    function update() {
+      var parallel = Math.abs(m1 - m2) < 1e-9;
+      var px = parallel ? null : (c2 - c1) / (m1 - m2);
+      var py = parallel ? null : m1 * px + c1;
+
+      redraw({
+        curves: [
+          { fn: function (x) { return m1 * x + c1; } },
+          { fn: function (x) { return m2 * x + c2; }, className: 'plot-curve-2' }
+        ],
+        points:  (px !== null && px >= -4 && px <= 8 && py >= -6 && py <= 10)
+                   ? [{ x: px, y: py, label: '(' + r(px) + ', ' + r(py) + ')' }] : [],
+        markers: (px !== null && px >= -4 && px <= 8 && py >= -6 && py <= 10)
+                   ? [{ x: px, y: py }] : []
+      });
+
+      document.getElementById('roLine1').textContent = eq(m1, c1);
+      document.getElementById('roLine2').textContent = eq(m2, c2);
+      document.getElementById('roPoint').textContent =
+        parallel
+          ? (Math.abs(c1 - c2) < 1e-9 ? 'same line' : 'parallel — none')
+          : '(' + r(px) + ', ' + r(py) + ')';
+    }
+    function r(v) { return Math.round(v * 100) / 100; }
+
+    var host = 'intersectSliders';
+    IE.slider({ mount: host, label: 'Line 1 gradient', min: -4, max: 4, step: 0.5, value: m1, onInput: function (v) { m1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Line 1 y-int',    min: -6, max: 6, step: 1,   value: c1, onInput: function (v) { c1 = v; update(); } });
+    IE.slider({ mount: host, label: 'Line 2 gradient', min: -4, max: 4, step: 0.5, value: m2, onInput: function (v) { m2 = v; update(); } });
+    IE.slider({ mount: host, label: 'Line 2 y-int',    min: -6, max: 6, step: 1,   value: c2, onInput: function (v) { c2 = v; update(); } });
+    update();
+  })();
+
+  /* ── Algebra exercises ────────────────────────────────────── */
+  (function () {
+    var ANS = { A: [3, 9], B: [4, 2], C: [2, 4] };
+    var NOTE = {
+      A: 'Set 4x − 3 = x + 6 → 3x = 9 → x = 3, then y = 3 + 6 = 9.',
+      B: 'Add the equations: 8x = 32 → x = 4, then 5(4) + 2y = 24 → y = 2.',
+      C: 'From the first, x = 18 − 4y. Substituting: 3(18 − 4y) + 2y = 14 → −10y = −40 → y = 4, x = 2.'
+    };
+    document.querySelectorAll('[data-check]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.check;
+        var fb = document.getElementById('fb' + k);
+        var gx = parseFloat(document.getElementById('ex' + k + '1').value);
+        var gy = parseFloat(document.getElementById('ex' + k + '2').value);
+        if (isNaN(gx) || isNaN(gy)) {
+          fb.className = 'exercise-feedback';
+          fb.textContent = 'Enter a value for both x and y.';
+          return;
+        }
+        var ok = Math.abs(gx - ANS[k][0]) < 0.005 && Math.abs(gy - ANS[k][1]) < 0.005;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = ok
+          ? '✓ Correct — (' + ANS[k][0] + ', ' + ANS[k][1] + '). ' + NOTE[k]
+          : '✗ Not quite. ' + NOTE[k];
+      });
+    });
+  })();
+
+  /* ── Static break-even plot ───────────────────────────────── */
+  IE.plot('plotBreakEvenStatic', {
+    xMin: 0, xMax: 100, yMin: 0, yMax: 1300, xStep: 20, yStep: 200,
+    xLabel: 'n (candles)', yLabel: '$',
+    curves: [
+      { fn: function (n) { return 450 + 4 * n; } },
+      { fn: function (n) { return 13 * n; }, className: 'plot-curve-2' }
+    ],
+    points:  [{ x: 50, y: 650, label: '(50, $650)' }],
+    markers: [{ x: 50, y: 650 }]
+  });
+
+  /* ── Break-even calculator ────────────────────────────────── */
+  (function () {
+    var fixed = 450, varc = 4, price = 13, level = 80;
+    var redraw = IE.plot('plotBreakEven', { xMin: 0, xMax: 150, yMin: 0, yMax: 2000, xStep: 30, yStep: 400, xLabel: 'n (items)', yLabel: '$', curves: [] });
+
+    function update() {
+      var contribution = price - varc;
+      var be = contribution > 0 ? fixed / contribution : null;
+      var profit = price * level - (fixed + varc * level);
+      var maxN = 150;
+      var maxY = Math.max(price * maxN, fixed + varc * maxN) * 1.05;
+
+      redraw({
+        yMax: maxY,
+        yStep: Math.max(100, Math.round(maxY / 5 / 100) * 100),
+        curves: [
+          { fn: function (n) { return fixed + varc * n; } },
+          { fn: function (n) { return price * n; }, className: 'plot-curve-2' }
+        ],
+        points:  (be !== null && be <= maxN) ? [{ x: be, y: price * be, label: 'break-even' }] : [],
+        markers: (be !== null && be <= maxN) ? [{ x: be, y: price * be }] : []
+      });
+
+      document.getElementById('roCost').textContent = 'C = ' + fixed + ' + ' + varc + 'n';
+      document.getElementById('roRev').textContent  = 'R = ' + price + 'n';
+      document.getElementById('roBE').textContent   =
+        be === null ? 'never' : (Math.round(be * 10) / 10) + ' items';
+      document.getElementById('roProfit').textContent =
+        (profit < 0 ? '−$' : '$') + Math.abs(Math.round(profit));
+
+      var note = document.getElementById('beNote');
+      if (contribution <= 0) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'The selling price is not above the variable cost, so every sale loses money — the business can never break even.';
+      } else if (profit < 0) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'At ' + level + ' items the business is below break-even (' +
+          (Math.round(be * 10) / 10) + '), so it is running at a loss.';
+      } else {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'At ' + level + ' items the business is above break-even (' +
+          (Math.round(be * 10) / 10) + '), earning $' + contribution + ' contribution per item.';
+      }
+    }
+
+    var host = 'beSliders';
+    IE.slider({ mount: host, label: 'Fixed costs',  min: 0,  max: 1200, step: 50, value: fixed, format: function (v) { return '$' + v; }, onInput: function (v) { fixed = v; update(); } });
+    IE.slider({ mount: host, label: 'Cost / item',  min: 1,  max: 30,   step: 1,  value: varc,  format: function (v) { return '$' + v; }, onInput: function (v) { varc = v; update(); } });
+    IE.slider({ mount: host, label: 'Price / item', min: 1,  max: 40,   step: 1,  value: price, format: function (v) { return '$' + v; }, onInput: function (v) { price = v; update(); } });
+    IE.slider({ mount: host, label: 'Items made',   min: 0,  max: 150,  step: 5,  value: level, onInput: function (v) { level = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'The lines \\(y = 3x + 2\\) and \\(y = 3x - 5\\) are graphed on the same axes. How many solutions does this pair of simultaneous equations have?',
+      opts: ['A) Exactly one', 'B) None — the lines are parallel', 'C) Infinitely many', 'D) Two'],
+      correct: 1,
+      explanation: 'B is correct. Both lines have gradient 3 but different \\(y\\)-intercepts, so they are parallel and never intersect. No pair \\((x, y)\\) satisfies both equations.'
+    },
+    {
+      q: 'Solve \\(y = 2x + 1\\) and \\(3x + y = 16\\).',
+      opts: ['A) \\((3, 7)\\)', 'B) \\((5, 11)\\)', 'C) \\((2, 5)\\)', 'D) \\((4, 9)\\)'],
+      correct: 0,
+      explanation: 'A is correct. Substituting: \\(3x + (2x+1) = 16 \\Rightarrow 5x = 15 \\Rightarrow x = 3\\), so \\(y = 2(3)+1 = 7\\).'
+    },
+    {
+      q: 'A business has cost \\(C = 800 + 6n\\) and revenue \\(R = 14n\\). What is the break-even quantity?',
+      opts: ['A) 57 items', 'B) 100 items', 'C) 133 items', 'D) 80 items'],
+      correct: 1,
+      explanation: 'B is correct. Setting \\(800 + 6n = 14n\\) gives \\(800 = 8n\\), so \\(n = 100\\). Equivalently \\(800 \\div (14 - 6) = 100\\).'
+    },
+    {
+      q: 'For the business in the previous question, what is the profit on 150 items?',
+      opts: ['A) $400', 'B) $1,200', 'C) $400 loss', 'D) $2,100'],
+      correct: 0,
+      explanation: 'A is correct. \\(R = 14(150) = 2100\\) and \\(C = 800 + 6(150) = 1700\\), so \\(P = 2100 - 1700 = \\$400\\).'
+    },
+    {
+      q: 'Concert tickets cost $18 for students and $30 for adults. 240 tickets were sold for a total of $5,400. Which pair of equations models this?',
+      opts: [
+        'A) \\(s + a = 240\\) and \\(18s + 30a = 5400\\)',
+        'B) \\(s + a = 5400\\) and \\(18s + 30a = 240\\)',
+        'C) \\(18s + 30a = 240\\) and \\(s + a = 5400\\)',
+        'D) \\(s - a = 240\\) and \\(18s - 30a = 5400\\)'
+      ],
+      correct: 0,
+      explanation: 'A is correct. One equation counts the tickets (\\(s + a = 240\\)); the other totals their value (\\(18s + 30a = 5400\\)).'
+    },
+    {
+      q: 'In a break-even model, what does increasing the fixed costs while leaving the price and variable cost unchanged do to the break-even quantity?',
+      opts: [
+        'A) It decreases',
+        'B) It stays the same',
+        'C) It increases',
+        'D) It becomes zero'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Break-even \\(= \\dfrac{\\text{fixed costs}}{\\text{price} - \\text{variable cost}}\\). A larger numerator with an unchanged denominator gives a larger break-even quantity — more items must be sold to cover the higher fixed costs.'
+    },
+    {
+      q: 'Solve \\(4x + 3y = 27\\) and \\(4x - y = 7\\) by elimination.',
+      opts: ['A) \\((3, 5)\\)', 'B) \\((5, 3)\\)', 'C) \\((2, 1)\\)', 'D) \\((6, 1)\\)'],
+      correct: 0,
+      explanation: 'A is correct. Subtracting the second from the first eliminates \\(x\\): \\(4y = 20 \\Rightarrow y = 5\\). Then \\(4x - 5 = 7 \\Rightarrow x = 3\\).'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Solve \\(y = 5x - 4\\) and \\(y = 2x + 8\\) algebraically.',
+      marks: 2,
+      steps: [
+        'Both equations give \\(y\\), so set them equal: \\(5x - 4 = 2x + 8\\).',
+        'Collect like terms: \\(3x = 12\\), so \\(x = 4\\).',
+        'Substitute into either equation: \\(y = 2(4) + 8 = 16\\).',
+        'Check in the other: \\(5(4) - 4 = 16\\) ✓'
+      ],
+      answer: '\\(x = 4,\\ y = 16\\), i.e. the point \\((4, 16)\\).'
+    },
+    {
+      q: 'Solve \\(2x + 5y = 31\\) and \\(2x - 3y = 7\\).',
+      marks: 2,
+      steps: [
+        'The \\(x\\) coefficients match, so subtract the second equation from the first.',
+        '\\((2x + 5y) - (2x - 3y) = 31 - 7\\) gives \\(8y = 24\\), so \\(y = 3\\).',
+        'Substitute into the second: \\(2x - 3(3) = 7 \\Rightarrow 2x = 16 \\Rightarrow x = 8\\).'
+      ],
+      answer: '\\((8, 3)\\)'
+    },
+    {
+      q: 'Solve \\(3x + 4y = 24\\) and \\(5x - 2y = 14\\).',
+      marks: 3,
+      steps: [
+        'Neither variable cancels as the equations stand, so create a matching pair.',
+        'Multiply the second equation by 2: \\(10x - 4y = 28\\) &nbsp;(3).',
+        'The \\(y\\) terms are now \\(+4y\\) and \\(-4y\\), so add (1) and (3): \\(13x = 52\\), giving \\(x = 4\\).',
+        'Substitute into the second equation: \\(5(4) - 2y = 14 \\Rightarrow -2y = -6 \\Rightarrow y = 3\\).',
+        'Check in the first: \\(3(4) + 4(3) = 12 + 12 = 24\\) ✓'
+      ],
+      answer: '\\((4, 3)\\)'
+    },
+    {
+      q: 'A theatre sells adult tickets at $35 and concession tickets at $22. On opening night 310 tickets were sold for a total of $9,030. How many of each type were sold?',
+      marks: 3,
+      steps: [
+        'Define: let \\(a\\) = adult tickets and \\(c\\) = concession tickets.',
+        'Count equation: \\(a + c = 310\\). Value equation: \\(35a + 22c = 9030\\).',
+        'From the first, \\(c = 310 - a\\). Substitute into the second: \\(35a + 22(310 - a) = 9030\\).',
+        'Expand: \\(35a + 6820 - 22a = 9030\\), so \\(13a = 2210\\) and \\(a = 170\\).',
+        'Then \\(c = 310 - 170 = 140\\).',
+        'Check: \\(35(170) + 22(140) = 5950 + 3080 = \\$9\\,030\\) ✓'
+      ],
+      answer: '170 adult tickets and 140 concession tickets.'
+    },
+    {
+      q: 'Two phone plans: Plan A charges $25 per month plus $0.20 per call. Plan B charges $45 per month with unlimited calls. Write an equation for each and find the number of calls at which they cost the same.',
+      marks: 3,
+      steps: [
+        'Let \\(n\\) = number of calls per month and \\(C\\) = monthly cost.',
+        'Plan A: \\(C = 25 + 0.2n\\). Plan B: \\(C = 45\\).',
+        'Set equal: \\(25 + 0.2n = 45\\).',
+        'Solve: \\(0.2n = 20\\), so \\(n = 100\\).',
+        'Interpret: below 100 calls Plan A is cheaper; above 100 calls Plan B is cheaper.'
+      ],
+      answer: '100 calls per month. Plan A is cheaper below that, Plan B above it.'
+    },
+    {
+      q: 'A food truck has fixed costs of $620 per week and each meal costs $5.50 in ingredients. Meals sell for $14. (a) Write the cost and revenue equations. (b) Find the break-even number of meals.',
+      marks: 3,
+      steps: [
+        '(a) Cost: \\(C = 620 + 5.5n\\). Revenue: \\(R = 14n\\).',
+        '(b) Break-even is where \\(C = R\\): \\(620 + 5.5n = 14n\\).',
+        'Rearrange: \\(620 = 8.5n\\).',
+        '\\(n = \\dfrac{620}{8.5} = 72.94…\\)',
+        'Meals must be whole, so the truck first makes a profit at 73 meals.'
+      ],
+      answer: '\\(C = 620 + 5.5n\\), \\(R = 14n\\); break-even at \\(n \\approx 72.9\\), so 73 meals are needed to move into profit.'
+    },
+    {
+      q: 'For the food truck above, calculate the profit or loss on (a) 50 meals and (b) 120 meals.',
+      marks: 3,
+      steps: [
+        '(a) \\(R = 14(50) = \\$700\\); \\(C = 620 + 5.5(50) = 620 + 275 = \\$895\\).',
+        '\\(P = 700 - 895 = -\\$195\\) — a loss, since 50 is below break-even.',
+        '(b) \\(R = 14(120) = \\$1680\\); \\(C = 620 + 5.5(120) = 620 + 660 = \\$1280\\).',
+        '\\(P = 1680 - 1280 = \\$400\\) — a profit.'
+      ],
+      answer: '(a) A loss of $195. (b) A profit of $400.'
+    },
+    {
+      q: 'A business breaks even at 240 items. Its fixed costs are $3,600 and it sells each item for $32. Find the variable cost per item.',
+      marks: 2,
+      steps: [
+        'Use \\(n_{BE} = \\dfrac{\\text{fixed}}{\\text{price} - \\text{variable}}\\).',
+        'So \\(240 = \\dfrac{3600}{32 - v}\\).',
+        'Rearrange: \\(32 - v = \\dfrac{3600}{240} = 15\\).',
+        'Therefore \\(v = 32 - 15 = 17\\).'
+      ],
+      answer: '$17 per item.'
+    },
+    {
+      q: 'The graph of a cost line and a revenue line cross at \\((80,\\ \\$1\\,440)\\). The cost line has a \\(y\\)-intercept of $640. Find the selling price per item and the variable cost per item.',
+      marks: 3,
+      steps: [
+        'Revenue passes through the origin and \\((80, 1440)\\), so the price per item is the gradient: \\(1440 \\div 80 = \\$18\\).',
+        'The cost line passes through \\((0, 640)\\) and \\((80, 1440)\\).',
+        'Its gradient is \\(\\dfrac{1440 - 640}{80 - 0} = \\dfrac{800}{80} = 10\\).',
+        'The gradient of the cost line is the variable cost per item.'
+      ],
+      answer: 'Selling price $18 per item; variable cost $10 per item.'
+    },
+    {
+      q: 'A spreadsheet has fixed costs in cell B1, variable cost per item in B2 and selling price in B3. Items are listed from cell A6 downwards. Write the formula for cell D6 (profit) so it can be filled down correctly.',
+      marks: 2,
+      steps: [
+        'Profit = revenue − cost.',
+        'Revenue for the row is \\(=\\$B\\$3*A6\\); cost is \\(=\\$B\\$1+\\$B\\$2*A6\\).',
+        'The parameter cells must be absolute ($ signs) so they do not shift when filled down; A6 stays relative so it steps with each row.'
+      ],
+      answer: '<code>=$B$3*A6-($B$1+$B$2*A6)</code> — or <code>=C6-B6</code> if columns B and C already hold cost and revenue.'
+    },
+    {
+      q: 'Explain why a break-even model that gives an answer of 47.3 items should be reported as 48 items in context.',
+      marks: 2,
+      steps: [
+        'The algebraic model treats \\(n\\) as continuous — it can take any value including fractions.',
+        'The real context is discrete: you cannot sell 0.3 of an item.',
+        'At 47 items the business is still just below break-even, so it remains at a small loss.',
+        'The first whole number of items at which revenue covers cost is 48.'
+      ],
+      answer: 'Because the quantity must be a whole number, and rounding down would leave the business still making a loss. Report 48 items — the first whole quantity that reaches profit. This is a limitation of the continuous model.'
+    },
+    {
+      q: 'Two lines are given by \\(2x + 3y = 12\\) and \\(4x + 6y = 30\\). Show algebraically that they have no solution and explain what this means graphically.',
+      marks: 3,
+      steps: [
+        'Multiply the first equation by 2: \\(4x + 6y = 24\\).',
+        'Compare with the second: \\(4x + 6y = 30\\).',
+        'The left sides are identical but the right sides differ, so \\(24 = 30\\) — a contradiction.',
+        'Rearranging both into gradient–intercept form gives \\(y = -\\tfrac{2}{3}x + 4\\) and \\(y = -\\tfrac{2}{3}x + 5\\): equal gradients, different intercepts.'
+      ],
+      answer: 'The equations are inconsistent, so there is no solution. Graphically the two lines are parallel — both have gradient \\(-\\tfrac{2}{3}\\) — and never intersect.'
+    },
+    {
+      q: 'A company currently breaks even at 150 units. It negotiates a cheaper supplier, reducing the variable cost per unit by $3, while the price and fixed costs stay the same. The original price was $40 and the original variable cost $25. Find the new break-even quantity.',
+      marks: 3,
+      steps: [
+        'Original contribution per unit: \\(40 - 25 = \\$15\\).',
+        'Fixed costs \\(= 150 \\times 15 = \\$2\\,250\\).',
+        'New variable cost is \\(25 - 3 = \\$22\\), so the new contribution is \\(40 - 22 = \\$18\\).',
+        'New break-even \\(= \\dfrac{2250}{18} = 125\\) units.'
+      ],
+      answer: '125 units — a reduction of 25 units, because each sale now contributes $18 instead of $15 towards the fixed costs.'
+    },
+    {
+      q: 'A market stall sells bunches of flowers. The stallholder pays $180 for the site and $6 per bunch, and sells each bunch for $15. She has 40 bunches available. Can she make a profit? Justify your answer with calculations.',
+      marks: 4,
+      steps: [
+        'Cost: \\(C = 180 + 6n\\). Revenue: \\(R = 15n\\).',
+        'Break-even: \\(180 + 6n = 15n \\Rightarrow 180 = 9n \\Rightarrow n = 20\\).',
+        'She needs to sell 20 bunches to cover her costs.',
+        'Selling all 40: \\(R = 15(40) = \\$600\\), \\(C = 180 + 6(40) = \\$420\\), so \\(P = \\$180\\).',
+        'Since 40 > 20, a profit is possible — but only if she actually sells more than 20 bunches.'
+      ],
+      answer: 'Yes. She breaks even at 20 bunches, and selling all 40 gives a maximum profit of $180. The model assumes every bunch is sold; unsold stock reduces revenue but not cost.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

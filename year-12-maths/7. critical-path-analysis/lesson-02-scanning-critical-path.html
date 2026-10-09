@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Forward &amp; Backward Scanning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 7 &mdash; Critical Path Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Forward &amp; Backward Scanning</h1>
+      <p class="subtitle">Two sweeps through the network give you everything: the earliest each
+        task can start, the latest it can start without delaying the project, and the slack in
+        between. Where the slack is zero, the path is critical.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-07</span>
+        <span class="pill">EST &amp; LST</span>
+        <span class="pill">Float time</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>The forward scan</li>
+        <li>Minimum completion time</li>
+        <li>The backward scan</li>
+        <li>Float time</li>
+        <li>Critical activities</li>
+        <li>Finding the critical path</li>
+        <li>Scanning without a diagram</li>
+        <li>Class activity: the delay drill</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#forward">1 &nbsp;The forward scan</a></li>
+        <li class="toc-item"><a class="toc-link" href="#backward">2 &nbsp;The backward scan</a></li>
+        <li class="toc-item"><a class="toc-link" href="#float">3 &nbsp;Float time</a></li>
+        <li class="toc-item"><a class="toc-link" href="#critical">4 &nbsp;The critical path</a></li>
+        <li class="toc-item"><a class="toc-link" href="#worked">5 &nbsp;A full analysis</a></li>
+        <li class="toc-item"><a class="toc-link" href="#table-method">6 &nbsp;The activity table</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. FORWARD ─────────── -->
+      <div class="content-card" id="forward">
+        <p class="section-label">Method</p>
+        <h2>The forward scan</h2>
+
+        <p>The <strong>forward scan</strong> works left to right through the network, finding the
+          <strong>earliest start time (EST)</strong> at each vertex &mdash; the soonest that every
+          activity arriving there can be complete.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The forward scan rule</p>
+          \[\text{EST at a vertex} = \textbf{maximum} \big(\text{EST of previous vertex} + \text{duration}\big)\]
+          <p class="formula-where">Start with EST \(= 0\) at the start vertex. Where several
+            activities arrive, take the <strong>largest</strong> total — everything must be
+            finished before work can continue.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Project: A (4, —), B (6, —), C (3, A), D (5, A and B), E (2, C and D).</p>
+          <p><strong>Vertex 1 (start):</strong> EST = 0.</p>
+          <p><strong>Vertex 2</strong> (end of A): \(0 + 4 = 4\).</p>
+          <p><strong>Vertex 3</strong> (end of B, and of the dummy from vertex 2): two arrivals —</p>
+          \[\max(0 + 6,\ 4 + 0) = \max(6, 4) = 6\]
+          <p><strong>Vertex 4</strong> (end of C): \(4 + 3 = 7\).</p>
+          <p><strong>Vertex 5</strong> (end of D): \(6 + 5 = 11\).</p>
+          <p><strong>Vertex 6</strong> (end of E, from both 4 and 5): here E leaves vertex 5 only,
+            but taking the general case —</p>
+          \[11 + 2 = 13\]
+          <p><strong>Minimum completion time = 13 days.</strong></p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The key result</p>
+          <p style="margin-bottom:0;">The EST at the <strong>finish vertex</strong> is the
+            <strong>minimum completion time</strong> for the whole project. It is also the length
+            of the longest path.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Forward scan walkthrough</h3>
+          <p class="exercise-intro">Step through the scan one vertex at a time and see each
+            maximum being taken.</p>
+          <div id="fwdControls"></div>
+          <div class="diagram-wrap"><div id="fwdDiagram"></div></div>
+          <p class="exercise-feedback" id="fwdNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <p>Project: A (2, —), B (5, —), C (4, A), D (3, B), E (6, C and D). C and D both end at
+            the vertex where E starts.</p>
+          <ol>
+            <li>Carry out the forward scan. What is the minimum completion time?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Start 0. End of A: 2. End of B: 5. Start of E:
+                  \(\max(2 + 4,\ 5 + 3) = \max(6, 8) = 8\). Finish: \(8 + 6 = 14\).</p>
+                <p><strong>Minimum completion time: 14.</strong></p>
+              </div></details></li>
+            <li>At the vertex where E starts, which arriving activity "wins" the maximum? What does
+              that tell you?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>D (via B), with 8. E cannot start until D is finished, so the chain B–D is
+                  holding the project up; A–C arrives 2 days earlier.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. BACKWARD ─────────── -->
+      <div class="content-card" id="backward">
+        <p class="section-label">Method</p>
+        <h2>The backward scan</h2>
+
+        <p>The <strong>backward scan</strong> works right to left, finding the <strong>latest
+          start time (LST)</strong> at each vertex &mdash; the latest moment work can leave without
+          delaying the project.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The backward scan rule</p>
+          \[\text{LST at a vertex} = \textbf{minimum} \big(\text{LST of next vertex} - \text{duration}\big)\]
+          <p class="formula-where">Start at the finish vertex, where <strong>LST = EST</strong>.
+            Where several activities leave, take the <strong>smallest</strong> — the earliest
+            deadline governs.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The symmetry worth memorising</p>
+          <p style="margin-bottom:0;">Forward scan: work <strong>forwards</strong>,
+            <strong>add</strong> durations, take the <strong>maximum</strong>.<br>
+            Backward scan: work <strong>backwards</strong>, <strong>subtract</strong> durations,
+            take the <strong>minimum</strong>.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>Continuing the project above, where the completion time is 13.</p>
+          <p><strong>Vertex 6 (finish):</strong> LST = EST = 13.</p>
+          <p><strong>Vertex 5</strong> (E, duration 2, leads to 6): \(13 - 2 = 11\).</p>
+          <p><strong>Vertex 4</strong> (leads to 6 via a zero-length join): \(13 - 2 = 11\).</p>
+          <p><strong>Vertex 3</strong> (D, duration 5, leads to 5): \(11 - 5 = 6\).</p>
+          <p><strong>Vertex 2</strong> — two activities leave: C (3) to vertex 4, and the dummy (0)
+            to vertex 3:</p>
+          \[\min(11 - 3,\ 6 - 0) = \min(8, 6) = 6\]
+          <p><strong>Vertex 1 (start):</strong> two leave — A (4) to vertex 2, B (6) to vertex 3:</p>
+          \[\min(6 - 4,\ 6 - 6) = \min(2, 0) = 0\]
+          <p><strong>Check:</strong> the LST at the start vertex must be 0. If it is not, there is
+            an arithmetic error somewhere.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Backward scan walkthrough</h3>
+          <p class="exercise-intro">Step backwards from the finish and watch each minimum being
+            taken.</p>
+          <div id="bwdControls"></div>
+          <div class="diagram-wrap"><div id="bwdDiagram"></div></div>
+          <p class="exercise-feedback" id="bwdNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>For the project in the previous Your turn (A 2, B 5, C 4, D 3, E 6; finish 14),
+              carry out the backward scan.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Finish: 14. Start of E: \(14 - 6 = 8\). End of A: \(8 - 4 = 4\). End of B:
+                  \(8 - 3 = 5\).</p>
+                <p>Start: \(\min(4 - 2,\ 5 - 5) = \min(2, 0) = 0\) ✓</p>
+              </div></details></li>
+            <li>Which vertices have EST = LST?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Start (0, 0), end of B (5, 5), start of E (8, 8) and finish (14, 14). The end of
+                  A has EST 2 but LST 4.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. FLOAT ─────────── -->
+      <div class="content-card" id="float">
+        <p class="section-label">Theory</p>
+        <h2>Float time</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Float time</p>
+          \[\text{Float} = \text{LST at end vertex} - \text{EST at start vertex} - \text{duration}\]
+          <p class="formula-where"><strong>Float time</strong> (also called slack) is the amount by
+            which an activity can be delayed, or run over, <em>without delaying the whole
+            project</em>.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Activity C runs from vertex 2 (EST 4) to vertex 4 (LST 11) and takes 3 days. Find its
+            float.</p>
+          \[\text{Float} = 11 - 4 - 3 = 4 \text{ days}\]
+          <p>C can start up to 4 days late, or take 4 days longer than planned, without pushing
+            back the project's finish.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; a critical activity</p>
+          <p>Activity D runs from vertex 3 (EST 6) to vertex 5 (LST 11) and takes 5 days.</p>
+          \[\text{Float} = 11 - 6 - 5 = 0\]
+          <p>D has <strong>zero float</strong>. Any delay to D delays the entire project by the
+            same amount. D is a <strong>critical activity</strong>.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Interpreting float</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>Float = 0</strong> → the activity is <strong>critical</strong>. It has no
+              slack at all.</li>
+            <li><strong>Float &gt; 0</strong> → the activity is <strong>non-critical</strong>, with
+              that much slack.</li>
+            <li>Float is never negative in a correctly analysed network. A negative value means a
+              scanning error.</li>
+          </ul>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Float calculator</h3>
+          <p class="exercise-intro">Enter the EST at the start, the LST at the end and the
+            duration.</p>
+          <div id="floatSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Float time</div>
+              <div class="readout-value" id="roFloat">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Status</div>
+              <div class="readout-value" id="roStatus">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="floatNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Using your scans (vertex ESTs 0, 2, 5, 8, 14; LSTs 0, 4, 5, 8, 14), find the float
+              of every activity.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A: \(4 - 0 - 2 = 2\). B: \(5 - 0 - 5 = 0\). C: \(8 - 2 - 4 = 2\).
+                  D: \(8 - 5 - 3 = 0\). E: \(14 - 8 - 6 = 0\).</p>
+              </div></details></li>
+            <li>State the critical path and check its length.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>B–D–E: \(5 + 3 + 6 = 14\) ✓ equal to the minimum completion time.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CRITICAL ─────────── -->
+      <div class="content-card" id="critical">
+        <p class="section-label">Method</p>
+        <h2>Finding the critical path</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The critical path</p>
+          <p style="margin-bottom:0;">The <strong>critical path</strong> is the continuous chain of
+            activities from start to finish for which <strong>every activity has zero float</strong>.
+            Its length is the minimum completion time.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">How to identify it</p>
+          <ol style="margin-bottom:0;">
+            <li>Do the forward scan for every EST.</li>
+            <li>Do the backward scan for every LST.</li>
+            <li>Calculate the float for every activity.</li>
+            <li>The zero-float activities form the critical path.</li>
+          </ol>
+          <p class="formula-where" style="margin-top:10px;">A vertex where EST = LST lies on the
+            critical path, but you must still check the <em>activities</em> — a zero-float vertex
+            at each end does not by itself make an activity critical.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Why it matters</p>
+          <ul style="margin-bottom:0;">
+            <li>Delaying <strong>any</strong> critical activity delays the whole project.</li>
+            <li>Shortening the project requires shortening a <strong>critical</strong> activity.</li>
+            <li>Speeding up a non-critical activity achieves <strong>nothing</strong> — it just
+              increases that activity's float.</li>
+          </ul>
+        </div>
+
+        <p>A project may have <strong>more than one critical path</strong> if two chains happen to
+          be the same length. In that case <em>every</em> critical path must be shortened to
+          shorten the project.</p>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A project's paths have lengths 18, 21, 21 and 15 days. What is the minimum
+              completion time, and how many critical paths are there?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>21 days, the longest. Two paths have length 21, so there are two critical
+                  paths.</p>
+              </div></details></li>
+            <li>For that project, a manager shortens one activity that lies on only one of the
+              21-day paths. Does the project finish sooner?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No. The other 21-day path is unchanged, so the project still takes 21 days.
+                  An activity common to both paths, or one activity on each, must be shortened.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. WORKED ─────────── -->
+      <div class="content-card" id="worked">
+        <p class="section-label">Application</p>
+        <h2>A full analysis</h2>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; the complete method</p>
+          <p>For the project A (4, —), B (6, —), C (3, A), D (5, A and B), E (2, C and D), produce
+            the full activity table.</p>
+          <p>From the scans: vertex ESTs are 0, 4, 6, 7, 11, 13; vertex LSTs are 0, 6, 6, 11,
+            11, 13.</p>
+          <table class="coord-table">
+            <tr>
+              <th>Activity</th><th>Duration</th><th>EST (start vertex)</th>
+              <th>LST (end vertex)</th><th>Float</th><th>Critical?</th>
+            </tr>
+            <tr><td>A</td><td>4</td><td>0</td><td>6</td><td>\(6 - 0 - 4 = 2\)</td><td>No</td></tr>
+            <tr><td>B</td><td>6</td><td>0</td><td>6</td><td>\(6 - 0 - 6 = 0\)</td><td><strong>Yes</strong></td></tr>
+            <tr><td>C</td><td>3</td><td>4</td><td>11</td><td>\(11 - 4 - 3 = 4\)</td><td>No</td></tr>
+            <tr><td>D</td><td>5</td><td>6</td><td>11</td><td>\(11 - 6 - 5 = 0\)</td><td><strong>Yes</strong></td></tr>
+            <tr><td>E</td><td>2</td><td>11</td><td>13</td><td>\(13 - 11 - 2 = 0\)</td><td><strong>Yes</strong></td></tr>
+          </table>
+          <p><strong>Critical path: B → D → E</strong>, total \(6 + 5 + 2 = 13\) days ✓ matching
+            the minimum completion time.</p>
+          <p><strong>Interpretation:</strong> A has 2 days of slack and C has 4. Delaying B, D or E
+            by even one day pushes the project past 13 days.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Full project analyser</h3>
+          <p class="exercise-intro">Change any duration. Both scans, all floats and the critical
+            path are recalculated live.</p>
+          <div id="fullSliders"></div>
+          <div id="fullTable" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="fullNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; exam style</p>
+          <p>A school is staging a musical. Durations are in weeks.</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>Task</th><th>Weeks</th><th>Predecessors</th></tr>
+            <tr><td>A</td><td>Choose the show</td><td>2</td><td>—</td></tr>
+            <tr><td>B</td><td>Auditions</td><td>1</td><td>A</td></tr>
+            <tr><td>C</td><td>Book the hall</td><td>1</td><td>A</td></tr>
+            <tr><td>D</td><td>Rehearsals</td><td>6</td><td>B</td></tr>
+            <tr><td>E</td><td>Build the set</td><td>4</td><td>C</td></tr>
+            <tr><td>F</td><td>Make costumes</td><td>3</td><td>B</td></tr>
+            <tr><td>G</td><td>Dress rehearsal</td><td>1</td><td>D, E, F</td></tr>
+            <tr><td>H</td><td>Sell tickets</td><td>3</td><td>C</td></tr>
+          </table>
+          <p><strong>(a) Find the minimum completion time and the critical path.</strong>
+            [3 marks]</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td></tr>
+            <tr><th>EST</th><td>0</td><td>2</td><td>2</td><td>3</td><td>3</td><td>3</td><td>9</td><td>3</td></tr>
+            <tr><th>Float</th><td>0</td><td>0</td><td>2</td><td>0</td><td>2</td><td>3</td><td>0</td><td>4</td></tr>
+          </table>
+          <p>Critical path A–B–D–G, \(2 + 1 + 6 + 1 = 10\) weeks.</p>
+          <p><strong>(b) The set builders say they need 7 weeks, not 4. Effect?</strong> [1 mark]</p>
+          <p>E has 2 weeks of float. A 3-week overrun uses that and delays the musical by 1 week,
+            to 11 weeks.</p>
+          <p><strong>(c) Would extra rehearsals that cut D to 5 weeks help?</strong> [1 mark]</p>
+          <p>Yes: D is critical. The next-longest path, A–C–E–G, is 8 weeks, so the project
+            shortens to 9 weeks.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. TABLE METHOD ─────────── -->
+      <div class="content-card" id="table-method">
+        <p class="section-label">Method</p>
+        <h2>Scanning without a diagram: the activity table</h2>
+
+        <p>The scans can be done directly on the precedence table, one activity per row. This is
+          how a spreadsheet does it (see Lesson 3), and it avoids drawing dummies.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Four times for each activity</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>ES</strong> (earliest start) = the largest EF of its predecessors (0 if
+              none).</li>
+            <li><strong>EF</strong> (earliest finish) = ES + duration.</li>
+            <li><strong>LF</strong> (latest finish) = the smallest LS of the activities that
+              follow it (the completion time if none).</li>
+            <li><strong>LS</strong> (latest start) = LF &minus; duration.</li>
+          </ul>
+          <p class="formula-where" style="margin-top:10px;">Float \(= \text{LS} - \text{ES}\).
+            Fill ES and EF top to bottom, then LF and LS bottom to top.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>Project: P (3, —), Q (5, —), R (4, P), S (2, P and Q), T (6, R), U (3, S and T).</p>
+          <table class="coord-table">
+            <tr><th>Activity</th><th>Duration</th><th>ES</th><th>EF</th><th>LS</th><th>LF</th><th>Float</th></tr>
+            <tr><td>P</td><td>3</td><td>0</td><td>3</td><td>0</td><td>3</td><td>0</td></tr>
+            <tr><td>Q</td><td>5</td><td>0</td><td>5</td><td>6</td><td>11</td><td>6</td></tr>
+            <tr><td>R</td><td>4</td><td>3</td><td>7</td><td>3</td><td>7</td><td>0</td></tr>
+            <tr><td>S</td><td>2</td><td>5</td><td>7</td><td>11</td><td>13</td><td>6</td></tr>
+            <tr><td>T</td><td>6</td><td>7</td><td>13</td><td>7</td><td>13</td><td>0</td></tr>
+            <tr><td>U</td><td>3</td><td>13</td><td>16</td><td>13</td><td>16</td><td>0</td></tr>
+          </table>
+          <p>S's ES is \(\max(3, 5) = 5\). P's LF is \(\min(\text{LS of R}, \text{LS of S}) =
+            \min(3, 11) = 3\).</p>
+          <p>Completion time 16; critical path P–R–T–U.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Use the table method on A (2, —), B (5, —), C (4, A), D (3, B), E (6, C and D).
+              Do your floats agree with the scans you did earlier?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Activity</th><th>ES</th><th>EF</th><th>LS</th><th>LF</th><th>Float</th></tr>
+                  <tr><td>A</td><td>0</td><td>2</td><td>2</td><td>4</td><td>2</td></tr>
+                  <tr><td>B</td><td>0</td><td>5</td><td>0</td><td>5</td><td>0</td></tr>
+                  <tr><td>C</td><td>2</td><td>6</td><td>4</td><td>8</td><td>2</td></tr>
+                  <tr><td>D</td><td>5</td><td>8</td><td>5</td><td>8</td><td>0</td></tr>
+                  <tr><td>E</td><td>8</td><td>14</td><td>8</td><td>14</td><td>0</td></tr>
+                </table>
+                <p>Yes &mdash; the same floats and the same critical path, B–D–E.</p>
+              </div></details></li>
+            <li>In the P–U project, Q is delayed by 4 days. Does the completion time change?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No. Q has 6 days of float, so a 4-day delay is absorbed.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>The delay drill</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> You manage the project A (4), B (6),
+          C (3), D (5), E (2) from this lesson, due in 13 days. Five pieces of bad news arrive.
+          For each one, <strong>predict</strong> the new completion time using float, then check
+          it in the <a href="#worked">full project analyser</a> and reset.</p>
+        <ol>
+          <li>C will take 3 days longer.</li>
+          <li>A will take 3 days longer.</li>
+          <li>B will take 2 days longer.</li>
+          <li>C will take 5 days longer.</li>
+          <li>D will take 1 day longer.</li>
+        </ol>
+        <p>Then discuss: after news 2, the critical path changes. Which activities become
+          critical, and why?</p>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>News</th><th>Float</th><th>New completion</th><th>Why</th></tr>
+            <tr><td>C +3</td><td>4</td><td>13</td><td>absorbed by float</td></tr>
+            <tr><td>A +3</td><td>2</td><td>14</td><td>2 days absorbed, 1 day passed on</td></tr>
+            <tr><td>B +2</td><td>0</td><td>15</td><td>critical: every day is passed on</td></tr>
+            <tr><td>C +5</td><td>4</td><td>14</td><td>4 absorbed, 1 passed on</td></tr>
+            <tr><td>D +1</td><td>0</td><td>14</td><td>critical</td></tr>
+          </table>
+          <p><strong>Rule:</strong> new completion time \(= 13 + \max(0,\ \text{delay} -
+            \text{float})\), as long as only one activity is delayed.</p>
+          <p>After news 2, A–dummy–D–E (\(7 + 0 + 5 + 2 = 14\)) is the longest path, so A
+            becomes critical and B gains a day of float.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Set out both scans clearly and build the float table &mdash; the
+          working carries most of the marks.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 covers Gantt charts, changing durations and spreadsheet modelling.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-7', LESSON_IDX = 1;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* Project: vertices 1..6; activities as edges */
+  var POS = { 1: [44, 108], 2: [166, 52], 3: [166, 166], 4: [300, 52], 5: [300, 150], 6: [402, 104] };
+  function acts(d) {
+    return [
+      { id: 'A', f: 1, t: 2, d: d.A },
+      { id: 'B', f: 1, t: 3, d: d.B },
+      { id: '·', f: 2, t: 3, d: 0, dummy: true },
+      { id: 'C', f: 2, t: 4, d: d.C },
+      { id: 'D', f: 3, t: 5, d: d.D },
+      { id: 'E', f: 5, t: 6, d: d.E },
+      { id: '·', f: 4, t: 6, d: 0, dummy: true }
+    ];
+  }
+
+  function scan(d) {
+    var A = acts(d);
+    var est = { 1: 0 };
+    [2, 3, 4, 5, 6].forEach(function (v) {
+      est[v] = Math.max.apply(null, A.filter(function (a) { return a.t === v; })
+        .map(function (a) { return est[a.f] + a.d; }));
+    });
+    var T = est[6];
+    var lst = { 6: T };
+    [5, 4, 3, 2, 1].forEach(function (v) {
+      lst[v] = Math.min.apply(null, A.filter(function (a) { return a.f === v; })
+        .map(function (a) { return lst[a.t] - a.d; }));
+    });
+    return { A: A, est: est, lst: lst, T: T };
+  }
+
+  function drawNet(mount, d, labelFn, highlight) {
+    var s = scan(d);
+    var W = 450, H = 220;
+    var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+    var defs = svgEl('defs');
+    var mk = svgEl('marker', { id: 'cps', markerWidth: 9, markerHeight: 7, refX: 8, refY: 3.5, orient: 'auto' });
+    mk.appendChild(svgEl('polygon', { points: '0 0, 9 3.5, 0 7', class: 'arrowhead-fill' }));
+    defs.appendChild(mk); svg.appendChild(defs);
+
+    s.A.forEach(function (a) {
+      var p = POS[a.f], q = POS[a.t];
+      var dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
+      var ux = dx / L, uy = dy / L;
+      var crit = highlight && (s.lst[a.t] - s.est[a.f] - a.d) === 0;
+      svg.appendChild(svgEl('line', {
+        class: 'edge-line', x1: p[0] + ux * 21, y1: p[1] + uy * 21,
+        x2: q[0] - ux * 23, y2: q[1] - uy * 23,
+        'stroke-width': crit ? 3.4 : 1.5,
+        'stroke-dasharray': a.dummy ? '6 4' : '',
+        'marker-end': 'url(#cps)'
+      }));
+      if (!a.dummy) {
+        svg.appendChild(svgEl('text', { class: 'edge-weight-label',
+          x: (p[0] + q[0]) / 2, y: (p[1] + q[1]) / 2 - 8, 'text-anchor': 'middle' }, a.id + ', ' + a.d));
+      }
+    });
+    Object.keys(POS).forEach(function (v) {
+      svg.appendChild(svgEl('circle', { class: 'node-circle', cx: POS[v][0], cy: POS[v][1], r: 21 }));
+      svg.appendChild(svgEl('text', { class: 'node-label', x: POS[v][0] - 5, y: POS[v][1] + 6 }, v));
+      var lab = labelFn(v, s);
+      if (lab) {
+        svg.appendChild(svgEl('text', { class: 'angle-label-text',
+          x: POS[v][0], y: POS[v][1] - 27, 'text-anchor': 'middle' }, lab));
+      }
+    });
+    mount.innerHTML = '';
+    mount.appendChild(svg);
+    return s;
+  }
+
+  var BASE = { A: 4, B: 6, C: 3, D: 5, E: 2 };
+
+  /* ── Forward scan walkthrough ─────────────────────────────── */
+  (function () {
+    var step = 0;
+    var mount = document.getElementById('fwdDiagram');
+    var controls = document.getElementById('fwdControls');
+    var order = [1, 2, 3, 4, 5, 6];
+
+    var next = document.createElement('button');
+    next.className = 'exercise-check-btn';
+    next.style.marginRight = '8px';
+    next.textContent = 'Next vertex →';
+    next.addEventListener('click', function () { step = Math.min(step + 1, order.length); update(); });
+    controls.appendChild(next);
+    var back = document.createElement('button');
+    back.className = 'practice-btn';
+    back.textContent = 'Reset';
+    back.addEventListener('click', function () { step = 0; update(); });
+    controls.appendChild(back);
+
+    function update() {
+      var s = drawNet(mount, BASE, function (v) {
+        return order.indexOf(+v) < step ? 'EST ' + scan(BASE).est[v] : '';
+      }, false);
+      var note = document.getElementById('fwdNote');
+      note.className = 'exercise-feedback';
+      if (step === 0) {
+        note.textContent = 'Press "Next vertex" to work forwards through the network, taking the maximum at each merge.';
+      } else if (step <= order.length) {
+        var v = order[step - 1];
+        var arrivals = s.A.filter(function (a) { return a.t === v; });
+        if (!arrivals.length) {
+          note.textContent = 'Vertex ' + v + ' is the start: EST = 0.';
+        } else {
+          var terms = arrivals.map(function (a) { return s.est[a.f] + ' + ' + a.d + ' = ' + (s.est[a.f] + a.d); });
+          note.textContent = 'Vertex ' + v + ': arrivals give ' + terms.join(' and ') +
+            '. Take the maximum → EST = ' + s.est[v] +
+            (v === 6 ? '. This is the minimum completion time.' : '.');
+        }
+      }
+    }
+    update();
+  })();
+
+  /* ── Backward scan walkthrough ────────────────────────────── */
+  (function () {
+    var step = 0;
+    var mount = document.getElementById('bwdDiagram');
+    var controls = document.getElementById('bwdControls');
+    var order = [6, 5, 4, 3, 2, 1];
+
+    var next = document.createElement('button');
+    next.className = 'exercise-check-btn';
+    next.style.marginRight = '8px';
+    next.textContent = '← Next vertex';
+    next.addEventListener('click', function () { step = Math.min(step + 1, order.length); update(); });
+    controls.appendChild(next);
+    var back = document.createElement('button');
+    back.className = 'practice-btn';
+    back.textContent = 'Reset';
+    back.addEventListener('click', function () { step = 0; update(); });
+    controls.appendChild(back);
+
+    function update() {
+      var s = drawNet(mount, BASE, function (v) {
+        return order.indexOf(+v) < step ? 'LST ' + scan(BASE).lst[v] : '';
+      }, false);
+      var note = document.getElementById('bwdNote');
+      note.className = 'exercise-feedback';
+      if (step === 0) {
+        note.textContent = 'Press "Next vertex" to work backwards from the finish, taking the minimum at each split.';
+      } else {
+        var v = order[step - 1];
+        var departures = s.A.filter(function (a) { return a.f === v; });
+        if (!departures.length) {
+          note.textContent = 'Vertex ' + v + ' is the finish: LST = EST = ' + s.T + '.';
+        } else {
+          var terms = departures.map(function (a) { return s.lst[a.t] + ' − ' + a.d + ' = ' + (s.lst[a.t] - a.d); });
+          note.textContent = 'Vertex ' + v + ': departures give ' + terms.join(' and ') +
+            '. Take the minimum → LST = ' + s.lst[v] +
+            (v === 1 ? '. It must be 0 — a useful check on your arithmetic.' : '.');
+        }
+      }
+    }
+    update();
+  })();
+
+  /* ── Float calculator ─────────────────────────────────────── */
+  (function () {
+    var est = 4, lst = 11, dur = 3;
+    function update() {
+      var f = lst - est - dur;
+      document.getElementById('roFloat').textContent  = f + ' days';
+      document.getElementById('roStatus').textContent = f === 0 ? 'critical' : (f > 0 ? 'non-critical' : 'impossible');
+      var note = document.getElementById('floatNote');
+      if (f > 0) {
+        note.className = 'exercise-feedback';
+        note.textContent = 'Float = ' + lst + ' − ' + est + ' − ' + dur + ' = ' + f +
+          '. This activity can start up to ' + f + ' days late, or overrun by ' + f +
+          ' days, without delaying the project.';
+      } else if (f === 0) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Float = 0, so this activity is critical. Any delay to it delays the whole project by the same amount.';
+      } else {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'A negative float is impossible in a correctly analysed network — check the scans, since the LST cannot be earlier than EST + duration.';
+      }
+    }
+    var host = 'floatSliders';
+    IE.slider({ mount: host, label: 'EST at start', min: 0, max: 20, step: 1, value: est, onInput: function (v) { est = v; update(); } });
+    IE.slider({ mount: host, label: 'LST at end',   min: 0, max: 30, step: 1, value: lst, onInput: function (v) { lst = v; update(); } });
+    IE.slider({ mount: host, label: 'Duration',     min: 1, max: 15, step: 1, value: dur, onInput: function (v) { dur = v; update(); } });
+    update();
+  })();
+
+  /* ── Full analyser ────────────────────────────────────────── */
+  (function () {
+    var d = { A: 4, B: 6, C: 3, D: 5, E: 2 };
+    function update() {
+      var s = scan(d);
+      var html = '<table class="coord-table"><tr><th>Activity</th><th>Duration</th><th>EST</th><th>LST</th><th>Float</th><th>Critical?</th></tr>';
+      var crit = [];
+      s.A.filter(function (a) { return !a.dummy; }).forEach(function (a) {
+        var f = s.lst[a.t] - s.est[a.f] - a.d;
+        if (f === 0) crit.push(a.id);
+        html += '<tr><td>' + a.id + '</td><td>' + a.d + '</td><td>' + s.est[a.f] + '</td><td>' +
+                s.lst[a.t] + '</td><td>' + f + '</td><td>' + (f === 0 ? '<strong>Yes</strong>' : 'No') + '</td></tr>';
+      });
+      document.getElementById('fullTable').innerHTML = html + '</table>';
+      var note = document.getElementById('fullNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'Minimum completion time: ' + s.T + ' days. Critical activities: ' +
+        crit.join(', ') + '. Shortening any other activity would only increase its float, not finish the project sooner.';
+    }
+    var host = 'fullSliders';
+    ['A', 'B', 'C', 'D', 'E'].forEach(function (k) {
+      IE.slider({ mount: host, label: 'Activity ' + k, min: 1, max: 14, step: 1, value: d[k],
+                  format: function (v) { return v + ' d'; },
+                  onInput: function (v) { d[k] = v; update(); } });
+    });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'In the forward scan, what do you do when several activities arrive at a vertex?',
+      opts: [
+        'A) Take the minimum of the totals',
+        'B) Take the maximum of the totals',
+        'C) Add all the totals together',
+        'D) Take the average'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Work at that vertex cannot begin until <em>every</em> arriving activity is finished, so the EST is the largest of the arriving totals.'
+    },
+    {
+      q: 'In the backward scan, what do you do when several activities leave a vertex?',
+      opts: [
+        'A) Take the maximum of the differences',
+        'B) Take the minimum of the differences',
+        'C) Add the differences',
+        'D) Subtract them in sequence'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Every departing activity must still meet its own deadline, so the earliest of those deadlines governs — take the minimum.'
+    },
+    {
+      q: 'An activity runs from a vertex with EST 7 to a vertex with LST 15 and takes 5 days. What is its float?',
+      opts: ['A) 3 days', 'B) 8 days', 'C) 27 days', 'D) 0 days'],
+      correct: 0,
+      explanation: 'A is correct. Float \\(= \\text{LST} - \\text{EST} - \\text{duration} = 15 - 7 - 5 = 3\\) days. The activity can be delayed up to 3 days without affecting the project.'
+    },
+    {
+      q: 'What does it mean for an activity to have zero float?',
+      opts: [
+        'A) It takes no time to complete',
+        'B) It can be skipped entirely',
+        'C) It is critical — any delay delays the whole project',
+        'D) It has not been scheduled yet'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Zero float means there is no slack: the activity must start at its earliest time and finish on schedule, or the project\'s completion is pushed back by the same amount.'
+    },
+    {
+      q: 'Where does the minimum completion time appear in the analysis?',
+      opts: [
+        'A) The LST at the start vertex',
+        'B) The EST at the finish vertex',
+        'C) The sum of all the durations',
+        'D) The largest single activity duration'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The forward scan ends at the finish vertex, and its EST is the earliest the whole project can be complete — equivalently, the length of the longest path.'
+    },
+    {
+      q: 'A manager wants to finish a project sooner and shortens an activity with 4 days of float by 2 days. What happens?',
+      opts: [
+        'A) The project finishes 2 days earlier',
+        'B) The project finishes 4 days earlier',
+        'C) The completion time does not change; that activity now has 6 days of float',
+        'D) The project takes 2 days longer'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Only critical activities determine the completion time. Shortening a non-critical activity simply increases its slack from 4 to 6 days — the critical path is unchanged.'
+    },
+    {
+      q: 'After a backward scan, the LST at the start vertex comes out as 3 rather than 0. What does this indicate?',
+      opts: [
+        'A) The project starts 3 days late',
+        'B) There is an arithmetic error in one of the scans',
+        'C) The first activity has 3 days of float',
+        'D) The critical path is 3 days long'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The LST at the start vertex must always equal 0, since the project begins at time zero. Any other value signals a mistake in the forward or backward scan, and is a useful self-check.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'State the forward scan and backward scan rules, and explain the symmetry between them.',
+      marks: 3,
+      steps: [
+        'Forward: EST at a vertex = maximum of (EST of previous vertex + duration), starting from 0.',
+        'Backward: LST at a vertex = minimum of (LST of next vertex − duration), starting from the completion time.',
+        'Forwards you add and take the maximum; backwards you subtract and take the minimum.',
+        'The maximum reflects waiting for everything; the minimum reflects meeting the earliest deadline.'
+      ],
+      answer: 'Forward: add durations moving right, take the maximum at merges. Backward: subtract durations moving left, take the minimum at splits. The rules mirror each other — one finds the earliest possible, the other the latest permissible.'
+    },
+    {
+      q: 'An activity starts at a vertex with EST 9 and ends at one with LST 20. It takes 6 days. Find its float and state whether it is critical.',
+      marks: 2,
+      steps: [
+        'Float \\(= \\text{LST} - \\text{EST} - \\text{duration}\\).',
+        '\\(= 20 - 9 - 6 = 5\\) days.',
+        'Since the float is not zero, the activity is not critical.'
+      ],
+      answer: 'Float 5 days; not critical. It can be delayed or overrun by up to 5 days without affecting the completion date.'
+    },
+    {
+      q: 'For a project with A (5, —), B (3, —), C (4, A), D (7, B), E (2, C, D), carry out the forward scan and state the minimum completion time.',
+      marks: 5,
+      steps: [
+        'Start vertex: EST = 0.',
+        'End of A: \\(0 + 5 = 5\\). End of B: \\(0 + 3 = 3\\).',
+        'End of C: \\(5 + 4 = 9\\). End of D: \\(3 + 7 = 10\\).',
+        'C and D merge before E: EST there \\(= \\max(9, 10) = 10\\).',
+        'Finish: \\(10 + 2 = 12\\).'
+      ],
+      answer: '12 days.'
+    },
+    {
+      q: 'For the same project, carry out the backward scan and find the float of each activity.',
+      marks: 6,
+      steps: [
+        'Finish LST = 12. Before E: \\(12 - 2 = 10\\).',
+        'End of A (before C): \\(10 - 4 = 6\\). End of B (before D): \\(10 - 7 = 3\\).',
+        'Start: \\(\\min(6 - 5,\\ 3 - 3) = \\min(1, 0) = 0\\) ✓',
+        'Float A \\(= 6 - 0 - 5 = 1\\); float B \\(= 3 - 0 - 3 = 0\\).',
+        'Float C \\(= 10 - 5 - 4 = 1\\); float D \\(= 10 - 3 - 7 = 0\\).',
+        'Float E \\(= 12 - 10 - 2 = 0\\).'
+      ],
+      answer: 'Floats: A = 1, B = 0, C = 1, D = 0, E = 0. The critical path is B–D–E.'
+    },
+    {
+      q: 'For that project, state the critical path and verify its length equals the completion time.',
+      marks: 3,
+      steps: [
+        'The zero-float activities are B, D and E.',
+        'They form a continuous chain from start to finish.',
+        'Length \\(= 3 + 7 + 2 = 12\\).',
+        'This matches the minimum completion time found by the forward scan ✓'
+      ],
+      answer: 'Critical path B–D–E, length 12 days, matching the completion time.'
+    },
+    {
+      q: 'Explain why a non-critical activity can be delayed without affecting the project, while a critical one cannot.',
+      marks: 3,
+      steps: [
+        'A non-critical activity has float — spare time between its earliest start and its latest permissible start.',
+        'A delay within that float still allows every successor to start on time.',
+        'A critical activity has zero float, so it must start at its earliest time.',
+        'Any delay pushes its successors back, and that delay propagates to the finish.'
+      ],
+      answer: 'A non-critical activity has slack, so a delay within its float is absorbed without pushing back any successor. A critical activity has none — every day of delay transmits directly to the project\'s completion date.'
+    },
+    {
+      q: 'A project has a critical path of 22 days. Activity M, with 5 days of float, is shortened by 3 days. What is the new completion time?',
+      marks: 3,
+      steps: [
+        'M is not on the critical path, since it has non-zero float.',
+        'The critical path is unchanged at 22 days.',
+        'M\'s float increases from 5 to 8 days.',
+        'The completion time is determined solely by the critical path.'
+      ],
+      answer: 'Still 22 days. Shortening M only increases its float to 8 days; only a critical activity can shorten the project.'
+    },
+    {
+      q: 'For a project with A (6, —), B (4, —), C (5, A), D (3, A, B), E (4, C), F (6, D), find the ESTs, LSTs, floats and critical path.',
+      marks: 8,
+      steps: [
+        'A dummy is needed: C depends on A only, D on A and B.',
+        'Forward: start 0; end of A = 6; merge for D \\(= \\max(6 + 0,\\ 0 + 4) = 6\\).',
+        'End of C \\(= 6 + 5 = 11\\); end of D \\(= 6 + 3 = 9\\).',
+        'Finish \\(= \\max(11 + 4,\\ 9 + 6) = \\max(15, 15) = 15\\).',
+        'Backward: finish 15; before E \\(= 15 - 4 = 11\\); before F \\(= 15 - 6 = 9\\).',
+        'End of A \\(= \\min(11 - 5,\\ 9 - 0) = 6\\); merge for D \\(= 9 - 3 = 6\\); start \\(= \\min(6 - 6,\\ 6 - 4) = 0\\) ✓',
+        'Floats: A \\(= 6 - 0 - 6 = 0\\); B \\(= 6 - 0 - 4 = 2\\); C \\(= 11 - 6 - 5 = 0\\); D \\(= 9 - 6 - 3 = 0\\); E \\(= 15 - 11 - 4 = 0\\); F \\(= 15 - 9 - 6 = 0\\).'
+      ],
+      answer: 'Completion time 15 days. Floats: A 0, B 2, C 0, D 0, E 0, F 0. There are <strong>two</strong> critical paths — A–C–E and A–(dummy)–D–F — both 15 days.'
+    },
+    {
+      q: 'For the project above with two critical paths, explain what a manager must do to finish one day earlier.',
+      marks: 4,
+      steps: [
+        'Both A–C–E and A–D–F are 15 days.',
+        'Shortening only one path leaves the other at 15, so the project still takes 15 days.',
+        'Activity A is on both paths, so shortening A by one day reduces both simultaneously.',
+        'Alternatively, one activity on each path must be shortened.'
+      ],
+      answer: 'Shorten activity A by one day, since A lies on both critical paths. Otherwise one activity on <em>each</em> path (say C and F) must be shortened — reducing just one path leaves the other still governing at 15 days.'
+    },
+    {
+      q: 'Explain the check that the LST at the start vertex must equal zero, and what a non-zero value implies.',
+      marks: 3,
+      steps: [
+        'The project begins at time 0 by definition.',
+        'The backward scan finds the latest each event can occur without delay.',
+        'The start event cannot be delayed at all, so its LST must be 0.',
+        'A non-zero result means an error in the forward or backward scan arithmetic.'
+      ],
+      answer: 'The project starts at time 0, so the latest permissible start at that vertex is also 0. Any other value means an arithmetic mistake in one of the scans — it is a reliable self-check before moving on.'
+    },
+    {
+      q: 'A manufacturing project has A (3, —), B (7, —), C (2, A), D (4, C), E (5, B), F (3, D, E). Find the critical path and completion time.',
+      marks: 7,
+      steps: [
+        'Forward: start 0; end of A = 3; end of B = 7.',
+        'End of C \\(= 3 + 2 = 5\\); end of D \\(= 5 + 4 = 9\\); end of E \\(= 7 + 5 = 12\\).',
+        'Merge before F: \\(\\max(9, 12) = 12\\); finish \\(= 12 + 3 = 15\\).',
+        'Backward: finish 15; before F \\(= 12\\).',
+        'End of C \\(= 12 - 4 = 8\\); end of A \\(= 8 - 2 = 6\\); end of B \\(= 12 - 5 = 7\\).',
+        'Start \\(= \\min(6 - 3,\\ 7 - 7) = \\min(3, 0) = 0\\) ✓',
+        'Floats: A 3, C 3, D 3, B 0, E 0, F 0.'
+      ],
+      answer: 'Completion time 15 days; critical path B–E–F. Activities A, C and D each carry 3 days of float.'
+    },
+    {
+      q: 'For the manufacturing project above, activity D overruns by 2 days. What is the new completion time?',
+      marks: 3,
+      steps: [
+        'D has 3 days of float.',
+        'An overrun of 2 days is within that float.',
+        'D\'s remaining float falls to 1 day.',
+        'The critical path B–E–F is unaffected.'
+      ],
+      answer: 'Still 15 days. The 2-day overrun is absorbed by D\'s 3 days of float, leaving 1 day of slack; the critical path is untouched.'
+    },
+    {
+      q: 'For the same project, activity E overruns by 2 days. What is the new completion time, and why is the effect different?',
+      marks: 3,
+      steps: [
+        'E is on the critical path, with zero float.',
+        'There is no slack to absorb the overrun.',
+        'The delay propagates directly to F and then to the finish.',
+        'New completion time \\(= 15 + 2 = 17\\) days.'
+      ],
+      answer: '17 days. Unlike D, activity E is critical with zero float, so every day of overrun transmits straight through to the project\'s completion date.'
+    },
+    {
+      q: 'Explain why a vertex with EST = LST does not on its own prove that an activity leaving it is critical.',
+      marks: 4,
+      steps: [
+        'EST = LST at a vertex means that event itself cannot be delayed.',
+        'But an activity\'s float depends on the EST at its <em>start</em> vertex and the LST at its <em>end</em> vertex.',
+        'An activity could leave a zero-slack vertex and arrive at one with plenty of slack.',
+        'Its float would then be positive despite the critical start vertex.'
+      ],
+      answer: 'Because float is calculated across the activity, using the EST at its start and the LST at its end. An activity can leave a critical vertex but arrive at one with slack, giving it positive float — so the activity itself must always be checked.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

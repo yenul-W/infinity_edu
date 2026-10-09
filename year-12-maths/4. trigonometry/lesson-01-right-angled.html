@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Right-Angled Trigonometry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 4 &mdash; Trigonometry</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Right-Angled Trigonometry</h1>
+      <p class="subtitle">Three ratios connect the sides and angles of any right-angled triangle.
+        Master choosing the right one, working in degrees and minutes, and the elevation and
+        depression problems that follow from them.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-04</span>
+        <span class="pill">SOH CAH TOA</span>
+        <span class="pill">Degrees &amp; minutes</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Labelling the sides</li>
+        <li>The three ratios</li>
+        <li>Finding a side</li>
+        <li>Finding an angle</li>
+        <li>Degrees, minutes and seconds</li>
+        <li>Elevation and depression</li>
+        <li>Problems with two triangles</li>
+        <li>Class activity: where to stand</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#labels">1 &nbsp;Labelling the sides</a></li>
+        <li class="toc-item"><a class="toc-link" href="#ratios">2 &nbsp;The three ratios</a></li>
+        <li class="toc-item"><a class="toc-link" href="#sides">3 &nbsp;Finding a side</a></li>
+        <li class="toc-item"><a class="toc-link" href="#angles">4 &nbsp;Finding an angle</a></li>
+        <li class="toc-item"><a class="toc-link" href="#dms">5 &nbsp;Degrees &amp; minutes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#elevation">6 &nbsp;Elevation &amp; depression</a></li>
+        <li class="toc-item"><a class="toc-link" href="#twotri">7 &nbsp;Two triangles</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. LABELS ─────────── -->
+      <div class="content-card" id="labels">
+        <p class="section-label">Theory</p>
+        <h2>Labelling the sides</h2>
+
+        <p>The names of the sides depend on <strong>which angle you are working from</strong>. Only
+          the hypotenuse is fixed.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The three sides</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>Hypotenuse</strong> &mdash; always the longest side, always opposite the
+              right angle. Never changes.</li>
+            <li><strong>Opposite</strong> &mdash; the side facing the angle you are using.</li>
+            <li><strong>Adjacent</strong> &mdash; the side next to the angle that is <em>not</em>
+              the hypotenuse.</li>
+          </ul>
+        </div>
+
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 240 190" width="240">
+              <polygon class="tri-fill" points="30,160 210,160 30,40"/>
+              <path class="right-angle" d="M 30 145 L 45 145 L 45 160"/>
+              <path class="angle-arc" d="M 180 160 A 30 30 0 0 0 189 139"/>
+              <text class="angle-label-text" x="168" y="150">θ</text>
+              <text class="side-label-text" x="118" y="178" text-anchor="middle">adjacent</text>
+              <text class="side-label-text" x="10" y="105" text-anchor="middle" transform="rotate(-90 14 105)">opposite</text>
+              <text class="side-label-text" x="135" y="90" text-anchor="middle" transform="rotate(-34 135 90)">hypotenuse</text>
+            </svg>
+            <p class="diagram-caption">Working from angle θ</p>
+          </div>
+          <div class="diagram-col">
+            <svg class="network-diagram" viewBox="0 0 240 190" width="240">
+              <polygon class="tri-fill" points="30,160 210,160 30,40"/>
+              <path class="right-angle" d="M 30 145 L 45 145 L 45 160"/>
+              <path class="angle-arc" d="M 30 70 A 30 30 0 0 0 55 52"/>
+              <text class="angle-label-text" x="42" y="78">α</text>
+              <text class="side-label-text" x="118" y="178" text-anchor="middle">opposite</text>
+              <text class="side-label-text" x="10" y="105" text-anchor="middle" transform="rotate(-90 14 105)">adjacent</text>
+              <text class="side-label-text" x="135" y="90" text-anchor="middle" transform="rotate(-34 135 90)">hypotenuse</text>
+            </svg>
+            <p class="diagram-caption">Same triangle, from angle α</p>
+          </div>
+        </div>
+
+        <p><strong>The same side is "opposite" in one diagram and "adjacent" in the other.</strong>
+          Always label relative to the angle in the question, and label the diagram before choosing
+          a ratio.</p>
+      </div>
+
+      <!-- ─────────── 2. RATIOS ─────────── -->
+      <div class="content-card" id="ratios">
+        <p class="section-label">Theory</p>
+        <h2>The three trigonometric ratios</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">SOH CAH TOA</p>
+          \[\sin \theta = \frac{\text{opposite}}{\text{hypotenuse}} \qquad
+            \cos \theta = \frac{\text{adjacent}}{\text{hypotenuse}} \qquad
+            \tan \theta = \frac{\text{opposite}}{\text{adjacent}}\]
+        </div>
+
+        <p><strong>Choosing the ratio.</strong> Identify which two sides the question involves
+          &mdash; the one you know and the one you want &mdash; then pick the ratio containing
+          exactly those two.</p>
+
+        <table class="coord-table">
+          <tr><th>You know</th><th>You want</th><th>Use</th></tr>
+          <tr><td>Opposite</td><td>Hypotenuse</td><td>\(\sin\)</td></tr>
+          <tr><td>Adjacent</td><td>Hypotenuse</td><td>\(\cos\)</td></tr>
+          <tr><td>Opposite</td><td>Adjacent</td><td>\(\tan\)</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">Before you start — two settings</p>
+          <p style="margin-bottom:0;">Your calculator must be in <strong>degree mode</strong> (look
+            for DEG, not RAD or GRAD). A common exam disaster is working an entire question in
+            radians. Check it before the first calculation.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Ratio chooser</h3>
+          <p class="exercise-intro">Drag to change the angle and the hypotenuse. The three ratios
+            and all side lengths update live.</p>
+          <div id="ratioSliders"></div>
+          <div class="diagram-wrap"><div id="ratioDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Opposite</div>
+              <div class="readout-value" id="roOpp">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Adjacent</div>
+              <div class="readout-value" id="roAdj">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">sin θ</div>
+              <div class="readout-value" id="roSin">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">cos θ</div>
+              <div class="readout-value" id="roCos">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">tan θ</div>
+              <div class="readout-value" id="roTan">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Which ratio would you use? (a) You know the hypotenuse and want the adjacent side.
+              (b) You know the opposite side and want the adjacent side. (c) You know the opposite
+              side and want the hypotenuse.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) cos &nbsp; (b) tan &nbsp; (c) sin</p>
+              </div></details></li>
+            <li>A right-angled triangle has sides 3, 4 and 5. Angle \(\theta\) is opposite the side
+              of length 3. Write \(\sin\theta\), \(\cos\theta\) and \(\tan\theta\) as decimals.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The hypotenuse is 5 and the adjacent side is 4.
+                  \(\sin\theta = \frac{3}{5} = 0.6\), \(\cos\theta = \frac{4}{5} = 0.8\),
+                  \(\tan\theta = \frac{3}{4} = 0.75\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. SIDES ─────────── -->
+      <div class="content-card" id="sides">
+        <p class="section-label">Method</p>
+        <h2>Finding an unknown side</h2>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1 &mdash; unknown on top</p>
+          <p>A ladder 6.5 m long leans against a wall at 68° to the ground. How far up the wall
+            does it reach?</p>
+          <p>The height is <em>opposite</em> the 68° angle; the ladder is the hypotenuse. Opposite
+            and hypotenuse means sine:</p>
+          \[\sin 68° = \frac{h}{6.5}\]
+          \[h = 6.5 \times \sin 68° = 6.5 \times 0.92718 = 6.03 \text{ m}\]
+          <p>When the unknown is on <strong>top</strong> of the fraction, multiply.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 260 200" width="260">
+            <line class="edge-line" x1="40" y1="170" x2="210" y2="170"/>
+            <line class="edge-line" x1="200" y1="170" x2="200" y2="30"/>
+            <line class="edge-line" x1="70" y1="170" x2="200" y2="40" stroke-width="2.4"/>
+            <path class="right-angle" d="M 200 155 L 185 155 L 185 170"/>
+            <path class="angle-arc" d="M 100 170 A 30 30 0 0 0 93 148"/>
+            <text class="angle-label-text" x="98" y="162">68°</text>
+            <text class="side-label-text" x="120" y="92" transform="rotate(-45 120 92)">6.5 m</text>
+            <text class="side-label-text" x="212" y="105">h</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The ladder is the hypotenuse; \(h\) is opposite the 68° angle.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; unknown on the bottom</p>
+          <p>A ramp rises at 9° and climbs a vertical height of 1.2 m. How long is the ramp?</p>
+          <p>The height is opposite; the ramp is the hypotenuse. Sine again &mdash; but this time
+            the unknown is underneath:</p>
+          \[\sin 9° = \frac{1.2}{L}\]
+          \[L = \frac{1.2}{\sin 9°} = \frac{1.2}{0.15643} = 7.67 \text{ m}\]
+          <p>When the unknown is on the <strong>bottom</strong>, divide by the ratio instead.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; using tan</p>
+          <p>From a point 45 m from the base of a tower, the angle to the top is 32°. Find the
+            tower's height.</p>
+          <p>Height is opposite, the 45 m is adjacent &mdash; no hypotenuse involved, so tangent:</p>
+          \[\tan 32° = \frac{h}{45}\]
+          \[h = 45 \times \tan 32° = 45 \times 0.62487 = 28.1 \text{ m}\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise finding sides</h3>
+          <p class="exercise-intro">Answers to two decimal places.</p>
+
+          <div class="exercise-row">
+            <label>(a) Hypotenuse 12 cm, angle 40°. Find the opposite side.</label>
+            <input class="exercise-input" id="sdA" type="text" inputmode="decimal" placeholder="? cm">
+            <button class="exercise-check-btn" data-sd="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSdA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Adjacent 8 m, angle 55°. Find the opposite side.</label>
+            <input class="exercise-input" id="sdB" type="text" inputmode="decimal" placeholder="? m">
+            <button class="exercise-check-btn" data-sd="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSdB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Opposite 5.4 m, angle 23°. Find the hypotenuse.</label>
+            <input class="exercise-input" id="sdC" type="text" inputmode="decimal" placeholder="? m">
+            <button class="exercise-check-btn" data-sd="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSdC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A guy wire 14 m long makes an angle of 61° with the ground. How far from the base of
+              the pole is it anchored?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The distance is adjacent to 61°; the wire is the hypotenuse, so use cos.</p>
+                \[d = 14 \times \cos 61° = 6.79 \text{ m}\]
+              </div></details></li>
+            <li>A slide drops a vertical height of 2.4 m and makes an angle of 35° with the ground.
+              How long is the slide?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The height is opposite, the slide is the hypotenuse, and the unknown is on the
+                  bottom:</p>
+                \[L = \frac{2.4}{\sin 35°} = 4.18 \text{ m}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. ANGLES ─────────── -->
+      <div class="content-card" id="angles">
+        <p class="section-label">Method</p>
+        <h2>Finding an unknown angle</h2>
+
+        <p>When two sides are known and the angle is wanted, use the <strong>inverse</strong>
+          functions \(\sin^{-1}\), \(\cos^{-1}\) and \(\tan^{-1}\) (often labelled
+          <code>asin</code>, <code>acos</code>, <code>atan</code>, or reached with SHIFT).</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Inverse ratios</p>
+          \[\theta = \sin^{-1}\!\left(\frac{\text{opp}}{\text{hyp}}\right) \qquad
+            \theta = \cos^{-1}\!\left(\frac{\text{adj}}{\text{hyp}}\right) \qquad
+            \theta = \tan^{-1}\!\left(\frac{\text{opp}}{\text{adj}}\right)\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>A right-angled triangle has an opposite side of 7 cm and a hypotenuse of 11 cm. Find
+            the angle, to the nearest degree.</p>
+          \[\sin \theta = \frac{7}{11} = 0.63636\]
+          \[\theta = \sin^{-1}(0.63636) = 39.52° \approx 40°\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; a gradient</p>
+          <p>A road rises 3 m over a horizontal distance of 40 m. Find the angle of inclination.</p>
+          <p>Rise is opposite, run is adjacent, so tangent:</p>
+          \[\tan \theta = \frac{3}{40} = 0.075\]
+          \[\theta = \tan^{-1}(0.075) = 4.29° \approx 4°17'\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">A check worth doing</p>
+          <p style="margin-bottom:0;">In a right-angled triangle the other two angles must each be
+            between 0° and 90°, and they must sum to 90°. If your inverse gives an impossible
+            answer, or the ratio you fed it exceeded 1 for sine or cosine, you have mixed up the
+            sides.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise finding angles</h3>
+          <p class="exercise-intro">Answers in degrees, to two decimal places.</p>
+
+          <div class="exercise-row">
+            <label>(a) Opposite 9, hypotenuse 15. Find θ.</label>
+            <input class="exercise-input" id="agA" type="text" inputmode="decimal" placeholder="?°">
+            <button class="exercise-check-btn" data-ag="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbAgA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Adjacent 6, hypotenuse 10. Find θ.</label>
+            <input class="exercise-input" id="agB" type="text" inputmode="decimal" placeholder="?°">
+            <button class="exercise-check-btn" data-ag="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbAgB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Opposite 4.2, adjacent 7.5. Find θ.</label>
+            <input class="exercise-input" id="agC" type="text" inputmode="decimal" placeholder="?°">
+            <button class="exercise-check-btn" data-ag="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbAgC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A wheelchair ramp rises 0.9 m over a horizontal distance of 7.2 m. Find its angle
+              to the horizontal in degrees and minutes.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[\theta = \tan^{-1}\!\left(\frac{0.9}{7.2}\right) = 7.125° = 7°7.5' \approx 7°8'\]
+              </div></details></li>
+            <li>A 15 m ladder has its foot 4 m from a wall. Find the angle it makes with the ground,
+              to the nearest minute.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>4 m is adjacent and the ladder is the hypotenuse:</p>
+                \[\theta = \cos^{-1}\!\left(\frac{4}{15}\right) = 74.534° \approx 74°32'\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. DMS ─────────── -->
+      <div class="content-card" id="dms">
+        <p class="section-label">Theory</p>
+        <h2>Degrees, minutes and seconds</h2>
+
+        <p>The syllabus requires answers <em>in both degrees, and degrees and minutes</em>. A
+          degree divides into 60 minutes, and a minute into 60 seconds &mdash; like time.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Conversions</p>
+          \[1° = 60' \qquad 1' = 60''\]
+          <p class="formula-where">
+            <strong>Decimal → minutes:</strong> multiply the decimal part by 60.<br>
+            <strong>Minutes → decimal:</strong> divide the minutes by 60.
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; converting to minutes</p>
+          <p>Write 37.45° in degrees and minutes.</p>
+          <p>The whole degrees are 37. Convert the decimal part:</p>
+          \[0.45 \times 60 = 27'\]
+          <p>So \(37.45° = 37°27'\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; converting to decimal</p>
+          <p>Write 52°18' as a decimal.</p>
+          \[\frac{18}{60} = 0.3\]
+          <p>So \(52°18' = 52.3°\).</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; rounding to the nearest minute</p>
+          <p>A calculation gives \(\theta = 63.7183°\). Express it to the nearest minute.</p>
+          \[0.7183 \times 60 = 43.098' \approx 43'\]
+          <p>So \(\theta \approx 63°43'\).</p>
+          <p>Most calculators have a <code>°'"</code> button that does this directly &mdash; learn
+            where it is, it saves time and avoids slips.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Angle converter</h3>
+          <p class="exercise-intro">Slide to see the same angle written both ways.</p>
+          <div id="dmsSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Decimal degrees</div>
+              <div class="readout-value" id="roDec">37.45°</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Degrees &amp; minutes</div>
+              <div class="readout-value" id="roDms">37°27'</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise converting</h3>
+          <div class="exercise-row">
+            <label>(a) Write 24.8° in degrees and minutes (e.g. 24°48').</label>
+            <input class="exercise-input" id="dmA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-dm="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbDmA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Write 61°45' as a decimal (2 dp).</label>
+            <input class="exercise-input" id="dmB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-dm="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbDmB"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. ELEVATION ─────────── -->
+      <div class="content-card" id="elevation">
+        <p class="section-label">Application</p>
+        <h2>Angles of elevation and depression</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Definitions</p>
+          <p style="margin-bottom:0;">
+            The <strong>angle of elevation</strong> is measured <em>upward</em> from the horizontal
+            to a line of sight.<br>
+            The <strong>angle of depression</strong> is measured <em>downward</em> from the
+            horizontal to a line of sight.<br>
+            Both are measured <strong>from the horizontal</strong> — never from the vertical.
+          </p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 400 210" width="400">
+            <line class="dim-line" x1="40" y1="60" x2="360" y2="60"/>
+            <line class="dim-line" x1="40" y1="170" x2="360" y2="170"/>
+            <line class="edge-line" x1="60" y1="170" x2="330" y2="60" stroke-width="2.2"/>
+            <circle class="node-circle" cx="60" cy="170" r="6"/>
+            <circle class="node-circle" cx="330" cy="60" r="6"/>
+            <path class="angle-arc" d="M 110 170 A 50 50 0 0 0 106 151"/>
+            <text class="angle-label-text" x="112" y="163">elevation</text>
+            <path class="angle-arc" d="M 280 60 A 50 50 0 0 0 284 79"/>
+            <text class="angle-label-text" x="225" y="76">depression</text>
+            <text class="side-label-text" x="40" y="185">observer</text>
+            <text class="side-label-text" x="316" y="48">target</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The two horizontals are parallel, so the angle of elevation from
+          the observer equals the angle of depression from the target &mdash; alternate angles.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The fact that unlocks most problems</p>
+          <p style="margin-bottom:0;">The angle of elevation from A to B <strong>equals</strong> the
+            angle of depression from B to A. Questions frequently give you one and expect you to
+            use the other.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; elevation</p>
+          <p>From 80 m away, the angle of elevation to the top of a building is 34°. The observer's
+            eyes are 1.6 m above the ground. Find the building's height.</p>
+          <p>The triangle sits above eye level, so find that part first:</p>
+          \[\tan 34° = \frac{h}{80} \quad\Rightarrow\quad h = 80 \times \tan 34° = 53.96 \text{ m}\]
+          <p>Then add the eye height:</p>
+          \[53.96 + 1.6 = 55.56 \approx 55.6 \text{ m}\]
+          <p><strong>Forgetting to add the observer's height is the single most common error in
+            these questions.</strong></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10 &mdash; depression</p>
+          <p>From a cliff 120 m high, the angle of depression to a boat is 23°. How far is the boat
+            from the base of the cliff?</p>
+          <p>The angle of depression from the cliff top equals the angle of elevation from the boat
+            &mdash; so inside the triangle, the angle at the boat is 23°.</p>
+          \[\tan 23° = \frac{120}{d}\]
+          \[d = \frac{120}{\tan 23°} = \frac{120}{0.42447} = 282.7 \text{ m}\]
+          <p><strong>Never put the depression angle at the top of the triangle.</strong> Transfer
+            it to the bottom, where it becomes the angle of elevation.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11 &mdash; exam style</p>
+          <p>A drone hovers 85 m above flat ground. The angle of depression from the drone to a
+            parked car is 32°10'.</p>
+          <p><strong>(a) Find the horizontal distance from the car to the point directly below the
+            drone, to the nearest metre.</strong> [2 marks]</p>
+          <p>The angle of elevation from the car is also 32°10' \(= 32.1667°\).</p>
+          \[d = \frac{85}{\tan 32°10'} = 135.15 \approx 135 \text{ m}\]
+          <p><strong>(b) The car drives 60 m directly towards that point. Find the new angle of
+            depression, to the nearest minute.</strong> [2 marks]</p>
+          <p>New horizontal distance: \(135 - 60 = 75\) m.</p>
+          \[\theta = \tan^{-1}\!\left(\frac{85}{75}\right) = 48.576° \approx 48°35'\]
+          <p>The angle of depression increases as the car gets closer, as it should.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Elevation explorer</h3>
+          <p class="exercise-intro">Change the distance and the angle of elevation. The height is
+            calculated live, with the observer's eye height added.</p>
+          <div id="elevSliders"></div>
+          <div class="diagram-wrap"><div id="elevDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Height above eye</div>
+              <div class="readout-value" id="roAbove">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Total height</div>
+              <div class="readout-value" id="roTotal">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Line of sight</div>
+              <div class="readout-value" id="roLos">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A tree is 28 m tall. Sam stands 50 m from its base with eyes 1.6 m above the ground.
+              Find the angle of elevation to the top of the tree, in degrees and minutes.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Height above eye level: \(28 - 1.6 = 26.4\) m.</p>
+                \[\theta = \tan^{-1}\!\left(\frac{26.4}{50}\right) = 27.834° \approx 27°50'\]
+              </div></details></li>
+            <li>From the top of a 64 m fire tower, the angle of depression to a fire is 9°. How far
+              is the fire from the base of the tower?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Move the 9° to the ground as an angle of elevation:</p>
+                \[d = \frac{64}{\tan 9°} = 404.1 \text{ m}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. TWO TRIANGLES ─────────── -->
+      <div class="content-card" id="twotri">
+        <p class="section-label">Application</p>
+        <h2>Problems with two right-angled triangles</h2>
+
+        <p>Many exam questions hide two right-angled triangles in one diagram. They are linked by a
+          <strong>shared side</strong>. The method:</p>
+        <ol>
+          <li>Draw the diagram and mark every right angle.</li>
+          <li>Find the shared side using the triangle where you know enough.</li>
+          <li>Use that side in the second triangle.</li>
+          <li>Keep full calculator values until the final answer &mdash; rounding the shared side
+            early causes errors.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 12</p>
+          <p>From the top of a 25 m building, the angle of depression to the base of a tree is 30°
+            and the angle of elevation to the top of the tree is 12°. Find the height of the
+            tree.</p>
+          <p><strong>Lower triangle</strong> (finds the shared horizontal distance \(d\)):</p>
+          \[d = \frac{25}{\tan 30°} = 43.301 \text{ m}\]
+          <p><strong>Upper triangle</strong> (height of the tree above the roof line):</p>
+          \[x = d \times \tan 12° = 43.301 \times 0.21256 = 9.204 \text{ m}\]
+          <p>Tree height \(= 25 + 9.204 = 34.2\) m.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>From the top of an 80 m cliff, the angles of depression to two boats, in line with
+              the cliff, are 40° and 25°. How far apart are the boats?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Nearer boat: \(80 \div \tan 40° = 95.34\) m. Farther boat:
+                  \(80 \div \tan 25° = 171.56\) m.</p>
+                <p>Distance apart: \(171.56 - 95.34 = 76.2\) m.</p>
+              </div></details></li>
+            <li>A vertical post is held by two wires attached 12 m up. The wires are on opposite
+              sides of the post and make angles of 50° and 65° with the ground. How far apart are
+              the anchor points?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(12 \div \tan 50° = 10.07\) m and \(12 \div \tan 65° = 5.60\) m.</p>
+                <p>On opposite sides, so add: \(10.07 + 5.60 = 15.7\) m.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Where should a surveyor stand?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> A surveyor with eye height 1.6 m
+          measures a building that is really 43.6 m tall. Her clinometer can be out by up to 1°.
+          Use the <a href="#elevation">elevation explorer</a> with eye height 1.6 m.</p>
+        <ol>
+          <li>Set the distance to 15 m. Find the elevation angle (whole degrees) that gives a total
+            height closest to 43.6 m.</li>
+          <li>Change that angle by 1° down and 1° up. Record the two heights. How far apart are
+            they?</li>
+          <li>Repeat steps 1 and 2 at 50 m and at 150 m.</li>
+          <li>From which distance is a 1° error least harmful? Roughly what angle of elevation does
+            that correspond to?</li>
+          <li>Give the surveyor one piece of advice, with a reason.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Distance</th><th>Best angle</th><th>1° lower</th><th>Exact</th><th>1° higher</th><th>Spread</th></tr>
+            <tr><td>15 m</td><td>70°</td><td>40.7 m</td><td>42.8 m</td><td>45.2 m</td><td>4.5 m</td></tr>
+            <tr><td>50 m</td><td>40°</td><td>42.1 m</td><td>43.6 m</td><td>45.1 m</td><td>3.0 m</td></tr>
+            <tr><td>150 m</td><td>16°</td><td>41.8 m</td><td>44.6 m</td><td>47.5 m</td><td>5.7 m</td></tr>
+          </table>
+          <p><strong>4.</strong> 50 m, with an angle near 40&ndash;45°. Very close, tan changes
+            rapidly with the angle; very far, the small angle is multiplied by a long
+            distance.</p>
+          <p><strong>5.</strong> Stand back far enough that the angle of elevation is around 45°,
+            and take several readings and average them.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first &mdash; always draw and label
+          a diagram &mdash; then reveal the worked solution and mark yourself honestly.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 lifts these methods to triangles with no right angle at all.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-4', LESSON_IDX = 0;
+  var NS = 'http://www.w3.org/2000/svg';
+  var D2R = Math.PI / 180;
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function toDMS(dec) {
+    var d = Math.floor(dec);
+    var m = Math.round((dec - d) * 60);
+    if (m === 60) { d += 1; m = 0; }
+    return d + '°' + (m < 10 ? '0' + m : m) + "'";
+  }
+
+  /* ── Ratio chooser ────────────────────────────────────────── */
+  (function () {
+    var ang = 35, hyp = 10;
+    var mount = document.getElementById('ratioDiagram');
+
+    function update() {
+      var opp = hyp * Math.sin(ang * D2R);
+      var adj = hyp * Math.cos(ang * D2R);
+
+      // Draw to scale within a 260 × 190 box
+      var W = 260, H = 190, PAD = 34;
+      var scale = Math.min((W - 2 * PAD) / Math.max(adj, 0.001), (H - 2 * PAD) / Math.max(opp, 0.001));
+      var ax = PAD, ay = H - PAD;                      // right-angle corner
+      var bx = PAD + adj * scale, by = H - PAD;        // along the base
+      var cy = H - PAD - opp * scale;                  // top of the vertical
+
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      svg.appendChild(svgEl('polygon', { class: 'tri-fill',
+        points: ax + ',' + ay + ' ' + bx + ',' + by + ' ' + ax + ',' + cy }));
+      svg.appendChild(svgEl('path', { class: 'right-angle',
+        d: 'M ' + ax + ' ' + (ay - 13) + ' L ' + (ax + 13) + ' ' + (ay - 13) + ' L ' + (ax + 13) + ' ' + ay }));
+      // Angle arc at B
+      var r = Math.min(26, adj * scale * 0.5);
+      svg.appendChild(svgEl('path', { class: 'angle-arc',
+        d: 'M ' + (bx - r) + ' ' + by + ' A ' + r + ' ' + r + ' 0 0 0 ' +
+           (bx - r * Math.cos(ang * D2R)) + ' ' + (by - r * Math.sin(ang * D2R)) }));
+      svg.appendChild(svgEl('text', { class: 'angle-label-text', x: bx - r - 24, y: by - 6 }, ang + '°'));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (ax + bx) / 2, y: ay + 18, 'text-anchor': 'middle' }, adj.toFixed(2)));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: ax - 8, y: (ay + cy) / 2, 'text-anchor': 'end' }, opp.toFixed(2)));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (bx + ax) / 2 + 12, y: (by + cy) / 2 - 6 }, hyp.toFixed(2)));
+
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roOpp').textContent = opp.toFixed(2);
+      document.getElementById('roAdj').textContent = adj.toFixed(2);
+      document.getElementById('roSin').textContent = Math.sin(ang * D2R).toFixed(4);
+      document.getElementById('roCos').textContent = Math.cos(ang * D2R).toFixed(4);
+      document.getElementById('roTan').textContent = Math.tan(ang * D2R).toFixed(4);
+    }
+
+    var host = 'ratioSliders';
+    IE.slider({ mount: host, label: 'Angle θ', min: 5, max: 85, step: 1, value: ang,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { ang = v; update(); } });
+    IE.slider({ mount: host, label: 'Hypotenuse', min: 2, max: 20, step: 0.5, value: hyp,
+                onInput: function (v) { hyp = v; update(); } });
+    update();
+  })();
+
+  /* ── Side exercises ───────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [12 * Math.sin(40 * D2R), 'Opposite and hypotenuse means sine: opp = 12 × sin 40°.'],
+      B: [8 * Math.tan(55 * D2R),  'Opposite and adjacent means tangent: opp = 8 × tan 55°.'],
+      C: [5.4 / Math.sin(23 * D2R),'Opposite and hypotenuse means sine, with the unknown underneath: hyp = 5.4 ÷ sin 23°.']
+    };
+    document.querySelectorAll('[data-sd]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.sd, fb = document.getElementById('fbSd' + k);
+        var g = parseFloat((document.getElementById('sd' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.02;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(2) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Angle exercises ──────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [Math.asin(9 / 15) / D2R,   'sin θ = 9/15 = 0.6, so θ = sin⁻¹(0.6).'],
+      B: [Math.acos(6 / 10) / D2R,   'cos θ = 6/10 = 0.6, so θ = cos⁻¹(0.6).'],
+      C: [Math.atan(4.2 / 7.5) / D2R,'tan θ = 4.2/7.5 = 0.56, so θ = tan⁻¹(0.56).']
+    };
+    document.querySelectorAll('[data-ag]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.ag, fb = document.getElementById('fbAg' + k);
+        var g = parseFloat((document.getElementById('ag' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.02;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(2) + '°. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── DMS converter ────────────────────────────────────────── */
+  (function () {
+    var dec = 37.45;
+    function update() {
+      document.getElementById('roDec').textContent = dec.toFixed(2) + '°';
+      document.getElementById('roDms').textContent = toDMS(dec);
+    }
+    IE.slider({ mount: 'dmsSliders', label: 'Angle', min: 0.5, max: 89.95, step: 0.05, value: dec,
+                format: function (v) { return v.toFixed(2) + '°'; },
+                onInput: function (v) { dec = v; update(); } });
+    update();
+  })();
+
+  (function () {
+    document.querySelectorAll('[data-dm]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.dm, fb = document.getElementById('fbDm' + k);
+        var raw = (document.getElementById('dm' + k).value || '').trim();
+        if (!raw) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter an answer.'; return; }
+        var ok, msg;
+        if (k === 'A') {
+          var digits = raw.replace(/[^\d]/g, '');
+          ok = digits === '2448';
+          msg = '0.8 × 60 = 48 minutes, so 24.8° = 24°48\'.';
+        } else {
+          var g = parseFloat(raw.replace(/[^\d.\-]/g, ''));
+          ok = !isNaN(g) && Math.abs(g - 61.75) < 0.005;
+          msg = '45 ÷ 60 = 0.75, so 61°45\' = 61.75°.';
+        }
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ Not quite. ') + msg;
+      });
+    });
+  })();
+
+  /* ── Elevation explorer ───────────────────────────────────── */
+  (function () {
+    var dist = 80, ang = 34, eye = 1.6;
+    var mount = document.getElementById('elevDiagram');
+
+    function update() {
+      var above = dist * Math.tan(ang * D2R);
+      var los = dist / Math.cos(ang * D2R);
+
+      var W = 380, H = 200, PAD = 34;
+      var sc = Math.min((W - 2 * PAD) / dist, (H - 2 * PAD) / Math.max(above, 0.001));
+      var ox = PAD, oy = H - PAD;
+      var tx = PAD + dist * sc, ty = H - PAD - above * sc;
+
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      svg.appendChild(svgEl('line', { class: 'dim-line', x1: ox, y1: oy, x2: tx, y2: oy }));
+      svg.appendChild(svgEl('line', { class: 'edge-line', x1: tx, y1: oy, x2: tx, y2: ty, 'stroke-width': 2.2 }));
+      svg.appendChild(svgEl('line', { class: 'edge-line', x1: ox, y1: oy, x2: tx, y2: ty, 'stroke-width': 2.2 }));
+      svg.appendChild(svgEl('path', { class: 'right-angle',
+        d: 'M ' + (tx - 13) + ' ' + oy + ' L ' + (tx - 13) + ' ' + (oy - 13) + ' L ' + tx + ' ' + (oy - 13) }));
+      var r = 30;
+      svg.appendChild(svgEl('path', { class: 'angle-arc',
+        d: 'M ' + (ox + r) + ' ' + oy + ' A ' + r + ' ' + r + ' 0 0 0 ' +
+           (ox + r * Math.cos(ang * D2R)) + ' ' + (oy - r * Math.sin(ang * D2R)) }));
+      svg.appendChild(svgEl('text', { class: 'angle-label-text', x: ox + r + 6, y: oy - 6 }, ang + '°'));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (ox + tx) / 2, y: oy + 18, 'text-anchor': 'middle' }, dist + ' m'));
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: tx + 6, y: (oy + ty) / 2 }, above.toFixed(1) + ' m'));
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      document.getElementById('roAbove').textContent = above.toFixed(2) + ' m';
+      document.getElementById('roTotal').textContent = (above + eye).toFixed(2) + ' m';
+      document.getElementById('roLos').textContent   = los.toFixed(2) + ' m';
+    }
+
+    var host = 'elevSliders';
+    IE.slider({ mount: host, label: 'Distance', min: 10, max: 200, step: 5, value: dist,
+                format: function (v) { return v + ' m'; },
+                onInput: function (v) { dist = v; update(); } });
+    IE.slider({ mount: host, label: 'Elevation', min: 5, max: 80, step: 1, value: ang,
+                format: function (v) { return v + '°'; },
+                onInput: function (v) { ang = v; update(); } });
+    IE.slider({ mount: host, label: 'Eye height', min: 0, max: 2.5, step: 0.1, value: eye,
+                format: function (v) { return v.toFixed(1) + ' m'; },
+                onInput: function (v) { eye = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'In a right-angled triangle, which side is always the hypotenuse?',
+      opts: [
+        'A) The side opposite the angle being used',
+        'B) The longest side, opposite the right angle',
+        'C) The horizontal side',
+        'D) Whichever side is given in the question'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The hypotenuse is always opposite the right angle and is always the longest side. Unlike "opposite" and "adjacent", it does not change when you switch reference angles.'
+    },
+    {
+      q: 'You know the adjacent side and want the hypotenuse. Which ratio should you use?',
+      opts: ['A) \\(\\sin\\)', 'B) \\(\\cos\\)', 'C) \\(\\tan\\)', 'D) None of these'],
+      correct: 1,
+      explanation: 'B is correct. Cosine relates adjacent and hypotenuse: \\(\\cos\\theta = \\dfrac{\\text{adj}}{\\text{hyp}}\\). Pick the ratio containing exactly the side you know and the side you want.'
+    },
+    {
+      q: 'A ramp makes an angle of 12° with the ground and has a hypotenuse of 9 m. How high does it rise?',
+      opts: ['A) 1.87 m', 'B) 8.80 m', 'C) 1.91 m', 'D) 43.30 m'],
+      correct: 0,
+      explanation: 'A is correct. The height is opposite the 12° angle and 9 m is the hypotenuse, so \\(h = 9 \\times \\sin 12° = 9 \\times 0.2079 = 1.87\\) m. Option B uses cosine, giving the horizontal distance instead.'
+    },
+    {
+      q: 'A right-angled triangle has an opposite side of 8 and an adjacent side of 15. What is the angle, to the nearest degree?',
+      opts: ['A) 62°', 'B) 28°', 'C) 32°', 'D) 58°'],
+      correct: 1,
+      explanation: 'B is correct. Opposite and adjacent means tangent: \\(\\tan\\theta = \\dfrac{8}{15} = 0.5333\\), so \\(\\theta = \\tan^{-1}(0.5333) = 28.07° \\approx 28°\\). Option A is the other acute angle in the triangle.'
+    },
+    {
+      q: 'Express 48.6° in degrees and minutes.',
+      opts: ["A) 48°6'", "B) 48°60'", "C) 48°36'", "D) 48°06'"],
+      correct: 2,
+      explanation: 'C is correct. Multiply the decimal part by 60: \\(0.6 \\times 60 = 36\\), so \\(48.6° = 48°36\'\\). Option A wrongly reads the decimal digit as the number of minutes.'
+    },
+    {
+      q: 'From a lighthouse 60 m tall, the angle of depression to a boat is 18°. Which equation correctly finds the distance \\(d\\) from the base?',
+      opts: [
+        'A) \\(\\tan 18° = \\dfrac{d}{60}\\)',
+        'B) \\(\\tan 18° = \\dfrac{60}{d}\\)',
+        'C) \\(\\sin 18° = \\dfrac{60}{d}\\)',
+        'D) \\(\\cos 18° = \\dfrac{60}{d}\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The angle of depression from the top equals the angle of elevation from the boat, so 18° sits at the boat. From there the 60 m height is opposite and \\(d\\) is adjacent, giving \\(\\tan 18° = \\dfrac{60}{d}\\).'
+    },
+    {
+      q: 'An observer whose eyes are 1.5 m above ground stands 40 m from a tower. The angle of elevation to the top is 38°. What is the tower\'s height?',
+      opts: ['A) 31.25 m', 'B) 32.75 m', 'C) 29.75 m', 'D) 51.24 m'],
+      correct: 1,
+      explanation: 'B is correct. \\(40 \\times \\tan 38° = 31.25\\) m above eye level, then add the 1.5 m eye height: \\(31.25 + 1.5 = 32.75\\) m. Option A is the most common error — forgetting to add the observer\'s height.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'A right-angled triangle has a hypotenuse of 18 cm and an angle of 27°. Find the side opposite that angle, to 2 decimal places.',
+      marks: 2,
+      steps: [
+        'Opposite and hypotenuse are involved, so use sine.',
+        '\\(\\sin 27° = \\dfrac{x}{18}\\).',
+        '\\(x = 18 \\times \\sin 27° = 18 \\times 0.45399\\).'
+      ],
+      answer: '8.17 cm'
+    },
+    {
+      q: 'A ladder leans against a wall, reaching 4.8 m up, at an angle of 72° to the ground. Find the length of the ladder.',
+      marks: 3,
+      steps: [
+        'The 4.8 m height is opposite the 72° angle; the ladder is the hypotenuse.',
+        '\\(\\sin 72° = \\dfrac{4.8}{L}\\).',
+        'The unknown is underneath, so divide: \\(L = \\dfrac{4.8}{\\sin 72°}\\).',
+        '\\(= \\dfrac{4.8}{0.95106}\\).'
+      ],
+      answer: '5.05 m'
+    },
+    {
+      q: 'From a point 62 m from the base of a tree, the angle of elevation to the top is 41°. Find the height of the tree.',
+      marks: 3,
+      steps: [
+        'Height is opposite, 62 m is adjacent — use tangent.',
+        '\\(\\tan 41° = \\dfrac{h}{62}\\).',
+        '\\(h = 62 \\times \\tan 41° = 62 \\times 0.86929\\).'
+      ],
+      answer: '53.90 m'
+    },
+    {
+      q: 'A triangle has an opposite side of 11 m and a hypotenuse of 19 m. Find the angle, in degrees and minutes.',
+      marks: 3,
+      steps: [
+        'Opposite and hypotenuse means sine.',
+        '\\(\\sin\\theta = \\dfrac{11}{19} = 0.57895\\).',
+        '\\(\\theta = \\sin^{-1}(0.57895) = 35.3866°\\).',
+        'Convert: \\(0.3866 \\times 60 = 23.2\\), so about \\(35°23\'\\).'
+      ],
+      answer: '\\(\\theta \\approx 35°23\'\\)'
+    },
+    {
+      q: 'Convert each. (a) 63.25° to degrees and minutes. (b) 17°42\' to a decimal, to 2 dp.',
+      marks: 3,
+      steps: [
+        '(a) Whole degrees: 63. Decimal part: \\(0.25 \\times 60 = 15\\).',
+        'So \\(63.25° = 63°15\'\\).',
+        '(b) \\(42 \\div 60 = 0.7\\).',
+        'So \\(17°42\' = 17.7°\\).'
+      ],
+      answer: "(a) 63°15' &nbsp; (b) 17.70°"
+    },
+    {
+      q: 'A road rises 4.5 m over a horizontal distance of 85 m. Find the angle of inclination, in degrees and minutes.',
+      marks: 3,
+      steps: [
+        'Rise is opposite, run is adjacent — use tangent.',
+        '\\(\\tan\\theta = \\dfrac{4.5}{85} = 0.052941\\).',
+        '\\(\\theta = \\tan^{-1}(0.052941) = 3.0304°\\).',
+        '\\(0.0304 \\times 60 = 1.8\\), so about \\(3°02\'\\).'
+      ],
+      answer: "About 3°02'"
+    },
+    {
+      q: 'From a cliff 95 m high, the angle of depression to a boat is 26°. Find the boat\'s distance from the base of the cliff.',
+      marks: 4,
+      steps: [
+        'The angle of depression from the cliff equals the angle of elevation from the boat (alternate angles between parallel horizontals).',
+        'So inside the triangle, the 26° angle sits at the boat.',
+        'From there, 95 m is opposite and \\(d\\) is adjacent: \\(\\tan 26° = \\dfrac{95}{d}\\).',
+        '\\(d = \\dfrac{95}{\\tan 26°} = \\dfrac{95}{0.48773}\\).'
+      ],
+      answer: '194.78 m'
+    },
+    {
+      q: 'An observer with eye height 1.7 m stands 55 m from a building. The angle of elevation to the top is 43°. Find the building\'s height.',
+      marks: 4,
+      steps: [
+        'The triangle is measured from eye level, not the ground.',
+        '\\(\\tan 43° = \\dfrac{h}{55}\\), so \\(h = 55 \\times \\tan 43° = 55 \\times 0.93252 = 51.29\\) m.',
+        'This is the height above eye level.',
+        'Add the observer\'s eye height: \\(51.29 + 1.7\\).'
+      ],
+      answer: '52.99 m — remembering to add the 1.7 m eye height.'
+    },
+    {
+      q: 'A kite is flying on a 48 m string at an angle of elevation of 58°. The person holding it has their hands 1.2 m above the ground. How high is the kite above the ground?',
+      marks: 4,
+      steps: [
+        'The string is the hypotenuse; the height above the hands is opposite the 58° angle.',
+        '\\(\\sin 58° = \\dfrac{h}{48}\\).',
+        '\\(h = 48 \\times \\sin 58° = 48 \\times 0.84805 = 40.71\\) m.',
+        'Add the hand height: \\(40.71 + 1.2\\).'
+      ],
+      answer: '41.91 m above the ground.'
+    },
+    {
+      q: 'From the top of a 40 m building, the angle of depression to a car is 35°, and to a second car directly behind it is 22°. Find the distance between the two cars.',
+      marks: 5,
+      steps: [
+        'Both depression angles become elevation angles at the cars.',
+        'Nearer car: \\(\\tan 35° = \\dfrac{40}{d_1}\\), so \\(d_1 = \\dfrac{40}{0.70021} = 57.13\\) m.',
+        'Further car: \\(\\tan 22° = \\dfrac{40}{d_2}\\), so \\(d_2 = \\dfrac{40}{0.40403} = 99.00\\) m.',
+        'The smaller angle gives the greater distance — a useful sense check.',
+        'Distance between them: \\(99.00 - 57.13\\).'
+      ],
+      answer: 'About 41.87 m apart.'
+    },
+    {
+      q: 'Explain why the angle of elevation from A to B always equals the angle of depression from B to A.',
+      marks: 2,
+      steps: [
+        'Both angles are measured from the horizontal.',
+        'The horizontal at A and the horizontal at B are parallel lines.',
+        'The line of sight AB is a transversal cutting both.',
+        'The two angles are therefore alternate angles between parallel lines, so they are equal.'
+      ],
+      answer: 'The horizontals at A and B are parallel, and the line of sight is a transversal. The angle of elevation and the angle of depression are alternate angles between those parallel lines, so they are equal.'
+    },
+    {
+      q: 'A surveyor measures an angle as 54°38\'. Convert it to a decimal and use it to find the height of a tower 120 m away.',
+      marks: 4,
+      steps: [
+        'Convert: \\(38 \\div 60 = 0.6333\\), so the angle is \\(54.6333°\\).',
+        'Height is opposite, 120 m is adjacent — use tangent.',
+        '\\(h = 120 \\times \\tan 54.6333°\\).',
+        '\\(\\tan 54.6333° = 1.40835\\), so \\(h = 120 \\times 1.40835\\).'
+      ],
+      answer: '\\(54°38\' = 54.63°\\); the tower is about 169.00 m tall.'
+    },
+    {
+      q: 'A student calculates \\(\\sin^{-1}(1.4)\\) and gets an error. Explain why, and what mistake they have probably made.',
+      marks: 3,
+      steps: [
+        'Sine is the ratio opposite ÷ hypotenuse.',
+        'The hypotenuse is always the longest side, so the opposite side can never exceed it.',
+        'That makes \\(\\sin\\theta\\) at most 1, so \\(\\sin^{-1}\\) of anything above 1 is undefined.',
+        'They have most likely divided the wrong way round, or labelled a shorter side as the hypotenuse.'
+      ],
+      answer: 'Sine can never exceed 1, because the opposite side cannot be longer than the hypotenuse. They have probably inverted the fraction (using hyp ÷ opp) or mislabelled which side is the hypotenuse.'
+    },
+    {
+      q: 'A flagpole stands on top of a building. From a point 70 m away, the angle of elevation to the bottom of the pole is 32° and to the top is 39°. Find the height of the flagpole.',
+      marks: 5,
+      steps: [
+        'Both measurements share the same 70 m horizontal distance.',
+        'Height to the bottom of the pole: \\(70 \\times \\tan 32° = 70 \\times 0.62487 = 43.74\\) m.',
+        'Height to the top of the pole: \\(70 \\times \\tan 39° = 70 \\times 0.80978 = 56.68\\) m.',
+        'The flagpole is the difference between these two heights.',
+        '\\(56.68 - 43.74\\).'
+      ],
+      answer: 'The flagpole is about 12.94 m tall.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

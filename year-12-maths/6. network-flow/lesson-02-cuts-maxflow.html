@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Cuts &amp; the Maximum-Flow Minimum-Cut Theorem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 6 &mdash; Network Flow</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Cuts &amp; the Max-Flow Min-Cut Theorem</h1>
+      <p class="subtitle">Guessing paths works for tiny networks. A <em>cut</em> is the systematic
+        method &mdash; and one elegant theorem guarantees that the smallest cut you can find is
+        exactly the maximum flow.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-06</span>
+        <span class="pill">Capacity of a cut</span>
+        <span class="pill">Minimum cut</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What a cut is</li>
+        <li>Valid and invalid cuts</li>
+        <li>Capacity of a cut</li>
+        <li>The direction rule</li>
+        <li>The minimum cut</li>
+        <li>The max-flow min-cut theorem</li>
+        <li>Building the flow path by path</li>
+        <li>Class activity: the engineer's challenge</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#whatis">1 &nbsp;What is a cut?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#capacity">2 &nbsp;Capacity of a cut</a></li>
+        <li class="toc-item"><a class="toc-link" href="#direction">3 &nbsp;The direction rule</a></li>
+        <li class="toc-item"><a class="toc-link" href="#minimum">4 &nbsp;Finding the minimum cut</a></li>
+        <li class="toc-item"><a class="toc-link" href="#theorem">5 &nbsp;The theorem</a></li>
+        <li class="toc-item"><a class="toc-link" href="#paths">6 &nbsp;Path by path</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. WHAT IS ─────────── -->
+      <div class="content-card" id="whatis">
+        <p class="section-label">Theory</p>
+        <h2>What is a cut?</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Definition</p>
+          <p style="margin-bottom:0;">A <strong>cut</strong> is a line drawn through a network that
+            completely separates the source from the sink. Every possible route from \(S\) to
+            \(T\) must cross it.</p>
+        </div>
+
+        <p>Think of it as slicing the network in two: all the source-side vertices on one side, all
+          the sink-side vertices on the other. Since every drop of flow must cross that line, the
+          total capacity crossing it <strong>limits the flow</strong>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The test for a valid cut</p>
+          <p style="margin-bottom:0;">A cut is valid only if <strong>no path from \(S\) to \(T\)
+            survives</strong>. If you can trace even one route from source to sink without crossing
+            the line, the cut is invalid and its capacity is meaningless.</p>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 440 250" width="440">
+            <defs>
+              <marker id="ahc" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                <polygon points="0 0, 9 3.5, 0 7" class="arrowhead-fill"/>
+              </marker>
+            </defs>
+            <line class="edge-line" x1="72"  y1="112" x2="146" y2="70"  marker-end="url(#ahc)"/>
+            <line class="edge-line" x1="72"  y1="138" x2="146" y2="180" marker-end="url(#ahc)"/>
+            <line class="edge-line" x1="190" y1="65"  x2="272" y2="65"  marker-end="url(#ahc)"/>
+            <line class="edge-line" x1="168" y1="88"  x2="168" y2="162" marker-end="url(#ahc)"/>
+            <line class="edge-line" x1="190" y1="185" x2="272" y2="185" marker-end="url(#ahc)"/>
+            <line class="edge-line" x1="312" y1="78"  x2="366" y2="112" marker-end="url(#ahc)"/>
+            <line class="edge-line" x1="312" y1="172" x2="366" y2="138" marker-end="url(#ahc)"/>
+            <circle class="node-circle" cx="52"  cy="125" r="20"/>
+            <circle class="node-circle" cx="168" cy="65"  r="20"/>
+            <circle class="node-circle" cx="168" cy="185" r="20"/>
+            <circle class="node-circle" cx="292" cy="65"  r="20"/>
+            <circle class="node-circle" cx="292" cy="185" r="20"/>
+            <circle class="node-circle" cx="388" cy="125" r="20"/>
+            <text class="node-label" x="46"  y="131">S</text>
+            <text class="node-label" x="162" y="71">A</text>
+            <text class="node-label" x="162" y="191">B</text>
+            <text class="node-label" x="286" y="71">C</text>
+            <text class="node-label" x="286" y="191">D</text>
+            <text class="node-label" x="382" y="131">T</text>
+            <text class="edge-weight-label" x="100" y="80">10</text>
+            <text class="edge-weight-label" x="100" y="176">8</text>
+            <text class="edge-weight-label" x="228" y="56">6</text>
+            <text class="edge-weight-label" x="176" y="128">4</text>
+            <text class="edge-weight-label" x="228" y="204">9</text>
+            <text class="edge-weight-label" x="336" y="84">7</text>
+            <text class="edge-weight-label" x="336" y="168">11</text>
+            <path d="M 110 20 Q 118 125 110 235" fill="none" stroke="#818181" stroke-width="2" stroke-dasharray="7 5"/>
+            <text class="angle-label-text" x="86" y="18">Cut 1</text>
+            <path d="M 340 20 Q 332 125 340 235" fill="none" stroke="#818181" stroke-width="2" stroke-dasharray="7 5"/>
+            <text class="angle-label-text" x="322" y="18">Cut 2</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">Two valid cuts. Cut 1 crosses S→A and S→B; Cut 2 crosses C→T
+          and D→T.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Verify that Cut 1 above is valid, and find its capacity.</p>
+          <p><strong>Validity:</strong> the only edges leaving S are S→A and S→B, and the cut
+            crosses both. No route from S to T avoids it, so it is valid.</p>
+          <p><strong>Capacity:</strong> \(10 + 8 = 18\).</p>
+          <p>Cut 2 crosses C→T and D→T, the only edges into T, so its capacity is
+            \(7 + 11 = 18\) as well.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. CAPACITY ─────────── -->
+      <div class="content-card" id="capacity">
+        <p class="section-label">Method</p>
+        <h2>Capacity of a cut</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Capacity of a cut</p>
+          \[C(\text{cut}) = \sum \text{capacities of edges crossing from the source side to the sink side}\]
+          <p class="formula-where">Add only the edges pointing <strong>from</strong> the source
+            side <strong>toward</strong> the sink side.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>In the network above, find the capacity of the cut that separates \(\{S, A\}\) from
+            \(\{B, C, D, T\}\).</p>
+          <p>Edges from the \(\{S, A\}\) side to the other side:</p>
+          <ul>
+            <li>S→B, capacity 8</li>
+            <li>A→B, capacity 4</li>
+            <li>A→C, capacity 6</li>
+          </ul>
+          \[C = 8 + 4 + 6 = 18\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Find the capacity of the cut separating \(\{S, A, B\}\) from \(\{C, D, T\}\).</p>
+          <p>Edges crossing forward: A→C (6) and B→D (9). The edge A→B stays entirely on the source
+            side, so it is not counted.</p>
+          \[C = 6 + 9 = 15\]
+          <p>This is smaller than the 18 found for the other cuts &mdash; a tighter constraint.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">A common error</p>
+          <p style="margin-bottom:0;">Only count edges that <strong>actually cross the cut
+            line</strong>. Edges with both endpoints on the same side are irrelevant, no matter how
+            small their capacity.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the network above, find the capacity of the cut separating \(\{S, A, C\}\) from
+              \(\{B, D, T\}\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Forward edges: S→B 8, A→B 4, C→T 7. (A→C is entirely on the source side.)</p>
+                <p>\(C = 8 + 4 + 7 = 19\).</p>
+              </div></details></li>
+            <li>Is a line crossing only A→C and C→T a valid cut? Explain.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No. The route S→B→D→T does not cross it, so it does not separate S from T.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. DIRECTION ─────────── -->
+      <div class="content-card" id="direction">
+        <p class="section-label">Theory</p>
+        <h2>The direction rule</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Forward and backward edges</p>
+          <p style="margin-bottom:0;">
+            An edge crossing the cut <strong>from the source side to the sink side</strong> is a
+            <strong>forward edge</strong> — <em>count its capacity</em>.<br><br>
+            An edge crossing <strong>backward</strong>, from the sink side to the source side, is a
+            <strong>backward edge</strong> — <em>count it as zero</em>.
+          </p>
+        </div>
+
+        <p><strong>Why?</strong> A cut measures how much can get <em>through</em> toward the sink.
+          An edge pointing backward carries flow the wrong way, so it contributes nothing to
+          getting material across.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>A cut separates \(\{S, A\}\) from \(\{B, T\}\). The crossing edges are A→B (capacity
+            12), S→B (capacity 7) and B→A (capacity 5). Find the capacity of the cut.</p>
+          <p>A→B and S→B point forward, so they count. B→A points backward (from the sink side to
+            the source side), so it contributes 0.</p>
+          \[C = 12 + 7 + 0 = 19\]
+        </div>
+
+        <div class="interactive-block">
+          <h3>Cut capacity calculator</h3>
+          <p class="exercise-intro">Toggle which vertices are on the source side. The calculator
+            identifies the crossing edges, applies the direction rule, and reports the capacity.</p>
+          <div id="cutControls"></div>
+          <div class="diagram-wrap"><div id="cutDiagram"></div></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Source side</div>
+              <div class="readout-value" id="roSide">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Forward edges</div>
+              <div class="readout-value" id="roFwd">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Cut capacity</div>
+              <div class="readout-value" id="roCap">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="cutNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the network above, find the capacity of the cut with source side
+              \(\{S, B, D\}\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Forward: S→A 10 and D→T 11. A→B crosses from the sink side (A) to the source
+                  side (B), so it is backward and counts 0. B→D lies inside the source side.</p>
+                <p>\(C = 10 + 11 = 21\).</p>
+              </div></details></li>
+            <li>A cut is crossed by forward edges of 8, 5 and 3 and a backward edge of 6. Find its
+              capacity.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(8 + 5 + 3 + 0 = 16\). The backward edge is ignored.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. MINIMUM ─────────── -->
+      <div class="content-card" id="minimum">
+        <p class="section-label">Method</p>
+        <h2>Finding the minimum cut</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The systematic method</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>List every valid cut.</strong> A cut corresponds to a choice of which
+              vertices sit on the source side (S must be included, T must not).</li>
+            <li><strong>Calculate each capacity</strong>, applying the direction rule.</li>
+            <li><strong>The smallest is the minimum cut</strong> — and by the theorem, that value
+              is the maximum flow.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; a full analysis</p>
+          <p>For the network at the top of this lesson (S→A 10, S→B 8, A→B 4, A→C 6, B→D 9,
+            C→T 7, D→T 11), list all cuts and find the maximum flow.</p>
+          <table class="coord-table">
+            <tr><th>Source side</th><th>Forward edges</th><th>Capacity</th></tr>
+            <tr><td>\(\{S\}\)</td><td>S→A 10, S→B 8</td><td>18</td></tr>
+            <tr><td>\(\{S, A\}\)</td><td>S→B 8, A→B 4, A→C 6</td><td>18</td></tr>
+            <tr><td>\(\{S, B\}\)</td><td>S→A 10, B→D 9</td><td>19</td></tr>
+            <tr><td>\(\{S, A, B\}\)</td><td>A→C 6, B→D 9</td><td><strong>15</strong></td></tr>
+            <tr><td>\(\{S, A, B, C\}\)</td><td>C→T 7, B→D 9</td><td>16</td></tr>
+            <tr><td>\(\{S, A, B, D\}\)</td><td>A→C 6, D→T 11</td><td>17</td></tr>
+            <tr><td>\(\{S, A, B, C, D\}\)</td><td>C→T 7, D→T 11</td><td>18</td></tr>
+          </table>
+          <p>The minimum is <strong>15</strong>, at the cut separating \(\{S, A, B\}\) from
+            \(\{C, D, T\}\).</p>
+          <p><strong>Therefore the maximum flow is 15 units.</strong> The edges A→C and B→D form
+            the bottleneck &mdash; every route must use one of them.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">A practical shortcut</p>
+          <p style="margin-bottom:0;">You rarely need every cut. Look for places where the network
+            <strong>narrows</strong> — a small number of edges that all routes must pass through.
+            Always check the cut right at the source and the one right at the sink, then any
+            obvious narrow waists in between.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A network has edges S→A 6, S→B 8, B→A 5, A→T 9 and B→T 4. List all four cuts and
+              find the maximum flow.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th>Source side</th><th>Forward edges</th><th>Capacity</th></tr>
+                  <tr><td>\(\{S\}\)</td><td>S→A 6, S→B 8</td><td>14</td></tr>
+                  <tr><td>\(\{S, A\}\)</td><td>S→B 8, A→T 9 (B→A backward)</td><td>17</td></tr>
+                  <tr><td>\(\{S, B\}\)</td><td>S→A 6, B→A 5, B→T 4</td><td>15</td></tr>
+                  <tr><td>\(\{S, A, B\}\)</td><td>A→T 9, B→T 4</td><td><strong>13</strong></td></tr>
+                </table>
+                <p>Maximum flow \(= 13\).</p>
+              </div></details></li>
+            <li>Which edges form the bottleneck in that network?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A→T and B→T &mdash; the two edges into the sink.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. THEOREM ─────────── -->
+      <div class="content-card" id="theorem">
+        <p class="section-label">Theory</p>
+        <h2>The maximum-flow minimum-cut theorem</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The theorem</p>
+          \[\text{Maximum flow} = \text{Capacity of the minimum cut}\]
+          <p class="formula-where">The greatest flow that can pass from source to sink equals
+            exactly the capacity of the smallest cut. They are always the same number.</p>
+        </div>
+
+        <p><strong>Why it must be true.</strong> Every unit of flow crosses every cut, so the flow
+          can never exceed <em>any</em> cut's capacity — in particular the smallest. That explains
+          why max flow \(\le\) min cut. The deeper part of the theorem is that this bound is always
+          achievable: you can always find a flow that actually reaches it.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">What this gives you</p>
+          <ul style="margin-bottom:0;">
+            <li>A <strong>guaranteed answer</strong> — no need to hunt for clever paths.</li>
+            <li>A way to <strong>prove</strong> your flow is maximal: exhibit a cut with the same
+              capacity.</li>
+            <li>The <strong>bottleneck identified</strong> — the minimum cut's edges are exactly
+              the ones to upgrade.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; using the theorem to advise</p>
+          <p>The network in Worked example 5 has a maximum flow of 15, limited by the cut
+            \(\{A\to C = 6,\ B\to D = 9\}\). A council wants to increase throughput. What should
+            it do?</p>
+          <p><strong>Upgrade an edge in the minimum cut.</strong> Increasing A→C from 6 to 10 raises
+            that cut's capacity to \(10 + 9 = 19\).</p>
+          <p>But the maximum flow does <em>not</em> become 19 — the next-smallest cut now binds.
+            From the table, the cut \(\{S\}\) has capacity 18 and \(\{S, A, B, C\}\) becomes
+            \(7 + 9 = 16\). So the new maximum flow is <strong>16</strong>.</p>
+          <p><strong>The lesson:</strong> upgrading a bottleneck moves the constraint elsewhere.
+            Gains are limited by the <em>next</em> smallest cut, so improvements are usually
+            smaller than expected.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Minimum cut finder</h3>
+          <p class="exercise-intro">Adjust the capacities. Every cut is evaluated and the minimum
+            — the maximum flow — is identified.</p>
+          <div id="minSliders"></div>
+          <div id="minTable" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="minNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; exam style</p>
+          <p>A stadium (S) is evacuated to a transport hub (T) through junctions A to E. Capacities
+            in people per hour:</p>
+          <table class="coord-table">
+            <tr><th>Edge</th><td>S→A</td><td>S→B</td><td>S→C</td><td>A→D</td><td>B→D</td><td>B→E</td><td>C→E</td><td>D→T</td><td>E→T</td></tr>
+            <tr><th>Capacity</th><td>800</td><td>900</td><td>500</td><td>600</td><td>400</td><td>700</td><td>450</td><td>900</td><td>1000</td></tr>
+          </table>
+          <p><strong>(a) Show that the maximum flow is 1,900 people per hour.</strong> [2 marks]</p>
+          <p>The cut at the sink crosses D→T and E→T: \(900 + 1000 = 1\,900\). Checking the other
+            cuts, the next smallest are \(\{S, A, C\}\) (S→B 900, A→D 600, C→E 450 = 1,950) and
+            the source cut (2,200). The minimum cut is 1,900, so the maximum flow is 1,900.</p>
+          <p><strong>(b) Planners need 2,100 people per hour. They widen E→T to 1,300. Is this
+            enough?</strong> [2 marks]</p>
+          <p>The sink cut rises to \(900 + 1300 = 2\,200\), but the cut \(\{S, A, C\}\) is still
+            1,950. The new maximum flow is 1,950 &mdash; still 150 short. A second upgrade on that
+            cut (for example A→D) is also needed.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In the network S→A 6, S→B 8, B→A 5, A→T 9, B→T 4 (maximum flow 13), B→T is
+              increased by 2. What is the new maximum flow?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The cut \(\{S, A, B\}\) rises to \(9 + 6 = 15\), but the source cut \(\{S\}\)
+                  is 14. New maximum flow: 14, not 15.</p>
+              </div></details></li>
+            <li>An engineer finds a valid flow of 13 units in that network and a cut of capacity
+              13. What can she conclude, and why?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The flow is maximal. No flow can exceed any cut, so 13 cannot be beaten, and
+                  she has a flow that reaches it.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. AUGMENTING PATHS ─────────── -->
+      <div class="content-card" id="paths">
+        <p class="section-label">Method</p>
+        <h2>Building the maximum flow path by path</h2>
+
+        <p>The minimum cut tells you the maximum flow. To show <em>how</em> that flow is
+          achieved, build it one path at a time:</p>
+        <ol>
+          <li>Choose any path from S to T with spare capacity on every edge.</li>
+          <li>Send its bottleneck amount (the smallest spare capacity along the path).</li>
+          <li>Reduce the spare capacity on each edge of that path.</li>
+          <li>Repeat until no path from S to T has spare capacity everywhere.</li>
+          <li>Add the amounts sent, then confirm with a cut of the same capacity.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Build a maximum flow for the network at the top of this lesson.</p>
+          <table class="coord-table">
+            <tr><th>Path</th><th>Spare capacities</th><th>Send</th></tr>
+            <tr><td>S→A→C→T</td><td>10, 6, 7</td><td>6</td></tr>
+            <tr><td>S→B→D→T</td><td>8, 9, 11</td><td>8</td></tr>
+            <tr><td>S→A→B→D→T</td><td>4, 4, 1, 3</td><td>1</td></tr>
+          </table>
+          <p>Now A→C (0 spare) and B→D (0 spare) are full, so no path remains. Total flow
+            \(= 6 + 8 + 1 = 15\), matching the minimum cut of 15 &mdash; so it is maximal.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Build a maximum flow, path by path, for S→A 9, S→B 7, A→B 3, A→T 5, B→T 10.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>S→A→T: send 5 (S→A has 4 left). S→B→T: send 7 (B→T has 3 left).
+                  S→A→B→T: send \(\min(4, 3, 3) = 3\).</p>
+                <p>Total flow: \(5 + 7 + 3 = 15\).</p>
+              </div></details></li>
+            <li>Confirm your answer to question 1 with a cut.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The cut with source side \(\{S, A\}\) crosses S→B 7, A→B 3 and A→T 5:
+                  capacity 15. A flow of 15 equals a cut of 15, so it is maximal.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>The engineer's challenge</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#theorem">minimum cut finder</a>, starting from the original capacities (S→A 10,
+          S→B 8, A→B 4, A→C 6, B→D 9, C→T 7, D→T 11), maximum flow 15.</p>
+        <ol>
+          <li>Add 5 units to S→A. What happens to the maximum flow? Why?</li>
+          <li>Reset. Try adding 5 units to each edge in turn, one at a time. Which single upgrade
+            helps most?</li>
+          <li>The challenge: raise the maximum flow to <strong>18</strong> by adding as few units
+            of capacity as possible, spread over any edges. Record your best total.</li>
+          <li>When you reach 18, how many cuts have capacity exactly 18? What does that tell you
+            about upgrading further?</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> Nothing changes: S→A is not in the minimum cut, so the maximum
+            flow stays 15.</p>
+          <p><strong>2.</strong> B→D +5 gives 17 (the next cut, \(\{S, A, B, D\}\), binds). A→C +5
+            gives 16. Every other single upgrade leaves 15.</p>
+          <p><strong>3.</strong> The best is 3 units: A→C +1 and B→D +2. This is the only 3-unit
+            solution.</p>
+          <p><strong>4.</strong> Three cuts tie at 18: \(\{S\}\), \(\{S, A, B\}\) and
+            \(\{S, A, B, C\}\). Going any higher requires upgrades across several cuts at once,
+            so each further unit becomes expensive.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Show every cut you test — listing them systematically is worth
+          marks even before you identify the minimum.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 applies all of this to real decisions: which edge to upgrade, and whether
+          capacity meets demand.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-6', LESSON_IDX = 1;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* Shared network: S→A, S→B, A→B, A→C, B→D, C→T, D→T */
+  var EDGES = [
+    { f: 'S', t: 'A', c: 10 }, { f: 'S', t: 'B', c: 8 },
+    { f: 'A', t: 'B', c: 4 },  { f: 'A', t: 'C', c: 6 },
+    { f: 'B', t: 'D', c: 9 },  { f: 'C', t: 'T', c: 7 },
+    { f: 'D', t: 'T', c: 11 }
+  ];
+  var POS = { S: [50, 125], A: [166, 62], B: [166, 188], C: [288, 62], D: [288, 188], T: [388, 125] };
+
+  function cutCapacity(edges, sourceSide) {
+    var fwd = [], cap = 0;
+    edges.forEach(function (e) {
+      var fIn = sourceSide.indexOf(e.f) !== -1, tIn = sourceSide.indexOf(e.t) !== -1;
+      if (fIn && !tIn) { cap += e.c; fwd.push(e.f + '→' + e.t + ' ' + e.c); }
+      // Backward edges (!fIn && tIn) contribute zero
+    });
+    return { cap: cap, fwd: fwd };
+  }
+
+  /* ── Cut capacity calculator ──────────────────────────────── */
+  (function () {
+    var side = ['S', 'A', 'B'];
+    var mount = document.getElementById('cutDiagram');
+    var controls = document.getElementById('cutControls');
+
+    ['A', 'B', 'C', 'D'].forEach(function (v) {
+      var row = document.createElement('div');
+      row.className = 'exercise-row';
+      row.innerHTML = '<label><input type="checkbox" data-v="' + v + '"' +
+        (side.indexOf(v) !== -1 ? ' checked' : '') + '> Put ' + v + ' on the source side</label>';
+      controls.appendChild(row);
+      row.querySelector('input').addEventListener('change', function (e) {
+        if (e.target.checked) { if (side.indexOf(v) === -1) side.push(v); }
+        else { side = side.filter(function (x) { return x !== v; }); }
+        update();
+      });
+    });
+
+    function update() {
+      var r = cutCapacity(EDGES, side);
+
+      var W = 440, H = 250;
+      var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+      var defs = svgEl('defs');
+      var mk = svgEl('marker', { id: 'ahcc', markerWidth: 9, markerHeight: 7, refX: 8, refY: 3.5, orient: 'auto' });
+      mk.appendChild(svgEl('polygon', { points: '0 0, 9 3.5, 0 7', class: 'arrowhead-fill' }));
+      defs.appendChild(mk); svg.appendChild(defs);
+
+      EDGES.forEach(function (e) {
+        var p = POS[e.f], q = POS[e.t];
+        var dx = q[0] - p[0], dy = q[1] - p[1], L = Math.hypot(dx, dy);
+        var ux = dx / L, uy = dy / L;
+        var crosses = (side.indexOf(e.f) !== -1) !== (side.indexOf(e.t) !== -1);
+        svg.appendChild(svgEl('line', {
+          class: 'edge-line',
+          x1: p[0] + ux * 21, y1: p[1] + uy * 21,
+          x2: q[0] - ux * 23, y2: q[1] - uy * 23,
+          'stroke-width': crosses ? 3.2 : 1.4,
+          'stroke-dasharray': crosses ? '' : '4 3',
+          'marker-end': 'url(#ahcc)'
+        }));
+        svg.appendChild(svgEl('text', { class: 'edge-weight-label',
+          x: (p[0] + q[0]) / 2 + 4, y: (p[1] + q[1]) / 2 - 6 }, String(e.c)));
+      });
+      Object.keys(POS).forEach(function (v) {
+        var onSide = side.indexOf(v) !== -1 || v === 'S';
+        svg.appendChild(svgEl('circle', {
+          class: 'node-circle', cx: POS[v][0], cy: POS[v][1], r: 20,
+          'stroke-width': onSide ? 3.4 : 2
+        }));
+        svg.appendChild(svgEl('text', { class: 'node-label', x: POS[v][0] - 6, y: POS[v][1] + 6 }, v));
+      });
+      mount.innerHTML = '';
+      mount.appendChild(svg);
+
+      var full = ['S'].concat(side.filter(function (v) { return v !== 'S'; }));
+      document.getElementById('roSide').textContent = '{' + full.join(', ') + '}';
+      document.getElementById('roFwd').textContent  = r.fwd.length ? r.fwd.join(', ') : 'none';
+      document.getElementById('roCap').textContent  = r.cap + ' units';
+
+      var note = document.getElementById('cutNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Bold edges cross the cut. Capacity = ' +
+        (r.fwd.length ? r.fwd.map(function (s) { return s.split(' ')[1]; }).join(' + ') + ' = ' + r.cap : '0') +
+        '. Edges entirely on one side (dashed) are not counted.';
+    }
+    update();
+  })();
+
+  /* ── Minimum cut finder ───────────────────────────────────── */
+  (function () {
+    var caps = [10, 8, 4, 6, 9, 7, 11];
+    var LABELS = ['S→A', 'S→B', 'A→B', 'A→C', 'B→D', 'C→T', 'D→T'];
+
+    /* All subsets of {A,B,C,D} added to {S} — 16 possible cuts */
+    var MID = ['A', 'B', 'C', 'D'];
+
+    function update() {
+      var edges = EDGES.map(function (e, i) { return { f: e.f, t: e.t, c: caps[i] }; });
+      var rows = [];
+      for (var mask = 0; mask < 16; mask++) {
+        var side = ['S'];
+        MID.forEach(function (v, i) { if (mask & (1 << i)) side.push(v); });
+        var r = cutCapacity(edges, side);
+        rows.push({ side: side, cap: r.cap, fwd: r.fwd });
+      }
+      var min = Math.min.apply(null, rows.map(function (r) { return r.cap; }));
+
+      var html = '<table class="coord-table"><tr><th>Source side</th><th>Forward edges</th><th>Capacity</th></tr>';
+      rows.sort(function (a, b) { return a.cap - b.cap; }).slice(0, 8).forEach(function (r) {
+        html += '<tr><td>{' + r.side.join(', ') + '}</td><td>' +
+                (r.fwd.join(', ') || '—') + '</td><td>' +
+                (r.cap === min ? '<strong>' + r.cap + '</strong>' : r.cap) + '</td></tr>';
+      });
+      html += '</table><p style="font-size:12px;color:var(--gray-med);margin-top:8px;">' +
+              'Eight smallest of 16 possible cuts shown.</p>';
+      document.getElementById('minTable').innerHTML = html;
+
+      var best = rows.filter(function (r) { return r.cap === min; });
+      var note = document.getElementById('minNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'Minimum cut capacity = ' + min + ', so by the max-flow min-cut theorem the maximum flow is ' +
+        min + ' units. The bottleneck edges are ' + (best[0].fwd.join(', ') || 'none') +
+        ' — those are the ones to upgrade.';
+    }
+
+    var host = 'minSliders';
+    LABELS.forEach(function (lab, i) {
+      IE.slider({ mount: host, label: lab, min: 1, max: 20, step: 1, value: caps[i],
+                  onInput: function (v) { caps[i] = v; update(); } });
+    });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'What is a cut in a flow network?',
+      opts: [
+        'A) The edge with the smallest capacity',
+        'B) A line that completely separates the source from the sink',
+        'C) The shortest path from source to sink',
+        'D) A vertex that has been removed'
+      ],
+      correct: 1,
+      explanation: 'B is correct. A cut divides the network so that every route from \\(S\\) to \\(T\\) must cross it. If a path survives the cut, it is not a valid cut at all.'
+    },
+    {
+      q: 'When calculating the capacity of a cut, how is an edge pointing from the sink side back to the source side treated?',
+      opts: [
+        'A) Its capacity is added',
+        'B) Its capacity is subtracted',
+        'C) It counts as zero',
+        'D) It makes the cut invalid'
+      ],
+      correct: 2,
+      explanation: 'C is correct. A cut measures how much can get through toward the sink. A backward edge carries flow the wrong way, so it contributes nothing — count it as zero, do not subtract it.'
+    },
+    {
+      q: 'A cut is crossed by edges of capacity 9, 4 and 7, all pointing forward. What is the capacity of the cut?',
+      opts: ['A) 4', 'B) 9', 'C) 20', 'D) 252'],
+      correct: 2,
+      explanation: 'C is correct. The capacity of a cut is the <em>sum</em> of the forward-crossing capacities: \\(9 + 4 + 7 = 20\\). Taking the minimum (option A) is the rule for edges in series along a path, not for a cut.'
+    },
+    {
+      q: 'The maximum-flow minimum-cut theorem states that:',
+      opts: [
+        'A) The maximum flow is the average of all cut capacities',
+        'B) The maximum flow equals the capacity of the minimum cut',
+        'C) The maximum flow is always less than the minimum cut',
+        'D) The maximum flow equals the largest cut capacity'
+      ],
+      correct: 1,
+      explanation: 'B is correct. They are exactly equal. Every unit of flow must cross every cut, so the flow cannot exceed the smallest one — and the theorem guarantees that this bound is always achievable.'
+    },
+    {
+      q: 'A network has cuts with capacities 22, 18, 25 and 19. What is the maximum flow?',
+      opts: ['A) 25', 'B) 21', 'C) 18', 'D) 84'],
+      correct: 2,
+      explanation: 'C is correct. The maximum flow equals the <em>minimum</em> cut capacity, which is 18. Every larger cut is a weaker constraint that the flow already satisfies.'
+    },
+    {
+      q: 'A cut separating \\(\\{S, A\\}\\) from the rest is crossed by S→B (7), A→C (5) and A→B (3). Edge S→A (12) lies entirely on the source side. What is the cut capacity?',
+      opts: ['A) 27', 'B) 15', 'C) 12', 'D) 20'],
+      correct: 1,
+      explanation: 'B is correct. Only edges that actually cross the cut count: \\(7 + 5 + 3 = 15\\). S→A has both endpoints in \\(\\{S, A\\}\\), so it never crosses the line and is excluded — option A wrongly includes it.'
+    },
+    {
+      q: 'The minimum cut of a network has capacity 14, made up of edges of 6 and 8. An engineer doubles the 6 to 12. What can be said about the new maximum flow?',
+      opts: [
+        'A) It becomes 20',
+        'B) It stays at 14',
+        'C) It increases, but is now limited by the next-smallest cut',
+        'D) It becomes 28'
+      ],
+      correct: 2,
+      explanation: 'C is correct. That particular cut rises to 20, but some other cut is now the smallest, so the flow increases only until the next constraint binds. Upgrading a bottleneck moves the constraint rather than removing it.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Define a cut and explain how to tell whether a proposed cut is valid.',
+      marks: 3,
+      steps: [
+        'A cut is a line through the network separating the source from the sink.',
+        'Validity test: trace every route from \\(S\\) to \\(T\\).',
+        'If any route reaches \\(T\\) without crossing the line, the cut is invalid.',
+        'A valid cut leaves no surviving path from source to sink.'
+      ],
+      answer: 'A cut divides the network so that source and sink are on opposite sides. It is valid only if every possible path from \\(S\\) to \\(T\\) crosses it — if even one route survives, the cut is invalid.'
+    },
+    {
+      q: 'A cut is crossed by edges with capacities 11, 6 and 9 going forward, and one of capacity 5 going backward. Find the cut capacity.',
+      marks: 3,
+      steps: [
+        'Forward edges are counted at full capacity.',
+        '\\(11 + 6 + 9 = 26\\).',
+        'The backward edge counts as zero — it carries flow away from the sink.',
+        'Do not subtract it.'
+      ],
+      answer: '26. The backward edge contributes 0, not \\(-5\\).'
+    },
+    {
+      q: 'For the network S→A 14, S→B 10, A→T 9, B→T 12, find the capacity of the cut at the source and the cut at the sink, and state the maximum flow.',
+      marks: 4,
+      steps: [
+        'Cut \\(\\{S\\}\\): crosses S→A and S→B, capacity \\(14 + 10 = 24\\).',
+        'Cut \\(\\{S, A, B\\}\\): crosses A→T and B→T, capacity \\(9 + 12 = 21\\).',
+        'Also check \\(\\{S, A\\}\\): crosses S→B (10) and A→T (9), capacity 19.',
+        'And \\(\\{S, B\\}\\): crosses S→A (14) and B→T (12), capacity 26.',
+        'The minimum is 19.'
+      ],
+      answer: 'Source cut 24, sink cut 21, but the minimum cut is \\(\\{S, A\\}\\) at 19 — so the maximum flow is 19.'
+    },
+    {
+      q: 'Explain why the maximum flow can never exceed the capacity of any cut.',
+      marks: 3,
+      steps: [
+        'A cut separates the source from the sink completely.',
+        'Therefore every unit of flow travelling from \\(S\\) to \\(T\\) must cross that cut at some point.',
+        'The total that can cross is limited by the sum of the forward capacities — the cut capacity.',
+        'So the flow is bounded by every cut, and in particular by the smallest.'
+      ],
+      answer: 'Because every unit of flow must cross the cut to reach the sink, so the total flow cannot exceed the cut\'s total forward capacity. This holds for every cut, so the minimum cut gives the tightest bound.'
+    },
+    {
+      q: 'A network has S→A 12, S→B 9, A→C 7, A→B 3, B→C 5, C→T 15. Find the maximum flow by examining all cuts.',
+      marks: 6,
+      steps: [
+        '\\(\\{S\\}\\): S→A 12 + S→B 9 = 21.',
+        '\\(\\{S, A\\}\\): S→B 9 + A→C 7 + A→B 3 = 19.',
+        '\\(\\{S, B\\}\\): S→A 12 + B→C 5 = 17.',
+        '\\(\\{S, A, B\\}\\): A→C 7 + B→C 5 = 12.',
+        '\\(\\{S, A, B, C\\}\\): C→T 15 = 15.',
+        'The minimum is 12.'
+      ],
+      answer: 'Maximum flow = 12, at the cut separating \\(\\{S, A, B\\}\\) from \\(\\{C, T\\}\\), with bottleneck edges A→C (7) and B→C (5).'
+    },
+    {
+      q: 'For the network in the previous question, the C→T edge has capacity 15 but the maximum flow is only 12. Explain what this means practically.',
+      marks: 3,
+      steps: [
+        'C→T can carry 15 units but never receives more than 12.',
+        'The constraint is upstream: only 12 units can reach C in the first place.',
+        'C→T therefore runs at 80% of its capacity with 3 units of spare capacity.',
+        'Upgrading C→T would achieve nothing.'
+      ],
+      answer: 'C→T has 3 units of spare capacity that can never be used, because only 12 units can reach C. Money spent widening C→T would be wasted — the upgrade must target A→C or B→C.'
+    },
+    {
+      q: 'A network\'s minimum cut consists of edges with capacities 5 and 8. The next-smallest cut has capacity 17. If the 5-capacity edge is increased to 11, find the new maximum flow.',
+      marks: 4,
+      steps: [
+        'Original maximum flow = minimum cut = \\(5 + 8 = 13\\).',
+        'After the upgrade, that cut becomes \\(11 + 8 = 19\\).',
+        'The next-smallest cut, at 17, is now the binding constraint.',
+        'So the maximum flow rises to 17, not 19.'
+      ],
+      answer: 'The new maximum flow is 17 — a gain of 4, not 6, because the cut of capacity 17 now becomes the bottleneck.'
+    },
+    {
+      q: 'A water network has a minimum cut of 620 kL/h and the town needs 750 kL/h. Explain the situation and what must be done.',
+      marks: 4,
+      steps: [
+        'By the theorem, the maximum deliverable flow is 620 kL/h.',
+        'Demand is 750 kL/h, so there is a shortfall of 130 kL/h.',
+        'Only edges in the minimum cut limit the flow.',
+        'Their combined capacity must rise by at least 130 kL/h — and then the next cut must be checked.'
+      ],
+      answer: 'The network can deliver only 620 kL/h against demand of 750 kL/h — a shortfall of 130 kL/h. Capacity must be added to the minimum-cut edges, after which the next-smallest cut should be re-checked, since it may then become the limit.'
+    },
+    {
+      q: 'Explain why it is not enough to check only the cut at the source and the cut at the sink.',
+      marks: 3,
+      steps: [
+        'Those two cuts describe the capacity available at the two ends of the network.',
+        'A bottleneck can occur anywhere in between, where the network narrows.',
+        'Such an intermediate cut can have a smaller capacity than either end.',
+        'Since the maximum flow is the <em>minimum</em> over all cuts, missing one can overstate the answer.'
+      ],
+      answer: 'Because the narrowest point may lie in the middle of the network, not at either end. An intermediate cut can have a smaller capacity than the source or sink cuts, and since the maximum flow is the minimum over all cuts, overlooking it gives too large an answer.'
+    },
+    {
+      q: 'A freight network has S→A 30, S→B 25, A→B 10, A→C 20, B→D 22, C→T 18, D→T 26 (tonnes/day). Find the maximum daily tonnage.',
+      marks: 6,
+      steps: [
+        '\\(\\{S\\}\\): 30 + 25 = 55.',
+        '\\(\\{S, A\\}\\): S→B 25 + A→B 10 + A→C 20 = 55.',
+        '\\(\\{S, A, B\\}\\): A→C 20 + B→D 22 = 42.',
+        '\\(\\{S, A, B, C\\}\\): C→T 18 + B→D 22 = 40.',
+        '\\(\\{S, A, B, D\\}\\): A→C 20 + D→T 26 = 46.',
+        '\\(\\{S, A, B, C, D\\}\\): C→T 18 + D→T 26 = 44. The minimum is 40.'
+      ],
+      answer: '40 tonnes per day, at the cut separating \\(\\{S, A, B, C\\}\\) from \\(\\{D, T\\}\\), with bottleneck edges C→T (18) and B→D (22).'
+    },
+    {
+      q: 'For the freight network above, a manager proposes widening S→A from 30 to 40. Evaluate this proposal.',
+      marks: 4,
+      steps: [
+        'S→A is not in the minimum cut \\(\\{C\\to T = 18,\\ B\\to D = 22\\}\\).',
+        'Changing it only affects cuts that S→A crosses, such as \\(\\{S\\}\\) (55 → 65).',
+        'The minimum cut of 40 is unchanged.',
+        'So the maximum flow stays at 40 tonnes per day.'
+      ],
+      answer: 'The proposal is worthless. S→A is not part of the minimum cut, so widening it leaves the maximum flow at 40 t/day. Only C→T or B→D should be upgraded.'
+    },
+    {
+      q: 'Explain how the max-flow min-cut theorem lets you prove that a flow you have found is actually the maximum.',
+      marks: 3,
+      steps: [
+        'Suppose you construct a flow of value \\(F\\) by routing along paths.',
+        'That shows the maximum is at least \\(F\\).',
+        'If you can also exhibit a cut whose capacity is exactly \\(F\\), the maximum is at most \\(F\\).',
+        'The two bounds squeeze together, proving the maximum is exactly \\(F\\).'
+      ],
+      answer: 'Find a flow of value \\(F\\) (showing the maximum is at least \\(F\\)) and a cut of capacity \\(F\\) (showing it is at most \\(F\\)). The two together prove the maximum is exactly \\(F\\) — no further searching is needed.'
+    },
+    {
+      q: 'A network has two minimum cuts, both of capacity 24. What does this tell an engineer planning upgrades?',
+      marks: 4,
+      steps: [
+        'Both cuts constrain the flow equally at 24 units.',
+        'Upgrading edges in only one of them leaves the other still binding at 24.',
+        'So the maximum flow would not increase at all.',
+        'Edges in both cuts must be upgraded together to gain anything.'
+      ],
+      answer: 'Upgrading only one of the two cuts achieves nothing, because the other still limits the flow to 24. To increase throughput the engineer must raise capacity across both minimum cuts simultaneously — which makes the upgrade considerably more expensive.'
+    },
+    {
+      q: 'A data network is modelled with S→A 50, S→B 40, A→B 15, A→T 35, B→T 45 (Gb/s). Find the maximum flow and identify the bottleneck.',
+      marks: 6,
+      steps: [
+        '\\(\\{S\\}\\): 50 + 40 = 90.',
+        '\\(\\{S, A\\}\\): S→B 40 + A→B 15 + A→T 35 = 90.',
+        '\\(\\{S, B\\}\\): S→A 50 + B→T 45 = 95.',
+        '\\(\\{S, A, B\\}\\): A→T 35 + B→T 45 = 80.',
+        'The minimum is 80.',
+        'Check: S can emit 90 and T can absorb 80, so 80 is consistent.'
+      ],
+      answer: '80 Gb/s, limited by the cut \\(\\{S, A, B\\}\\) versus \\(\\{T\\}\\) — the two links into T (35 and 45) are the bottleneck, so the final leg to the client is what constrains the whole network.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

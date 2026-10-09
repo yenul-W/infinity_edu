@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Normally Distributed Datasets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 10 &mdash; The Normal Distribution</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Normally Distributed Datasets</h1>
+      <p class="subtitle">Heights, birth weights, exam marks, manufacturing tolerances &mdash; measure
+        enough of almost anything and the same bell-shaped curve appears. This lesson is about
+        recognising that shape and reading everything it tells you.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-10</span>
+        <span class="pill">The bell curve</span>
+        <span class="pill">Mean &asymp; median &asymp; mode</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>What "normally distributed" means</li>
+        <li>Features of the bell curve</li>
+        <li>Mean, median and mode</li>
+        <li>The role of &sigma;</li>
+        <li>Skewed data</li>
+        <li>Sketching with a scale</li>
+        <li>Recognising normality</li>
+        <li>Class activity: normal or not?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#shape">1 &nbsp;The bell curve</a></li>
+        <li class="toc-item"><a class="toc-link" href="#centre">2 &nbsp;Mean, median &amp; mode</a></li>
+        <li class="toc-item"><a class="toc-link" href="#spread">3 &nbsp;The role of &sigma;</a></li>
+        <li class="toc-item"><a class="toc-link" href="#skew">4 &nbsp;When data is not normal</a></li>
+        <li class="toc-item"><a class="toc-link" href="#sketching">5 &nbsp;Sketching the curve</a></li>
+        <li class="toc-item"><a class="toc-link" href="#recognise">6 &nbsp;Recognising normality</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge Check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended Practice</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1 ─────────── -->
+      <div class="content-card" id="shape">
+        <p class="section-label">Theory</p>
+        <h2>The bell curve</h2>
+
+        <p>Take a large sample of a naturally varying measurement &mdash; the heights of adult women,
+          the birth weights of babies, the diameters of ball bearings off a production line &mdash; and
+          draw a histogram. Most values cluster near the middle, and the further you move from the
+          middle in either direction, the rarer the values become. Narrow the class intervals and
+          increase the sample size, and the histogram settles into a smooth, symmetric,
+          bell-shaped curve.</p>
+
+        <p>A random variable whose values behave this way is called
+          <strong>normally distributed</strong>, and the curve is the
+          <strong>normal distribution</strong>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Features of every normal curve</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>Symmetric</strong> about the mean &mdash; the left half mirrors the right.</li>
+            <li><strong>Single peak</strong> at the mean. The most common value is the central one.</li>
+            <li><strong>Tails</strong> that fall away smoothly on both sides and never quite touch
+              the horizontal axis &mdash; extreme values are rare but not impossible.</li>
+            <li><strong>Total area under the curve is 1</strong>, because every observation lies
+              somewhere under it. Areas therefore represent proportions or probabilities.</li>
+            <li>Completely determined by two numbers: the mean \(\mu\) and the standard deviation
+              \(\sigma\).</li>
+          </ul>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Build the curve</h3>
+          <p class="exercise-intro">Change the mean and standard deviation and watch what each one
+            does. The mean slides the curve; the standard deviation stretches it.</p>
+          <div id="bellSliders"></div>
+          <div id="bellPlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="bellNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>The heights of adult Australian men are approximately normally distributed with a mean
+            of 175 cm and a standard deviation of 7 cm. Describe what this tells you.</p>
+          <p><strong>Centre.</strong> 175 cm is the most common height, and the histogram peaks
+            there.</p>
+          <p><strong>Symmetry.</strong> A man is just as likely to be 168 cm (7 cm below) as
+            182 cm (7 cm above).</p>
+          <p><strong>Spread.</strong> Typical heights sit within a few centimetres of 175 cm. A
+            height of 200 cm is far out in the upper tail &mdash; possible, but rare.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Why the normal curve turns up so often</p>
+          <p style="margin-bottom:0;">A measurement that is the combined result of many small,
+            independent influences tends to be normally distributed. Adult height depends on
+            hundreds of genes plus nutrition, illness and sleep; no single factor dominates, so the
+            small pushes up and down average out into a symmetric bell. Measurements driven by one
+            dominant factor &mdash; income, for example, or time spent waiting in a queue &mdash; usually
+            are <em>not</em> normal.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>True or false? (a) A normal curve can have two peaks. (b) The tails of a normal
+              curve touch the axis. (c) The total area under a normal curve is 1.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) False &mdash; one peak, at the mean. (b) False &mdash; the tails approach
+                  the axis but never touch it. (c) True.</p>
+              </div></details></li>
+            <li>Egg masses are normal with mean 60 g and standard deviation 4 g. Which is more
+              likely: an egg of 56 g or an egg of 64 g?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Equally likely: both are 4 g (one standard deviation) from the mean, and the
+                  curve is symmetric.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2 ─────────── -->
+      <div class="content-card" id="centre">
+        <p class="section-label">Theory</p>
+        <h2>Mean, median and mode</h2>
+
+        <p>For a perfectly symmetric distribution with a single peak, the three measures of centre
+          land on exactly the same value.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The key result</p>
+          <p style="margin-bottom:0;">For data arising from a random variable that is normally
+            distributed,
+            \[\text{mean} \approx \text{median} \approx \text{mode}\]
+            and all three sit at the centre of the curve, under the peak.</p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>Measure</th><th>Definition</th><th>Why it lands at the centre</th></tr>
+          <tr>
+            <td>Mode</td>
+            <td>The most frequently occurring value</td>
+            <td>The curve is highest at the centre, so values there occur most often</td>
+          </tr>
+          <tr>
+            <td>Median</td>
+            <td>The middle value &mdash; half the data lies below it</td>
+            <td>Symmetry means exactly half the area lies on each side of the centre</td>
+          </tr>
+          <tr>
+            <td>Mean</td>
+            <td>The balance point of the data</td>
+            <td>A symmetric shape balances at its line of symmetry</td>
+          </tr>
+        </table>
+
+        <p>In real data the three will not be <em>exactly</em> equal &mdash; a sample is never perfectly
+          symmetric &mdash; which is why the syllabus says <strong>approximately</strong> equal. If your
+          sample gives a mean of 62.3, a median of 62 and a mode of 62, that is exactly what you
+          would expect from a normal population.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>A class of 30 students sits a test. The mean is 64.1, the median is 64 and the mode is
+            65. Is the data consistent with a normal distribution?</p>
+          <p><strong>Answer.</strong> Yes. All three measures agree to within about one mark on a
+            scale of 100, which is the closeness you would expect from a sample of only 30 drawn
+            from a normal population. There is no evidence of skew.</p>
+          <p>Compare with a second class where the mean is 71, the median is 78 and the mode is 82.
+            Here the mean is pulled well below the median by a few very low marks &mdash; the data is
+            negatively skewed and <em>not</em> normal.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Centre calculator</h3>
+          <p class="exercise-intro">Enter a small dataset (comma separated) and see whether its
+            three measures of centre agree.</p>
+          <div class="exercise-row">
+            <label>Data &rarr;</label>
+            <input class="exercise-input" id="dataIn" type="text" style="min-width:230px;"
+                   value="58, 61, 62, 63, 63, 64, 65, 66, 68">
+            <button class="exercise-check-btn" id="dataBtn">Analyse</button>
+          </div>
+          <div id="dataOut" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find the mean, median and mode of 12, 14, 15, 15, 16, 17, 18. Is the data
+              consistent with a normal distribution?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Mean \(107 \div 7 = 15.3\); median 15; mode 15. All three are close, so the
+                  data is consistent with a normal distribution.</p>
+              </div></details></li>
+            <li>A normally distributed variable has mean 82. Estimate its median and mode.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Both approximately 82.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3 ─────────── -->
+      <div class="content-card" id="spread">
+        <p class="section-label">Theory</p>
+        <h2>The role of the standard deviation</h2>
+
+        <p>The mean tells you <em>where</em> the curve sits. The standard deviation \(\sigma\) tells
+          you <em>how wide</em> it is &mdash; how far a typical value falls from the mean.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Reading &sigma;</p>
+          <p style="margin-bottom:0;">
+            <strong>Small \(\sigma\)</strong> &mdash; a tall, narrow curve. Values cluster tightly
+            around the mean; the process is consistent.<br><br>
+            <strong>Large \(\sigma\)</strong> &mdash; a low, wide curve. Values spread far from the
+            mean; the process is variable.<br><br>
+            Both curves still enclose a total area of 1, which is why a wider curve must also be
+            flatter.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two processes compared</h3>
+          <p class="exercise-intro">Two machines fill 500 mL bottles. Both average 500 mL, but one
+            is more consistent. Adjust each machine's standard deviation.</p>
+          <div id="cmpSliders"></div>
+          <div id="cmpPlot" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="cmpNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>Two archers each shoot 100 arrows. Archer A's distances from the bullseye are normally
+            distributed with \(\mu = 6\) cm, \(\sigma = 1.5\) cm. Archer B's are normal with
+            \(\mu = 6\) cm, \(\sigma = 4\) cm. Who is the better archer?</p>
+          <p><strong>Answer.</strong> Both are equally accurate on average &mdash; the same mean. But
+            Archer A is far more <strong>consistent</strong>: a standard deviation of 1.5 cm against
+            4 cm means A's arrows cluster much more tightly. For most purposes A is the better
+            archer, because consistency is what can be coached into an improved mean. B's results
+            include both very good and very poor shots.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Distance from the mean, measured in &sigma;</p>
+          <p style="margin-bottom:0;">The reason \(\sigma\) matters so much is that it becomes the
+            <strong>unit of measurement</strong> for the whole topic. "3 cm above the mean" means
+            something quite different on a curve with \(\sigma = 1.5\) than on one with
+            \(\sigma = 4\). Lesson 2 turns this idea into the \(z\)-score.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Two bakeries' loaves both average 800 g. Bakery A has \(\sigma = 5\) g and bakery B
+              has \(\sigma = 20\) g. Which is more consistent, and whose curve is taller?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Bakery A is more consistent. Its curve is taller and narrower, because the same
+                  total area of 1 is packed into a smaller spread.</p>
+              </div></details></li>
+            <li>The standard deviation of a normal distribution is halved and the mean is
+              unchanged. Describe the new curve.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Same centre, half as wide, and twice as tall at the peak &mdash; the area must
+                  still be 1.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4 ─────────── -->
+      <div class="content-card" id="skew">
+        <p class="section-label">Theory</p>
+        <h2>When data is not normal</h2>
+
+        <p>Plenty of real datasets are <em>not</em> bell-shaped, and the normal-distribution methods
+          of this topic do not apply to them. The most common departure is <strong>skew</strong>.</p>
+
+        <table class="coord-table">
+          <tr><th>Shape</th><th>Appearance</th><th>Centre measures</th><th>Example</th></tr>
+          <tr>
+            <td>Symmetric (normal)</td>
+            <td>Bell-shaped, equal tails</td>
+            <td>mean &asymp; median &asymp; mode</td>
+            <td>Adult heights</td>
+          </tr>
+          <tr>
+            <td>Positively skewed</td>
+            <td>Long tail to the right</td>
+            <td>mean &gt; median &gt; mode</td>
+            <td>Household income; house prices</td>
+          </tr>
+          <tr>
+            <td>Negatively skewed</td>
+            <td>Long tail to the left</td>
+            <td>mean &lt; median &lt; mode</td>
+            <td>Age at death; marks on an easy test</td>
+          </tr>
+          <tr>
+            <td>Bimodal</td>
+            <td>Two separate peaks</td>
+            <td>Two modes; mean is misleading</td>
+            <td>Heights of a mixed adult group, measured together</td>
+          </tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The tail names the skew</p>
+          <p style="margin-bottom:0;">The skew is named after the direction the <em>long tail</em>
+            points, not where the bulk of the data sits. The long tail also drags the mean towards
+            it &mdash; which is why in positively skewed income data the mean income always exceeds the
+            median, and why the median is the fairer summary.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Shape identifier</h3>
+          <p class="exercise-intro">Given the three measures of centre, name the shape. Type
+            <code>normal</code>, <code>positive</code> or <code>negative</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) mean 54,000, median 43,000, mode 38,000 &rarr;</label>
+            <input class="exercise-input" id="skA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-sk="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSkA"></p>
+
+          <div class="exercise-row">
+            <label>(b) mean 82, median 82.5, mode 83 &rarr;</label>
+            <input class="exercise-input" id="skB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-sk="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSkB"></p>
+
+          <div class="exercise-row">
+            <label>(c) mean 66, median 74, mode 79 &rarr;</label>
+            <input class="exercise-input" id="skC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-sk="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSkC"></p>
+
+          <div class="exercise-row">
+            <label>(d) mean 2.4 s, median 2.1 s, mode 2.0 s &rarr;</label>
+            <input class="exercise-input" id="skD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-sk="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbSkD"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Sydney house prices have a long tail of very expensive homes. Name the skew, and
+              say which is larger, the mean or the median.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Positively skewed (long right tail). The expensive homes drag the mean above the
+                  median.</p>
+              </div></details></li>
+            <li>On a very easy test, most students score 85&ndash;100 but a few score much lower.
+              Name the skew and order the mean, median and mode.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Negatively skewed (long left tail): mean &lt; median &lt; mode.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5 · SKETCHING ─────────── -->
+      <div class="content-card" id="sketching">
+        <p class="section-label">Method</p>
+        <h2>Sketching a normal curve with a scale</h2>
+
+        <p>A good sketch of a normal distribution is more than a bell shape: its horizontal axis is
+          labelled in steps of one standard deviation. This is the picture you will shade in
+          Lesson 3.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The routine</p>
+          <ol style="margin-bottom:0;">
+            <li>Draw a symmetric bell with its peak in the middle.</li>
+            <li>Mark the mean \(\mu\) under the peak.</li>
+            <li>Mark \(\mu \pm \sigma\), \(\mu \pm 2\sigma\) and \(\mu \pm 3\sigma\) at equal
+              spacing on either side.</li>
+            <li>Make the curve almost reach the axis by \(\mu \pm 3\sigma\): nearly all the data lies
+              within three standard deviations of the mean.</li>
+          </ol>
+          <p class="formula-where" style="margin-top:10px;">The curve changes from bending down to
+            bending up at \(\mu \pm \sigma\) &mdash; one standard deviation either side of the
+            peak.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>Sketch the distribution of adult men's heights, \(\mu = 175\) cm, \(\sigma = 7\) cm.</p>
+          <table class="coord-table">
+            <tr><th>Position</th><td>\(\mu - 3\sigma\)</td><td>\(\mu - 2\sigma\)</td><td>\(\mu - \sigma\)</td><td>\(\mu\)</td><td>\(\mu + \sigma\)</td><td>\(\mu + 2\sigma\)</td><td>\(\mu + 3\sigma\)</td></tr>
+            <tr><th>Height (cm)</th><td>154</td><td>161</td><td>168</td><td>175</td><td>182</td><td>189</td><td>196</td></tr>
+          </table>
+          <p>Draw the bell with its peak above 175 and these seven values equally spaced along the
+            axis.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Phone battery life is normal with \(\mu = 40\) hours and \(\sigma = 2.5\) hours.
+              List the seven values you would mark on the axis.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>32.5, 35, 37.5, 40, 42.5, 45, 47.5 hours.</p>
+              </div></details></li>
+            <li>A sketch has axis marks at 12, 15, 18, 21, 24, 27 and 30. What are \(\mu\) and
+              \(\sigma\)?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The middle mark is the mean, \(\mu = 21\); the marks are 3 apart, so
+                  \(\sigma = 3\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6 ─────────── -->
+      <div class="content-card" id="recognise">
+        <p class="section-label">Method</p>
+        <h2>Recognising normality</h2>
+
+        <p>Exam questions rarely ask you to <em>prove</em> a dataset is normal. They ask whether it
+          is <strong>reasonable to model</strong> it as normal. Three checks answer that.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Three checks</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Shape.</strong> Does the histogram have a single peak, roughly symmetric,
+              with tails falling away on both sides?</li>
+            <li><strong>Centre.</strong> Are the mean, median and mode close together?</li>
+            <li><strong>Context.</strong> Is the measurement the result of many small independent
+              influences, with no hard boundary close to the mean?</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>Is it reasonable to model each of these as normally distributed?</p>
+          <p><strong>(a) The birth weights of 5,000 babies.</strong> Yes &mdash; a classic example.
+            Many small influences, symmetric histogram, mean and median both near 3.4 kg.</p>
+          <p><strong>(b) The number of children per household.</strong> No. The values are whole
+            numbers, cannot be negative, and pile up at 0, 1 and 2 with a tail to the right. The
+            distribution is discrete and positively skewed.</p>
+          <p><strong>(c) The annual salaries of everyone in a city.</strong> No. Strongly positively
+            skewed &mdash; a small number of very high earners drag the mean well above the median.</p>
+          <p><strong>(d) The diameters of bolts from a well-maintained machine.</strong> Yes.
+            Manufacturing variation is the sum of many tiny random errors, giving a tight symmetric
+            spread around the target diameter.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Normal or not?</h3>
+          <p class="exercise-intro">Type <code>yes</code> or <code>no</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) Resting heart rates of 2,000 adults &rarr;</label>
+            <input class="exercise-input" id="nnA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-nn="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbNnA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Time between arrivals at an emergency department &rarr;</label>
+            <input class="exercise-input" id="nnB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-nn="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbNnB"></p>
+
+          <div class="exercise-row">
+            <label>(c) The lengths of 1,000 mass-produced screws &rarr;</label>
+            <input class="exercise-input" id="nnC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-nn="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbNnC"></p>
+
+          <div class="exercise-row">
+            <label>(d) The number of goals scored per soccer match &rarr;</label>
+            <input class="exercise-input" id="nnD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-nn="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbNnD"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; exam style</p>
+          <p>A café records how long customers wait for coffee. The times range from 0.5 to
+            15 minutes, with mean 4.2 minutes, median 3.6 minutes and mode 3.0 minutes.</p>
+          <p><strong>(a) Is it reasonable to model the waiting times as normal? Justify.</strong>
+            [2 marks]</p>
+          <p>No. Mean &gt; median &gt; mode shows positive skew, and the range stretches much further
+            above the mean (about 11 minutes) than below it (under 4 minutes), where times cannot
+            go below 0.</p>
+          <p><strong>(b) Which measure of centre best describes a typical wait?</strong> [1 mark]</p>
+          <p>The median, 3.6 minutes. The few very long waits pull the mean up.</p>
+          <p><strong>(c) After a second coffee machine is installed, the mean, median and mode are
+            3.1, 3.1 and 3.0 minutes, and the histogram is symmetric. Comment.</strong> [1 mark]</p>
+          <p>The long waits have gone. The distribution is now approximately symmetric, so a normal
+            model is reasonable.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Summary</p>
+          <p style="margin-bottom:0;">A normal distribution is a symmetric, single-peaked,
+            bell-shaped model with mean \(\mu\) at its centre and standard deviation \(\sigma\)
+            setting its width. Its mean, median and mode coincide, and the area under it totals 1.
+            The next lesson gives you the tool that makes all of this calculable: the
+            \(z\)-score.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Normal or not? A sorting challenge</h2>
+        <p><strong>About 10 minutes &middot; groups of three.</strong> For each dataset, decide
+          whether a normal model is reasonable. Use the three checks (shape, centre, context) and
+          write a one-line justification.</p>
+        <ol>
+          <li>Heights of 500 Year 12 girls.</li>
+          <li>Weekly pocket money of 500 teenagers.</li>
+          <li>Number of siblings of each student in your school.</li>
+          <li>Daily maximum temperatures in Sydney during January, over 30 years.</li>
+          <li>Masses of 1,000 bags of rice filled by a machine set to 1 kg.</li>
+          <li>Ages of people attending a primary school (students and staff together).</li>
+        </ol>
+        <p>Then, in <a href="#shape">Build the curve</a>, model a test with mean 65 and standard
+          deviation 10. Between which two marks would you expect almost all students to score?</p>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> Normal: many small influences, symmetric.</p>
+          <p><strong>2.</strong> Not normal: cannot be negative, many small amounts and a long
+            right tail &mdash; positively skewed.</p>
+          <p><strong>3.</strong> Not normal: whole numbers piled up at 0&ndash;2 with a right
+            tail.</p>
+          <p><strong>4.</strong> Approximately normal: many weather influences around a typical
+            value (a hot tail on heatwave days is possible).</p>
+          <p><strong>5.</strong> Normal: small random filling errors around 1 kg.</p>
+          <p><strong>6.</strong> Not normal: bimodal &mdash; one peak for children around 5&ndash;12
+            and another, smaller one for adults.</p>
+          <p><strong>Test:</strong> almost all marks lie within three standard deviations of the
+            mean, from 35 to 95.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">When describing a distribution, always name the shape, the centre
+          and the spread &mdash; in context, with units.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── NEXT ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 introduces the \(z\)-score, which measures any value in standard deviations and
+          lets you compare results from completely different datasets.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-10', LESSON_IDX = 0;
+
+  function normal(mu, sd) {
+    return function (x) {
+      var z = (x - mu) / sd;
+      return Math.exp(-0.5 * z * z) / (sd * Math.sqrt(2 * Math.PI));
+    };
+  }
+
+  /* ── Build the curve ──────────────────────────────────────── */
+  (function () {
+    var mu = 50, sd = 10;
+    var redraw = null;
+    function update() {
+      var f = normal(mu, sd);
+      var opts = {
+        xMin: 0, xMax: 100, yMin: 0, yMax: 0.09, width: 460, height: 300,
+        xStep: 20, yStep: 0.02, xLabel: 'x',
+        curves: [{ fn: f }],
+        shade: [{ from: mu - sd, to: mu + sd, fn: f }],
+        points: [{ x: mu, y: f(mu), label: 'mean' }]
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('bellPlot', opts);
+      var n = document.getElementById('bellNote');
+      n.className = 'exercise-feedback';
+      n.textContent = 'Mean ' + mu + ', standard deviation ' + sd +
+        '. The peak sits at ' + mu + ', and the shaded band runs from ' + (mu - sd) +
+        ' to ' + (mu + sd) + ' — one standard deviation either side of the mean. ' +
+        'Moving the mean slides the whole curve without changing its shape; ' +
+        'changing the standard deviation makes it wider and flatter, or narrower and taller.';
+    }
+    var host = 'bellSliders';
+    IE.slider({ mount: host, label: 'Mean (μ)', min: 20, max: 80, step: 1, value: mu,
+                onInput: function (v) { mu = v; update(); } });
+    IE.slider({ mount: host, label: 'Standard deviation (σ)', min: 4, max: 20, step: 1, value: sd,
+                onInput: function (v) { sd = v; update(); } });
+    update();
+  })();
+
+  /* ── Centre calculator ────────────────────────────────────── */
+  (function () {
+    function analyse() {
+      var raw = document.getElementById('dataIn').value || '';
+      var xs = raw.split(/[,\s]+/).map(parseFloat).filter(function (v) { return isFinite(v); });
+      var out = document.getElementById('dataOut');
+      if (xs.length < 3) { out.innerHTML = '<p class="exercise-feedback">Enter at least three numbers.</p>'; return; }
+      var sorted = xs.slice().sort(function (a, b) { return a - b; });
+      var n = sorted.length;
+      var mean = xs.reduce(function (a, b) { return a + b; }, 0) / n;
+      var median = n % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
+      var counts = {}, best = null, bestC = 0;
+      sorted.forEach(function (v) { counts[v] = (counts[v] || 0) + 1;
+        if (counts[v] > bestC) { bestC = counts[v]; best = v; } });
+      var mode = bestC > 1 ? best : null;
+      var varSum = xs.reduce(function (a, b) { return a + (b - mean) * (b - mean); }, 0);
+      var sd = Math.sqrt(varSum / n);
+      var gap = Math.abs(mean - median);
+      var verdict;
+      if (gap < 0.15 * (sd || 1)) verdict = 'The mean and median are very close, so the data looks symmetric — consistent with a normal distribution.';
+      else if (mean > median) verdict = 'The mean sits above the median, which suggests a tail to the right: positively skewed.';
+      else verdict = 'The mean sits below the median, which suggests a tail to the left: negatively skewed.';
+      out.innerHTML = '<table class="coord-table">' +
+        '<tr><th>n</th><td>' + n + '</td></tr>' +
+        '<tr><th>Mean</th><td>' + mean.toFixed(3) + '</td></tr>' +
+        '<tr><th>Median</th><td>' + median.toFixed(3) + '</td></tr>' +
+        '<tr><th>Mode</th><td>' + (mode === null ? 'no repeated value' : mode) + '</td></tr>' +
+        '<tr><th>Standard deviation (σ)</th><td>' + sd.toFixed(3) + '</td></tr>' +
+        '</table><p class="exercise-feedback" style="margin-top:12px;">' + verdict + '</p>';
+    }
+    document.getElementById('dataBtn').addEventListener('click', analyse);
+    analyse();
+  })();
+
+  /* ── Two processes compared ───────────────────────────────── */
+  (function () {
+    var sdA = 3, sdB = 9;
+    var redraw = null;
+    function update() {
+      var fA = normal(500, sdA), fB = normal(500, sdB);
+      var opts = {
+        xMin: 470, xMax: 530, yMin: 0, yMax: 0.16, width: 460, height: 300,
+        xStep: 10, yStep: 0.04, xLabel: 'mL',
+        curves: [{ fn: fA }, { fn: fB, className: 'plot-curve-2' }]
+      };
+      if (redraw) redraw(opts); else redraw = IE.plot('cmpPlot', opts);
+      var n = document.getElementById('cmpNote');
+      n.className = 'exercise-feedback';
+      var tight = sdA < sdB ? 'A' : sdB < sdA ? 'B' : 'neither';
+      n.textContent = 'Machine A: σ = ' + sdA + ' mL. Machine B: σ = ' + sdB + ' mL. ' +
+        (tight === 'neither'
+          ? 'The two machines are equally consistent — identical curves.'
+          : 'Machine ' + tight + ' is more consistent: its curve is taller and narrower, so more ' +
+            'bottles land close to 500 mL. Both curves enclose the same total area of 1, which is ' +
+            'why the wider one has to be flatter.');
+    }
+    var host = 'cmpSliders';
+    IE.slider({ mount: host, label: 'Machine A σ (mL)', min: 1, max: 12, step: 1, value: sdA,
+                onInput: function (v) { sdA = v; update(); } });
+    IE.slider({ mount: host, label: 'Machine B σ (mL)', min: 1, max: 12, step: 1, value: sdB,
+                onInput: function (v) { sdB = v; update(); } });
+    update();
+  })();
+
+  /* ── Shape identifier ─────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['positive', 'Mean > median > mode, with a long tail of high incomes to the right.'],
+      B: ['normal',   'All three measures agree to within a mark — symmetric, so normal.'],
+      C: ['negative', 'Mean < median < mode: a long tail of low scores drags the mean down.'],
+      D: ['positive', 'Mean > median > mode: a few slow times stretch the right tail.']
+    };
+    document.querySelectorAll('[data-sk]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.sk, fb = document.getElementById('fbSk' + k);
+        var v = (document.getElementById('sk' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type an answer.'; return; }
+        var ok = v.indexOf(ANS[k][0]) === 0;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ It is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Normal or not ────────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['yes', 'Resting heart rate is driven by many small independent factors and is roughly symmetric about about 70 bpm.'],
+      B: ['no',  'Waiting times between random arrivals are strongly positively skewed — many short gaps and a long right tail.'],
+      C: ['yes', 'Manufacturing error is the sum of many tiny random deviations, giving a tight symmetric spread about the target length.'],
+      D: ['no',  'Goals per match is a small whole number that cannot be negative and piles up at 0, 1 and 2 — discrete and positively skewed.']
+    };
+    document.querySelectorAll('[data-nn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.nn, fb = document.getElementById('fbNn' + k);
+        var v = (document.getElementById('nn' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type yes or no.'; return; }
+        var ok = v.charAt(0) === ANS[k][0].charAt(0);
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Which statement is true of every normal distribution?',
+      opts: [
+        'A) It is symmetric about its mean',
+        'B) It has two peaks',
+        'C) Its tails touch the horizontal axis',
+        'D) The area under the curve depends on the standard deviation'
+      ],
+      correct: 0,
+      explanation: 'A is correct. Every normal curve is symmetric about its mean, has a single peak, and has tails that approach but never touch the axis. The total area is always 1, whatever the standard deviation.'
+    },
+    {
+      q: 'For data arising from a normally distributed random variable, the mean, median and mode are:',
+      opts: [
+        'A) Always exactly equal',
+        'B) Approximately equal, all at the centre of the curve',
+        'C) Spread evenly across the range',
+        'D) Impossible to determine'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Symmetry places all three at the centre. In real sample data they will differ slightly, which is why the syllabus says approximately equal.'
+    },
+    {
+      q: 'Two normal curves have the same mean, but curve P is taller and narrower than curve Q. What does this tell you?',
+      opts: [
+        'A) P has a larger standard deviation',
+        'B) P encloses more area than Q',
+        'C) P has a smaller standard deviation, so its data is less spread out',
+        'D) P has a larger mean'
+      ],
+      correct: 2,
+      explanation: 'C is correct. A taller, narrower curve means values cluster more tightly around the mean, so P has the smaller standard deviation. Both curves still enclose an area of exactly 1.'
+    },
+    {
+      q: 'A dataset has mean 48, median 41 and mode 37. The distribution is:',
+      opts: [
+        'A) Normal',
+        'B) Negatively skewed',
+        'C) Positively skewed',
+        'D) Bimodal'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Mean > median > mode means a long tail stretching to the right, which is positive skew. The high values in that tail pull the mean upwards.'
+    },
+    {
+      q: 'Why is the total area under a normal curve equal to 1?',
+      opts: [
+        'A) Because the mean is always 1',
+        'B) Because every observation must lie somewhere under the curve, so the total proportion is 100%',
+        'C) Because the standard deviation is always 1',
+        'D) It is a coincidence of the formula'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The curve shows how the whole population is distributed, so the area represents the total proportion — 100%, or 1. This is what lets areas be read as probabilities.'
+    },
+    {
+      q: 'Which of these is least likely to be normally distributed?',
+      opts: [
+        'A) The heights of 3000 adult women',
+        'B) The annual incomes of everyone in a large city',
+        'C) The birth weights of 4000 babies',
+        'D) The diameters of ball bearings from one machine'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Income is strongly positively skewed: most people earn modest amounts and a small number earn very large amounts, creating a long right tail. The other three are classic symmetric, bell-shaped datasets.'
+    },
+    {
+      q: 'The masses of apples are normal with mean 150 g and standard deviation 20 g. Which statement follows directly?',
+      opts: [
+        'A) No apple can weigh more than 210 g',
+        'B) Exactly half the apples weigh more than 150 g',
+        'C) All apples weigh between 130 g and 170 g',
+        'D) The mode is 170 g'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Symmetry about the mean puts exactly half the area on each side, so half the apples exceed 150 g. Masses above 210 g are rare but possible, values outside one standard deviation are common, and the mode is 150 g.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'List four features shared by every normal distribution.',
+      marks: 4,
+      steps: [
+        'Symmetric about the mean.',
+        'Single peak, located at the mean.',
+        'Tails approach but never meet the horizontal axis.',
+        'Total area under the curve is 1.'
+      ],
+      answer: 'Symmetric about the mean; one peak at the mean; tails that approach but never touch the axis; total area of 1.'
+    },
+    {
+      q: 'Explain why the mean, median and mode coincide for a normal distribution.',
+      marks: 3,
+      steps: [
+        'The mode is the most common value, which is under the highest point — the centre.',
+        'Symmetry puts half the area each side of the centre, so the median is there too.',
+        'A symmetric shape balances at its line of symmetry, so the mean is there as well.'
+      ],
+      answer: 'The curve peaks at the centre (mode), symmetry splits the area evenly there (median), and a symmetric shape balances at its line of symmetry (mean) — so all three land on the same value.'
+    },
+    {
+      q: 'The masses of packets of chips are normal with \\(\\mu = 175\\) g and \\(\\sigma = 4\\) g. Describe this distribution in context.',
+      marks: 3,
+      steps: [
+        'The most common packet mass is 175 g, and the histogram peaks there.',
+        'The distribution is symmetric: a 171 g packet is as likely as a 179 g packet.',
+        'Most packets lie within a few grams of 175 g; masses far from it are rare.'
+      ],
+      answer: 'Packets average 175 g, with the most common mass also 175 g. The spread is small — a standard deviation of only 4 g — so the filling process is consistent, and masses are symmetrically distributed about 175 g.'
+    },
+    {
+      q: 'A dataset has mean 61.2, median 61 and mode 61. Another has mean 61.2, median 68 and mode 72. Compare the two shapes.',
+      marks: 4,
+      steps: [
+        'First dataset: all three measures agree, so the distribution is symmetric.',
+        'It is consistent with a normal distribution.',
+        'Second dataset: mean < median < mode.',
+        'The mean has been dragged down by a tail of low values, so it is negatively skewed.'
+      ],
+      answer: 'The first is symmetric and consistent with a normal distribution. The second is negatively skewed — the mean sits well below the median and mode because a tail of low values pulls it down.'
+    },
+    {
+      q: 'Sketch and describe what happens to a normal curve when \\(\\sigma\\) is doubled but \\(\\mu\\) is unchanged.',
+      marks: 3,
+      steps: [
+        'The centre stays in the same place.',
+        'The curve becomes wider — values spread further from the mean.',
+        'It also becomes flatter, because the enclosed area must remain 1.'
+      ],
+      answer: 'The peak stays at the same \\(\\mu\\), but the curve becomes twice as wide and correspondingly lower, since the total area under it must remain 1.'
+    },
+    {
+      q: 'Two classes both average 68 on a test. Class A has \\(\\sigma = 4\\), class B has \\(\\sigma = 15\\). What does this tell a teacher?',
+      marks: 4,
+      steps: [
+        'The two classes performed equally well on average.',
+        'Class A is far more uniform: nearly everyone scored close to 68.',
+        'Class B contains both very high and very low marks.',
+        'Class B needs differentiated teaching; class A can be taught as one group.'
+      ],
+      answer: 'Both classes are equally strong on average, but class A is homogeneous while class B contains a wide range of abilities. The teacher would differentiate work in class B and could teach class A as a single group.'
+    },
+    {
+      q: 'Give one example each of a dataset that is approximately normal and one that is positively skewed, and justify each.',
+      marks: 4,
+      steps: [
+        'Approximately normal: adult heights — many small independent influences, symmetric histogram.',
+        'The mean, median and mode all fall near the same value.',
+        'Positively skewed: house prices — most properties cluster at modest prices.',
+        'A small number of very expensive properties form a long right tail, pulling the mean above the median.'
+      ],
+      answer: 'Normal: adult heights, because they result from many small independent influences and are symmetric about the mean. Positively skewed: house prices, because a small number of very expensive homes create a long right tail that pulls the mean above the median.'
+    },
+    {
+      q: 'The following nine marks were recorded: 52, 55, 57, 58, 58, 59, 60, 62, 65. Find the mean, median and mode, and comment on the shape.',
+      marks: 5,
+      steps: [
+        'Sum \\(= 526\\), so mean \\(= 526 \\div 9 = 58.44\\).',
+        'The data is already ordered; the middle (5th) value is 58, so the median is 58.',
+        'The only repeated value is 58, so the mode is 58.',
+        'All three measures are within half a mark of each other.',
+        'The distribution is close to symmetric and consistent with a normal model.'
+      ],
+      answer: 'Mean 58.44, median 58, mode 58. All three agree closely, so the data is approximately symmetric and consistent with a normal distribution.'
+    },
+    {
+      q: 'Explain why a histogram of the number of children per household is not normally distributed.',
+      marks: 3,
+      steps: [
+        'The values are whole numbers, so the variable is discrete rather than continuous.',
+        'It cannot be negative, and the bulk of households sit at 0, 1 or 2.',
+        'A small number of large households form a tail to the right, giving positive skew.'
+      ],
+      answer: 'It is discrete, bounded below by zero, and piles up at 0–2 with a right tail from a few large households. That is a positively skewed discrete distribution, not a symmetric continuous bell curve.'
+    },
+    {
+      q: 'A quality inspector reports that bolt lengths are normal with \\(\\mu = 40.0\\) mm and \\(\\sigma = 0.2\\) mm. After a machine fault, \\(\\mu = 40.0\\) mm and \\(\\sigma = 0.9\\) mm. What has changed, and why does it matter?',
+      marks: 4,
+      steps: [
+        'The average length is unchanged, so the machine is still correctly centred.',
+        'The standard deviation has more than quadrupled.',
+        'Bolt lengths now vary much more widely about the target.',
+        'Far more bolts will fall outside the acceptable tolerance and be rejected.'
+      ],
+      answer: 'Accuracy is unchanged but consistency has collapsed: the spread has more than quadrupled. Many more bolts will now fall outside tolerance, so the reject rate rises sharply even though the average is still correct.'
+    },
+    {
+      q: 'A journalist writes that "the average Australian household income is $121,000, so half of households earn more than that". Evaluate the claim.',
+      marks: 4,
+      steps: [
+        'The claim assumes mean = median, which only holds for a symmetric distribution.',
+        'Income is strongly positively skewed.',
+        'High earners pull the mean above the median.',
+        'So well under half of households earn more than the mean.'
+      ],
+      answer: 'The claim is wrong. It treats the mean as the median, which is only valid for a symmetric distribution. Income is positively skewed, so the mean exceeds the median and fewer than half of households earn above $121,000. The median would be the fairer figure to quote.'
+    },
+    {
+      q: 'Describe how you would decide, from a histogram alone, whether a dataset could be modelled as normal.',
+      marks: 4,
+      steps: [
+        'Check for a single peak rather than two or more.',
+        'Check the two halves are roughly mirror images about that peak.',
+        'Check the frequencies fall away smoothly in both tails.',
+        'Check no tail is much longer than the other, which would indicate skew.'
+      ],
+      answer: 'Look for one peak, approximate symmetry about it, and frequencies that tail off smoothly and about equally on both sides. Two peaks, a clear long tail on one side, or a flat top all rule out a normal model.'
+    },
+    {
+      q: 'The times taken by students to complete a puzzle have mean 4.8 minutes, median 4.1 minutes and mode 3.9 minutes. Sketch the shape and explain what causes it.',
+      marks: 4,
+      steps: [
+        'Mean > median > mode, so the distribution is positively skewed.',
+        'The peak sits near 3.9 minutes with a long tail to the right.',
+        'Most students finish quickly, near the mode.',
+        'A few students take a very long time, which stretches the right tail and pulls the mean up.'
+      ],
+      answer: 'Positively skewed: a peak near 3.9 minutes with a long tail to the right. Most students finish quickly, but a small number take far longer, dragging the mean above the median.'
+    },
+    {
+      q: 'Explain why \\(\\sigma\\), rather than a raw difference in units, is the natural way to measure how unusual a value is.',
+      marks: 4,
+      steps: [
+        'A gap of 3 units is large on a tightly clustered distribution and trivial on a widely spread one.',
+        'So a raw difference cannot be judged without knowing the spread.',
+        'Measuring the gap in standard deviations makes it comparable across datasets.',
+        'This is exactly what the z-score does, and it works for any units.'
+      ],
+      answer: 'Because the same raw gap means different things at different spreads — 3 units is extreme when \\(\\sigma = 1\\) and negligible when \\(\\sigma = 20\\). Expressing the gap in standard deviations makes values from different datasets, in different units, directly comparable. That is the z-score.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

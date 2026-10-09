@@ -6,7 +6,7 @@
   <title>Lesson 3 — Direct Variation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -30,26 +30,26 @@
       --ink: #000; --canvas: #fff;
       --gray-med: #818181; --gray-light: #d6d6d6; --gray-faint: #f2f2f2;
       --font-display: 'Poppins', sans-serif;
-      --font-mono: 'Space Mono', 'Courier New', monospace;
+      --font-mono: 'DM Mono', monospace;
     }
-    html.dark-mode { --ink:#f0f0f0; --canvas:#111; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
+    html.dark-mode { --ink:#f0f0f0; --canvas:#0a0a0a; --gray-med:#888; --gray-light:#333; --gray-faint:#1a1a1a; }
     html { scroll-behavior: smooth; }
     body { font-family:var(--font-display); font-size:14px; line-height:1.29; letter-spacing:0.35px; color:var(--ink); background:var(--canvas); }
     a { color: inherit; }
     .page { max-width:1400px; margin:0 auto; padding:24px 24px 120px; }
 
-    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-med); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; margin-bottom:32px; border-bottom:1px solid var(--ink); font-size:11px; letter-spacing:0.02em; color:var(--gray-med); }
     .topbar-left { display:flex; flex-direction:column; gap:2px; }
     .topbar-topic { color:var(--ink); font-weight:700; }
 
     /* ── Hero ── */
     .hero { display:grid; grid-template-columns:1.3fr 0.7fr; gap:40px; border:1px solid var(--ink); padding:36px 40px 32px; margin-bottom:48px; }
     .hero-side { border-left:1px solid var(--gray-light); padding-left:32px; }
-    .side-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:14px; }
+    .side-label { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:14px; }
     .side-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
     .side-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
     .side-list li::before { content:'—'; position:absolute; left:0; color:var(--gray-med); }
-    .eyebrow { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .eyebrow { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:12px; }
     h1 { font-size:clamp(28px,4vw,44px); font-weight:400; line-height:1.1; margin-bottom:16px; }
     .subtitle { font-size:14px; line-height:1.75; color:var(--gray-med); max-width:52ch; }
     .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
@@ -58,7 +58,7 @@
     /* ── Layout ── */
     .layout { display:grid; grid-template-columns:210px 1fr; gap:48px; align-items:start; }
     .toc { position:sticky; top:24px; }
-    .toc-heading { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray-med); margin-bottom:12px; }
+    .toc-heading { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:12px; }
     .toc-list { list-style:none; }
     .toc-item { margin-bottom:2px; }
     .toc-link { display:block; font-size:12px; color:var(--gray-med); text-decoration:none; padding:5px 0 5px 12px; border-left:1px solid var(--gray-light); transition:color 0.15s,border-color 0.15s; }
@@ -67,7 +67,7 @@
 
     /* ── Content cards ── */
     .content-card { border:1px solid var(--ink); padding:32px 36px; margin-bottom:32px; }
-    .section-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .section-label { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     h2 { font-size:22px; font-weight:600; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--gray-light); }
     h3 { font-size:16px; font-weight:600; margin-bottom:10px; }
     p { margin-bottom:14px; }
@@ -75,10 +75,10 @@
 
     /* ── Definition / example / note blocks ── */
     .definition-block { border:1px solid var(--ink); padding:20px 24px; margin-bottom:24px; background:var(--gray-faint); }
-    .definition-block .def-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .definition-block .def-label { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .definition-block p:last-child, .definition-block ul:last-child { margin-bottom:0; }
     .example-block { border-left:3px solid var(--ink); padding:12px 20px; margin-bottom:20px; }
-    .example-block .ex-label { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-block .ex-label { font-size:10px; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .example-block p:last-child, .example-block ul:last-child { margin-bottom:0; }
     .note-block { border:1px solid var(--gray-light); padding:16px 20px; margin-bottom:20px; background:var(--gray-faint); }
     .note-block p:last-child { margin-bottom:0; }
@@ -87,16 +87,16 @@
     .stepper { border:1px solid var(--ink); margin-bottom:28px; }
     .stepper-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--gray-light); background:var(--gray-faint); }
     .stepper-nodes { display:flex; gap:8px; }
-    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono); font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s,border-color 0.15s,color 0.15s; }
+    .stepper-node { width:32px; height:32px; border:1px solid var(--gray-light); background:var(--canvas); font-family:var(--font-mono);font-weight:300; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.15s,border-color 0.15s,color 0.15s; }
     .stepper-node:hover { border-color:var(--ink); }
     .stepper-node.active { background:var(--ink); color:var(--canvas); border-color:var(--ink); }
     .stepper-node.visited { border-color:var(--ink); }
-    .stepper-counter { font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray-med); }
+    .stepper-counter { font-size:11px; letter-spacing:0.02em; color:var(--gray-med); }
     .stepper-panel { padding:24px 28px; min-height:160px; }
     .stepper-panel h4 { font-size:14px; font-weight:700; margin-bottom:10px; }
     .stepper-panel p:last-child { margin-bottom:0; }
     .stepper-nav { display:flex; gap:12px; padding:14px 20px; border-top:1px solid var(--gray-light); }
-    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s,color 0.15s; }
+    .stepper-btn { border:1px solid var(--ink); padding:6px 18px; font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.06em; background:transparent; color:var(--ink); cursor:pointer; transition:background 0.15s,color 0.15s; }
     .stepper-btn:hover:not(:disabled) { background:var(--ink); color:var(--canvas); }
     .stepper-btn:disabled { opacity:0.35; cursor:default; }
 
@@ -106,25 +106,25 @@
     /* ── Real-world cards ── */
     .example-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:24px; }
     .example-card { border:1px solid var(--gray-light); padding:20px 22px; }
-    .example-card h4 { font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--gray-med); margin-bottom:8px; }
+    .example-card h4 { font-size:13px; font-weight:700; letter-spacing:0.02em; color:var(--gray-med); margin-bottom:8px; }
     .example-card p { font-size:13px; margin-bottom:0; color:var(--ink); }
-    .example-k { font-family:var(--font-mono); font-size:17px; font-weight:700; display:block; margin-top:10px; }
+    .example-k { font-family:var(--font-mono); font-size:17px; font-weight:300; display:block; margin-top:10px; }
 
     /* ── Contrast table ── */
     .contrast-table { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:20px; }
     .contrast-table th, .contrast-table td { border:1px solid var(--gray-light); padding:10px 16px; }
-    .contrast-table th { background:var(--gray-faint); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; }
+    .contrast-table th { background:var(--gray-faint); font-weight:700; font-size:11px; letter-spacing:0.02em; }
 
     /* ── k explorer ── */
     .interactive-block { border:1px solid var(--ink); padding:28px; margin-bottom:24px; }
     .interactive-block h3 { margin-bottom:18px; }
     .k-explorer { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
     .k-controls { display:flex; flex-direction:column; gap:16px; }
-    .k-slider-group label { font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; }
-    .k-val { font-family:var(--font-mono); font-size:22px; font-weight:700; }
+    .k-slider-group label { font-family:var(--font-mono);font-weight:300; font-size:12px; letter-spacing:0.06em; display:block; margin-bottom:6px; }
+    .k-val { font-family:var(--font-mono); font-size:22px; font-weight:300; }
     input[type=range] { width:100%; accent-color:var(--ink); }
-    .eq-live { font-family:var(--font-mono); font-size:15px; font-weight:700; margin-top:10px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); }
-    .prop-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12px; }
+    .eq-live { font-family:var(--font-mono); font-size:15px; font-weight:300; margin-top:10px; padding:10px 14px; border:1px solid var(--gray-light); background:var(--gray-faint); }
+    .prop-table { width:100%; border-collapse:collapse; font-family:var(--font-mono);font-weight:300; font-size:12px; }
     .prop-table th, .prop-table td { border:1px solid var(--gray-light); padding:8px 10px; text-align:center; }
     .prop-table th { background:var(--gray-faint); font-weight:700; }
 
@@ -132,7 +132,7 @@
     .dv-check-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:16px; }
     .dv-card { border:1px solid var(--gray-light); padding:16px 18px; cursor:pointer; user-select:none; transition:border-color 0.15s; }
     .dv-card:hover { border-color:var(--ink); }
-    .dv-card h4 { font-family:var(--font-mono); font-size:12px; margin-bottom:6px; }
+    .dv-card h4 { font-family:var(--font-mono);font-weight:300; font-size:12px; margin-bottom:6px; }
     .dv-card p { font-size:12px; color:var(--gray-med); margin-bottom:0; }
     .dv-card.is-dv { border-color:#00a050; background:rgba(0,160,80,0.06); }
     .dv-card.not-dv { border-color:#c00000; background:rgba(200,0,0,0.06); }
@@ -143,16 +143,16 @@
     .step-form { display:flex; flex-direction:column; gap:14px; }
     .step { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
     .step-label { font-size:13px; min-width:200px; }
-    .step input { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono); font-size:13px; background:var(--canvas); color:var(--ink); width:120px; }
+    .step input { border:1px solid var(--gray-light); padding:8px 10px; font-family:var(--font-mono);font-weight:300; font-size:13px; background:var(--canvas); color:var(--ink); width:120px; }
     .step input:focus { outline:1px solid var(--ink); }
     .step .hint { font-size:12px; color:var(--gray-med); }
-    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
+    .check-btn { display:inline-block; border:1px solid var(--ink); padding:8px 22px; font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; cursor:pointer; background:transparent; color:var(--ink); transition:background 0.15s,color 0.15s; white-space:nowrap; }
     .check-btn:hover { background:var(--ink); color:var(--canvas); }
     .feedback { margin-top:10px; font-size:13px; min-height:18px; color:var(--gray-med); }
     .feedback.correct { color:#00a050; font-weight:600; }
     .feedback.wrong { color:#c00000; }
 
-    .val-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:13px; margin-bottom:18px; }
+    .val-table { width:100%; border-collapse:collapse; font-family:var(--font-mono);font-weight:300; font-size:13px; margin-bottom:18px; }
     .val-table th, .val-table td { border:1px solid var(--gray-light); padding:10px 14px; text-align:center; }
     .val-table th { background:var(--gray-faint); font-weight:700; }
 
@@ -167,7 +167,7 @@
     .mcq-option.wrong-ans { border-color:#c00000; background:rgba(200,0,0,0.08); }
     html.dark-mode .mcq-option.correct-ans { background:rgba(0,160,80,0.12); }
     html.dark-mode .mcq-option.wrong-ans   { background:rgba(200,0,0,0.12); }
-    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:700; min-width:16px; padding-top:1px; }
+    .opt-letter { font-family:var(--font-mono); font-size:11px; font-weight:300; min-width:16px; padding-top:1px; }
     .mcq-explanation { border-top:1px solid var(--gray-light); padding-top:14px; font-size:13px; color:var(--gray-med); display:none; }
     .mcq-explanation.show { display:block; }
 
@@ -189,11 +189,11 @@
     .kc-score { border-top:1px solid var(--gray-light); padding-top:20px; margin-top:20px; font-size:15px; font-weight:600; display:none; }
     .kc-score.show { display:block; }
     .kc-remark { font-size:13px; font-weight:400; color:var(--gray-med); margin-top:6px; }
-    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:2px 0; cursor:pointer; }
+    .kc-reset { margin-top:14px; background:transparent; border:none; border-bottom:1px solid var(--gray-med); color:var(--gray-med); font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; padding:2px 0; cursor:pointer; }
 
     /* ── Complete button ── */
     .complete-section { margin-top:48px; padding-top:32px; border-top:1px solid var(--gray-light); display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
-    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 0; cursor:pointer; }
+    .complete-btn { border:none; border-bottom:1px solid var(--ink); background:transparent; color:var(--ink); font-family:var(--font-mono);font-weight:300; font-size:11px; letter-spacing:0.02em; padding:4px 0; cursor:pointer; }
     .complete-btn.done { color:#00a050; border-bottom-color:#00a050; }
 
     /* ── Sociotype typography ── */
@@ -368,7 +368,7 @@
         <!-- Identify DV interactive -->
         <div class="interactive-block">
           <h3>Which relationships are direct variation?</h3>
-          <p style="font-size:13px; color:var(--gray-med); margin-bottom:18px;">Click each card to reveal whether it is direct variation. Remember: must pass through the origin AND be linear.</p>
+          <p style="font-size:13px; color:var(--gray-med); margin-bottom:18px;">Click each card to reveal whether it is direct variation. Remember: must pass through the origin <strong>and</strong> be linear.</p>
           <div class="dv-check-grid">
             <div class="dv-card" data-isdv="true" id="dv1">
               <h4>y = 3x</h4>
@@ -425,7 +425,7 @@
         <div class="example-block">
           <p class="ex-label">Worked Example — From a table</p>
           <p><strong>A table shows the cost of apples at different weights. Is this direct variation? If so, find k.</strong></p>
-          <table style="border-collapse:collapse; font-family:var(--font-mono); font-size:13px; margin-bottom:10px; width:100%;">
+          <table style="border-collapse:collapse; font-family:var(--font-mono);font-weight:300; font-size:13px; margin-bottom:10px; width:100%;">
             <thead><tr>
               <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">Weight (w kg)</th>
               <th style="border:1px solid var(--gray-light); padding:8px; background:var(--gray-faint);">1</th>

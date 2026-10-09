@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Scatter Plots &amp; Correlation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 &mdash; Bivariate Data Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Scatter Plots &amp; Correlation</h1>
+      <p class="subtitle">A scatter plot shows the relationship; Pearson's \(r\) measures it. Read
+        the form, the direction and the strength &mdash; then put a number on it.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-08</span>
+        <span class="pill">Line of best fit</span>
+        <span class="pill">Pearson's \(r\)</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Drawing a scatter plot</li>
+        <li>Form, direction, strength</li>
+        <li>Line of best fit by eye</li>
+        <li>Gradient and intercept</li>
+        <li>Pearson's correlation coefficient</li>
+        <li>Finding \(r\) on a calculator</li>
+        <li>Interpreting \(r\)</li>
+        <li>Class activity: guess the correlation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#scatter">1 &nbsp;Scatter plots</a></li>
+        <li class="toc-item"><a class="toc-link" href="#describing">2 &nbsp;Describing the association</a></li>
+        <li class="toc-item"><a class="toc-link" href="#bestfit">3 &nbsp;Line of best fit by eye</a></li>
+        <li class="toc-item"><a class="toc-link" href="#equation">4 &nbsp;Finding the equation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#pearson">5 &nbsp;Pearson's \(r\)</a></li>
+        <li class="toc-item"><a class="toc-link" href="#calculator">6 &nbsp;\(r\) on a calculator</a></li>
+        <li class="toc-item"><a class="toc-link" href="#interpreting">7 &nbsp;Interpreting \(r\)</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. SCATTER ─────────── -->
+      <div class="content-card" id="scatter">
+        <p class="section-label">Method</p>
+        <h2>Drawing a scatter plot</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The rules</p>
+          <ol style="margin-bottom:0;">
+            <li><strong>Independent variable on the horizontal axis</strong>, dependent on the
+              vertical.</li>
+            <li>Choose scales that use most of the available space — the axes need not start at
+              zero, but say so if they do not.</li>
+            <li>Plot one point per individual. <strong>Do not join the points.</strong></li>
+            <li>Label both axes with the variable name <em>and</em> its units.</li>
+          </ol>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Eight cars: age (years) and value ($000s).</p>
+          <table class="coord-table">
+            <tr><th>Age</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>8</td><td>10</td></tr>
+            <tr><th>Value</th><td>38</td><td>33</td><td>30</td><td>26</td><td>24</td><td>20</td><td>15</td><td>11</td></tr>
+          </table>
+          <p>Age is used to predict value, so age goes on the horizontal axis.</p>
+        </div>
+
+        <div class="plot-wrap" id="plotCars"></div>
+        <p class="diagram-caption">Car value against age. The points fall in a clear downward band
+          &mdash; a strong negative linear association.</p>
+      </div>
+
+      <!-- ─────────── 2. DESCRIBING ─────────── -->
+      <div class="content-card" id="describing">
+        <p class="section-label">Method</p>
+        <h2>Describing the association</h2>
+
+        <p>Every description of a scatter plot needs <strong>three things</strong>. Missing one
+          loses a mark.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Form, direction, strength</p>
+          <p style="margin-bottom:0;">
+            <strong>Form</strong> — is the pattern <em>linear</em> (a straight band) or
+            <em>non-linear</em> (curved)?<br><br>
+            <strong>Direction</strong> — <em>positive</em> (as \(x\) increases, \(y\) increases) or
+            <em>negative</em> (as \(x\) increases, \(y\) decreases)?<br><br>
+            <strong>Strength</strong> — <em>strong</em>, <em>moderate</em> or <em>weak</em>,
+            depending on how tightly the points cluster about a line.
+          </p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The sentence to write</p>
+          <p style="margin-bottom:0;">"There is a <strong>[strong/moderate/weak]</strong>
+            <strong>[positive/negative]</strong> <strong>[linear/non-linear]</strong> association
+            between [variable 1] and [variable 2]." Then add the context: "…as age increases, value
+            decreases."</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Association explorer</h3>
+          <p class="exercise-intro">Adjust the underlying gradient and the amount of scatter. The
+            correlation coefficient updates, and so does the description.</p>
+          <div id="assocSliders"></div>
+          <div class="plot-wrap" id="plotAssoc"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Pearson's r</div>
+              <div class="readout-value" id="roR">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Direction</div>
+              <div class="readout-value" id="roDir">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Strength</div>
+              <div class="readout-value" id="roStr">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="assocNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>Describe the car data from Worked example 1.</p>
+          <p style="border-left:2px solid var(--ink); padding-left:14px;">
+            "There is a strong negative linear association between the age of a car and its value.
+            As age increases, value decreases, and the points lie close to a straight line."</p>
+          <p>Form: linear. Direction: negative. Strength: strong. Context included ✓</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Write a full description for data relating hours of weekly training (\(x\)) to
+              swimming speed (\(y\)), where the points form a fairly tight upward straight band.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>"There is a strong positive linear association between hours of weekly training
+                  and swimming speed: as training increases, speed tends to increase."</p>
+              </div></details></li>
+            <li>A scatter plot of plant height against days rises steeply at first, then levels
+              off. Which of the three features would you describe differently from the car
+              data?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The form: it is non-linear (curved), so a straight line of best fit is not
+                  appropriate.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. BEST FIT ─────────── -->
+      <div class="content-card" id="bestfit">
+        <p class="section-label">Method</p>
+        <h2>Line of best fit by eye</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Drawing it by eye</p>
+          <ol style="margin-bottom:0;">
+            <li>Follow the <strong>general trend</strong> of the points.</li>
+            <li>Aim for roughly <strong>equal numbers of points above and below</strong> the line.</li>
+            <li>Keep the points as <strong>close to the line</strong> as possible overall.</li>
+            <li>It need <strong>not</strong> pass through any data point, and usually should not be
+              forced through the origin.</li>
+          </ol>
+          <p class="formula-where" style="margin-top:10px;">A good check: the line should pass
+            close to the point \((\bar{x}, \bar{y})\) — the mean of each variable.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Fit the line yourself</h3>
+          <p class="exercise-intro">Adjust the gradient and intercept to fit the points by eye.
+            The tool reports how far your line is from the true least-squares line.</p>
+          <div id="fitSliders"></div>
+          <div class="plot-wrap" id="plotFit"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Your line</div>
+              <div class="readout-value" id="roYours">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Best-fit line</div>
+              <div class="readout-value" id="roBest">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Your total error</div>
+              <div class="readout-value" id="roErr">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="fitNote" style="margin-top:14px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. EQUATION ─────────── -->
+      <div class="content-card" id="equation">
+        <p class="section-label">Method</p>
+        <h2>Finding the equation of the line</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The equation</p>
+          \[y = mx + c\]
+          <p class="formula-where">\(m\) is the <strong>gradient</strong> — the change in \(y\) for
+            each 1-unit increase in \(x\). \(c\) is the <strong>\(y\)-intercept</strong> — the
+            predicted value of \(y\) when \(x = 0\).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Reading the gradient from a graph</p>
+          \[m = \frac{\text{rise}}{\text{run}} = \frac{y_2 - y_1}{x_2 - x_1}\]
+          <p class="formula-where">Pick two points <strong>on the line</strong> (not necessarily
+            data points), as far apart as possible for accuracy.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>A line of best fit passes through \((2, 33)\) and \((8, 15)\). Find its equation.</p>
+          <p><strong>Gradient:</strong></p>
+          \[m = \frac{15 - 33}{8 - 2} = \frac{-18}{6} = -3\]
+          <p><strong>Intercept</strong>, substituting \((2, 33)\):</p>
+          \[33 = -3(2) + c \quad\Rightarrow\quad c = 33 + 6 = 39\]
+          \[y = -3x + 39\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Interpreting them in context</p>
+          <p style="margin-bottom:0;">
+            <strong>Gradient:</strong> "For each additional year of age, the car's value decreases
+            by about $3,000."<br><br>
+            <strong>Intercept:</strong> "A brand-new car (age 0) is predicted to be worth
+            $39,000."<br><br>
+            Always state the units and the direction. A negative gradient means a
+            <em>decrease</em>.
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; a meaningless intercept</p>
+          <p>A line relating a person's height (cm) to their weight (kg) is \(w = 0.8h - 65\).
+            Interpret the intercept.</p>
+          <p>The intercept \(-65\) predicts that a person of height 0 cm weighs \(-65\) kg, which is
+            <strong>meaningless</strong>. The intercept has no sensible interpretation here because
+            \(x = 0\) is far outside the range of the data and impossible in context.</p>
+          <p>The <strong>gradient</strong> is still meaningful: each extra centimetre of height is
+            associated with about 0.8 kg more weight.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise reading a line</h3>
+          <p class="exercise-intro">A line of best fit passes through \((4, 26)\) and \((10, 11)\).</p>
+
+          <div class="exercise-row">
+            <label>(a) Find the gradient (2 dp).</label>
+            <input class="exercise-input" id="eqA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-eq="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbEqA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Find the \(y\)-intercept (2 dp).</label>
+            <input class="exercise-input" id="eqB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-eq="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbEqB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Predict \(y\) when \(x = 7\) (2 dp).</label>
+            <input class="exercise-input" id="eqC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-eq="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbEqC"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; exam style</p>
+          <p>A café records the daily maximum temperature (°C) and the number of iced coffees
+            sold. A line of best fit drawn by eye passes through \((15, 40)\) and \((35, 120)\).</p>
+          <p><strong>(a) Find the equation of the line.</strong> [2 marks]</p>
+          \[m = \frac{120 - 40}{35 - 15} = 4 \qquad 40 = 4(15) + c \Rightarrow c = -20\]
+          \[\text{Sales} = 4T - 20\]
+          <p><strong>(b) Interpret the gradient and the intercept.</strong> [2 marks]</p>
+          <p>Gradient: each 1°C rise is associated with about 4 more iced coffees sold. Intercept:
+            the model predicts \(-20\) sales at 0°C &mdash; impossible, so the intercept has no
+            meaning in context (0°C is outside the data).</p>
+          <p><strong>(c) Predict sales on a 28°C day.</strong> [1 mark]</p>
+          <p>\(4(28) - 20 = 92\) iced coffees.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A line of best fit passes through \((3, 12)\) and \((11, 36)\). Find its equation.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(m = \dfrac{36 - 12}{11 - 3} = 3\). \(12 = 3(3) + c \Rightarrow c = 3\).</p>
+                <p>\(y = 3x + 3\).</p>
+              </div></details></li>
+            <li>For \(S = 2.5h + 40\), where \(h\) is hours of practice and \(S\) is typing speed
+              (words per minute), interpret both constants.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Gradient: each extra hour of practice is associated with 2.5 more words per
+                  minute. Intercept: someone with no practice is predicted to type about 40 words
+                  per minute &mdash; plausible here.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. PEARSON ─────────── -->
+      <div class="content-card" id="pearson">
+        <p class="section-label">Theory</p>
+        <h2>Pearson's correlation coefficient</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Pearson's \(r\)</p>
+          <p style="margin-bottom:0;">Pearson's correlation coefficient \(r\) measures the
+            <strong>strength and direction of a linear association</strong> with a single number
+            between \(-1\) and \(+1\).</p>
+        </div>
+
+        <p>In this course \(r\) is found with a <strong>scientific calculator</strong> in
+          statistics mode, not by hand. Enter the paired data and read off \(r\).</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The scale</p>
+          \[-1 \le r \le +1\]
+          <p class="formula-where">
+            \(r = +1\): perfect positive linear relationship — all points exactly on an upward line.<br>
+            \(r = 0\): no linear relationship.<br>
+            \(r = -1\): perfect negative linear relationship — all points exactly on a downward line.
+          </p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>\(|r|\)</th><th>Strength</th></tr>
+          <tr><td>0.9 to 1.0</td><td>Very strong</td></tr>
+          <tr><td>0.7 to 0.9</td><td>Strong</td></tr>
+          <tr><td>0.5 to 0.7</td><td>Moderate</td></tr>
+          <tr><td>0.3 to 0.5</td><td>Weak</td></tr>
+          <tr><td>0 to 0.3</td><td>Very weak or none</td></tr>
+        </table>
+
+        <p><strong>The sign gives the direction; the size gives the strength.</strong> So
+          \(r = -0.85\) is a <em>strong negative</em> association — just as strong as \(r = +0.85\),
+          but in the opposite direction.</p>
+
+        <div class="interactive-block">
+          <h3>Correlation gallery</h3>
+          <p class="exercise-intro">Four datasets with very different \(r\) values.</p>
+          <div class="diagram-row">
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotR1"></div>
+              <p class="diagram-caption">\(r \approx 0.98\) — very strong positive</p>
+            </div>
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotR2"></div>
+              <p class="diagram-caption">\(r \approx 0.62\) — moderate positive</p>
+            </div>
+          </div>
+          <div class="diagram-row">
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotR3"></div>
+              <p class="diagram-caption">\(r \approx -0.91\) — very strong negative</p>
+            </div>
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotR4"></div>
+              <p class="diagram-caption">\(r \approx 0.05\) — essentially none</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Describe the strength and direction for (a) \(r = -0.55\) (b) \(r = 0.92\)
+              (c) \(r = 0.18\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Moderate negative. (b) Very strong positive. (c) Very weak positive, or
+                  essentially none.</p>
+              </div></details></li>
+            <li>Which is the stronger association: \(r = -0.81\) or \(r = 0.76\)?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = -0.81\), because \(|-0.81| &gt; |0.76|\). The sign only gives the
+                  direction.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. CALCULATOR ─────────── -->
+      <div class="content-card" id="calculator">
+        <p class="section-label">Technology</p>
+        <h2>Finding \(r\) with a scientific calculator</h2>
+
+        <p>The syllabus asks you to <em>calculate and interpret Pearson's correlation
+          coefficient using a scientific calculator</em>. Button names differ between models, but
+          the steps are always the same:</p>
+        <ol>
+          <li>Enter <strong>statistics mode</strong> and choose <strong>linear regression</strong>
+            (often shown as \(y = a + bx\) or A+BX).</li>
+          <li>Enter the data as pairs: the <strong>independent</strong> variable in the \(x\)
+            column, the <strong>dependent</strong> variable in the \(y\) column.</li>
+          <li>Open the regression results and read \(r\). (The same screen gives the
+            least-squares gradient and intercept &mdash; Lesson 3.)</li>
+          <li><strong>Check:</strong> does the sign of \(r\) match the direction on your scatter
+            plot? A wrong sign usually means swapped columns or a typing error.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6</p>
+          <p>Enter the car data from Worked example 1: \(x\) = age 1, 2, 3, 4, 5, 6, 8, 10 and
+            \(y\) = value 38, 33, 30, 26, 24, 20, 15, 11.</p>
+          <p>The calculator gives \(r = -0.992\) (3 decimal places).</p>
+          <p><strong>Interpretation:</strong> a very strong negative linear association between a
+            car's age and its value. The sign matches the downward scatter plot ✓</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find \(r\) for hours studied \(x\) = 2, 4, 5, 7, 8, 10 and test mark
+              \(y\) = 52, 58, 61, 70, 72, 80. Interpret it.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r = 0.997\): a very strong positive linear association between hours studied
+                  and test mark.</p>
+              </div></details></li>
+            <li>A café's temperature \(x\) = 8, 12, 15, 19, 23, 27, 31 °C and hot chocolates sold
+              \(y\) = 95, 88, 80, 66, 58, 41, 30. Find \(r\). What sign should you expect before
+              you calculate?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Expect negative: sales fall as temperature rises. \(r = -0.995\): a very strong
+                  negative linear association.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 7. INTERPRETING ─────────── -->
+      <div class="content-card" id="interpreting">
+        <p class="section-label">Evaluation</p>
+        <h2>Interpreting \(r\) correctly</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">What \(r\) does and does not tell you</p>
+          <ul style="margin-bottom:0;">
+            <li>\(r\) measures <strong>linear</strong> association only. A perfect curve can have
+              \(r\) near 0.</li>
+            <li>\(r\) says <strong>nothing about causation</strong>.</li>
+            <li>\(r\) is <strong>heavily affected by outliers</strong>, especially in small samples.</li>
+            <li>\(r\) has <strong>no units</strong> and does not change if you change the units of
+              measurement.</li>
+            <li>\(r\) is <strong>not a percentage</strong>. \(r = 0.5\) does not mean "50%
+              related".</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; the non-linear trap</p>
+          <p>A projectile's height against time follows a perfect parabola. Its \(r\) is close to
+            0. What does this mean?</p>
+          <p>It means there is no <em>linear</em> relationship — and there isn't, since the
+            relationship is quadratic. The variables are perfectly related, just not in a straight
+            line. <strong>Always look at the scatter plot before trusting \(r\).</strong></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; the outlier effect</p>
+          <p>Nine points lie almost exactly on a rising line, giving \(r = 0.96\). One extra point
+            sits far away, low and to the right. The correlation drops to \(r = 0.31\).</p>
+          <p>A single outlier has transformed a very strong association into a weak one. You should
+            <strong>investigate the outlier</strong>: is it a recording error, or a genuine but
+            unusual case? Report \(r\) both with and without it, and explain the difference.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Outlier impact</h3>
+          <p class="exercise-intro">Drag the outlier around and watch \(r\) collapse.</p>
+          <div id="outSliders"></div>
+          <div class="plot-wrap" id="plotOut"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">r with outlier</div>
+              <div class="readout-value" id="roRWith">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">r without it</div>
+              <div class="readout-value" id="roRWithout">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="outNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A researcher finds \(r = 0.1\) and concludes "the variables are unrelated". The
+              scatter plot shows a clear U-shape. Comment.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(r\) only measures <em>linear</em> association. The U-shape shows a strong
+                  non-linear relationship, so the variables are related &mdash; just not along a
+                  straight line.</p>
+              </div></details></li>
+            <li>Heights in a dataset are converted from centimetres to inches. What happens to
+              \(r\)?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Nothing. \(r\) has no units, and rescaling a variable does not change how
+                  closely the points follow a line.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Guess the correlation</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#describing">association explorer</a>.</p>
+        <ol>
+          <li>Partner A covers the readouts, then sets any gradient and scatter. Partner B looks at
+            the plot only and estimates \(r\). Uncover and score the difference. Swap; play three
+            rounds each. Lowest total wins.</li>
+          <li>Set gradient 0.2 and scatter 0. Then set gradient 1.5 and scatter 3. Which has the
+            larger \(r\)? Which line is steeper?</li>
+          <li>Using your answer to step 2, explain why "a steeper line means a stronger
+            correlation" is false.</li>
+          <li>Find a setting with \(r\) between 0.6 and 0.7. Describe it in a full sentence.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>2.</strong> Gradient 0.2 with no scatter gives \(r = 1.000\); gradient 1.5
+            with scatter 3 gives \(r = 0.717\). The second line is much steeper but the
+            correlation is weaker.</p>
+          <p><strong>3.</strong> \(r\) measures how closely the points follow a line, not how
+            steep the line is. Steepness is the gradient; strength is the scatter about the
+            line.</p>
+          <p><strong>4.</strong> For example gradient 0.2, scatter 0.5: \(r = 0.630\), "a moderate
+            positive linear association".</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Every description of an association must give form, direction
+          and strength — and be set in context.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 replaces the by-eye line with the least-squares regression line and uses it to
+          make predictions.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-8', LESSON_IDX = 1;
+
+  /* Pearson's r and least-squares line for an array of [x,y] pairs */
+  function stats(pts) {
+    var n = pts.length;
+    var sx = 0, sy = 0;
+    pts.forEach(function (p) { sx += p[0]; sy += p[1]; });
+    var mx = sx / n, my = sy / n;
+    var sxy = 0, sxx = 0, syy = 0;
+    pts.forEach(function (p) {
+      sxy += (p[0] - mx) * (p[1] - my);
+      sxx += (p[0] - mx) * (p[0] - mx);
+      syy += (p[1] - my) * (p[1] - my);
+    });
+    var r = (sxx && syy) ? sxy / Math.sqrt(sxx * syy) : 0;
+    var m = sxx ? sxy / sxx : 0;
+    return { r: r, m: m, c: my - m * mx, mx: mx, my: my };
+  }
+  function describe(r) {
+    var a = Math.abs(r);
+    return a >= 0.9 ? 'very strong' : a >= 0.7 ? 'strong'
+         : a >= 0.5 ? 'moderate'    : a >= 0.3 ? 'weak' : 'very weak or none';
+  }
+
+  /* ── Car scatter plot ─────────────────────────────────────── */
+  var CARS = [[1,38],[2,33],[3,30],[4,26],[5,24],[6,20],[8,15],[10,11]];
+  (function () {
+    var s = stats(CARS);
+    IE.plot('plotCars', {
+      width: 460, height: 300,
+      xMin: 0, xMax: 11, yMin: 0, yMax: 42, xStep: 2, yStep: 10,
+      xLabel: 'age (years)', yLabel: 'value ($000)',
+      points: CARS.map(function (p) { return { x: p[0], y: p[1] }; }),
+      curves: [{ fn: function (x) { return s.m * x + s.c; }, className: 'plot-curve-2' }]
+    });
+  })();
+
+  /* ── Association explorer ─────────────────────────────────── */
+  (function () {
+    var grad = 0.8, noise = 1.0;
+    var SEED = [0.31,-0.72,0.55,-0.18,0.91,-0.44,0.07,0.68,-0.85,0.23,-0.61,0.49];
+    var redraw = IE.plot('plotAssoc', {
+      width: 460, height: 280, xMin: 0, xMax: 10, yMin: 0, yMax: 12,
+      xStep: 2, yStep: 3, xLabel: 'x', yLabel: 'y', points: []
+    });
+
+    function build() {
+      return SEED.map(function (e, i) {
+        var x = 0.6 + i * 0.78;
+        return [x, 6 + grad * (x - 5) + e * noise * 2.2];
+      });
+    }
+    function update() {
+      var pts = build();
+      var s = stats(pts);
+      redraw({
+        points: pts.map(function (p) { return { x: p[0], y: Math.max(0, Math.min(12, p[1])) }; }),
+        curves: [{ fn: function (x) { return s.m * x + s.c; }, className: 'plot-curve-2' }]
+      });
+      document.getElementById('roR').textContent   = s.r.toFixed(3);
+      document.getElementById('roDir').textContent = Math.abs(s.r) < 0.1 ? 'none'
+        : (s.r > 0 ? 'positive' : 'negative');
+      document.getElementById('roStr').textContent = describe(s.r);
+      var note = document.getElementById('assocNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'There is a ' + describe(s.r) + ' ' +
+        (Math.abs(s.r) < 0.1 ? '' : (s.r > 0 ? 'positive ' : 'negative ')) +
+        'linear association between x and y (r = ' + s.r.toFixed(3) +
+        '). More scatter lowers |r| without changing the underlying trend.';
+    }
+    var host = 'assocSliders';
+    IE.slider({ mount: host, label: 'Trend gradient', min: -1.5, max: 1.5, step: 0.1, value: grad,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { grad = v; update(); } });
+    IE.slider({ mount: host, label: 'Scatter', min: 0, max: 3, step: 0.1, value: noise,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { noise = v; update(); } });
+    update();
+  })();
+
+  /* ── Fit the line yourself ────────────────────────────────── */
+  (function () {
+    var m = -2, c = 35;
+    var best = stats(CARS);
+    var redraw = IE.plot('plotFit', {
+      width: 460, height: 290, xMin: 0, xMax: 11, yMin: 0, yMax: 42,
+      xStep: 2, yStep: 10, xLabel: 'age (years)', yLabel: 'value ($000)',
+      points: CARS.map(function (p) { return { x: p[0], y: p[1] }; })
+    });
+
+    function update() {
+      redraw({
+        curves: [
+          { fn: function (x) { return m * x + c; } },
+          { fn: function (x) { return best.m * x + best.c; }, className: 'plot-curve-2' }
+        ]
+      });
+      var err = CARS.reduce(function (s, p) { return s + Math.abs(p[1] - (m * p[0] + c)); }, 0);
+      var bestErr = CARS.reduce(function (s, p) { return s + Math.abs(p[1] - (best.m * p[0] + best.c)); }, 0);
+      document.getElementById('roYours').textContent = 'y = ' + m.toFixed(2) + 'x + ' + c.toFixed(1);
+      document.getElementById('roBest').textContent  = 'y = ' + best.m.toFixed(2) + 'x + ' + best.c.toFixed(1);
+      document.getElementById('roErr').textContent   = err.toFixed(2);
+      var note = document.getElementById('fitNote');
+      if (err <= bestErr * 1.08) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'Excellent fit — your total error of ' + err.toFixed(2) +
+          ' is within 8% of the best possible (' + bestErr.toFixed(2) + '). The dashed line is the least-squares line.';
+      } else {
+        note.className = 'exercise-feedback';
+        note.textContent = 'Your total error is ' + err.toFixed(2) + '; the best possible is ' +
+          bestErr.toFixed(2) + '. Aim for equal numbers of points above and below your line.';
+      }
+    }
+    var host = 'fitSliders';
+    IE.slider({ mount: host, label: 'Gradient', min: -5, max: 1, step: 0.1, value: m,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { m = v; update(); } });
+    IE.slider({ mount: host, label: 'y-intercept', min: 5, max: 50, step: 0.5, value: c,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { c = v; update(); } });
+    update();
+  })();
+
+  /* ── Equation exercises ───────────────────────────────────── */
+  (function () {
+    var m = (11 - 26) / (10 - 4);      // −2.5
+    var c = 26 - m * 4;                // 36
+    var ANS = {
+      A: [m, 'Gradient = (11 − 26) ÷ (10 − 4) = −15 ÷ 6 = −2.50.'],
+      B: [c, 'Substituting (4, 26): 26 = −2.5(4) + c, so c = 26 + 10 = 36.00.'],
+      C: [m * 7 + c, 'y = −2.5(7) + 36 = −17.5 + 36 = 18.50.']
+    };
+    document.querySelectorAll('[data-eq]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.eq, fb = document.getElementById('fbEq' + k);
+        var g = parseFloat((document.getElementById('eq' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.02;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(2) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Correlation gallery ──────────────────────────────────── */
+  (function () {
+    var SMALL = { width: 290, height: 215, xMin: 0, xMax: 10, yMin: 0, yMax: 10, xStep: 2, yStep: 2, xLabel: 'x', yLabel: 'y' };
+    function show(id, pts) {
+      var s = stats(pts);
+      IE.plot(id, Object.assign({}, SMALL, {
+        points: pts.map(function (p) { return { x: p[0], y: p[1] }; }),
+        curves: [{ fn: function (x) { return s.m * x + s.c; }, className: 'plot-curve-2' }]
+      }));
+    }
+    show('plotR1', [[1,1.2],[2,2.1],[3,3.4],[4,4.1],[5,5.3],[6,6.0],[7,7.2],[8,8.1],[9,9.0]]);
+    show('plotR2', [[1,2.8],[2,2.2],[3,4.6],[4,3.4],[5,5.8],[6,4.6],[7,7.2],[8,6.2],[9,8.0]]);
+    show('plotR3', [[1,9.2],[2,8.0],[3,7.6],[4,6.2],[5,5.4],[6,4.0],[7,3.6],[8,2.2],[9,1.4]]);
+    show('plotR4', [[1,5.4],[2,2.6],[3,7.2],[4,3.8],[5,8.0],[6,4.4],[7,2.4],[8,7.0],[9,4.6]]);
+  })();
+
+  /* ── Outlier impact ───────────────────────────────────────── */
+  (function () {
+    var CLEAN = [[1,1.5],[2,2.4],[3,3.6],[4,4.2],[5,5.5],[6,6.3],[7,7.1],[8,8.4],[9,9.2]];
+    var ox = 9, oy = 1;
+    var redraw = IE.plot('plotOut', {
+      width: 460, height: 290, xMin: 0, xMax: 10, yMin: 0, yMax: 10,
+      xStep: 2, yStep: 2, xLabel: 'x', yLabel: 'y', points: []
+    });
+    function update() {
+      var all = CLEAN.concat([[ox, oy]]);
+      var sw = stats(all), sn = stats(CLEAN);
+      redraw({
+        points: CLEAN.map(function (p) { return { x: p[0], y: p[1] }; })
+                     .concat([{ x: ox, y: oy, hollow: true, label: 'outlier' }]),
+        curves: [
+          { fn: function (x) { return sw.m * x + sw.c; } },
+          { fn: function (x) { return sn.m * x + sn.c; }, className: 'plot-curve-2' }
+        ]
+      });
+      document.getElementById('roRWith').textContent    = sw.r.toFixed(3);
+      document.getElementById('roRWithout').textContent = sn.r.toFixed(3);
+      var note = document.getElementById('outNote');
+      var drop = sn.r - sw.r;
+      note.className = 'exercise-feedback' + (Math.abs(drop) > 0.2 ? ' wrong' : '');
+      note.textContent = 'Without the outlier r = ' + sn.r.toFixed(3) + ' (' + describe(sn.r) +
+        '); with it r = ' + sw.r.toFixed(3) + ' (' + describe(sw.r) + '). A single point changes r by ' +
+        Math.abs(drop).toFixed(3) + '. Solid line: with the outlier. Dashed: without.';
+    }
+    var host = 'outSliders';
+    IE.slider({ mount: host, label: 'Outlier x', min: 0.5, max: 9.5, step: 0.5, value: ox,
+                onInput: function (v) { ox = v; update(); } });
+    IE.slider({ mount: host, label: 'Outlier y', min: 0.5, max: 9.5, step: 0.5, value: oy,
+                onInput: function (v) { oy = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Which three features must a description of a scatter plot include?',
+      opts: [
+        'A) Mean, median and mode',
+        'B) Form, direction and strength',
+        'C) Gradient, intercept and \\(r\\)',
+        'D) Range, outliers and sample size'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Form (linear or non-linear), direction (positive or negative) and strength (strong, moderate or weak) — and the description should be written in the context of the variables.'
+    },
+    {
+      q: 'A dataset has \\(r = -0.88\\). How is this association described?',
+      opts: [
+        'A) Weak negative',
+        'B) Strong positive',
+        'C) Strong negative',
+        'D) No association'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The sign gives the direction (negative) and the magnitude gives the strength — \\(|{-0.88}| = 0.88\\) lies in the strong band. It is exactly as strong as \\(r = +0.88\\), just in the opposite direction.'
+    },
+    {
+      q: 'A line of best fit passes through \\((2, 20)\\) and \\((8, 8)\\). What is its gradient?',
+      opts: ['A) \\(-2\\)', 'B) \\(2\\)', 'C) \\(-0.5\\)', 'D) \\(-12\\)'],
+      correct: 0,
+      explanation: 'A is correct. \\(m = \\dfrac{8 - 20}{8 - 2} = \\dfrac{-12}{6} = -2\\). Option D stops at the rise without dividing by the run.'
+    },
+    {
+      q: 'For the line \\(v = -3a + 39\\) relating car value ($000) to age (years), what does the gradient mean?',
+      opts: [
+        'A) A new car is worth $3,000',
+        'B) The car loses about $3,000 in value each year',
+        'C) The car is 3 years old',
+        'D) The car gains $3,000 each year'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The gradient is the change in \\(y\\) per 1-unit increase in \\(x\\). Being negative, it means value <em>falls</em> by 3 (thousand dollars) for each extra year of age.'
+    },
+    {
+      q: 'A perfect parabolic relationship between two variables gives a Pearson\'s \\(r\\) close to 0. What does this show?',
+      opts: [
+        'A) The variables are unrelated',
+        'B) There is no <em>linear</em> relationship, although the variables are strongly related',
+        'C) A calculation error has been made',
+        'D) The sample is too small'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Pearson\'s \\(r\\) measures <em>linear</em> association only. A perfect curve can give \\(r \\approx 0\\) while the variables are perfectly related — which is why you must always look at the scatter plot.'
+    },
+    {
+      q: 'When drawing a line of best fit by eye, which is the best guidance?',
+      opts: [
+        'A) It must pass through the origin',
+        'B) It must pass through the first and last data points',
+        'C) It should follow the trend with roughly equal numbers of points above and below',
+        'D) It should pass through as many data points as possible'
+      ],
+      correct: 2,
+      explanation: 'C is correct. The line represents the overall trend, balancing the points either side. Forcing it through the origin or through particular data points usually gives a worse fit.'
+    },
+    {
+      q: 'Nine points give \\(r = 0.95\\). Adding one distant outlier drops \\(r\\) to 0.28. What is the best response?',
+      opts: [
+        'A) Report \\(r = 0.28\\) and conclude the association is weak',
+        'B) Delete the outlier without comment',
+        'C) Investigate the outlier, report \\(r\\) both with and without it, and explain the difference',
+        'D) Ignore \\(r\\) entirely'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Outliers can be recording errors or genuine unusual cases, and a single one can transform \\(r\\) in a small sample. Good practice is to investigate it and report both values transparently — never delete data silently.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'State the three features needed to describe an association, and write a full description for data with \\(r = -0.82\\) relating car age to value.',
+      marks: 4,
+      steps: [
+        'The three features are form, direction and strength.',
+        'Form: the points lie in a straight band, so linear.',
+        'Direction: \\(r\\) is negative, so as age increases value decreases.',
+        'Strength: \\(|{-0.82}| = 0.82\\), which is strong.'
+      ],
+      answer: 'Form, direction and strength. "There is a strong negative linear association between the age of a car and its value — as age increases, value decreases."'
+    },
+    {
+      q: 'A line of best fit passes through \\((3, 46)\\) and \\((9, 22)\\). Find its equation.',
+      marks: 3,
+      steps: [
+        'Gradient: \\(m = \\dfrac{22 - 46}{9 - 3} = \\dfrac{-24}{6} = -4\\).',
+        'Substitute \\((3, 46)\\): \\(46 = -4(3) + c\\).',
+        '\\(c = 46 + 12 = 58\\).'
+      ],
+      answer: '\\(y = -4x + 58\\)'
+    },
+    {
+      q: 'For the line \\(w = 0.45h - 12\\) relating weekly wage ($100s) to hours worked, interpret both the gradient and the intercept.',
+      marks: 4,
+      steps: [
+        'The gradient is the change in \\(w\\) per extra hour worked.',
+        'Each additional hour is associated with an increase of 0.45 (hundred dollars), or $45.',
+        'The intercept is the predicted wage when hours = 0.',
+        'That gives \\(-12\\) hundred dollars, which is impossible — so the intercept has no meaningful interpretation here.'
+      ],
+      answer: 'Gradient: each extra hour worked is associated with about $45 more pay. Intercept: predicts \\(-\\$1\\,200\\) for zero hours, which is meaningless — \\(x = 0\\) lies outside the data range.'
+    },
+    {
+      q: 'Explain what Pearson\'s \\(r\\) measures and state its possible range.',
+      marks: 3,
+      steps: [
+        '\\(r\\) measures the strength and direction of a <em>linear</em> association.',
+        'Its range is \\(-1 \\le r \\le +1\\).',
+        '\\(r = +1\\) is a perfect positive linear relationship, \\(r = -1\\) a perfect negative one, and \\(r = 0\\) no linear relationship.'
+      ],
+      answer: 'Pearson\'s \\(r\\) measures the strength and direction of a linear association, taking values from \\(-1\\) to \\(+1\\). The sign gives direction and the magnitude gives strength.'
+    },
+    {
+      q: 'Classify each: (a) \\(r = 0.94\\) (b) \\(r = -0.41\\) (c) \\(r = 0.66\\) (d) \\(r = -0.08\\)',
+      marks: 4,
+      steps: [
+        '(a) \\(|r| = 0.94\\) → very strong, positive.',
+        '(b) \\(|r| = 0.41\\) → weak, negative.',
+        '(c) \\(|r| = 0.66\\) → moderate, positive.',
+        '(d) \\(|r| = 0.08\\) → essentially no linear association.'
+      ],
+      answer: '(a) Very strong positive. (b) Weak negative. (c) Moderate positive. (d) Very weak or none.'
+    },
+    {
+      q: 'Explain why a scatter plot should always be examined before relying on the value of \\(r\\).',
+      marks: 4,
+      steps: [
+        '\\(r\\) measures only linear association.',
+        'A strong curved relationship can produce \\(r\\) near 0, falsely suggesting no relationship.',
+        'A single outlier can inflate or destroy \\(r\\), especially in small samples.',
+        'The plot also reveals clusters or distinct subgroups that \\(r\\) alone conceals.'
+      ],
+      answer: 'Because \\(r\\) only detects straight-line patterns. A perfect curve can give \\(r \\approx 0\\), and one outlier can drastically change \\(r\\). The plot also shows clustering and subgroups that a single number cannot.'
+    },
+    {
+      q: 'Eight students\' study hours and test marks give \\(r = 0.78\\). Describe the association and state what can and cannot be concluded.',
+      marks: 4,
+      steps: [
+        '\\(|r| = 0.78\\) is strong, and positive.',
+        'Description: a strong positive linear association — more study hours tend to go with higher marks.',
+        'It does <em>not</em> establish that studying causes higher marks.',
+        'Motivation or prior ability could be confounding variables influencing both.'
+      ],
+      answer: 'A strong positive linear association: students who study more tend to score higher. However, causation is not established — motivation and prior ability could drive both, and with only 8 students the sample is small.'
+    },
+    {
+      q: 'A dataset of 10 points has \\(r = 0.91\\). One point is found to have been entered as \\((8, 2)\\) instead of \\((8, 20)\\). Explain the likely effect of correcting it.',
+      marks: 4,
+      steps: [
+        'The erroneous point sits far below the rising trend, acting as an outlier.',
+        'Outliers against the trend pull \\(r\\) towards zero.',
+        'Since \\(r\\) is already 0.91 despite the error, the true association must be very strong.',
+        'Correcting the point should raise \\(r\\) closer to 1.'
+      ],
+      answer: '\\(r\\) should increase, probably to well above 0.95. The mistyped point was an outlier working against the trend, suppressing \\(r\\); removing that distortion strengthens the measured association.'
+    },
+    {
+      q: 'Describe how to draw a line of best fit by eye, and state two things it need not do.',
+      marks: 4,
+      steps: [
+        'Follow the general trend of the points.',
+        'Balance the points, with roughly equal numbers above and below the line.',
+        'Keep the points as close to the line as possible overall.',
+        'It need not pass through the origin, and it need not pass through any actual data point.'
+      ],
+      answer: 'Follow the trend with roughly equal numbers of points either side, minimising the overall distance. It need not pass through the origin, nor through any data point — a good check is that it passes near \\((\\bar{x}, \\bar{y})\\).'
+    },
+    {
+      q: 'Data on a car\'s age and value gives the line \\(v = -2.8a + 36\\) (value in $000). Predict the value at 4 years and at 6 years, and state the annual depreciation.',
+      marks: 4,
+      steps: [
+        'At \\(a = 4\\): \\(v = -2.8(4) + 36 = -11.2 + 36 = 24.8\\).',
+        'At \\(a = 6\\): \\(v = -2.8(6) + 36 = -16.8 + 36 = 19.2\\).',
+        'The gradient is \\(-2.8\\), in thousands of dollars per year.',
+        'Check: the value falls by \\(24.8 - 19.2 = 5.6\\) over 2 years, which is \\(2.8\\) per year ✓'
+      ],
+      answer: '$24,800 at 4 years and $19,200 at 6 years; the car depreciates by about $2,800 per year.'
+    },
+    {
+      q: 'Two studies report \\(r = 0.7\\) and \\(r = -0.7\\). Compare the strength and direction of the associations.',
+      marks: 3,
+      steps: [
+        'Both have \\(|r| = 0.7\\), so both are equally strong.',
+        'The first is positive: as \\(x\\) increases, \\(y\\) increases.',
+        'The second is negative: as \\(x\\) increases, \\(y\\) decreases.',
+        'The sign carries no information about strength.'
+      ],
+      answer: 'They are equally strong, since \\(|r|\\) is the same. They differ only in direction — the first positive, the second negative. A negative \\(r\\) is not "worse" than a positive one.'
+    },
+    {
+      q: 'Explain why \\(r = 0.5\\) does not mean "the variables are 50% related".',
+      marks: 3,
+      steps: [
+        '\\(r\\) is a correlation coefficient, not a percentage or proportion.',
+        'The scale is not linear in any intuitive sense — the step from 0.9 to 0.95 matters far more than 0.1 to 0.15.',
+        'An \\(r\\) of 0.5 is conventionally described as a moderate association.',
+        'There is no meaningful "percentage related" interpretation at this level.'
+      ],
+      answer: 'Because \\(r\\) is a correlation coefficient measured on its own scale, not a percentage. \\(r = 0.5\\) indicates a moderate linear association; it does not mean the variables are half-related in any quantitative sense.'
+    },
+    {
+      q: 'A study of rainfall and crop yield across 30 farms gives \\(r = 0.83\\) and the line \\(y = 0.42R + 1.6\\) (yield in tonnes/ha, rainfall in mm). Describe the association and interpret the gradient.',
+      marks: 5,
+      steps: [
+        '\\(|r| = 0.83\\) is strong and positive.',
+        'Description: a strong positive linear association between rainfall and crop yield.',
+        'The gradient 0.42 is the change in yield per extra millimetre of rainfall.',
+        'So each additional millimetre is associated with about 0.42 tonnes per hectare more yield.',
+        'With 30 farms the sample is reasonable, but causation still is not proven — soil quality could confound.'
+      ],
+      answer: 'A strong positive linear association: farms with more rainfall tend to have higher yields. The gradient means each extra millimetre of rainfall is associated with about 0.42 t/ha additional yield. Causation is plausible here (water is needed for growth) but soil quality and farming practices could still confound.'
+    },
+    {
+      q: 'A scatter plot of temperature against ice-cream sales shows points rising steeply then levelling off above 35°C. Explain why fitting a straight line and quoting \\(r\\) would be misleading.',
+      marks: 5,
+      steps: [
+        'The described pattern is non-linear — it curves and plateaus.',
+        'Pearson\'s \\(r\\) only measures linear association, so it understates the true relationship.',
+        'A straight line would over-predict sales at very high temperatures, where the real data level off.',
+        'It would also mis-predict at the low end.',
+        'The correct response is to describe the form as non-linear and not rely on a linear model.'
+      ],
+      answer: 'Because the relationship is non-linear. \\(r\\) measures only straight-line association, so it understates how strongly the variables are related, and a straight line would over-predict sales above 35°C where the data plateau. The form should be described as non-linear, and a linear model should not be used for prediction.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Relative Frequency, Expected Frequency &amp; Two-Way Tables</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 &mdash; Relative Frequency &amp; Probability</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Relative Frequency &amp; Two-Way Tables</h1>
+      <p class="subtitle">When outcomes are not equally likely, you cannot count them &mdash; you
+        must observe them. Relative frequency estimates probability from data, and converges on the
+        truth as the sample grows.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-09</span>
+        <span class="pill">Expected frequency \(np\)</span>
+        <span class="pill">Two-way tables</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Relative frequency</li>
+        <li>Why more trials help</li>
+        <li>Expected frequency</li>
+        <li>Two-way tables</li>
+        <li>Reading a two-way table</li>
+        <li>Venn diagrams</li>
+        <li>Probability in society</li>
+        <li>Class activity: how many trials are enough?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#relfreq">1 &nbsp;Relative frequency</a></li>
+        <li class="toc-item"><a class="toc-link" href="#convergence">2 &nbsp;More trials</a></li>
+        <li class="toc-item"><a class="toc-link" href="#expected">3 &nbsp;Expected frequency</a></li>
+        <li class="toc-item"><a class="toc-link" href="#twoway">4 &nbsp;Two-way tables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#venn">5 &nbsp;Venn diagrams</a></li>
+        <li class="toc-item"><a class="toc-link" href="#society">6 &nbsp;Probability in society</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. REL FREQ ─────────── -->
+      <div class="content-card" id="relfreq">
+        <p class="section-label">Theory</p>
+        <h2>Relative frequency</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Relative frequency</p>
+          \[\text{Relative frequency} = \frac{\text{number of times the event occurred}}{\text{total number of trials}}\]
+          <p class="formula-where">Also called <strong>experimental probability</strong>. It is an
+            <em>estimate</em> of the true probability, based on what actually happened.</p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th></th><th>Theoretical probability</th><th>Relative frequency</th></tr>
+          <tr><td>Based on</td><td>Counting equally likely outcomes</td><td>Observing actual trials</td></tr>
+          <tr><td>Requires</td><td>Fair, equally likely outcomes</td><td>Nothing — works for any situation</td></tr>
+          <tr><td>Example</td><td>\(P(\text{six}) = \frac{1}{6}\) on a fair die</td><td>A drawing pin landed point-up 63 times in 100</td></tr>
+          <tr><td>Accuracy</td><td>Exact</td><td>An estimate, improving with more trials</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">When relative frequency is the only option</p>
+          <p style="margin-bottom:0;">Use it whenever outcomes are <strong>not equally
+            likely</strong> and cannot be counted: a biased die, a drawing pin, whether a bus is
+            late, whether a patient responds to a drug. There is no theoretical calculation
+            available — only data.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>A drawing pin is dropped 200 times and lands point-up 118 times. Estimate the
+            probability of landing point-up.</p>
+          \[\text{Relative frequency} = \frac{118}{200} = 0.59\]
+          <p>There is no way to calculate this theoretically — the pin's shape and mass
+            distribution determine it, so it must be measured.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; testing for bias</p>
+          <p>A die is rolled 600 times and shows a six 142 times. Is it fair?</p>
+          <p><strong>Relative frequency:</strong> \(\dfrac{142}{600} = 0.2367\).</p>
+          <p><strong>Theoretical for a fair die:</strong> \(\dfrac{1}{6} = 0.1667\).</p>
+          <p>Expected number of sixes: \(600 \times \frac{1}{6} = 100\). Observing 142 is 42 more
+            than expected — a large excess over 600 trials, which suggests the die is
+            <strong>biased towards six</strong>. With a large sample like this, a gap this size is
+            unlikely to be chance alone.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A basketballer makes 37 of 50 free throws. Estimate the probability she makes her
+              next one.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\frac{37}{50} = 0.74\).</p>
+              </div></details></li>
+            <li>A spinner with four equal colours lands on blue 132 times in 400 spins. Does it
+              appear fair?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Relative frequency \(\frac{132}{400} = 0.33\), against 0.25 for a fair spinner
+                  (an expected 100 blues). 32 extra blues in 400 spins suggests bias towards
+                  blue.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. CONVERGENCE ─────────── -->
+      <div class="content-card" id="convergence">
+        <p class="section-label">Theory</p>
+        <h2>Why more trials give better estimates</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The key principle</p>
+          <p style="margin-bottom:0;">As the number of trials increases, the relative frequency
+            gets <strong>closer in value to the theoretical probability</strong>. Short runs are
+            erratic; long runs settle down.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>A fair coin is tossed. Typical results:</p>
+          <table class="coord-table">
+            <tr><th>Tosses</th><th>Heads</th><th>Relative frequency</th><th>Difference from 0.5</th></tr>
+            <tr><td>10</td><td>7</td><td>0.700</td><td>0.200</td></tr>
+            <tr><td>50</td><td>28</td><td>0.560</td><td>0.060</td></tr>
+            <tr><td>200</td><td>96</td><td>0.480</td><td>0.020</td></tr>
+            <tr><td>1 000</td><td>507</td><td>0.507</td><td>0.007</td></tr>
+            <tr><td>10 000</td><td>5 032</td><td>0.5032</td><td>0.0032</td></tr>
+          </table>
+          <p>The estimate steadily approaches 0.5. Note that the <em>number</em> of heads drifts
+            further from half (507 is 7 away; 5,032 is 32 away) while the
+            <em>proportion</em> gets closer — it is the proportion that converges.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Convergence simulator</h3>
+          <p class="exercise-intro">Simulate trials and watch the relative frequency settle
+            towards the true probability.</p>
+          <div id="convSliders"></div>
+          <div id="convControls" style="margin-bottom:12px;"></div>
+          <div class="plot-wrap" id="plotConv"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Trials</div>
+              <div class="readout-value" id="roTrials">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Successes</div>
+              <div class="readout-value" id="roSucc">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Relative frequency</div>
+              <div class="readout-value" id="roRF">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">True probability</div>
+              <div class="readout-value" id="roTrue">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="convNote" style="margin-top:14px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. EXPECTED ─────────── -->
+      <div class="content-card" id="expected">
+        <p class="section-label">Method</p>
+        <h2>Expected frequency</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Expected frequency</p>
+          \[\text{Expected frequency} = np\]
+          <p class="formula-where">\(n\) is the number of times the experiment is repeated, and
+            \(p\) is the probability the event occurs each time.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p>A fair die is rolled 300 times. How many sixes would you expect?</p>
+          \[np = 300 \times \frac{1}{6} = 50\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5</p>
+          <p>A factory produces items with a 3% defect rate. In a batch of 1,200, how many
+            defective items are expected?</p>
+          \[np = 1200 \times 0.03 = 36\]
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">What "expected" really means</p>
+          <p style="margin-bottom:0;">The expected frequency is a <strong>long-run average</strong>,
+            not a guarantee. Rolling 300 times will rarely give exactly 50 sixes — it will give
+            something near it. Expected values can also be non-whole numbers: an expectation of
+            2.5 children per family is meaningful as an average even though no family has 2.5
+            children.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; working backwards</p>
+          <p>A biased coin gives 340 heads in 500 tosses. Estimate \(p\), then predict the heads in
+            1,200 tosses.</p>
+          <p><strong>Estimate:</strong> \(p = \dfrac{340}{500} = 0.68\).</p>
+          <p><strong>Predict:</strong> \(np = 1200 \times 0.68 = 816\) heads.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Expected frequency calculator</h3>
+          <p class="exercise-intro">Compare the expected count with a simulated actual result.</p>
+          <div id="expSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Expected (np)</div>
+              <div class="readout-value" id="roExp">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Expected not occurring</div>
+              <div class="readout-value" id="roExpNot">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="expNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Records show a 0.28 chance of rain on any July day in a town. How many rainy days
+              are expected in July (31 days)?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(np = 31 \times 0.28 = 8.68\), so about 9 days.</p>
+              </div></details></li>
+            <li>A raffle sells 2,500 tickets and you buy 20. What is your chance of winning? If you
+              entered 250 such raffles, how many would you expect to win?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(p = \frac{20}{2500} = 0.008\). Expected wins: \(250 \times 0.008 = 2\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. TWO WAY ─────────── -->
+      <div class="content-card" id="twoway">
+        <p class="section-label">Method</p>
+        <h2>Two-way tables</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">What they show</p>
+          <p style="margin-bottom:0;">A <strong>two-way table</strong> cross-classifies data by
+            two attributes, with row and column totals in the margins. The syllabus limits this to
+            <strong>combinations of two attributes</strong>.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>120 students were surveyed about whether they play sport and whether they play a
+            musical instrument.</p>
+          <table class="coord-table">
+            <tr><th></th><th>Plays sport</th><th>No sport</th><th>Total</th></tr>
+            <tr><th>Plays instrument</th><td>28</td><td>22</td><td>50</td></tr>
+            <tr><th>No instrument</th><td>47</td><td>23</td><td>70</td></tr>
+            <tr><th>Total</th><td>75</td><td>45</td><td>120</td></tr>
+          </table>
+          <p>One student is chosen at random.</p>
+          <p><strong>(a) \(P(\text{plays sport})\):</strong> \(\dfrac{75}{120} = 0.625\)</p>
+          <p><strong>(b) \(P(\text{both}):\)</strong> \(\dfrac{28}{120} \approx 0.2333\)</p>
+          <p><strong>(c) \(P(\text{neither}):\)</strong> \(\dfrac{23}{120} \approx 0.1917\)</p>
+          <p><strong>(d) \(P(\text{sport or instrument})\):</strong> everyone except the 23 who do
+            neither, so \(\dfrac{97}{120} \approx 0.8083\)</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Completing a table</p>
+          <p style="margin-bottom:0;">Every row and column must add to its total, and the two
+            grand totals must agree. Given enough entries you can always fill in the rest by
+            subtraction — start wherever only one value is missing from a line.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two-way table explorer</h3>
+          <p class="exercise-intro">Adjust the four inner cells and see every probability
+            recalculated.</p>
+          <div id="twSliders"></div>
+          <div id="twTable" style="margin-top:16px;"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">P(A)</div>
+              <div class="readout-value" id="roPA">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(B)</div>
+              <div class="readout-value" id="roPB">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(A and B)</div>
+              <div class="readout-value" id="roPAB">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(A or B)</div>
+              <div class="readout-value" id="roPAorB">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">P(neither)</div>
+              <div class="readout-value" id="roPNone">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="twNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise reading a table</h3>
+          <p class="exercise-intro">Use the 120-student table from Worked example 7. Give answers
+            to 4 decimal places.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(P(\text{plays an instrument})\)?</label>
+            <input class="exercise-input" id="twA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-tw="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTwA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(P(\text{sport but no instrument})\)?</label>
+            <input class="exercise-input" id="twB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-tw="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTwB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Of those who play sport, what fraction play an instrument?</label>
+            <input class="exercise-input" id="twC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-tw="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbTwC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>In a group of 80 people, 45 are female, 30 wear glasses, and 18 are females who wear
+              glasses. Complete a two-way table.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th></th><th>Glasses</th><th>No glasses</th><th>Total</th></tr>
+                  <tr><th>Female</th><td>18</td><td>27</td><td>45</td></tr>
+                  <tr><th>Male</th><td>12</td><td>23</td><td>35</td></tr>
+                  <tr><th>Total</th><td>30</td><td>50</td><td>80</td></tr>
+                </table>
+              </div></details></li>
+            <li>From your table, find \(P(\text{male with no glasses})\) and
+              \(P(\text{female or wears glasses})\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\frac{23}{80} = 0.2875\). Female or glasses: everyone except the 23 males
+                  without glasses, so \(\frac{57}{80} = 0.7125\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. VENN ─────────── -->
+      <div class="content-card" id="venn">
+        <p class="section-label">Method</p>
+        <h2>Venn diagrams</h2>
+
+        <p>The syllabus pairs two-way tables with <strong>Venn diagrams</strong>. They hold the
+          same four numbers, arranged differently: two overlapping circles inside a rectangle that
+          stands for everyone.</p>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 360 210" width="360" role="img" aria-label="Venn diagram of sport and instrument">
+            <rect class="edge-line" x="10" y="10" width="340" height="190"></rect>
+            <circle class="edge-line" cx="140" cy="105" r="70"></circle>
+            <circle class="edge-line" cx="220" cy="105" r="70"></circle>
+            <text class="node-label" x="78" y="40">Sport</text>
+            <text class="node-label" x="232" y="40">Instrument</text>
+            <text class="node-label" x="98" y="110">47</text>
+            <text class="node-label" x="170" y="110">28</text>
+            <text class="node-label" x="245" y="110">22</text>
+            <text class="node-label" x="318" y="190">23</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">The 120 students from Worked example 7. The overlap is
+          "both"; outside both circles is "neither".</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Reading the regions</p>
+          <ul style="margin-bottom:0;">
+            <li><strong>A and B</strong> &mdash; the overlap.</li>
+            <li><strong>A only</strong> &mdash; the part of A's circle outside the overlap.</li>
+            <li><strong>A or B</strong> &mdash; everything inside either circle (including the
+              overlap).</li>
+            <li><strong>Neither</strong> &mdash; inside the rectangle, outside both circles.</li>
+          </ul>
+          \[P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)\]
+          <p class="formula-where">Subtract the overlap because adding \(P(A)\) and \(P(B)\) counts
+            it twice.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Using the Venn diagram, find \(P(\text{sport or instrument})\) with the formula.</p>
+          \[\frac{75}{120} + \frac{50}{120} - \frac{28}{120} = \frac{97}{120} \approx 0.8083\]
+          <p>This matches the two-way table answer (everyone except the 23 who do neither) ✓</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Of 60 people, 35 like tea, 28 like coffee and 12 like both. Find the number in each
+              region of a Venn diagram.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Both 12; tea only \(35 - 12 = 23\); coffee only \(28 - 12 = 16\); neither
+                  \(60 - (23 + 12 + 16) = 9\).</p>
+              </div></details></li>
+            <li>Find \(P(\text{tea or coffee})\) in two ways.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Formula: \(\frac{35 + 28 - 12}{60} = \frac{51}{60} = 0.85\).
+                  Complement: \(1 - \frac{9}{60} = 0.85\) ✓</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. SOCIETY ─────────── -->
+      <div class="content-card" id="society">
+        <p class="section-label">Evaluation</p>
+        <h2>Probability in society</h2>
+
+        <p>The syllabus asks you to <em>examine the use of statistics and the associated
+          probabilities in shaping decisions made by the media, governments and companies</em>.</p>
+
+        <table class="coord-table">
+          <tr><th>Who</th><th>Use of probability</th><th>What to watch for</th></tr>
+          <tr>
+            <td><strong>Insurance</strong></td>
+            <td>Premiums set from the probability of a claim and its expected cost</td>
+            <td>Premiums must exceed the expected payout, or the insurer fails</td>
+          </tr>
+          <tr>
+            <td><strong>Medicine</strong></td>
+            <td>Drug approval from trial success rates and side-effect probabilities</td>
+            <td>Sample size; whether risks are stated in absolute or relative terms</td>
+          </tr>
+          <tr>
+            <td><strong>Government</strong></td>
+            <td>Policy from projected risks — disease spread, road tolls, climate</td>
+            <td>The assumptions behind the model</td>
+          </tr>
+          <tr>
+            <td><strong>Media</strong></td>
+            <td>Headlines from risk statistics</td>
+            <td>Relative risk sounds alarming where absolute risk is tiny</td>
+          </tr>
+          <tr>
+            <td><strong>Gambling</strong></td>
+            <td>Odds set so the expected return to the player is negative</td>
+            <td>The house edge is built into every game</td>
+          </tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9 &mdash; relative versus absolute risk</p>
+          <p>A headline reads: "New study: this food doubles your risk of a rare disease!" The
+            disease affects 2 in 100,000 people. Evaluate.</p>
+          <p style="border-left:2px solid var(--ink); padding-left:14px;">
+            "Doubling the risk raises it from 2 in 100,000 to 4 in 100,000 — an
+            <strong>absolute</strong> increase of just 0.002%. The <strong>relative</strong>
+            increase of 100% sounds dramatic, but the actual change in risk is negligible.<br><br>
+            Reporting only the relative risk is misleading. A reader should ask for the absolute
+            numbers, the sample size, and whether the study was observational (which cannot
+            establish causation) or a controlled trial."</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 10 &mdash; insurance</p>
+          <p>An insurer estimates a 1.2% annual chance of a $40,000 claim. What is the expected
+            payout per policy, and what does this imply for the premium?</p>
+          \[\text{Expected payout} = 0.012 \times 40\,000 = \$480\]
+          <p>The premium must exceed $480 to cover administration, profit and the risk of
+            worse-than-expected years. A premium of, say, $700 gives a $220 margin per policy —
+            which is why insurers need large numbers of policies for the average to be reliable.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Risk communication tool</h3>
+          <p class="exercise-intro">See how the same change looks in relative and absolute terms.</p>
+          <div id="riskSliders"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Baseline risk</div>
+              <div class="readout-value" id="roBase">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">New risk</div>
+              <div class="readout-value" id="roNew">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Relative increase</div>
+              <div class="readout-value" id="roRel">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Absolute increase</div>
+              <div class="readout-value" id="roAbs">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="riskNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 11 &mdash; exam style</p>
+          <p>A store sells a television for $1,200 and offers a 3-year extended warranty for $180.
+            Its records show that 6% of these televisions need a repair in that time, at an average
+            cost of $450.</p>
+          <p><strong>(a) Find the expected repair cost per television.</strong> [1 mark]</p>
+          <p>\(0.06 \times 450 = \$27\).</p>
+          <p><strong>(b) Find the store's expected profit per warranty sold.</strong> [1 mark]</p>
+          <p>\(180 - 27 = \$153\).</p>
+          <p><strong>(c) Should a customer buy the warranty? Discuss.</strong> [2 marks]</p>
+          <p>On average, no: the customer pays $180 to cover an expected cost of $27 &mdash; an
+            expected loss of $153. But averages hide the individual risk: a customer who could not
+            afford a $450 repair might still choose the certainty of the warranty. The store relies
+            on selling many warranties so that the average holds.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A treatment lowers the risk of a condition from 12 in 10,000 to 9 in 10,000. Give
+              the relative and absolute reductions.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Relative: \(\frac{3}{12} = 25\%\). Absolute: 3 in 10,000, which is 0.03
+                  percentage points.</p>
+              </div></details></li>
+            <li>A game costs $2. There is a 0.15 chance of winning $10, otherwise nothing. Find the
+              expected result per game.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Expected winnings: \(0.15 \times 10 = \$1.50\). Expected result:
+                  \(1.50 - 2 = -\$0.50\) per game &mdash; a loss of 50 cents on average.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>How many trials are enough?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#convergence">convergence simulator</a>.</p>
+        <ol>
+          <li>Set the true probability to 0.3. Record the relative frequency after 10, 50, 200,
+            1,000 and 2,000 trials, and how far each is from 0.3.</li>
+          <li>Describe the shape of the graph: where is it most erratic, and where does it settle?</li>
+          <li>Repeat with a true probability of 0.5. Is the pattern the same?</li>
+          <li>A company tests a new product on 10 customers and 7 like it. It announces "70% of
+            customers love it". Use your results to criticise this claim.</li>
+          <li>Roughly how many trials would you want before trusting an estimate to within about
+            0.02? Justify from your table.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1&ndash;3.</strong> With few trials the relative frequency jumps around and
+            can be far from the true value; with more trials it settles close to it. The same
+            pattern appears for any true probability.</p>
+          <p><strong>4.</strong> 10 customers is far too few: in the simulator, 10 trials often
+            miss the true probability by 0.1 or more. The true proportion could easily be 50% or
+            85%.</p>
+          <p><strong>5.</strong> Answers depend on the simulation, but typically several hundred
+            to a thousand or more. The error shrinks slowly: to halve it, you need about four
+            times as many trials.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">For evaluation questions, always distinguish relative from
+          absolute risk and comment on sample size.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-9', LESSON_IDX = 2;
+
+  /* ── Convergence simulator ────────────────────────────────── */
+  (function () {
+    var p = 0.5, seed = 12345;
+    var history = [];
+    /* Deterministic pseudo-random so results are reproducible */
+    function rnd() {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      return seed / 0x7fffffff;
+    }
+    var redraw = IE.plot('plotConv', {
+      width: 460, height: 260, xMin: 0, xMax: 500, yMin: 0, yMax: 1,
+      xStep: 100, yStep: 0.25, xLabel: 'trials', yLabel: 'relative frequency',
+      curves: []
+    });
+
+    function run(n) {
+      history = [];
+      seed = 12345;
+      var succ = 0;
+      for (var i = 1; i <= n; i++) {
+        if (rnd() < p) succ++;
+        if (i % Math.max(1, Math.floor(n / 200)) === 0 || i === n) history.push([i, succ / i]);
+      }
+      return succ;
+    }
+
+    var total = 500, successes = 0;
+    function update() {
+      successes = run(total);
+      redraw({
+        xMax: total,
+        xStep: Math.max(1, Math.round(total / 5)),
+        curves: [
+          { fn: function (x) {
+              if (!history.length) return p;
+              var i = 0;
+              while (i < history.length - 1 && history[i][0] < x) i++;
+              return history[i][1];
+            } },
+          { fn: function () { return p; }, className: 'plot-curve-2' }
+        ]
+      });
+      var rf = successes / total;
+      document.getElementById('roTrials').textContent = String(total);
+      document.getElementById('roSucc').textContent   = String(successes);
+      document.getElementById('roRF').textContent     = rf.toFixed(4);
+      document.getElementById('roTrue').textContent   = p.toFixed(4);
+      var note = document.getElementById('convNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'After ' + total + ' trials the relative frequency is ' + rf.toFixed(4) +
+        ', differing from the true probability by ' + Math.abs(rf - p).toFixed(4) +
+        '. Increase the trials and watch the jagged line settle towards the dashed true value.';
+    }
+
+    var host = 'convSliders';
+    IE.slider({ mount: host, label: 'True P', min: 0.05, max: 0.95, step: 0.05, value: p,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { p = v; update(); } });
+    IE.slider({ mount: host, label: 'Trials', min: 10, max: 2000, step: 10, value: total,
+                onInput: function (v) { total = v; update(); } });
+    update();
+  })();
+
+  /* ── Expected frequency ───────────────────────────────────── */
+  (function () {
+    var n = 300, p = 1 / 6;
+    function update() {
+      var e = n * p;
+      document.getElementById('roExp').textContent    = e.toFixed(2);
+      document.getElementById('roExpNot').textContent = (n - e).toFixed(2);
+      var note = document.getElementById('expNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'Expected frequency = np = ' + n + ' × ' + p.toFixed(4) + ' = ' + e.toFixed(2) +
+        '. This is a long-run average, not a guarantee — an actual run of ' + n +
+        ' trials will give something near ' + Math.round(e) + ', rarely exactly that.';
+    }
+    var host = 'expSliders';
+    IE.slider({ mount: host, label: 'Trials n', min: 10, max: 5000, step: 10, value: n,
+                onInput: function (v) { n = v; update(); } });
+    IE.slider({ mount: host, label: 'Probability p', min: 0.01, max: 0.99, step: 0.01, value: p,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { p = v; update(); } });
+    update();
+  })();
+
+  /* ── Two-way table ────────────────────────────────────────── */
+  (function () {
+    var ab = 28, aNb = 22, nAb = 47, nAnB = 23;
+    function update() {
+      var rowA = ab + aNb, rowN = nAb + nAnB;
+      var colB = ab + nAb, colN = aNb + nAnB;
+      var n = rowA + rowN;
+      var html = '<table class="coord-table">' +
+        '<tr><th></th><th>Plays sport</th><th>No sport</th><th>Total</th></tr>' +
+        '<tr><th>Instrument</th><td>' + ab + '</td><td>' + aNb + '</td><td>' + rowA + '</td></tr>' +
+        '<tr><th>No instrument</th><td>' + nAb + '</td><td>' + nAnB + '</td><td>' + rowN + '</td></tr>' +
+        '<tr><th>Total</th><td>' + colB + '</td><td>' + colN + '</td><td>' + n + '</td></tr></table>';
+      document.getElementById('twTable').innerHTML = html;
+      document.getElementById('roPA').textContent     = (rowA / n).toFixed(4);
+      document.getElementById('roPB').textContent     = (colB / n).toFixed(4);
+      document.getElementById('roPAB').textContent    = (ab / n).toFixed(4);
+      document.getElementById('roPAorB').textContent  = ((n - nAnB) / n).toFixed(4);
+      document.getElementById('roPNone').textContent  = (nAnB / n).toFixed(4);
+      var note = document.getElementById('twNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'P(A) = instrument row ÷ total; P(A and B) = the single overlap cell ÷ total; ' +
+        'P(A or B) = everyone except the ' + nAnB + ' in neither, so (' + n + ' − ' + nAnB + ') ÷ ' + n +
+        '. Rows and columns both add to ' + n + ' ✓';
+    }
+    var host = 'twSliders';
+    IE.slider({ mount: host, label: 'Both', min: 0, max: 60, step: 1, value: ab, onInput: function (v) { ab = v; update(); } });
+    IE.slider({ mount: host, label: 'Instrument only', min: 0, max: 60, step: 1, value: aNb, onInput: function (v) { aNb = v; update(); } });
+    IE.slider({ mount: host, label: 'Sport only', min: 0, max: 60, step: 1, value: nAb, onInput: function (v) { nAb = v; update(); } });
+    IE.slider({ mount: host, label: 'Neither', min: 0, max: 60, step: 1, value: nAnB, onInput: function (v) { nAnB = v; update(); } });
+    update();
+  })();
+
+  /* ── Two-way exercises ────────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [50 / 120, 'The instrument row totals 50 out of 120 students: 50/120 ≈ 0.4167.'],
+      B: [47 / 120, 'Sport but no instrument is the single cell 47, so 47/120 ≈ 0.3917.'],
+      C: [28 / 75,  'Restrict to the 75 who play sport; of those, 28 play an instrument: 28/75 ≈ 0.3733.']
+    };
+    document.querySelectorAll('[data-tw]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.tw, fb = document.getElementById('fbTw' + k);
+        var raw = (document.getElementById('tw' + k).value || '').trim();
+        var g;
+        if (raw.indexOf('/') !== -1) {
+          var parts = raw.split('/');
+          g = parseFloat(parts[0]) / parseFloat(parts[1]);
+        } else {
+          g = parseFloat(raw.replace(/[^\d.\-]/g, ''));
+        }
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number or fraction.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(4) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Risk communication ───────────────────────────────────── */
+  (function () {
+    var basePer100k = 2, multiplier = 2;
+    function update() {
+      var base = basePer100k / 100000;
+      var nw = base * multiplier;
+      document.getElementById('roBase').textContent = basePer100k + ' in 100,000 (' + (base * 100).toFixed(4) + '%)';
+      document.getElementById('roNew').textContent  = (basePer100k * multiplier).toFixed(1) + ' in 100,000 (' + (nw * 100).toFixed(4) + '%)';
+      document.getElementById('roRel').textContent  = ((multiplier - 1) * 100).toFixed(0) + '%';
+      document.getElementById('roAbs').textContent  = ((nw - base) * 100).toFixed(4) + ' percentage points';
+      var note = document.getElementById('riskNote');
+      note.className = 'exercise-feedback' + (multiplier >= 2 && basePer100k <= 50 ? ' wrong' : '');
+      note.textContent = 'A headline could say "risk increases by ' + ((multiplier - 1) * 100).toFixed(0) +
+        '%" — which sounds alarming. In absolute terms the risk rises from ' + basePer100k + ' to ' +
+        (basePer100k * multiplier).toFixed(1) + ' per 100,000, a change of ' +
+        ((nw - base) * 100).toFixed(4) + ' percentage points. Always ask for the absolute figures.';
+    }
+    var host = 'riskSliders';
+    IE.slider({ mount: host, label: 'Baseline per 100k', min: 1, max: 5000, step: 1, value: basePer100k,
+                onInput: function (v) { basePer100k = v; update(); } });
+    IE.slider({ mount: host, label: 'Risk multiplier', min: 1, max: 5, step: 0.1, value: multiplier,
+                format: function (v) { return '×' + v.toFixed(1); },
+                onInput: function (v) { multiplier = v; update(); } });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'A drawing pin lands point-up 84 times in 150 drops. What is the relative frequency?',
+      opts: ['A) 0.56', 'B) 0.84', 'C) 1.79', 'D) 0.44'],
+      correct: 0,
+      explanation: 'A is correct. Relative frequency \\(= \\dfrac{84}{150} = 0.56\\). Option C divides the wrong way round, giving an impossible value above 1.'
+    },
+    {
+      q: 'Why must relative frequency be used for a drawing pin rather than theoretical probability?',
+      opts: [
+        'A) Drawing pins are too small to count',
+        'B) The outcomes are not equally likely and cannot be calculated from the shape',
+        'C) Theoretical probability only works for coins',
+        'D) Relative frequency is always more accurate'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Point-up and point-down are not equally likely — the probability depends on the pin\'s mass distribution in ways that cannot be computed. It must be measured experimentally.'
+    },
+    {
+      q: 'As the number of trials increases, the relative frequency:',
+      opts: [
+        'A) Moves further from the theoretical probability',
+        'B) Becomes closer in value to the theoretical probability',
+        'C) Stays exactly the same',
+        'D) Always equals exactly 0.5'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Short runs are erratic, but as trials accumulate the <em>proportion</em> settles towards the true probability. Note the raw count of successes may drift further from the expected number even as the proportion converges.'
+    },
+    {
+      q: 'A fair die is rolled 480 times. What is the expected number of fives?',
+      opts: ['A) 96', 'B) 80', 'C) 48', 'D) 240'],
+      correct: 1,
+      explanation: 'B is correct. \\(np = 480 \\times \\dfrac{1}{6} = 80\\). Option A uses \\(\\dfrac{1}{5}\\) instead of \\(\\dfrac{1}{6}\\).'
+    },
+    {
+      q: 'In a two-way table of 200 people, 45 are in the "both" cell. What is \\(P(\\text{both})\\)?',
+      opts: ['A) 0.45', 'B) 0.225', 'C) 4.44', 'D) 0.775'],
+      correct: 1,
+      explanation: 'B is correct. \\(\\dfrac{45}{200} = 0.225\\). The grand total is always the denominator when selecting one person at random from the whole group.'
+    },
+    {
+      q: 'A factory has a 2.5% defect rate. How many defects are expected in 4,000 items?',
+      opts: ['A) 25', 'B) 100', 'C) 160', 'D) 1,000'],
+      correct: 1,
+      explanation: 'B is correct. \\(np = 4000 \\times 0.025 = 100\\). Remember to convert the percentage to a decimal before multiplying.'
+    },
+    {
+      q: 'A headline says a food "triples the risk" of a disease affecting 3 in 100,000 people. What is the best evaluation?',
+      opts: [
+        'A) The risk is now very high and the food should be banned',
+        'B) The absolute risk rises from 3 to 9 per 100,000 — a tiny increase presented in alarming relative terms',
+        'C) The risk has increased by 3 percentage points',
+        'D) The claim must be false'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Tripling a very small risk leaves it very small: 9 in 100,000 is still 0.009%. Reporting only the relative increase (200%) without the absolute figures is misleading, which is exactly what to identify in such questions.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain the difference between theoretical probability and relative frequency, and when each is used.',
+      marks: 4,
+      steps: [
+        'Theoretical probability counts equally likely outcomes: favourable ÷ total.',
+        'It requires the outcomes to be equally likely and finite, as with a fair die.',
+        'Relative frequency divides observed occurrences by the number of trials.',
+        'It is used when outcomes are not equally likely or cannot be calculated — a drawing pin, weather, a biased die.'
+      ],
+      answer: 'Theoretical probability counts equally likely outcomes and is exact; relative frequency estimates from observed data and is used whenever outcomes are not equally likely or cannot be computed in advance.'
+    },
+    {
+      q: 'A spinner is spun 250 times and lands on red 92 times. Estimate \\(P(\\text{red})\\), and predict the reds in 800 spins.',
+      marks: 4,
+      steps: [
+        'Relative frequency \\(= \\dfrac{92}{250} = 0.368\\).',
+        'Use this as the estimate of \\(p\\).',
+        'Expected in 800 spins \\(= np = 800 \\times 0.368\\).',
+        '\\(= 294.4\\), so about 294 reds.'
+      ],
+      answer: '\\(P(\\text{red}) \\approx 0.368\\); about 294 reds expected in 800 spins.'
+    },
+    {
+      q: 'A die is rolled 900 times and shows a two 203 times. Is the die fair? Justify.',
+      marks: 5,
+      steps: [
+        'Relative frequency \\(= \\dfrac{203}{900} = 0.2256\\).',
+        'A fair die would give \\(\\dfrac{1}{6} = 0.1667\\).',
+        'Expected number of twos \\(= 900 \\times \\dfrac{1}{6} = 150\\).',
+        'The observed 203 is 53 more than expected.',
+        'Over 900 trials that is a large excess, so the die appears biased towards two.'
+      ],
+      answer: 'Probably not fair. The relative frequency of 0.2256 substantially exceeds the expected 0.1667, and 203 twos against an expected 150 is a large discrepancy over 900 rolls — too big to be plausibly explained by chance.'
+    },
+    {
+      q: 'Explain why increasing the number of trials improves a relative-frequency estimate.',
+      marks: 3,
+      steps: [
+        'In a short run, a few unusual results have a large effect on the proportion.',
+        'As trials accumulate, individual results have proportionally less influence.',
+        'Random variation averages out over many trials.',
+        'So the relative frequency settles closer and closer to the true probability.'
+      ],
+      answer: 'Because random fluctuations average out as trials accumulate. In a short run one unusual result skews the proportion badly; over many trials each result matters proportionally less, so the estimate converges on the true probability.'
+    },
+    {
+      q: 'A factory has a 1.8% defect rate. Find the expected number of defects in 2,500 items, and the expected number of acceptable items.',
+      marks: 3,
+      steps: [
+        'Defects: \\(np = 2500 \\times 0.018 = 45\\).',
+        'Acceptable: \\(2500 - 45 = 2455\\).',
+        'Or directly: \\(2500 \\times 0.982 = 2455\\) ✓'
+      ],
+      answer: '45 defects and 2,455 acceptable items.'
+    },
+    {
+      q: 'A biased coin gives 288 heads in 400 tosses. Estimate \\(p\\), then find the expected heads in 1,000 tosses.',
+      marks: 4,
+      steps: [
+        '\\(p = \\dfrac{288}{400} = 0.72\\).',
+        'Expected in 1,000 tosses \\(= 1000 \\times 0.72\\).',
+        '\\(= 720\\) heads.'
+      ],
+      answer: '\\(p \\approx 0.72\\); about 720 heads expected.'
+    },
+    {
+      q: 'Explain why an expected frequency of 47.5 is meaningful even though you cannot observe half an event.',
+      marks: 3,
+      steps: [
+        'Expected frequency is a long-run average across many repetitions.',
+        'Averages need not be whole numbers, even when individual counts are.',
+        'It means that over many sets of trials, the average count would be about 47.5.',
+        'Any single run would give a whole number near 47 or 48.'
+      ],
+      answer: 'Because it is an average over many repetitions, not a prediction for one run. Averages need not be whole numbers — any single trial set gives 47 or 48, but the long-run mean is 47.5.'
+    },
+    {
+      q: 'In a survey of 180 people, 62 own a pet and exercise regularly, 34 own a pet but do not exercise, 49 exercise but own no pet. Complete the two-way table and find \\(P(\\text{neither})\\).',
+      marks: 5,
+      steps: [
+        'Pet owners: \\(62 + 34 = 96\\).',
+        'Exercisers: \\(62 + 49 = 111\\).',
+        'Non-pet-owners: \\(180 - 96 = 84\\).',
+        'Neither \\(= 84 - 49 = 35\\).',
+        '\\(P(\\text{neither}) = \\dfrac{35}{180} \\approx 0.1944\\).'
+      ],
+      answer: 'The "neither" cell is 35, so \\(P(\\text{neither}) = \\dfrac{35}{180} \\approx 0.1944\\).'
+    },
+    {
+      q: 'Using the table above, find \\(P(\\text{owns a pet})\\), \\(P(\\text{exercises})\\) and \\(P(\\text{pet or exercise})\\).',
+      marks: 4,
+      steps: [
+        '\\(P(\\text{pet}) = \\dfrac{96}{180} \\approx 0.5333\\).',
+        '\\(P(\\text{exercise}) = \\dfrac{111}{180} \\approx 0.6167\\).',
+        '"Pet or exercise" is everyone except the 35 in neither.',
+        '\\(P = \\dfrac{145}{180} \\approx 0.8056\\).'
+      ],
+      answer: '\\(P(\\text{pet}) \\approx 0.5333\\); \\(P(\\text{exercise}) \\approx 0.6167\\); \\(P(\\text{pet or exercise}) \\approx 0.8056\\).'
+    },
+    {
+      q: 'A media report states that a treatment "cuts your risk by 50%". The untreated risk is 8 in 10,000. Evaluate the claim.',
+      marks: 5,
+      steps: [
+        'A 50% relative reduction halves the risk.',
+        'From 8 in 10,000 to 4 in 10,000.',
+        'In percentage terms: from 0.08% to 0.04%.',
+        'The absolute reduction is only 0.04 percentage points.',
+        'The relative figure sounds impressive but the absolute benefit is very small.'
+      ],
+      answer: 'The risk falls from 8 to 4 per 10,000 — an absolute reduction of just 0.04 percentage points. The "50%" figure is technically accurate but misleading without the absolute numbers, since the baseline risk was already tiny.'
+    },
+    {
+      q: 'An insurer estimates a 0.8% annual chance of a $60,000 claim. Find the expected payout per policy and explain how the premium is set.',
+      marks: 5,
+      steps: [
+        'Expected payout \\(= 0.008 \\times 60\\,000 = \\$480\\).',
+        'This is the average cost per policy in the long run.',
+        'The premium must exceed $480 to cover administration and profit.',
+        'It must also allow a buffer for years with worse-than-average claims.',
+        'A large number of policies makes the average reliable — the law of large numbers.'
+      ],
+      answer: 'Expected payout $480 per policy. The premium must exceed this to cover administration, profit and the risk of bad years — and the insurer needs many policies so the actual claim rate stays close to the expected 0.8%.'
+    },
+    {
+      q: 'A game costs $5 to play. There is a 15% chance of winning $25 and otherwise nothing. Find the expected return per game and advise a player.',
+      marks: 5,
+      steps: [
+        'Expected winnings \\(= 0.15 \\times 25 = \\$3.75\\).',
+        'Cost to play \\(= \\$5\\).',
+        'Expected net result \\(= 3.75 - 5 = -\\$1.25\\) per game.',
+        'The player loses $1.25 on average every time.',
+        'Over many games the losses accumulate predictably.'
+      ],
+      answer: 'The expected return is \\(-\\$1.25\\) per game. The player loses on average $1.25 each time, so over many games a loss is near-certain — the game is designed with a house edge.'
+    },
+    {
+      q: 'A survey of 400 people finds 148 support a policy. Estimate the probability, and predict the number of supporters in a city of 90,000, noting one limitation.',
+      marks: 5,
+      steps: [
+        'Relative frequency \\(= \\dfrac{148}{400} = 0.37\\).',
+        'Expected supporters \\(= 90\\,000 \\times 0.37\\).',
+        '\\(= 33\\,300\\) people.',
+        'Limitation: the estimate assumes the 400 surveyed are representative of the whole city.',
+        'If the sample was biased — by location, age or method of contact — the prediction is unreliable.'
+      ],
+      answer: 'About 0.37, predicting roughly 33,300 supporters. The limitation is representativeness: unless the 400 were randomly and fairly selected across the city, the sample may be biased and the prediction wrong.'
+    },
+    {
+      q: 'Explain how insurance companies, governments and the media each use probability, and one risk associated with each.',
+      marks: 6,
+      steps: [
+        'Insurers set premiums from the probability and cost of claims; the risk is underestimating claim rates and becoming insolvent.',
+        'Governments use projected probabilities for policy — disease spread, road safety, climate; the risk is that the model\'s assumptions are wrong.',
+        'The media report risk statistics in headlines; the risk is presenting relative rather than absolute risk, which misleads readers.',
+        'In each case the sample size and assumptions determine reliability.'
+      ],
+      answer: 'Insurers price premiums from expected claim costs, risking insolvency if the probabilities are underestimated. Governments set policy from projected risks, which depend entirely on the model\'s assumptions. Media report risk statistics, often as relative rather than absolute risk, which exaggerates small changes and misleads readers.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

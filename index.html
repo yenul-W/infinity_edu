@@ -3,358 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preliminary Mathematics Standard</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-style='italic' font-size='22' fill='%23fff'>∞</text></svg>">
+  <title>Mathematics Standard</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='22' fill='%23fff'>∞</text></svg>">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <script>
+    // Jump straight to the remembered year unless the picker was asked for explicitly.
+    (function () {
+      if (location.search.indexOf('pick=1') !== -1) return;
+      try {
+        var y = localStorage.getItem('ie_year');
+        if (y === '11') location.replace('year-11.html');
+        else if (y === '12') location.replace('year-12.html');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
-  <!-- ── Sticky nav bar ───────────────────────────────────────── -->
   <nav class="site-nav">
     <div class="nav-inner">
-      <span class="nav-eyebrow">Year 11</span>
+      <span class="nav-eyebrow">Mathematics Standard</span>
       <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode">
         <span class="toggle-icon">dark</span>
       </button>
     </div>
   </nav>
 
-  <!-- ── Page title ───────────────────────────────────────────── -->
-  <div class="page-heading">
-    <h1 class="page-title">Preliminary Mathematics Standard</h1>
-  </div>
-
-  <!-- ── Live session bar ────────────────────────────────────── -->
-  <div class="live-session-bar" id="liveSessionBar">
-    <span class="live-dot"></span>
-    <span class="live-label" id="liveLabel">Live Lesson &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST</span>
-    <a class="live-join-btn" id="liveJoinBtn" href="https://meet.google.com/xdv-qwag-kti" target="_blank" rel="noreferrer noopener">Join Google Meet &rarr;</a>
-  </div>
-
-  <!-- ── 4-column card grid ───────────────────────────────────── -->
-  <main class="site-main">
-
-    <!-- ── Overall progress summary ───────────────────────────── -->
-    <div class="progress-summary">
-      <span class="progress-summary-label" id="progressSummaryLabel">0 / 0 lessons complete</span>
-      <div class="progress-summary-track"><div class="progress-summary-fill" id="progressSummaryFill"></div></div>
+  <main class="year-picker">
+    <div class="year-picker-head">
+      <p class="year-picker-eyebrow">Choose your course</p>
+      <h1 class="year-picker-title">Mathematics Standard</h1>
     </div>
 
-    <div class="topic-grid">
+    <div class="year-grid">
 
-      <!-- 01 Formulas & Equations — New York City -->
-      <div class="topic-card topic-card-1" id="card-1" onclick="window.location.href='year-11-maths/1. formulas-and-equations/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-1" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/nyc-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
+      <a class="year-card" href="year-11.html" data-year="11">
+        <span class="year-card-num">11</span>
+        <div class="year-card-body">
+          <p class="year-card-eyebrow">Preliminary</p>
+          <h2 class="year-card-title">Year 11</h2>
+          <ul class="year-card-list">
+            <li>9 topics</li>
+            <li>PDF slides &amp; interactive lessons</li>
+            <li>Past-paper library</li>
+          </ul>
         </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">01</span>
-          </div>
-          <h2 class="card-title">Formulas &amp; Equations</h2>
-          <p class="card-desc">Substitution, equations, and formula interpretation</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa346f5353" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
+        <span class="year-card-cta">Enter <span class="cta-arrow">&rarr;</span></span>
+      </a>
 
-      <!-- 02 Linear Relationships — Sequential -->
-      <div class="topic-card topic-card-6" id="card-6" onclick="window.location.href='year-11-maths/2. linear-relationships/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-6" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/seq-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
+      <a class="year-card" href="year-12.html" data-year="12">
+        <span class="year-card-num">12</span>
+        <div class="year-card-body">
+          <p class="year-card-eyebrow">HSC &mdash; Standard 2</p>
+          <h2 class="year-card-title">Year 12</h2>
+          <ul class="year-card-list">
+            <li>10 focus areas</li>
+            <li>Fully interactive lessons</li>
+            <li>Homework &amp; revision per topic</li>
+          </ul>
         </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">02</span>
-          </div>
-          <h2 class="card-title">Linear Relationships</h2>
-          <p class="card-desc">Graphing lines, gradient, intercept, and variation</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fabe84d89c" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 03 Earning Money — Los Angeles -->
-      <div class="topic-card topic-card-2" id="card-2" onclick="window.location.href='year-11-maths/3. earning-money/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-2" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/la-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">03</span>
-          </div>
-          <h2 class="card-title">Earning Money</h2>
-          <p class="card-desc">Wages, tax, leave loading, and deductions</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/faacdf9b3d" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 04 Managing Money — Melbourne -->
-      <div class="topic-card topic-card-3" id="card-3" onclick="window.location.href='year-11-maths/4. managing-money/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-3" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/melbourne-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">04</span>
-          </div>
-          <h2 class="card-title">Managing Money</h2>
-          <p class="card-desc">Budgeting, loans, interest, and financial planning</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa8d2fb431" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05 Applications of Measurement — Green -->
-      <div class="topic-card topic-card-5" id="card-5" onclick="window.location.href='year-11-maths/5. applications-of-measurement/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-5" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/green-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">05</span>
-          </div>
-          <h2 class="card-title">Applications of Measurement</h2>
-          <p class="card-desc">Units, area, volume, and the Trapezoidal rule</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fad74ae493" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 06 Data Analysis — Chicago -->
-      <div class="topic-card topic-card-4" id="card-4" onclick="window.location.href='year-11-maths/6. data-analysis/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-4" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/chicago-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">06</span>
-          </div>
-          <h2 class="card-title">Data Analysis</h2>
-          <p class="card-desc">Statistics, graphs, central tendency, and spread</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa4de413b8" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 08 Time and Location — London -->
-      <div class="topic-card topic-card-8" id="card-8" onclick="window.location.href='year-11-maths/8. time-and-location/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-8" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/london-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">08</span>
-          </div>
-          <h2 class="card-title">Time and Location</h2>
-          <p class="card-desc">Latitude, longitude, time zones and UTC</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fa136ea49c" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 09 Networks, Paths and Trees — LAX -->
-      <div class="topic-card topic-card-9" id="card-9" onclick="window.location.href='year-11-maths/9. networks-paths-and-trees/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-9" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/lax-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">09</span>
-          </div>
-          <h2 class="card-title">Networks, Paths and Trees</h2>
-          <p class="card-desc">Vertices, edges, shortest paths and spanning trees</p>
-          <div class="card-footer">
-            <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-11/fabf235394" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 07 Revision — Thailand -->
-      <div class="topic-card topic-card-7" id="card-7" onclick="window.location.href='year-11-maths/7. revision/index.html'" style="cursor:pointer;">
-        <span class="complete-badge">&#10003; Complete</span>
-        <div class="card-scene">
-          <video class="scene-video" id="vid-7" loop muted playsinline preload="none">
-            <source src="assets/city-gifs/th-day.mp4" type="video/mp4">
-          </video>
-          <div class="scene-gradient"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-top-row">
-            <span class="card-num">07</span>
-          </div>
-          <h2 class="card-title">Revision</h2>
-          <p class="card-desc">Mixed practice across all preliminary topics</p>
-          <div class="card-footer">
-            <span class="card-cta">Browse <span class="cta-arrow">&rarr;</span></span>
-          </div>
-        </div>
-      </div>
+        <span class="year-card-cta">Enter <span class="cta-arrow">&rarr;</span></span>
+      </a>
 
     </div>
   </main>
 
-  <!-- ── Survey section ─────────────────────────────────────── -->
-  <!--
-    SETUP: Replace the iframe src below with your Google Forms embed URL.
-    Steps:
-      1. Go to forms.google.com and create a new form.
-      2. Add these 4 questions:
-           Q1 (Multiple choice, required): "How do you find the site layout?"
-               Options: Confusing / A bit hard to navigate / It's OK / Pretty clear / Really clear
-           Q2 (Multiple choice, required): "What do you think of the colour scheme?"
-               Options: Love it / It's alright / Not my thing
-           Q3 (Multiple choice, required): "For lessons, do you prefer PDF slides or interactive lessons?"
-               Options: PDF slides / Interactive lessons / Both work fine / No preference
-           Q4 (Short answer, optional): "Anything else you'd like to say?"
-      3. Click Send → Embed icon (<>) → copy the src= URL from the <iframe> code shown.
-      4. Paste that URL below, replacing REPLACE_WITH_GOOGLE_FORMS_EMBED_URL.
-  -->
-  <section class="survey-section" id="survey">
-    <div class="survey-inner">
-      <p class="survey-eyebrow">30 seconds</p>
-      <h2 class="survey-heading">Quick feedback</h2>
-      <p class="survey-sub">Four questions — helps make this site better for you.</p>
-      <form id="surveyForm" class="survey-form" novalidate>
-
-        <fieldset class="survey-fieldset">
-          <legend class="survey-legend">How do you find the site layout?</legend>
-          <div class="survey-options">
-            <label class="survey-option"><input type="radio" name="layout" value="Confusing"><span>Confusing</span></label>
-            <label class="survey-option"><input type="radio" name="layout" value="A bit hard to navigate"><span>A bit hard to navigate</span></label>
-            <label class="survey-option"><input type="radio" name="layout" value="It's OK"><span>It&rsquo;s OK</span></label>
-            <label class="survey-option"><input type="radio" name="layout" value="Pretty clear"><span>Pretty clear</span></label>
-            <label class="survey-option"><input type="radio" name="layout" value="Really clear"><span>Really clear</span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="survey-fieldset">
-          <legend class="survey-legend">What do you think of the colour scheme?</legend>
-          <div class="survey-options">
-            <label class="survey-option"><input type="radio" name="colour" value="Love it"><span>Love it</span></label>
-            <label class="survey-option"><input type="radio" name="colour" value="It's alright"><span>It&rsquo;s alright</span></label>
-            <label class="survey-option"><input type="radio" name="colour" value="Not my thing"><span>Not my thing</span></label>
-            <label class="survey-option"><input type="radio" name="colour" value="I need more colour"><span>I need more colour</span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="survey-fieldset">
-          <legend class="survey-legend">For lessons, do you prefer PDF slides or interactive lessons?</legend>
-          <div class="survey-options">
-            <label class="survey-option"><input type="radio" name="format" value="PDF slides"><span>PDF slides</span></label>
-            <label class="survey-option"><input type="radio" name="format" value="Interactive lessons"><span>Interactive lessons</span></label>
-            <label class="survey-option"><input type="radio" name="format" value="Both work fine"><span>Both work fine</span></label>
-            <label class="survey-option"><input type="radio" name="format" value="No preference"><span>No preference</span></label>
-          </div>
-        </fieldset>
-
-        <div class="survey-fieldset">
-          <label class="survey-legend" for="surveyOther">Anything else you&rsquo;d like to say? <span class="survey-optional">(optional)</span></label>
-          <textarea id="surveyOther" name="other" class="survey-textarea" rows="3" placeholder="Your thoughts…"></textarea>
-        </div>
-
-        <div class="survey-submit-row">
-          <button type="submit" class="survey-submit">Submit feedback &rarr;</button>
-        </div>
-      </form>
-      <p class="survey-done" id="surveyDone" style="display:none">Response recorded &mdash; thank you.</p>
-    </div>
-  </section>
-
   <script>
     // ── Dark mode ───────────────────────────────────────────────
-    const VIDEO_SRCS = {
-      'vid-1': { day: 'assets/city-gifs/nyc-day.mp4',       night: 'assets/city-gifs/nyc-night.mp4' },
-      'vid-2': { day: 'assets/city-gifs/la-day.mp4',        night: 'assets/city-gifs/la-night.mp4' },
-      'vid-3': { day: 'assets/city-gifs/melbourne-day.mp4', night: 'assets/city-gifs/melbourne-night.mp4' },
-      'vid-4': { day: 'assets/city-gifs/chicago-day.mp4',   night: 'assets/city-gifs/chicago-night.mp4' },
-      'vid-5': { day: 'assets/city-gifs/green-day.mp4',     night: 'assets/city-gifs/green-night.mp4' },
-      'vid-6': { day: 'assets/city-gifs/seq-day.mp4',       night: 'assets/city-gifs/seq-night.mp4' },
-      'vid-7': { day: 'assets/city-gifs/th-day.mp4',        night: 'assets/city-gifs/th-night.mp4' },
-      'vid-8': { day: 'assets/city-gifs/london-day.mp4',    night: 'assets/city-gifs/london-night.mp4' },
-      'vid-9': { day: 'assets/city-gifs/lax-day.mp4',       night: 'assets/city-gifs/lax-night.mp4' },
-    };
-    // Videos are heavy (~15MB each); only load/play the ones scrolled into view.
-    let videosDark = false;
-    function applyVideoSrcs(dark) {
-      videosDark = dark;
-      for (const [id, srcs] of Object.entries(VIDEO_SRCS)) {
-        const vid = document.getElementById(id);
-        if (!vid || !vid.dataset.loaded) continue;
-        vid.querySelector('source').src = dark ? srcs.night : srcs.day;
-        vid.load();
-        if (vid.dataset.visible === '1') vid.play().catch(() => {});
-      }
-    }
-    const videoObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const vid = entry.target;
-        vid.dataset.visible = entry.isIntersecting ? '1' : '0';
-        if (entry.isIntersecting) {
-          if (!vid.dataset.loaded) {
-            const srcs = VIDEO_SRCS[vid.id];
-            if (srcs) {
-              vid.querySelector('source').src = videosDark ? srcs.night : srcs.day;
-              vid.load();
-              vid.dataset.loaded = '1';
-            }
-          }
-          vid.play().catch(() => {});
-        } else {
-          vid.pause();
-        }
-      });
-    }, { rootMargin: '200px' });
-    document.querySelectorAll('.scene-video').forEach(v => videoObserver.observe(v));
     function isNightByTime() {
       const h = new Date().getHours();
       return h < 6 || h >= 19;
@@ -366,14 +82,11 @@
     const isDark = savedTheme ? savedTheme === 'dark' : isNightByTime();
     if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
     else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
-    applyVideoSrcs(isDark);
     toggle.addEventListener('click', () => {
       const isDarkNow = html.classList.toggle('dark-mode');
       localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
       toggleIcon.textContent = isDarkNow ? 'light' : 'dark';
-      applyVideoSrcs(isDarkNow);
     });
-    // 2. Keyboard shortcut: d = toggle dark mode
     document.addEventListener('keydown', e => {
       if (e.key === 'd' && !e.metaKey && !e.ctrlKey) {
         const tag = document.activeElement && document.activeElement.tagName;
@@ -382,158 +95,12 @@
       }
     });
 
-    // ── Live session bar ────────────────────────────────────────
-    function getNextSaturdayLabel() {
-      const now = new Date();
-      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-      const day = sydney.getDay();
-      const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
-      let daysUntilSat;
-      if (day === 6) {
-        daysUntilSat = (totalMins >= 480) ? 7 : 0;
-      } else {
-        daysUntilSat = (6 - day + 7) % 7 || 7;
-      }
-      const target = new Date(now.getTime() + daysUntilSat * 86400 * 1000);
-      const dateStr = target.toLocaleDateString('en-AU', {
-        weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Australia/Sydney'
-      }).replace(',', '').replace(/\./g, '');
-      return `Next Lesson &nbsp;&middot;&nbsp; ${dateStr} &nbsp;&middot;&nbsp; 7:00 – 8:00 AM AEST`;
-    }
-
-    function updateLiveStatus() {
-      const now = new Date();
-      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-      const day = sydney.getDay();
-      const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
-      const bar = document.getElementById('liveSessionBar');
-      const label = document.getElementById('liveLabel');
-      bar.classList.remove('live-session-bar--live', 'live-session-bar--soon', 'live-session-bar--idle');
-      if (day === 6 && totalMins >= 420 && totalMins < 480) {
-        bar.classList.add('live-session-bar--live');
-        label.innerHTML = 'Live Now &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST';
-      } else if (day === 6 && totalMins >= 405 && totalMins < 420) {
-        const minsLeft = 420 - totalMins;
-        bar.classList.add('live-session-bar--soon');
-        label.innerHTML = `Starting Soon  ·  in ~${minsLeft}m`;
-      } else {
-        bar.classList.add('live-session-bar--idle');
-        label.innerHTML = getNextSaturdayLabel();
-      }
-    }
-    updateLiveStatus();
-    setInterval(updateLiveStatus, 60000);
-
-    // ── Completion badges + progress rings ──────────────────────
-    const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6], 5: [0,1,2,4], 6: [0,1,2,4], 8: [0,1,2], 9: [0,1,2] };
-    const CIRC = 2 * Math.PI * 12;
-    function checkCompletionBadges() {
-      let totalDone = 0, totalLessons = 0;
-      for (const [topicId, indices] of Object.entries(COMPLETABLE)) {
-        const doneCount = indices.filter(i => localStorage.getItem(`ie_done_${topicId}_${i}`) === '1').length;
-        const allDone = doneCount === indices.length;
-        totalDone += doneCount;
-        totalLessons += indices.length;
-        const card = document.getElementById(`card-${topicId}`);
-        if (!card) continue;
-        card.classList.toggle('topic-card--complete', allDone);
-
-        // 1. Progress ring — create once, update on every call
-        let fillEl = card.querySelector('.progress-ring-fill');
-        if (!fillEl) {
-          const numEl = card.querySelector('.card-num');
-          if (numEl) {
-            const wrap = document.createElement('div');
-            wrap.className = 'card-num-wrap';
-            numEl.parentNode.insertBefore(wrap, numEl);
-            wrap.appendChild(numEl);
-            const ns = 'http://www.w3.org/2000/svg';
-            const svg = document.createElementNS(ns, 'svg');
-            svg.setAttribute('class', 'progress-ring');
-            svg.setAttribute('viewBox', '0 0 28 28');
-            const track = document.createElementNS(ns, 'circle');
-            track.setAttribute('class', 'progress-ring-track');
-            ['cx','cy','r'].forEach((a,v) => track.setAttribute(a, ['14','14','12'][v]));
-            const fill = document.createElementNS(ns, 'circle');
-            fill.setAttribute('class', 'progress-ring-fill');
-            ['cx','cy','r'].forEach((a,v) => fill.setAttribute(a, ['14','14','12'][v]));
-            fill.setAttribute('stroke-dasharray', CIRC.toFixed(1));
-            fill.setAttribute('stroke-dashoffset', CIRC.toFixed(1));
-            svg.appendChild(track); svg.appendChild(fill);
-            wrap.insertBefore(svg, numEl);
-            fillEl = fill;
-          }
-        }
-        if (fillEl) {
-          const offset = CIRC * (1 - doneCount / indices.length);
-          fillEl.setAttribute('stroke-dashoffset', offset.toFixed(1));
-        }
-
-      }
-
-      // Overall summary above the grid
-      const summaryLabel = document.getElementById('progressSummaryLabel');
-      const summaryFill  = document.getElementById('progressSummaryFill');
-      if (summaryLabel) summaryLabel.textContent = `${totalDone} / ${totalLessons} lessons complete`;
-      if (summaryFill)  summaryFill.style.width = (totalLessons ? (totalDone / totalLessons) * 100 : 0) + '%';
-    }
-    checkCompletionBadges();
-    // Refresh when returning from a topic page (bfcache) or when another tab updates progress
-    window.addEventListener('pageshow', checkCompletionBadges);
-    window.addEventListener('storage', checkCompletionBadges);
-
-    // ── 5. Recently-viewed — update CTA text on visited cards ──
-    function checkLastVisited() {
-      for (let tid = 1; tid <= 9; tid++) {
-        const raw = localStorage.getItem(`ie_last_${tid}`);
-        if (!raw) continue;
-        try {
-          const { title } = JSON.parse(raw);
-          const card = document.getElementById(`card-${tid}`);
-          if (!card) continue;
-          const cta = card.querySelector('.card-cta');
-          if (cta) cta.innerHTML = `&#8629; ${title} <span class="cta-arrow">&rarr;</span>`;
-        } catch (e) {}
-      }
-    }
-    checkLastVisited();
-
-  </script>
-
-  <script>
-    // ── Survey submission ──────────────────────────────────────────
-    // SETUP: Replace each 'entry.XXXXXXXXXX' below with the real entry
-    // IDs from your Google Form. To find them:
-    //   1. Open the form URL in a browser
-    //   2. Right-click → View Page Source (Cmd+U)
-    //   3. Search for "entry." — IDs look like entry.1234567890
-    (function () {
-      var SURVEY_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf6gRVgWa9CZM3NZ92s8IVM1GrowqmgWd2PNkL7QZn-WjvT4w/formResponse';
-      var ENTRY = {
-        layout: 'entry.1466005241',  // Q1 — How do you find the site layout?
-        colour: 'entry.1703439837',  // Q2 — What do you think of the colour scheme?
-        format: 'entry.633836083',   // Q3 — PDF slides or interactive lessons?
-        other:  'entry.2089748571',  // Q4 — Anything else?
-      };
-      var form = document.getElementById('surveyForm');
-      var done = document.getElementById('surveyDone');
-      if (!form) return;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var checked = function (n) {
-          var el = form.querySelector('[name="' + n + '"]:checked');
-          return el ? el.value : '';
-        };
-        var fd = new FormData();
-        fd.append(ENTRY.layout, checked('layout'));
-        fd.append(ENTRY.colour, checked('colour'));
-        fd.append(ENTRY.format, checked('format'));
-        fd.append(ENTRY.other,  form.querySelector('[name="other"]').value);
-        fetch(SURVEY_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(function () {});
-        form.style.display = 'none';
-        done.style.display = '';
+    // ── Remember the chosen year ────────────────────────────────
+    document.querySelectorAll('.year-card').forEach(card => {
+      card.addEventListener('click', () => {
+        try { localStorage.setItem('ie_year', card.dataset.year); } catch (e) {}
       });
-    })();
+    });
   </script>
   <script src="question-popup.js"></script>
 </body>

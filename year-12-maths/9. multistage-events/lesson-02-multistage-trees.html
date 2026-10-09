@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Multistage Events, Trees &amp; Arrays</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 9 &mdash; Relative Frequency &amp; Probability</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Multistage Events, Trees &amp; Arrays</h1>
+      <p class="subtitle">When something happens in stages, a tree diagram lays out every path.
+        Multiply along the branches, add between them &mdash; and watch carefully for whether the
+        first item is replaced.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-09</span>
+        <span class="pill">Tree diagrams</span>
+        <span class="pill">With &amp; without replacement</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Multistage events</li>
+        <li>Arrays and tables</li>
+        <li>Tree diagrams</li>
+        <li>Multiply along, add between</li>
+        <li>With replacement</li>
+        <li>Without replacement</li>
+        <li>Three or more stages</li>
+        <li>Class activity: when does replacement matter?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#multistage">1 &nbsp;Multistage events</a></li>
+        <li class="toc-item"><a class="toc-link" href="#arrays">2 &nbsp;Arrays</a></li>
+        <li class="toc-item"><a class="toc-link" href="#trees">3 &nbsp;Tree diagrams</a></li>
+        <li class="toc-item"><a class="toc-link" href="#rules">4 &nbsp;Multiply &amp; add</a></li>
+        <li class="toc-item"><a class="toc-link" href="#replacement">5 &nbsp;Replacement</a></li>
+        <li class="toc-item"><a class="toc-link" href="#threestage">6 &nbsp;Three or more stages</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. MULTISTAGE ─────────── -->
+      <div class="content-card" id="multistage">
+        <p class="section-label">Theory</p>
+        <h2>Multistage events</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">What they are</p>
+          <p style="margin-bottom:0;">A <strong>multistage event</strong> happens in two or more
+            steps: tossing a coin twice, drawing two marbles, or taking a test then a re-test. Each
+            stage has its own outcomes, and the combinations build up quickly.</p>
+        </div>
+
+        <p>Two tools organise them: <strong>arrays</strong> (tables) work well for exactly two
+          stages with few outcomes; <strong>tree diagrams</strong> work for any number of stages
+          and handle changing probabilities.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The multiplication rule for independent events</p>
+          \[P(A \text{ and } B) = P(A) \times P(B)\]
+          <p class="formula-where">This applies when the events are <strong>independent</strong> —
+            the outcome of the first does not change the probability of the second.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>A coin is tossed and a die is rolled. Find \(P(\text{head and a six})\).</p>
+          <p>The coin does not affect the die, so the events are independent:</p>
+          \[P = \frac{1}{2} \times \frac{1}{6} = \frac{1}{12}\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A spinner lands on red with probability 0.3, and a die is rolled. Find
+              \(P(\text{red and an even number})\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Independent: \(0.3 \times \frac12 = 0.15\).</p>
+              </div></details></li>
+            <li>Are the two stages independent? (a) Toss a coin, then roll a die. (b) Draw two
+              cards from a deck without putting the first back.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Yes &mdash; the coin cannot affect the die. (b) No &mdash; the first card
+                  changes what is left in the deck.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. ARRAYS ─────────── -->
+      <div class="content-card" id="arrays">
+        <p class="section-label">Method</p>
+        <h2>Arrays and tables</h2>
+
+        <p>An <strong>array</strong> lists one stage down the side and the other across the top,
+          with every combination in the body. It is ideal for two dice or two spinners.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>A coin is tossed and a four-sided die rolled. Show the sample space as an array.</p>
+          <table class="coord-table">
+            <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+            <tr><th>H</th><td>H1</td><td>H2</td><td>H3</td><td>H4</td></tr>
+            <tr><th>T</th><td>T1</td><td>T2</td><td>T3</td><td>T4</td></tr>
+          </table>
+          <p>Eight equally likely outcomes, so each has probability \(\frac{1}{8}\).</p>
+          <p>\(P(\text{head and an even number}) = \dfrac{2}{8} = \dfrac{1}{4}\), counting H2 and
+            H4.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two-dice array</h3>
+          <p class="exercise-intro">Choose a target sum and see which of the 36 cells match.</p>
+          <div id="arrSliders"></div>
+          <div style="overflow-x:auto;"><table class="coord-table" id="arrTable"></table></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Favourable cells</div>
+              <div class="readout-value" id="roFav">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Probability</div>
+              <div class="readout-value" id="roProb">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="arrNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">When arrays fall short</p>
+          <p style="margin-bottom:0;">Arrays only handle <strong>two</strong> stages, and they
+            assume the probabilities stay the same. For three or more stages, or for drawing
+            <em>without replacement</em>, use a tree diagram.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Spinner A shows 1, 2 or 3; spinner B shows 1, 2, 3 or 4, all equally likely. Draw an
+              array of the sums and find \(P(\text{sum} = 5)\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <table class="coord-table">
+                  <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+                  <tr><th>1</th><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                  <tr><th>2</th><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+                  <tr><th>3</th><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+                </table>
+                <p>Sum 5 appears 3 times out of 12: \(P = \frac{3}{12} = \frac14\).</p>
+              </div></details></li>
+            <li>For the same spinners, find the probability that the <em>product</em> is even.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>The product is odd only when both are odd: \(2 \times 2 = 4\) cells. So
+                  \(P(\text{even}) = 1 - \frac{4}{12} = \frac{2}{3}\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. TREES ─────────── -->
+      <div class="content-card" id="trees">
+        <p class="section-label">Method</p>
+        <h2>Tree diagrams</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Building a tree</p>
+          <ol style="margin-bottom:0;">
+            <li>Draw one branch per outcome of the first stage, writing its probability on the
+              branch.</li>
+            <li>From the end of each branch, draw the outcomes of the second stage.</li>
+            <li>Continue for every stage.</li>
+            <li>The probabilities leaving any single point must <strong>sum to 1</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="diagram-wrap">
+          <svg class="network-diagram" viewBox="0 0 420 260" width="420">
+            <line class="edge-line" x1="50" y1="130" x2="160" y2="70"/>
+            <line class="edge-line" x1="50" y1="130" x2="160" y2="190"/>
+            <line class="edge-line" x1="180" y1="65" x2="290" y2="35"/>
+            <line class="edge-line" x1="180" y1="75" x2="290" y2="105"/>
+            <line class="edge-line" x1="180" y1="185" x2="290" y2="155"/>
+            <line class="edge-line" x1="180" y1="195" x2="290" y2="225"/>
+            <circle class="node-circle" cx="42" cy="130" r="8"/>
+            <text class="side-label-text" x="168" y="66">H</text>
+            <text class="side-label-text" x="168" y="196">T</text>
+            <text class="side-label-text" x="300" y="40">H</text>
+            <text class="side-label-text" x="300" y="110">T</text>
+            <text class="side-label-text" x="300" y="160">H</text>
+            <text class="side-label-text" x="300" y="230">T</text>
+            <text class="edge-weight-label" x="92" y="88">½</text>
+            <text class="edge-weight-label" x="92" y="176">½</text>
+            <text class="edge-weight-label" x="226" y="40">½</text>
+            <text class="edge-weight-label" x="226" y="100">½</text>
+            <text class="edge-weight-label" x="226" y="160">½</text>
+            <text class="edge-weight-label" x="226" y="220">½</text>
+            <text class="angle-label-text" x="340" y="40">HH = ¼</text>
+            <text class="angle-label-text" x="340" y="110">HT = ¼</text>
+            <text class="angle-label-text" x="340" y="160">TH = ¼</text>
+            <text class="angle-label-text" x="340" y="230">TT = ¼</text>
+          </svg>
+        </div>
+        <p class="diagram-caption">Two coin tosses. Each path's probability is the product along
+          its branches, and the four results sum to 1.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">A check worth doing</p>
+          <p style="margin-bottom:0;">The probabilities of <strong>all the final paths must sum to
+            1</strong>. If they do not, a branch probability is wrong.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. RULES ─────────── -->
+      <div class="content-card" id="rules">
+        <p class="section-label">Method</p>
+        <h2>Multiply along, add between</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The two operations</p>
+          <p style="margin-bottom:0;">
+            <strong>Multiply along</strong> a path (left to right) to find the probability of that
+            complete sequence — the word is "<em>and</em>".<br><br>
+            <strong>Add between</strong> paths to combine several ways of getting the same result
+            — the word is "<em>or</em>".
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3</p>
+          <p>A coin is tossed twice. Find the probability of exactly one head.</p>
+          <p>Two paths give exactly one head: \(HT\) and \(TH\).</p>
+          \[P(HT) = \tfrac12 \times \tfrac12 = \tfrac14 \qquad P(TH) = \tfrac12 \times \tfrac12 = \tfrac14\]
+          \[P(\text{exactly one head}) = \tfrac14 + \tfrac14 = \tfrac12\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; unequal branches</p>
+          <p>A biased coin has \(P(H) = 0.7\). It is tossed twice. Find the probability of exactly
+            one head.</p>
+          \[P(HT) = 0.7 \times 0.3 = 0.21\]
+          \[P(TH) = 0.3 \times 0.7 = 0.21\]
+          \[P(\text{exactly one head}) = 0.21 + 0.21 = 0.42\]
+          <p><strong>Check all four paths:</strong> \(HH = 0.49\), \(HT = 0.21\), \(TH = 0.21\),
+            \(TT = 0.09\), summing to \(1.00\) ✓</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Two-stage tree calculator</h3>
+          <p class="exercise-intro">Set the probability of success at each stage, then read every
+            path.</p>
+          <div id="treeSliders"></div>
+          <div id="treeTable" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="treeNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>The probability of rain is 0.3 on Saturday and 0.4 on Sunday, independently. Find
+              the probability it rains on exactly one day.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Rain then dry: \(0.3 \times 0.6 = 0.18\). Dry then rain: \(0.7 \times 0.4 = 0.28\).</p>
+                <p>Add: \(0.18 + 0.28 = 0.46\).</p>
+              </div></details></li>
+            <li>Find the probability of rain on neither day, and check that all the outcomes sum
+              to 1.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Neither: \(0.7 \times 0.6 = 0.42\). Both: \(0.3 \times 0.4 = 0.12\).</p>
+                <p>\(0.12 + 0.46 + 0.42 = 1\) ✓</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. REPLACEMENT ─────────── -->
+      <div class="content-card" id="replacement">
+        <p class="section-label">Theory</p>
+        <h2>With and without replacement</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The crucial distinction</p>
+          <p style="margin-bottom:0;">
+            <strong>With replacement</strong> — the item is returned before the next draw. The
+            total stays the same, and the stages are <strong>independent</strong>.<br><br>
+            <strong>Without replacement</strong> — the item is kept out. Both the favourable count
+            and the total <strong>decrease by one</strong>, so the second probability
+            <strong>depends</strong> on the first.
+          </p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; with replacement</p>
+          <p>A bag has 4 red and 6 blue marbles. Two are drawn <em>with</em> replacement. Find
+            \(P(\text{both red})\).</p>
+          <p>The bag is identical for both draws:</p>
+          \[P = \frac{4}{10} \times \frac{4}{10} = \frac{16}{100} = 0.16\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; without replacement</p>
+          <p>Same bag, but the first marble is <em>not</em> replaced. Find \(P(\text{both red})\).</p>
+          <p>After a red is removed, 3 reds remain out of 9 marbles:</p>
+          \[P = \frac{4}{10} \times \frac{3}{9} = \frac{12}{90} = \frac{2}{15} \approx 0.1333\]
+          <p><strong>Note both numbers changed:</strong> the reds fell from 4 to 3
+            <em>and</em> the total from 10 to 9. Changing only one is the most common error.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; a full without-replacement question</p>
+          <p>From the same bag (4 red, 6 blue), two marbles are drawn without replacement. Find
+            the probability they are different colours.</p>
+          <p>Two paths give different colours: red then blue, or blue then red.</p>
+          \[P(RB) = \frac{4}{10} \times \frac{6}{9} = \frac{24}{90}\]
+          \[P(BR) = \frac{6}{10} \times \frac{4}{9} = \frac{24}{90}\]
+          \[P(\text{different}) = \frac{24}{90} + \frac{24}{90} = \frac{48}{90} = \frac{8}{15}\]
+          <p><strong>Alternative using the complement:</strong> \(P(RR) = \frac{12}{90}\) and
+            \(P(BB) = \frac{6}{10} \times \frac{5}{9} = \frac{30}{90}\), so
+            \(P(\text{same}) = \frac{42}{90}\) and \(P(\text{different}) = 1 - \frac{42}{90} =
+            \frac{48}{90}\) ✓</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Replacement comparator</h3>
+          <p class="exercise-intro">Set the bag contents and compare both scenarios side by side.</p>
+          <div id="repSliders"></div>
+          <div id="repTable" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="repNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise</h3>
+          <p class="exercise-intro">A bag has 5 green and 7 yellow counters. Give answers to 4
+            decimal places.</p>
+
+          <div class="exercise-row">
+            <label>(a) Two drawn <em>with</em> replacement. \(P(\text{both green})\)?</label>
+            <input class="exercise-input" id="rpA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rp="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRpA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Two drawn <em>without</em> replacement. \(P(\text{both green})\)?</label>
+            <input class="exercise-input" id="rpB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rp="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRpB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Without replacement, \(P(\text{one of each colour})\)?</label>
+            <input class="exercise-input" id="rpC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-rp="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbRpC"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; exam style</p>
+          <p>A box of 12 light globes contains 3 faulty ones. Two globes are chosen at random,
+            without replacement.</p>
+          <p><strong>(a) Find the probability that both are faulty.</strong> [1 mark]</p>
+          \[\frac{3}{12} \times \frac{2}{11} = \frac{6}{132} = \frac{1}{22}\]
+          <p><strong>(b) Find the probability that exactly one is faulty.</strong> [2 marks]</p>
+          \[P(FW) + P(WF) = \frac{3}{12} \times \frac{9}{11} + \frac{9}{12} \times \frac{3}{11}
+            = \frac{54}{132} = \frac{9}{22}\]
+          <p><strong>(c) Find the probability that at least one works.</strong> [1 mark]</p>
+          \[1 - P(\text{both faulty}) = 1 - \frac{1}{22} = \frac{21}{22}\]
+          <p><strong>(d) Would both being faulty be more or less likely with replacement?
+            Explain.</strong> [1 mark]</p>
+          <p>More likely: \(\left(\frac{3}{12}\right)^2 = \frac{1}{16}\), compared with
+            \(\frac{1}{22}\). Without replacement, the first faulty globe leaves fewer faulty
+            globes for the second draw.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A box holds 3 dark and 5 milk chocolates. Two are eaten, one after the other. Find
+              \(P(\text{both dark})\) and \(P(\text{at least one dark})\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(P(\text{both dark}) = \frac38 \times \frac27 = \frac{6}{56} = \frac{3}{28}\).</p>
+                <p>\(P(\text{at least one dark}) = 1 - \frac58 \times \frac47 = 1 - \frac{20}{56}
+                  = \frac{9}{14}\).</p>
+              </div></details></li>
+            <li>If the first chocolate were put back before the second was chosen, what would
+              \(P(\text{both dark})\) be?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(\left(\frac38\right)^2 = \frac{9}{64}\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. THREE STAGES ─────────── -->
+      <div class="content-card" id="threestage">
+        <p class="section-label">Method</p>
+        <h2>Three or more stages</h2>
+
+        <p>Trees extend to any number of stages: three stages with two outcomes each gives
+          \(2^3 = 8\) paths. You rarely need to draw them all &mdash; list only the paths you
+          need.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Counting the paths</p>
+          <p style="margin-bottom:0;">For "exactly two successes in three stages", the success
+            and failure can be arranged as SSF, SFS or FSS &mdash; <strong>three paths</strong>,
+            each with the same probability when the stages are independent and identical.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 9</p>
+          <p>A netballer scores each shot with probability 0.8, independently. She takes three
+            shots.</p>
+          <p><strong>Exactly two goals:</strong> paths GGM, GMG, MGG, each
+            \(0.8 \times 0.8 \times 0.2 = 0.128\).</p>
+          \[P(\text{exactly 2}) = 3 \times 0.128 = 0.384\]
+          <p><strong>At least two goals:</strong> exactly two or all three:</p>
+          \[0.384 + 0.8^3 = 0.384 + 0.512 = 0.896\]
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Each of three sets of traffic lights is green with probability 0.4, independently.
+              Find \(P(\text{all green})\) and \(P(\text{exactly one green})\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>All green: \(0.4^3 = 0.064\).</p>
+                <p>Exactly one: three paths, each \(0.4 \times 0.6 \times 0.6 = 0.144\), so
+                  \(3 \times 0.144 = 0.432\).</p>
+              </div></details></li>
+            <li>Three students are chosen at random, without replacement, from 5 girls and 4 boys.
+              Find the probability all three are girls.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[\frac59 \times \frac48 \times \frac37 = \frac{60}{504} = \frac{5}{42}\]
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>When does replacement matter?</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#replacement">replacement comparator</a>. Every bag below is 40% red.</p>
+        <ol>
+          <li>Record \(P(\text{both red})\) with and without replacement for bags of 2 red + 3 blue,
+            4 red + 6 blue, 6 red + 9 blue and 10 red + 15 blue.</li>
+          <li>Why is the "with replacement" value the same for every bag?</li>
+          <li>What happens to the gap between the two columns as the bag gets bigger? Explain
+            why.</li>
+          <li>A pollster selects 2 people from a city of 1 million without replacement. Would
+            treating the selections as independent cause a noticeable error? Explain.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Bag</th><td>2 + 3</td><td>4 + 6</td><td>6 + 9</td><td>10 + 15</td></tr>
+            <tr><th>With</th><td>0.1600</td><td>0.1600</td><td>0.1600</td><td>0.1600</td></tr>
+            <tr><th>Without</th><td>0.1000</td><td>0.1333</td><td>0.1429</td><td>0.1500</td></tr>
+          </table>
+          <p><strong>2.</strong> With replacement, each draw has \(P(\text{red}) = 0.4\), so
+            \(0.4^2 = 0.16\) whatever the bag size.</p>
+          <p><strong>3.</strong> The gap shrinks. Removing one red changes the second-draw
+            probability a lot in a small bag (\(\frac14\) instead of \(\frac25\)) but hardly at
+            all in a big one (\(\frac{9}{24}\) instead of \(\frac{10}{25}\)).</p>
+          <p><strong>4.</strong> No. Removing one person from a million changes the next
+            probability by a negligible amount, so large populations can be treated as if
+            selecting with replacement.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Draw the tree for every multistage question, and read carefully
+          whether items are replaced.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 3 covers relative frequency, expected frequency and two-way tables.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-9', LESSON_IDX = 1;
+
+  function gcd(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
+  function frac(n, d) { var g = gcd(n, d) || 1; return (n / g) + '/' + (d / g); }
+
+  /* ── Two-dice array ───────────────────────────────────────── */
+  (function () {
+    var target = 7;
+    function update() {
+      var count = 0;
+      var html = '<tr><th>+</th>';
+      for (var c = 1; c <= 6; c++) html += '<th>' + c + '</th>';
+      html += '</tr>';
+      for (var r = 1; r <= 6; r++) {
+        html += '<tr><th>' + r + '</th>';
+        for (var c2 = 1; c2 <= 6; c2++) {
+          var s = r + c2, hit = s === target;
+          if (hit) count++;
+          html += '<td style="' + (hit ? 'background:var(--gray-faint);font-weight:700;outline:2px solid var(--ink);' : '') +
+                  '">' + s + '</td>';
+        }
+        html += '</tr>';
+      }
+      document.getElementById('arrTable').innerHTML = html;
+      document.getElementById('roFav').textContent  = count + ' of 36';
+      document.getElementById('roProb').textContent = count ? frac(count, 36) + ' = ' + (count / 36).toFixed(4) : '0';
+      var note = document.getElementById('arrNote');
+      note.className = 'exercise-feedback' + (count ? '' : ' wrong');
+      note.textContent = count
+        ? 'A sum of ' + target + ' occurs in ' + count + ' of the 36 equally likely cells, so P = ' +
+          frac(count, 36) + '. Sums near 7 have the most combinations; 2 and 12 have only one each.'
+        : 'A sum of ' + target + ' is impossible with two dice — the range is 2 to 12.';
+    }
+    IE.slider({ mount: 'arrSliders', label: 'Target sum', min: 1, max: 13, step: 1, value: target,
+                onInput: function (v) { target = v; update(); } });
+    update();
+  })();
+
+  /* ── Two-stage tree ───────────────────────────────────────── */
+  (function () {
+    var p1 = 0.7, p2 = 0.7;
+    function update() {
+      var rows = [
+        ['Success, Success', p1 * p2],
+        ['Success, Fail',    p1 * (1 - p2)],
+        ['Fail, Success',    (1 - p1) * p2],
+        ['Fail, Fail',       (1 - p1) * (1 - p2)]
+      ];
+      var html = '<table class="coord-table"><tr><th>Path</th><th>Calculation</th><th>Probability</th></tr>';
+      html += '<tr><td>' + rows[0][0] + '</td><td>' + p1.toFixed(2) + ' × ' + p2.toFixed(2) + '</td><td>' + rows[0][1].toFixed(4) + '</td></tr>';
+      html += '<tr><td>' + rows[1][0] + '</td><td>' + p1.toFixed(2) + ' × ' + (1 - p2).toFixed(2) + '</td><td>' + rows[1][1].toFixed(4) + '</td></tr>';
+      html += '<tr><td>' + rows[2][0] + '</td><td>' + (1 - p1).toFixed(2) + ' × ' + p2.toFixed(2) + '</td><td>' + rows[2][1].toFixed(4) + '</td></tr>';
+      html += '<tr><td>' + rows[3][0] + '</td><td>' + (1 - p1).toFixed(2) + ' × ' + (1 - p2).toFixed(2) + '</td><td>' + rows[3][1].toFixed(4) + '</td></tr>';
+      var total = rows.reduce(function (s, r) { return s + r[1]; }, 0);
+      html += '<tr><th>Total</th><th></th><th>' + total.toFixed(4) + '</th></tr></table>';
+      document.getElementById('treeTable').innerHTML = html;
+      var exactlyOne = rows[1][1] + rows[2][1];
+      var note = document.getElementById('treeNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'All four paths sum to ' + total.toFixed(4) +
+        ' ✓ P(exactly one success) = ' + rows[1][1].toFixed(4) + ' + ' + rows[2][1].toFixed(4) +
+        ' = ' + exactlyOne.toFixed(4) + ' — multiply along each path, then add between them.';
+    }
+    var host = 'treeSliders';
+    IE.slider({ mount: host, label: 'P(stage 1)', min: 0.05, max: 0.95, step: 0.05, value: p1,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { p1 = v; update(); } });
+    IE.slider({ mount: host, label: 'P(stage 2)', min: 0.05, max: 0.95, step: 0.05, value: p2,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { p2 = v; update(); } });
+    update();
+  })();
+
+  /* ── Replacement comparator ───────────────────────────────── */
+  (function () {
+    var red = 4, blue = 6;
+    function update() {
+      var n = red + blue;
+      if (n < 2) return;
+      var withR = {
+        rr: (red / n) * (red / n),
+        rb: (red / n) * (blue / n),
+        br: (blue / n) * (red / n),
+        bb: (blue / n) * (blue / n)
+      };
+      var without = {
+        rr: (red / n) * ((red - 1) / (n - 1)),
+        rb: (red / n) * (blue / (n - 1)),
+        br: (blue / n) * (red / (n - 1)),
+        bb: (blue / n) * ((blue - 1) / (n - 1))
+      };
+      function row(label, a, b) {
+        return '<tr><td>' + label + '</td><td>' + a.toFixed(4) + '</td><td>' + b.toFixed(4) + '</td></tr>';
+      }
+      var html = '<table class="coord-table"><tr><th>Outcome</th><th>With replacement</th><th>Without replacement</th></tr>';
+      html += row('Both red', withR.rr, without.rr);
+      html += row('Both blue', withR.bb, without.bb);
+      html += row('One of each', withR.rb + withR.br, without.rb + without.br);
+      html += '<tr><th>Total</th><th>' + (withR.rr + withR.bb + withR.rb + withR.br).toFixed(4) +
+              '</th><th>' + (without.rr + without.bb + without.rb + without.br).toFixed(4) + '</th></tr></table>';
+      document.getElementById('repTable').innerHTML = html;
+      var note = document.getElementById('repNote');
+      note.className = 'exercise-feedback';
+      note.textContent = 'With replacement the second draw sees ' + red + ' red out of ' + n +
+        ' again. Without replacement, after a red it sees ' + (red - 1) + ' out of ' + (n - 1) +
+        ' — both numbers drop by one. That makes "both the same" less likely without replacement.';
+    }
+    var host = 'repSliders';
+    IE.slider({ mount: host, label: 'Red', min: 1, max: 15, step: 1, value: red, onInput: function (v) { red = v; update(); } });
+    IE.slider({ mount: host, label: 'Blue', min: 1, max: 15, step: 1, value: blue, onInput: function (v) { blue = v; update(); } });
+    update();
+  })();
+
+  /* ── Replacement exercises ────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [(5 / 12) * (5 / 12),  'With replacement the bag is unchanged: (5/12) × (5/12) = 25/144 ≈ 0.1736.'],
+      B: [(5 / 12) * (4 / 11),  'Without replacement: (5/12) × (4/11) = 20/132 = 5/33 ≈ 0.1515. Both numbers drop by one.'],
+      C: [(5 / 12) * (7 / 11) + (7 / 12) * (5 / 11), 'Two paths: GY = (5/12)(7/11) and YG = (7/12)(5/11). Adding gives 70/132 = 35/66 ≈ 0.5303.']
+    };
+    document.querySelectorAll('[data-rp]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.rp, fb = document.getElementById('fbRp' + k);
+        var raw = (document.getElementById('rp' + k).value || '').trim();
+        var g;
+        if (raw.indexOf('/') !== -1) {
+          var parts = raw.split('/');
+          g = parseFloat(parts[0]) / parseFloat(parts[1]);
+        } else {
+          g = parseFloat(raw.replace(/[^\d.\-]/g, ''));
+        }
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number or a fraction.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0].toFixed(4) + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'On a tree diagram, what operation gives the probability of a complete path?',
+      opts: [
+        'A) Add the branch probabilities',
+        'B) Multiply the branch probabilities',
+        'C) Take the largest branch probability',
+        'D) Divide the branch probabilities'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Multiply <em>along</em> a path, because every stage must happen — the word is "and". Adding is used <em>between</em> different paths, for "or".'
+    },
+    {
+      q: 'A bag has 3 red and 5 blue marbles. Two are drawn <strong>with</strong> replacement. What is \\(P(\\text{both red})\\)?',
+      opts: [
+        'A) \\(\\dfrac{3}{8} \\times \\dfrac{2}{7}\\)',
+        'B) \\(\\dfrac{3}{8} \\times \\dfrac{3}{8}\\)',
+        'C) \\(\\dfrac{3}{8} + \\dfrac{3}{8}\\)',
+        'D) \\(\\dfrac{6}{8}\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. With replacement the marble is returned, so the bag is identical for the second draw: \\(\\dfrac{3}{8} \\times \\dfrac{3}{8} = \\dfrac{9}{64}\\). Option A is the without-replacement calculation.'
+    },
+    {
+      q: 'The same bag, but drawn <strong>without</strong> replacement. What is \\(P(\\text{both red})\\)?',
+      opts: [
+        'A) \\(\\dfrac{3}{8} \\times \\dfrac{3}{8}\\)',
+        'B) \\(\\dfrac{3}{8} \\times \\dfrac{2}{8}\\)',
+        'C) \\(\\dfrac{3}{8} \\times \\dfrac{2}{7}\\)',
+        'D) \\(\\dfrac{3}{8} \\times \\dfrac{3}{7}\\)'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Removing a red leaves 2 reds out of 7 marbles — <em>both</em> the favourable count and the total drop by one. Option B changes only the numerator and option D only the denominator.'
+    },
+    {
+      q: 'On a tree diagram, what must the probabilities leaving any single point sum to?',
+      opts: ['A) 0', 'B) 0.5', 'C) 1', 'D) The number of branches'],
+      correct: 2,
+      explanation: 'C is correct. The branches from a point cover every possibility at that stage, so their probabilities must total 1. The final path probabilities must also sum to 1 — both are useful checks.'
+    },
+    {
+      q: 'A biased coin has \\(P(H) = 0.6\\) and is tossed twice. What is \\(P(\\text{exactly one head})\\)?',
+      opts: ['A) 0.24', 'B) 0.48', 'C) 0.36', 'D) 0.60'],
+      correct: 1,
+      explanation: 'B is correct. Two paths give exactly one head: \\(HT = 0.6 \\times 0.4 = 0.24\\) and \\(TH = 0.4 \\times 0.6 = 0.24\\). Adding gives 0.48. Option A counts only one of the two paths.'
+    },
+    {
+      q: 'Which tool is best for a three-stage event with changing probabilities?',
+      opts: [
+        'A) An array',
+        'B) A tree diagram',
+        'C) A two-way table',
+        'D) A histogram'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Arrays and two-way tables handle only two stages with fixed probabilities. A tree diagram extends to any number of stages and shows changing probabilities on each branch — essential for without-replacement problems.'
+    },
+    {
+      q: 'Two events are independent when:',
+      opts: [
+        'A) They cannot both occur',
+        'B) The outcome of one does not change the probability of the other',
+        'C) They have the same probability',
+        'D) They occur at the same time'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Independence means the first outcome leaves the second\'s probability unchanged — as with drawing <em>with</em> replacement. Option A describes mutually exclusive events, which is a different idea.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain the difference between drawing with and without replacement, and its effect on the calculation.',
+      marks: 3,
+      steps: [
+        'With replacement, the item is returned so the total and composition are unchanged.',
+        'The stages are independent and the probabilities stay the same.',
+        'Without replacement, the item is kept out.',
+        'Both the favourable count and the total decrease by one, so the second probability depends on the first.'
+      ],
+      answer: 'With replacement the bag is restored, so each draw has identical probabilities and the events are independent. Without replacement both the favourable count and the total drop by one, so the second draw\'s probability depends on the first outcome.'
+    },
+    {
+      q: 'A coin is tossed and a die rolled. Find \\(P(\\text{tail and a number greater than 4})\\).',
+      marks: 3,
+      steps: [
+        'The events are independent — the coin does not affect the die.',
+        '\\(P(\\text{tail}) = \\dfrac{1}{2}\\).',
+        '\\(P(> 4) = P(5 \\text{ or } 6) = \\dfrac{2}{6} = \\dfrac{1}{3}\\).',
+        'Multiply: \\(\\dfrac{1}{2} \\times \\dfrac{1}{3}\\).'
+      ],
+      answer: '\\(\\dfrac{1}{6}\\)'
+    },
+    {
+      q: 'A bag holds 6 red and 4 white balls. Two are drawn with replacement. Find \\(P(\\text{both red})\\) and \\(P(\\text{one of each})\\).',
+      marks: 4,
+      steps: [
+        'With replacement, each draw has \\(P(R) = 0.6\\) and \\(P(W) = 0.4\\).',
+        '\\(P(\\text{both red}) = 0.6 \\times 0.6 = 0.36\\).',
+        '\\(P(RW) = 0.6 \\times 0.4 = 0.24\\); \\(P(WR) = 0.4 \\times 0.6 = 0.24\\).',
+        '\\(P(\\text{one of each}) = 0.24 + 0.24 = 0.48\\).'
+      ],
+      answer: '\\(P(\\text{both red}) = 0.36\\); \\(P(\\text{one of each}) = 0.48\\).'
+    },
+    {
+      q: 'The same bag, drawn without replacement. Find \\(P(\\text{both red})\\) and \\(P(\\text{one of each})\\).',
+      marks: 5,
+      steps: [
+        '\\(P(\\text{both red}) = \\dfrac{6}{10} \\times \\dfrac{5}{9} = \\dfrac{30}{90} = \\dfrac{1}{3}\\).',
+        '\\(P(RW) = \\dfrac{6}{10} \\times \\dfrac{4}{9} = \\dfrac{24}{90}\\).',
+        '\\(P(WR) = \\dfrac{4}{10} \\times \\dfrac{6}{9} = \\dfrac{24}{90}\\).',
+        '\\(P(\\text{one of each}) = \\dfrac{48}{90} = \\dfrac{8}{15}\\).',
+        'Check with \\(P(WW) = \\dfrac{4}{10} \\times \\dfrac{3}{9} = \\dfrac{12}{90}\\): total \\(= \\dfrac{30+48+12}{90} = 1\\) ✓'
+      ],
+      answer: '\\(P(\\text{both red}) = \\dfrac{1}{3}\\); \\(P(\\text{one of each}) = \\dfrac{8}{15} \\approx 0.5333\\).'
+    },
+    {
+      q: 'Explain why "multiply along, add between" works on a tree diagram.',
+      marks: 3,
+      steps: [
+        'Moving along a path, every stage must occur — the events are joined by "and".',
+        'The multiplication rule applies to "and", so the branch probabilities multiply.',
+        'Different paths are alternative ways to reach the same result — joined by "or".',
+        'Mutually exclusive alternatives are combined by adding.'
+      ],
+      answer: 'Along a path every stage must happen ("and"), so probabilities multiply. Different paths are mutually exclusive alternatives ("or"), so their probabilities add.'
+    },
+    {
+      q: 'A biased coin has \\(P(H) = 0.35\\), tossed three times. Find \\(P(\\text{all heads})\\) and \\(P(\\text{at least one head})\\).',
+      marks: 4,
+      steps: [
+        '\\(P(\\text{all heads}) = 0.35^{3} = 0.042875\\).',
+        'For "at least one", use the complement: all tails.',
+        '\\(P(\\text{all tails}) = 0.65^{3} = 0.274625\\).',
+        '\\(P(\\text{at least one head}) = 1 - 0.274625\\).'
+      ],
+      answer: '\\(P(\\text{all heads}) \\approx 0.0429\\); \\(P(\\text{at least one head}) \\approx 0.7254\\).'
+    },
+    {
+      q: 'A box has 5 good and 3 faulty components. Two are tested without replacement. Find the probability that exactly one is faulty.',
+      marks: 5,
+      steps: [
+        'Two paths: good then faulty, or faulty then good.',
+        '\\(P(GF) = \\dfrac{5}{8} \\times \\dfrac{3}{7} = \\dfrac{15}{56}\\).',
+        '\\(P(FG) = \\dfrac{3}{8} \\times \\dfrac{5}{7} = \\dfrac{15}{56}\\).',
+        'Add: \\(\\dfrac{30}{56} = \\dfrac{15}{28}\\).',
+        '\\(\\approx 0.5357\\).'
+      ],
+      answer: '\\(\\dfrac{15}{28} \\approx 0.5357\\)'
+    },
+    {
+      q: 'Two dice are rolled. Use an array to find \\(P(\\text{sum} = 8)\\) and \\(P(\\text{doubles})\\).',
+      marks: 4,
+      steps: [
+        'Sum 8: (2,6), (3,5), (4,4), (5,3), (6,2) — five outcomes.',
+        '\\(P(\\text{sum} = 8) = \\dfrac{5}{36}\\).',
+        'Doubles: (1,1) through (6,6) — six outcomes, one per number.',
+        '\\(P(\\text{doubles}) = \\dfrac{6}{36} = \\dfrac{1}{6}\\).'
+      ],
+      answer: '\\(P(\\text{sum} = 8) = \\dfrac{5}{36}\\); \\(P(\\text{doubles}) = \\dfrac{1}{6}\\).'
+    },
+    {
+      q: 'Explain why an array cannot be used for a three-stage event or a without-replacement problem.',
+      marks: 3,
+      steps: [
+        'An array has two dimensions — one axis per stage — so it handles only two stages.',
+        'A third stage would need a third dimension.',
+        'An array also assumes every cell is equally likely.',
+        'Without replacement the probabilities change between stages, so the cells are not equally likely.'
+      ],
+      answer: 'An array is two-dimensional, so it can only represent two stages, and it assumes all cells are equally likely. Without replacement the second-stage probabilities change, breaking that assumption — a tree diagram is needed instead.'
+    },
+    {
+      q: 'A student has a 0.8 chance of passing a test. They sit it twice. Find the probability they pass exactly once, and the probability they pass at least once.',
+      marks: 5,
+      steps: [
+        '\\(P(\\text{pass, fail}) = 0.8 \\times 0.2 = 0.16\\).',
+        '\\(P(\\text{fail, pass}) = 0.2 \\times 0.8 = 0.16\\).',
+        '\\(P(\\text{exactly once}) = 0.16 + 0.16 = 0.32\\).',
+        'For at least once, use the complement: \\(P(\\text{fail both}) = 0.2 \\times 0.2 = 0.04\\).',
+        '\\(P(\\text{at least once}) = 1 - 0.04 = 0.96\\).'
+      ],
+      answer: '\\(P(\\text{exactly once}) = 0.32\\); \\(P(\\text{at least once}) = 0.96\\).'
+    },
+    {
+      q: 'A bag has 4 green, 3 red and 5 blue counters. Two are drawn without replacement. Find \\(P(\\text{both the same colour})\\).',
+      marks: 6,
+      steps: [
+        'Total 12 counters, so 11 remain after the first draw.',
+        '\\(P(GG) = \\dfrac{4}{12} \\times \\dfrac{3}{11} = \\dfrac{12}{132}\\).',
+        '\\(P(RR) = \\dfrac{3}{12} \\times \\dfrac{2}{11} = \\dfrac{6}{132}\\).',
+        '\\(P(BB) = \\dfrac{5}{12} \\times \\dfrac{4}{11} = \\dfrac{20}{132}\\).',
+        'Add: \\(\\dfrac{12 + 6 + 20}{132} = \\dfrac{38}{132}\\).',
+        '\\(= \\dfrac{19}{66} \\approx 0.2879\\).'
+      ],
+      answer: '\\(\\dfrac{19}{66} \\approx 0.2879\\)'
+    },
+    {
+      q: 'For the bag above, find \\(P(\\text{different colours})\\) using the complement, and verify.',
+      marks: 3,
+      steps: [
+        '"Different colours" is the complement of "same colour".',
+        '\\(P(\\text{different}) = 1 - \\dfrac{19}{66}\\).',
+        '\\(= \\dfrac{47}{66} \\approx 0.7121\\).',
+        'This is far quicker than adding the six separate mixed-colour paths.'
+      ],
+      answer: '\\(\\dfrac{47}{66} \\approx 0.7121\\) — much faster via the complement than summing all six mixed paths.'
+    },
+    {
+      q: 'A machine produces items with a 6% defect rate. Three are selected at random (with replacement). Find the probability that at least one is defective.',
+      marks: 4,
+      steps: [
+        'Complement: none of the three is defective.',
+        '\\(P(\\text{not defective}) = 0.94\\) for each.',
+        '\\(P(\\text{none defective}) = 0.94^{3} = 0.830584\\).',
+        '\\(P(\\text{at least one}) = 1 - 0.830584\\).'
+      ],
+      answer: 'About 0.1694, or roughly a 17% chance.'
+    },
+    {
+      q: 'A survey draws 2 people from a group of 9 women and 6 men, without replacement. Find the probability of selecting one of each, and explain why drawing with replacement would give a different answer.',
+      marks: 6,
+      steps: [
+        'Total 15 people, so 14 remain after the first draw.',
+        '\\(P(WM) = \\dfrac{9}{15} \\times \\dfrac{6}{14} = \\dfrac{54}{210}\\).',
+        '\\(P(MW) = \\dfrac{6}{15} \\times \\dfrac{9}{14} = \\dfrac{54}{210}\\).',
+        '\\(P(\\text{one of each}) = \\dfrac{108}{210} = \\dfrac{18}{35} \\approx 0.5143\\).',
+        'With replacement: \\(2 \\times \\dfrac{9}{15} \\times \\dfrac{6}{15} = \\dfrac{108}{225} = 0.48\\).',
+        'Without replacement removing one person makes the other group relatively more likely on the second draw.'
+      ],
+      answer: '\\(\\dfrac{18}{35} \\approx 0.5143\\) without replacement, versus 0.48 with. Removing the first person increases the proportion of the other group in the remaining pool, making a mixed pair slightly more likely — and in a real survey the same person cannot be selected twice, so without replacement is the correct model.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

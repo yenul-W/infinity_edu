@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — Exponential Relationships</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 1 &mdash; Algebraic Relationships</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 2</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 2</p>
+      <h1>Exponential Relationships</h1>
+      <p class="subtitle">When a quantity is multiplied by the same factor every period &mdash;
+        rather than having the same amount added &mdash; the relationship is exponential. This is
+        the mathematics of populations, bacteria, radioactive decay and compound growth.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-01</span>
+        <span class="pill">Growth &amp; decay</span>
+        <span class="pill">\(y = ka^x\)</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Recognising exponential relationships</li>
+        <li>Graphing \(y = a^x\) and \(y = a^{-x}\)</li>
+        <li>The model \(y = ka^x\)</li>
+        <li>Reading a model from its graph</li>
+        <li>Growth and decay problems</li>
+        <li>Limitations of the model</li>
+        <li>Class activity: the rule of 72</li>
+        <li>Knowledge check &amp; extended practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#recognise">1 &nbsp;Recognising them</a></li>
+        <li class="toc-item"><a class="toc-link" href="#graphs">2 &nbsp;The basic graphs</a></li>
+        <li class="toc-item"><a class="toc-link" href="#model">3 &nbsp;The model \(y = ka^x\)</a></li>
+        <li class="toc-item"><a class="toc-link" href="#fromgraph">4 &nbsp;Models from graphs</a></li>
+        <li class="toc-item"><a class="toc-link" href="#growth">5 &nbsp;Growth &amp; decay problems</a></li>
+        <li class="toc-item"><a class="toc-link" href="#limits">6 &nbsp;Limitations</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. RECOGNISE ─────────── -->
+      <div class="content-card" id="recognise">
+        <p class="section-label">Theory</p>
+        <h2>Recognising an exponential relationship</h2>
+
+        <p>In a <strong>linear</strong> relationship you <em>add</em> the same amount each step. In
+          an <strong>exponential</strong> relationship you <em>multiply</em> by the same factor
+          each step. That factor is the <strong>base</strong>, \(a\).</p>
+
+        <div class="formula-box">
+          <p class="formula-label">The test</p>
+          <p style="margin-bottom:0;">Take consecutive \(y\)-values from a table.
+            If the <strong>differences</strong> are constant &rarr; linear.
+            If the <strong>ratios</strong> are constant &rarr; exponential.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Decide whether each table is linear or exponential.</p>
+          <table class="coord-table">
+            <tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+            <tr><th>Table A</th><td>5</td><td>8</td><td>11</td><td>14</td><td>17</td></tr>
+            <tr><th>Table B</th><td>5</td><td>10</td><td>20</td><td>40</td><td>80</td></tr>
+          </table>
+          <p><strong>Table A:</strong> differences are \(3, 3, 3, 3\) &mdash; constant. Linear,
+            \(y = 5 + 3x\).</p>
+          <p><strong>Table B:</strong> differences are \(5, 10, 20, 40\) &mdash; not constant. Try
+            ratios: \(10 \div 5 = 2\), \(20 \div 10 = 2\), \(40 \div 20 = 2\), \(80 \div 40 = 2\)
+            &mdash; constant. Exponential with base 2, \(y = 5 \times 2^x\).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>For \(x = 0, 1, 2, 3\), decide whether each table is linear or exponential and write
+              its equation. (a) 3200, 1600, 800, 400 &nbsp; (b) 7, 11.5, 16, 20.5
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Ratios are all \(0.5\): exponential, \(y = 3200 \times 0.5^x\).</p>
+                <p>(b) Differences are all \(4.5\): linear, \(y = 7 + 4.5x\).</p>
+              </div></details></li>
+            <li>Which of these are exponential? \(y = 5^x\), \(y = x^5\), \(y = 2 \times 0.9^x\),
+              \(y = 3x + 2\)
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Only \(y = 5^x\) and \(y = 2 \times 0.9^x\) have the variable in the exponent.
+                  \(y = x^5\) is a power of \(x\), and \(y = 3x + 2\) is linear.</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <p>You can also recognise them from the equation. An exponential relationship has the
+          variable <strong>in the exponent</strong>:</p>
+        <ul>
+          <li>\(y = 3^x\) &mdash; exponential (variable is the power).</li>
+          <li>\(y = x^3\) &mdash; <em>not</em> exponential; this is a cubic, where the variable is the base.</li>
+          <li>\(y = 200 \times 1.05^x\) &mdash; exponential.</li>
+        </ul>
+
+        <div class="interactive-block">
+          <h3>Linear or exponential?</h3>
+          <p class="exercise-intro">Classify each sequence of \(y\)-values. Type
+            <code>linear</code> or <code>exponential</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) 3, 6, 12, 24, 48 &nbsp;&rarr;&nbsp;</label>
+            <input class="exercise-input" id="clsA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cls="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbClsA"></p>
+
+          <div class="exercise-row">
+            <label>(b) 100, 88, 76, 64, 52 &nbsp;&rarr;&nbsp;</label>
+            <input class="exercise-input" id="clsB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cls="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbClsB"></p>
+
+          <div class="exercise-row">
+            <label>(c) 800, 400, 200, 100, 50 &nbsp;&rarr;&nbsp;</label>
+            <input class="exercise-input" id="clsC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cls="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbClsC"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. GRAPHS ─────────── -->
+      <div class="content-card" id="graphs">
+        <p class="section-label">Theory</p>
+        <h2>Graphing \(y = a^x\) and \(y = a^{-x}\)</h2>
+
+        <p>For \(a &gt; 0\) and \(a \neq 1\), the graph of \(y = a^x\) always has the same shape.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Key features of \(y = a^x\)</p>
+          <ul style="margin-bottom:0;">
+            <li>Passes through \((0, 1)\) &mdash; because \(a^0 = 1\) for every base.</li>
+            <li>Never touches the \(x\)-axis. \(y = 0\) is a <strong>horizontal asymptote</strong>
+              &mdash; the curve gets arbitrarily close but never reaches it.</li>
+            <li>\(y &gt; 0\) always &mdash; the range is \(y &gt; 0\).</li>
+            <li>If \(a &gt; 1\): <strong>increasing</strong> (growth). If \(0 &lt; a &lt; 1\): <strong>decreasing</strong> (decay).</li>
+          </ul>
+        </div>
+
+        <p>The graph of \(y = a^{-x}\) is the <strong>reflection of \(y = a^x\) in the
+          \(y\)-axis</strong>. Note that</p>
+        \[a^{-x} = \frac{1}{a^x} = \left(\frac{1}{a}\right)^{x}\]
+        <p>so \(y = 2^{-x}\) and \(y = 0.5^{x}\) are the same curve &mdash; a decay curve.</p>
+
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <div class="plot-wrap" id="plotGrowth"></div>
+            <p class="diagram-caption">\(y = 2^x\) &mdash; growth</p>
+          </div>
+          <div class="diagram-col">
+            <div class="plot-wrap" id="plotDecay"></div>
+            <p class="diagram-caption">\(y = 2^{-x}\) &mdash; decay</p>
+          </div>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Parameter explorer</h3>
+          <p class="exercise-intro">Change \(k\) and \(a\) in \(y = ka^x\), and flip the sign of
+            the exponent. Notice that \(k\) is always the \(y\)-intercept, and the curve grows
+            when \(a &gt; 1\) but decays when \(a &lt; 1\).</p>
+          <div id="expSliders"></div>
+          <div class="exercise-row" style="margin-top:6px;">
+            <label><input type="checkbox" id="negExp"> Use \(y = ka^{-x}\) (negative exponent)</label>
+          </div>
+          <div class="plot-wrap" id="plotExp"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Equation</div>
+              <div class="readout-value" id="roEq">y = 1 × 2^x</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">y-intercept</div>
+              <div class="readout-value" id="roYint">1</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Behaviour</div>
+              <div class="readout-value" id="roBehave">growth</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">y at x = 5</div>
+              <div class="readout-value" id="roY5">32</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>For \(y = 0.4^x\), state the \(y\)-intercept, whether the graph increases or
+              decreases, and the equation of its asymptote.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(y\)-intercept 1 (since \(0.4^0 = 1\)); decreasing because \(0 &lt; 0.4 &lt; 1\);
+                  asymptote \(y = 0\).</p>
+              </div></details></li>
+            <li>Write \(y = 5^{-x}\) in the form \(y = b^x\). Which single point lies on both
+              \(y = 5^x\) and \(y = 5^{-x}\)?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(5^{-x} = \left(\frac{1}{5}\right)^x = 0.2^x\). The curves are reflections in the
+                  \(y\)-axis, so they meet only on it, at \((0, 1)\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. MODEL ─────────── -->
+      <div class="content-card" id="model">
+        <p class="section-label">Theory</p>
+        <h2>The model \(y = ka^x\)</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Interpreting the parameters</p>
+          \[y = ka^{x}\]
+          <p class="formula-where">
+            \(k\) is the <strong>initial value</strong> &mdash; the value of \(y\) when \(x = 0\),
+            and therefore the \(y\)-intercept.<br>
+            \(a\) is the <strong>growth or decay factor</strong> &mdash; what you multiply by each
+            period.<br>
+            \(x\) is the <strong>number of periods</strong> elapsed.
+          </p>
+        </div>
+
+        <p>Converting a percentage rate into the factor \(a\) is the step students most often get
+          wrong:</p>
+        <table class="coord-table">
+          <tr><th>Situation</th><th>Factor \(a\)</th><th>Example</th></tr>
+          <tr><td>Growth of \(r\%\) per period</td><td>\(a = 1 + \frac{r}{100}\)</td><td>8% growth &rarr; \(a = 1.08\)</td></tr>
+          <tr><td>Decay of \(r\%\) per period</td><td>\(a = 1 - \frac{r}{100}\)</td><td>15% decay &rarr; \(a = 0.85\)</td></tr>
+          <tr><td>Doubling each period</td><td>\(a = 2\)</td><td>\(y = k \times 2^x\)</td></tr>
+          <tr><td>Halving each period</td><td>\(a = 0.5\)</td><td>\(y = k \times 0.5^x\)</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2 &mdash; finding the equation from a table</p>
+          <p>Find the exponential equation for this data.</p>
+          <table class="coord-table">
+            <tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+            <tr><th>\(y\)</th><td>12</td><td>18</td><td>27</td><td>40.5</td></tr>
+          </table>
+          <p>The value at \(x = 0\) is 12, so \(k = 12\).</p>
+          <p>The ratio is \(18 \div 12 = 1.5\); check \(27 \div 18 = 1.5\) ✓ and
+            \(40.5 \div 27 = 1.5\) ✓. So \(a = 1.5\).</p>
+          \[y = 12 \times 1.5^{x}\]
+          <p>Check at \(x = 3\): \(12 \times 1.5^3 = 12 \times 3.375 = 40.5\) ✓</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; finding \(a\) when \(k\) is not at \(x=0\)</p>
+          <p>An exponential model passes through \((0, 500)\) and \((4, 2000)\). Find \(a\).</p>
+          <p>Since \(x = 0\) gives \(y = 500\), \(k = 500\). Then:</p>
+          \[500 \times a^{4} = 2000 \quad\Rightarrow\quad a^{4} = 4\]
+          \[a = \sqrt[4]{4} = 4^{0.25} \approx 1.414\]
+          <p>So \(y = 500 \times 1.414^{x}\), a growth of about 41.4% per period.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Find the exponential equation for \(x = 0, 1, 2, 3\) and \(y = 80, 60, 45, 33.75\).
+              Is it growth or decay, and by what percentage per period?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(k = 80\); ratio \(60 \div 80 = 0.75\) (check \(45 \div 60 = 0.75\) ✓).</p>
+                <p><strong>Answer:</strong> \(y = 80 \times 0.75^x\) &mdash; decay of 25% per period.</p>
+              </div></details></li>
+            <li>An exponential model passes through \((0, 300)\) and \((2, 432)\). Find \(a\) and
+              the percentage growth per period.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[300a^2 = 432 \;\Rightarrow\; a^2 = 1.44 \;\Rightarrow\; a = 1.2\]
+                <p><strong>Answer:</strong> \(y = 300 \times 1.2^x\), growth of 20% per period.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. FROM A GRAPH ─────────── -->
+      <div class="content-card" id="fromgraph">
+        <p class="section-label">Theory</p>
+        <h2>Reading a model from its graph</h2>
+
+        <p>Exam questions often give only a graph. Two clearly marked points are enough to write
+          the model \(y = ka^x\):</p>
+        <ol>
+          <li>Read the <strong>\(y\)-intercept</strong>: that is \(k\), the initial value.</li>
+          <li>Take a second point \((x_1, y_1)\) and solve \(k a^{x_1} = y_1\) for \(a\).</li>
+          <li><strong>Interpret</strong> \(a\) in context: \(a &gt; 1\) is growth of
+            \((a - 1) \times 100\%\) per period, \(a &lt; 1\) is decay of
+            \((1 - a) \times 100\%\) per period.</li>
+        </ol>
+
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <div class="plot-wrap" id="plotReadGrowth"></div>
+            <p class="diagram-caption">Graph A</p>
+          </div>
+          <div class="diagram-col">
+            <div class="plot-wrap" id="plotReadDecay"></div>
+            <p class="diagram-caption">Graph B</p>
+          </div>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4</p>
+          <p><strong>Graph A</strong> shows the number of followers of a new account
+            after \(x\) weeks. It passes through \((0, 200)\) and \((2, 450)\).</p>
+          \[k = 200: \quad 200a^2 = 450 \;\Rightarrow\; a^2 = 2.25 \;\Rightarrow\; a = 1.5\]
+          <p>Model \(y = 200 \times 1.5^x\): followers grow by 50% each week.</p>
+          <p><strong>Graph B</strong> shows a medicine level (mg) \(x\) hours after a dose, through
+            \((0, 80)\) and \((3, 10)\).</p>
+          \[80a^3 = 10 \;\Rightarrow\; a^3 = 0.125 \;\Rightarrow\; a = 0.5\]
+          <p>Model \(y = 80 \times 0.5^x\): the level halves every hour, so it falls by 50% per hour.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>An exponential graph has \(y\)-intercept 50 and passes through \((2, 72)\). Write
+              its equation and describe the rate of change.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[50a^2 = 72 \;\Rightarrow\; a^2 = 1.44 \;\Rightarrow\; a = 1.2\]
+                <p><strong>Answer:</strong> \(y = 50 \times 1.2^x\) &mdash; growth of 20% per period.</p>
+              </div></details></li>
+            <li>A graph of a drink's temperature above room temperature, \(T\) (°C), after \(t\)
+              minutes passes through \((0, 64)\) and \((3, 27)\). Find the model and predict \(T\)
+              after 5 minutes.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                \[64a^3 = 27 \;\Rightarrow\; a^3 = \tfrac{27}{64} \;\Rightarrow\; a = \tfrac{3}{4} = 0.75\]
+                <p>\(T = 64 \times 0.75^t\): it falls by 25% each minute. At \(t = 5\):
+                  \(64 \times 0.75^5 \approx 15.2\)°C above room temperature.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. GROWTH & DECAY ─────────── -->
+      <div class="content-card" id="growth">
+        <p class="section-label">Application</p>
+        <h2>Growth and decay problems</h2>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; population growth</p>
+          <p>A town has 8,000 residents and is growing at 3% per year.</p>
+          <p><strong>(a) Write a model.</strong> \(k = 8000\), \(a = 1 + 0.03 = 1.03\):</p>
+          \[P = 8000 \times 1.03^{t}\]
+          <p><strong>(b) Population after 10 years?</strong></p>
+          \[P = 8000 \times 1.03^{10} = 8000 \times 1.3439 \approx 10\,751\]
+          <p><strong>(c) When does it reach 12,000?</strong> By trial:</p>
+          <table class="coord-table">
+            <tr><th>\(t\)</th><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+            <tr><th>\(P\)</th><td>11 406</td><td>11 748</td><td>12 101</td><td>12 464</td></tr>
+          </table>
+          <p>The population first exceeds 12,000 during year 14.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; decay</p>
+          <p>A car bought for $42,000 loses 18% of its value each year.</p>
+          <p>\(k = 42000\), \(a = 1 - 0.18 = 0.82\):</p>
+          \[V = 42000 \times 0.82^{t}\]
+          <p><strong>Value after 5 years:</strong></p>
+          \[V = 42000 \times 0.82^{5} = 42000 \times 0.37074 \approx \$15\,571\]
+          <p>Note the car never reaches $0 under this model &mdash; the curve approaches the
+            asymptote \(V = 0\) without touching it.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; half-life</p>
+          <p>A radioactive sample of 240 g has a half-life of 6 days. Find the mass after 30 days.</p>
+          <p>Let \(n\) = number of half-lives \(= 30 \div 6 = 5\).</p>
+          \[M = 240 \times 0.5^{5} = 240 \times 0.03125 = 7.5\ \text{g}\]
+          <p>Alternatively, in days: \(M = 240 \times 0.5^{t/6}\), and at \(t = 30\) this gives
+            the same 7.5 g.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8 &mdash; exam style</p>
+          <p>Town A has 15,000 residents and grows at 2% per year. Town B has 12,000 residents and
+            grows at 5% per year.</p>
+          <p><strong>(a) Write a model for each town.</strong> [1 mark]</p>
+          \[A = 15000 \times 1.02^{t} \qquad B = 12000 \times 1.05^{t}\]
+          <p><strong>(b) In which year does Town B's population first exceed Town A's?</strong>
+            [2 marks]</p>
+          <table class="coord-table">
+            <tr><th>\(t\)</th><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+            <tr><th>Town A</th><td>16 892</td><td>17 230</td><td>17 575</td><td>17 926</td></tr>
+            <tr><th>Town B</th><td>16 081</td><td>16 885</td><td>17 729</td><td>18 616</td></tr>
+          </table>
+          <p>Town B first exceeds Town A at \(t = 8\), during the eighth year.</p>
+          <p><strong>(c) A planner uses the models to predict the populations in 50 years. Comment
+            on this.</strong> [1 mark]</p>
+          <p>It is a long extrapolation. Both models assume the growth rates stay at 2% and 5% for
+            50 years; Town B's model predicts over 137,000 residents, which housing, jobs and
+            services are unlikely to support.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A phone bought for $1,400 loses 30% of its value each year. Write a model and find
+              its value after 3 years.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(a = 1 - 0.30 = 0.7\), so \(V = 1400 \times 0.7^t\).</p>
+                <p>\(V = 1400 \times 0.7^3 = 1400 \times 0.343 = \$480.20\).</p>
+              </div></details></li>
+            <li>A culture of 250 bacteria triples every 4 hours. How many are there after 12 hours?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>12 hours is \(12 \div 4 = 3\) tripling periods: \(N = 250 \times 3^3 = 6750\)
+                  bacteria.</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Growth &amp; decay table generator</h3>
+          <p class="exercise-intro">Set the initial value and the percentage rate, then read the
+            value at each period. Switch between growth and decay to see the factor \(a\) change.</p>
+          <div id="tableSliders"></div>
+          <div class="exercise-row" style="margin-top:6px;">
+            <label><input type="checkbox" id="decayMode"> Decay (instead of growth)</label>
+          </div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Model</div>
+              <div class="readout-value" id="roModel">y = 1000 × 1.05^x</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Factor a</div>
+              <div class="readout-value" id="roFactor">1.05</div>
+            </div>
+          </div>
+          <div id="growthTable" style="margin-top:16px;"></div>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. LIMITATIONS ─────────── -->
+      <div class="content-card" id="limits">
+        <p class="section-label">Evaluation</p>
+        <h2>Limitations of exponential models</h2>
+
+        <p>The syllabus explicitly asks you to <em>explain the limitations of exponential models
+          in practical contexts</em>. These are the arguments that earn the marks:</p>
+
+        <h3>1. Unbounded growth is unrealistic</h3>
+        <p>An exponential growth model increases without limit. Real populations are constrained
+          by food, space, disease and resources. A model predicting a town of 8,000 growing at 3%
+          per year gives over 150,000 people after 100 years &mdash; almost certainly beyond what
+          the area can support.</p>
+
+        <h3>2. The rate is assumed constant</h3>
+        <p>The model assumes \(a\) never changes. In reality growth rates fluctuate with economic
+          conditions, policy, migration and seasons. A single fixed percentage is an
+          approximation.</p>
+
+        <h3>3. Decay never reaches zero</h3>
+        <p>Because \(y = 0\) is an asymptote, a decay model never predicts a value of exactly
+          zero. A car modelled by \(V = 42000 \times 0.82^t\) is still worth $1,000 after 19
+          years and never becomes worthless &mdash; but in practice a car eventually has only
+          scrap value.</p>
+
+        <h3>4. Extrapolation is risky</h3>
+        <p>Predictions well beyond the range of the original data are unreliable. A model fitted
+          to 5 years of data may be reasonable for year 6, but is speculative for year 50.</p>
+
+        <h3>5. The domain may be restricted</h3>
+        <p>Negative values of \(x\) often have no meaning (you cannot have &minus;3 years of
+          growth from the starting point), and values may need to be whole numbers &mdash; you
+          cannot have 10,751.2 people.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Answering these questions in an exam</p>
+          <p style="margin-bottom:0;">Name the limitation, then tie it to the specific context
+            and numbers in the question. "The model assumes growth continues at 3% forever, but
+            the town's land area limits how many people can live there, so the prediction of
+            150,000 after 100 years is unrealistic" scores; "the model is not accurate" does not.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Discovering the rule of 72</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#growth">growth &amp; decay table generator</a> with an initial value of 1000
+          and growth (not decay).</p>
+        <ol>
+          <li>Set the rate to 10%. Between which two periods does the value first pass 2000?
+            Estimate the doubling time to one decimal place.</li>
+          <li>Repeat for 12%, 18% and 24%. Record each rate and doubling time in a table.</li>
+          <li>Multiply each rate by its doubling time. What do you notice?</li>
+          <li>Use your discovery to predict how long money takes to double at 6% per year, then
+            check with the formula \(1000 \times 1.06^t\) on a calculator.</li>
+          <li>Does the starting value matter? Change it to 3000 and explain what you see.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Rate</th><td>10%</td><td>12%</td><td>18%</td><td>24%</td></tr>
+            <tr><th>Passes 2000 between</th><td>7 and 8</td><td>6 and 7</td><td>4 and 5</td><td>3 and 4</td></tr>
+            <tr><th>True doubling time</th><td>7.3</td><td>6.1</td><td>4.2</td><td>3.2</td></tr>
+            <tr><th>\(72 \div \text{rate}\)</th><td>7.2</td><td>6</td><td>4</td><td>3</td></tr>
+          </table>
+          <p><strong>3.</strong> Rate \(\times\) doubling time is always close to 72, so doubling
+            time \(\approx 72 \div \text{rate}\). This is the <strong>rule of 72</strong>.</p>
+          <p><strong>4.</strong> \(72 \div 6 = 12\) years. Check: \(1.06^{12} \approx 2.01\) ✓</p>
+          <p><strong>5.</strong> No. Every value is multiplied by the same factor, so the time to
+            double from 3000 to 6000 is the same as from 1000 to 2000. This is what makes the
+            relationship exponential rather than linear.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Continue to Lesson 3 for quadratic and reciprocal relationships, or open the homework
+          set covering all three lessons.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-1', LESSON_IDX = 1;
+
+  /* ── Classification exercise ──────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: ['exponential', 'Each term is double the one before (ratio 2), so it is exponential: \\(y = 3 \\times 2^x\\).'],
+      B: ['linear', 'Each term is 12 less than the one before — a constant difference, so it is linear: \\(y = 100 - 12x\\).'],
+      C: ['exponential', 'Each term is half the one before (ratio 0.5), so it is exponential decay: \\(y = 800 \\times 0.5^x\\).']
+    };
+    document.querySelectorAll('[data-cls]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.cls;
+        var fb = document.getElementById('fbCls' + k);
+        var v  = (document.getElementById('cls' + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type linear or exponential.'; return; }
+        var ok = v === ANS[k][0];
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.innerHTML = (ok ? '✓ Correct. ' : '✗ It is ' + ANS[k][0] + '. ') + ANS[k][1];
+        IE.tex(fb);
+      });
+    });
+  })();
+
+  /* ── Static growth / decay plots ──────────────────────────── */
+  IE.plot('plotGrowth', {
+    width: 300, height: 240,
+    xMin: -3, xMax: 4, yMin: 0, yMax: 16, xStep: 1, yStep: 4,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return Math.pow(2, x); } }],
+    points: [{ x: 0, y: 1, label: '(0,1)' }]
+  });
+  IE.plot('plotDecay', {
+    width: 300, height: 240,
+    xMin: -4, xMax: 3, yMin: 0, yMax: 16, xStep: 1, yStep: 4,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return Math.pow(2, -x); } }],
+    points: [{ x: 0, y: 1, label: '(0,1)' }]
+  });
+
+  /* ── Reading a model from its graph ───────────────────────── */
+  IE.plot('plotReadGrowth', {
+    width: 300, height: 240,
+    xMin: 0, xMax: 4, yMin: 0, yMax: 1100, xStep: 1, yStep: 200,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return 200 * Math.pow(1.5, x); } }],
+    points: [{ x: 0, y: 200, label: '(0, 200)' }, { x: 2, y: 450, label: '(2, 450)' }]
+  });
+  IE.plot('plotReadDecay', {
+    width: 300, height: 240,
+    xMin: 0, xMax: 4, yMin: 0, yMax: 90, xStep: 1, yStep: 20,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return 80 * Math.pow(0.5, x); } }],
+    points: [{ x: 0, y: 80, label: '(0, 80)' }, { x: 3, y: 10, label: '(3, 10)' }]
+  });
+
+  /* ── Exponential parameter explorer ───────────────────────── */
+  (function () {
+    var k = 1, a = 2, neg = false;
+    var redraw = IE.plot('plotExp', { xMin: -4, xMax: 6, yMin: 0, yMax: 40, xStep: 2, yStep: 10, xLabel: 'x', yLabel: 'y', curves: [] });
+
+    function f(x) { return k * Math.pow(a, neg ? -x : x); }
+
+    function update() {
+      // Scale the y-axis to keep the curve readable as k and a change.
+      var vals = [];
+      for (var x = -4; x <= 6; x += 0.5) { var v = f(x); if (isFinite(v)) vals.push(v); }
+      var top = Math.max(10, Math.min(Math.max.apply(null, vals), k * 60));
+      top = Math.ceil(top / 10) * 10;
+
+      redraw({
+        yMax: top,
+        yStep: Math.max(1, Math.round(top / 5)),
+        curves: [{ fn: f }],
+        points: [{ x: 0, y: k, label: '(0, ' + k + ')' }]
+      });
+
+      var growing = neg ? (a < 1) : (a > 1);
+      document.getElementById('roEq').textContent = 'y = ' + k + ' × ' + a + '^' + (neg ? '−x' : 'x');
+      document.getElementById('roYint').textContent = String(k);
+      document.getElementById('roBehave').textContent =
+        Math.abs(a - 1) < 1e-9 ? 'constant' : (growing ? 'growth' : 'decay');
+      document.getElementById('roY5').textContent = String(Math.round(f(5) * 100) / 100);
+    }
+
+    var host = 'expSliders';
+    IE.slider({ mount: host, label: 'k (initial)', min: 1,   max: 20, step: 1,    value: k, onInput: function (v) { k = v; update(); } });
+    IE.slider({ mount: host, label: 'a (base)',    min: 0.1, max: 3,  step: 0.05, value: a, onInput: function (v) { a = v; update(); } });
+    document.getElementById('negExp').addEventListener('change', function (e) { neg = e.target.checked; update(); });
+    update();
+  })();
+
+  /* ── Growth & decay table generator ───────────────────────── */
+  (function () {
+    var init = 1000, rate = 5, decay = false;
+
+    function update() {
+      var a = decay ? 1 - rate / 100 : 1 + rate / 100;
+      a = Math.round(a * 10000) / 10000;
+
+      document.getElementById('roModel').textContent = 'y = ' + init + ' × ' + a + '^x';
+      document.getElementById('roFactor').textContent = String(a);
+
+      var rows = '<table class="coord-table"><tr><th>Period x</th>';
+      var vals = '<tr><th>Value</th>';
+      for (var x = 0; x <= 8; x++) {
+        var v = init * Math.pow(a, x);
+        rows += '<td>' + x + '</td>';
+        vals += '<td>' + (Math.round(v * 100) / 100).toLocaleString('en-AU') + '</td>';
+      }
+      document.getElementById('growthTable').innerHTML = rows + '</tr>' + vals + '</tr></table>';
+    }
+
+    var host = 'tableSliders';
+    IE.slider({ mount: host, label: 'Initial value', min: 100, max: 5000, step: 100, value: init, onInput: function (v) { init = v; update(); } });
+    IE.slider({ mount: host, label: 'Rate per period', min: 1, max: 40, step: 1, value: rate, format: function (v) { return v + '%'; }, onInput: function (v) { rate = v; update(); } });
+    document.getElementById('decayMode').addEventListener('change', function (e) { decay = e.target.checked; update(); });
+    update();
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Which of these tables shows an exponential relationship? <br><em>P:</em> 4, 7, 10, 13 &nbsp;&nbsp; <em>Q:</em> 4, 12, 36, 108',
+      opts: ['A) P only', 'B) Q only', 'C) Both', 'D) Neither'],
+      correct: 1,
+      explanation: 'B is correct. P has a constant difference of 3, so it is linear. Q has a constant ratio of 3 (\\(12 \\div 4 = 3\\), \\(36 \\div 12 = 3\\)), so it is exponential: \\(y = 4 \\times 3^x\\).'
+    },
+    {
+      q: 'What is the \\(y\\)-intercept of \\(y = 7 \\times 1.4^{x}\\)?',
+      opts: ['A) 1.4', 'B) 0', 'C) 7', 'D) 9.8'],
+      correct: 2,
+      explanation: 'C is correct. At \\(x = 0\\), \\(y = 7 \\times 1.4^{0} = 7 \\times 1 = 7\\). In \\(y = ka^x\\) the value of \\(k\\) is always the \\(y\\)-intercept.'
+    },
+    {
+      q: 'A quantity decreases by 12% each year. What is the decay factor \\(a\\)?',
+      opts: ['A) 0.12', 'B) 0.88', 'C) 1.12', 'D) 12'],
+      correct: 1,
+      explanation: 'B is correct. Decreasing by 12% leaves 88% of the previous value, so \\(a = 1 - 0.12 = 0.88\\).'
+    },
+    {
+      q: 'The graph of \\(y = 3^{-x}\\) is best described as:',
+      opts: [
+        'A) Increasing, passing through \\((0, 1)\\)',
+        'B) Decreasing, passing through \\((0, 1)\\)',
+        'C) Decreasing, passing through \\((0, 0)\\)',
+        'D) Increasing, passing through \\((0, 3)\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(3^{-x} = (1/3)^x\\), a base less than 1, so the curve decreases. At \\(x = 0\\) it gives \\(3^{0} = 1\\), so it passes through \\((0,1)\\) like every exponential of this form.'
+    },
+    {
+      q: 'A colony of 400 bacteria doubles every hour. How many are there after 6 hours?',
+      opts: ['A) 2,400', 'B) 4,800', 'C) 25,600', 'D) 12,800'],
+      correct: 2,
+      explanation: 'C is correct. \\(N = 400 \\times 2^{6} = 400 \\times 64 = 25\\,600\\). Doubling means multiplying by 2 each hour, not adding 400 each hour.'
+    },
+    {
+      q: 'An investment is modelled by \\(V = 5000 \\times 1.06^{t}\\). What does the 1.06 represent?',
+      opts: [
+        'A) The investment grows by $1.06 each year',
+        'B) The investment grows by 6% each year',
+        'C) The investment grows by 106% each year',
+        'D) The investment is worth $1.06 initially'
+      ],
+      correct: 1,
+      explanation: 'B is correct. \\(a = 1.06 = 1 + 0.06\\), so the value is multiplied by 1.06 each year — a 6% annual increase. The $5,000 is the initial value.'
+    },
+    {
+      q: 'Which is the strongest statement of a limitation of using \\(P = 8000 \\times 1.03^{t}\\) to model a town\'s population?',
+      opts: [
+        'A) The model is not accurate',
+        'B) Exponential models are always wrong',
+        'C) The model assumes 3% growth continues indefinitely, but land, housing and resources cap how large the town can become',
+        'D) The model uses a decimal'
+      ],
+      correct: 2,
+      explanation: 'C is correct. A limitation answer must name the assumption and tie it to the context. Unbounded growth is the key flaw: the model has no upper limit, but real towns do.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Determine whether each set of \\(y\\)-values is linear or exponential, and write its equation. (a) 6, 18, 54, 162 &nbsp; (b) 90, 78, 66, 54',
+      marks: 4,
+      steps: [
+        '(a) Differences: 12, 36, 108 — not constant. Ratios: \\(18 \\div 6 = 3\\), \\(54 \\div 18 = 3\\), \\(162 \\div 54 = 3\\) — constant.',
+        'So (a) is exponential with \\(k = 6\\) and \\(a = 3\\).',
+        '(b) Differences: \\(-12, -12, -12\\) — constant, so linear.',
+        'The value at \\(x = 0\\) is 90 and the gradient is \\(-12\\).'
+      ],
+      answer: '(a) Exponential, \\(y = 6 \\times 3^{x}\\). &nbsp; (b) Linear, \\(y = 90 - 12x\\).'
+    },
+    {
+      q: 'An exponential relationship passes through \\((0, 25)\\) and \\((3, 200)\\). Find its equation in the form \\(y = ka^x\\).',
+      marks: 3,
+      steps: [
+        'The point \\((0, 25)\\) gives the \\(y\\)-intercept directly, so \\(k = 25\\).',
+        'Substitute the second point: \\(25 \\times a^{3} = 200\\).',
+        'Divide: \\(a^{3} = 8\\).',
+        'Take the cube root: \\(a = 2\\).'
+      ],
+      answer: '\\(y = 25 \\times 2^{x}\\)'
+    },
+    {
+      q: 'The number of users of an app is modelled by \\(U = 1500 \\times 1.25^{m}\\), where \\(m\\) is months since launch. (a) How many users at launch? (b) How many after 8 months? (c) What monthly growth rate does the model assume?',
+      marks: 4,
+      steps: [
+        '(a) At launch \\(m = 0\\), so \\(U = 1500 \\times 1.25^{0} = 1500\\).',
+        '(b) \\(U = 1500 \\times 1.25^{8}\\). Now \\(1.25^{8} = 5.9605…\\)',
+        '\\(U = 1500 \\times 5.9605 = 8940.7…\\), so about 8,941 users.',
+        '(c) \\(a = 1.25 = 1 + 0.25\\), which is a 25% increase each month.'
+      ],
+      answer: '(a) 1,500 users. (b) About 8,941 users. (c) 25% growth per month.'
+    },
+    {
+      q: 'A machine purchased for $36,000 depreciates by 22% per year. Write a model for its value and find its value after 4 years.',
+      marks: 3,
+      steps: [
+        'Initial value \\(k = 36000\\). Losing 22% leaves 78%, so \\(a = 1 - 0.22 = 0.78\\).',
+        'Model: \\(V = 36000 \\times 0.78^{t}\\).',
+        'At \\(t = 4\\): \\(0.78^{4} = 0.37015…\\)',
+        '\\(V = 36000 \\times 0.37015 = 13\\,325.4…\\)'
+      ],
+      answer: '\\(V = 36000 \\times 0.78^{t}\\); after 4 years the value is about $13,325.'
+    },
+    {
+      q: 'A radioactive isotope has a half-life of 15 years. A 500 g sample is stored. (a) Write a model for the mass after \\(n\\) half-lives. (b) Find the mass after 60 years.',
+      marks: 3,
+      steps: [
+        '(a) Halving means \\(a = 0.5\\), so \\(M = 500 \\times 0.5^{n}\\).',
+        '(b) 60 years is \\(60 \\div 15 = 4\\) half-lives, so \\(n = 4\\).',
+        '\\(M = 500 \\times 0.5^{4} = 500 \\times 0.0625\\).'
+      ],
+      answer: '(a) \\(M = 500 \\times 0.5^{n}\\). (b) 31.25 g.'
+    },
+    {
+      q: 'A population of 20,000 grows at 4% per year. Use a table of values to find the first whole year in which the population exceeds 30,000.',
+      marks: 4,
+      steps: [
+        'Model: \\(P = 20000 \\times 1.04^{t}\\).',
+        'Trial values: \\(t = 8\\) gives \\(20000 \\times 1.3686 = 27\\,372\\).',
+        '\\(t = 10\\) gives \\(20000 \\times 1.4802 = 29\\,605\\).',
+        '\\(t = 11\\) gives \\(20000 \\times 1.5395 = 30\\,789\\).',
+        'The population first exceeds 30,000 in year 11.'
+      ],
+      answer: 'Year 11 — the population reaches about 30,789, having been about 29,605 in year 10.'
+    },
+    {
+      q: 'Explain why \\(y = x^{4}\\) is not an exponential relationship, while \\(y = 4^{x}\\) is.',
+      marks: 2,
+      steps: [
+        'In an exponential relationship the variable appears in the exponent, and the base is a fixed number.',
+        'In \\(y = x^{4}\\) the variable \\(x\\) is the base and 4 is the fixed exponent — this is a power (quartic) relationship.',
+        'In \\(y = 4^{x}\\) the fixed number 4 is the base and \\(x\\) is the exponent.',
+        'The behaviour differs: \\(y = x^4\\) passes through the origin, while \\(y = 4^x\\) passes through \\((0,1)\\) and never reaches zero.'
+      ],
+      answer: '\\(y = x^4\\) has the variable as the base (a power function); \\(y = 4^x\\) has the variable as the exponent, which is the defining feature of an exponential relationship.'
+    },
+    {
+      q: 'Two investments are compared. Investment A: $4,000 growing at 7% per year. Investment B: $5,000 growing at 4% per year. Determine which is worth more after 10 years, and after 20 years.',
+      marks: 4,
+      steps: [
+        'A: \\(V = 4000 \\times 1.07^{t}\\). B: \\(V = 5000 \\times 1.04^{t}\\).',
+        'At \\(t = 10\\): A \\(= 4000 \\times 1.9672 = \\$7\\,869\\); B \\(= 5000 \\times 1.4802 = \\$7\\,401\\).',
+        'At \\(t = 20\\): A \\(= 4000 \\times 3.8697 = \\$15\\,479\\); B \\(= 5000 \\times 2.1911 = \\$10\\,956\\).',
+        'A overtakes B and the gap widens, because a higher growth factor eventually dominates a higher starting value.'
+      ],
+      answer: 'A is worth more at both times: $7,869 vs $7,401 after 10 years, and $15,479 vs $10,956 after 20 years.'
+    },
+    {
+      q: 'The value of a collectable is modelled by \\(V = 250 \\times 1.09^{t}\\). Explain what the 250 and the 1.09 represent, and state one limitation of the model.',
+      marks: 3,
+      steps: [
+        'The 250 is \\(k\\), the value when \\(t = 0\\) — the purchase price of $250.',
+        'The 1.09 is \\(a\\), the growth factor: the value is multiplied by 1.09 each year, a 9% annual increase.',
+        'For the limitation, name the assumption and tie it to the context.'
+      ],
+      answer: '$250 is the initial value; 1.09 means 9% growth per year. Limitation: the model assumes 9% growth continues forever, but collectable values depend on demand and fashion, which change — after 50 years it predicts over $18,000, which is speculative.'
+    },
+    {
+      q: 'A cup of coffee cools so that its temperature above room temperature halves every 8 minutes. It starts 60°C above room temperature. Find how far above room temperature it is after 24 minutes.',
+      marks: 3,
+      steps: [
+        '24 minutes is \\(24 \\div 8 = 3\\) halvings.',
+        'Model: \\(T = 60 \\times 0.5^{n}\\) where \\(n\\) is the number of 8-minute intervals.',
+        '\\(T = 60 \\times 0.5^{3} = 60 \\times 0.125\\).'
+      ],
+      answer: '7.5°C above room temperature.'
+    },
+    {
+      q: 'Sketch the key features of \\(y = 3 \\times 2^{-x}\\): state the \\(y\\)-intercept, whether it increases or decreases, and describe its behaviour for large \\(x\\).',
+      marks: 3,
+      steps: [
+        '\\(y\\)-intercept: at \\(x = 0\\), \\(y = 3 \\times 2^{0} = 3\\).',
+        'The negative exponent means \\(2^{-x} = (0.5)^{x}\\), a base below 1, so the curve decreases.',
+        'As \\(x\\) grows, \\(2^{-x}\\) approaches 0, so \\(y\\) approaches 0 from above.',
+        'The line \\(y = 0\\) is a horizontal asymptote — the curve gets arbitrarily close but never touches it.'
+      ],
+      answer: '\\(y\\)-intercept 3; decreasing throughout; approaches the horizontal asymptote \\(y = 0\\) as \\(x\\) increases, staying positive for all \\(x\\).'
+    },
+    {
+      q: 'A car\'s value drops from $48,000 to $28,000 over 5 years. Assuming exponential decay, find the annual rate of depreciation to one decimal place.',
+      marks: 4,
+      steps: [
+        'Model: \\(V = 48000 \\times a^{t}\\), with \\(V = 28000\\) at \\(t = 5\\).',
+        '\\(48000 \\times a^{5} = 28000\\), so \\(a^{5} = \\dfrac{28000}{48000} = 0.58333…\\)',
+        'Take the fifth root: \\(a = 0.58333^{0.2} = 0.8985…\\)',
+        'Since \\(a = 1 - r\\), the rate is \\(r = 1 - 0.8985 = 0.1015\\).'
+      ],
+      answer: 'About 10.2% per year.'
+    },
+    {
+      q: 'The table shows a quantity measured each week. Determine whether an exponential model fits, and if so find its equation. <br>Week: 0, 1, 2, 3 &nbsp;&nbsp; Value: 320, 240, 180, 135',
+      marks: 4,
+      steps: [
+        'Test the ratios: \\(240 \\div 320 = 0.75\\).',
+        '\\(180 \\div 240 = 0.75\\) ✓ and \\(135 \\div 180 = 0.75\\) ✓ — the ratio is constant.',
+        'So an exponential model fits, with \\(a = 0.75\\).',
+        'The value at week 0 is 320, so \\(k = 320\\).',
+        'This represents a 25% decrease each week.'
+      ],
+      answer: 'Yes — the constant ratio 0.75 confirms exponential decay. \\(y = 320 \\times 0.75^{x}\\), a 25% weekly decrease.'
+    },
+    {
+      q: 'A biologist models a fish population as \\(P = 900 \\times 1.15^{t}\\) where \\(t\\) is years. Give two distinct reasons why this model would not remain valid for \\(t = 40\\).',
+      marks: 3,
+      steps: [
+        'Calculate the prediction to make the argument concrete: \\(1.15^{40} \\approx 267.9\\), so \\(P \\approx 241\\,000\\) fish.',
+        'Reason 1 — unbounded growth: the lake has finite food, oxygen and space, so the population cannot keep multiplying by 1.15 indefinitely; it will level off at a carrying capacity.',
+        'Reason 2 — constant rate assumption: the 15% rate was measured over a short period. Predation, disease, fishing and changing water conditions will alter the rate over 40 years.',
+        'Reason 3 (alternative) — extrapolating 40 years beyond the data range is unreliable.'
+      ],
+      answer: 'First, the model grows without limit (predicting about 241,000 fish), but the lake has a finite carrying capacity. Second, it assumes the 15% rate never changes, whereas disease, predation and environmental change will alter it over four decades.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

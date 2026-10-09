@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Bivariate Data Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 &mdash; Bivariate Data Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>Bivariate Data Analysis</h1>
+      <p class="subtitle">Every dot-point of MST-12-S2-08 in one place: the method sheet, the
+        interpretation templates, the mistakes that cost marks, and a mixed exam-style paper with
+        full solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-08</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Method sheet</li>
+        <li>Answer templates</li>
+        <li>Interactive analyser</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#method">1 &nbsp;Method sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#templates">2 &nbsp;Answer templates</a></li>
+        <li class="toc-item"><a class="toc-link" href="#analyser">3 &nbsp;Interactive analyser</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">4 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">5 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. METHOD ─────────── -->
+      <div class="content-card" id="method">
+        <p class="section-label">Reference</p>
+        <h2>Method sheet</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Univariate vs bivariate</p>
+          <p style="margin-bottom:0;">One measurement per individual → <strong>univariate</strong>
+            (mean, spread, histogram). Two measurements per individual → <strong>bivariate</strong>
+            (relationship, scatter plot, correlation).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Variables</p>
+          <p style="margin-bottom:0;"><strong>Independent</strong> = the predictor, on the
+            \(x\)-axis. <strong>Dependent</strong> = the outcome, on the \(y\)-axis. Ask: "which
+            one am I using to predict the other?"</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Describing an association</p>
+          <p style="margin-bottom:0;">Always give <strong>form</strong> (linear / non-linear),
+            <strong>direction</strong> (positive / negative) and <strong>strength</strong> (strong
+            / moderate / weak) — in context.</p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>\(|r|\)</th><th>Strength</th></tr>
+          <tr><td>0.9 – 1.0</td><td>Very strong</td></tr>
+          <tr><td>0.7 – 0.9</td><td>Strong</td></tr>
+          <tr><td>0.5 – 0.7</td><td>Moderate</td></tr>
+          <tr><td>0.3 – 0.5</td><td>Weak</td></tr>
+          <tr><td>0 – 0.3</td><td>Very weak or none</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">The line</p>
+          \[y = mx + c \qquad m = \frac{y_2 - y_1}{x_2 - x_1}\]
+          <p class="formula-where">Calculators give \(y = A + Bx\), where \(A\) is the
+            <strong>intercept</strong> and \(B\) the <strong>gradient</strong>. The least-squares
+            line always passes through \((\bar{x}, \bar{y})\).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Spreadsheet</p>
+          <p style="margin-bottom:0;"><code>=SLOPE(y,x)</code>, <code>=INTERCEPT(y,x)</code>,
+            <code>=CORREL(x,y)</code>, <code>=FORECAST(x,y,x-range)</code>. Trendlines display
+            \(R^2\); take the square root for \(|r|\) and read the sign from the gradient.</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. TEMPLATES ─────────── -->
+      <div class="content-card" id="templates">
+        <p class="section-label">Exam technique</p>
+        <h2>Answer templates</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Describing an association</p>
+          <p style="margin-bottom:0;">"There is a <strong>[strength]</strong>
+            <strong>[direction]</strong> <strong>[form]</strong> association between [\(x\)] and
+            [\(y\)]. As [\(x\)] increases, [\(y\)] tends to [increase/decrease]."</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Interpreting the gradient</p>
+          <p style="margin-bottom:0;">"For each 1-unit increase in [\(x\), with units], [\(y\)]
+            [increases/decreases] by about [\(m\)] [units of \(y\)]."</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Interpreting the intercept</p>
+          <p style="margin-bottom:0;">"When [\(x\)] is 0, [\(y\)] is predicted to be [\(c\)]."
+            Add: "However, \(x = 0\) lies outside the data range and is not meaningful here" —
+            whenever that is true.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Commenting on a prediction</p>
+          <p style="margin-bottom:0;">"This is <strong>[interpolation/extrapolation]</strong>,
+            since \(x = \) [value] lies [inside/outside] the data range of [range]. It is therefore
+            [reliable / unreliable, because there is no evidence the linear relationship continues]."</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Association vs causation</p>
+          <p style="margin-bottom:0;">"The data show an association, but not causation. A possible
+            confounding variable is [specific variable], which would influence both [\(x\)] and
+            [\(y\)]. To establish causation, a controlled experiment would be needed."</p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. ANALYSER ─────────── -->
+      <div class="content-card" id="analyser">
+        <p class="section-label">Practice</p>
+        <h2>Interactive analyser</h2>
+
+        <div class="interactive-block">
+          <h3>Full bivariate analysis</h3>
+          <p class="exercise-intro">Adjust the trend and the scatter. Everything updates: the
+            regression line, \(r\), the description and the prediction.</p>
+          <div id="revSliders"></div>
+          <div class="plot-wrap" id="plotRev"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Equation</div>
+              <div class="readout-value" id="roEq">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Pearson's r</div>
+              <div class="readout-value" id="roR">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Prediction at x</div>
+              <div class="readout-value" id="roPred">—</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Type</div>
+              <div class="readout-value" id="roType">—</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="revNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Quick calculations</h3>
+          <div class="exercise-row">
+            <label>(a) Line through \((3, 40)\) and \((9, 16)\). Gradient?</label>
+            <input class="exercise-input" id="qcA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-qc="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcA"></p>
+
+          <div class="exercise-row">
+            <label>(b) \(R^2 = 0.49\) with a negative gradient. Find \(r\).</label>
+            <input class="exercise-input" id="qcB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-qc="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Using \(y = -2.5x + 48\), find \(x\) when \(y = 18\).</label>
+            <input class="exercise-input" id="qcC" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-qc="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcC"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CHECKLIST ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 5. MISTAKES ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Putting the dependent variable on the \(x\)-axis</td>
+            <td>The predictor goes on \(x\). Decide before plotting.</td>
+          </tr>
+          <tr>
+            <td>Describing an association with only one or two features</td>
+            <td>Always give form, direction <em>and</em> strength, in context.</td>
+          </tr>
+          <tr>
+            <td>Concluding causation from a strong \(r\)</td>
+            <td>Association is not causation. Name a specific confounder.</td>
+          </tr>
+          <tr>
+            <td>Reading \(A\) as the gradient on a calculator</td>
+            <td>In \(y = A + Bx\), \(A\) is the <strong>intercept</strong> and \(B\) the gradient.</td>
+          </tr>
+          <tr>
+            <td>Quoting \(R^2\) as if it were \(r\)</td>
+            <td>Take the square root, and get the sign from the gradient.</td>
+          </tr>
+          <tr>
+            <td>Trusting \(r\) without looking at the plot</td>
+            <td>A perfect curve gives \(r \approx 0\). Always inspect the scatter plot.</td>
+          </tr>
+          <tr>
+            <td>Extrapolating without comment</td>
+            <td>State that it is extrapolation and explain why it is unreliable.</td>
+          </tr>
+          <tr>
+            <td>Interpreting a meaningless intercept</td>
+            <td>If \(x = 0\) is impossible or far outside the data, say so.</td>
+          </tr>
+          <tr>
+            <td>Joining the points on a scatter plot</td>
+            <td>Never join them. Plot points only, then add a line of best fit.</td>
+          </tr>
+          <tr>
+            <td>Rounding the gradient before predicting</td>
+            <td>Keep full calculator precision; round only the final answer.</td>
+          </tr>
+          <tr>
+            <td>Deleting an outlier silently</td>
+            <td>Investigate it and report \(r\) with and without it.</td>
+          </tr>
+          <tr>
+            <td>Omitting units when interpreting the gradient</td>
+            <td>"$2,830 per year", not just "2.83".</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes with a
+          calculator &mdash; then mark yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident
+            with every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-8', LESSON_IDX = 4;
+
+  function stats(pts) {
+    var n = pts.length, sx = 0, sy = 0;
+    pts.forEach(function (p) { sx += p[0]; sy += p[1]; });
+    var mx = sx / n, my = sy / n, sxy = 0, sxx = 0, syy = 0;
+    pts.forEach(function (p) {
+      sxy += (p[0] - mx) * (p[1] - my);
+      sxx += (p[0] - mx) * (p[0] - mx);
+      syy += (p[1] - my) * (p[1] - my);
+    });
+    var r = (sxx && syy) ? sxy / Math.sqrt(sxx * syy) : 0;
+    var m = sxx ? sxy / sxx : 0;
+    return { r: r, m: m, c: my - m * mx, mx: mx, my: my };
+  }
+  function describe(r) {
+    var a = Math.abs(r);
+    return a >= 0.9 ? 'very strong' : a >= 0.7 ? 'strong'
+         : a >= 0.5 ? 'moderate'    : a >= 0.3 ? 'weak' : 'very weak or none';
+  }
+
+  /* ── Full analyser ────────────────────────────────────────── */
+  (function () {
+    var grad = -2.5, noise = 1.2, px = 6;
+    var SEED = [0.42,-0.88,0.61,-0.27,0.95,-0.53,0.14,0.73,-0.96,0.31,-0.66,0.5];
+    var LO = 1, HI = 11;
+    var redraw = IE.plot('plotRev', {
+      width: 460, height: 300, xMin: 0, xMax: 18, yMin: -10, yMax: 45,
+      xStep: 3, yStep: 10, xLabel: 'x', yLabel: 'y', points: []
+    });
+
+    function update() {
+      var pts = SEED.map(function (e, i) {
+        var x = LO + i * (HI - LO) / 11;
+        return [x, 26 + grad * (x - 6) + e * noise * 3];
+      });
+      var s = stats(pts);
+      var pv = s.m * px + s.c;
+      var inside = px >= LO && px <= HI;
+
+      redraw({
+        points: pts.map(function (p) { return { x: p[0], y: p[1] }; })
+                   .concat([{ x: px, y: pv, hollow: true, label: pv.toFixed(1) }]),
+        markers: [{ x: px, y: pv }],
+        curves: [{ fn: function (x) { return s.m * x + s.c; }, className: 'plot-curve-2' }]
+      });
+
+      document.getElementById('roEq').textContent   = 'y = ' + s.m.toFixed(2) + 'x + ' + s.c.toFixed(2);
+      document.getElementById('roR').textContent    = s.r.toFixed(3);
+      document.getElementById('roPred').textContent = pv.toFixed(2);
+      document.getElementById('roType').textContent = inside ? 'interpolation' : 'extrapolation';
+
+      var note = document.getElementById('revNote');
+      note.className = 'exercise-feedback' + (inside ? ' correct' : ' wrong');
+      note.textContent = 'There is a ' + describe(s.r) + ' ' +
+        (s.r > 0 ? 'positive' : 'negative') + ' linear association (r = ' + s.r.toFixed(3) +
+        '). At x = ' + px + ' the model predicts y = ' + pv.toFixed(2) + ' — ' +
+        (inside ? 'interpolation within the data range ' + LO + '–' + HI + ', so reliable.'
+                : 'extrapolation outside the data range ' + LO + '–' + HI + ', so unreliable.');
+    }
+    var host = 'revSliders';
+    IE.slider({ mount: host, label: 'Trend', min: -5, max: 5, step: 0.25, value: grad,
+                format: function (v) { return v.toFixed(2); },
+                onInput: function (v) { grad = v; update(); } });
+    IE.slider({ mount: host, label: 'Scatter', min: 0, max: 4, step: 0.1, value: noise,
+                format: function (v) { return v.toFixed(1); },
+                onInput: function (v) { noise = v; update(); } });
+    IE.slider({ mount: host, label: 'Predict at x', min: 0, max: 18, step: 1, value: px,
+                onInput: function (v) { px = v; update(); } });
+    update();
+  })();
+
+  /* ── Quick calculations ───────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [-4,  'Gradient = (16 − 40) ÷ (9 − 3) = −24 ÷ 6 = −4.'],
+      B: [-0.7,'r = ±√0.49 = ±0.7; the gradient is negative, so r = −0.7.'],
+      C: [12,  '18 = −2.5x + 48 → 2.5x = 30 → x = 12.']
+    };
+    document.querySelectorAll('[data-qc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.qc, fb = document.getElementById('fbQc' + k);
+        var g = parseFloat((document.getElementById('qc' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.02;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Distinguish between one-variable and bivariate data analysis and explain when each is needed',
+      'Explain the difference between variables showing association and those with a causal relationship',
+      'Identify the dependent and independent variables within a bivariate dataset',
+      'Analyse relationships between independent and dependent variables that may be described as causal',
+      'Represent a bivariate dataset using a scatter plot',
+      'Create a line of best fit on a scatter plot, by eye and with digital tools',
+      'Describe the form of a dataset as linear or non-linear',
+      'Describe the strength of a linear association as strong, moderate or weak',
+      'Describe the direction of an association as positive or negative',
+      'Determine and interpret the gradient and y-intercept of the line of best fit',
+      'Form the equation of the line of best fit from a scatter plot',
+      "Calculate and interpret Pearson's correlation coefficient (r) using a scientific calculator",
+      'Determine the equation of the least-squares regression line using a scientific calculator',
+      'Use a spreadsheet to construct a scatter plot and the least-squares regression line',
+      'Use lines of best fit to make predictions',
+      'Recognise the limitations of interpolation and extrapolation'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none'; ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0'; li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+    var tally = document.createElement('p');
+    tally.style.cssText = 'margin-top:16px;font-family:var(--font-mono);font-size:12px;color:var(--gray-med);';
+    mount.appendChild(tally);
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'State whether each requires univariate or bivariate analysis. (a) The spread of daily rainfall. (b) Whether rainfall predicts crop yield. (c) The median house price in a suburb.',
+      marks: 3,
+      steps: [
+        '(a) One measurement per day — univariate.',
+        '(b) Two measurements per farm, with one predicting the other — bivariate.',
+        '(c) One measurement per house — univariate.'
+      ],
+      answer: '(a) Univariate. (b) Bivariate. (c) Univariate.'
+    },
+    {
+      q: 'In a study predicting a student\'s exam mark from hours of sleep, identify the variables and state which axis each belongs on.',
+      marks: 2,
+      steps: [
+        'Hours of sleep is used to predict, so it is the independent variable.',
+        'The exam mark is the outcome, so it is the dependent variable.',
+        'Independent goes on the horizontal axis; dependent on the vertical.'
+      ],
+      answer: 'Independent: hours of sleep (\\(x\\)-axis). Dependent: exam mark (\\(y\\)-axis).'
+    },
+    {
+      q: 'Classify each: (a) \\(r = -0.93\\) (b) \\(r = 0.58\\) (c) \\(r = 0.17\\)',
+      marks: 3,
+      steps: [
+        '(a) \\(|r| = 0.93\\) → very strong, negative.',
+        '(b) \\(|r| = 0.58\\) → moderate, positive.',
+        '(c) \\(|r| = 0.17\\) → very weak or none.'
+      ],
+      answer: '(a) Very strong negative. (b) Moderate positive. (c) Very weak.'
+    },
+    {
+      q: 'A line of best fit passes through \\((4, 62)\\) and \\((12, 30)\\). Find its equation.',
+      marks: 3,
+      steps: [
+        'Gradient \\(= \\dfrac{30 - 62}{12 - 4} = \\dfrac{-32}{8} = -4\\).',
+        'Substitute \\((4, 62)\\): \\(62 = -4(4) + c\\).',
+        '\\(c = 62 + 16 = 78\\).'
+      ],
+      answer: '\\(y = -4x + 78\\)'
+    },
+    {
+      q: 'For \\(W = 1.8T + 24\\), where \\(W\\) is weekly water use (kL) and \\(T\\) is mean temperature (°C), interpret both coefficients.',
+      marks: 4,
+      steps: [
+        'Gradient: each 1°C increase in mean temperature is associated with 1.8 kL more water used.',
+        'Intercept: at 0°C the model predicts 24 kL of use.',
+        '0°C is possible in some climates, but may lie outside the data range.',
+        'If so, note that the intercept should not be relied upon.'
+      ],
+      answer: 'Gradient: 1.8 kL more water per additional degree. Intercept: 24 kL predicted at 0°C — meaningful only if 0°C falls within or near the observed temperature range.'
+    },
+    {
+      q: 'Explain why a strong correlation does not establish causation, and name the four possible explanations.',
+      marks: 4,
+      steps: [
+        'Correlation describes a statistical pattern, not a mechanism.',
+        'A causes B; or B causes A; or a confounding variable drives both; or coincidence.',
+        'Only a controlled experiment can distinguish these.',
+        'Observational data cannot rule out unmeasured third variables.'
+      ],
+      answer: 'Because correlation only shows the variables move together. The four explanations are: A causes B, B causes A, a confounding variable drives both, or coincidence — and only a controlled experiment can distinguish them.'
+    },
+    {
+      q: 'A calculator gives \\(A = 74.6\\), \\(B = -3.25\\), \\(r = -0.89\\) for \\(y = A + Bx\\). Write the equation and describe the association.',
+      marks: 4,
+      steps: [
+        'In \\(y = A + Bx\\), \\(A\\) is the intercept and \\(B\\) the gradient.',
+        'Equation: \\(y = -3.25x + 74.6\\).',
+        '\\(|r| = 0.89\\) is strong, and the sign is negative.',
+        'The negative gradient is consistent with the negative \\(r\\) ✓'
+      ],
+      answer: '\\(y = -3.25x + 74.6\\); a strong negative linear association.'
+    },
+    {
+      q: 'A spreadsheet trendline shows \\(y = 2.7x + 15\\) with \\(R^2 = 0.8464\\). Find \\(r\\) and describe.',
+      marks: 4,
+      steps: [
+        '\\(r = \\pm\\sqrt{0.8464} = \\pm 0.92\\).',
+        'The gradient is positive, so \\(r = +0.92\\).',
+        '\\(|r| = 0.92\\) is very strong.'
+      ],
+      answer: '\\(r = 0.92\\): a very strong positive linear association.'
+    },
+    {
+      q: 'A model \\(v = 52.4 - 4.1a\\) comes from cars aged 1–10 years. Predict the value at 6 and at 15 years, commenting on each.',
+      marks: 5,
+      steps: [
+        'At \\(a = 6\\): \\(v = 52.4 - 24.6 = 27.8\\), about $27,800.',
+        '6 lies within 1–10, so this is interpolation — reliable.',
+        'At \\(a = 15\\): \\(v = 52.4 - 61.5 = -9.1\\).',
+        'A negative value is impossible.',
+        '15 is well outside the range, so this is extrapolation and the model has failed.'
+      ],
+      answer: 'At 6 years: about $27,800 — interpolation, reliable. At 15 years: \\(-\\$9\\,100\\) — extrapolation giving an impossible result; depreciation slows and cars retain a residual value.'
+    },
+    {
+      q: 'Explain why the analyst must look at the scatter plot before relying on \\(r\\).',
+      marks: 4,
+      steps: [
+        '\\(r\\) measures only linear association.',
+        'A perfect curve can give \\(r \\approx 0\\), suggesting no relationship when one is total.',
+        'A single outlier can dramatically inflate or deflate \\(r\\).',
+        'The plot also reveals clusters and subgroups invisible in a single number.'
+      ],
+      answer: 'Because \\(r\\) only detects straight lines. A perfect curve gives \\(r \\approx 0\\), one outlier can transform \\(r\\) in a small sample, and clusters or subgroups are invisible in the coefficient alone.'
+    },
+    {
+      q: 'Ten points give \\(r = 0.94\\). Adding an eleventh, far from the trend, drops \\(r\\) to 0.35. Explain and recommend a course of action.',
+      marks: 5,
+      steps: [
+        'The new point is an outlier working against the trend.',
+        'Least squares squares the residuals, so a distant point has enormous influence.',
+        'In a sample of 11, one such point can dominate.',
+        'Investigate whether it is a recording error or a genuine unusual case.',
+        'Report \\(r\\) both with and without it, and never delete data silently.'
+      ],
+      answer: 'A single outlier has enormous leverage because residuals are squared, and in a sample of 11 it dominates. Investigate its origin: if a recording error, correct it and document this; if genuine, report \\(r\\) both with (0.35) and without (0.94) it, explaining the discrepancy.'
+    },
+    {
+      q: 'A study of 45 houses gives \\(P = 4.2A + 185\\) (price $000, area m², range 90–340 m²) with \\(r = 0.84\\). Predict the price of a 250 m² house and state two limitations.',
+      marks: 5,
+      steps: [
+        '\\(P = 4.2(250) + 185 = 1050 + 185 = 1235\\), so about $1,235,000.',
+        '250 m² lies within 90–340, so this is interpolation.',
+        'Limitation 1: the prediction is an average; individual houses vary by location and condition.',
+        'Limitation 2: \\(r = 0.84\\) is strong but leaves substantial unexplained variation.'
+      ],
+      answer: 'About $1,235,000 — interpolation, so reliable as an average. Limitations: individual houses vary considerably with location, condition and features; and \\(r = 0.84\\) leaves real scatter about the line, so any single prediction carries uncertainty.'
+    },
+    {
+      q: 'A newspaper reports that suburbs with more cafés have higher average incomes, and suggests opening cafés to raise incomes. Evaluate fully.',
+      marks: 6,
+      steps: [
+        'The article infers causation from an observational association.',
+        'Reverse causation is far more plausible: wealthy areas can support more cafés.',
+        'A confounder is population density and affluence, driving both café numbers and incomes.',
+        'Opening a café in a low-income suburb would not raise residents\' incomes.',
+        'The suggested intervention has no plausible mechanism.',
+        'A controlled study would be needed, and is practically impossible here.'
+      ],
+      answer: 'The reasoning is backwards. Reverse causation is the likely explanation — affluent suburbs can sustain more cafés, not the other way round. Affluence and population density confound the relationship. There is no mechanism by which opening cafés would raise residents\' incomes, so the recommendation is unjustified.'
+    },
+    {
+      q: 'Data on temperature and ice-cream sales shows a rising trend that flattens above 34°C. A student fits a straight line and reports \\(r = 0.51\\), predicting sales at 45°C. Critique fully.',
+      marks: 6,
+      steps: [
+        'The form is non-linear — the relationship plateaus.',
+        '\\(r = 0.51\\) understates the true strength, since \\(r\\) measures only linear association.',
+        'A straight line over-predicts in the flat region above 34°C.',
+        'Predicting at 45°C is extrapolation well beyond the data.',
+        'It compounds two errors: a wrong model and extrapolation.',
+        'A non-linear model should be used, and no prediction attempted outside the data range.'
+      ],
+      answer: 'Two serious errors. First, the relationship is non-linear (sales plateau above 34°C), so \\(r = 0.51\\) understates the association and a straight line over-predicts at high temperatures. Second, 45°C is extrapolation beyond the data. A non-linear model is needed, and predictions should stay within the observed range.'
+    },
+    {
+      q: 'A researcher studies 28 athletes, finding training hours and race times give \\(T = -0.42H + 58.6\\) (time in minutes, hours per week, range 4–20) with \\(r = -0.79\\). Interpret the gradient, predict the time at 15 hours, and discuss causation.',
+      marks: 7,
+      steps: [
+        'Gradient: each additional hour of weekly training is associated with a 0.42-minute faster race time.',
+        'The negative gradient means more training goes with lower (better) times.',
+        'At \\(H = 15\\): \\(T = -0.42(15) + 58.6 = -6.3 + 58.6 = 52.3\\) minutes.',
+        '15 lies within 4–20, so this is interpolation — reliable.',
+        '\\(r = -0.79\\) is a strong negative association.',
+        'Causation is plausible (training improves fitness) but not proven by these data.',
+        'Natural ability and dedication could confound: talented athletes may both train more and race faster.'
+      ],
+      answer: 'Gradient: each extra weekly training hour is associated with a 0.42-minute improvement. At 15 hours the predicted time is 52.3 minutes — interpolation, so reliable. The strong negative association (\\(r = -0.79\\)) is consistent with training causing improvement, and a clear physiological mechanism exists, but natural ability and dedication could confound. A controlled trial assigning training loads would be needed to prove causation.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  IE.completeBanner({
+    mount: 'completeBtn', topicId: TOPIC_ID, lessonIdx: LESSON_IDX,
+    label: 'Mark as complete', doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

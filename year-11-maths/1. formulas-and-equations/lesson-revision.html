@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Formulas &amp; Equations</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <style>
     :root {
@@ -13,8 +13,8 @@
       --color-medium-gray: #818181;
       --color-light-gray: #d6d6d6;
       --color-faded-gray: #9d9d9d;
-      --font-onsite: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'Space Mono', monospace;
+      --font-onsite: 'Poppins', sans-serif;
+      --font-mono: 'DM Mono', monospace;
       --text-caption: 11px;
       --leading-caption: 1.38;
       --tracking-caption: 0.88px;
@@ -64,6 +64,7 @@
     }
     .sidebar-back {
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: var(--text-caption);
       color: var(--color-faded-gray);
       text-decoration: none;
@@ -75,9 +76,8 @@
     .sidebar-label {
       font-family: var(--font-mono);
       font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: 0.02em;
       color: var(--color-faded-gray);
       margin-bottom: var(--spacing-8);
       margin-top: var(--spacing-16);
@@ -101,9 +101,8 @@
     .page-label {
       font-family: var(--font-mono);
       font-size: var(--text-caption);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: 0.02em;
       color: var(--color-faded-gray);
       margin-bottom: var(--spacing-8);
     }
@@ -113,15 +112,7 @@
       letter-spacing: 0.6px;
       line-height: 1;
       color: var(--color-ink-black);
-      margin-bottom: var(--spacing-12);
-    }
-    .page-intro {
-      font-size: var(--text-body);
-      color: var(--color-medium-gray);
-      line-height: var(--leading-body);
-      letter-spacing: var(--tracking-body);
       margin-bottom: var(--spacing-40);
-      max-width: 560px;
     }
 
     /* ── Section ── */
@@ -129,9 +120,8 @@
     .section-label {
       font-family: var(--font-mono);
       font-size: var(--text-caption);
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: 0.02em;
       color: var(--color-faded-gray);
       margin-bottom: var(--spacing-8);
     }
@@ -162,8 +152,7 @@
       font-family: var(--font-onsite);
       font-size: var(--text-caption);
       font-weight: 700;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--color-faded-gray);
     }
     .q-source {
@@ -189,6 +178,7 @@
     }
     .q-formula {
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 13px;
       background: var(--color-light-gray);
       color: var(--color-ink-black);
@@ -198,6 +188,7 @@
     }
     .q-formula-block {
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 13px;
       background: var(--color-light-gray);
       color: var(--color-ink-black);
@@ -235,9 +226,8 @@
       cursor: pointer;
       font-family: var(--font-mono);
       font-size: var(--text-caption);
-      font-weight: 700;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: 0.02em;
       color: var(--color-faded-gray);
       list-style: none;
       user-select: none;
@@ -258,6 +248,7 @@
     .solution-body p + p { margin-top: var(--spacing-8); }
     .solution-step {
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: 13px;
       color: var(--color-ink-black);
       padding: 3px 0;
@@ -266,7 +257,7 @@
     .solution-answer {
       font-family: var(--font-mono);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 300;
       color: var(--color-ink-black);
       margin-top: var(--spacing-8);
       display: block;
@@ -278,15 +269,13 @@
     }
     .q-options li { cursor: pointer; padding: 6px 8px; }
     .q-options li:hover:not(.opt-locked) { background: var(--color-light-gray); }
-    .q-options li.opt-correct { background: #d4edda; color: #155724; }
-    .q-options li.opt-correct .opt-label { color: #155724; }
-    .q-options li.opt-wrong { background: #f8d7da; color: #721c24; }
-    .q-options li.opt-wrong .opt-label { color: #721c24; }
+    .q-options li.opt-correct { box-shadow: inset 2px 0 0 #00a050; background: rgba(0,160,80,0.08); }
+    .q-options li.opt-correct .opt-label { color: #00a050; }
+    .q-options li.opt-wrong { box-shadow: inset 2px 0 0 #c00000; background: rgba(200,0,0,0.08); }
+    .q-options li.opt-wrong .opt-label { color: #c00000; }
     .q-options li.opt-locked { cursor: default; pointer-events: none; }
-    html.dark-mode .q-options li.opt-correct { background: #1a3a25; color: #8fd4a0; }
-    html.dark-mode .q-options li.opt-correct .opt-label { color: #8fd4a0; }
-    html.dark-mode .q-options li.opt-wrong { background: #3a1a1e; color: #d4939a; }
-    html.dark-mode .q-options li.opt-wrong .opt-label { color: #d4939a; }
+    html.dark-mode .q-options li.opt-correct { background: rgba(0,160,80,0.14); }
+    html.dark-mode .q-options li.opt-wrong { background: rgba(200,0,0,0.14); }
     .q-formula-latex {
       margin: var(--spacing-12) 0;
       overflow-x: auto;
@@ -317,8 +306,6 @@
   <main class="main">
     <p class="page-label">Formulas &amp; Equations — Revision</p>
     <h1 class="page-title">HSC Practice Questions</h1>
-    <p class="page-intro">Questions drawn from past NSW HSC examinations. Open each solution only after you have attempted the question.</p>
-
     <!-- ── Section 1: Substitution ── -->
     <section class="section" id="substitution">
       <p class="section-label">Section 1</p>

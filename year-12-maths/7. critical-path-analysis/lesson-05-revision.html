@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Critical Path Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 7 &mdash; Critical Path Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Revision</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Revision</p>
+      <h1>Critical Path Analysis</h1>
+      <p class="subtitle">Every dot-point of MST-12-S2-07 in one place: the scanning rules, the
+        float formula, the mistakes that cost marks, and a mixed exam-style paper with full
+        solutions.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-07</span>
+        <span class="pill">Full topic recap</span>
+        <span class="pill">Exam paper</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this revision</p>
+      <ul class="side-list">
+        <li>Method sheet</li>
+        <li>Interactive project analyser</li>
+        <li>Syllabus checklist</li>
+        <li>Common mistakes</li>
+        <li>Mixed exam paper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#method">1 &nbsp;Method sheet</a></li>
+        <li class="toc-item"><a class="toc-link" href="#analyser">2 &nbsp;Project analyser</a></li>
+        <li class="toc-item"><a class="toc-link" href="#checklist">3 &nbsp;Syllabus checklist</a></li>
+        <li class="toc-item"><a class="toc-link" href="#mistakes">4 &nbsp;Common mistakes</a></li>
+        <li class="toc-item"><a class="toc-link" href="#exam">Exam paper</a></li>
+        <li class="toc-item"><a class="toc-link" href="#done">Finish</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. METHOD ─────────── -->
+      <div class="content-card" id="method">
+        <p class="section-label">Reference</p>
+        <h2>Method sheet</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The scans</p>
+          \[\text{EST} = \max(\text{previous EST} + \text{duration}) \qquad \text{(forward, from 0)}\]
+          \[\text{LST} = \min(\text{next LST} - \text{duration}) \qquad \text{(backward, from } T)\]
+          <p class="formula-where">Forwards: add and take the <strong>maximum</strong>. Backwards:
+            subtract and take the <strong>minimum</strong>.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Float and criticality</p>
+          \[\text{Float} = \text{LST}_{\text{end vertex}} - \text{EST}_{\text{start vertex}} - \text{duration}\]
+          <p class="formula-where">Float 0 → <strong>critical</strong>. Float &gt; 0 →
+            non-critical, with that much slack. Float is never negative.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Three self-checks</p>
+          <ul style="margin-bottom:0;">
+            <li>The <strong>LST at the start vertex must be 0</strong>.</li>
+            <li>The <strong>EST at the finish vertex</strong> is the minimum completion time.</li>
+            <li>The <strong>critical path length</strong> equals that completion time, and its bars
+              tile the Gantt chart with no gaps.</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Dummies</p>
+          <p style="margin-bottom:0;">Dashed, zero duration. Needed for
+            <strong>overlapping dependencies</strong> (C needs A; D needs A and B) or
+            <strong>uniqueness</strong> (two activities sharing both endpoints).</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Changing durations</p>
+          <ul style="margin-bottom:0;">
+            <li>Shorten a <strong>non-critical</strong> activity → no change; float increases.</li>
+            <li>Shorten a <strong>critical</strong> activity → project shortens, but only down to
+              the <strong>next-longest path</strong>.</li>
+            <li>Delay within float → absorbed. Delay beyond float → project slips by
+              \((\text{delay} - \text{float})\).</li>
+            <li>With <strong>two critical paths</strong>, both must be shortened — or an activity
+              lying on both.</li>
+          </ul>
+        </div>
+
+        <h3>Spreadsheet formulas</h3>
+        <p>EFT \(=\) <code>=C2+B2</code> &nbsp;·&nbsp; float \(=\) <code>=E2-C2</code> &nbsp;·&nbsp;
+          successor EST \(=\) <code>=MAX(D2,D3)</code> &nbsp;·&nbsp; completion \(=\)
+          <code>=MAX(D2:D9)</code>. The <code>MAX</code> reproduces the entire forward scan.</p>
+      </div>
+
+      <!-- ─────────── 2. ANALYSER ─────────── -->
+      <div class="content-card" id="analyser">
+        <p class="section-label">Practice</p>
+        <h2>Project analyser</h2>
+
+        <div class="interactive-block">
+          <h3>Full analysis, live</h3>
+          <p class="exercise-intro">Project: A (—), B (—), C (A), D (A and B), E (C and D). Change
+            any duration to see both scans, the floats, the critical path and the Gantt chart
+            update together.</p>
+          <div id="revSliders"></div>
+          <div id="revTable" style="margin-top:16px;"></div>
+          <div id="revGantt" style="margin-top:16px;"></div>
+          <p class="exercise-feedback" id="revNote" style="margin-top:14px;"></p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Quick calculations</h3>
+          <div class="exercise-row">
+            <label>(a) EST 9, LST at end 17, duration 5. Float?</label>
+            <input class="exercise-input" id="qcA" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-qc="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Float 4, delayed 9 days. Project delayed by?</label>
+            <input class="exercise-input" id="qcB" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-qc="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Critical path 26, next-longest 21. Shortest achievable by shortening the critical path alone?</label>
+            <input class="exercise-input" id="qcC" type="text" inputmode="numeric" placeholder="?">
+            <button class="exercise-check-btn" data-qc="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbQcC"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. CHECKLIST ─────────── -->
+      <div class="content-card" id="checklist">
+        <p class="section-label">Syllabus</p>
+        <h2>Dot-point checklist</h2>
+        <p>Tick each one only when you could do it in an exam without notes.</p>
+        <div id="checklistMount"></div>
+      </div>
+
+      <!-- ─────────── 4. MISTAKES ─────────── -->
+      <div class="content-card" id="mistakes">
+        <p class="section-label">Exam technique</p>
+        <h2>Mistakes that cost marks</h2>
+
+        <table class="coord-table">
+          <tr><th>Mistake</th><th>Fix</th></tr>
+          <tr>
+            <td>Taking the minimum in the forward scan</td>
+            <td>Take the <strong>maximum</strong> — work waits for every arriving activity.</td>
+          </tr>
+          <tr>
+            <td>Taking the maximum in the backward scan</td>
+            <td>Take the <strong>minimum</strong> — the earliest deadline governs.</td>
+          </tr>
+          <tr>
+            <td>Adding durations of parallel activities</td>
+            <td>Parallel activities run at the same time; take the later finish, not the sum.</td>
+          </tr>
+          <tr>
+            <td>Using the EST at the <em>end</em> vertex in the float formula</td>
+            <td>Float uses EST at the <strong>start</strong> and LST at the <strong>end</strong>.</td>
+          </tr>
+          <tr>
+            <td>Getting a negative float</td>
+            <td>Impossible — recheck both scans.</td>
+          </tr>
+          <tr>
+            <td>LST at the start vertex ≠ 0</td>
+            <td>An arithmetic error. Find it before continuing.</td>
+          </tr>
+          <tr>
+            <td>Drawing arrows for indirect predecessors</td>
+            <td>Only <strong>immediate</strong> predecessors are drawn.</td>
+          </tr>
+          <tr>
+            <td>Giving a dummy a duration</td>
+            <td>Dummies are always zero duration and always dashed.</td>
+          </tr>
+          <tr>
+            <td>Assuming shortening any activity helps</td>
+            <td>Only <strong>critical</strong> activities affect the finish date.</td>
+          </tr>
+          <tr>
+            <td>Shortening past the next-longest path</td>
+            <td>The project cannot go below the next path's length without shortening it too.</td>
+          </tr>
+          <tr>
+            <td>Missing a second critical path</td>
+            <td>Check every zero-float chain — there may be more than one.</td>
+          </tr>
+          <tr>
+            <td>Forgetting units in the answer</td>
+            <td>Days, weeks, hours — always state them.</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- ─────────── EXAM PAPER ─────────── -->
+      <div class="practice-block" id="exam">
+        <p class="section-label">Assessment</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Mixed exam-style paper</h2>
+        <p class="practice-intro">Fifteen questions from across the whole topic, in roughly
+          increasing difficulty. Work under exam conditions &mdash; about 55 minutes &mdash; then
+          mark yourself.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── DONE ─────────── -->
+      <div class="complete-banner" id="done">
+        <div>
+          <p class="complete-banner-title">Finished the revision?</p>
+          <p>Mark this topic complete once you have worked through the paper and are confident
+            with every checklist item.</p>
+        </div>
+        <button class="lesson-complete-btn" id="completeBtn">Mark as complete</button>
+      </div>
+
+      <div class="content-card">
+        <p class="section-label">Navigate</p>
+        <h2>Back to the lessons</h2>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(0)">Lesson 1</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3</button>&nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-7', LESSON_IDX = 4;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function svgEl(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function analyse(d) {
+    var A = [
+      { id: 'A', f: 1, t: 2, d: d.A },
+      { id: 'B', f: 1, t: 3, d: d.B },
+      { id: '·', f: 2, t: 3, d: 0, dummy: true },
+      { id: 'C', f: 2, t: 4, d: d.C },
+      { id: 'D', f: 3, t: 5, d: d.D },
+      { id: 'E', f: 5, t: 6, d: d.E },
+      { id: '·', f: 4, t: 6, d: 0, dummy: true }
+    ];
+    var est = { 1: 0 };
+    [2, 3, 4, 5, 6].forEach(function (v) {
+      est[v] = Math.max.apply(null, A.filter(function (a) { return a.t === v; })
+        .map(function (a) { return est[a.f] + a.d; }));
+    });
+    var T = est[6];
+    var lst = { 6: T };
+    [5, 4, 3, 2, 1].forEach(function (v) {
+      lst[v] = Math.min.apply(null, A.filter(function (a) { return a.f === v; })
+        .map(function (a) { return lst[a.t] - a.d; }));
+    });
+    var rows = A.filter(function (a) { return !a.dummy; }).map(function (a) {
+      return { id: a.id, d: a.d, est: est[a.f], lst: lst[a.t], float: lst[a.t] - est[a.f] - a.d };
+    });
+    return { rows: rows, T: T, est: est, lst: lst };
+  }
+
+  function gantt(mount, res) {
+    var T = res.T, W = 460, rowH = 26, PAD_L = 46, PAD_T = 26;
+    var H = PAD_T + res.rows.length * rowH + 26;
+    var sc = (W - PAD_L - 20) / Math.max(T, 1);
+    var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
+    for (var t = 0; t <= T; t += Math.max(1, Math.ceil(T / 12))) {
+      var x = PAD_L + t * sc;
+      svg.appendChild(svgEl('line', { class: 'plot-grid', x1: x, y1: PAD_T - 8, x2: x, y2: H - 22, stroke: '#d6d6d6' }));
+      svg.appendChild(svgEl('text', { class: 'plot-tick', x: x, y: PAD_T - 12, 'text-anchor': 'middle' }, String(t)));
+    }
+    res.rows.forEach(function (r, i) {
+      var y = PAD_T + i * rowH;
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: 8, y: y + 14 }, r.id));
+      if (r.float > 0) {
+        svg.appendChild(svgEl('rect', {
+          x: PAD_L + (r.est + r.d) * sc, y: y + 4, width: r.float * sc, height: 14,
+          fill: 'none', stroke: '#818181', 'stroke-width': 1, 'stroke-dasharray': '4 3'
+        }));
+      }
+      svg.appendChild(svgEl('rect', {
+        x: PAD_L + r.est * sc, y: y + 4, width: Math.max(r.d * sc, 1), height: 14,
+        class: r.float === 0 ? 'plot-bar-filled' : 'plot-bar'
+      }));
+    });
+    mount.innerHTML = '';
+    mount.appendChild(svg);
+  }
+
+  /* ── Project analyser ─────────────────────────────────────── */
+  (function () {
+    var d = { A: 4, B: 6, C: 3, D: 5, E: 2 };
+    function update() {
+      var res = analyse(d);
+      var html = '<table class="coord-table"><tr><th>Activity</th><th>Duration</th><th>EST</th><th>LST</th><th>Float</th><th>Critical?</th></tr>';
+      var crit = [];
+      res.rows.forEach(function (r) {
+        if (r.float === 0) crit.push(r.id);
+        html += '<tr><td>' + r.id + '</td><td>' + r.d + '</td><td>' + r.est + '</td><td>' +
+                r.lst + '</td><td>' + r.float + '</td><td>' +
+                (r.float === 0 ? '<strong>Yes</strong>' : 'No') + '</td></tr>';
+      });
+      document.getElementById('revTable').innerHTML = html + '</table>';
+      gantt(document.getElementById('revGantt'), res);
+      var note = document.getElementById('revNote');
+      note.className = 'exercise-feedback correct';
+      note.textContent = 'Completion time ' + res.T + ' days. Critical path: ' + crit.join('–') +
+        '. Check: LST at the start vertex = ' + res.lst[1] +
+        ' (must be 0) and the critical bars tile the chart with no gaps.';
+    }
+    var host = 'revSliders';
+    ['A', 'B', 'C', 'D', 'E'].forEach(function (k) {
+      IE.slider({ mount: host, label: 'Activity ' + k, min: 1, max: 14, step: 1, value: d[k],
+                  format: function (v) { return v + ' d'; },
+                  onInput: function (v) { d[k] = v; update(); } });
+    });
+    update();
+  })();
+
+  /* ── Quick calculations ───────────────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [3, 'Float = LST − EST − duration = 17 − 9 − 5 = 3 days.'],
+      B: [5, 'The float absorbs 4 days; the excess is 9 − 4 = 5 days, which delays the project.'],
+      C: [21, 'The critical path can only be reduced to the length of the next-longest path, 21 days.']
+    };
+    document.querySelectorAll('[data-qc]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset.qc, fb = document.getElementById('fbQc' + k);
+        var g = parseFloat((document.getElementById('qc' + k).value || '').replace(/[^\d.\-]/g, ''));
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.001;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  })();
+
+  /* ── Syllabus checklist ───────────────────────────────────── */
+  (function () {
+    var ITEMS = [
+      'Construct a network diagram from a precedence table, limited to 10 activities',
+      'Construct networks involving dummy activities',
+      'Explain the term float time',
+      'Apply forward scanning to determine the earliest starting time (EST) for each activity',
+      'Apply backward scanning to determine the latest starting time (LST) for each activity',
+      'Calculate float times to identify critical and non-critical activities',
+      'Analyse ESTs and LSTs to locate the critical path(s) for a project',
+      'Apply critical path analysis to determine the minimum completion time',
+      'Construct a Gantt chart from a network diagram, indicating the critical path',
+      'Examine the impact of increasing the duration of an activity on completion time',
+      'Examine the impact of reducing the duration of an activity on completion time',
+      'Use a spreadsheet to model a project involving precedence tables',
+      'Solve related problems using the spreadsheet model'
+    ];
+    var mount = document.getElementById('checklistMount');
+    var KEY = 'ie_chk_' + TOPIC_ID;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none'; ul.style.padding = '0';
+    ITEMS.forEach(function (text, i) {
+      var li = document.createElement('li');
+      li.style.borderBottom = '1px solid var(--gray-light)';
+      li.style.padding = '9px 0'; li.style.marginBottom = '0';
+      var id = 'chk' + i;
+      li.innerHTML = '<label for="' + id + '" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; font-size:13px;">' +
+        '<input type="checkbox" id="' + id + '"' + (state[i] ? ' checked' : '') + '>' +
+        '<span>' + text + '</span></label>';
+      ul.appendChild(li);
+      li.querySelector('input').addEventListener('change', function (e) {
+        state[i] = e.target.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+        count();
+      });
+    });
+    mount.appendChild(ul);
+    var tally = document.createElement('p');
+    tally.style.cssText = 'margin-top:16px;font-family:var(--font-mono);font-size:12px;color:var(--gray-med);';
+    mount.appendChild(tally);
+    function count() {
+      var n = ITEMS.filter(function (_, i) { return state[i]; }).length;
+      tally.textContent = n + ' / ' + ITEMS.length + ' confident';
+    }
+    count();
+  })();
+
+  /* ── Exam paper ───────────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain the term float time and state what a float of zero means.',
+      marks: 2,
+      steps: [
+        'Float is the amount an activity can be delayed or overrun without delaying the project.',
+        'It equals LST at the end vertex minus EST at the start vertex minus the duration.',
+        'A float of zero means there is no slack at all.'
+      ],
+      answer: 'Float is the spare time available to an activity before it affects the completion date. Zero float means the activity is critical — any delay delays the whole project.'
+    },
+    {
+      q: 'An activity runs from a vertex with EST 12 to one with LST 21 and takes 7 days. Find its float.',
+      marks: 2,
+      steps: [
+        'Float \\(= \\text{LST} - \\text{EST} - \\text{duration}\\).',
+        '\\(= 21 - 12 - 7\\).'
+      ],
+      answer: '2 days.'
+    },
+    {
+      q: 'For A (6, —), B (4, —), C (5, A), D (3, B), E (4, C, D), carry out the forward scan and state the completion time.',
+      marks: 5,
+      steps: [
+        'Start: 0. End of A: 6. End of B: 4.',
+        'End of C: \\(6 + 5 = 11\\). End of D: \\(4 + 3 = 7\\).',
+        'Merge before E: \\(\\max(11, 7) = 11\\).',
+        'Finish: \\(11 + 4 = 15\\).'
+      ],
+      answer: '15 days.'
+    },
+    {
+      q: 'For the same project, carry out the backward scan and find every float.',
+      marks: 6,
+      steps: [
+        'Finish LST = 15. Before E: \\(15 - 4 = 11\\).',
+        'End of A: \\(11 - 5 = 6\\). End of B: \\(11 - 3 = 8\\).',
+        'Start: \\(\\min(6 - 6,\\ 8 - 4) = \\min(0, 4) = 0\\) ✓',
+        'Float A \\(= 6 - 0 - 6 = 0\\); B \\(= 8 - 0 - 4 = 4\\).',
+        'Float C \\(= 11 - 6 - 5 = 0\\); D \\(= 11 - 4 - 3 = 4\\); E \\(= 15 - 11 - 4 = 0\\).'
+      ],
+      answer: 'Floats: A 0, B 4, C 0, D 4, E 0. Critical path A–C–E, length 15 ✓'
+    },
+    {
+      q: 'For the project above, draw the Gantt chart bars (spans and float) for each activity.',
+      marks: 5,
+      steps: [
+        'A: solid day 0–6, no float.',
+        'B: solid day 0–4, dashed extension to day 8 (float 4).',
+        'C: solid day 6–11, no float.',
+        'D: solid day 4–7, dashed extension to day 11 (float 4).',
+        'E: solid day 11–15, no float.',
+        'The critical bars A, C and E tile 0–6, 6–11 and 11–15 with no gaps ✓'
+      ],
+      answer: 'A 0–6, B 0–4 (+4 float), C 6–11, D 4–7 (+4 float), E 11–15. The three critical bars cover the full 15 days without gaps.'
+    },
+    {
+      q: 'Explain the two circumstances requiring a dummy activity.',
+      marks: 4,
+      steps: [
+        'Overlapping dependencies: two activities share some but not all predecessors.',
+        'Without a dummy, one would acquire a dependency it should not have.',
+        'Uniqueness: two activities would run between the same pair of vertices.',
+        'A dummy gives them distinct endpoints without adding time.'
+      ],
+      answer: 'Overlapping dependencies (C needs A, D needs A and B) and uniqueness (two activities sharing both endpoints). A dashed zero-duration arrow resolves both.'
+    },
+    {
+      q: 'A project has a critical path of 28 days. An activity with 6 days of float is delayed by 9 days. Find the new completion time.',
+      marks: 3,
+      steps: [
+        'The float absorbs the first 6 days.',
+        'The excess is \\(9 - 6 = 3\\) days.',
+        'That excess delays the project.'
+      ],
+      answer: '31 days. The activity has now become critical.'
+    },
+    {
+      q: 'For A (5, —), B (8, —), C (4, A, B), D (6, A), E (3, C, D), find the completion time and critical path.',
+      marks: 7,
+      steps: [
+        'A dummy is needed: D depends on A only, C on A and B.',
+        'Forward: end of A = 5; merge for C \\(= \\max(5 + 0,\\ 8) = 8\\).',
+        'End of C \\(= 8 + 4 = 12\\); end of D \\(= 5 + 6 = 11\\).',
+        'Merge before E \\(= \\max(12, 11) = 12\\); finish \\(= 15\\).',
+        'Backward: before E = 12; end of A \\(= \\min(12 - 6,\\ 8 - 0) = 6\\); end of B \\(= 12 - 4 = 8\\).',
+        'Start \\(= \\min(6 - 5,\\ 8 - 8) = 0\\) ✓',
+        'Floats: A 1, B 0, C 0, D 1, E 0.'
+      ],
+      answer: 'Completion 15 days; critical path B–C–E. A and D each have 1 day of float.'
+    },
+    {
+      q: 'For the project above, the manager shortens D from 6 to 3 days. Evaluate the effect.',
+      marks: 4,
+      steps: [
+        'D has 1 day of float, so it is not critical.',
+        'Shortening it cannot change the critical path B–C–E.',
+        'D\'s float rises from 1 to 4 days.',
+        'The completion time stays at 15 days.'
+      ],
+      answer: 'No effect — the project still takes 15 days. D was non-critical, so the reduction only increases its float from 1 to 4 days.'
+    },
+    {
+      q: 'For the same project, the manager instead shortens B from 8 to 5 days. Find the new completion time.',
+      marks: 5,
+      steps: [
+        'B is critical, so shortening it can help.',
+        'Forward: end of A = 5; merge for C \\(= \\max(5, 5) = 5\\).',
+        'End of C \\(= 5 + 4 = 9\\); end of D \\(= 5 + 6 = 11\\).',
+        'Merge before E \\(= \\max(9, 11) = 11\\); finish \\(= 14\\).',
+        'The critical path has shifted to A–D–E.'
+      ],
+      answer: '14 days — a saving of only 1 day, because the path A–D–E (5 + 6 + 3 = 14) now becomes critical and limits further improvement.'
+    },
+    {
+      q: 'Explain why a project can only be shortened to the length of its next-longest path by working on the critical path alone.',
+      marks: 3,
+      steps: [
+        'The completion time is the length of the longest path.',
+        'Shortening critical activities reduces that path.',
+        'Once it falls to the length of the next-longest path, that path becomes the longest.',
+        'Further reductions to the original path no longer change the maximum.'
+      ],
+      answer: 'Because the finish date is set by the longest path. Once the critical path is reduced to the next-longest path\'s length, that path takes over as critical, and further work on the original delivers nothing.'
+    },
+    {
+      q: 'A catering project has Plan (2, —), Order (4, Plan), Staff (3, Plan), Cook (6, Order, Staff), Setup (4, Staff), Serve (2, Cook, Setup). Find the completion time and critical path.',
+      marks: 7,
+      steps: [
+        'Cook needs Order and Staff; Setup needs Staff only — a dummy is required.',
+        'Forward: Plan ends at 2; Order ends at 6; Staff ends at 5.',
+        'Merge for Cook \\(= \\max(6, 5) = 6\\), so Cook ends at 12.',
+        'Setup starts at 5, ends at 9.',
+        'Merge before Serve \\(= \\max(12, 9) = 12\\); finish \\(= 14\\).',
+        'Backward: before Serve = 12; before Cook = 6; before Setup \\(= 12 - 4 = 8\\).',
+        'Floats: Plan 0, Order 0, Cook 0, Serve 0, Staff 3, Setup 3.'
+      ],
+      answer: 'Completion 14 days; critical path Plan–Order–Cook–Serve. Staff and Setup each carry 3 days of float.'
+    },
+    {
+      q: 'Write the spreadsheet formulas needed to model the catering project, and explain why <code>MAX</code> is central.',
+      marks: 4,
+      steps: [
+        'EFT = EST + duration: <code>=C2+B2</code>.',
+        'An activity\'s EST is the maximum of its predecessors\' EFTs: for Cook, <code>=MAX(D3,D4)</code>.',
+        'Float = LST − EST: <code>=E2-C2</code>. Completion = <code>=MAX(D2:D7)</code>.',
+        '<code>MAX</code> encodes the rule that an activity waits for <em>every</em> predecessor.'
+      ],
+      answer: 'EFT <code>=C2+B2</code>; Cook\'s EST <code>=MAX(D3,D4)</code>; float <code>=E2-C2</code>; completion <code>=MAX(D2:D7)</code>. <code>MAX</code> is central because it enforces waiting for the last predecessor to finish — reproducing the forward scan automatically.'
+    },
+    {
+      q: 'A project has two critical paths of 32 days. Activity W (7 days) lies on both. Compare shortening W by 3 days against shortening one activity on each path by 3 days, if all reductions cost $1,500 per day.',
+      marks: 6,
+      steps: [
+        'Shortening W by 3 days reduces both critical paths at once, to 29 days.',
+        'Cost \\(= 3 \\times 1500 = \\$4\\,500\\).',
+        'Shortening one activity per path by 3 days requires 6 activity-days.',
+        'Cost \\(= 6 \\times 1500 = \\$9\\,000\\) for the same 29-day result.',
+        'W is therefore half the cost.',
+        'In either case, other paths must then be checked against 29 days.'
+      ],
+      answer: 'Shortening W costs $4,500 and reduces both paths simultaneously to 29 days. The alternative costs $9,000 for the same outcome, so W is clearly preferable — though all remaining paths must then be checked against the new 29-day target.'
+    },
+    {
+      q: 'A construction project runs 30 weeks with critical path P–Q–R (10, 12, 8 weeks) and next-longest path 25 weeks. A $20,000 per week bonus applies for early completion. Q can be shortened by up to 4 weeks at $12,000 per week. Advise, with calculations.',
+      marks: 7,
+      steps: [
+        'The project can be reduced to at most 25 weeks, the next-longest path — a maximum saving of 5 weeks.',
+        'Q can only be shortened by 4 weeks, so the reachable completion is 26 weeks.',
+        'That is a saving of 4 weeks.',
+        'Bonus \\(= 4 \\times 20\\,000 = \\$80\\,000\\).',
+        'Cost \\(= 4 \\times 12\\,000 = \\$48\\,000\\).',
+        'Net gain \\(= \\$32\\,000\\).',
+        'A fifth week would need shortening P or R as well, since Q\'s limit is reached.'
+      ],
+      answer: 'Shorten Q by its full 4 weeks: the project finishes in 26 weeks, earning $80,000 in bonuses for $48,000 of cost — a net gain of $32,000. Going to 25 weeks would require shortening P or R too, and the extra week\'s bonus ($20,000) should be weighed against that additional cost.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+
+  IE.completeBanner({
+    mount: 'completeBtn', topicId: TOPIC_ID, lessonIdx: LESSON_IDX,
+    label: 'Mark as complete', doneLabel: '✓ Revision complete'
+  });
+});
+</script>
+</body>
+</html>

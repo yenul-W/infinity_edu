@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — Bivariate Data, Variables &amp; Causation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 8 &mdash; Bivariate Data Analysis</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 1</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 1</p>
+      <h1>Bivariate Data, Variables &amp; Causation</h1>
+      <p class="subtitle">One variable tells you about a group. Two variables tell you about a
+        <em>relationship</em> — and the hardest, most valuable skill in statistics is knowing when
+        that relationship means one thing causes the other.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-08</span>
+        <span class="pill">Dependent &amp; independent</span>
+        <span class="pill">Association vs causation</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Univariate vs bivariate</li>
+        <li>When each is needed</li>
+        <li>Dependent &amp; independent variables</li>
+        <li>Association</li>
+        <li>Causation</li>
+        <li>Confounding &amp; coincidence</li>
+        <li>Designing a fair investigation</li>
+        <li>Class activity: explain the association</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#univar">1 &nbsp;Univariate vs bivariate</a></li>
+        <li class="toc-item"><a class="toc-link" href="#variables">2 &nbsp;Naming the variables</a></li>
+        <li class="toc-item"><a class="toc-link" href="#association">3 &nbsp;Association</a></li>
+        <li class="toc-item"><a class="toc-link" href="#causation">4 &nbsp;Causation</a></li>
+        <li class="toc-item"><a class="toc-link" href="#confounding">5 &nbsp;Confounding &amp; coincidence</a></li>
+        <li class="toc-item"><a class="toc-link" href="#design">6 &nbsp;Designing a fair test</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. UNIVAR ─────────── -->
+      <div class="content-card" id="univar">
+        <p class="section-label">Theory</p>
+        <h2>Univariate versus bivariate data</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The distinction</p>
+          <p style="margin-bottom:0;">
+            <strong>Univariate</strong> (one-variable) data records a single measurement for each
+            individual. You summarise it with the mean, median, range and standard deviation, and
+            display it with a histogram, dot plot or box plot.<br><br>
+            <strong>Bivariate</strong> (two-variable) data records <em>two</em> measurements for
+            each individual. You analyse the <strong>relationship</strong> between them, and
+            display it with a scatter plot.
+          </p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th></th><th>Univariate</th><th>Bivariate</th></tr>
+          <tr><td>Measurements per individual</td><td>One</td><td>Two</td></tr>
+          <tr><td>Question answered</td><td>"What is typical? How spread out?"</td><td>"Are these two related? Can I predict one from the other?"</td></tr>
+          <tr><td>Display</td><td>Histogram, box plot, dot plot</td><td>Scatter plot</td></tr>
+          <tr><td>Summary</td><td>Mean, median, standard deviation</td><td>Correlation coefficient, line of best fit</td></tr>
+          <tr><td>Example</td><td>The heights of 40 students</td><td>The height <em>and</em> arm span of 40 students</td></tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">When each is needed</p>
+          <p style="margin-bottom:0;">Use <strong>univariate</strong> analysis when the question is
+            about one quantity on its own — "what is the average rainfall?"<br>
+            Use <strong>bivariate</strong> analysis when the question involves a
+            <strong>relationship or a prediction</strong> — "does more rainfall lead to higher crop
+            yield?"</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1</p>
+          <p>Classify each investigation.</p>
+          <p><strong>(a)</strong> "What is the median salary of graduates?" — one measurement per
+            graduate, so <strong>univariate</strong>.</p>
+          <p><strong>(b)</strong> "Do graduates with more years of study earn higher salaries?" —
+            two measurements per graduate (years of study and salary), so
+            <strong>bivariate</strong>.</p>
+          <p><strong>(c)</strong> "How much does daily temperature vary across the year?" — one
+            measurement per day, so <strong>univariate</strong>.</p>
+          <p><strong>(d)</strong> "Does ice-cream sell better on hotter days?" — temperature and
+            sales for each day, so <strong>bivariate</strong>.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Classify the investigation</h3>
+          <p class="exercise-intro">Type <code>univariate</code> or <code>bivariate</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) "What is the average mass of 200 apples?" &rarr;</label>
+            <input class="exercise-input" id="uvA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-uv="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbUvA"></p>
+
+          <div class="exercise-row">
+            <label>(b) "Do taller basketball players score more points?" &rarr;</label>
+            <input class="exercise-input" id="uvB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-uv="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbUvB"></p>
+
+          <div class="exercise-row">
+            <label>(c) "How spread out are the exam marks?" &rarr;</label>
+            <input class="exercise-input" id="uvC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-uv="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbUvC"></p>
+
+          <div class="exercise-row">
+            <label>(d) "Can a car's age predict its resale value?" &rarr;</label>
+            <input class="exercise-input" id="uvD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-uv="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbUvD"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. VARIABLES ─────────── -->
+      <div class="content-card" id="variables">
+        <p class="section-label">Method</p>
+        <h2>Identifying the dependent and independent variables</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">The two roles</p>
+          <p style="margin-bottom:0;">
+            The <strong>independent variable</strong> (or explanatory variable) is the one used to
+            <em>explain or predict</em>. It goes on the <strong>horizontal (\(x\)) axis</strong>.<br><br>
+            The <strong>dependent variable</strong> (or response variable) is the one being
+            <em>explained or predicted</em>. It goes on the <strong>vertical (\(y\)) axis</strong>.
+          </p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The test question</p>
+          <p style="margin-bottom:0;">Ask: "<strong>Which one am I using to predict the
+            other?</strong>" That one is independent. Equivalently, ask which variable
+            <em>depends on</em> the other — time, age and dosage are almost always independent,
+            because nothing you measure changes them.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>Identify the variables in each study.</p>
+          <table class="coord-table">
+            <tr><th>Study</th><th>Independent (\(x\))</th><th>Dependent (\(y\))</th></tr>
+            <tr><td>Predicting crop yield from rainfall</td><td>Rainfall</td><td>Crop yield</td></tr>
+            <tr><td>Car value against age</td><td>Age</td><td>Value</td></tr>
+            <tr><td>Exam mark against hours studied</td><td>Hours studied</td><td>Exam mark</td></tr>
+            <tr><td>Fuel used against distance driven</td><td>Distance</td><td>Fuel used</td></tr>
+            <tr><td>Plant growth against fertiliser applied</td><td>Fertiliser</td><td>Growth</td></tr>
+          </table>
+          <p>In every case the independent variable is the one you would set or observe first, and
+            the dependent variable is the outcome.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Why the order matters</p>
+          <p style="margin-bottom:0;">Swapping the axes changes the line of best fit and therefore
+            every prediction you make from it. Getting this wrong makes the entire analysis wrong,
+            so decide before you plot anything.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Which is independent?</h3>
+          <p class="exercise-intro">Type the name of the <strong>independent</strong> variable.</p>
+
+          <div class="exercise-row">
+            <label>(a) Predicting house price from floor area. &rarr;</label>
+            <input class="exercise-input" id="ivA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-iv="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbIvA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Predicting a runner's time from their age. &rarr;</label>
+            <input class="exercise-input" id="ivB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-iv="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbIvB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Predicting electricity cost from kWh used. &rarr;</label>
+            <input class="exercise-input" id="ivC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-iv="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbIvC"></p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Identify the independent and dependent variables. (a) Predicting a puppy's weight
+              from its age. (b) Predicting a household's heating bill from the outside temperature.
+              (c) Investigating whether salt intake affects blood pressure.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Independent: age; dependent: weight. (b) Independent: outside temperature;
+                  dependent: heating bill. (c) Independent: salt intake; dependent: blood
+                  pressure.</p>
+              </div></details></li>
+            <li>For height and arm span, which variable is independent?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>It depends on the question. Predicting arm span from height makes height
+                  independent; predicting height from arm span (useful when someone cannot stand)
+                  reverses it. Neither causes the other &mdash; the question decides.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. ASSOCIATION ─────────── -->
+      <div class="content-card" id="association">
+        <p class="section-label">Theory</p>
+        <h2>Association</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Association</p>
+          <p style="margin-bottom:0;">Two variables show an <strong>association</strong> when a
+            change in one tends to go with a change in the other. It is a <em>statistical
+            pattern</em> — nothing more. Association alone says nothing about <em>why</em> the
+            pattern exists.</p>
+        </div>
+
+        <p>Associations are described in three ways, all covered fully in Lesson 2:</p>
+        <ul>
+          <li><strong>Form</strong> — linear or non-linear.</li>
+          <li><strong>Direction</strong> — positive (both rise together) or negative (one rises as
+            the other falls).</li>
+          <li><strong>Strength</strong> — strong, moderate or weak, depending on how closely the
+            points follow the pattern.</li>
+        </ul>
+
+        <div class="interactive-block">
+          <h3>Three associations</h3>
+          <p class="exercise-intro">The same number of points, three different relationships.</p>
+          <div class="diagram-row">
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotPos"></div>
+              <p class="diagram-caption">Positive association</p>
+            </div>
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotNeg"></div>
+              <p class="diagram-caption">Negative association</p>
+            </div>
+          </div>
+          <div class="diagram-row">
+            <div class="diagram-col">
+              <div class="plot-wrap" id="plotNone"></div>
+              <p class="diagram-caption">No association</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>"As daily screen time increases, hours of sleep tend to decrease." What is the
+              direction of this association?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Negative: one variable rises as the other falls.</p>
+              </div></details></li>
+            <li>Predict the direction of association, if any: (a) a car's age and its odometer
+              reading; (b) adults' shoe size and their IQ.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Positive: older cars have usually travelled further. (b) No association
+                  expected.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. CAUSATION ─────────── -->
+      <div class="content-card" id="causation">
+        <p class="section-label">Theory</p>
+        <h2>Causation</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Causation</p>
+          <p style="margin-bottom:0;">A relationship is <strong>causal</strong> when a change in
+            the independent variable <em>directly produces</em> a change in the dependent variable.
+            Causation is a much stronger claim than association, and the data alone can never prove
+            it.</p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">The rule to remember</p>
+          <p style="margin-bottom:0;"><strong>Association does not imply causation.</strong> A
+            strong correlation shows the variables move together; it does not show that one makes
+            the other happen.</p>
+        </div>
+
+        <p>When variables A and B are associated, there are four possible explanations:</p>
+
+        <table class="coord-table">
+          <tr><th>Explanation</th><th>Meaning</th><th>Example</th></tr>
+          <tr>
+            <td><strong>A causes B</strong></td>
+            <td>The genuine causal case</td>
+            <td>More fertiliser → more growth</td>
+          </tr>
+          <tr>
+            <td><strong>B causes A</strong></td>
+            <td>The causation runs the other way</td>
+            <td>Fit people exercise more, rather than exercise making them want to</td>
+          </tr>
+          <tr>
+            <td><strong>A third variable</strong></td>
+            <td>A <em>confounding</em> variable drives both</td>
+            <td>Hot weather drives both ice-cream sales and drownings</td>
+          </tr>
+          <tr>
+            <td><strong>Coincidence</strong></td>
+            <td>Chance alone, especially in small samples</td>
+            <td>Two unrelated trends that happen to rise together</td>
+          </tr>
+        </table>
+
+        <div class="formula-box">
+          <p class="formula-label">What would support a causal claim</p>
+          <ul style="margin-bottom:0;">
+            <li>A <strong>controlled experiment</strong> where the independent variable is
+              deliberately changed and everything else held constant.</li>
+            <li>A <strong>plausible mechanism</strong> explaining how one produces the other.</li>
+            <li>The cause <strong>precedes</strong> the effect in time.</li>
+            <li>The association is <strong>consistent</strong> across repeated studies.</li>
+          </ul>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; causal</p>
+          <p>A study finds a strong positive association between the amount of fertiliser applied
+            and plant growth, in a trial where identical plants were grown in identical conditions
+            with only the fertiliser varied.</p>
+          <p><strong>Causal.</strong> This is a controlled experiment: the researcher set the
+            independent variable, everything else was held constant, and there is a well-understood
+            biological mechanism.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; not causal</p>
+          <p>A study finds a strong positive association between the number of firefighters sent to
+            a fire and the damage caused.</p>
+          <p><strong>Not causal.</strong> Firefighters do not cause damage. The
+            <strong>confounding variable</strong> is the size of the fire: larger fires both attract
+            more firefighters <em>and</em> cause more damage.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Students who sit at the front of the class get higher marks. Give two explanations
+              other than "sitting at the front causes higher marks".
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>A confounding variable such as motivation: keen students both choose the front
+                  and work harder. Or reverse causation: students who already do well feel
+                  confident sitting at the front.</p>
+              </div></details></li>
+            <li>Countries with more televisions per person have higher life expectancy. Is this
+              causal? Explain.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Not causal. National wealth is a confounder: richer countries have more
+                  televisions <em>and</em> better health care, nutrition and sanitation.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. CONFOUNDING ─────────── -->
+      <div class="content-card" id="confounding">
+        <p class="section-label">Application</p>
+        <h2>Confounding variables and coincidence</h2>
+
+        <div class="formula-box">
+          <p class="formula-label">Confounding variable</p>
+          <p style="margin-bottom:0;">A <strong>confounding variable</strong> is a third factor
+            that influences both of the measured variables, creating an association between them
+            even though neither causes the other.</p>
+        </div>
+
+        <table class="coord-table">
+          <tr><th>Observed association</th><th>Confounding variable</th></tr>
+          <tr><td>Ice-cream sales and drowning deaths</td><td>Hot weather</td></tr>
+          <tr><td>Shoe size and reading ability in children</td><td>Age</td></tr>
+          <tr><td>Number of churches and number of crimes in a town</td><td>Population size</td></tr>
+          <tr><td>Coffee drinking and lung cancer</td><td>Smoking (coffee drinkers smoked more)</td></tr>
+          <tr><td>Hospital admissions and death rates by suburb</td><td>Age profile of the suburb</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; writing the answer</p>
+          <p>A newspaper reports: "Students who own more books score higher in tests. Buy your child
+            books to improve their marks." Comment.</p>
+          <p style="border-left:2px solid var(--ink); padding-left:14px;">
+            "The report confuses association with causation. The data show only that book ownership
+            and test scores are positively associated.<br><br>
+            A likely <strong>confounding variable</strong> is family income or parental education:
+            wealthier, more educated households tend to own more books <em>and</em> to provide more
+            educational support, tutoring and a quieter study environment. These drive both
+            variables.<br><br>
+            Simply buying books would not raise marks unless they were actually read. To establish
+            causation you would need a controlled experiment in which books were provided to a
+            randomly selected group and outcomes compared with a control group."
+          </p>
+          <p>Notice the structure: <em>name the error, state the association, propose a specific
+            confounder, explain how it drives both, and say what evidence would be needed.</em></p>
+        </div>
+
+        <div class="formula-box">
+          <p class="formula-label">Coincidence and small samples</p>
+          <p style="margin-bottom:0;">With few data points, strong-looking correlations can arise
+            by pure chance. Two points always lie exactly on a line. Always ask how large the
+            sample is before treating a correlation as meaningful.</p>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Causal or not?</h3>
+          <p class="exercise-intro">Type <code>causal</code> or <code>not causal</code>.</p>
+
+          <div class="exercise-row">
+            <label>(a) Hours of sunlight and solar panel output. &rarr;</label>
+            <input class="exercise-input" id="csA" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cs="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCsA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Number of mobile phones sold and average life expectancy, by country. &rarr;</label>
+            <input class="exercise-input" id="csB" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cs="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCsB"></p>
+
+          <div class="exercise-row">
+            <label>(c) Cigarettes smoked per day and lung cancer risk. &rarr;</label>
+            <input class="exercise-input" id="csC" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cs="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCsC"></p>
+
+          <div class="exercise-row">
+            <label>(d) Children's shoe size and reading ability. &rarr;</label>
+            <input class="exercise-input" id="csD" type="text" placeholder="?">
+            <button class="exercise-check-btn" data-cs="D">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbCsD"></p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; exam style</p>
+          <p>Data from 12 Sydney suburbs show a strong positive association (\(r = 0.86\)) between
+            the number of cafés and the median house price. A real estate agent says: "Open more
+            cafés and house prices will rise."</p>
+          <p><strong>(a) Identify the independent and dependent variables in the agent's
+            claim.</strong> [1 mark]</p>
+          <p>Independent: number of cafés. Dependent: median house price.</p>
+          <p><strong>(b) Evaluate the agent's claim.</strong> [3 marks]</p>
+          <p>The data show association, not causation. Causation may run the other way: wealthy
+            suburbs attract cafés because residents have money to spend. A confounder such as
+            location (closeness to the CBD or the beach) could drive both. And 12 suburbs is a
+            small sample.</p>
+          <p><strong>(c) What evidence would support the claim?</strong> [1 mark]</p>
+          <p>Prices tracked before and after new cafés open in otherwise similar suburbs,
+            compared with suburbs where none opened.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Towns with more fast-food outlets have more hospital beds. Suggest a confounding
+              variable and explain how it drives both.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Population: larger towns have more of everything, including fast-food outlets
+                  and hospital beds.</p>
+              </div></details></li>
+            <li>A study finds dog owners live longer than non-owners. Give two reasons this may not
+              mean owning a dog extends life.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Reverse causation: healthier, more active people are more likely to take on a
+                  dog. Confounders: dog owners may have higher incomes, more space or more stable
+                  lives, each linked to longer life.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. INVESTIGATION DESIGN ─────────── -->
+      <div class="content-card" id="design">
+        <p class="section-label">Application</p>
+        <h2>Designing a fair investigation</h2>
+
+        <p>To test whether one variable <em>causes</em> another, design a study that rules out the
+          other explanations. The features of a fair test:</p>
+
+        <table class="coord-table">
+          <tr><th>Feature</th><th>Why it matters</th></tr>
+          <tr><td><strong>Control group</strong> that does not receive the change</td><td>Gives a
+            comparison, so you can see what would have happened anyway</td></tr>
+          <tr><td><strong>Random allocation</strong> to the groups</td><td>Spreads confounders
+            (motivation, ability, income) evenly between the groups</td></tr>
+          <tr><td><strong>Everything else held constant</strong></td><td>Only the independent
+            variable differs between the groups</td></tr>
+          <tr><td><strong>Large enough sample</strong></td><td>Reduces the chance that the result is
+            a coincidence</td></tr>
+          <tr><td><strong>Measure before and after</strong></td><td>Shows that the cause came before
+            the effect</td></tr>
+        </table>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7</p>
+          <p>A school wants to know whether a new revision app improves maths results. Design a
+            fair investigation.</p>
+          <ul>
+            <li>Choose 200 Year 12 students and record their current maths marks.</li>
+            <li><strong>Randomly</strong> allocate 100 to use the app for 6 weeks and 100 (the
+              control group) to revise as usual.</li>
+            <li>Keep teachers, lessons and the test the same for both groups.</li>
+            <li>Compare the <strong>change</strong> in marks between the groups.</li>
+          </ul>
+          <p>If the app group improves clearly more, the app is the most likely cause, because
+            random allocation balanced the other factors.</p>
+          <p><strong>Contrast:</strong> simply comparing students who chose to download the app
+            with those who did not is an observational study. Keen students may be more likely to
+            download it, so motivation would confound the result.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Design a fair test of whether listening to music while studying affects how many
+              words students can memorise.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Randomly split a large group of students in two. Both groups study the same list
+                  of words for the same time in the same room; one group hears music, the control
+                  group studies in silence. Test both groups identically and compare the mean
+                  number of words recalled.</p>
+              </div></details></li>
+            <li>A gym compares members who chose its new class with those who did not, and finds
+              the class members lost more weight. Identify two flaws in this design.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>No random allocation: more motivated members may choose the class, so
+                  motivation confounds the result. Other factors such as diet were not controlled,
+                  and there may be no before-and-after measurements.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>Explain the association</h2>
+        <p><strong>About 10 minutes &middot; groups of three.</strong> Each statement below
+          describes a real-looking association. For each one, decide which of the four
+          explanations fits best (A causes B, B causes A, a confounder, or coincidence), and
+          justify it in one sentence. Then choose one statement and outline a fair test.</p>
+        <ol>
+          <li>Ice-cream sales and sunburn cases rise together.</li>
+          <li>Students who learn a musical instrument have higher maths marks.</li>
+          <li>Hours of study and test marks are positively associated.</li>
+          <li>Over ten years, a country's mobile phone sales and its number of shark sightings
+            both rose.</li>
+          <li>People who exercise regularly report being happier.</li>
+          <li>Among primary-school children, those with bigger feet read better.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <p><strong>1.</strong> Confounder: sunny, hot weather drives both.</p>
+          <p><strong>2.</strong> Most likely a confounder: family income and support pay for
+            lessons and also help with maths. Some causal effect is possible but unproven.</p>
+          <p><strong>3.</strong> Plausibly causal (study improves marks), although motivation
+            also plays a part. A controlled trial would be needed to measure the size of the
+            effect.</p>
+          <p><strong>4.</strong> Coincidence: two unrelated trends rising over the same years.
+            (Population growth or more people at beaches could also be argued.)</p>
+          <p><strong>5.</strong> Possibly causal in both directions: exercise may improve mood,
+            and happier people may find it easier to exercise.</p>
+          <p><strong>6.</strong> Confounder: age. Older children have bigger feet and read
+            better.</p>
+          <p>A fair test needs random allocation, a control group and everything else held
+            constant &mdash; for example, randomly assigning some students to free music lessons
+            for a year.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">For causation questions, always name a <em>specific</em>
+          confounding variable and explain how it affects both measured variables.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          Lesson 2 measures these associations precisely with scatter plots and Pearson's \(r\).</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(1)">Lesson 2 &rarr;</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-8', LESSON_IDX = 0;
+
+  function textCheck(sel, prefix, ANS, matcher) {
+    document.querySelectorAll(sel).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k = btn.dataset[prefix.toLowerCase()];
+        var fb = document.getElementById('fb' + prefix + k);
+        var v = (document.getElementById(prefix.toLowerCase() + k).value || '').trim().toLowerCase();
+        if (!v) { fb.className = 'exercise-feedback'; fb.textContent = 'Type an answer.'; return; }
+        var ok = matcher ? matcher(v, ANS[k][0]) : v === ANS[k][0];
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.textContent = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+      });
+    });
+  }
+
+  /* ── Univariate / bivariate ───────────────────────────────── */
+  textCheck('[data-uv]', 'Uv', {
+    A: ['univariate', 'Only one measurement (mass) is taken per apple, so it is one-variable data.'],
+    B: ['bivariate',  'Two measurements per player — height and points scored — and the question asks about a relationship.'],
+    C: ['univariate', 'Spread is a property of a single variable, the exam marks.'],
+    D: ['bivariate',  'Age and resale value are recorded for each car, and one is used to predict the other.']
+  }, function (v, a) { return v.indexOf(a) !== -1; });
+
+  /* ── Independent variable ─────────────────────────────────── */
+  textCheck('[data-iv]', 'Iv', {
+    A: ['floor area',  'Floor area is used to predict price, so it is independent and goes on the x-axis.'],
+    B: ['age',         'Age is used to predict the running time, so it is independent. Age is almost always independent.'],
+    C: ['kwh',         'The energy used (kWh) determines the cost, so it is the independent variable.']
+  }, function (v, a) { return v.replace(/[^a-z]/g, '').indexOf(a.replace(/[^a-z]/g, '')) !== -1; });
+
+  /* ── Causal or not ────────────────────────────────────────── */
+  textCheck('[data-cs]', 'Cs', {
+    A: ['causal',     'Sunlight directly powers the panels — a clear physical mechanism, so the relationship is causal.'],
+    B: ['not causal', 'Both are driven by national wealth, a confounding variable. Phones do not extend life.'],
+    C: ['causal',     'Decades of controlled research established a biological mechanism, so this association is causal.'],
+    D: ['not causal', 'Age is the confounder: older children have bigger feet and read better. Shoe size causes nothing.']
+  }, function (v, a) {
+    var isNot = /not|no\b/.test(v);
+    return a === 'not causal' ? isNot : (!isNot && v.indexOf('caus') !== -1);
+  });
+
+  /* ── Association scatter plots ────────────────────────────── */
+  (function () {
+    var SMALL = { width: 290, height: 220, xLabel: 'x', yLabel: 'y', xMin: 0, xMax: 10, yMin: 0, yMax: 10, xStep: 2, yStep: 2 };
+    function pts(list) { return list.map(function (p) { return { x: p[0], y: p[1] }; }); }
+
+    IE.plot('plotPos', Object.assign({}, SMALL, {
+      points: pts([[1,2],[2,2.8],[2.5,3.6],[3.5,4],[4,5],[5,5.4],[5.5,6.4],[6.5,6.8],[7,7.8],[8,8.2],[8.5,9],[9,8.8]])
+    }));
+    IE.plot('plotNeg', Object.assign({}, SMALL, {
+      points: pts([[1,9],[2,8.4],[2.5,7.6],[3.5,7.2],[4,6.2],[5,5.8],[5.5,4.8],[6.5,4.2],[7,3.4],[8,2.8],[8.5,2],[9,1.6]])
+    }));
+    IE.plot('plotNone', Object.assign({}, SMALL, {
+      points: pts([[1,5.2],[2,2.4],[2.5,7.8],[3.5,3.6],[4,8.2],[5,4.6],[5.5,2.2],[6.5,7.4],[7,4],[8,8.6],[8.5,3.2],[9,6]])
+    }));
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'Which investigation requires bivariate analysis?',
+      opts: [
+        'A) Finding the median height of 50 students',
+        'B) Calculating the standard deviation of exam marks',
+        'C) Investigating whether hours of sleep affect reaction time',
+        'D) Drawing a histogram of daily temperatures'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Two measurements are taken per person — sleep and reaction time — and the question asks about the relationship between them. The others each involve a single variable.'
+    },
+    {
+      q: 'In a study predicting a car\'s resale value from its age, which is the independent variable?',
+      opts: ['A) Resale value', 'B) Age', 'C) Both', 'D) Neither'],
+      correct: 1,
+      explanation: 'B is correct. Age is used to predict value, so it is the independent variable and goes on the horizontal axis. Age is almost always independent — nothing you measure can change it.'
+    },
+    {
+      q: 'A strong positive association is found between two variables. What can be concluded?',
+      opts: [
+        'A) One variable definitely causes the other',
+        'B) The variables tend to increase together, but causation is not established',
+        'C) There is no relationship between them',
+        'D) A third variable must be responsible'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Association describes a statistical pattern only. Causation is a stronger claim requiring controlled experiments, a plausible mechanism and consistent results — option D overstates it in the other direction.'
+    },
+    {
+      q: 'Ice-cream sales and drowning deaths are strongly positively associated. What is the best explanation?',
+      opts: [
+        'A) Eating ice-cream causes drowning',
+        'B) Drowning causes ice-cream sales',
+        'C) Hot weather is a confounding variable driving both',
+        'D) The association is pure coincidence'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Hot weather increases both ice-cream purchases and swimming (and so drownings). It is a confounding variable influencing both measured quantities, with neither causing the other.'
+    },
+    {
+      q: 'Which piece of evidence would most support a claim of causation?',
+      opts: [
+        'A) A very large correlation coefficient',
+        'B) A controlled experiment where the independent variable was deliberately varied',
+        'C) A large sample size',
+        'D) A neat straight line on the scatter plot'
+      ],
+      correct: 1,
+      explanation: 'B is correct. Only a controlled experiment, holding other factors constant, can rule out confounding variables. A strong correlation, a big sample and a tidy line all describe the association — none establishes cause.'
+    },
+    {
+      q: 'What is a confounding variable?',
+      opts: [
+        'A) The variable plotted on the \\(y\\)-axis',
+        'B) A measurement recorded incorrectly',
+        'C) A third variable influencing both measured variables, creating an apparent association',
+        'D) An outlier in the dataset'
+      ],
+      correct: 2,
+      explanation: 'C is correct. A confounder affects both of the variables being studied, producing an association between them even though neither causes the other — as hot weather does for ice-cream and drownings.'
+    },
+    {
+      q: 'A study of 6 students finds a near-perfect correlation between shoe size and test score. What is the most appropriate response?',
+      opts: [
+        'A) Conclude that larger feet improve test performance',
+        'B) Note that the sample is very small, so a strong correlation could easily arise by chance',
+        'C) Conclude that test scores determine shoe size',
+        'D) Accept the result because the correlation is near-perfect'
+      ],
+      correct: 1,
+      explanation: 'B is correct. With only 6 points, strong correlations occur readily by coincidence. A larger sample is needed before the association means anything — and even then, age would be an obvious confounder.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Explain the difference between univariate and bivariate data analysis, and give an example of a question suited to each.',
+      marks: 3,
+      steps: [
+        'Univariate data records one measurement per individual and describes that single variable.',
+        'Bivariate data records two measurements per individual and examines the relationship between them.',
+        'Univariate question: "What is the average daily rainfall?"',
+        'Bivariate question: "Does more rainfall produce higher crop yields?"'
+      ],
+      answer: 'Univariate analyses one variable (its centre and spread); bivariate analyses the relationship between two. "What is the average rainfall?" is univariate; "does rainfall predict crop yield?" is bivariate.'
+    },
+    {
+      q: 'For each study, identify the independent and dependent variables. (a) Predicting exam marks from hours studied. (b) Predicting fuel consumption from engine size. (c) Predicting house price from distance to the city.',
+      marks: 3,
+      steps: [
+        'The independent variable is the one used to predict; it goes on the \\(x\\)-axis.',
+        '(a) Independent: hours studied. Dependent: exam mark.',
+        '(b) Independent: engine size. Dependent: fuel consumption.',
+        '(c) Independent: distance to the city. Dependent: house price.'
+      ],
+      answer: '(a) Hours studied → exam mark. (b) Engine size → fuel consumption. (c) Distance → price. In each case the predictor is independent.'
+    },
+    {
+      q: 'Explain why it matters which variable is placed on the horizontal axis.',
+      marks: 3,
+      steps: [
+        'The line of best fit is calculated to predict \\(y\\) from \\(x\\).',
+        'Swapping the axes produces a different line, since the roles are not symmetric.',
+        'Every prediction made from the line would then be wrong.',
+        'The gradient\'s interpretation also changes, since its units are \\(y\\) per unit of \\(x\\).'
+      ],
+      answer: 'Because the regression line predicts \\(y\\) from \\(x\\), and swapping the axes gives a different line with a different gradient and different predictions. The independent variable must always go on the horizontal axis.'
+    },
+    {
+      q: 'Explain the difference between association and causation.',
+      marks: 3,
+      steps: [
+        'Association means two variables tend to change together — a statistical pattern.',
+        'Causation means a change in one directly produces a change in the other.',
+        'Association can be established from observational data; causation cannot.',
+        'Causation requires controlled experiments and a plausible mechanism.'
+      ],
+      answer: 'Association is a statistical pattern — the variables move together. Causation is the stronger claim that one produces the other, and it requires controlled experimental evidence and a plausible mechanism, not just data.'
+    },
+    {
+      q: 'List the four possible explanations for an observed association between variables A and B.',
+      marks: 4,
+      steps: [
+        'A causes B — the genuine causal relationship.',
+        'B causes A — the causation runs in the opposite direction.',
+        'A third (confounding) variable influences both.',
+        'Coincidence — chance, especially likely with a small sample.'
+      ],
+      answer: 'A causes B; B causes A; a confounding variable drives both; or coincidence. Only the first is what most people assume, which is why the other three must always be considered.'
+    },
+    {
+      q: 'A study finds that towns with more churches have more crimes. Explain this association.',
+      marks: 4,
+      steps: [
+        'Churches obviously do not cause crime, nor does crime cause churches to be built.',
+        'The confounding variable is population size.',
+        'Larger towns have more people, so they have more churches.',
+        'Larger towns also have more people, so they record more crimes in absolute terms.',
+        'Comparing crimes <em>per capita</em> would remove the effect.'
+      ],
+      answer: 'Population size is the confounding variable: bigger towns have both more churches and more crimes simply because they have more people. The association would disappear if crime rates per capita were used instead of totals.'
+    },
+    {
+      q: 'A report claims: "Children who eat breakfast score higher on tests, so schools should provide breakfast." Evaluate this reasoning.',
+      marks: 5,
+      steps: [
+        'The report infers causation from an observational association.',
+        'A plausible confounder is household stability or income.',
+        'Families with routines and resources are more likely to provide breakfast <em>and</em> to support learning in other ways.',
+        'Reverse causation is implausible here, but confounding is very likely.',
+        'A randomised trial providing breakfast to some schools and not others would be needed.'
+      ],
+      answer: 'The reasoning assumes causation from association. Household income and stability are likely confounders — organised, better-resourced families provide both breakfast and broader educational support. A randomised controlled trial across schools would be needed before recommending the policy, though the intervention may still be worthwhile on other grounds.'
+    },
+    {
+      q: 'Explain why a controlled experiment provides stronger evidence of causation than an observational study.',
+      marks: 4,
+      steps: [
+        'In a controlled experiment the researcher deliberately sets the independent variable.',
+        'Other factors are held constant or randomised across groups.',
+        'This rules out confounding variables as an explanation.',
+        'In an observational study the variables are merely recorded, so any unmeasured factor could be responsible.'
+      ],
+      answer: 'Because the researcher controls the independent variable and holds other factors constant (or randomises them), eliminating confounders. In an observational study the variables are only observed, so an unmeasured third factor could explain the association.'
+    },
+    {
+      q: 'For each, state whether the relationship is likely causal and justify. (a) Fertiliser applied and plant growth in a controlled trial. (b) Number of hospitals in a region and the region\'s death rate.',
+      marks: 4,
+      steps: [
+        '(a) A controlled trial varies fertiliser while holding other conditions constant.',
+        'There is a clear biological mechanism, so this is causal.',
+        '(b) Hospitals do not cause deaths; the confounder is population size and age profile.',
+        'Larger, older populations need more hospitals <em>and</em> record more deaths.'
+      ],
+      answer: '(a) Causal — a controlled trial with a known biological mechanism. (b) Not causal — population size and age profile confound the relationship; more people (and older people) mean both more hospitals and more deaths.'
+    },
+    {
+      q: 'Explain why a near-perfect correlation from a sample of 4 points should be treated with caution.',
+      marks: 3,
+      steps: [
+        'With very few points, a strong-looking pattern can arise by chance alone.',
+        'Two points always lie exactly on a line, and three or four are easily close to one.',
+        'The sample may not represent the wider population.',
+        'A single unusual observation has an enormous influence on the correlation.'
+      ],
+      answer: 'Because chance alone readily produces strong correlations in tiny samples — two points lie exactly on a line by definition. The sample may be unrepresentative, and any one unusual value dominates the result. A much larger sample is needed.'
+    },
+    {
+      q: 'A researcher finds that people who drink more coffee have higher rates of lung cancer, and concludes coffee is carcinogenic. Explain the flaw.',
+      marks: 4,
+      steps: [
+        'The conclusion infers causation from an observational association.',
+        'Historically, coffee drinkers were much more likely to be smokers.',
+        'Smoking is a confounding variable: it is associated with coffee drinking and is a known cause of lung cancer.',
+        'Controlling for smoking removes the apparent coffee effect.'
+      ],
+      answer: 'Smoking is the confounding variable. Coffee drinkers were historically more likely to smoke, and smoking causes lung cancer. Once smoking status is controlled for, the coffee–cancer association largely disappears — so the conclusion is unjustified.'
+    },
+    {
+      q: 'A council observes that suburbs with more parks have healthier residents, and plans to build parks to improve health. Discuss whether this is justified.',
+      marks: 5,
+      steps: [
+        'The observation is an association from observational data.',
+        'A confounder is likely: wealthier suburbs tend to have both more parks and healthier residents (better diet, healthcare access, lower stress).',
+        'Reverse causation is implausible — health does not create parks.',
+        'A genuine mechanism does exist, however: parks encourage exercise.',
+        'The policy may still be sensible, but the evidence presented does not prove it will work.'
+      ],
+      answer: 'Not justified by this evidence alone. Suburb wealth plausibly confounds the relationship, driving both park provision and resident health. That said, a real mechanism exists — parks enable exercise — so the policy may be worthwhile; it simply needs stronger evidence, ideally from before-and-after studies of new parks.'
+    },
+    {
+      q: 'Describe two questions about the same dataset of 100 cars (age and value), one requiring univariate analysis and one requiring bivariate analysis.',
+      marks: 4,
+      steps: [
+        'Univariate: focus on one variable\'s distribution.',
+        'For example: "What is the median value of the cars, and how spread out are the values?"',
+        'Bivariate: focus on the relationship between the two.',
+        'For example: "Can a car\'s age be used to predict its value, and how strong is that relationship?"'
+      ],
+      answer: 'Univariate: "What is the median car value and its standard deviation?" — analysed with a box plot or histogram. Bivariate: "How well does age predict value?" — analysed with a scatter plot and line of best fit.'
+    },
+    {
+      q: 'Write a full evaluation of the claim: "Students who use tutoring services get better marks, so tutoring improves results."',
+      marks: 5,
+      steps: [
+        'Identify the error: causation inferred from an observational association.',
+        'Name a confounder: family income, since wealthier families can afford tutoring and also provide other advantages.',
+        'Consider reverse causation: struggling students may seek tutoring, which would <em>weaken</em> the observed association — so the real effect may be understated.',
+        'Note selection effects: motivated students are more likely to seek tutoring.',
+        'State the evidence needed: a randomised trial assigning tutoring to some students and not others.'
+      ],
+      answer: 'The claim assumes causation from association. Family income is a likely confounder — it enables tutoring and brings other educational advantages. Motivation also confounds, since self-selecting students differ from those who do not seek help. Interestingly, reverse causation (weaker students seeking tutoring) would work against the observed association, so tutoring may genuinely help. Only a randomised controlled trial could settle it.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

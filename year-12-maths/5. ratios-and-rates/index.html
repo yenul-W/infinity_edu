@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratios &amp; Rates &mdash; Year 12 Maths Standard 2</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+</head>
+<body class="sociotype">
+
+  <header class="topic-header">
+    <div class="header-inner">
+      <div class="header-nav">
+        <a href="../../year-12.html" class="back-link">&larr; All Topics</a>
+        <div class="header-actions">
+          <a class="syllabus-chip-inline" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa96edbda5" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
+          <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode"><span class="toggle-icon">dark</span></button>
+        </div>
+      </div>
+      <h1 class="topic-page-title">Ratios <em>&amp; Rates</em></h1>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="pdf-viewer-container">
+      <div class="lessons-sidebar" id="lessonsList"></div>
+      <div class="pdf-viewer-main">
+        <div class="pdf-controls">
+          <div class="control-group" id="fileControls">
+            <button class="pdf-btn" id="downloadBtn">&#8595; Download</button>
+            <a class="pdf-btn" id="openExternalBtn" href="#" target="_blank" rel="noreferrer">&#8599; Open</a>
+            <button class="pdf-btn" id="printSyllabusBtn">&#8942; Print Syllabus</button>
+          </div>
+          <div class="control-group" id="pageControls">
+            <button class="pdf-nav-arrow" id="prevPage" disabled>&#8592;</button>
+            <input class="page-info" id="pageInfo" type="text" inputmode="numeric" placeholder="–" disabled><span class="page-sep" id="pageTotal">/ –</span>
+            <button class="pdf-nav-arrow" id="nextPage" disabled>&#8594;</button>
+          </div>
+          <div class="control-group" id="zoomControls">
+            <div class="zoom-control">
+              <button class="zoom-btn" id="zoomOut">&#8722;</button>
+              <span class="zoom-display" id="zoomDisplay">–</span>
+              <button class="zoom-btn" id="zoomIn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-stage" id="pdfStage">
+          <div class="pdf-loading" id="pdfLoading">
+            <div class="pdf-loading-spinner"></div>
+            <p>Loading</p>
+          </div>
+          <div class="pdf-canvas-wrapper" id="pdfCanvasWrapper" style="display:none"></div>
+          <iframe class="pdf-html-frame" id="pdfHtmlFrame" src="about:blank" title="Lesson"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../pdf-viewer.js"></script>
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const toggleIcon = toggle.querySelector('.toggle-icon');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = saved ? saved === 'dark' : prefersDark;
+    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
+    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
+    toggle.addEventListener('click', () => {
+      const nowDark = html.classList.toggle('dark-mode');
+      localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+      toggleIcon.textContent = nowDark ? 'light' : 'dark';
+      const frame = document.getElementById('pdfHtmlFrame');
+      try { if (frame && frame.contentDocument && frame.contentDocument.documentElement) { frame.contentDocument.documentElement.classList.toggle('dark-mode', nowDark); } } catch (e) {}
+      try { if (frame && frame.contentWindow) { frame.contentWindow.postMessage({ type: 'ie-theme', dark: nowDark }, '*'); } } catch (e) {}
+    });
+
+    const TOPIC_ID = 'y12-5';
+
+    const lessons = [
+      {
+        num: 1,
+        title: "Ratios, Scale & Plans",
+        slides: "lesson-01-ratios-scale.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Recognise ratios and explain their relationship with fractions",
+          "Express a ratio in simplest form and determine the ratio of two quantities",
+          "Divide a quantity in a given ratio and solve practical problems involving ratios",
+          "Solve practical ratio problems involving the unitary method",
+          "Explain the relationship between ratios and map scales and apply this to solve problems",
+          "Construct scale drawings, and estimate and compare quantities, materials and costs from scale drawings and building plans"
+        ]
+      },
+      {
+        num: 2,
+        title: "Site Plans, Area & Rainfall",
+        slides: "lesson-02-plans-area-rainfall.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Calculate the perimeter or area of a section of land using the trapezoidal rule where appropriate, from a site plan, an aerial photograph, a radial survey or a map that includes a scale",
+          "Calculate the volume of rainfall over an area using V = Ah, where V is the volume, A is the area of land and h is the depth of rain"
+        ]
+      },
+      {
+        num: 3,
+        title: "Rates, Fuel & Energy",
+        slides: "lesson-03-rates.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Explain the difference between ratios and rates, and represent given information as a unit rate",
+          "Convert between rates and make comparisons between rates in a variety of practical contexts",
+          "Compare prices to determine best buys, and use rates to solve practical problems",
+          "Interpret and analyse graphs to solve problems related to distance, speed and time",
+          "Examine fuel consumption rates to compare the efficiency of vehicles",
+          "Recognise and convert between watts and kilowatts using 1000 W = 1 kW",
+          "Apply units of energy to calculate costs and solve problems involving the consumption of energy"
+        ]
+      },
+      {
+        num: 4,
+        homework: true,
+        slides: "lesson-04-homework.html",
+        annotated: null,
+        kind: "html",
+        syllabus: []
+      },
+      {
+        num: 5,
+        title: "Revision",
+        revision: true,
+        slides: "lesson-05-revision.html",
+        annotated: null,
+        kind: "html",
+        syllabus: [
+          "Review all Ratios and Rates dot-points",
+          "Mixed exam-style practice with full worked solutions"
+        ]
+      }
+    ];
+
+    initPdfViewer({ topicId: TOPIC_ID, lessons });
+  </script>
+  <script src="../../question-popup.js"></script>
+</body>
+</html>

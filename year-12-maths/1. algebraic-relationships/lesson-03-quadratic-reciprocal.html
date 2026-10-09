@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — Quadratic &amp; Reciprocal Relationships</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="../lesson-kit.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-topic">Topic 1 &mdash; Algebraic Relationships</span>
+      <span>Year 12 Mathematics Standard 2</span>
+    </div>
+    <span>Lesson 3</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">Lesson 3</p>
+      <h1>Quadratic &amp; Reciprocal Relationships</h1>
+      <p class="subtitle">Two more shapes to add to your toolkit: the parabola, which rises to a
+        maximum or falls to a minimum, and the hyperbola, where doubling one quantity halves the
+        other.</p>
+      <div class="hero-meta">
+        <span class="pill">MST-12-S2-01</span>
+        <span class="pill">\(y = ax^2 + bx + c\)</span>
+        <span class="pill">\(y = k/x\)</span>
+      </div>
+    </div>
+    <div class="hero-side">
+      <p class="side-label">In this lesson</p>
+      <ul class="side-list">
+        <li>Recognising quadratics</li>
+        <li>Intercepts, axis of symmetry, vertex</li>
+        <li>Practical parabola problems</li>
+        <li>Inverse variation \(y = k/x\)</li>
+        <li>Choosing the right model</li>
+        <li>Hyperbolas and their limits</li>
+        <li>Class activity: the best pen</li>
+        <li>Knowledge check &amp; extended practice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc">
+      <p class="toc-heading">Contents</p>
+      <ul class="toc-list">
+        <li class="toc-item"><a class="toc-link" href="#quad-recognise">1 &nbsp;Recognising quadratics</a></li>
+        <li class="toc-item"><a class="toc-link" href="#quad-features">2 &nbsp;Key features</a></li>
+        <li class="toc-item"><a class="toc-link" href="#quad-apply">3 &nbsp;Practical problems</a></li>
+        <li class="toc-item"><a class="toc-link" href="#reciprocal">4 &nbsp;Reciprocal relationships</a></li>
+        <li class="toc-item"><a class="toc-link" href="#which-model">5 &nbsp;Which model fits?</a></li>
+        <li class="toc-item"><a class="toc-link" href="#limits">6 &nbsp;Domain, range &amp; limits</a></li>
+        <li class="toc-item"><a class="toc-link" href="#activity">Class activity</a></li>
+        <li class="toc-item"><a class="toc-link" href="#check">Knowledge check</a></li>
+        <li class="toc-item"><a class="toc-link" href="#practice">Extended practice</a></li>
+        <li class="toc-item"><a class="toc-link" href="#homework">Homework</a></li>
+      </ul>
+    </aside>
+
+    <div class="main-content">
+
+      <!-- ─────────── 1. RECOGNISING QUADRATICS ─────────── -->
+      <div class="content-card" id="quad-recognise">
+        <p class="section-label">Theory</p>
+        <h2>Recognising a quadratic relationship</h2>
+
+        <p>A <strong>quadratic</strong> relationship has the form</p>
+        \[y = ax^{2} + bx + c \qquad (a \neq 0)\]
+        <p>The defining feature is the \(x^{2}\) term. Its graph is a <strong>parabola</strong>
+          &mdash; a symmetric U-shaped curve.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Which way does it open?</p>
+          <p style="margin-bottom:0;">
+            If \(a &gt; 0\) the parabola opens <strong>upwards</strong> (a valley) and has a
+            <strong>minimum</strong> at its vertex.<br>
+            If \(a &lt; 0\) it opens <strong>downwards</strong> (a hill) and has a
+            <strong>maximum</strong> at its vertex.
+          </p>
+        </div>
+
+        <p>From a table, a quadratic has neither constant differences (linear) nor constant ratios
+          (exponential). Instead its <strong>second differences</strong> are constant.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 1 &mdash; the second-difference test</p>
+          <table class="coord-table">
+            <tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+            <tr><th>\(y\)</th><td>3</td><td>6</td><td>13</td><td>24</td><td>39</td></tr>
+          </table>
+          <p>First differences: \(3,\ 7,\ 11,\ 15\) &mdash; not constant, so not linear.</p>
+          <p>Second differences: \(4,\ 4,\ 4\) &mdash; constant, so the relationship is quadratic.</p>
+          <p>(For the record, \(y = 2x^{2} + x + 3\).)</p>
+        </div>
+
+        <div class="diagram-row">
+          <div class="diagram-col">
+            <div class="plot-wrap" id="plotUp"></div>
+            <p class="diagram-caption">\(a &gt; 0\): minimum</p>
+          </div>
+          <div class="diagram-col">
+            <div class="plot-wrap" id="plotDown"></div>
+            <p class="diagram-caption">\(a &lt; 0\): maximum</p>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>Use second differences to decide whether this table is quadratic.
+              \(x\): 0, 1, 2, 3, 4 &nbsp; \(y\): 5, 6, 9, 14, 21
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>First differences: 1, 3, 5, 7. Second differences: 2, 2, 2 &mdash; constant, so
+                  it is quadratic. (It is \(y = x^2 + 5\).)</p>
+              </div></details></li>
+            <li>State whether each parabola opens up or down, and whether its vertex is a maximum or
+              a minimum. (a) \(y = -0.5x^2 + 3x + 1\) &nbsp; (b) \(y = 4 - x + 2x^2\)
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) \(a = -0.5 &lt; 0\): opens down, maximum.</p>
+                <p>(b) The \(x^2\) coefficient is \(a = 2 &gt; 0\) (the order of terms does not
+                  matter): opens up, minimum.</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 2. KEY FEATURES ─────────── -->
+      <div class="content-card" id="quad-features">
+        <p class="section-label">Theory</p>
+        <h2>Intercepts, axis of symmetry and vertex</h2>
+
+        <h3>The \(y\)-intercept</h3>
+        <p>Set \(x = 0\): every term with an \(x\) disappears, leaving \(y = c\). So the
+          \(y\)-intercept of \(y = ax^2 + bx + c\) is always \(c\).</p>
+
+        <h3>The \(x\)-intercepts</h3>
+        <p>These are where the curve crosses the \(x\)-axis, so \(y = 0\). A parabola may have
+          two, one, or no \(x\)-intercepts. In this course you read them from a graph or from a
+          graphing application rather than using the quadratic formula.</p>
+
+        <h3>The axis of symmetry</h3>
+        <p>A parabola is symmetric about a vertical line through its vertex. The syllabus method
+          is to use the <strong>midpoint of the \(x\)-intercepts</strong>:</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Axis of symmetry from the x-intercepts</p>
+          \[x = \frac{x_1 + x_2}{2}\]
+          <p class="formula-where">where \(x_1\) and \(x_2\) are the two \(x\)-intercepts. The
+            vertex sits on this line.</p>
+        </div>
+
+        <h3>The vertex</h3>
+        <p>The vertex is the turning point &mdash; the maximum or minimum. To find it:</p>
+        <ol>
+          <li>Find the axis of symmetry, \(x = \dfrac{x_1 + x_2}{2}\). This is the
+            \(x\)-coordinate of the vertex.</li>
+          <li>Substitute that \(x\) into the equation to get the \(y\)-coordinate.</li>
+        </ol>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 2</p>
+          <p>A parabola \(y = x^{2} - 6x + 5\) crosses the \(x\)-axis at \(x = 1\) and \(x = 5\).
+            Find the \(y\)-intercept, the axis of symmetry and the vertex.</p>
+          <p><strong>\(y\)-intercept:</strong> \(c = 5\), so \((0, 5)\).</p>
+          <p><strong>Axis of symmetry:</strong></p>
+          \[x = \frac{1 + 5}{2} = 3\]
+          <p><strong>Vertex:</strong> substitute \(x = 3\):</p>
+          \[y = 3^{2} - 6(3) + 5 = 9 - 18 + 5 = -4\]
+          <p>The vertex is \((3, -4)\). Since \(a = 1 &gt; 0\) this is a <strong>minimum</strong>.</p>
+        </div>
+
+        <div class="plot-wrap" id="plotWE2"></div>
+        <p class="diagram-caption">\(y = x^2 - 6x + 5\): intercepts at \(x = 1\) and \(x = 5\),
+          vertex \((3, -4)\), axis of symmetry \(x = 3\).</p>
+
+        <div class="interactive-block">
+          <h3>Parabola explorer</h3>
+          <p class="exercise-intro">Adjust \(a\), \(b\) and \(c\). The \(y\)-intercept, the
+            \(x\)-intercepts, the axis of symmetry and the vertex are all computed live. Set
+            \(a\) negative to flip the parabola.</p>
+          <div id="quadSliders"></div>
+          <div class="plot-wrap" id="plotQuad"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Equation</div>
+              <div class="readout-value" id="roQEq">y = x² − 6x + 5</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">y-intercept</div>
+              <div class="readout-value" id="roQY">5</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">x-intercepts</div>
+              <div class="readout-value" id="roQX">1, 5</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Axis of symmetry</div>
+              <div class="readout-value" id="roQAxis">x = 3</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Vertex</div>
+              <div class="readout-value" id="roQVertex">(3, −4) min</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>\(y = x^2 - 2x - 8\) crosses the \(x\)-axis at \(x = -2\) and \(x = 4\). Find the
+              \(y\)-intercept, the axis of symmetry and the vertex.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(y\)-intercept: \((0, -8)\). Axis: \(x = \frac{-2 + 4}{2} = 1\).</p>
+                <p>Vertex: \(y = 1 - 2 - 8 = -9\), so \((1, -9)\), a minimum.</p>
+              </div></details></li>
+            <li>\(y = -x^2 + 10x - 16\) crosses the \(x\)-axis at \(x = 2\) and \(x = 8\). Find the
+              vertex and say whether it is a maximum or minimum.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>Axis: \(x = \frac{2 + 8}{2} = 5\). \(y = -25 + 50 - 16 = 9\).</p>
+                <p>Vertex \((5, 9)\), a <strong>maximum</strong> because \(a = -1 &lt; 0\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 3. PRACTICAL ─────────── -->
+      <div class="content-card" id="quad-apply">
+        <p class="section-label">Application</p>
+        <h2>Practical parabola problems</h2>
+
+        <p>Quadratics model anything with a single maximum or minimum: the path of a thrown
+          object, the area enclosed by a fixed length of fencing, or a revenue that rises then
+          falls as price increases.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 3 &mdash; projectile</p>
+          <p>A ball is thrown and its height in metres after \(t\) seconds is
+            \(h = -5t^{2} + 20t\).</p>
+          <p><strong>(a) When does it land?</strong> Landing means \(h = 0\):</p>
+          \[-5t^{2} + 20t = 0 \quad\Rightarrow\quad -5t(t - 4) = 0\]
+          <p>So \(t = 0\) (thrown) or \(t = 4\) (lands). The \(t\)-intercepts are 0 and 4.</p>
+          <p><strong>(b) When is it highest?</strong> The axis of symmetry is the midpoint of
+            the intercepts:</p>
+          \[t = \frac{0 + 4}{2} = 2 \text{ seconds}\]
+          <p><strong>(c) What is the maximum height?</strong> Substitute \(t = 2\):</p>
+          \[h = -5(4) + 20(2) = -20 + 40 = 20\ \text{m}\]
+          <p>The vertex is \((2, 20)\): maximum height 20 m at 2 seconds.</p>
+        </div>
+
+        <div class="plot-wrap" id="plotProjectile"></div>
+        <p class="diagram-caption">\(h = -5t^2 + 20t\): the ball peaks at 20 m after 2 s and lands
+          at 4 s.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 4 &mdash; maximising area</p>
+          <p>A farmer has 40 m of fencing to enclose a rectangular pen against an existing wall
+            (so only three sides need fencing). Find the dimensions giving the largest area.</p>
+          <p>Let the two sides perpendicular to the wall be \(x\) each. The remaining side is
+            \(40 - 2x\).</p>
+          \[A = x(40 - 2x) = 40x - 2x^{2}\]
+          <p>This is a quadratic with \(a = -2 &lt; 0\), so it has a maximum.</p>
+          <p>The \(x\)-intercepts are where \(x(40 - 2x) = 0\), i.e. \(x = 0\) and \(x = 20\).</p>
+          \[x = \frac{0 + 20}{2} = 10\]
+          <p>So \(x = 10\) m, the other side is \(40 - 20 = 20\) m, and</p>
+          \[A = 10 \times 20 = 200\ \text{m}^{2}\]
+          <p><strong>Valid domain:</strong> \(0 &lt; x &lt; 20\). Outside this range the area is
+            zero or negative, which is meaningless.</p>
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 5 &mdash; exam style</p>
+          <p>The arch of a tunnel is modelled by \(h = -0.2x^{2} + 4x\), where \(h\) is the height
+            in metres and \(x\) is the horizontal distance in metres from one side of the base.</p>
+          <p><strong>(a) How wide is the tunnel at ground level?</strong> [1 mark]</p>
+          <p>\(h = 0\) when \(x(-0.2x + 4) = 0\), so \(x = 0\) or \(x = 20\). The tunnel is 20 m
+            wide.</p>
+          <p><strong>(b) Find the maximum height of the arch.</strong> [2 marks]</p>
+          \[x = \frac{0 + 20}{2} = 10 \qquad h = -0.2(100) + 4(10) = 20 \text{ m}\]
+          <p><strong>(c) A truck 4 m wide and 18 m tall drives through the centre of the tunnel.
+            Will it fit? Justify your answer.</strong> [2 marks]</p>
+          <p>Centred, the truck's sides are at \(x = 8\) and \(x = 12\). By symmetry the arch is
+            the same height at both:</p>
+          \[h = -0.2(64) + 4(8) = 19.2 \text{ m}\]
+          <p>The arch is 19.2 m high at the truck's edges, above 18 m, so the truck fits with
+            1.2 m to spare.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>A ball's height is \(h = -5t^2 + 15t\) metres after \(t\) seconds. When does it land,
+              and what is its maximum height?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(-5t(t - 3) = 0\) gives \(t = 0\) or \(t = 3\): it lands after 3 seconds.</p>
+                <p>Highest at \(t = 1.5\): \(h = -5(2.25) + 15(1.5) = 11.25\) m.</p>
+              </div></details></li>
+            <li>56 m of fencing encloses a rectangular pen against a wall (three sides fenced).
+              Find the dimensions and the maximum area.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(A = x(56 - 2x)\) has intercepts \(x = 0\) and \(x = 28\), so the best
+                  \(x = 14\).</p>
+                <p>The pen is 14 m by \(56 - 28 = 28\) m, with area \(14 \times 28 = 392\) m².</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Fencing optimiser</h3>
+          <p class="exercise-intro">Change the total length of fencing and slide the side length
+            \(x\). The enclosed area updates live &mdash; find the peak.</p>
+          <div id="fenceSliders"></div>
+          <div class="plot-wrap" id="plotFence"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Dimensions</div>
+              <div class="readout-value" id="roFDim">10 m × 20 m</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Area</div>
+              <div class="readout-value" id="roFArea">200 m²</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Maximum possible</div>
+              <div class="readout-value" id="roFMax">200 m²</div>
+            </div>
+          </div>
+          <p class="exercise-feedback" id="fenceNote" style="margin-top:14px;"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 4. RECIPROCAL ─────────── -->
+      <div class="content-card" id="reciprocal">
+        <p class="section-label">Theory</p>
+        <h2>Reciprocal relationships and inverse variation</h2>
+
+        <p>Two quantities are in <strong>inverse variation</strong> when one increases as the
+          other decreases, in such a way that their <em>product stays constant</em>.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Inverse variation</p>
+          \[y = \frac{k}{x} \qquad \text{equivalently} \qquad xy = k\]
+          <p class="formula-where">\(k\) is the <strong>constant of variation</strong>. To find
+            it, multiply any matching pair of \(x\) and \(y\) values.</p>
+        </div>
+
+        <p>Double \(x\) and \(y\) halves. Triple \(x\) and \(y\) drops to a third. The graph is a
+          <strong>hyperbola</strong> &mdash; two separate curved branches.</p>
+
+        <div class="formula-box">
+          <p class="formula-label">Key features of \(y = k/x\) (for \(k &gt; 0\))</p>
+          <ul style="margin-bottom:0;">
+            <li>Two branches, one in the first quadrant and one in the third.</li>
+            <li>\(x = 0\) is a <strong>vertical asymptote</strong> &mdash; you cannot divide by zero.</li>
+            <li>\(y = 0\) is a <strong>horizontal asymptote</strong> &mdash; \(y\) never reaches zero.</li>
+            <li>There is no \(x\)-intercept and no \(y\)-intercept.</li>
+          </ul>
+        </div>
+
+        <div class="plot-wrap" id="plotHyperbola"></div>
+        <p class="diagram-caption">\(y = 12/x\): both branches, with asymptotes along the axes.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 6 &mdash; finding \(k\)</p>
+          <p>\(y\) varies inversely with \(x\). When \(x = 4\), \(y = 15\). Find \(y\) when
+            \(x = 10\).</p>
+          <p>Since \(y = k/x\), we have \(k = xy\):</p>
+          \[k = 4 \times 15 = 60\]
+          <p>So the relationship is \(y = \dfrac{60}{x}\). When \(x = 10\):</p>
+          \[y = \frac{60}{10} = 6\]
+        </div>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 7 &mdash; workers and time</p>
+          <p>It takes 6 workers 20 days to complete a job. Assuming inverse variation, how long
+            would 15 workers take?</p>
+          <p>Let \(w\) = workers and \(d\) = days. Then \(d = k/w\), so \(k = wd\):</p>
+          \[k = 6 \times 20 = 120 \ \text{worker-days}\]
+          \[d = \frac{120}{15} = 8 \ \text{days}\]
+          <p><strong>Interpretation:</strong> \(k = 120\) is the total amount of work. More
+            workers means fewer days, but the total worker-days stays the same.</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>\(y\) varies inversely with \(x\), and \(y = 2.5\) when \(x = 16\). Find \(k\), then
+              find \(y\) when \(x = 5\).
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(k = 16 \times 2.5 = 40\), so \(y = \frac{40}{x}\). When \(x = 5\),
+                  \(y = 8\).</p>
+              </div></details></li>
+            <li>A trip takes 3 hours at 80 km/h. Time varies inversely with speed. How long does it
+              take at 96 km/h? What does \(k\) represent?
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>\(k = 80 \times 3 = 240\) &mdash; the distance in km. At 96 km/h,
+                  \(t = 240 \div 96 = 2.5\) hours.</p>
+              </div></details></li>
+          </ol>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Inverse variation explorer</h3>
+          <p class="exercise-intro">Change \(k\) and slide \(x\) to read the matching \(y\).
+            Notice that \(x \times y\) always equals \(k\).</p>
+          <div id="recipSliders"></div>
+          <div class="plot-wrap" id="plotRecip"></div>
+          <div class="readout">
+            <div class="readout-item">
+              <div class="readout-label">Equation</div>
+              <div class="readout-value" id="roREq">y = 12/x</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">At this x</div>
+              <div class="readout-value" id="roRPt">(3, 4)</div>
+            </div>
+            <div class="readout-item">
+              <div class="readout-label">Product x × y</div>
+              <div class="readout-value" id="roRProd">12</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="interactive-block">
+          <h3>Practise inverse variation</h3>
+          <p class="exercise-intro">Answer to two decimal places where needed.</p>
+
+          <div class="exercise-row">
+            <label>(a) \(y\) varies inversely with \(x\); \(y = 9\) when \(x = 8\). Find \(k\).</label>
+            <input class="exercise-input" id="ivA" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-iv="A">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbIvA"></p>
+
+          <div class="exercise-row">
+            <label>(b) Using that relationship, find \(y\) when \(x = 24\).</label>
+            <input class="exercise-input" id="ivB" type="text" inputmode="decimal" placeholder="?">
+            <button class="exercise-check-btn" data-iv="B">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbIvB"></p>
+
+          <div class="exercise-row">
+            <label>(c) 5 pumps drain a tank in 12 hours. How long for 8 pumps?</label>
+            <input class="exercise-input" id="ivC" type="text" inputmode="decimal" placeholder="? hours">
+            <button class="exercise-check-btn" data-iv="C">Check</button>
+          </div>
+          <p class="exercise-feedback" id="fbIvC"></p>
+        </div>
+      </div>
+
+      <!-- ─────────── 5. WHICH MODEL ─────────── -->
+      <div class="content-card" id="which-model">
+        <p class="section-label">Theory</p>
+        <h2>Which model fits? Linear, quadratic, exponential or reciprocal</h2>
+
+        <p>Across this topic you have met four relationships. Exam questions often give a table or
+          a graph and ask which one it is. Each has its own test:</p>
+
+        <table class="coord-table">
+          <tr><th>Model</th><th>Equation</th><th>Table test (equal steps in \(x\))</th><th>Graph</th></tr>
+          <tr><td>Linear</td><td>\(y = mx + c\)</td><td>constant <strong>differences</strong></td><td>straight line</td></tr>
+          <tr><td>Quadratic</td><td>\(y = ax^2 + bx + c\)</td><td>constant <strong>second differences</strong></td><td>parabola with one turning point</td></tr>
+          <tr><td>Exponential</td><td>\(y = ka^x\)</td><td>constant <strong>ratios</strong></td><td>one asymptote (\(y = 0\)), crosses the \(y\)-axis at \(k\)</td></tr>
+          <tr><td>Reciprocal</td><td>\(y = \dfrac{k}{x}\)</td><td>constant <strong>product</strong> \(xy\)</td><td>hyperbola, two asymptotes (both axes), no intercepts</td></tr>
+        </table>
+
+        <p>Check the tests in this order: differences, then ratios, then products, then second
+          differences. Stop at the first one that is constant.</p>
+
+        <div class="example-block">
+          <p class="example-label">Worked example 8</p>
+          <p>Classify each table and write its equation.</p>
+          <table class="coord-table">
+            <tr><th>\(x\)</th><td>1</td><td>2</td><td>3</td><td>4</td><th>Test</th><th>Model</th></tr>
+            <tr><th>A</th><td>6</td><td>3</td><td>2</td><td>1.5</td><td>\(xy = 6\) each time</td><td>\(y = \frac{6}{x}\)</td></tr>
+            <tr><th>B</th><td>2</td><td>5</td><td>10</td><td>17</td><td>differences 3, 5, 7; second differences 2</td><td>quadratic, \(y = x^2 + 1\)</td></tr>
+            <tr><th>C</th><td>5</td><td>10</td><td>20</td><td>40</td><td>ratio 2 each time</td><td>\(y = 2.5 \times 2^x\)</td></tr>
+            <tr><th>D</th><td>11</td><td>8</td><td>5</td><td>2</td><td>difference \(-3\) each time</td><td>\(y = 14 - 3x\)</td></tr>
+          </table>
+          <p>For C, \(k\) is the value at \(x = 0\): go back one step, \(5 \div 2 = 2.5\).
+            For D, the value at \(x = 0\) is \(11 + 3 = 14\).</p>
+        </div>
+
+        <div class="your-turn">
+          <p class="example-label">Your turn</p>
+          <ol>
+            <li>For \(x = 1, 2, 3, 4\), classify each table. (a) 36, 18, 12, 9 &nbsp;
+              (b) 0, 6, 16, 30
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Differences and ratios are not constant, but \(xy = 36\) every time:
+                  reciprocal, \(y = \frac{36}{x}\).</p>
+                <p>(b) Differences 6, 10, 14; second differences 4, 4: quadratic. (It is
+                  \(y = 2x^2 - 2\).)</p>
+              </div></details></li>
+            <li>Name the model described. (a) A curve with two branches that never touches either
+              axis. (b) A curve through \((0, 3)\) that stays above the \(x\)-axis and rises more
+              and more steeply to the right. (c) A curve with a single highest point.
+              <details class="yt-answer"><summary>Show working</summary><div class="yt-body">
+                <p>(a) Reciprocal. (b) Exponential growth, \(k = 3\), \(a &gt; 1\).
+                  (c) Quadratic with \(a &lt; 0\).</p>
+              </div></details></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ─────────── 6. LIMITS ─────────── -->
+      <div class="content-card" id="limits">
+        <p class="section-label">Evaluation</p>
+        <h2>Valid domain, range and model limitations</h2>
+
+        <p>The syllabus asks you to <em>explain the limitations of these models and identify valid
+          domain and range values</em>. The algebra will happily produce answers that make no
+          physical sense &mdash; your job is to say which ones count.</p>
+
+        <h3>Quadratic models</h3>
+        <ul>
+          <li><strong>Negative values are often invalid.</strong> In \(h = -5t^2 + 20t\), the
+            model gives \(h &lt; 0\) for \(t &gt; 4\). The ball does not go underground &mdash;
+            the valid domain is \(0 \le t \le 4\), and the range is \(0 \le h \le 20\).</li>
+          <li><strong>Endpoints may be excluded.</strong> In the fencing problem the valid domain
+            is \(0 &lt; x &lt; 20\): at \(x = 0\) or \(x = 20\) the pen has zero width and encloses
+            nothing.</li>
+          <li><strong>The symmetry can mislead.</strong> A projectile model is symmetric, but real
+            trajectories are distorted by air resistance.</li>
+        </ul>
+
+        <h3>Reciprocal models</h3>
+        <ul>
+          <li><strong>\(x = 0\) is never in the domain.</strong> Division by zero is undefined,
+            and it usually makes no sense in context either &mdash; zero workers never finish the
+            job.</li>
+          <li><strong>Negative branches are often irrelevant.</strong> For workers and days only
+            \(x &gt; 0\) is meaningful, so only the first-quadrant branch applies.</li>
+          <li><strong>Whole numbers may be required.</strong> \(120 \div 7 = 17.14\) days is fine,
+            but 7.5 workers is not.</li>
+          <li><strong>The assumption of perfect inverse variation is strong.</strong> Doubling the
+            workforce rarely exactly halves the time &mdash; coordination costs, limited
+            equipment and workspace mean the real gain is smaller.</li>
+        </ul>
+
+        <div class="formula-box">
+          <p class="formula-label">Writing a good limitation answer</p>
+          <p style="margin-bottom:0;">State the mathematical fact, then the physical reason, then
+            the consequence. "The model gives \(h = -25\) m at \(t = 5\), but height cannot be
+            negative because the ball stops at ground level, so the model is only valid for
+            \(0 \le t \le 4\)."</p>
+        </div>
+      </div>
+
+      <!-- ─────────── CLASS ACTIVITY ─────────── -->
+      <div class="content-card" id="activity">
+        <p class="section-label">Class activity</p>
+        <h2>The best pen for any length of fencing</h2>
+        <p><strong>About 10 minutes &middot; pairs.</strong> Use the
+          <a href="#quad-apply">fencing optimiser</a>. The pen is built against a wall, so only
+          three sides are fenced.</p>
+        <ol>
+          <li>Copy the table. For each fencing length, find the side \(x\) that gives the largest
+            area, then record the pen's dimensions and the maximum area.
+            <table class="coord-table">
+              <tr><th>Fencing (m)</th><td>40</td><td>48</td><td>60</td><td>80</td></tr>
+              <tr><th>Best \(x\) (m)</th><td></td><td></td><td></td><td></td></tr>
+              <tr><th>Dimensions</th><td></td><td></td><td></td><td></td></tr>
+              <tr><th>Maximum area (m²)</th><td></td><td></td><td></td><td></td></tr>
+            </table></li>
+          <li>Write a rule for the best \(x\) in terms of the fencing length \(F\).</li>
+          <li>Show algebraically why the rule works, using the \(x\)-intercepts of
+            \(A = x(F - 2x)\).</li>
+          <li>Doubling the fencing from 40 m to 80 m does what to the maximum area? Why is it not
+            simply doubled?</li>
+          <li>Without a wall, all four sides need fencing. Predict the best shape for 40 m, and
+            compare its area with the pen against the wall.</li>
+        </ol>
+        <details class="yt-answer"><summary>Discussion points</summary><div class="yt-body">
+          <table class="coord-table">
+            <tr><th>Fencing (m)</th><td>40</td><td>48</td><td>60</td><td>80</td></tr>
+            <tr><th>Best \(x\) (m)</th><td>10</td><td>12</td><td>15</td><td>20</td></tr>
+            <tr><th>Dimensions</th><td>10 &times; 20</td><td>12 &times; 24</td><td>15 &times; 30</td><td>20 &times; 40</td></tr>
+            <tr><th>Maximum area (m²)</th><td>200</td><td>288</td><td>450</td><td>800</td></tr>
+          </table>
+          <p><strong>2 and 3.</strong> Best \(x = F \div 4\). The intercepts of \(A = x(F - 2x)\)
+            are \(x = 0\) and \(x = F/2\), and the axis of symmetry is their midpoint, \(F/4\). The
+            side along the wall is then \(F/2\): always twice the depth.</p>
+          <p><strong>4.</strong> The area multiplies by 4, because both dimensions double. (The
+            maximum area is \(F^2 \div 8\), a quadratic in \(F\).)</p>
+          <p><strong>5.</strong> A 10 m \(\times\) 10 m square, area 100 m² &mdash; half the area
+            against the wall. The wall does the work of a whole side of fencing.</p>
+        </div></details>
+      </div>
+
+      <!-- ─────────── KNOWLEDGE CHECK ─────────── -->
+      <div class="kc-block" id="check">
+        <p class="section-label">Knowledge Check</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Practice &amp; Quiz</h2>
+        <p class="kc-intro">Answer all seven questions to see your score. Completing this quiz
+          marks the lesson as done.</p>
+        <div id="kcQuestions"></div>
+        <div class="kc-score" id="kcScore"></div>
+      </div>
+
+      <!-- ─────────── EXTENDED PRACTICE ─────────── -->
+      <div class="practice-block" id="practice">
+        <p class="section-label">Extended Practice</p>
+        <h2 style="border-bottom:none; padding-bottom:0; margin-bottom:8px;">Exam-style questions</h2>
+        <p class="practice-intro">Work each question on paper first, then reveal the worked
+          solution and mark yourself honestly. Aim for about 60&ndash;80 minutes on this set.</p>
+        <div class="practice-tally" id="practiceTally"></div>
+        <div id="practiceQuestions"></div>
+        <div class="practice-summary" id="practiceSummary"></div>
+      </div>
+
+      <!-- ─────────── HOMEWORK ─────────── -->
+      <div class="content-card" id="homework">
+        <p class="section-label">Homework</p>
+        <h2>Next steps</h2>
+        <p style="font-size:13px; color:var(--gray-med); margin-bottom:20px;">
+          You have now covered all three lessons in this topic. Work through the homework set,
+          then use the revision lesson to prepare for assessment.</p>
+        <p>
+          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          &nbsp;
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Revision &rarr;</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../lesson-kit.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  IE.tex(document.body);
+
+  var TOPIC_ID = 'y12-1', LESSON_IDX = 2;
+
+  /* ── Static parabola shapes ───────────────────────────────── */
+  IE.plot('plotUp', {
+    width: 300, height: 230, xMin: -4, xMax: 4, yMin: -2, yMax: 10, xStep: 2, yStep: 2,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return x * x; } }],
+    points: [{ x: 0, y: 0, hollow: true }]
+  });
+  IE.plot('plotDown', {
+    width: 300, height: 230, xMin: -4, xMax: 4, yMin: -10, yMax: 2, xStep: 2, yStep: 2,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return -x * x; } }],
+    points: [{ x: 0, y: 0, hollow: true }]
+  });
+
+  /* ── Worked example 2 plot ────────────────────────────────── */
+  IE.plot('plotWE2', {
+    xMin: -1, xMax: 7, yMin: -6, yMax: 8, xStep: 1, yStep: 2,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return x * x - 6 * x + 5; } }],
+    points: [
+      { x: 1, y: 0, label: '(1,0)' },
+      { x: 5, y: 0, label: '(5,0)' },
+      { x: 3, y: -4, label: 'vertex (3,−4)' },
+      { x: 0, y: 5, hollow: true }
+    ],
+    markers: [{ x: 3, y: -4 }]
+  });
+
+  /* ── Parabola explorer ────────────────────────────────────── */
+  (function () {
+    var a = 1, b = -6, c = 5;
+    var redraw = IE.plot('plotQuad', { xMin: -6, xMax: 8, yMin: -12, yMax: 12, xStep: 2, yStep: 4, xLabel: 'x', yLabel: 'y', curves: [] });
+
+    function r(v) { return Math.round(v * 100) / 100; }
+    function sgn(v, sym) {
+      if (Math.abs(v) < 1e-9) return '';
+      return (v < 0 ? ' − ' : ' + ') + Math.abs(r(v)) + sym;
+    }
+
+    function update() {
+      var disc = b * b - 4 * a * c;
+      var roots = [];
+      if (disc > 0) {
+        roots = [(-b - Math.sqrt(disc)) / (2 * a), (-b + Math.sqrt(disc)) / (2 * a)];
+      } else if (Math.abs(disc) < 1e-9) {
+        roots = [-b / (2 * a)];
+      }
+      // Axis of symmetry: midpoint of the x-intercepts when they exist.
+      var axis = roots.length === 2 ? (roots[0] + roots[1]) / 2 : -b / (2 * a);
+      var vy = a * axis * axis + b * axis + c;
+
+      var pts = roots.map(function (x) { return { x: x, y: 0, label: '(' + r(x) + ', 0)' }; });
+      pts.push({ x: axis, y: vy, label: 'vertex' });
+      pts.push({ x: 0, y: c, hollow: true });
+
+      redraw({
+        curves: [{ fn: function (x) { return a * x * x + b * x + c; } }],
+        points: pts.filter(function (p) { return p.x >= -6 && p.x <= 8 && p.y >= -12 && p.y <= 12; }),
+        markers: (axis >= -6 && axis <= 8 && vy >= -12 && vy <= 12) ? [{ x: axis, y: vy }] : []
+      });
+
+      document.getElementById('roQEq').textContent =
+        'y = ' + (a === 1 ? '' : a === -1 ? '−' : r(a)) + 'x²' + sgn(b, 'x') + sgn(c, '');
+      document.getElementById('roQY').textContent = String(r(c));
+      document.getElementById('roQX').textContent =
+        roots.length === 0 ? 'none' : roots.map(r).join(', ');
+      document.getElementById('roQAxis').textContent = 'x = ' + r(axis);
+      document.getElementById('roQVertex').textContent =
+        '(' + r(axis) + ', ' + r(vy) + ') ' + (a > 0 ? 'min' : 'max');
+    }
+
+    var host = 'quadSliders';
+    IE.slider({ mount: host, label: 'a', min: -3, max: 3,  step: 0.5, value: a,
+                onInput: function (v) { a = (Math.abs(v) < 1e-9) ? 0.5 : v; update(); } });
+    IE.slider({ mount: host, label: 'b', min: -8, max: 8,  step: 1,   value: b, onInput: function (v) { b = v; update(); } });
+    IE.slider({ mount: host, label: 'c', min: -10, max: 10, step: 1,  value: c, onInput: function (v) { c = v; update(); } });
+    update();
+  })();
+
+  /* ── Projectile plot ──────────────────────────────────────── */
+  IE.plot('plotProjectile', {
+    xMin: 0, xMax: 5, yMin: 0, yMax: 24, xStep: 1, yStep: 4,
+    xLabel: 't (s)', yLabel: 'h (m)',
+    curves: [{ fn: function (t) { return -5 * t * t + 20 * t; } }],
+    points: [{ x: 2, y: 20, label: 'max 20 m' }, { x: 4, y: 0, label: 'lands' }],
+    markers: [{ x: 2, y: 20 }]
+  });
+
+  /* ── Fencing optimiser ────────────────────────────────────── */
+  (function () {
+    var total = 40, x = 10;
+    var redraw = IE.plot('plotFence', { xMin: 0, xMax: 20, yMin: 0, yMax: 220, xStep: 4, yStep: 40, xLabel: 'x (m)', yLabel: 'Area (m²)', curves: [] });
+
+    function area(xx) { return xx * (total - 2 * xx); }
+
+    function update() {
+      var half = total / 2;              // where area returns to zero
+      var best = total / 4;              // midpoint of the intercepts 0 and total/2
+      var bestArea = area(best);
+      var curArea = area(x);
+      var other = total - 2 * x;
+
+      redraw({
+        xMax: half,
+        xStep: Math.max(1, Math.round(half / 5)),
+        yMax: Math.ceil(bestArea * 1.15 / 20) * 20,
+        yStep: Math.max(10, Math.round(bestArea * 1.15 / 5 / 10) * 10),
+        curves: [{ fn: area }],
+        points: [{ x: best, y: bestArea, label: 'max' },
+                 { x: x, y: Math.max(0, curArea), hollow: true }],
+        markers: [{ x: x, y: Math.max(0, curArea) }]
+      });
+
+      document.getElementById('roFDim').textContent =
+        x + ' m × ' + (Math.round(other * 10) / 10) + ' m';
+      document.getElementById('roFArea').textContent =
+        (Math.round(Math.max(0, curArea) * 10) / 10) + ' m²';
+      document.getElementById('roFMax').textContent =
+        (Math.round(bestArea * 10) / 10) + ' m²';
+
+      var note = document.getElementById('fenceNote');
+      if (other <= 0) {
+        note.className = 'exercise-feedback wrong';
+        note.textContent = 'x is too large — the two sides use up all the fencing, leaving nothing for the third side. Valid domain: 0 < x < ' + half + '.';
+      } else if (Math.abs(x - best) < 0.01) {
+        note.className = 'exercise-feedback correct';
+        note.textContent = 'This is the maximum. The pen is ' + best + ' m × ' + (total - 2 * best) + ' m — the depth is always half the width at the optimum.';
+      } else {
+        note.className = 'exercise-feedback';
+        note.textContent = 'Area is ' + (Math.round((bestArea - curArea) * 10) / 10) + ' m² below the maximum. Try x = ' + best + '.';
+      }
+    }
+
+    var host = 'fenceSliders';
+    IE.slider({ mount: host, label: 'Fencing', min: 20, max: 80, step: 4, value: total,
+                format: function (v) { return v + ' m'; },
+                onInput: function (v) { total = v; if (x > v / 2 - 0.5) { x = v / 4; } update(); } });
+    var xs = IE.slider({ mount: host, label: 'Side x', min: 1, max: 39, step: 1, value: x,
+                format: function (v) { return v + ' m'; },
+                onInput: function (v) { x = v; update(); } });
+    update();
+  })();
+
+  /* ── Hyperbola ────────────────────────────────────────────── */
+  IE.plot('plotHyperbola', {
+    xMin: -10, xMax: 10, yMin: -10, yMax: 10, xStep: 2, yStep: 2,
+    xLabel: 'x', yLabel: 'y',
+    curves: [{ fn: function (x) { return 12 / x; }, discontinuityAt: 0 }],
+    points: [{ x: 3, y: 4, label: '(3, 4)' }, { x: 6, y: 2, label: '(6, 2)' }]
+  });
+
+  /* ── Inverse variation explorer ───────────────────────────── */
+  (function () {
+    var k = 12, x = 3;
+    var redraw = IE.plot('plotRecip', { xMin: 0.5, xMax: 12, yMin: 0, yMax: 26, xStep: 2, yStep: 4, xLabel: 'x', yLabel: 'y', curves: [] });
+
+    function update() {
+      var y = k / x;
+      redraw({
+        yMax: Math.max(10, Math.ceil(k / 0.5 / 10) * 10 / 2),
+        curves: [{ fn: function (xx) { return k / xx; }, discontinuityAt: 0 }],
+        points: [{ x: x, y: y, label: '(' + x + ', ' + (Math.round(y * 100) / 100) + ')' }],
+        markers: [{ x: x, y: y }]
+      });
+      document.getElementById('roREq').textContent = 'y = ' + k + '/x';
+      document.getElementById('roRPt').textContent = '(' + x + ', ' + (Math.round(y * 100) / 100) + ')';
+      document.getElementById('roRProd').textContent = String(Math.round(x * y * 100) / 100);
+    }
+
+    var host = 'recipSliders';
+    IE.slider({ mount: host, label: 'k', min: 2, max: 60, step: 2, value: k, onInput: function (v) { k = v; update(); } });
+    IE.slider({ mount: host, label: 'x', min: 1, max: 12, step: 1, value: x, onInput: function (v) { x = v; update(); } });
+    update();
+  })();
+
+  /* ── Inverse variation exercises ──────────────────────────── */
+  (function () {
+    var ANS = {
+      A: [72, 'Since \\(k = xy\\), \\(k = 8 \\times 9 = 72\\).'],
+      B: [3,  'With \\(y = 72/x\\), at \\(x = 24\\) we get \\(y = 72 \\div 24 = 3\\).'],
+      C: [7.5, 'The total work is \\(5 \\times 12 = 60\\) pump-hours, so 8 pumps take \\(60 \\div 8 = 7.5\\) hours.']
+    };
+    document.querySelectorAll('[data-iv]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var k  = btn.dataset.iv;
+        var fb = document.getElementById('fbIv' + k);
+        var g  = parseFloat(document.getElementById('iv' + k).value);
+        if (isNaN(g)) { fb.className = 'exercise-feedback'; fb.textContent = 'Enter a number.'; return; }
+        var ok = Math.abs(g - ANS[k][0]) < 0.005;
+        fb.className = 'exercise-feedback ' + (ok ? 'correct' : 'wrong');
+        fb.innerHTML = (ok ? '✓ Correct. ' : '✗ The answer is ' + ANS[k][0] + '. ') + ANS[k][1];
+        IE.tex(fb);
+      });
+    });
+  })();
+
+  /* ── Knowledge check ──────────────────────────────────────── */
+  var KC_QS = [
+    {
+      q: 'What is the \\(y\\)-intercept of \\(y = 2x^{2} - 5x + 7\\)?',
+      opts: ['A) 2', 'B) −5', 'C) 7', 'D) 0'],
+      correct: 2,
+      explanation: 'C is correct. Substituting \\(x = 0\\) leaves \\(y = 7\\). In \\(y = ax^2 + bx + c\\) the \\(y\\)-intercept is always \\(c\\).'
+    },
+    {
+      q: 'A parabola crosses the \\(x\\)-axis at \\(x = -2\\) and \\(x = 8\\). What is its axis of symmetry?',
+      opts: ['A) \\(x = 3\\)', 'B) \\(x = 5\\)', 'C) \\(x = 6\\)', 'D) \\(x = -5\\)'],
+      correct: 0,
+      explanation: 'A is correct. The axis of symmetry is the midpoint of the \\(x\\)-intercepts: \\(x = \\dfrac{-2 + 8}{2} = \\dfrac{6}{2} = 3\\).'
+    },
+    {
+      q: 'The graph of \\(y = -3x^{2} + 12x - 4\\) has:',
+      opts: [
+        'A) A minimum, because \\(a\\) is negative',
+        'B) A maximum, because \\(a\\) is negative',
+        'C) A minimum, because \\(c\\) is negative',
+        'D) No turning point'
+      ],
+      correct: 1,
+      explanation: 'B is correct. When \\(a < 0\\) the parabola opens downwards, so the vertex is the highest point — a maximum.'
+    },
+    {
+      q: 'If \\(y\\) varies inversely with \\(x\\), and \\(y = 20\\) when \\(x = 3\\), what is \\(y\\) when \\(x = 12\\)?',
+      opts: ['A) 80', 'B) 5', 'C) 60', 'D) 15'],
+      correct: 1,
+      explanation: 'B is correct. \\(k = xy = 3 \\times 20 = 60\\), so \\(y = \\dfrac{60}{12} = 5\\). Multiplying \\(x\\) by 4 divides \\(y\\) by 4.'
+    },
+    {
+      q: 'Which statement about the graph of \\(y = \\dfrac{8}{x}\\) is correct?',
+      opts: [
+        'A) It has a \\(y\\)-intercept of 8',
+        'B) It passes through the origin',
+        'C) It has asymptotes at \\(x = 0\\) and \\(y = 0\\)',
+        'D) It is a parabola'
+      ],
+      correct: 2,
+      explanation: 'C is correct. Substituting \\(x = 0\\) is undefined, so \\(x = 0\\) is a vertical asymptote; \\(y\\) can never equal 0, so \\(y = 0\\) is a horizontal asymptote. A hyperbola has no intercepts at all.'
+    },
+    {
+      q: 'A ball\'s height is \\(h = -5t^{2} + 30t\\) metres after \\(t\\) seconds. What is its maximum height?',
+      opts: ['A) 30 m', 'B) 45 m', 'C) 90 m', 'D) 25 m'],
+      correct: 1,
+      explanation: 'B is correct. The \\(t\\)-intercepts are \\(t = 0\\) and \\(t = 6\\), so the axis of symmetry is \\(t = 3\\). Then \\(h = -5(9) + 30(3) = -45 + 90 = 45\\) m.'
+    },
+    {
+      q: 'For the model \\(h = -5t^{2} + 30t\\), which is the valid domain in context?',
+      opts: [
+        'A) All real numbers',
+        'B) \\(0 \\le t \\le 6\\)',
+        'C) \\(t \\ge 0\\)',
+        'D) \\(0 \\le t \\le 45\\)'
+      ],
+      correct: 1,
+      explanation: 'B is correct. The ball is thrown at \\(t = 0\\) and lands at \\(t = 6\\). Beyond \\(t = 6\\) the model gives a negative height, which is impossible, and before \\(t = 0\\) the throw has not happened.'
+    }
+  ];
+  IE.buildKC(KC_QS, { topicId: TOPIC_ID, lessonIdx: LESSON_IDX });
+
+  /* ── Extended practice ────────────────────────────────────── */
+  var PRACTICE_QS = [
+    {
+      q: 'Use second differences to show that the following table is quadratic. <br>\\(x\\): 0, 1, 2, 3, 4 &nbsp;&nbsp; \\(y\\): 1, 4, 11, 22, 37',
+      marks: 3,
+      steps: [
+        'First differences: \\(4-1 = 3\\), \\(11-4 = 7\\), \\(22-11 = 11\\), \\(37-22 = 15\\).',
+        'These are not constant, so the relationship is not linear.',
+        'Second differences: \\(7-3 = 4\\), \\(11-7 = 4\\), \\(15-11 = 4\\).',
+        'The second differences are constant, which is the defining property of a quadratic.'
+      ],
+      answer: 'The second differences are constant at 4, confirming a quadratic relationship. (It is \\(y = 2x^2 + x + 1\\).)'
+    },
+    {
+      q: 'A parabola has \\(x\\)-intercepts at \\(x = -3\\) and \\(x = 7\\), and its equation is \\(y = x^{2} - 4x - 21\\). Find the axis of symmetry and the coordinates of the vertex.',
+      marks: 3,
+      steps: [
+        'Axis of symmetry is the midpoint of the intercepts: \\(x = \\dfrac{-3 + 7}{2} = 2\\).',
+        'Substitute \\(x = 2\\) into the equation to find the \\(y\\)-coordinate.',
+        '\\(y = (2)^2 - 4(2) - 21 = 4 - 8 - 21 = -25\\).',
+        'Since \\(a = 1 > 0\\), this vertex is a minimum.'
+      ],
+      answer: 'Axis of symmetry \\(x = 2\\); vertex \\((2, -25)\\), which is a minimum.'
+    },
+    {
+      q: 'A stone is thrown from a cliff and its height above the sea is \\(h = -5t^{2} + 10t + 40\\) metres. (a) What is its initial height? (b) When does it reach its maximum height, and what is it?',
+      marks: 4,
+      steps: [
+        '(a) Initial height is at \\(t = 0\\): \\(h = 40\\) m. This is the \\(c\\) value.',
+        '(b) Find where \\(h = 0\\): \\(-5t^2 + 10t + 40 = 0\\), or dividing by \\(-5\\): \\(t^2 - 2t - 8 = 0\\).',
+        'Factorising: \\((t-4)(t+2) = 0\\), so \\(t = 4\\) or \\(t = -2\\).',
+        'Axis of symmetry: \\(t = \\dfrac{-2 + 4}{2} = 1\\) second.',
+        'Maximum height: \\(h = -5(1) + 10(1) + 40 = 45\\) m.'
+      ],
+      answer: '(a) 40 m. (b) Maximum height of 45 m at \\(t = 1\\) second.'
+    },
+    {
+      q: 'For the stone in the previous question, state the valid domain and range in context, and justify each.',
+      marks: 3,
+      steps: [
+        'The stone is thrown at \\(t = 0\\) and hits the sea when \\(h = 0\\), which is at \\(t = 4\\) (the negative root \\(t = -2\\) is before the throw).',
+        'So the valid domain is \\(0 \\le t \\le 4\\) seconds.',
+        'The height starts at 40 m, rises to a maximum of 45 m, then falls to 0.',
+        'So the range is \\(0 \\le h \\le 45\\) metres.'
+      ],
+      answer: 'Domain \\(0 \\le t \\le 4\\) s — before 0 the stone has not been thrown, and after 4 s it is in the sea so the model gives impossible negative heights. Range \\(0 \\le h \\le 45\\) m — it cannot go below sea level, and 45 m is the vertex.'
+    },
+    {
+      q: 'A rectangular garden is to be fenced on all four sides using 60 m of fencing. Write an expression for the area in terms of one side \\(x\\), and find the dimensions giving the maximum area.',
+      marks: 4,
+      steps: [
+        'All four sides are fenced, so \\(2x + 2y = 60\\), giving \\(y = 30 - x\\).',
+        'Area: \\(A = x(30 - x) = 30x - x^{2}\\).',
+        'The \\(x\\)-intercepts of this quadratic are \\(x = 0\\) and \\(x = 30\\).',
+        'Axis of symmetry: \\(x = \\dfrac{0 + 30}{2} = 15\\).',
+        'So \\(x = 15\\) and \\(y = 30 - 15 = 15\\); the area is \\(225\\) m².'
+      ],
+      answer: '\\(A = 30x - x^{2}\\); the maximum area is 225 m² with a 15 m × 15 m square. The valid domain is \\(0 < x < 30\\).'
+    },
+    {
+      q: 'The revenue from selling concert tickets at price \\(p\\) dollars is \\(R = p(500 - 5p)\\). Find the price that maximises revenue and the maximum revenue.',
+      marks: 4,
+      steps: [
+        'Expand: \\(R = 500p - 5p^{2}\\), a quadratic with \\(a = -5 < 0\\), so it has a maximum.',
+        'Find the \\(p\\)-intercepts: \\(p(500 - 5p) = 0\\) gives \\(p = 0\\) or \\(500 - 5p = 0\\), i.e. \\(p = 100\\).',
+        'Axis of symmetry: \\(p = \\dfrac{0 + 100}{2} = 50\\).',
+        'Maximum revenue: \\(R = 50(500 - 250) = 50 \\times 250 = 12\\,500\\).'
+      ],
+      answer: 'A ticket price of $50 gives the maximum revenue of $12,500 (selling 250 tickets).'
+    },
+    {
+      q: 'The time \\(t\\) to complete a task varies inversely with the number of people \\(n\\). With 4 people it takes 18 hours. (a) Find the constant of variation. (b) Find the time for 9 people. (c) How many people are needed to finish in 6 hours?',
+      marks: 4,
+      steps: [
+        '(a) \\(t = \\dfrac{k}{n}\\), so \\(k = nt = 4 \\times 18 = 72\\) person-hours.',
+        '(b) \\(t = \\dfrac{72}{9} = 8\\) hours.',
+        '(c) Set \\(6 = \\dfrac{72}{n}\\), so \\(n = \\dfrac{72}{6} = 12\\) people.'
+      ],
+      answer: '(a) \\(k = 72\\) person-hours. (b) 8 hours. (c) 12 people.'
+    },
+    {
+      q: 'Explain why the model in the previous question becomes unrealistic for very large \\(n\\), such as \\(n = 1000\\).',
+      marks: 2,
+      steps: [
+        'The model predicts \\(t = \\dfrac{72}{1000} = 0.072\\) hours, about 4.3 minutes.',
+        'Perfect inverse variation assumes every extra person contributes exactly the same amount of work with no loss.',
+        'In reality there is limited workspace and equipment, and coordinating 1000 people creates delays.',
+        'Some tasks also have steps that cannot be split up at all.'
+      ],
+      answer: 'It predicts the job takes about 4 minutes with 1000 people, which is unrealistic. Inverse variation assumes work divides perfectly, ignoring limited space and equipment, coordination overhead, and steps that cannot be done in parallel.'
+    },
+    {
+      q: 'The pressure \\(P\\) of a fixed mass of gas varies inversely with its volume \\(V\\). When \\(V = 250\\) mL the pressure is 96 kPa. Find the pressure when the volume is compressed to 150 mL.',
+      marks: 3,
+      steps: [
+        'Inverse variation gives \\(PV = k\\).',
+        '\\(k = 96 \\times 250 = 24\\,000\\).',
+        'At \\(V = 150\\): \\(P = \\dfrac{24000}{150}\\).'
+      ],
+      answer: '160 kPa.'
+    },
+    {
+      q: 'A parabola has vertex \\((4, -9)\\) and one \\(x\\)-intercept at \\(x = 1\\). Find the other \\(x\\)-intercept, explaining your reasoning.',
+      marks: 2,
+      steps: [
+        'The vertex lies on the axis of symmetry, so the axis is \\(x = 4\\).',
+        'The two \\(x\\)-intercepts are equally spaced either side of the axis.',
+        'The known intercept \\(x = 1\\) is \\(4 - 1 = 3\\) units to the left of the axis.',
+        'So the other is 3 units to the right: \\(4 + 3 = 7\\).'
+      ],
+      answer: '\\(x = 7\\). The parabola is symmetric about \\(x = 4\\), so the intercepts are equidistant from it.'
+    },
+    {
+      q: 'Sketch \\(y = \\dfrac{20}{x}\\) for \\(x > 0\\), marking the points where \\(x = 2, 4, 5, 10\\). State what happens to \\(y\\) as \\(x\\) becomes very large.',
+      marks: 3,
+      steps: [
+        'Build a table: \\(x = 2 \\Rightarrow y = 10\\); \\(x = 4 \\Rightarrow y = 5\\); \\(x = 5 \\Rightarrow y = 4\\); \\(x = 10 \\Rightarrow y = 2\\).',
+        'Each product \\(xy = 20\\), confirming the constant of variation.',
+        'Plot these and join with a smooth decreasing curve, steep near the \\(y\\)-axis and flattening out.',
+        'As \\(x\\) increases without bound, \\(20/x\\) gets closer and closer to 0 but stays positive.'
+      ],
+      answer: 'Points \\((2,10), (4,5), (5,4), (10,2)\\) on a decreasing curve. As \\(x \\to\\) large, \\(y \\to 0\\) from above — \\(y = 0\\) is a horizontal asymptote that the curve never reaches.'
+    },
+    {
+      q: 'A company finds its weekly profit is \\(P = -2n^{2} + 60n - 250\\) dollars when it makes \\(n\\) units. Find the number of units that maximises profit, and the maximum profit.',
+      marks: 4,
+      steps: [
+        'Here \\(a = -2 < 0\\), so the parabola has a maximum.',
+        'The \\(n\\)-intercepts are not whole numbers here, so use the axis of symmetry formula \\(n = -\\dfrac{b}{2a}\\) as a check on the midpoint method.',
+        '\\(n = -\\dfrac{60}{2(-2)} = \\dfrac{60}{4} = 15\\).',
+        'Maximum profit: \\(P = -2(225) + 60(15) - 250 = -450 + 900 - 250 = 200\\).'
+      ],
+      answer: '15 units gives the maximum weekly profit of $200.'
+    },
+    {
+      q: 'For the profit model above, explain what the value \\(P = -250\\) at \\(n = 0\\) represents, and why the profit becomes negative again for large \\(n\\).',
+      marks: 3,
+      steps: [
+        'At \\(n = 0\\) nothing is produced, yet \\(P = -250\\) — a loss of $250.',
+        'This is the fixed cost the business pays regardless of production.',
+        'For large \\(n\\) the \\(-2n^{2}\\) term dominates, pulling the profit down.',
+        'In context this reflects rising costs of overtime, materials or discounting needed to sell a large volume.'
+      ],
+      answer: 'The \\(-250\\) is the fixed weekly cost incurred even with no production. Profit falls again for large \\(n\\) because the negative squared term dominates, modelling the rising marginal costs (or price discounts) needed to produce and sell very large quantities.'
+    },
+    {
+      q: 'Classify each relationship as linear, quadratic, exponential or reciprocal, giving a reason. (a) \\(y = \\dfrac{15}{x}\\) &nbsp; (b) \\(y = 3(1.2)^{x}\\) &nbsp; (c) \\(y = 5 - 2x\\) &nbsp; (d) \\(y = x^{2} + 4\\)',
+      marks: 4,
+      steps: [
+        '(a) The variable is in the denominator and \\(xy = 15\\) is constant — reciprocal (inverse variation).',
+        '(b) The variable is in the exponent with a fixed base 1.2 — exponential.',
+        '(c) The variable appears to the first power only, with constant gradient \\(-2\\) — linear.',
+        '(d) The highest power of the variable is 2 — quadratic.'
+      ],
+      answer: '(a) Reciprocal — \\(xy\\) is constant. (b) Exponential — variable in the exponent. (c) Linear — constant rate of change. (d) Quadratic — highest power is \\(x^2\\), graph is a parabola.'
+    }
+  ];
+  IE.buildPractice(PRACTICE_QS, {});
+});
+</script>
+</body>
+</html>

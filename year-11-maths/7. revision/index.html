@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision Papers — Year 11 Maths Standard</title>
   <link rel="stylesheet" href="../../style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <style>
     /* ── Sociotype tokens ── */
     :root {
@@ -14,8 +14,8 @@
       --color-medium-gray:  #818181;
       --color-light-gray:   #d6d6d6;
       --color-faded-gray:   #9d9d9d;
-      --font-mono: 'Space Mono', monospace;
-      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-body: 'Poppins', sans-serif;
       --text-caption: 11px;
       --tracking-caption: 0.08em;
       --text-body: 14px;
@@ -37,23 +37,14 @@
       margin: 0 auto;
       padding: 80px var(--spacing-24) 120px;
     }
-    .papers-intro {
-      font-family: var(--font-body);
-      font-size: var(--text-body);
-      letter-spacing: var(--tracking-body);
-      color: var(--color-medium-gray);
-      margin-bottom: 56px;
-      line-height: 1.6;
-    }
 
     /* ── Provider sections ── */
     .provider-section { margin-bottom: 56px; }
     .provider-name {
       font-family: var(--font-mono);
       font-size: var(--text-caption);
-      font-weight: 700;
-      letter-spacing: var(--tracking-caption);
-      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: 0.02em;
       color: var(--color-ink-black);
       border-bottom: 1px solid var(--color-light-gray);
       padding-bottom: var(--spacing-8);
@@ -72,7 +63,7 @@
     .paper-year {
       font-family: var(--font-mono);
       font-size: var(--text-caption);
-      font-weight: 700;
+      font-weight: 300;
       letter-spacing: var(--tracking-caption);
       color: var(--color-ink-black);
       min-width: 48px;
@@ -81,6 +72,7 @@
     /* ── Ghost download buttons ── */
     .paper-btn {
       font-family: var(--font-mono);
+      font-weight:300;
       font-size: var(--text-caption);
       letter-spacing: var(--tracking-caption);
       color: var(--color-ink-black);
@@ -110,7 +102,7 @@
   <header class="topic-header">
     <div class="header-inner">
       <div class="header-nav">
-        <a href="../../index.html" class="back-link">&larr; All Topics</a>
+        <a href="../../year-11.html" class="back-link">&larr; All Topics</a>
         <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode">
           <span class="toggle-icon">dark</span>
         </button>
@@ -120,8 +112,6 @@
   </header>
 
   <main class="papers-main">
-    <p class="papers-intro">Past preliminary papers from leading NSW providers. Download and complete under exam conditions, then check the solutions.</p>
-
     <!-- Independent -->
     <section class="provider-section">
       <h2 class="provider-name">Independent</h2>
