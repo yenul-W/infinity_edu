@@ -28,13 +28,6 @@
     <h1 class="page-title">Preliminary Mathematics Standard</h1>
   </div>
 
-  <!-- ── Live session bar ────────────────────────────────────── -->
-  <div class="live-session-bar" id="liveSessionBar">
-    <span class="live-dot"></span>
-    <span class="live-label" id="liveLabel">Live Lesson &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST</span>
-    <a class="live-join-btn" id="liveJoinBtn" href="https://meet.google.com/xdv-qwag-kti" target="_blank" rel="noreferrer noopener">Join Google Meet &rarr;</a>
-  </div>
-
   <!-- ── 4-column card grid ───────────────────────────────────── -->
   <main class="site-main">
 
@@ -374,48 +367,6 @@
         toggle.click();
       }
     });
-
-    // ── Live session bar ────────────────────────────────────────
-    function getNextSaturdayLabel() {
-      const now = new Date();
-      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-      const day = sydney.getDay();
-      const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
-      let daysUntilSat;
-      if (day === 6) {
-        daysUntilSat = (totalMins >= 480) ? 7 : 0;
-      } else {
-        daysUntilSat = (6 - day + 7) % 7 || 7;
-      }
-      const target = new Date(now.getTime() + daysUntilSat * 86400 * 1000);
-      const dateStr = target.toLocaleDateString('en-AU', {
-        weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Australia/Sydney'
-      }).replace(',', '').replace(/\./g, '');
-      return `Next Lesson &nbsp;&middot;&nbsp; ${dateStr} &nbsp;&middot;&nbsp; 7:00 – 8:00 AM AEST`;
-    }
-
-    function updateLiveStatus() {
-      const now = new Date();
-      const sydney = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-      const day = sydney.getDay();
-      const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
-      const bar = document.getElementById('liveSessionBar');
-      const label = document.getElementById('liveLabel');
-      bar.classList.remove('live-session-bar--live', 'live-session-bar--soon', 'live-session-bar--idle');
-      if (day === 6 && totalMins >= 420 && totalMins < 480) {
-        bar.classList.add('live-session-bar--live');
-        label.innerHTML = 'Live Now &nbsp;&middot;&nbsp; Saturday 7:00 – 8:00 AM AEST';
-      } else if (day === 6 && totalMins >= 405 && totalMins < 420) {
-        const minsLeft = 420 - totalMins;
-        bar.classList.add('live-session-bar--soon');
-        label.innerHTML = `Starting Soon  ·  in ~${minsLeft}m`;
-      } else {
-        bar.classList.add('live-session-bar--idle');
-        label.innerHTML = getNextSaturdayLabel();
-      }
-    }
-    updateLiveStatus();
-    setInterval(updateLiveStatus, 60000);
 
     // ── Completion badges + progress rings ──────────────────────
     const COMPLETABLE = { 1: [0,1,3], 2: [0,1,3], 3: [0,1,3], 4: [0,1,2,3,4,6], 5: [0,1,2,4], 6: [0,1,2,4], 8: [0,1,2], 9: [0,1,2] };

@@ -2169,9 +2169,8 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   YEAR 12 TOPIC CARDS — TYPOGRAPHIC, NO VIDEO
-   The base .topic-card family hardcodes white text for the video
-   backdrop; these cards have none, so every colour is re-themed.
+   YEAR 12 TOPIC CARDS — same city-video posters as Year 11,
+   laid out five across.
    ═══════════════════════════════════════════════════════════════ */
 
 .topic-grid--y12 {
@@ -2179,91 +2178,12 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
   flex: none;
 }
 
-.topic-card--y12 {
-  aspect-ratio: auto;
-  min-height: 300px;
-  border: 1px solid var(--border-hover);
-  background: transparent;
-  overflow: visible;
-}
-
-.topic-card--y12:hover {
-  border-color: var(--rule);
-}
-
-/* Body flows normally instead of overlaying a poster */
-.topic-card--y12 .card-body {
-  position: static;
-  inset: auto;
-  height: 100%;
-  padding: 1.6rem 1.5rem 1.4rem;
-  justify-content: flex-start;
-  gap: 0;
-}
-
-.topic-card--y12 .card-top-row {
-  position: static;
-  top: auto; left: auto; right: auto;
-  align-items: baseline;
-  margin-bottom: 1.75rem;
-}
-
-.topic-card--y12 .card-num {
-  font-size: 2.4rem;
-  line-height: 0.85;
-  letter-spacing: 0;
-  color: var(--text-faint);
-  transition: color 0.22s ease;
-}
-
-.topic-card--y12:hover .card-num { color: var(--text); }
-
 .card-outcome {
   font-family: var(--font-mono);
   font-size: 0.52rem;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: var(--text-faint);
-}
-
-.topic-card--y12 .card-title {
-  color: var(--text);
-  font-size: 1.05rem;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--border);
-  margin-bottom: 0.6rem;
-}
-
-.topic-card--y12 .card-footer {
-  border-top: 1px solid var(--border);
-  margin-top: auto;
-  padding-top: 0.85rem;
-}
-
-.topic-card--y12 .card-cta        { color: var(--text-faint); }
-.topic-card--y12:hover .card-cta  { color: var(--text); }
-
-.topic-card--y12 .syllabus-chip {
-  color: var(--text-faint);
-  border-bottom-color: var(--border-hover);
-}
-.topic-card--y12 .syllabus-chip:hover {
-  color: var(--text);
-  border-bottom-color: var(--text-muted);
-}
-
-/* The ring sits beside the big numeral — re-themed for the plain canvas */
-.topic-card--y12 .card-num-wrap { gap: 0.6rem; }
-.topic-card--y12 .progress-ring { width: 18px; height: 18px; }
-.topic-card--y12 .progress-ring-track { stroke: var(--border); }
-.topic-card--y12 .progress-ring-fill  { stroke: var(--text); }
-
-/* Completed badge sits on the canvas, not a video */
-.topic-card--y12 .complete-badge {
-  top: 0;
-  right: 0;
-  color: var(--bg);
-  background: var(--text);
+  color: rgba(255,255,255,0.38);
 }
 
 /* ─── Pending (not yet authored) topics ─────────────────────── */
@@ -2290,5 +2210,4 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
 
 @media (max-width: 1400px) { .topic-grid--y12 { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 1100px) { .topic-grid--y12 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px)  { .topic-grid--y12 { grid-template-columns: 1fr; }
-                             .topic-card--y12 { min-height: 0; } }
+@media (max-width: 640px)  { .topic-grid--y12 { grid-template-columns: 1fr; } }

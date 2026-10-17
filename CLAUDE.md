@@ -7,7 +7,7 @@ An educational web platform for NSW Mathematics Standard — **Year 11 Prelimina
 ```
 index.html                    # Year picker — Year 11 vs Year 12
 year-11.html                  # Year 11 landing page (9-topic card grid, city videos)
-year-12.html                  # Year 12 landing page (10-topic typographic grid)
+year-12.html                  # Year 12 landing page (10-topic card grid, reusing the Year 11 city videos)
 style.css                     # Global stylesheet (shared across all pages)
 DESIGN.md                     # Design system as implemented — read before any UI change
 pdf-viewer.js                 # Custom PDF viewer (PDF.js-based, scrolling mode)
@@ -19,7 +19,8 @@ year-12-maths/
   lesson-kit.css              # Shared lesson stylesheet (Year 12 only)
   lesson-kit.js               # Shared lesson behaviour → window.IE (Year 12 only)
   1. algebraic-relationships/ … 10. normal-distribution/
-                              # Each has: index.html + 5 HTML lessons
+                              # Each has: index.html + 5 HTML lessons (6 in topics with
+                              # spreadsheet workbooks, which also have assets/*.xlsx)
 skills/
   style/SKILL.md              # Sociotype design system reference
   make-lesson/                # Canonical lesson generator — read before adding a lesson
@@ -39,8 +40,12 @@ Year 11 lessons inline their own CSS and `buildKC` function. Year 12 lessons loa
 **Read `skills/make-lesson/SKILL.md` before writing any lesson** — it documents both.
 
 Year 12 topic IDs are **strings** (`'y12-1'` … `'y12-10'`) so their completion keys cannot collide
-with Year 11's numeric IDs. Each Year 12 topic has exactly 5 lessons: 3 lessons, homework (index 3,
-not completable), revision (index 4).
+with Year 11's numeric IDs. Each Year 12 topic has 5 lessons: 3 lessons, homework (index 3,
+not completable), revision (index 4). Exception: the topics whose syllabus has a "use a
+spreadsheet" content point — 1, 2, 3, 7 and 8 — have 6: lesson 4 "Spreadsheets" (index 3, a
+download page for the Tutorial / Homework / Homework SOLUTIONS workbooks in that topic's
+`assets/`), homework (index 4, `lesson-05-homework.html`), revision (index 5,
+`lesson-06-revision.html`, `LESSON_IDX = 5`). Their `COMPLETABLE` entries are `[0,1,2,3,5]`.
 
 ## Running the project
 
@@ -106,7 +111,7 @@ Never introduce saturated accent colors, shadows/elevation, or rounded corners.
 - Works on every page once the script tag is present
 
 ## Live session bar
-`year-11.html` shows a live/upcoming lesson bar driven by Sydney time (`Australia/Sydney`). Lesson time is **Saturday 7:00–8:00 AM AEST**. The bar has three states: `--live`, `--soon` (≤15 min before), and `--idle`. `year-12.html` has no such bar — there is no Year 12 session time yet.
+`year-12.html` shows a live/upcoming lesson bar driven by Sydney time (`Australia/Sydney`). Lesson time is **Sunday 7:00–8:00 AM AEST** (constants `SESSION_DAY`/`SESSION_START`/`SESSION_END` in its script). The bar has three states: `--live`, `--soon` (≤15 min before), and `--idle`. `year-11.html` has no bar — there are no Year 11 sessions any more. Styles live in `style.css`.
 
 ## Adding a new topic
 
@@ -117,8 +122,8 @@ Never introduce saturated accent colors, shadows/elevation, or rounded corners.
 
 ## Authoring Year 12 lessons
 
-All ten Year 12 focus areas are complete — 50 lesson files, no `topic-card--pending` cards left.
-`year-12.html` reads `0 / 40 lessons complete` on a fresh browser.
+All ten Year 12 focus areas are complete — 55 lesson files, no `topic-card--pending` cards left.
+`year-12.html` reads `0 / 45 lessons complete` on a fresh browser.
 
 Read `skills/make-lesson/SKILL.md` before touching a lesson — it documents the `lesson-kit` API and
 lists the syllabus URL for each focus area. Topics 1 and 2 are the reference implementations;

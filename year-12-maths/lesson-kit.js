@@ -258,7 +258,7 @@
        curves: [{ fn, className, discontinuityAt }],
        shade:  [{ from, to, fn, className }],   filled region under fn over [from,to]
        bars:   [{ x, y, width, className }],    histogram rectangles, x = bar centre
-       points: [{ x, y, label, hollow }],
+       points: [{ x, y, label, hollow, labelPos }],  labelPos: 'ne' (default) | 'nw' | 'se' | 'sw'
        markers: [{ x, y }],              dashed guide lines to an (x,y)
        width, height
      })
@@ -386,7 +386,15 @@
           cx: sx(p.x), cy: sy(p.y), r: p.hollow ? 4.5 : 4
         });
         if (p.label) {
-          add('text', { class: 'plot-label', x: sx(p.x) + 8, y: sy(p.y) - 8 }, p.label);
+          // Put the label on the side the curve isn't, so the line never runs through it.
+          var pos  = p.labelPos || 'ne';
+          var west = pos.charAt(1) === 'w';
+          add('text', {
+            class: 'plot-label',
+            x: sx(p.x) + (west ? -8 : 8),
+            y: sy(p.y) + (pos.charAt(0) === 's' ? 16 : -8),
+            'text-anchor': west ? 'end' : 'start'
+          }, p.label);
         }
       });
 
