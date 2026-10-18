@@ -85,9 +85,8 @@ example, groups in a simulation) by fill: hollow, gray or solid. Never use hue.
   Placeholder in medium gray. Textareas use a full 1px light-gray border.
 - **Badge or tag.** DM Mono 300, 11px, 1px light-gray border, small padding. The "Complete" badge is
   solid (ink background, canvas text).
-- **Hub topic card.** Year 11 uses a video poster with white type over a dark gradient. Year 12 is
-  typographic, with a large DM Mono numeral, Poppins title and hairline dividers. On hover only the
-  border changes, to ink.
+- **Hub topic card.** Both years use a city-video poster with white type over a dark gradient
+  (Year 12 reuses Year 11's clips for topics 1–9; topic 10 has its own). On hover only the border changes, to ink.
 - **Live-session bar** (Year 11 hub). It sits between hairline rules. A square dot shows the state:
   blinking means live, solid means starting soon, hollow means idle. The label text says the same
   thing, and the Join link is a ghost button.

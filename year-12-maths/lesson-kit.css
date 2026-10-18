@@ -118,6 +118,11 @@ table.coord-table { width: 100%; border-collapse: collapse; margin: 16px 0; font
 table.coord-table th, table.coord-table td { border: 1px solid var(--gray-light); padding: 8px 12px; text-align: left; }
 table.coord-table th { font-family: var(--font-mono);font-weight:300; font-size: 11px; letter-spacing: 0.02em; color: var(--gray-med); }
 
+/* Live-generated tables: fixed columns so changing values never resize or shift the block */
+.table-scroll { overflow-x: auto; }
+.table-scroll table.coord-table { table-layout: fixed; min-width: 640px; }
+.table-scroll table.coord-table td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
 /* Diagrams */
 .diagram-wrap { display: flex; justify-content: center; margin: 20px 0; }
 .diagram-row { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
@@ -479,6 +484,37 @@ html.dark-mode .ie-plot .plot-shade-2 { fill-opacity: 0.14; }
 }
 .lesson-complete-btn:hover { background: var(--gray-faint); }
 .lesson-complete-btn.done { background: var(--ink); color: var(--canvas); }
+
+/* Downloads (spreadsheet lessons) */
+.download-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.download-card { border: 1px solid var(--gray-light); padding: 24px; display: flex; flex-direction: column; }
+.download-card-label { font-family: var(--font-mono); font-weight: 300; font-size: 11px; letter-spacing: 0.02em; color: var(--gray-med); margin: 0 0 12px; }
+.download-card h3 { margin: 0 0 8px; }
+.download-card p { font-size: 13px; line-height: 1.6; color: var(--gray-med); }
+.download-card ul { font-size: 13px; color: var(--gray-med); margin-bottom: 20px; }
+.download-card ul li { margin-bottom: 2px; }
+.download-btn {
+  margin-top: auto;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border: 1px solid var(--ink);
+  background: var(--canvas);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, color 0.15s;
+}
+.download-btn:hover { background: var(--ink); color: var(--canvas); }
+
+@media (max-width: 900px) {
+  .download-grid { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 760px) {
   .hero { grid-template-columns: 1fr; }

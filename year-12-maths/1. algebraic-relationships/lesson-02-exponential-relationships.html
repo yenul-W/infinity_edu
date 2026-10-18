@@ -462,7 +462,7 @@
               <div class="readout-value" id="roFactor">1.05</div>
             </div>
           </div>
-          <div id="growthTable" style="margin-top:16px;"></div>
+          <div id="growthTable" class="table-scroll" style="margin-top:16px;"></div>
         </div>
       </div>
 
@@ -614,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function () {
     xMin: -3, xMax: 4, yMin: 0, yMax: 16, xStep: 1, yStep: 4,
     xLabel: 'x', yLabel: 'y',
     curves: [{ fn: function (x) { return Math.pow(2, x); } }],
-    points: [{ x: 0, y: 1, label: '(0,1)' }]
+    points: [{ x: 0, y: 1, label: '(0,1)', labelPos: 'nw' }]
   });
   IE.plot('plotDecay', {
     width: 300, height: 240,
@@ -630,11 +630,11 @@ document.addEventListener('DOMContentLoaded', function () {
     xMin: 0, xMax: 4, yMin: 0, yMax: 1100, xStep: 1, yStep: 200,
     xLabel: 'x', yLabel: 'y',
     curves: [{ fn: function (x) { return 200 * Math.pow(1.5, x); } }],
-    points: [{ x: 0, y: 200, label: '(0, 200)' }, { x: 2, y: 450, label: '(2, 450)' }]
+    points: [{ x: 0, y: 200, label: '(0, 200)', labelPos: 'se' }, { x: 2, y: 450, label: '(2, 450)', labelPos: 'se' }]
   });
   IE.plot('plotReadDecay', {
     width: 300, height: 240,
-    xMin: 0, xMax: 4, yMin: 0, yMax: 90, xStep: 1, yStep: 20,
+    xMin: 0, xMax: 4, yMin: 0, yMax: 100, xStep: 1, yStep: 20,
     xLabel: 'x', yLabel: 'y',
     curves: [{ fn: function (x) { return 80 * Math.pow(0.5, x); } }],
     points: [{ x: 0, y: 80, label: '(0, 80)' }, { x: 3, y: 10, label: '(3, 10)' }]
@@ -654,14 +654,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var top = Math.max(10, Math.min(Math.max.apply(null, vals), k * 60));
       top = Math.ceil(top / 10) * 10;
 
+      var growing = neg ? (a < 1) : (a > 1);
       redraw({
         yMax: top,
         yStep: Math.max(1, Math.round(top / 5)),
         curves: [{ fn: f }],
-        points: [{ x: 0, y: k, label: '(0, ' + k + ')' }]
+        points: [{ x: 0, y: k, label: '(0, ' + k + ')', labelPos: growing ? 'nw' : 'ne' }]
       });
-
-      var growing = neg ? (a < 1) : (a > 1);
       document.getElementById('roEq').textContent = 'y = ' + k + ' × ' + a + '^' + (neg ? '−x' : 'x');
       document.getElementById('roYint').textContent = String(k);
       document.getElementById('roBehave').textContent =
