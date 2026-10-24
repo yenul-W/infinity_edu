@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mathematics Standard 2 &mdash; Year 12</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='22' fill='%23fff'>∞</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>
+    // Apply the theme before first paint (hubs fall back to time of day, matching their day/night videos)
+    try{var t=localStorage.getItem('theme'),h=new Date().getHours();if(t?t==='dark':(h<6||h>=19))document.documentElement.classList.add('dark-mode')}catch(e){}
+  </script>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
 
   <nav class="site-nav">
     <div class="nav-inner">
       <span class="nav-eyebrow">Year 12 &middot; Standard 2</span>
       <div class="nav-actions">
-        <a class="year-switch" href="index.html?pick=1">Change year &#8599;</a>
-        <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode">
+        <a class="year-switch" href="index.html?pick=1">&larr; Change year</a>
+        <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode" aria-label="Toggle dark mode" aria-pressed="false">
           <span class="toggle-icon">dark</span>
         </button>
       </div>
@@ -28,22 +35,24 @@
 
   <!-- ── Live session bar ────────────────────────────────────── -->
   <div class="live-session-bar" id="liveSessionBar">
-    <span class="live-dot"></span>
-    <span class="live-label" id="liveLabel">Live Lesson &nbsp;&middot;&nbsp; Sunday 7:00 – 8:00 AM AEST</span>
+    <span class="live-dot" aria-hidden="true"></span>
+    <span class="live-label" id="liveLabel" aria-live="polite">Live lesson &nbsp;&middot;&nbsp; Sunday 7:00 – 8:00 AM</span>
     <a class="live-join-btn" id="liveJoinBtn" href="https://meet.google.com/wka-bwoy-pmc" target="_blank" rel="noreferrer noopener">Join Google Meet &rarr;</a>
   </div>
 
-  <main class="site-main">
+  <main class="site-main" id="content" tabindex="-1">
 
     <div class="progress-summary">
-      <span class="progress-summary-label" id="progressSummaryLabel">0 / 0 lessons complete</span>
-      <div class="progress-summary-track"><div class="progress-summary-fill" id="progressSummaryFill"></div></div>
+      <span class="progress-summary-label" id="progressSummaryLabel">&nbsp;</span>
+      <div class="progress-summary-track" aria-hidden="true"><div class="progress-summary-fill" id="progressSummaryFill"></div></div>
     </div>
+
+    <a class="continue-strip" id="continueStrip" href="#" hidden></a>
 
     <div class="topic-grid topic-grid--y12">
 
       <!-- 01 Algebraic Relationships — MST-12-S2-01 -->
-      <div class="topic-card" id="card-y12-1" onclick="window.location.href='year-12-maths/1. algebraic-relationships/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-1">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-1" loop muted playsinline preload="none">
@@ -56,16 +65,16 @@
             <span class="card-num">01</span>
             <span class="card-outcome">MST-12-S2-01</span>
           </div>
-          <h2 class="card-title">Algebraic Relationships</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/1. algebraic-relationships/index.html">Algebraic relationships</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/faf5e47f4a" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/faf5e47f4a" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 02 Investment & Loans — MST-12-S2-02 -->
-      <div class="topic-card" id="card-y12-2" onclick="window.location.href='year-12-maths/2. investment-and-loans/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-2">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-2" loop muted playsinline preload="none">
@@ -78,16 +87,16 @@
             <span class="card-num">02</span>
             <span class="card-outcome">MST-12-S2-02</span>
           </div>
-          <h2 class="card-title">Investment &amp; Loans</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/2. investment-and-loans/index.html">Investment &amp; loans</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fac80cab35" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fac80cab35" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 03 Annuities — MST-12-S2-03 -->
-      <div class="topic-card" id="card-y12-3" onclick="window.location.href='year-12-maths/3. annuities/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-3">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-3" loop muted playsinline preload="none">
@@ -100,16 +109,16 @@
             <span class="card-num">03</span>
             <span class="card-outcome">MST-12-S2-03</span>
           </div>
-          <h2 class="card-title">Annuities</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/3. annuities/index.html">Annuities</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/faa14f8aa3" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/faa14f8aa3" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 04 Trigonometry — MST-12-S2-04 -->
-      <div class="topic-card" id="card-y12-4" onclick="window.location.href='year-12-maths/4. trigonometry/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-4">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-4" loop muted playsinline preload="none">
@@ -122,16 +131,16 @@
             <span class="card-num">04</span>
             <span class="card-outcome">MST-12-S2-04</span>
           </div>
-          <h2 class="card-title">Trigonometry</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/4. trigonometry/index.html">Trigonometry</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa6dd765ae" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa6dd765ae" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 05 Ratios & Rates — MST-12-S2-05 -->
-      <div class="topic-card" id="card-y12-5" onclick="window.location.href='year-12-maths/5. ratios-and-rates/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-5">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-5" loop muted playsinline preload="none">
@@ -144,16 +153,16 @@
             <span class="card-num">05</span>
             <span class="card-outcome">MST-12-S2-05</span>
           </div>
-          <h2 class="card-title">Ratios &amp; Rates</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/5. ratios-and-rates/index.html">Ratios &amp; rates</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa96edbda5" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa96edbda5" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 06 Network Flow — MST-12-S2-06 -->
-      <div class="topic-card" id="card-y12-6" onclick="window.location.href='year-12-maths/6. network-flow/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-6">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-6" loop muted playsinline preload="none">
@@ -166,16 +175,16 @@
             <span class="card-num">06</span>
             <span class="card-outcome">MST-12-S2-06</span>
           </div>
-          <h2 class="card-title">Network Flow</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/6. network-flow/index.html">Network flow</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fafe0a915b" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fafe0a915b" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 07 Critical Path Analysis — MST-12-S2-07 -->
-      <div class="topic-card" id="card-y12-7" onclick="window.location.href='year-12-maths/7. critical-path-analysis/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-7">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-7" loop muted playsinline preload="none">
@@ -188,16 +197,16 @@
             <span class="card-num">07</span>
             <span class="card-outcome">MST-12-S2-07</span>
           </div>
-          <h2 class="card-title">Critical Path Analysis</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/7. critical-path-analysis/index.html">Critical path analysis</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa9c92c4c6" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa9c92c4c6" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 08 Bivariate Data Analysis — MST-12-S2-08 -->
-      <div class="topic-card" id="card-y12-8" onclick="window.location.href='year-12-maths/8. bivariate-data-analysis/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-8">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-8" loop muted playsinline preload="none">
@@ -210,16 +219,16 @@
             <span class="card-num">08</span>
             <span class="card-outcome">MST-12-S2-08</span>
           </div>
-          <h2 class="card-title">Bivariate Data Analysis</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/8. bivariate-data-analysis/index.html">Bivariate data analysis</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fadb5e412c" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fadb5e412c" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 09 Relative Frequency & Probability — MST-12-S2-09 -->
-      <div class="topic-card" id="card-y12-9" onclick="window.location.href='year-12-maths/9. multistage-events/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-9">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-9" loop muted playsinline preload="none">
@@ -232,16 +241,16 @@
             <span class="card-num">09</span>
             <span class="card-outcome">MST-12-S2-09</span>
           </div>
-          <h2 class="card-title">Relative Frequency &amp; Probability</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/9. multistage-events/index.html">Relative frequency &amp; probability</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fae778ced4" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fae778ced4" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
 
       <!-- 10 The Normal Distribution — MST-12-S2-10 -->
-      <div class="topic-card" id="card-y12-10" onclick="window.location.href='year-12-maths/10. normal-distribution/index.html'" style="cursor:pointer;">
+      <div class="topic-card" id="card-y12-10">
         <span class="complete-badge">&#10003; Complete</span>
         <div class="card-scene">
           <video class="scene-video" id="vid-y12-10" loop muted playsinline preload="none">
@@ -254,10 +263,10 @@
             <span class="card-num">10</span>
             <span class="card-outcome">MST-12-S2-10</span>
           </div>
-          <h2 class="card-title">The Normal Distribution</h2>
+          <h2 class="card-title"><a class="card-link" href="year-12-maths/10. normal-distribution/index.html">The normal distribution</a></h2>
           <div class="card-footer">
             <span class="card-cta">Explore <span class="cta-arrow">&rarr;</span></span>
-            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa92309f60" target="_blank" rel="noreferrer noopener" onclick="event.stopPropagation()">Syllabus &#8599;</a>
+            <a class="syllabus-chip" href="https://curriculum.nsw.edu.au/learning-areas/mathematics/mathematics-standard-11-12-2024/content/year-12-tba2/fa92309f60" target="_blank" rel="noreferrer noopener">Syllabus &#8599;</a>
           </div>
         </div>
       </div>
@@ -280,15 +289,20 @@
       'vid-y12-10': { day: 'assets/city-gifs/gg-day.mp4', night: 'assets/city-gifs/gg-night.mp4' },
     };
     // Videos are heavy (~15MB each); only load/play the ones scrolled into view.
+    // Respect reduced-motion (load a still frame, don't play) and Save-Data (don't load at all)
+    const MOTION_OK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SAVE_DATA = !!(navigator.connection && navigator.connection.saveData);
     let videosDark = false;
     function applyVideoSrcs(dark) {
       videosDark = dark;
       for (const [id, srcs] of Object.entries(VIDEO_SRCS)) {
         const vid = document.getElementById(id);
         if (!vid || !vid.dataset.loaded) continue;
+        // Off-screen clips just forget their source and reload when scrolled back in
+        if (vid.dataset.visible !== '1') { delete vid.dataset.loaded; continue; }
         vid.querySelector('source').src = dark ? srcs.night : srcs.day;
         vid.load();
-        if (vid.dataset.visible === '1') vid.play().catch(() => {});
+        if (MOTION_OK) vid.play().catch(() => {});
       }
     }
     const videoObserver = new IntersectionObserver(entries => {
@@ -304,35 +318,34 @@
               vid.dataset.loaded = '1';
             }
           }
-          vid.play().catch(() => {});
+          if (MOTION_OK) vid.play().catch(() => {});
         } else {
           vid.pause();
         }
       });
     }, { rootMargin: '200px' });
-    document.querySelectorAll('.scene-video').forEach(v => videoObserver.observe(v));
-    function isNightByTime() {
-      const h = new Date().getHours();
-      return h < 6 || h >= 19;
-    }
+    if (!SAVE_DATA) document.querySelectorAll('.scene-video').forEach(v => videoObserver.observe(v));
+    // html.dark-mode was already set by the <head> script
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = document.querySelector('.toggle-icon');
     const html = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    const isDark = savedTheme ? savedTheme === 'dark' : isNightByTime();
-    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
-    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
-    applyVideoSrcs(isDark);
+    function syncToggle() {
+      const d = html.classList.contains('dark-mode');
+      toggleIcon.textContent = d ? 'light' : 'dark';
+      toggle.setAttribute('aria-pressed', d ? 'true' : 'false');
+    }
+    syncToggle();
+    const isDark = html.classList.contains('dark-mode');
     toggle.addEventListener('click', () => {
       const isDarkNow = html.classList.toggle('dark-mode');
       localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
-      toggleIcon.textContent = isDarkNow ? 'light' : 'dark';
+      syncToggle();
       applyVideoSrcs(isDarkNow);
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'd' && !e.metaKey && !e.ctrlKey) {
-        const tag = document.activeElement && document.activeElement.tagName;
-        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+        const ae = document.activeElement;
+        if (ae && (/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) || ae.isContentEditable)) return;
         toggle.click();
       }
     });
@@ -342,6 +355,16 @@
     // ── Live session bar ────────────────────────────────────────
     // Sunday 7:00–8:00 AM Sydney time (minutes since midnight).
     const SESSION_DAY = 0, SESSION_START = 420, SESSION_END = 480, SOON_MINS = 15;
+    let lastLiveState = '';
+
+    // AEST or AEDT, whichever Sydney is on for the given date
+    function sydneyZone(date) {
+      const part = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', timeZoneName: 'short' })
+        .formatToParts(date).find(p => p.type === 'timeZoneName');
+      const name = part ? part.value : '';
+      if (/^AE[SD]T$/.test(name)) return name;
+      return name.indexOf('+11') !== -1 ? 'AEDT' : 'AEST';   // engines that answer "GMT+11"
+    }
 
     function getNextSessionLabel() {
       const now = new Date();
@@ -354,7 +377,7 @@
       const dateStr = target.toLocaleDateString('en-AU', {
         weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Australia/Sydney'
       }).replace(',', '').replace(/\./g, '');
-      return `Next Lesson &nbsp;&middot;&nbsp; ${dateStr} &nbsp;&middot;&nbsp; 7:00 – 8:00 AM AEST`;
+      return `Next lesson &nbsp;&middot;&nbsp; ${dateStr} &nbsp;&middot;&nbsp; 7:00 – 8:00 AM ${sydneyZone(target)}`;
     }
 
     function updateLiveStatus() {
@@ -364,13 +387,17 @@
       const totalMins = sydney.getHours() * 60 + sydney.getMinutes();
       const bar = document.getElementById('liveSessionBar');
       const label = document.getElementById('liveLabel');
+      // Only rewrite the (aria-live) label when the state changes or the countdown ticks
+      const state = `${day}-${totalMins >= SESSION_START - SOON_MINS && totalMins < SESSION_START ? totalMins : ''}-${totalMins >= SESSION_START && totalMins < SESSION_END}`;
+      if (state === lastLiveState) return;
+      lastLiveState = state;
       bar.classList.remove('live-session-bar--live', 'live-session-bar--soon', 'live-session-bar--idle');
       if (day === SESSION_DAY && totalMins >= SESSION_START && totalMins < SESSION_END) {
         bar.classList.add('live-session-bar--live');
-        label.innerHTML = 'Live Now &nbsp;&middot;&nbsp; Sunday 7:00 – 8:00 AM AEST';
+        label.innerHTML = `Live now &nbsp;&middot;&nbsp; Sunday 7:00 – 8:00 AM ${sydneyZone(now)}`;
       } else if (day === SESSION_DAY && totalMins >= SESSION_START - SOON_MINS && totalMins < SESSION_START) {
         bar.classList.add('live-session-bar--soon');
-        label.innerHTML = `Starting Soon  ·  in ~${SESSION_START - totalMins}m`;
+        label.innerHTML = `Starting soon &nbsp;&middot;&nbsp; in ~${SESSION_START - totalMins}m`;
       } else {
         bar.classList.add('live-session-bar--idle');
         label.innerHTML = getNextSessionLabel();
@@ -421,6 +448,11 @@
           const offset = CIRC * (1 - doneCount / indices.length);
           fillEl.setAttribute('stroke-dashoffset', offset.toFixed(1));
         }
+        const ring = card.querySelector('.progress-ring');
+        if (ring) {
+          ring.setAttribute('role', 'img');
+          ring.setAttribute('aria-label', `${doneCount} of ${indices.length} lessons complete`);
+        }
       }
 
       const summaryLabel = document.getElementById('progressSummaryLabel');
@@ -448,6 +480,27 @@
       }
     }
     checkLastVisited();
+
+    // ── Continue strip — the most recently opened lesson on this hub ──
+    function showContinue() {
+      let best = null;
+      document.querySelectorAll('.topic-card').forEach(card => {
+        const tid = card.id.replace(/^card-/, '');
+        try {
+          const last = JSON.parse(localStorage.getItem(`ie_last_${tid}`) || 'null');
+          if (last && (!best || (last.t || 0) > (best.last.t || 0))) best = { card, last };
+        } catch (e) {}
+      });
+      const strip = document.getElementById('continueStrip');
+      if (!best || !strip) return;
+      const link = best.card.querySelector('.card-link');
+      const topic = link.textContent.trim();
+      strip.href = link.getAttribute('href') + (best.last.num != null ? `#lesson-${best.last.num}` : '');
+      strip.innerHTML = `<span class="continue-label">Continue</span> ${topic} &middot; ${best.last.title} <span aria-hidden="true">&rarr;</span>`;
+      strip.hidden = false;
+    }
+    showContinue();
+    window.addEventListener('pageshow', showContinue);
   </script>
   <script src="question-popup.js"></script>
 </body>

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision Papers — Year 11 Maths Standard</title>
+  <script>try{var t=localStorage.getItem('theme');if(t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.classList.add('dark-mode')}catch(e){}</script>
   <link rel="stylesheet" href="../../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <style>
@@ -102,12 +103,12 @@
   <header class="topic-header">
     <div class="header-inner">
       <div class="header-nav">
-        <a href="../../year-11.html" class="back-link">&larr; All Topics</a>
-        <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode">
+        <a href="../../year-11.html" class="back-link">&larr; All topics</a>
+        <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode" aria-label="Toggle dark mode" aria-pressed="false">
           <span class="toggle-icon">dark</span>
         </button>
       </div>
-      <h1 class="topic-page-title">Revision <em>Papers</em></h1>
+      <h1 class="topic-page-title">Revision <em>papers</em></h1>
     </div>
   </header>
 
@@ -324,15 +325,17 @@
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = toggle.querySelector('.toggle-icon');
     const html = document.documentElement;
-    const saved = localStorage.getItem('theme');
-    const isNight = () => { const h = new Date().getHours(); return h < 6 || h >= 19; };
-    const dark = saved ? saved === 'dark' : isNight();
-    if (dark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
-    else { toggleIcon.textContent = 'dark'; }
+    // html.dark-mode was set in <head> before paint
+    const sync = () => {
+      const d = html.classList.contains('dark-mode');
+      toggleIcon.textContent = d ? 'light' : 'dark';
+      toggle.setAttribute('aria-pressed', d ? 'true' : 'false');
+    };
+    sync();
     toggle.addEventListener('click', () => {
       const d = html.classList.toggle('dark-mode');
       localStorage.setItem('theme', d ? 'dark' : 'light');
-      toggleIcon.textContent = d ? 'light' : 'dark';
+      sync();
     });
   </script>
   <script src="../../question-popup.js"></script>

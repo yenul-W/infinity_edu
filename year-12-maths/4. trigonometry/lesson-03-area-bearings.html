@@ -91,13 +91,13 @@
         <div class="diagram-wrap">
           <svg class="network-diagram" viewBox="0 0 300 200" width="300">
             <polygon class="tri-fill" points="50,160 260,160 120,40"/>
-            <text class="node-label" x="38" y="176">C</text>
-            <text class="node-label" x="266" y="176">B</text>
-            <text class="node-label" x="114" y="30">A</text>
-            <text class="side-label-text" x="80" y="100">b</text>
-            <text class="side-label-text" x="150" y="180" text-anchor="middle">a</text>
-            <path class="angle-arc" d="M 80 160 A 30 30 0 0 0 69 138"/>
-            <text class="angle-label-text" x="76" y="152">C</text>
+            <text class="node-label" x="40" y="170" text-anchor="middle">C</text>
+            <text class="node-label" x="270" y="169" text-anchor="middle">B</text>
+            <text class="node-label" x="117" y="34" text-anchor="middle">A</text>
+            <text class="side-label-text" x="76" y="99" text-anchor="middle">b</text>
+            <text class="side-label-text" x="155" y="176" text-anchor="middle">a</text>
+            <path class="angle-arc" d="M 80 160 A 30 30 0 0 0 65.12 134.09"/>
+            <text class="angle-label-text" x="83" y="145" text-anchor="middle">C</text>
           </svg>
         </div>
         <p class="diagram-caption">The included angle \(C\) sits between sides \(a\) and \(b\).</p>
@@ -258,10 +258,10 @@
             <text class="node-label" x="133" y="270">S</text>
             <text class="node-label" x="258" y="146">E</text>
             <text class="node-label" x="14" y="146">W</text>
-            <text class="angle-label-text" x="146" y="40">000°</text>
-            <text class="angle-label-text" x="214" y="136">090°</text>
+            <text class="angle-label-text" x="146" y="33">000°</text>
+            <text class="angle-label-text" x="232" y="156" text-anchor="end">090°</text>
             <text class="angle-label-text" x="146" y="262">180°</text>
-            <text class="angle-label-text" x="38" y="136">270°</text>
+            <text class="angle-label-text" x="48" y="156">270°</text>
             <line class="edge-line" x1="140" y1="140" x2="218" y2="62" stroke-width="2.4"/>
             <path class="angle-arc" d="M 140 90 A 50 50 0 0 1 175 105"/>
             <text class="angle-label-text" x="156" y="88">045°</text>
@@ -466,13 +466,13 @@
             <circle class="node-circle" cx="60" cy="215" r="6"/>
             <circle class="node-circle" cx="235" cy="130" r="6"/>
             <circle class="node-circle" cx="300" cy="220" r="6"/>
-            <text class="side-label-text" x="130" y="160">45 km</text>
-            <text class="side-label-text" x="278" y="168">38 km</text>
-            <text class="side-label-text" x="165" y="238">d</text>
-            <path class="angle-arc" d="M 60 185 A 30 30 0 0 1 86 200"/>
-            <text class="angle-label-text" x="68" y="188">062°</text>
-            <path class="angle-arc" d="M 235 92 A 38 38 0 0 1 262 108"/>
-            <text class="angle-label-text" x="243" y="98">145°</text>
+            <text class="side-label-text" x="139" y="160" text-anchor="middle">45 km</text>
+            <text class="side-label-text" x="287" y="165" text-anchor="middle">38 km</text>
+            <text class="side-label-text" x="180" y="233" text-anchor="middle">d</text>
+            <path class="angle-arc" d="M 60 185 A 30 30 0 0 1 86.49 200.92"/>
+            <text class="angle-label-text" x="83" y="181" text-anchor="middle">062°</text>
+            <path class="angle-arc" d="M 235 92 A 38 38 0 0 1 256.80 161.13"/>
+            <text class="angle-label-text" x="288" y="117" text-anchor="middle">145°</text>
           </svg>
         </div>
         <p class="diagram-caption">The interior angle at the turning point is 97°, found from the
@@ -716,9 +716,15 @@ document.addEventListener('DOMContentLoaded', function () {
       var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
       svg.appendChild(svgEl('polygon', { class: 'tri-fill',
         points: q.map(function (p) { return p[0] + ',' + p[1]; }).join(' ') }));
-      svg.appendChild(svgEl('text', { class: 'node-label', x: q[0][0] - 16, y: q[0][1] + 6 }, 'C'));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q[0][0] + q[1][0]) / 2, y: q[0][1] + 18, 'text-anchor': 'middle' }, 'a = ' + a));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q[0][0] + q[2][0]) / 2 - 24, y: (q[0][1] + q[2][1]) / 2 }, 'b = ' + b));
+      // Labels sit outside the triangle, clear of every edge
+      var mid = [(q[0][0] + q[1][0] + q[2][0]) / 3, (q[0][1] + q[1][1] + q[2][1]) / 3];
+      function label(cls, pos, text) {
+        svg.appendChild(svgEl('text', { class: cls, x: pos.x, y: pos.y, 'text-anchor': 'middle' }, text));
+      }
+      svg.appendChild(svgEl('path', { class: 'angle-arc', d: IE.geom.arc(q[0], q[1], q[2], 20) }));
+      label('node-label', IE.geom.vertex(q[0], mid, 'C', 14), 'C');
+      label('side-label-text', IE.geom.side(q[0], q[1], mid, 'a = ' + a, 12), 'a = ' + a);
+      label('side-label-text', IE.geom.side(q[0], q[2], mid, 'b = ' + b, 12), 'b = ' + b);
       mount.innerHTML = '';
       mount.appendChild(svg);
 
@@ -771,7 +777,18 @@ document.addEventListener('DOMContentLoaded', function () {
       svg.appendChild(svgEl('path', { class: 'angle-arc',
         d: 'M ' + cx + ' ' + (cy - ar) + ' A ' + ar + ' ' + ar + ' 0 ' + large + ' 1 ' +
            (cx + ar * Math.sin(t * D2R)) + ' ' + (cy - ar * Math.cos(t * D2R)) }));
-      svg.appendChild(svgEl('text', { class: 'angle-label-text', x: cx + 8, y: cy - ar - 6 }, pad3(t)));
+      // Label just outside the arc, halfway round it, so the bearing line never crosses it
+      // (near 0°/360° the wedge is too thin, and near 180° the midpoint lands on the east axis)
+      var half = t / 2 * D2R, lw = 4 * 6.6, lh = 8, lab;
+      if (t < 30)                lab = { x: cx - 6, y: cy - ar + 12, anchor: 'end' };
+      else if (t > 330)          lab = { x: cx + 6, y: cy - ar + 12, anchor: 'start' };
+      else if (Math.abs(t - 180) < 24) lab = { x: cx + ar + 4, y: cy - 6, anchor: 'start' };
+      else {
+        var ld = ar + 4 + Math.abs(Math.sin(half)) * lw / 2 + Math.abs(Math.cos(half)) * lh / 2;
+        lab = { x: cx + ld * Math.sin(half), y: cy - ld * Math.cos(half) + lh / 2, anchor: 'middle' };
+      }
+      svg.appendChild(svgEl('text', { class: 'angle-label-text', 'text-anchor': lab.anchor,
+        x: lab.x, y: lab.y }, pad3(t)));
       mount.innerHTML = '';
       mount.appendChild(svg);
 
@@ -848,9 +865,12 @@ document.addEventListener('DOMContentLoaded', function () {
       [q0, q1, q2].forEach(function (p) {
         svg.appendChild(svgEl('circle', { class: 'node-circle', cx: p[0], cy: p[1], r: 5 }));
       });
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q0[0] + q1[0]) / 2 - 24, y: (q0[1] + q1[1]) / 2 }, d1 + ' km'));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q1[0] + q2[0]) / 2 + 6, y: (q1[1] + q2[1]) / 2 }, d2 + ' km'));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (q0[0] + q2[0]) / 2, y: (q0[1] + q2[1]) / 2 + 16 }, d.toFixed(1) + ' km'));
+      // Distance labels sit outside the triangle, clear of every leg
+      var mid = [(q0[0] + q1[0] + q2[0]) / 3, (q0[1] + q1[1] + q2[1]) / 3];
+      [[q0, q1, d1 + ' km'], [q1, q2, d2 + ' km'], [q0, q2, d.toFixed(1) + ' km']].forEach(function (s) {
+        var pos = IE.geom.side(s[0], s[1], mid, s[2], 12, 7);
+        svg.appendChild(svgEl('text', { class: 'side-label-text', x: pos.x, y: pos.y, 'text-anchor': 'middle' }, s[2]));
+      });
       mount.innerHTML = '';
       mount.appendChild(svg);
 

@@ -12,7 +12,7 @@
 :root {
   --ink: #000;
   --canvas: #fff;
-  --gray-med: #818181;
+  --gray-med: #6b6b6b;   /* 5.3:1 on white — #818181 failed AA for small text */
   --gray-light: #d6d6d6;
   --gray-faint: #f2f2f2;
   --font-display: 'Poppins', sans-serif;
@@ -28,6 +28,14 @@ html.dark-mode {
 }
 
 * { box-sizing: border-box; }
+
+/* Keyboard focus — flat 1px ink ring, no glow */
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
 
 body {
   font-family: var(--font-display);
@@ -173,6 +181,7 @@ html.dark-mode .kc-opt.kc-wrong   { background: rgba(200,0,0,0.14); }
 .kc-score { border-top: 1px solid var(--gray-light); padding-top: 20px; margin-top: 20px; font-size: 15px; font-weight: 600; display: none; }
 .kc-score.show { display: block; }
 .kc-remark { font-size: 13px; font-weight: 400; color: var(--gray-med); margin-top: 6px; }
+.kc-next { margin-left: 20px; color: var(--ink); border-bottom-color: var(--ink); }
 .kc-reset { margin-top: 14px; background: transparent; border: none; border-bottom: 1px solid var(--gray-med); color: var(--gray-med); font-size: 11px; letter-spacing: 0.02em; padding: 2px 0; cursor: pointer; font-family: var(--font-display); }
 .opt-letter { font-family: var(--font-mono); font-size: 11px; font-weight: 300; min-width: 16px; padding-top: 1px; }
 
@@ -245,22 +254,23 @@ input[type="range"] {
   width: 100%;
   height: 1px;
   background: var(--gray-med);
-  outline: none;
   margin: 0;
+  padding: 10px 0;          /* taller hit area; the 1px track is the background-clip */
+  background-clip: content-box;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 20px;
+  height: 20px;
   border-radius: 0;
   background: var(--ink);
   cursor: pointer;
   border: none;
 }
 input[type="range"]::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
+  width: 20px;
+  height: 20px;
   border-radius: 0;
   background: var(--ink);
   cursor: pointer;
@@ -525,4 +535,13 @@ html.dark-mode .ie-plot .plot-shade-2 { fill-opacity: 0.14; }
   .content-card, .kc-block, .practice-block { padding: 24px 20px; }
   .practice-actions, .practice-working, .practice-mark-row { margin-left: 0; padding-left: 0; }
   .slider-row { grid-template-columns: 76px 1fr 64px; gap: 10px; }
+}
+
+@media print {
+  html.dark-mode { --ink: #000; --canvas: #fff; --gray-med: #6b6b6b; --gray-light: #d6d6d6; --gray-faint: #f2f2f2; }
+  .page { max-width: none; padding: 0; }
+  .layout { grid-template-columns: 1fr; }
+  .toc, .slider-row, .kc-reset, .practice-actions, .practice-mark-row { display: none !important; }
+  .practice-working { display: block; }
+  .content-card, .kc-block, .practice-block { break-inside: avoid-page; }
 }

@@ -95,11 +95,11 @@
             <svg class="network-diagram" viewBox="0 0 240 190" width="240">
               <polygon class="tri-fill" points="30,160 210,160 30,40"/>
               <path class="right-angle" d="M 30 145 L 45 145 L 45 160"/>
-              <path class="angle-arc" d="M 180 160 A 30 30 0 0 0 189 139"/>
+              <path class="angle-arc" d="M 180 160 A 30 30 0 0 1 185.04 143.36"/>
               <text class="angle-label-text" x="168" y="150">θ</text>
               <text class="side-label-text" x="118" y="178" text-anchor="middle">adjacent</text>
               <text class="side-label-text" x="10" y="105" text-anchor="middle" transform="rotate(-90 14 105)">opposite</text>
-              <text class="side-label-text" x="135" y="90" text-anchor="middle" transform="rotate(-34 135 90)">hypotenuse</text>
+              <text class="side-label-text" x="124.4" y="93.3" text-anchor="middle" transform="rotate(33.69 124.4 93.3)">hypotenuse</text>
             </svg>
             <p class="diagram-caption">Working from angle θ</p>
           </div>
@@ -107,11 +107,11 @@
             <svg class="network-diagram" viewBox="0 0 240 190" width="240">
               <polygon class="tri-fill" points="30,160 210,160 30,40"/>
               <path class="right-angle" d="M 30 145 L 45 145 L 45 160"/>
-              <path class="angle-arc" d="M 30 70 A 30 30 0 0 0 55 52"/>
+              <path class="angle-arc" d="M 30 70 A 30 30 0 0 0 54.96 56.64"/>
               <text class="angle-label-text" x="42" y="78">α</text>
               <text class="side-label-text" x="118" y="178" text-anchor="middle">opposite</text>
               <text class="side-label-text" x="10" y="105" text-anchor="middle" transform="rotate(-90 14 105)">adjacent</text>
-              <text class="side-label-text" x="135" y="90" text-anchor="middle" transform="rotate(-34 135 90)">hypotenuse</text>
+              <text class="side-label-text" x="124.4" y="93.3" text-anchor="middle" transform="rotate(33.69 124.4 93.3)">hypotenuse</text>
             </svg>
             <p class="diagram-caption">Same triangle, from angle α</p>
           </div>
@@ -224,8 +224,8 @@
             <line class="edge-line" x1="200" y1="170" x2="200" y2="30"/>
             <line class="edge-line" x1="70" y1="170" x2="200" y2="40" stroke-width="2.4"/>
             <path class="right-angle" d="M 200 155 L 185 155 L 185 170"/>
-            <path class="angle-arc" d="M 100 170 A 30 30 0 0 0 93 148"/>
-            <text class="angle-label-text" x="98" y="162">68°</text>
+            <path class="angle-arc" d="M 100 170 A 30 30 0 0 0 91.21 148.79"/>
+            <text class="angle-label-text" x="111" y="157" text-anchor="middle">68°</text>
             <text class="side-label-text" x="120" y="92" transform="rotate(-45 120 92)">6.5 m</text>
             <text class="side-label-text" x="212" y="105">h</text>
           </svg>
@@ -482,8 +482,8 @@
             <path class="angle-arc" d="M 110 170 A 50 50 0 0 0 106 151"/>
             <text class="angle-label-text" x="112" y="163">elevation</text>
             <path class="angle-arc" d="M 280 60 A 50 50 0 0 0 284 79"/>
-            <text class="angle-label-text" x="225" y="76">depression</text>
-            <text class="side-label-text" x="40" y="185">observer</text>
+            <text class="angle-label-text" x="262" y="76" text-anchor="end">depression</text>
+            <text class="side-label-text" x="40" y="191">observer</text>
             <text class="side-label-text" x="316" y="48">target</text>
           </svg>
         </div>
@@ -727,10 +727,11 @@ document.addEventListener('DOMContentLoaded', function () {
       var adj = hyp * Math.cos(ang * D2R);
 
       // Draw to scale within a 260 × 190 box
-      var W = 260, H = 190, PAD = 34;
-      var scale = Math.min((W - 2 * PAD) / Math.max(adj, 0.001), (H - 2 * PAD) / Math.max(opp, 0.001));
-      var ax = PAD, ay = H - PAD;                      // right-angle corner
-      var bx = PAD + adj * scale, by = H - PAD;        // along the base
+      // Wider left margin so the opposite-side label is never cut off
+      var W = 260, H = 190, PAD = 34, PAD_L = 56;
+      var scale = Math.min((W - PAD_L - PAD) / Math.max(adj, 0.001), (H - 2 * PAD) / Math.max(opp, 0.001));
+      var ax = PAD_L, ay = H - PAD;                    // right-angle corner
+      var bx = PAD_L + adj * scale, by = H - PAD;      // along the base
       var cy = H - PAD - opp * scale;                  // top of the vertical
 
       var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
@@ -741,12 +742,16 @@ document.addEventListener('DOMContentLoaded', function () {
       // Angle arc at B
       var r = Math.min(26, adj * scale * 0.5);
       svg.appendChild(svgEl('path', { class: 'angle-arc',
-        d: 'M ' + (bx - r) + ' ' + by + ' A ' + r + ' ' + r + ' 0 0 0 ' +
+        d: 'M ' + (bx - r) + ' ' + by + ' A ' + r + ' ' + r + ' 0 0 1 ' +
            (bx - r * Math.cos(ang * D2R)) + ' ' + (by - r * Math.sin(ang * D2R)) }));
       svg.appendChild(svgEl('text', { class: 'angle-label-text', x: bx - r - 24, y: by - 6 }, ang + '°'));
       svg.appendChild(svgEl('text', { class: 'side-label-text', x: (ax + bx) / 2, y: ay + 18, 'text-anchor': 'middle' }, adj.toFixed(2)));
       svg.appendChild(svgEl('text', { class: 'side-label-text', x: ax - 8, y: (ay + cy) / 2, 'text-anchor': 'end' }, opp.toFixed(2)));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (bx + ax) / 2 + 12, y: (by + cy) / 2 - 6 }, hyp.toFixed(2)));
+      // Hypotenuse label runs along the line, nudged just outside the triangle
+      var hx = (bx + ax) / 2 + 7 * Math.sin(ang * D2R);
+      var hy = (by + cy) / 2 - 7 * Math.cos(ang * D2R);
+      svg.appendChild(svgEl('text', { class: 'side-label-text', x: hx, y: hy, 'text-anchor': 'middle',
+        transform: 'rotate(' + ang + ' ' + hx + ' ' + hy + ')' }, hyp.toFixed(2)));
 
       mount.innerHTML = '';
       mount.appendChild(svg);

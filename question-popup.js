@@ -142,11 +142,11 @@
       'border:1px solid #000;border-radius:0;',
       'display:flex;flex-direction:column;',
       'max-height:calc(100vh - 8rem);overflow:hidden;',
-      'transform:translateY(12px);opacity:0;pointer-events:none;',
-      'transition:transform 0.22s ease,opacity 0.18s ease;',
+      'opacity:0;visibility:hidden;pointer-events:none;',
+      'transition:opacity 0.18s ease,visibility 0s linear 0.18s;',
     '}',
     'html.dark-mode .qpop-panel{background:#0a0a0a;color:#fff;border-color:#fff;}',
-    '.qpop-panel.qpop-panel--open{transform:translateY(0);opacity:1;pointer-events:all;}',
+    '.qpop-panel.qpop-panel--open{opacity:1;visibility:visible;pointer-events:all;transition-delay:0s;}',
 
     /* Header */
     '.qpop-header{',
@@ -163,7 +163,7 @@
       'padding:0.1rem 0;cursor:pointer;',
       'font-family:\'DM Mono\',monospace;',
       'font-size:11px;font-weight:300;letter-spacing:0.02em;',
-      'color:#818181;',
+      'color:#6b6b6b;',
       'transition:color 0.15s,border-color 0.15s;',
     '}',
     '.qpop-tab:hover{color:#000;}',
@@ -174,7 +174,8 @@
     /* Close */
     '.qpop-close{',
       'background:transparent;border:none;border-radius:0;cursor:pointer;',
-      'font-size:1.2rem;line-height:1;color:#818181;padding:0;',
+      'font-size:1.2rem;line-height:1;color:#6b6b6b;padding:0;',
+      'min-width:44px;min-height:44px;margin:-0.75rem -1rem -0.75rem 0;',
       'transition:color 0.15s;',
     '}',
     '.qpop-close:hover{color:#000;}',
@@ -190,13 +191,13 @@
     '.qpop-label{',
       'font-family:\'DM Mono\',monospace;',
       'font-size:11px;font-weight:300;letter-spacing:0.02em;',
-      'color:#818181;margin:0;',
+      'color:#6b6b6b;margin:0;',
     '}',
 
     /* Toggle group — ghost buttons */
     '.qpop-toggle-group{display:flex;flex-wrap:wrap;gap:0.2rem 0.75rem;}',
     '.qpop-toggle{',
-      'background:transparent;color:#818181;',
+      'background:transparent;color:#6b6b6b;',
       'border:none;border-bottom:1px solid #d6d6d6;border-radius:0;',
       'padding:0.18rem 0;cursor:pointer;',
       'font-family:\'Poppins\',sans-serif;',
@@ -218,11 +219,11 @@
       'border:none;border-bottom:1px solid #818181;border-radius:0;',
       'padding:0.3rem 0;',
       'font-family:\'Poppins\',sans-serif;','font-size:14px;letter-spacing:0.35px;',
-      'outline:none;transition:border-color 0.15s;width:100%;',
+      'transition:border-color 0.15s;width:100%;',
       '-moz-appearance:textfield;',
     '}',
     'html.dark-mode .qpop-input{color:#fff;}',
-    '.qpop-input::placeholder,.qpop-textarea::placeholder{color:#818181;}',
+    '.qpop-input::placeholder,.qpop-textarea::placeholder{color:#6b6b6b;}',
     '.qpop-input::-webkit-inner-spin-button,.qpop-input::-webkit-outer-spin-button{-webkit-appearance:none;}',
     '.qpop-input:focus{border-bottom-color:#000;}',
     'html.dark-mode .qpop-input:focus{border-bottom-color:#fff;}',
@@ -232,14 +233,14 @@
       'border:1px solid #d6d6d6;border-radius:0;',
       'padding:0.5rem;',
       'font-family:\'Poppins\',sans-serif;','font-size:14px;letter-spacing:0.35px;',
-      'resize:vertical;outline:none;min-height:80px;',
+      'resize:vertical;min-height:80px;',
       'transition:border-color 0.15s;width:100%;',
     '}',
     'html.dark-mode .qpop-textarea{color:#fff;border-color:#333;}',
     '.qpop-textarea:focus{border-color:#000;}',
     'html.dark-mode .qpop-textarea:focus{border-color:#fff;}',
 
-    '.qpop-file{font-family:\'DM Mono\',monospace;font-size:11px;color:#818181;cursor:pointer;font-weight:300;}',
+    '.qpop-file{font-family:\'DM Mono\',monospace;font-size:11px;color:#6b6b6b;cursor:pointer;font-weight:300;}',
 
     /* Hints & errors — weight, not colour */
     '.qpop-hint{',
@@ -260,13 +261,13 @@
       'transition:color 0.15s,border-color 0.15s;',
     '}',
     'html.dark-mode .qpop-submit{color:#fff;border-bottom-color:#fff;}',
-    '.qpop-submit:hover{color:#818181;border-bottom-color:#818181;}',
-    'html.dark-mode .qpop-submit:hover{color:#818181;border-bottom-color:#818181;}',
+    '.qpop-submit:hover{color:#6b6b6b;border-bottom-color:#818181;}',
+    'html.dark-mode .qpop-submit:hover{color:#6b6b6b;border-bottom-color:#818181;}',
     '.qpop-submit:disabled{opacity:0.35;cursor:not-allowed;}',
 
     '.qpop-status{',
       'font-family:\'Poppins\',sans-serif;',
-      'font-size:13px;color:#818181;line-height:1.5;margin:0;',
+      'font-size:13px;color:#6b6b6b;line-height:1.5;margin:0;',
     '}',
     '.qpop-status--error{color:#000;font-weight:600;}',
     'html.dark-mode .qpop-status--error{color:#fff;}',
@@ -282,14 +283,14 @@
     '.qpop-history-date{',
       'font-family:\'DM Mono\',monospace;',
       'font-size:11px;letter-spacing:0.02em;',
-      'color:#9d9d9d;margin-left:auto;',
+      'color:#767676;margin-left:auto;',
     ';font-weight:300;}',
 
     '.qpop-category-tag,.qpop-badge{',
       'font-family:\'DM Mono\',monospace;',
       'font-size:11px;font-weight:300;letter-spacing:0.02em;',
       'border:1px solid #d6d6d6;border-radius:0;',
-      'padding:0.1rem 0.35rem;color:#818181;',
+      'padding:0.1rem 0.35rem;color:#6b6b6b;',
     '}',
     'html.dark-mode .qpop-category-tag,html.dark-mode .qpop-badge{border-color:#333;}',
     '.qpop-badge--answered{color:#000;border-color:#000;}',
@@ -297,7 +298,7 @@
 
     '.qpop-history-question{',
       'font-family:\'Poppins\',sans-serif;',
-      'font-size:14px;color:#818181;line-height:1.55;margin:0;',
+      'font-size:14px;color:#6b6b6b;line-height:1.55;margin:0;',
     '}',
 
     '.qpop-history-response{',
@@ -309,8 +310,13 @@
 
     '.qpop-no-questions{',
       'font-family:\'Poppins\',sans-serif;',
-      'font-size:14px;color:#818181;line-height:1.6;padding:0.5rem 0;margin:0;',
+      'font-size:14px;color:#6b6b6b;line-height:1.6;padding:0.5rem 0;margin:0;',
     '}',
+
+    'html.dark-mode .qpop-tab,html.dark-mode .qpop-close,html.dark-mode .qpop-label,html.dark-mode .qpop-toggle,',
+    'html.dark-mode .qpop-input::placeholder,html.dark-mode .qpop-textarea::placeholder,html.dark-mode .qpop-file,',
+    'html.dark-mode .qpop-status,html.dark-mode .qpop-history-date,html.dark-mode .qpop-category-tag,html.dark-mode .qpop-badge,',
+    'html.dark-mode .qpop-history-question,html.dark-mode .qpop-no-questions{color:#818181;}',
 
     /* Mobile */
     '@media(max-width:480px){',
@@ -320,6 +326,38 @@
     '}',
   ].join('');
   document.head.appendChild(style);
+
+  /* ─── TOPICS (per year) ───────────────────────────────────────── */
+  var TOPIC_LABELS = {
+    general:     'General',
+    formulas:    'Formulas & equations',
+    linear:      'Linear relationships',
+    earning:     'Earning money',
+    managing:    'Managing money',
+    measurement: 'Applications of measurement',
+    data:        'Data analysis',
+    time:        'Time and location',
+    networks:    'Networks, paths and trees',
+    y12algebra:  'Algebraic relationships',
+    y12invest:   'Investment & loans',
+    y12annuity:  'Annuities',
+    y12trig:     'Trigonometry',
+    y12rates:    'Ratios & rates',
+    y12flow:     'Network flow',
+    y12cpa:      'Critical path analysis',
+    y12bivar:    'Bivariate data analysis',
+    y12prob:     'Relative frequency & probability',
+    y12normal:   'The normal distribution',
+  };
+  var isY12 = /year-12/.test(location.pathname) ||
+    (!/year-11/.test(location.pathname) && localStorage.getItem('ie_year') === '12');
+  var TOPICS = ['general'].concat(isY12
+    ? ['y12algebra','y12invest','y12annuity','y12trig','y12rates','y12flow','y12cpa','y12bivar','y12prob','y12normal']
+    : ['formulas','linear','earning','managing','measurement','data','time','networks']);
+  var topicButtons = TOPICS.map(function (k, i) {
+    return '<button class="qpop-toggle' + (i === 0 ? ' qpop-toggle--active' : '') + '" data-value="' + k +
+      '" aria-pressed="' + (i === 0) + '">' + TOPIC_LABELS[k].replace(/&/g, '&amp;') + '</button>';
+  }).join('');
 
   /* ─── INJECT HTML ─────────────────────────────────────────────── */
   var root = document.createElement('div');
@@ -335,34 +373,30 @@
       '<span>Ask a question</span>',
     '</button>',
 
-    '<div class="qpop-panel" id="qpopPanel" aria-hidden="true" role="dialog" aria-label="Ask a question">',
+    '<div class="qpop-panel" id="qpopPanel" role="dialog" aria-label="Ask a question" inert>',
       '<div class="qpop-header">',
-        '<div class="qpop-tabs">',
-          '<button class="qpop-tab qpop-tab--active" id="tabAsk">Ask</button>',
-          '<button class="qpop-tab" id="tabHistory">History</button>',
+        '<div class="qpop-tabs" role="tablist" aria-label="Question panel">',
+          '<button class="qpop-tab qpop-tab--active" id="tabAsk" role="tab" aria-selected="true" aria-controls="panelAsk">Ask</button>',
+          '<button class="qpop-tab" id="tabHistory" role="tab" aria-selected="false" aria-controls="panelHistory" tabindex="-1">History</button>',
         '</div>',
         '<button class="qpop-close" id="qpopClose" aria-label="Close">&times;</button>',
       '</div>',
 
       /* Ask tab */
-      '<div class="qpop-body" id="panelAsk">',
+      '<div class="qpop-body" id="panelAsk" role="tabpanel" aria-labelledby="tabAsk">',
 
         '<div class="qpop-field">',
-          '<p class="qpop-label">Topic</p>',
-          '<div class="qpop-toggle-group" id="topicGroup">',
-            '<button class="qpop-toggle qpop-toggle--active" data-value="general">General</button>',
-            '<button class="qpop-toggle" data-value="formulas">Formulas &amp; Equations</button>',
-            '<button class="qpop-toggle" data-value="earning">Earning Money</button>',
-            '<button class="qpop-toggle" data-value="managing">Managing Money</button>',
-            '<button class="qpop-toggle" data-value="data">Data Analysis</button>',
+          '<p class="qpop-label" id="qpopTopicLabel">Topic</p>',
+          '<div class="qpop-toggle-group" id="topicGroup" role="group" aria-labelledby="qpopTopicLabel">',
+            topicButtons,
           '</div>',
         '</div>',
 
         '<div class="qpop-field">',
-          '<p class="qpop-label">Question type</p>',
-          '<div class="qpop-toggle-group" id="qtypeGroup">',
-            '<button class="qpop-toggle qpop-toggle--active" data-value="other">Other</button>',
-            '<button class="qpop-toggle" data-value="hsc">HSC Exam</button>',
+          '<p class="qpop-label" id="qpopTypeLabel">Question type</p>',
+          '<div class="qpop-toggle-group" id="qtypeGroup" role="group" aria-labelledby="qpopTypeLabel">',
+            '<button class="qpop-toggle qpop-toggle--active" data-value="other" aria-pressed="true">Other</button>',
+            '<button class="qpop-toggle" data-value="hsc" aria-pressed="false">HSC exam</button>',
           '</div>',
         '</div>',
 
@@ -377,10 +411,10 @@
               '<input class="qpop-input" type="text" id="hscQNum" placeholder="e.g. Q14b">',
             '</div>',
           '</div>',
-          '<p class="qpop-label" style="margin-top:8px">Standard</p>',
-          '<div class="qpop-toggle-group" id="stdGroup">',
-            '<button class="qpop-toggle qpop-toggle--active" data-value="std1">Standard 1</button>',
-            '<button class="qpop-toggle" data-value="std2">Standard 2</button>',
+          '<p class="qpop-label" id="qpopStdLabel" style="margin-top:8px">Standard</p>',
+          '<div class="qpop-toggle-group" id="stdGroup" role="group" aria-labelledby="qpopStdLabel">',
+            '<button class="qpop-toggle qpop-toggle--active" data-value="std1" aria-pressed="true">Standard 1</button>',
+            '<button class="qpop-toggle" data-value="std2" aria-pressed="false">Standard 2</button>',
           '</div>',
         '</div>',
 
@@ -391,13 +425,13 @@
 
         '<div class="qpop-actions">',
           '<button class="qpop-submit" id="qpopSubmit">Submit question →</button>',
-          '<p class="qpop-status" id="qpopStatus" style="display:none"></p>',
+          '<p class="qpop-status" id="qpopStatus" role="status" aria-live="polite" style="display:none"></p>',
         '</div>',
 
       '</div>',
 
       /* History tab */
-      '<div class="qpop-body" id="panelHistory" style="display:none">',
+      '<div class="qpop-body" id="panelHistory" role="tabpanel" aria-labelledby="tabHistory" style="display:none">',
         '<div class="qpop-history-list" id="historyList">',
           '<p class="qpop-no-questions">Loading your questions…</p>',
         '</div>',
@@ -437,22 +471,43 @@
 
   var isOpen = false;
 
+  function focusables() {
+    return Array.prototype.filter.call(
+      panel.querySelectorAll('button, input, textarea, select, a[href], [tabindex]:not([tabindex="-1"])'),
+      function (el) { return !el.disabled && el.offsetParent !== null; });
+  }
   function openPanel()  {
     isOpen = true;
+    panel.removeAttribute('inert');
     panel.classList.add('qpop-panel--open');
-    panel.setAttribute('aria-hidden', 'false');
     trigger.setAttribute('aria-expanded', 'true');
+    var active = panel.querySelector('.qpop-tab--active');
+    if (active) active.focus();
   }
   function closePanel() {
+    var hadFocus = panel.contains(document.activeElement);
     isOpen = false;
     panel.classList.remove('qpop-panel--open');
-    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('inert', '');
     trigger.setAttribute('aria-expanded', 'false');
+    if (hadFocus) trigger.focus();
   }
 
   trigger.addEventListener('click', function () { isOpen ? closePanel() : openPanel(); });
   closeBtn.addEventListener('click', closePanel);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen) closePanel(); });
+  document.addEventListener('keydown', function (e) {
+    if (!isOpen) return;
+    if (e.key === 'Escape') { closePanel(); return; }
+    // Keep Tab inside the open panel
+    if (e.key === 'Tab') {
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!panel.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    }
+  });
 
   /* Click outside to close */
   document.addEventListener('click', function (e) {
@@ -466,12 +521,26 @@
     var toAsk = tab === 'ask';
     tabAsk.classList.toggle('qpop-tab--active', toAsk);
     tabHistory.classList.toggle('qpop-tab--active', !toAsk);
+    tabAsk.setAttribute('aria-selected', String(toAsk));
+    tabHistory.setAttribute('aria-selected', String(!toAsk));
+    tabAsk.tabIndex = toAsk ? 0 : -1;
+    tabHistory.tabIndex = toAsk ? -1 : 0;
     panelAsk.style.display     = toAsk ? '' : 'none';
     panelHistory.style.display = toAsk ? 'none' : '';
     if (!toAsk) loadHistory();
   }
   tabAsk.addEventListener('click',     function () { switchTab('ask'); });
   tabHistory.addEventListener('click', function () { switchTab('history'); });
+  // Arrow keys move between tabs (WAI-ARIA tabs pattern)
+  [tabAsk, tabHistory].forEach(function (t) {
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      var next = t === tabAsk ? tabHistory : tabAsk;
+      switchTab(next === tabAsk ? 'ask' : 'history');
+      next.focus();
+    });
+  });
 
   /* Toggle groups */
   function bindToggleGroup(groupEl, onChange) {
@@ -479,8 +548,10 @@
       btn.addEventListener('click', function () {
         groupEl.querySelectorAll('.qpop-toggle').forEach(function (b) {
           b.classList.remove('qpop-toggle--active');
+          b.setAttribute('aria-pressed', 'false');
         });
         btn.classList.add('qpop-toggle--active');
+        btn.setAttribute('aria-pressed', 'true');
         if (onChange) onChange(btn.dataset.value);
       });
     });
@@ -548,7 +619,7 @@
       body: JSON.stringify(payload),
     })
       .then(function () {
-        setStatus('Question sent. Check the History tab for updates.', false);
+        setStatus('Question submitted. It will appear in the History tab once received.', false);
         resetForm();
       })
       .catch(function () {
@@ -558,14 +629,6 @@
         submitBtn.disabled = false;
       });
   });
-
-  var TOPIC_LABELS = {
-    general:  'General',
-    formulas: 'Formulas & Equations',
-    earning:  'Earning Money',
-    managing: 'Managing Money',
-    data:     'Data Analysis',
-  };
 
   /* History */
   function loadHistory() {
@@ -625,6 +688,7 @@
             );
             var img = document.createElement('img');
             img.src = imgSrc;
+            img.alt = 'Image attached to your question';
             img.style.cssText = 'max-width:100%;margin-top:0.4rem;border:1px solid #d6d6d6;display:block;';
             item.appendChild(img);
           }

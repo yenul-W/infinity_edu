@@ -12,6 +12,8 @@
      IE.slider(opts)                   labelled range input with live readout
      IE.toc()                          scroll-spy for the sticky contents list
      IE.completeBanner(opts)           manual "mark complete" banner
+     IE.nextLesson(idx, cb)            ask the viewer for the lesson after idx
+     IE.enhanceExercises()             a11y wiring for .exercise-row (auto)
 
    Depends on KaTeX auto-render (loaded by the lesson page) for IE.tex;
    everything degrades gracefully if KaTeX is unavailable.
@@ -37,13 +39,14 @@
   };
 
   /* ── Theme ─────────────────────────────────────────────────── */
-  // pdf-viewer.js never answers 'ie-theme-request', so read localStorage
-  // on load and then follow the parent's 'ie-theme' broadcasts.
+  // Read the saved theme (or the OS preference, as the topic page does) on
+  // load, then follow the parent's 'ie-theme' messages — pdf-viewer.js
+  // sends one every time the iframe loads.
   (function initTheme() {
     try {
-      if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark-mode');
-      }
+      var t = localStorage.getItem('theme');
+      var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark-mode', dark);
     } catch (e) {}
     window.addEventListener('message', function (e) {
       if (!e.data || e.data.type !== 'ie-theme') return;
@@ -51,6 +54,18 @@
       try { localStorage.setItem('theme', e.data.dark ? 'dark' : 'light'); } catch (err) {}
     });
   })();
+
+  /* ── Viewer shortcuts (j/k lesson, d theme) ────────────────── */
+  // pdf-viewer.js listens on this document directly when it can and sets
+  // window.__ieKeysBound; otherwise (file:// origins) forward the key.
+  document.addEventListener('keydown', function (e) {
+    if (window.__ieKeysBound || window.parent === window) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+    if (e.key !== 'j' && e.key !== 'k' && e.key !== 'd') return;
+    try { window.parent.postMessage({ type: 'ie-key', key: e.key }, '*'); } catch (err) {}
+  });
 
   /* ── Completion ────────────────────────────────────────────── */
   IE.markComplete = function (topicId, lessonIdx) {
@@ -72,6 +87,20 @@
     catch (e) {}
   };
 
+  // Ask the viewer what comes after lessonIdx; cb({ index, label, num,
+  // homework, revision }) or cb(null). Silent when not inside the viewer.
+  IE.nextLesson = function (lessonIdx, cb) {
+    if (window.parent === window) return;
+    function onMsg(e) {
+      if (!e.data || e.data.type !== 'ie-lesson-meta') return;
+      window.removeEventListener('message', onMsg);
+      cb(e.data.next);
+    }
+    window.addEventListener('message', onMsg);
+    try { window.parent.postMessage({ type: 'ie-lesson-meta-request', lessonIndex: lessonIdx }, '*'); }
+    catch (e) { window.removeEventListener('message', onMsg); }
+  };
+
   /* ── Knowledge Check ───────────────────────────────────────── */
   /* QS: [{ q, opts:['A) …', …], correct:<0-idx>, explanation }]
      opts: { mount='kcQuestions', scoreMount='kcScore', topicId, lessonIdx } */
@@ -82,6 +111,13 @@
     if (!container || !scoreEl) return;
 
     var answered = 0, score = 0;
+
+    // One persistent live region per check so each answer is announced
+    var live = document.createElement('p');
+    live.className = 'sr-only';
+    live.setAttribute('aria-live', 'polite');
+    container.appendChild(live);
+    scoreEl.setAttribute('aria-live', 'polite');
 
     QS.forEach(function (qData, qi) {
       var wrap = document.createElement('div');
@@ -116,9 +152,13 @@
           });
           var fb = document.createElement('p');
           fb.className = 'kc-feedback ' + (isCorrect ? 'correct' : 'wrong');
-          fb.innerHTML = (isCorrect ? '✓ ' : '✗ ') + qData.explanation;
+          fb.tabIndex = -1;
+          fb.innerHTML = '<strong>' + (isCorrect ? '✓ Correct.' : '✗ Not quite.') + '</strong> ' + qData.explanation;
           wrap.appendChild(fb);
           IE.tex(wrap);
+          // The clicked button is now disabled — keep keyboard focus nearby
+          try { fb.focus({ preventScroll: true }); } catch (err) { fb.focus(); }
+          live.textContent = 'Question ' + (qi + 1) + ': ' + fb.textContent;
           if (answered === QS.length) showScore();
         });
         optsEl.appendChild(btn);
@@ -135,11 +175,23 @@
       var remark = pct === 1   ? 'Excellent — full marks!'
                  : pct >= 0.6  ? 'Good work. Review any incorrect answers.'
                                : 'Keep practising — re-read the theory and try again.';
+      var completes = opts.topicId != null && opts.lessonIdx != null;
       scoreEl.innerHTML =
         'Score: <strong>' + score + ' / ' + QS.length + '</strong>' +
         '<p class="kc-remark">' + remark + '</p>' +
+        (completes ? '<p class="kc-remark">✓ Lesson marked complete.</p>' : '') +
         '<button class="kc-reset" id="kcResetBtn">Reset quiz</button>';
       scoreEl.classList.add('show');
+      if (completes) {
+        IE.nextLesson(opts.lessonIdx, function (next) {
+          if (!next || !scoreEl.classList.contains('show')) return;
+          var btn = document.createElement('button');
+          btn.className = 'kc-reset kc-next';
+          btn.textContent = 'Next: ' + (next.homework || next.revision ? next.label : 'Lesson ' + next.num + ' — ' + next.label) + ' →';
+          btn.addEventListener('click', function () { IE.openLesson(next.index); });
+          scoreEl.appendChild(btn);
+        });
+      }
       document.getElementById('kcResetBtn').addEventListener('click', function () {
         container.innerHTML = '';
         scoreEl.className = 'kc-score';
@@ -250,6 +302,54 @@
     }
   };
 
+  /* ── Diagram label geometry ────────────────────────────────── */
+  /* Positions for text-anchor="middle" labels that never touch the lines they describe.
+     Points are [x, y] in SVG units; fs is the label's font size (mono, ≈0.6em per glyph).
+       IE.geom.side(p, q, inside, text, fs, gap)   label just outside side pq
+       IE.geom.vertex(v, inside, text, fs, gap)    label beyond vertex v, away from `inside`
+       IE.geom.angle(v, p1, p2, r, text, fs, gap)  label inside angle p1-v-p2, past an arc of radius r
+       IE.geom.edge(p, q, text, fs, gap)           network edge label beside the midpoint of pq
+       IE.geom.arc(v, p1, p2, r)                   SVG path d for that arc, ending on both arms */
+  IE.geom = (function () {
+    function unit(x, y) { var l = Math.hypot(x, y) || 1; return [x / l, y / l]; }
+    function size(text, fs) { return [String(text).length * 0.6 * fs, 0.72 * fs]; }
+    // Centre a w×h box `gap` beyond `from` in direction d; return the baseline point
+    function push(from, d, text, fs, gap) {
+      var s = size(text, fs);
+      var dist = gap + Math.abs(d[0]) * s[0] / 2 + Math.abs(d[1]) * s[1] / 2;
+      return { x: from[0] + d[0] * dist, y: from[1] + d[1] * dist + s[1] / 2 };
+    }
+    return {
+      side: function (p, q, inside, text, fs, gap) {
+        var n = unit(q[1] - p[1], p[0] - q[0]);
+        var m = [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
+        if ((inside[0] - m[0]) * n[0] + (inside[1] - m[1]) * n[1] > 0) n = [-n[0], -n[1]];
+        return push(m, n, text, fs, gap == null ? 5 : gap);
+      },
+      vertex: function (v, inside, text, fs, gap) {
+        return push(v, unit(v[0] - inside[0], v[1] - inside[1]), text, fs, gap == null ? 5 : gap);
+      },
+      angle: function (v, p1, p2, r, text, fs, gap) {
+        var u1 = unit(p1[0] - v[0], p1[1] - v[1]), u2 = unit(p2[0] - v[0], p2[1] - v[1]);
+        var b = unit(u1[0] + u2[0], u1[1] + u2[1]);
+        return push([v[0] + b[0] * r, v[1] + b[1] * r], b, text, fs, gap == null ? 3 : gap);
+      },
+      // Network edge label: beside the midpoint of pq, on the upper side (right side if vertical)
+      edge: function (p, q, text, fs, gap) {
+        var n = unit(q[1] - p[1], p[0] - q[0]);
+        if (n[1] > 0.05 || (Math.abs(n[1]) <= 0.05 && n[0] < 0)) n = [-n[0], -n[1]];
+        return push([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2], n, text, fs, gap == null ? 4 : gap);
+      },
+      arc: function (v, p1, p2, r) {
+        var u1 = unit(p1[0] - v[0], p1[1] - v[1]), u2 = unit(p2[0] - v[0], p2[1] - v[1]);
+        var sweep = (u1[0] * u2[1] - u1[1] * u2[0]) > 0 ? 1 : 0;
+        return 'M ' + (v[0] + u1[0] * r).toFixed(2) + ' ' + (v[1] + u1[1] * r).toFixed(2) +
+               ' A ' + r + ' ' + r + ' 0 0 ' + sweep + ' ' +
+               (v[0] + u2[0] * r).toFixed(2) + ' ' + (v[1] + u2[1] * r).toFixed(2);
+      }
+    };
+  })();
+
   /* ── Plotter ───────────────────────────────────────────────── */
   /* IE.plot(mountElOrId, {
        xMin, xMax, yMin, yMax,           axis ranges
@@ -260,7 +360,8 @@
        bars:   [{ x, y, width, className }],    histogram rectangles, x = bar centre
        points: [{ x, y, label, hollow, labelPos }],  labelPos: 'ne' (default) | 'nw' | 'se' | 'sw'
        markers: [{ x, y }],              dashed guide lines to an (x,y)
-       width, height
+       width, height,
+       ariaLabel                         screen-reader description (default built from axis labels)
      })
      Returns a redraw(newOpts) function so sliders can re-render cheaply. */
   IE.plot = function (mount, opts) {
@@ -281,6 +382,9 @@
 
       var svg = document.createElementNS(NS, 'svg');
       svg.setAttribute('class', 'ie-plot');
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', o.ariaLabel ||
+        ('Graph' + (o.yLabel ? ' of ' + o.yLabel : '') + (o.xLabel ? ' against ' + o.xLabel : '')));
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
       svg.setAttribute('width', W);
 
@@ -331,11 +435,12 @@
       var i;
       for (i = Math.ceil(xMin / xStep) * xStep; i <= xMax + 1e-9; i += xStep) {
         add('line', { class: 'plot-grid', x1: sx(i), y1: PAD.t, x2: sx(i), y2: PAD.t + ph });
-        add('text', { class: 'plot-tick', x: sx(i), y: PAD.t + ph + 15, 'text-anchor': 'middle' }, fmt(i));
+        add('text', { class: 'plot-tick', x: sx(i), y: PAD.t + ph + 16, 'text-anchor': 'middle' }, fmt(i));
       }
       for (i = Math.ceil(yMin / yStep) * yStep; i <= yMax + 1e-9; i += yStep) {
         add('line', { class: 'plot-grid', x1: PAD.l, y1: sy(i), x2: PAD.l + pw, y2: sy(i) });
-        add('text', { class: 'plot-tick', x: PAD.l - 7, y: sy(i) + 3.5, 'text-anchor': 'end' }, fmt(i));
+        // The bottom label sits a little higher so it clears the first x-axis number
+        add('text', { class: 'plot-tick', x: PAD.l - 7, y: sy(i) + (Math.abs(i - yMin) < 1e-9 ? 0 : 3.5), 'text-anchor': 'end' }, fmt(i));
       }
 
       // Axes (drawn at 0 when in range, else at the edge)
@@ -344,32 +449,60 @@
       add('line', { class: 'plot-axis', x1: PAD.l, y1: xAxisY, x2: PAD.l + pw, y2: xAxisY });
       add('line', { class: 'plot-axis', x1: yAxisX, y1: PAD.t, x2: yAxisX, y2: PAD.t + ph });
 
-      if (o.xLabel) add('text', { class: 'plot-axis-label', x: PAD.l + pw, y: xAxisY - 8, 'text-anchor': 'end' }, o.xLabel);
-      if (o.yLabel) add('text', { class: 'plot-axis-label', x: yAxisX + 8, y: PAD.t + 10 }, o.yLabel);
+      // Everything a label must not sit on, in screen coordinates
+      var obstacleSegs = [];   // [x1, y1, x2, y2]
+      var obstacleBoxes = [];  // { x0, y0, x1, y1 }
+      obstacleSegs.push([PAD.l, xAxisY, PAD.l + pw, xAxisY], [yAxisX, PAD.t, yAxisX, PAD.t + ph]);
 
       // Curves
       (o.curves || []).forEach(function (c) {
         var segs = [], cur = [];
         var N = 360;
+        var inBox = function (y) { return y >= yMin && y <= yMax; };
+        var pt = function (x, y) { return sx(x).toFixed(2) + ',' + sy(y).toFixed(2); };
+        var flush = function () { if (cur.length) { segs.push(cur); cur = []; } };
+        // Where the curve crosses y = edge between x0 (inside) and x1 (outside)
+        var crossing = function (x0, x1, edge) {
+          var a = x0, b = x1;
+          for (var it = 0; it < 30; it++) {
+            var m = (a + b) / 2, ym = c.fn(m);
+            if (isFinite(ym) && inBox(ym)) a = m; else b = m;
+          }
+          return pt(a, edge);
+        };
+        var px = null, py = null;
         for (var k = 0; k <= N; k++) {
           var x = xMin + (xMax - xMin) * k / N;
-          if (c.discontinuityAt != null && Math.abs(x - c.discontinuityAt) < (xMax - xMin) / N) {
-            if (cur.length) { segs.push(cur); cur = []; }
-            continue;
-          }
           var y = c.fn(x);
-          if (!isFinite(y) || y < yMin - (yMax - yMin) || y > yMax + (yMax - yMin)) {
-            if (cur.length) { segs.push(cur); cur = []; }
+          if ((c.discontinuityAt != null && Math.abs(x - c.discontinuityAt) < (xMax - xMin) / N) || !isFinite(y)) {
+            flush(); px = null;
             continue;
           }
-          // Clamp to the visible box so a steep curve does not escape the frame
-          var cy = Math.max(yMin, Math.min(yMax, y));
-          cur.push(sx(x).toFixed(2) + ',' + sy(cy).toFixed(2));
+          // Cut the curve where it leaves the frame rather than clamping it,
+          // which would draw a flat line along the top or bottom edge
+          if (px !== null) {
+            var pin = inBox(py), qin = inBox(y);
+            if (pin && !qin) {
+              cur.push(crossing(px, x, y > yMax ? yMax : yMin));
+              flush();
+            } else if (!pin && qin) {
+              cur.push(crossing(x, px, py > yMax ? yMax : yMin));
+            }
+          }
+          if (inBox(y)) {
+            if (px === null) flush();
+            cur.push(pt(x, y));
+          }
+          px = x; py = y;
         }
-        if (cur.length) segs.push(cur);
+        flush();
         segs.forEach(function (s) {
           if (s.length < 2) return;
           add('polyline', { class: c.className || 'plot-curve', points: s.join(' ') });
+          for (var j = 1; j < s.length; j++) {
+            var p0 = s[j - 1].split(','), p1 = s[j].split(',');
+            obstacleSegs.push([+p0[0], +p0[1], +p1[0], +p1[1]]);
+          }
         });
       });
 
@@ -377,26 +510,92 @@
       (o.markers || []).forEach(function (m) {
         add('line', { class: 'plot-marker-line', x1: sx(m.x), y1: sy(m.y), x2: sx(m.x), y2: xAxisY });
         add('line', { class: 'plot-marker-line', x1: sx(m.x), y1: sy(m.y), x2: yAxisX, y2: sy(m.y) });
+        obstacleSegs.push([sx(m.x), sy(m.y), sx(m.x), xAxisY], [sx(m.x), sy(m.y), yAxisX, sy(m.y)]);
       });
 
       // Points
       (o.points || []).forEach(function (p) {
+        var r = p.hollow ? 4.5 : 4;
         add('circle', {
           class: p.hollow ? 'plot-point-hollow' : 'plot-point',
-          cx: sx(p.x), cy: sy(p.y), r: p.hollow ? 4.5 : 4
+          cx: sx(p.x), cy: sy(p.y), r: r
         });
-        if (p.label) {
-          // Put the label on the side the curve isn't, so the line never runs through it.
-          var pos  = p.labelPos || 'ne';
-          var west = pos.charAt(1) === 'w';
-          add('text', {
-            class: 'plot-label',
-            x: sx(p.x) + (west ? -8 : 8),
-            y: sy(p.y) + (pos.charAt(0) === 's' ? 16 : -8),
-            'text-anchor': west ? 'end' : 'start'
-          }, p.label);
-        }
+        obstacleBoxes.push({ x0: sx(p.x) - r - 1, y0: sy(p.y) - r - 1, x1: sx(p.x) + r + 1, y1: sy(p.y) + r + 1 });
       });
+
+      /* Label placement: try each candidate spot in order and keep the first one that no
+         curve, axis, guide line, point or earlier label runs through (else the least-crossed). */
+      function segHitsBox(s, b) {
+        var len = Math.max(Math.abs(s[2] - s[0]), Math.abs(s[3] - s[1]));
+        var n = Math.max(1, Math.ceil(len));
+        for (var q = 0; q <= n; q++) {
+          var x = s[0] + (s[2] - s[0]) * q / n, y = s[1] + (s[3] - s[1]) * q / n;
+          if (x > b.x0 && x < b.x1 && y > b.y0 && y < b.y1) return true;
+        }
+        return false;
+      }
+      function boxCost(b) {
+        var cost = 0;
+        if (b.x0 < 0 || b.x1 > W || b.y0 < 0 || b.y1 > H) cost += 1000;
+        obstacleSegs.forEach(function (s) { if (segHitsBox(s, b)) cost++; });
+        obstacleBoxes.forEach(function (o2) {
+          if (b.x0 < o2.x1 && b.x1 > o2.x0 && b.y0 < o2.y1 && b.y1 > o2.y0) cost += 5;
+        });
+        return cost;
+      }
+      function placeLabel(cls, text, candidates) {
+        var w = String(text).length * 6.6, best = null;   // 11px DM Mono ≈ 0.6em per glyph
+        for (var ci = 0; ci < candidates.length; ci++) {
+          var c = candidates[ci];
+          var x0 = c.anchor === 'end' ? c.x - w : c.anchor === 'middle' ? c.x - w / 2 : c.x;
+          var box = { x0: x0 - 1, y0: c.y - 9, x1: x0 + w + 1, y1: c.y + 2 };
+          var cost = boxCost(box);
+          if (!best || cost < best.cost) best = { c: c, box: box, cost: cost };
+          if (cost === 0) break;
+        }
+        obstacleBoxes.push(best.box);
+        add('text', { class: cls, x: best.c.x, y: best.c.y, 'text-anchor': best.c.anchor }, text);
+      }
+
+      (o.points || []).forEach(function (p) {
+        if (!p.label) return;
+        var px = sx(p.x), py = sy(p.y);
+        // Rings of spots at growing distance, so a label can clear two lines crossing at the point
+        var spots = function (d) {
+          return {
+            ne: { x: px + d,       y: py - d,       anchor: 'start' },
+            nw: { x: px - d,       y: py - d,       anchor: 'end' },
+            se: { x: px + d,       y: py + d + 8,   anchor: 'start' },
+            sw: { x: px - d,       y: py + d + 8,   anchor: 'end' },
+            e:  { x: px + d + 1,   y: py + 4,       anchor: 'start' },
+            w:  { x: px - d - 1,   y: py + 4,       anchor: 'end' },
+            n:  { x: px,           y: py - d - 2,   anchor: 'middle' },
+            s:  { x: px,           y: py + d + 11,  anchor: 'middle' }
+          };
+        };
+        var order = ['ne', 'nw', 'se', 'sw', 'e', 'w', 'n', 's'];
+        if (p.labelPos) order.unshift(p.labelPos);
+        var cands = [];
+        [8, 14, 20, 28].forEach(function (d) {
+          var ring = spots(d);
+          order.forEach(function (k) { cands.push(ring[k]); });
+        });
+        placeLabel('plot-label', p.label, cands);
+      });
+
+      if (o.xLabel) {
+        var xc = [{ x: PAD.l + pw, y: xAxisY - 8, anchor: 'end' }];
+        if (xAxisY < PAD.t + ph - 16) xc.push({ x: PAD.l + pw, y: xAxisY + 14, anchor: 'end' });
+        xc.push({ x: PAD.l + pw, y: PAD.t + ph + 29, anchor: 'end' });   // under the tick numbers
+        for (var sl = 1; sl <= 8; sl++) xc.push({ x: PAD.l + pw - sl * pw / 10, y: xAxisY - 8, anchor: 'end' });
+        placeLabel('plot-axis-label', o.xLabel, xc);
+      }
+      if (o.yLabel) {
+        var yc = [{ x: yAxisX + 8, y: PAD.t + 10, anchor: 'start' }];
+        if (yAxisX > PAD.l + 20) yc.push({ x: yAxisX - 8, y: PAD.t + 10, anchor: 'end' });
+        for (var sd = 1; sd <= 8; sd++) yc.push({ x: yAxisX + 8, y: PAD.t + 10 + sd * ph / 10, anchor: 'start' });
+        placeLabel('plot-axis-label', o.yLabel, yc);
+      }
 
       el.innerHTML = '';
       el.appendChild(svg);
@@ -435,7 +634,7 @@
       '<label for="' + id + '">' + cfg.label + '</label>' +
       '<input type="range" id="' + id + '" min="' + cfg.min + '" max="' + cfg.max +
         '" step="' + (cfg.step || 1) + '" value="' + cfg.value + '">' +
-      '<output for="' + id + '">' + fmt(cfg.value) + '</output>';
+      '<output for="' + id + '" aria-live="polite">' + fmt(cfg.value) + '</output>';
     host.appendChild(row);
 
     var input  = row.querySelector('input');
@@ -502,7 +701,27 @@
   };
 
   /* ── Auto-init ─────────────────────────────────────────────── */
+  // Hand-authored exercise rows: tie the label to its input, let Enter run
+  // Check, and have feedback announced to screen readers.
+  IE.enhanceExercises = function () {
+    document.querySelectorAll('.exercise-row').forEach(function (row) {
+      var input = row.querySelector('.exercise-input');
+      var label = row.querySelector('label');
+      var check = row.querySelector('.exercise-check-btn');
+      if (input && label && !label.htmlFor && input.id) label.htmlFor = input.id;
+      if (input && check) {
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); check.click(); }
+        });
+      }
+    });
+    document.querySelectorAll('.exercise-feedback').forEach(function (fb) {
+      if (!fb.hasAttribute('aria-live')) fb.setAttribute('aria-live', 'polite');
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', function () {
     IE.toc();
+    IE.enhanceExercises();
   });
 })();

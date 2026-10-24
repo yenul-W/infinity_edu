@@ -104,6 +104,16 @@ Never introduce saturated accent colors, shadows/elevation, or rounded corners.
   `homework: true` or `revision: true` to relabel the sidebar row and suppress its Mark Complete
   button. There is no `questions` key.
 - Zoom range: 0.5× – 3.0× in 0.25× steps
+- The open lesson is in the URL as `#lesson-{num}` (the `num` field). With no hash, the viewer
+  resumes `ie_last_{topicId}` (`{ idx, num, title, t }`), which the hubs also read for their
+  "Continue" strip.
+- Owns the theme toggle (`#darkModeToggle`) and the j/k/d shortcuts. Topic pages carry no inline theme
+  script beyond the `<head>` one-liner.
+- Lesson iframe messages it handles: `ie-load-lesson`, `ie-lesson-complete` (Y12) / `ie-lesson-done`
+  (Y11), which re-read every completion key, `ie-key` (shortcut forwarded from a lesson) and
+  `ie-lesson-meta-request` (answered with the next lesson, used by `IE.nextLesson`).
+- Hardcoded `IE.openLesson(n)` links in lessons use the array index. In the six-lesson topics,
+  homework is 4 and revision is 5.
 
 ### Question popup (`question-popup.js`)
 - Self-contained IIFE injected via `<script src="question-popup.js">`
@@ -111,7 +121,7 @@ Never introduce saturated accent colors, shadows/elevation, or rounded corners.
 - Works on every page once the script tag is present
 
 ## Live session bar
-`year-12.html` shows a live/upcoming lesson bar driven by Sydney time (`Australia/Sydney`). Lesson time is **Sunday 7:00–8:00 AM AEST** (constants `SESSION_DAY`/`SESSION_START`/`SESSION_END` in its script). The bar has three states: `--live`, `--soon` (≤15 min before), and `--idle`. `year-11.html` has no bar — there are no Year 11 sessions any more. Styles live in `style.css`.
+`year-12.html` shows a live/upcoming lesson bar driven by Sydney time (`Australia/Sydney`). Lesson time is **Sunday 7:00–8:00 AM Sydney time** (the label shows AEST or AEDT via `Intl`) (constants `SESSION_DAY`/`SESSION_START`/`SESSION_END` in its script). The bar has three states: `--live`, `--soon` (≤15 min before), and `--idle`. `year-11.html` has no bar — there are no Year 11 sessions any more. Styles live in `style.css`.
 
 ## Adding a new topic
 

@@ -14,6 +14,7 @@
 
   // ── 3. Confetti burst (achromatic — white on dark, black on light) ──
   function fireConfetti() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const canvas = document.createElement('canvas');
     canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
     document.body.appendChild(canvas);
@@ -197,10 +198,51 @@
       group.classList.toggle('lesson-group--done', done);
       const btn = group.querySelector('.complete-btn');
       if (btn) {
-        btn.textContent = done ? '✓ Done' : 'Mark Complete';
+        btn.textContent = done ? '✓ Done' : 'Mark complete';
         btn.classList.toggle('complete-btn--done', done);
+        btn.setAttribute('aria-pressed', done ? 'true' : 'false');
       }
     }
+    function refreshAllCompletion() {
+      lessons.forEach((_, i) => updateCompletionUI(i));
+    }
+    function celebrateIfAllDone() {
+      const completable = [...lessonsList.querySelectorAll('.lesson-group')].filter(g => g.querySelector('.complete-btn'));
+      if (completable.length && completable.every(g => g.classList.contains('lesson-group--done'))) {
+        fireConfetti();
+      }
+    }
+
+    // ── Theme ────────────────────────────────────────────────────
+    // The <head> script has already applied html.dark-mode before paint;
+    // this keeps the toggle label, localStorage and the lesson iframe in step.
+    const themeToggle = document.getElementById('darkModeToggle');
+    function isDark() { return document.documentElement.classList.contains('dark-mode'); }
+    function postThemeToFrame() {
+      try { htmlFrame.contentWindow.postMessage({ type: 'ie-theme', dark: isDark() }, '*'); } catch (e) {}
+    }
+    function syncThemeToggle() {
+      if (!themeToggle) return;
+      const icon = themeToggle.querySelector('.toggle-icon');
+      if (icon) icon.textContent = isDark() ? 'light' : 'dark';
+      themeToggle.setAttribute('aria-pressed', isDark() ? 'true' : 'false');
+    }
+    function setTheme(dark) {
+      document.documentElement.classList.toggle('dark-mode', dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      syncThemeToggle();
+      postThemeToFrame();
+    }
+    if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!isDark()));
+    syncThemeToggle();
+
+    // ── Screen-reader announcements ──────────────────────────────
+    const liveRegion = document.createElement('div');
+    liveRegion.className = 'sr-only';
+    liveRegion.setAttribute('role', 'status');
+    liveRegion.setAttribute('aria-live', 'polite');
+    document.body.appendChild(liveRegion);
+    pdfLoading.setAttribute('role', 'status');
 
     // ── Print syllabus ───────────────────────────────────────────
     function printSyllabus() {
@@ -210,7 +252,8 @@
         .textContent.replace(/\s+/g, ' ').trim();
       const sheet = document.createElement('div');
       sheet.className = 'print-syllabus-sheet';
-      let markup = `<h1>${topicTitle}</h1><p class="print-subtitle">Year 11 Mathematics Standard — NSW Curriculum</p>`;
+      const course = String(topicId).startsWith('y12') ? 'Year 12 Mathematics Standard 2' : 'Year 11 Mathematics Standard';
+      let markup = `<h1>${topicTitle}</h1><p class="print-subtitle">${course} — NSW Curriculum</p>`;
       lessons.forEach(l => {
         if (!l.homework && !l.revision && l.syllabus && l.syllabus.length > 0) {
           markup += `<h2>Lesson ${l.num}: ${l.title}</h2><ul>${l.syllabus.map(d => `<li>${d}</li>`).join('')}</ul>`;
@@ -218,15 +261,43 @@
       });
       sheet.innerHTML = markup;
       document.body.appendChild(sheet);
+      document.body.classList.add('printing-syllabus');
+      window.addEventListener('afterprint', () => document.body.classList.remove('printing-syllabus'), { once: true });
       window.print();
     }
+
+    // ── Mobile lesson-list toggle (shown ≤900px by CSS) ─────────
+    const lessonsToggle = document.createElement('button');
+    lessonsToggle.type = 'button';
+    lessonsToggle.className = 'lessons-toggle';
+    lessonsToggle.setAttribute('aria-controls', 'lessonsList');
+    lessonsToggle.setAttribute('aria-expanded', 'false');
+    lessonsList.parentElement.insertBefore(lessonsToggle, lessonsList);
+    function setLessonsOpen(open) {
+      lessonsList.classList.toggle('lessons-sidebar--open', open);
+      lessonsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      lessonsToggle.querySelector('.lessons-toggle-icon').textContent = open ? '▴' : '▾';
+    }
+    function updateLessonsToggle() {
+      const lesson = lessons[currentIndex];
+      const label = lesson.homework || lesson.revision ? lessonLabel(lesson) : `Lesson ${lesson.num}: ${lessonLabel(lesson)}`;
+      lessonsToggle.innerHTML =
+        `<span class="lessons-toggle-current">${label}</span>` +
+        `<span>All lessons <span class="lessons-toggle-icon" aria-hidden="true">▾</span></span>`;
+      setLessonsOpen(false);
+    }
+    lessonsToggle.addEventListener('click', () => {
+      setLessonsOpen(!lessonsList.classList.contains('lessons-sidebar--open'));
+    });
 
     // ── Sidebar ──────────────────────────────────────────────────
     function buildSidebar() {
       lessons.forEach((lesson, index) => {
         const group = document.createElement('div');
-        group.className = 'lesson-group' + (index === 0 ? ' active' : '');
+        group.className = 'lesson-group';
         group.dataset.index = index;
+        group.setAttribute('role', 'button');
+        group.tabIndex = 0;
 
         const syllabusHtml = lesson.syllabus && lesson.syllabus.length > 0
           ? `<div class="lesson-syllabus-dots"><ul>${lesson.syllabus.map(d => `<li>${d}</li>`).join('')}</ul></div>`
@@ -243,7 +314,7 @@
         }
         inner += syllabusHtml;
         if (!lesson.homework && !lesson.revision) {
-          inner += `<button class="complete-btn pdf-btn" data-index="${index}">Mark Complete</button>`;
+          inner += `<button class="complete-btn pdf-btn" data-index="${index}" aria-pressed="false">Mark complete</button>`;
         }
         if (lesson.annotated) {
           inner += `
@@ -263,12 +334,7 @@
             setDone(index, !wasDone);
             updateCompletionUI(index);
             // 3. Fire confetti when the last lesson is marked complete
-            if (!wasDone) {
-              const completable = [...lessonsList.querySelectorAll('.lesson-group')].filter(g => g.querySelector('.complete-btn'));
-              if (completable.every(g => g.classList.contains('lesson-group--done'))) {
-                fireConfetti();
-              }
-            }
+            if (!wasDone) celebrateIfAllDone();
           });
           updateCompletionUI(index);
         }
@@ -276,6 +342,11 @@
         group.addEventListener('click', () => {
           const variant = currentIndex === index ? currentVariant : 'slides';
           loadLesson(index, variant);
+        });
+        group.addEventListener('keydown', e => {
+          if (e.target !== group || (e.key !== 'Enter' && e.key !== ' ')) return;
+          e.preventDefault();
+          loadLesson(index, currentIndex === index ? currentVariant : 'slides');
         });
 
         if (lesson.annotated) {
@@ -294,6 +365,8 @@
     function updateSidebarActive(idx, variant) {
       lessonsList.querySelectorAll('.lesson-group').forEach((g, i) => {
         g.classList.toggle('active', i === idx);
+        if (i === idx) g.setAttribute('aria-current', 'true');
+        else g.removeAttribute('aria-current');
       });
       const active = lessonsList.querySelectorAll('.lesson-group')[idx];
       if (active) {
@@ -541,8 +614,6 @@
       canvasWrapper.style.display = 'none';
       pdfStage.style.padding = '0';
       htmlFrame.style.display = 'block';
-      htmlFrame.style.width = '100%';
-      htmlFrame.style.minHeight = 'calc(100vh - 180px)';
       htmlFrame.src = url;
     }
 
@@ -566,15 +637,29 @@
     }
 
     // ── Load lesson ───────────────────────────────────────────────
+    function lessonLabel(lesson) {
+      return lesson.title || (lesson.homework ? 'Homework' : lesson.revision ? 'Revision' : `Lesson ${lesson.num}`);
+    }
+    function lessonHash(lesson) { return `#lesson-${lesson.num}`; }
+    function indexFromHash() {
+      const m = /^#lesson-(\d+)$/.exec(location.hash);
+      if (!m) return -1;
+      return lessons.findIndex(l => String(l.num) === m[1]);
+    }
+
     async function loadLesson(idx, variant) {
       const lesson = lessons[idx];
+      if (!lesson) return;
       currentIndex   = idx;
       currentVariant = variant;
       currentKind    = lesson.kind || 'pdf';
 
-      // 5. Track recently viewed
-      const displayTitle = lesson.title || (lesson.homework ? 'Homework' : lesson.revision ? 'Revision' : `Lesson ${lesson.num}`);
-      localStorage.setItem(`ie_last_${topicId}`, JSON.stringify({ idx, title: displayTitle }));
+      // 5. Track recently viewed (the hubs read this for their "Continue" link)
+      const displayTitle = lessonLabel(lesson);
+      localStorage.setItem(`ie_last_${topicId}`, JSON.stringify({ idx, num: lesson.num, title: displayTitle, t: Date.now() }));
+      if (location.hash !== lessonHash(lesson)) history.replaceState(null, '', lessonHash(lesson));
+      liveRegion.textContent = lesson.homework || lesson.revision ? displayTitle : `Lesson ${lesson.num}: ${displayTitle}`;
+      updateLessonsToggle();
 
       scrollBar.style.width = '0%';
       annotationToolbar.style.display = 'none';
@@ -701,30 +786,35 @@
     });
 
     // Keyboard navigation + shortcuts (2. j/k lessons, +/- zoom, d dark mode)
-    document.addEventListener('keydown', e => {
-      const tag = document.activeElement && document.activeElement.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      if (e.metaKey || e.ctrlKey) return;
-
-      if (e.key === 'd') {
-        const nowDark = document.documentElement.classList.toggle('dark-mode');
-        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
-        const ti = document.querySelector('.toggle-icon');
-        if (ti) ti.textContent = nowDark ? 'light' : 'dark';
-        return;
-      }
-      if (e.key === 'j') {
-        e.preventDefault();
+    function isTypingTarget(el) {
+      if (!el) return false;
+      return el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable;
+    }
+    // Shared by the page's own keydown and keys forwarded from the lesson iframe.
+    // Returns true when the key was handled.
+    function handleLessonShortcut(key) {
+      if (key === 'd') { setTheme(!isDark()); return true; }
+      if (key === 'j') {
         if (currentIndex < lessons.length - 1) loadLesson(currentIndex + 1, 'slides');
-        return;
+        return true;
       }
-      if (e.key === 'k') {
-        e.preventDefault();
+      if (key === 'k') {
         if (currentIndex > 0) loadLesson(currentIndex - 1, 'slides');
-        return;
+        return true;
       }
+      return false;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (isTypingTarget(document.activeElement)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      if (handleLessonShortcut(e.key)) { e.preventDefault(); return; }
 
       if (currentKind !== 'pdf') return;
+      // Leave arrow keys alone while a control outside the page stage has focus
+      const ae = document.activeElement;
+      const inStage = !ae || ae === document.body || pdfStage.contains(ae);
 
       if (e.key === '=' || e.key === '+') {
         e.preventDefault();
@@ -738,6 +828,7 @@
         rerenderAll(loadGen);
         return;
       }
+      if (!inStage) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
         if (currentPage < totalPages) scrollToPage(currentPage + 1);
@@ -747,16 +838,60 @@
       }
     });
 
-    // ── Cross-frame lesson navigation (from lesson iframes) ──────
+    // ── Lesson iframe bridge ─────────────────────────────────────
+    // On every load: push the current theme (lessons only read a saved
+    // theme, not the OS preference) and, when same-origin, listen for the
+    // shortcut keys inside the lesson. lesson-kit.js forwards keys itself
+    // via 'ie-key' when it sees no __ieKeysBound flag (e.g. file:// pages).
+    htmlFrame.addEventListener('load', () => {
+      postThemeToFrame();
+      try {
+        const win = htmlFrame.contentWindow;
+        if (!win || win.__ieKeysBound) return;
+        win.__ieKeysBound = true;
+        win.document.addEventListener('keydown', e => {
+          if (isTypingTarget(e.target) || e.metaKey || e.ctrlKey || e.altKey) return;
+          if (handleLessonShortcut(e.key)) e.preventDefault();
+        });
+      } catch (err) { /* cross-origin — lesson-kit forwards keys instead */ }
+    });
+
     window.addEventListener('message', e => {
-      if (e.data && e.data.type === 'ie-load-lesson' && typeof e.data.lessonIndex === 'number') {
-        loadLesson(e.data.lessonIndex, 'slides');
+      const d = e.data;
+      if (!d || typeof d.type !== 'string') return;
+      if (d.type === 'ie-load-lesson' && typeof d.lessonIndex === 'number') {
+        loadLesson(d.lessonIndex, 'slides');
+      } else if (d.type === 'ie-lesson-complete' || d.type === 'ie-lesson-done') {
+        // Y12 sends its index; Y11 sends nothing and may also be un-marking,
+        // so re-read every key rather than trusting one index.
+        refreshAllCompletion();
+        celebrateIfAllDone();
+      } else if (d.type === 'ie-key' && typeof d.key === 'string') {
+        handleLessonShortcut(d.key);
+      } else if (d.type === 'ie-lesson-meta-request' && e.source) {
+        const next = lessons[d.lessonIndex + 1];
+        e.source.postMessage({
+          type: 'ie-lesson-meta',
+          next: next ? { index: d.lessonIndex + 1, label: lessonLabel(next), num: next.num, homework: !!next.homework, revision: !!next.revision } : null
+        }, '*');
       }
+    });
+
+    window.addEventListener('hashchange', () => {
+      const idx = indexFromHash();
+      if (idx >= 0 && idx !== currentIndex) loadLesson(idx, 'slides');
     });
 
     // ── Init ─────────────────────────────────────────────────────
     buildSidebar();
-    loadLesson(0, 'slides');
+    let startIdx = indexFromHash();
+    if (startIdx < 0) {
+      try {
+        const last = JSON.parse(localStorage.getItem(`ie_last_${topicId}`) || 'null');
+        if (last && lessons[last.idx]) startIdx = last.idx;
+      } catch (e) {}
+    }
+    loadLesson(Math.max(0, startIdx), 'slides');
   }
 
   window.initPdfViewer = initPdfViewer;
