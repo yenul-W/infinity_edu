@@ -27,8 +27,8 @@
   --border:       #222222;
   --border-hover: #444444;
   --text:         #ffffff;
-  --text-muted:   #818181;
-  --text-faint:   #555555;
+  --text-muted:   #818181;   /* 5.1:1 on #0a0a0a */
+  --text-faint:   #7a7a7a;   /* 4.6:1 — was #555 (2.7:1) */
 
   /* Shared topic-page backward-compat tokens — all achromatic */
   --accent:          var(--text);
@@ -60,8 +60,8 @@ html:not(.dark-mode) {
   --border:       #d6d6d6;
   --border-hover: #9d9d9d;
   --text:         #000000;
-  --text-muted:   #818181;
-  --text-faint:   #9d9d9d;
+  --text-muted:   #6b6b6b;   /* 5.3:1 on white — was #818181 (3.9:1) */
+  --text-faint:   #767676;   /* 4.5:1 — was #9d9d9d (2.7:1) */
 }
 
 /* ─── BASE ─────────────────────────────────────────────────────── */
@@ -121,6 +121,7 @@ body {
   border: none;
   border-bottom: 1px solid var(--border-hover);
   padding: 0.2rem 0;
+  position: relative;           /* ::before widens the tap target */
   border-radius: 0;
   cursor: pointer;
   font-size: 11px;
@@ -207,9 +208,25 @@ body {
   transition: border-color 0.25s ease;
 }
 
-.topic-card:hover {
+.topic-card:hover,
+.topic-card:focus-within {
   border-color: var(--rule);
 }
+
+/* The title link stretches over the whole card (no nested <a>s), so the
+   syllabus chip can stay a separate link above it. */
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}
+.card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.card-link:focus-visible { outline: none; }
+.card-link:focus-visible::after { outline: 1px solid #ffffff; outline-offset: -4px; }
 
 /* ─── Card scene fills entire card ─────────────────────────── */
 
@@ -225,11 +242,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
-}
-
-.topic-card:hover .scene-video {
-  transform: scale(1.06);
 }
 
 .scene-gradient {
@@ -280,10 +292,10 @@ body {
 .card-num {
   font-variant-numeric: tabular-nums;
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.30);
+  color: rgba(255,255,255,0.72);
 }
 
 /* Card text — always white, always on dark background */
@@ -300,48 +312,44 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   padding-top: 0.3rem;
 }
 
 .card-cta {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.38);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  color: rgba(255,255,255,0.75);
+  display: block;
+  flex: 1 1 auto;
   pointer-events: none;
   transition: color 0.22s ease;
   overflow: hidden;
-  max-width: 9rem;
+  min-width: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.topic-card:hover .card-cta { color: rgba(255,255,255,0.65); }
+.topic-card:hover .card-cta { color: #ffffff; }
 
-.cta-arrow {
-  display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-}
-
-.topic-card:hover .cta-arrow { transform: translateX(5px); }
+.cta-arrow { display: inline-block; }
 
 /* Syllabus chip on landing cards — always on dark bg */
 .syllabus-chip {
   display: inline-flex;
-  align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.72);
   text-decoration: none;
   padding: 0.1rem 0;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.22);
+  border-bottom: 1px solid rgba(255,255,255,0.45);
+  position: relative;
+  z-index: 3;                   /* above the card's stretched link */
   border-radius: 0;
   background: transparent;
   transition: color 0.18s ease, border-color 0.18s ease;
@@ -349,8 +357,8 @@ body {
 }
 
 .syllabus-chip:hover {
-  color: rgba(255,255,255,0.65);
-  border-bottom-color: rgba(255,255,255,0.50);
+  color: #ffffff;
+  border-bottom-color: #ffffff;
   background: transparent;
 }
 
@@ -370,15 +378,83 @@ body {
   .site-main     { padding: 0 1rem 1rem; }
   .page-title    { font-size: clamp(1.4rem, 6vw, 2rem); }
   .topic-grid    { min-height: 0; }
+  .topic-card    { aspect-ratio: 4 / 3; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    ACCESSIBILITY
    ═══════════════════════════════════════════════════════════════ */
 
+/* ~44px tap targets for the small ghost links without changing their
+   layout box: an invisible hit area extends above and below the text. */
+.dark-mode-btn::before,
+.year-switch::before,
+.syllabus-chip::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
+}
+
+/* Keyboard focus — flat 1px ink ring, no glow (DESIGN.md) */
+:focus-visible {
+  outline: 1px solid var(--text);
+  outline-offset: 2px;
+}
+[tabindex="-1"]:focus { outline: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 1000;
+  padding: 0.6rem 0.9rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0.5rem; }
+
+/* "Continue: topic · lesson →" above the hub grid */
+.continue-strip {
+  display: block;
+  max-width: 520px;
+  width: 100%;
+  margin: -1rem auto 2rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border-hover);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.18s ease;
+}
+.continue-strip[hidden] { display: none; }
+.continue-strip:hover { border-bottom-color: var(--text); }
+.continue-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
@@ -896,16 +972,52 @@ body {
    RESPONSIVE — TOPIC PAGES & PDF VIEWER
    ═══════════════════════════════════════════════════════════════ */
 
+/* Phone/tablet: the lesson list collapses behind a disclosure button
+   (created by pdf-viewer.js) so the lesson gets the screen. */
+.lessons-toggle { display: none; }
+
 @media (max-width: 900px) {
-  .pdf-viewer-container {
-    grid-template-columns: 1fr;
+  body.sociotype .pdf-viewer-container {
+    display: flex;
+    flex-direction: column;
+  }
+  body.sociotype .pdf-viewer-main { flex: 1; }
+
+  .lessons-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    text-align: left;
+    cursor: pointer;
+  }
+  .lessons-toggle > span:last-child { white-space: nowrap; flex-shrink: 0; }
+  .lessons-toggle-current {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
-  .lessons-sidebar {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+  body.sociotype .lessons-sidebar {
+    display: none;
+    max-height: 55vh;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
   }
+  body.sociotype .lessons-sidebar.lessons-sidebar--open { display: flex; }
+  body.sociotype .lesson-group.active .lesson-syllabus-dots { display: none; }
 }
 
 @media (max-width: 768px) {
@@ -924,10 +1036,6 @@ body {
 }
 
 @media (max-width: 600px) {
-  .lessons-sidebar {
-    grid-template-columns: 1fr;
-  }
-
   .pdf-controls {
     flex-direction: column;
     align-items: flex-start;
@@ -958,7 +1066,7 @@ body {
   }
 
   .syllabus-chip-inline {
-    font-size: 0.55rem;
+    font-size: 11px;
     padding: 0.25rem 0.5rem;
   }
 }
@@ -1004,7 +1112,7 @@ body.sociotype .back-link {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: #818181;
+  color: var(--text-muted);
   border-bottom: 1px solid #d6d6d6;
   padding-bottom: 1px;
   margin-bottom: 0;
@@ -1016,7 +1124,7 @@ body.sociotype .back-link:hover {
   border-color: #000000;
   transform: none;
 }
-html.dark-mode body.sociotype .back-link { color: #818181; border-color: #444; }
+html.dark-mode body.sociotype .back-link { color: var(--text-muted); border-color: #444; }
 html.dark-mode body.sociotype .back-link:hover { color: #ffffff; border-color: #ffffff; }
 
 body.sociotype .topic-page-title {
@@ -1044,7 +1152,7 @@ body.sociotype .syllabus-chip-inline {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.06em;
-  color: #818181;
+  color: var(--text-muted);
   border-bottom-color: #d6d6d6;
   padding: 0 0 1px;
 }
@@ -1053,7 +1161,7 @@ body.sociotype .syllabus-chip-inline:hover {
   border-bottom-color: #000000;
   background: transparent;
 }
-html.dark-mode body.sociotype .syllabus-chip-inline { color: #818181; border-bottom-color: #444; }
+html.dark-mode body.sociotype .syllabus-chip-inline { color: var(--text-muted); border-bottom-color: #444; }
 html.dark-mode body.sociotype .syllabus-chip-inline:hover { color: #ffffff; border-bottom-color: #ffffff; }
 
 body.sociotype .dark-mode-btn {
@@ -1061,7 +1169,7 @@ body.sociotype .dark-mode-btn {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.06em;
-  color: #818181;
+  color: var(--text-muted);
   border-bottom-color: #d6d6d6;
 }
 body.sociotype .dark-mode-btn:hover {
@@ -1069,7 +1177,7 @@ body.sociotype .dark-mode-btn:hover {
   border-bottom-color: #000000;
   background: transparent;
 }
-html.dark-mode body.sociotype .dark-mode-btn { color: #818181; border-bottom-color: #444; }
+html.dark-mode body.sociotype .dark-mode-btn { color: var(--text-muted); border-bottom-color: #444; }
 html.dark-mode body.sociotype .dark-mode-btn:hover { color: #ffffff; border-bottom-color: #ffffff; }
 
 /* Layout */
@@ -1142,7 +1250,7 @@ body.sociotype .lesson-group-num {
   font-size: 10px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: #9d9d9d;
+  color: var(--text-faint);
 }
 body.sociotype .lesson-group-title {
   font-family: var(--font-display);
@@ -1161,7 +1269,7 @@ body.sociotype .lesson-kind-badge {
   font-size: 9px;
   font-weight: 300;
   letter-spacing: 0.1em;
-  color: #9d9d9d;
+  color: var(--text-faint);
   background: transparent;
   border: 1px solid #d6d6d6;
   padding: 0.1rem 0.3rem;
@@ -1178,12 +1286,12 @@ body.sociotype .variant-btn {
   border-bottom: 1px solid #d6d6d6;
   border-radius: 0;
   padding: 0.2rem 0;
-  color: #9d9d9d;
+  color: var(--text-faint);
   background: transparent;
 }
 body.sociotype .variant-btn:hover { color: #000000; border-bottom-color: #000000; background: transparent; }
 body.sociotype .variant-btn.active { color: #000000; background: transparent; border-bottom-color: #000000; }
-html.dark-mode body.sociotype .variant-btn { color: #555; border-bottom-color: #333; }
+html.dark-mode body.sociotype .variant-btn { color: var(--text-faint); border-bottom-color: #333; }
 html.dark-mode body.sociotype .variant-btn:hover,
 html.dark-mode body.sociotype .variant-btn.active { color: #ffffff; border-bottom-color: #ffffff; background: transparent; }
 
@@ -1214,7 +1322,7 @@ html.dark-mode body.sociotype .lesson-btn.active .lesson-syllabus-dots { border-
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0.01em;
-  color: #818181;
+  color: var(--text-muted);
   padding-left: 0.85rem;
   position: relative;
 }
@@ -1259,7 +1367,7 @@ body.sociotype .pdf-btn {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: #818181;
+  color: var(--text-muted);
   border: none;
   border-bottom: 1px solid #d6d6d6;
   border-radius: 0;
@@ -1270,7 +1378,7 @@ body.sociotype .pdf-btn {
 }
 body.sociotype .pdf-btn:hover { color: #000000; border-bottom-color: #000000; background: transparent; }
 body.sociotype .pdf-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-html.dark-mode body.sociotype .pdf-btn { color: #555; border-bottom-color: #333; }
+html.dark-mode body.sociotype .pdf-btn { color: var(--text-faint); border-bottom-color: #333; }
 html.dark-mode body.sociotype .pdf-btn:hover { color: #ffffff; border-bottom-color: #ffffff; }
 
 body.sociotype .page-info {
@@ -1278,7 +1386,7 @@ body.sociotype .page-info {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.06em;
-  color: #818181;
+  color: var(--text-muted);
   background: transparent;
   border: none;
   border-bottom: 1px solid #d6d6d6;
@@ -1293,7 +1401,7 @@ body.sociotype input.page-info::-webkit-inner-spin-button,
 body.sociotype input.page-info::-webkit-outer-spin-button { -webkit-appearance: none; }
 body.sociotype input.page-info:focus { color: #000000; border-bottom-color: #000000; }
 body.sociotype input.page-info:disabled { opacity: 0.3; cursor: default; }
-html.dark-mode body.sociotype .page-info { color: #555; border-bottom-color: #333; }
+html.dark-mode body.sociotype .page-info { color: var(--text-faint); border-bottom-color: #333; }
 html.dark-mode body.sociotype input.page-info:focus { color: #ffffff; border-bottom-color: #ffffff; }
 
 body.sociotype .page-sep {
@@ -1301,10 +1409,10 @@ body.sociotype .page-sep {
   font-weight:300;
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: #9d9d9d;
+  color: var(--text-faint);
   white-space: nowrap;
 }
-html.dark-mode body.sociotype .page-sep { color: #555; }
+html.dark-mode body.sociotype .page-sep { color: var(--text-faint); }
 
 body.sociotype .zoom-control {
   border: 1px solid #d6d6d6;
@@ -1316,7 +1424,7 @@ body.sociotype .zoom-control {
 html.dark-mode body.sociotype .zoom-control { border-color: #333; }
 
 body.sociotype .zoom-btn {
-  color: #818181;
+  color: var(--text-muted);
   background: transparent;
   font-size: 1rem;
   line-height: 1;
@@ -1325,7 +1433,7 @@ body.sociotype .zoom-btn {
   transition: color 0.15s ease;
 }
 body.sociotype .zoom-btn:hover { color: #000000; background: transparent; }
-html.dark-mode body.sociotype .zoom-btn { color: #555; }
+html.dark-mode body.sociotype .zoom-btn { color: var(--text-faint); }
 html.dark-mode body.sociotype .zoom-btn:hover { color: #ffffff; background: transparent; }
 
 body.sociotype .zoom-display {
@@ -1333,21 +1441,21 @@ body.sociotype .zoom-display {
   font-weight:300;
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: #818181;
+  color: var(--text-muted);
   border-left: 1px solid #d6d6d6;
   border-right: 1px solid #d6d6d6;
   padding: 0.25rem 0.5rem;
   min-width: 44px;
   text-align: center;
 }
-html.dark-mode body.sociotype .zoom-display { color: #555; border-color: #333; }
+html.dark-mode body.sociotype .zoom-display { color: var(--text-faint); border-color: #333; }
 
 body.sociotype .pdf-nav-arrow {
   width: 28px;
   height: 28px;
   background: transparent;
   border: 1px solid #d6d6d6;
-  color: #818181;
+  color: var(--text-muted);
   border-radius: 0;
   font-size: 0.85rem;
   cursor: pointer;
@@ -1362,7 +1470,7 @@ body.sociotype .pdf-nav-arrow:hover:not(:disabled) {
   color: #ffffff;
 }
 body.sociotype .pdf-nav-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
-html.dark-mode body.sociotype .pdf-nav-arrow { border-color: #333; color: #555; }
+html.dark-mode body.sociotype .pdf-nav-arrow { border-color: #333; color: var(--text-faint); }
 html.dark-mode body.sociotype .pdf-nav-arrow:hover:not(:disabled) {
   background: #ffffff;
   border-color: #ffffff;
@@ -1417,6 +1525,7 @@ body.sociotype .pdf-file-links {
 /* HTML-kind lesson iframe */
 body.sociotype .pdf-html-frame {
   width: 100%;
+  height: 100%;
   flex: 1;
   border: none;
   display: none;
@@ -1431,14 +1540,14 @@ body.sociotype .pdf-loading {
   align-items: center;
   gap: 1rem;
   padding: 3rem;
-  color: #9d9d9d;
+  color: var(--text-faint);
 }
 body.sociotype .pdf-loading p {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: #9d9d9d;
+  color: var(--text-faint);
 }
 body.sociotype .pdf-loading-spinner {
   width: 28px;
@@ -1464,7 +1573,7 @@ body.sociotype .pdf-error-msg {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: #9d9d9d;
+  color: var(--text-faint);
   text-align: center;
 }
 body.sociotype .pdf-error-retry {
@@ -1493,7 +1602,7 @@ html.dark-mode body.sociotype .complete-btn--done {
   color: #ffffff !important;
   border-bottom-color: #ffffff !important;
 }
-body.sociotype .lesson-group--done .lesson-group-num::after { color: #818181; }
+body.sociotype .lesson-group--done .lesson-group-num::after { color: var(--text-muted); }
 
 /* Footer */
 body.sociotype .site-footer {
@@ -1507,7 +1616,7 @@ body.sociotype .footer-content p {
   font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: #9d9d9d;
+  color: var(--text-faint);
 }
 
 /* ─── LIVE SESSION BAR ────────────────────────────────────────── */
@@ -1550,7 +1659,7 @@ body.sociotype .footer-content p {
   font-weight: 300;
   color: var(--text);
   letter-spacing: 0.02em;
-  white-space: nowrap;
+  text-align: center;
 }
 
 .live-join-btn {
@@ -1591,7 +1700,8 @@ body.sociotype .footer-content p {
 }
 
 .live-session-bar--idle .live-join-btn {
-  display: none;
+  color: var(--text-muted);
+  border-bottom-color: var(--border-hover);
 }
 
 /* ─── TOPIC CARD: COMPLETED BADGE ────────────────────────────── */
@@ -1608,7 +1718,7 @@ body.sociotype .footer-content p {
   align-items: center;
   gap: 0.3rem;
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
   color: #000000;
@@ -1652,11 +1762,21 @@ body.sociotype .footer-content p {
 }
 
 @media print {
-  body.sociotype .topic-header,
-  body.sociotype .main-content,
+  /* Plain Cmd+P prints the lesson area; "Print syllabus" swaps in the sheet */
+  body.sociotype { height: auto; overflow: visible; }
+  body.sociotype .lessons-sidebar,
+  body.sociotype .lessons-toggle,
+  body.sociotype .pdf-controls,
+  body.sociotype .pdf-scroll-progress,
+  body.sociotype .header-nav,
+  #qpop-root { display: none !important; }
+  body.sociotype .pdf-stage { background: none; padding: 0; overflow: visible; }
+
+  body.sociotype.printing-syllabus .topic-header,
+  body.sociotype.printing-syllabus .main-content,
   body.sociotype .site-footer { display: none !important; }
 
-  .print-syllabus-sheet {
+  body.sociotype.printing-syllabus .print-syllabus-sheet {
     display: block !important;
     font-family: var(--font-display);
     color: #000;
@@ -1917,7 +2037,7 @@ body.sociotype .footer-content p {
 .progress-summary-label {
   font-variant-numeric: tabular-nums;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
   color: var(--text-muted);
@@ -2037,6 +2157,7 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
   color: var(--text-muted);
   text-decoration: none;
   padding: 0.2rem 0;
+  position: relative;           /* ::before widens the tap target */
   border-bottom: 1px solid var(--border-hover);
   border-radius: 0;
   transition: color 0.18s ease, border-color 0.18s ease;
@@ -2160,7 +2281,6 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
 }
 
 .year-card:hover .year-card-cta { color: var(--text); }
-.year-card:hover .cta-arrow { transform: translateX(5px); }
 
 @media (max-width: 768px) {
   .year-grid   { grid-template-columns: 1fr; }
@@ -2180,10 +2300,10 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
 
 .card-outcome {
   font-family: var(--font-mono);
-  font-size: 0.52rem;
+  font-size: 11px;
   font-weight: 300;
   letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.38);
+  color: rgba(255,255,255,0.72);
 }
 
 /* ─── Pending (not yet authored) topics ─────────────────────── */
@@ -2208,6 +2328,5 @@ html.dark-mode .annotation-btn:hover { background: rgba(0,0,0,0.08); }
   border-radius: 0;
 }
 
-@media (max-width: 1400px) { .topic-grid--y12 { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 1100px) { .topic-grid--y12 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px)  { .topic-grid--y12 { grid-template-columns: 1fr; } }

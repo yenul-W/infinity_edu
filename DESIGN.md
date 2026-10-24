@@ -54,9 +54,15 @@ Excel functions (MAX, SLOPE, CORREL).
 |-----------------------|-----------|-----------|
 | Canvas (page)         | `#ffffff` | `#0a0a0a` |
 | Ink (text, structure) | `#000000` | `#ffffff` (`#f0f0f0` inside lessons) |
-| Medium gray (muted)   | `#818181` | `#818181` |
-| Faded gray (tertiary) | `#9d9d9d` | `#555555` |
+| Medium gray (muted)   | `#6b6b6b` | `#818181` |
+| Faded gray (tertiary) | `#767676` | `#7a7a7a` |
 | Light gray (dividers) | `#d6d6d6` | `#222222`–`#333333` |
+
+Every gray used for **text** must reach 4.5:1 against its canvas (WCAG AA). That is why the light
+muted and faded grays are darker than Sociotype's original `#818181` / `#9d9d9d` (3.9:1 and 2.7:1).
+Those originals are fine for rules and borders. Write text grays as `var(--text-muted)` /
+`var(--text-faint)`, not hex, so each mode gets its own value. White text on the card videos is
+never below 72% opacity.
 
 Token names differ by layer:
 
@@ -83,13 +89,26 @@ example, groups in a simulation) by fill: hollow, gray or solid. Never use hue.
   hover it turns medium gray. The muted variant starts gray and turns ink on hover.
 - **Text input.** Transparent background, 1px medium-gray bottom border that turns ink on focus.
   Placeholder in medium gray. Textareas use a full 1px light-gray border.
-- **Badge or tag.** DM Mono 300, 11px, 1px light-gray border, small padding. The "Complete" badge is
-  solid (ink background, canvas text).
+- **Badge or tag.** DM Mono 300, 11px, 1px light-gray border, small padding. The "Complete" badge on
+  hub cards is solid white with black text in both modes (it always sits on the dark video).
+- **Minimum size.** No text below 11px. Small ghost links (dark-mode toggle, "Change year", the
+  card syllabus chip) get a 44px-tall invisible `::before` hit area instead of a bigger box.
+- **Focus.** `:focus-visible` draws a 1px ink outline at a 2px offset (`style.css`, `lesson-kit.css`).
+  Never set `outline: none` without a replacement.
 - **Hub topic card.** Both years use a city-video poster with white type over a dark gradient
-  (Year 12 reuses Year 11's clips for topics 1–9; topic 10 has its own). On hover only the border changes, to ink.
-- **Live-session bar** (Year 11 hub). It sits between hairline rules. A square dot shows the state:
-  blinking means live, solid means starting soon, hollow means idle. The label text says the same
-  thing, and the Join link is a ghost button.
+  (Year 12 reuses Year 11's clips for topics 1–9; topic 10 has its own). On hover or focus only the
+  border changes, to ink: no zoom and no arrow nudge. The card is a `div`; its title holds an
+  `<a class="card-link">` whose `::after` stretches over the whole card, and the syllabus chip
+  sits above it at `z-index: 3`. Videos don't play under `prefers-reduced-motion` or load at all
+  under Save-Data.
+- **Continue strip** (both hubs). One line under the progress bar: a DM Mono "Continue" label and the
+  topic · lesson in Poppins, over a 1px bottom rule. It links to the newest `ie_last_*` lesson.
+- **Live-session bar** (Year 12 hub only). It sits between hairline rules. A square dot shows the
+  state: blinking means live, solid means starting soon, hollow means idle. The label text says the
+  same thing in sentence case, with AEST or AEDT taken from `Intl`. The Join link is a ghost button
+  in every state (muted when idle).
+- **Lesson list on phones** (≤900px). The viewer sidebar collapses behind a full-width
+  "Lesson N: title · All lessons ▾" disclosure button, and picking a lesson closes it again.
 - **Worked example and Your turn** (Year 12 lessons). A worked example (`.example-block`) has a 2px
   ink left rule on a faint gray fill. A Your turn block (`.your-turn`) is told apart by outline
   only: a 1px light-gray border with no fill. Its hidden answers use `<details class="yt-answer">`
@@ -104,6 +123,10 @@ example, groups in a simulation) by fill: hollow, gray or solid. Never use hue.
 - `html.dark-mode` class, persisted as `localStorage.theme = 'dark' | 'light'`.
 - Every layer swaps the same tokens. The canvas is `#0a0a0a` everywhere, so lesson iframes blend
   into the page around them.
+- An inline `<head>` script applies the class before first paint on every hub and topic page. With
+  no saved choice, hubs follow the time of day (to match their day/night videos) and topic pages
+  follow `prefers-color-scheme`. `pdf-viewer.js` sends `ie-theme` to the lesson iframe every time
+  it loads.
 
 ## Don'ts
 

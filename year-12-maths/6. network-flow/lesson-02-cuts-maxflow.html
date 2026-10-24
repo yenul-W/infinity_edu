@@ -119,13 +119,13 @@
             <text class="node-label" x="286" y="71">C</text>
             <text class="node-label" x="286" y="191">D</text>
             <text class="node-label" x="382" y="131">T</text>
-            <text class="edge-weight-label" x="100" y="80">10</text>
+            <text class="edge-weight-label" x="84" y="92">10</text>
             <text class="edge-weight-label" x="100" y="176">8</text>
             <text class="edge-weight-label" x="228" y="56">6</text>
             <text class="edge-weight-label" x="176" y="128">4</text>
             <text class="edge-weight-label" x="228" y="204">9</text>
-            <text class="edge-weight-label" x="336" y="84">7</text>
-            <text class="edge-weight-label" x="336" y="168">11</text>
+            <text class="edge-weight-label" x="346" y="86">7</text>
+            <text class="edge-weight-label" x="350" y="166">11</text>
             <path d="M 110 20 Q 118 125 110 235" fill="none" stroke="#818181" stroke-width="2" stroke-dasharray="7 5"/>
             <text class="angle-label-text" x="86" y="18">Cut 1</text>
             <path d="M 340 20 Q 332 125 340 235" fill="none" stroke="#818181" stroke-width="2" stroke-dasharray="7 5"/>
@@ -621,8 +621,9 @@ document.addEventListener('DOMContentLoaded', function () {
           'stroke-dasharray': crosses ? '' : '4 3',
           'marker-end': 'url(#ahcc)'
         }));
+        var lp = IE.geom.edge(p, q, String(e.c), 12);
         svg.appendChild(svgEl('text', { class: 'edge-weight-label',
-          x: (p[0] + q[0]) / 2 + 4, y: (p[1] + q[1]) / 2 - 6 }, String(e.c)));
+          x: lp.x, y: lp.y, 'text-anchor': 'middle' }, String(e.c)));
       });
       Object.keys(POS).forEach(function (v) {
         var onSide = side.indexOf(v) !== -1 || v === 'S';

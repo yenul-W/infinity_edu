@@ -537,7 +537,7 @@
         <p>
           <button class="lesson-link-btn" onclick="IE.openLesson(2)">Lesson 3 &rarr;</button>
           &nbsp;
-          <button class="lesson-link-btn" onclick="IE.openLesson(3)">Open Homework</button>
+          <button class="lesson-link-btn" onclick="IE.openLesson(4)">Open Homework</button>
         </p>
       </div>
 
@@ -612,8 +612,9 @@ document.addEventListener('DOMContentLoaded', function () {
         'marker-end': 'url(#cps)'
       }));
       if (!a.dummy) {
+        var lp = IE.geom.edge(p, q, a.id + ', ' + a.d, 12);
         svg.appendChild(svgEl('text', { class: 'edge-weight-label',
-          x: (p[0] + q[0]) / 2, y: (p[1] + q[1]) / 2 - 8, 'text-anchor': 'middle' }, a.id + ', ' + a.d));
+          x: lp.x, y: lp.y, 'text-anchor': 'middle' }, a.id + ', ' + a.d));
       }
     });
     Object.keys(POS).forEach(function (v) {

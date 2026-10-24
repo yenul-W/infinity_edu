@@ -701,13 +701,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var svg = svgEl('svg', { class: 'network-diagram', viewBox: '0 0 ' + W + ' ' + H, width: W });
     svg.appendChild(svgEl('polygon', { class: 'tri-fill',
       points: a[0] + ',' + a[1] + ' ' + b[0] + ',' + b[1] + ' ' + c[0] + ',' + c[1] }));
-    svg.appendChild(svgEl('text', { class: 'node-label', x: a[0] - 16, y: a[1] + 6 }, 'A'));
-    svg.appendChild(svgEl('text', { class: 'node-label', x: b[0] + 8,  y: b[1] + 6 }, 'B'));
-    svg.appendChild(svgEl('text', { class: 'node-label', x: c[0] - 4,  y: c[1] - 10 }, 'C'));
+    // Labels sit outside the triangle, clear of every edge
+    var mid = [(a[0] + b[0] + c[0]) / 3, (a[1] + b[1] + c[1]) / 3];
+    function label(cls, pos, text) {
+      svg.appendChild(svgEl('text', { class: cls, x: pos.x, y: pos.y, 'text-anchor': 'middle' }, text));
+    }
+    label('node-label', IE.geom.vertex(a, mid, 'A', 14), 'A');
+    label('node-label', IE.geom.vertex(b, mid, 'B', 14), 'B');
+    label('node-label', IE.geom.vertex(c, mid, 'C', 14), 'C');
     if (labels) {
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (a[0] + b[0]) / 2, y: Math.max(a[1], b[1]) + 18, 'text-anchor': 'middle' }, labels.c));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (a[0] + c[0]) / 2 - 18, y: (a[1] + c[1]) / 2 }, labels.b));
-      svg.appendChild(svgEl('text', { class: 'side-label-text', x: (b[0] + c[0]) / 2 + 6,  y: (b[1] + c[1]) / 2 }, labels.a));
+      label('side-label-text', IE.geom.side(a, b, mid, labels.c, 12), labels.c);
+      label('side-label-text', IE.geom.side(a, c, mid, labels.b, 12), labels.b);
+      label('side-label-text', IE.geom.side(b, c, mid, labels.a, 12), labels.a);
     }
     mount.innerHTML = '';
     mount.appendChild(svg);

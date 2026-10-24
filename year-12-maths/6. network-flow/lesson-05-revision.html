@@ -319,9 +319,9 @@ document.addEventListener('DOMContentLoaded', function () {
           x2: q[0] - ux * 23, y2: q[1] - uy * 23,
           'stroke-width': inCut ? 3.4 : 1.5, 'marker-end': 'url(#ahr)'
         }));
+        var lt = caps[i] + (inCut ? ' ◄' : ''), lp = IE.geom.edge(p, q, lt, 12);
         svg.appendChild(svgEl('text', { class: 'edge-weight-label',
-          x: (p[0] + q[0]) / 2 + 4, y: (p[1] + q[1]) / 2 - 6 },
-          caps[i] + (inCut ? ' ◄' : '')));
+          x: lp.x, y: lp.y, 'text-anchor': 'middle' }, lt));
       });
       Object.keys(POS).forEach(function (v) {
         svg.appendChild(svgEl('circle', { class: 'node-circle', cx: POS[v][0], cy: POS[v][1], r: 20 }));

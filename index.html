@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mathematics Standard</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='22' fill='%23fff'>∞</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>
+    // Apply the theme before first paint (hubs fall back to time of day, matching their day/night videos)
+    try{var t=localStorage.getItem('theme'),h=new Date().getHours();if(t?t==='dark':(h<6||h>=19))document.documentElement.classList.add('dark-mode')}catch(e){}
+  </script>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <script>
@@ -20,17 +26,18 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
 
   <nav class="site-nav">
     <div class="nav-inner">
       <span class="nav-eyebrow">Mathematics Standard</span>
-      <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode">
+      <button id="darkModeToggle" class="dark-mode-btn" title="Toggle dark mode" aria-label="Toggle dark mode" aria-pressed="false">
         <span class="toggle-icon">dark</span>
       </button>
     </div>
   </nav>
 
-  <main class="year-picker">
+  <main class="year-picker" id="content" tabindex="-1">
     <div class="year-picker-head">
       <p class="year-picker-eyebrow">Choose your course</p>
       <h1 class="year-picker-title">Mathematics Standard</h1>
@@ -71,26 +78,26 @@
 
   <script>
     // ── Dark mode ───────────────────────────────────────────────
-    function isNightByTime() {
-      const h = new Date().getHours();
-      return h < 6 || h >= 19;
-    }
+    // html.dark-mode was already set by the <head> script
     const toggle = document.getElementById('darkModeToggle');
     const toggleIcon = document.querySelector('.toggle-icon');
     const html = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    const isDark = savedTheme ? savedTheme === 'dark' : isNightByTime();
-    if (isDark) { html.classList.add('dark-mode'); toggleIcon.textContent = 'light'; }
-    else { html.classList.remove('dark-mode'); toggleIcon.textContent = 'dark'; }
+    function syncToggle() {
+      const d = html.classList.contains('dark-mode');
+      toggleIcon.textContent = d ? 'light' : 'dark';
+      toggle.setAttribute('aria-pressed', d ? 'true' : 'false');
+    }
+    syncToggle();
+    const isDark = html.classList.contains('dark-mode');
     toggle.addEventListener('click', () => {
       const isDarkNow = html.classList.toggle('dark-mode');
       localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
-      toggleIcon.textContent = isDarkNow ? 'light' : 'dark';
+      syncToggle();
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'd' && !e.metaKey && !e.ctrlKey) {
-        const tag = document.activeElement && document.activeElement.tagName;
-        if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+        const ae = document.activeElement;
+        if (ae && (/^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) || ae.isContentEditable)) return;
         toggle.click();
       }
     });
